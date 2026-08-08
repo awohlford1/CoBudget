@@ -9,11 +9,13 @@ coverage/
 .turbo/
 .expo/
 web-build/
+.vercel/
 
 # Local environment and secrets
 .env
 .env.*
 !.env.example
+*.local
 *.pem
 *.key
 

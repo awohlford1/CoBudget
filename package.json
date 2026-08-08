@@ -1,0 +1,22 @@
+{
+  "name": "cobudget",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Collaborative budgeting for individuals, partners, and families.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@cobudget/web",
+    "build": "npm run build --workspace=@cobudget/web",
+    "start": "npm run start --workspace=@cobudget/web",
+    "lint": "npm run lint --workspace=@cobudget/web",
+    "typecheck": "npm run typecheck --workspace=@cobudget/web",
+    "check": "npm run lint && npm run typecheck && npm run build"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "packageManager": "npm@11.12.1"
+}

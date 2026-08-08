@@ -26,6 +26,7 @@ Planning and product validation. No application code has been added yet.
 - [Brand foundation](docs/brand-foundation.md)
 - [Product plan](docs/product-plan.md)
 - [Technical architecture](docs/architecture.md)
+- [Development guide](docs/development.md)
 
 ## Proposed repository layout
 
@@ -46,13 +47,23 @@ docs/
 infra/       Infrastructure as code
 ```
 
-This structure is documented only; the folders will be created when
-implementation begins.
+The web workspace is now in place. Other folders will be created only when
+their implementation phase begins.
 
 ## Local development
 
-Development commands will be documented after the application stack is
-scaffolded.
+Install dependencies and start the web application from the repository root:
+
+```sh
+npm install
+npm run dev
+```
+
+Run all web checks with:
+
+```sh
+npm run check
+```
 
 ## License
 
