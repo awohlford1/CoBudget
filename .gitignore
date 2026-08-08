@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+dist/
+build/
+coverage/
+.turbo/
+.expo/
+web-build/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs and local caches
+*.log
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Editors and operating systems
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Infrastructure state
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Test artifacts
+playwright-report/
+test-results/
+
+# Local database files
+*.sqlite
+*.sqlite3
