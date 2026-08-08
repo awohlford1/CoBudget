@@ -23,6 +23,7 @@ Planning and product validation. No application code has been added yet.
 
 ## Documentation
 
+- [Brand foundation](docs/brand-foundation.md)
 - [Product plan](docs/product-plan.md)
 - [Technical architecture](docs/architecture.md)
 

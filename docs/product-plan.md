@@ -11,6 +11,10 @@ The two initial differentiators are:
 2. Explicit viewer, collaborator, and guardian relationships with scoped
    permissions, consent, alerts, and audit history.
 
+The approved mission, vision, values, and manifesto are maintained in the
+[brand foundation](brand-foundation.md). A public Mission or About Us page using
+that content is part of the initial web experience.
+
 ## Initial audience
 
 The first release will target U.S. consumers who want a clearer short-term view
@@ -20,6 +24,7 @@ minors, and financial control by another person are outside the initial scope.
 ## Minimum viable product
 
 - Responsive, installable web application
+- Public Mission or About Us page reflecting the approved brand foundation
 - Secure authentication and multifactor authentication
 - Personal and shared budget spaces
 - Weekly, monthly, biweekly, semimonthly, paycheck, and custom schedules
