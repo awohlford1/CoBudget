@@ -30,6 +30,7 @@ web-build/
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
+.claude/settings.local.json
 .DS_Store
 Thumbs.db
 Desktop.ini
