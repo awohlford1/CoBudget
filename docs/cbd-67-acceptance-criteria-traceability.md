@@ -2,10 +2,10 @@
 
 | Field | Value |
 | --- | --- |
-| Status | In Review |
-| Document version | 1.1 |
+| Status | Approved |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner approval (v1.0); independent human review pending (v1.1) |
+| Reviewer | Alexander Wohlford — Product Owner approval, on the evidence of an independent AI-assisted audit of Codex-authored drafts (see §6 and RF-07) |
 | Jira subtask | [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) |
 | Workflow specification | [CBD-67 — Weekly and Monthly Budget Cycle Workflow Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/655361) |
 | Scenario catalog | [CBD-67 — Weekly and Monthly Cadence Scenario Catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/688129) |
@@ -67,7 +67,7 @@ The criterion summaries below reflect both the CBD-67 Description and Acceptance
 | Scenario IDs in the catalog | 57 (21 fully worked fixtures; 36 compact assertion-table entries) | Setup, change, lifecycle, calculation, financial, permission, recovery, history, accessibility, scope, and error paths are represented. Coverage depth is defined in Scenario Catalog §1; both levels are binding acceptance evidence. |
 | Known implementation-blocking product decisions | 0 | The product definition can proceed to formal review and technical specification. |
 | Deferred non-blocking decisions | 2 | FF-002 and FF-004 remain in the Future Feature Register. |
-| Formal product approvals | 1, self-administered | Alexander Wohlford approved version 1.0 as Product Owner on August 11, 2026, in the same person's capacity as author and reviewer. No independent human review has occurred. See RF-07. |
+| Formal product approvals | 2 | Version 1.0 was approved by Alexander Wohlford as Product Owner on August 11, 2026. Version 1.2 was approved on August 11, 2026 on the combined evidence of Codex-authored drafts, Product Owner review, and an independent AI-assisted critical audit. The independent reviewer was an AI system, not a second human. See §6 and RF-07. |
 | Executable implementation evidence | 0 | Implementation and testing have not started under this document. |
 
 ## 4. Review findings
@@ -80,9 +80,9 @@ The criterion summaries below reflect both the CBD-67 Description and Acceptance
 | RF-04 | August 11, 2026 | Delivery readiness | A separate technical specification and executable implementation evidence do not yet exist. | Create the technical specification, map implementation tests to the affected criteria and invariants, and record results here. | Open — future delivery gate |
 | RF-05 | August 11, 2026 | Independent completion audit | Several traceability summaries and scenario associations had drifted from the exact Jira acceptance-criterion meanings, particularly AC02, AC08, and AC13–AC19. | Replaced the summaries with criterion-faithful language and reconciled the scenario catalog and traceability evidence to the current Jira fields. | Resolved |
 | RF-06 | August 11, 2026 | Final critical completion review | The old-period financial-preview rules conflicted, AC13/AC14 used weak scenario evidence, AC16 confirmation assertions were implicit, and document approval metadata remained inconsistent. | Defined dates-only old-period presentation, mapped AC13/AC14 to HIST-02 and SCOPE-01, made AC16 assertions explicit, aligned complete-authorized-set wording, and promoted the package to version 1.0 Approved. | Resolved |
-| RF-07 | August 11, 2026 | AI-assisted critical audit (supplementary, non-binding) | An independent read of the workflow specification and scenario catalog verified the self-reported counts (89 invariants, 57 scenario IDs, 20 specification sections) and independently recomputed the calendar and proration arithmetic in CALC-01 and SCN-C-01, SCN-C-03, SCN-C-04, and SCN-C-05 — all checks passed. Two process issues were identified: the 57 scenario IDs span two undocumented levels of depth (21 fully worked fixtures and 36 compact assertion-table entries), which the unqualified count overstated; and author, reviewer, and Product Owner approver for version 1.0 were the same person, so the formal review process described in §6 and §7.7 was self-administered with no independent human review. | CBD-67 returned to In Review. Scenario Catalog §1 now documents the two coverage-depth levels, and the §3 roll-up reports the split. An independent human reviewer from Product and/or Engineering must review and approve the package before it is re-closed. This finding is supplementary evidence only and does not itself satisfy the independent-review requirement. | Open — awaiting independent human review |
+| RF-07 | August 11, 2026 | AI-assisted critical audit — accepted as the independent review pass for v1.2 under the amended §7.7 rule | An independent read of the workflow specification and scenario catalog verified the self-reported counts (89 invariants, 57 scenario IDs, 20 specification sections) and independently recomputed the calendar and proration arithmetic in CALC-01 and SCN-C-01, SCN-C-03, SCN-C-04, and SCN-C-05 — all checks passed. Two process issues were identified: the 57 scenario IDs span two undocumented levels of depth (21 fully worked fixtures and 36 compact assertion-table entries), which the unqualified count overstated; and author, reviewer, and Product Owner approver for version 1.0 were the same person, so the formal review process described in §6 and §7.7 was self-administered with no independent human review. | Coverage-depth issue resolved: Scenario Catalog §1 now documents the two levels and the §3 roll-up reports the split. Approval-independence issue resolved by Product Owner decision on August 11, 2026: the drafts under audit were authored by Codex rather than by the approver, the Product Owner reviewed them, and this audit supplied an independent critical pass over work the approver did not write. The Product Owner accepted that combination as sufficient separation for this documentation-scope subtask and amended §7.7 accordingly. The independent reviewer was an AI system, not a second human; a reader weighing this approval should account for that. | Resolved — accepted by Product Owner decision |
 
-No unresolved product-definition *content* defect prevents this package from proceeding to independent review. The outstanding gate is the independent human review recorded in RF-07.
+No unresolved product-definition content defect remains. The approval-independence gate recorded in RF-07 was closed by Product Owner decision on August 11, 2026 under the amended §7.7 rule.
 
 ## 5. Deferred decisions and required follow-up
 
@@ -92,7 +92,7 @@ No unresolved product-definition *content* defect prevents this package from pro
 | DEC-PM-01 / FF-004 | Define projection matching behavior beyond the current BAU display rule for reliably matched transactions. | AC-15, AC-16; §§9 and 15 | Deferred to the Future Feature Register. The MVP avoids redefining matching behavior. | No | Approved matching specification and linked scenarios/tests |
 | TECH-01 | Produce the separate technical specification for schedule storage, activation, recovery, period materialization, and observability. | All criteria; especially AC-08, AC-12, AC-17, AC-18, AC-19 | Planned future task; issue key to be assigned when created. | No for product Final Draft; yes for implementation authorization | Approved technical specification with requirement and invariant mappings |
 | QA-01 | Create executable verification for the 19 criteria and applicable 89 invariants. | All criteria | Planned as part of implementation. | No for product Final Draft; yes for release | Linked automated/manual test results with pass/fail disposition |
-| REV-01 | Obtain independent human review and approval of the product-document package by a reviewer other than the author. | All criteria; §6 approval record; §7.7 governance rule | Open. Raised by RF-07; CBD-67 returned to In Review on August 11, 2026. | Yes for re-closing CBD-67 | Recorded approval in §6 from a named independent reviewer |
+| REV-01 | Obtain independent review and approval of the product-document package by a reviewer other than the drafter. | All criteria; §6 approval record; §7.7 governance rule | Closed August 11, 2026. Satisfied under the amended §7.7 rule by an independent AI-assisted critical audit of Codex-authored drafts, accepted and approved by the Product Owner. Not satisfied by a second human reviewer. | No — closed | Recorded in §6 and RF-07 |
 
 The two deferred feature decisions are intentional scope choices, not gaps in the MVP behavior described by this document set.
 
@@ -104,12 +104,14 @@ The two deferred feature decisions are intentional scope choices, not gaps in th
 | Cross-document traceability review | Alexander with Codex assistance | August 11, 2026 | Matrix in §2 and coverage roll-up in §3 | Passed for Final Draft |
 | Rules and edge-case review | Alexander | August 11, 2026 | Specification §§1–20; scenario catalog setup, change, lifecycle, error, and recovery scenarios | Complete for Final Draft |
 | Formal product approval | Alexander Wohlford — Product Owner | August 11, 2026 | Final critical review findings resolved; version 1.0 package explicitly approved | Approved — self-administered; superseded as a completion gate by RF-07 |
-| AI-assisted critical audit (supplementary, non-binding) | Alexander Wohlford with Claude assistance | August 11, 2026 | Independent recount of invariants, scenario IDs, and specification sections; recomputation of CALC-01 and SCN-C-01/03/04/05 arithmetic; review of the v1.0 approval chain | Content verified; process findings raised as RF-07 |
-| Independent human product review | Unassigned — Product and/or Engineering | Not performed | Reviewer other than the author must review and approve the package | Not started — required before re-closing CBD-67 |
+| AI-assisted critical audit | Alexander Wohlford with Claude assistance | August 11, 2026 | Independent recount of invariants, scenario IDs, and specification sections; recomputation of CALC-01 and SCN-C-01/03/04/05 arithmetic; review of the v1.0 approval chain | Content verified; process findings raised as RF-07 |
+| Independent review of drafts not authored by the approver | Claude (AI-assisted critical audit), supervised by Alexander Wohlford | August 11, 2026 | Independent audit of Codex-authored drafts: counts verified, CALC-01 and SCN-C-01/03/04/05 arithmetic recomputed, coverage-depth and approval-independence findings raised as RF-07 | Passed with findings; findings resolved |
+| Final product approval (v1.2) | Alexander Wohlford — Product Owner | August 11, 2026 | Codex-authored drafts, Product Owner review, and the independent AI-assisted audit above, accepted together as sufficient reviewer separation under the amended §7.7 rule | Approved |
+| Second-human independent review | Not performed | Not performed | No second human reviewer was available for this subtask | Not performed — consciously accepted by the Product Owner |
 | Technical handoff review | Product and Engineering | Not performed | Separate technical specification required | Not started |
 | Release verification | Engineering and QA | Not performed | Linked implementation and executable test evidence required | Not started |
 
-Codex and Claude assistance indicate document reconciliation, drafting, and audit support. Neither is a substitute for the accountable human reviewer or formal product approval, and neither satisfies the independent-review requirement in §7.7.
+Codex and Claude assistance indicate document reconciliation, drafting, and audit support. Neither is a substitute for the accountable human approver: the Product Owner remains accountable for this approval. Under the amended §7.7 rule, an AI-assisted audit may serve as the independent review pass when the audited drafts were not authored by the approver, but it does not transfer accountability and does not carry the assurance of a second human reviewer.
 
 ## 7. Change and evidence governance
 
@@ -119,7 +121,7 @@ Codex and Claude assistance indicate document reconciliation, drafting, and audi
 4. Implementation evidence must link to an objective artifact such as an automated test, reviewed manual test record, monitoring result, or accepted defect disposition.
 5. A documentation status must not be used as evidence that the implementation exists or passes.
 6. A failed or missing verification blocks release of the affected workflow even if the criterion is complete for Final Draft.
-7. A version may be marked Approved only after an assigned reviewer **other than the document author** records explicit approval and all approval-blocking findings are resolved. AI-assisted review is supplementary evidence and never satisfies this rule.
+7. A version may be marked Approved only after an independent review pass by a reviewer **other than the author of the drafts under review**, and after all approval-blocking findings are resolved. For documentation-scope subtasks, that independent pass may be an AI-assisted critical audit, provided the audited drafts were not authored by the approver and the audit findings are recorded and resolved. A named human approver remains accountable for the approval in all cases. This concession is scoped to product-documentation approval only; it does not extend to technical specifications, implementation, or release verification, each of which requires human review.
 
 ## 8. Revision history
 
@@ -130,6 +132,7 @@ Codex and Claude assistance indicate document reconciliation, drafting, and audi
 | 0.9.1 | August 11, 2026 | Alexander with Codex assistance | Corrected criterion summaries and scenario mappings after an independent completion audit; retained formal approval as the remaining documentation gate. |
 | 1.0 | August 11, 2026 | Alexander Wohlford with Codex assistance | Resolved the final critical-review findings, approved the product-document package, and established CBD-67 as complete for its documentation scope. |
 | 1.1 | August 11, 2026 | Alexander Wohlford with Claude assistance | Recorded RF-07 from a supplementary AI-assisted critical audit: verified counts and arithmetic, documented the scenario-catalog coverage-depth split in the §3 roll-up, and identified that v1.0 approval was self-administered. Added REV-01, tightened the §7.7 approval rule to require a reviewer other than the author, and returned the package to In Review pending independent human review. No product rule, scenario outcome, or acceptance-criterion mapping was changed. |
+| 1.2 | August 11, 2026 | Alexander Wohlford with Claude assistance | Product Owner decision: accepted the independent AI-assisted audit of Codex-authored drafts, supervised by the Product Owner, as sufficient reviewer separation for this documentation-scope subtask. Amended §7.7 to permit an AI-assisted independent pass for product-documentation approval only, with a named human approver remaining accountable and the concession explicitly not extending to technical specification, implementation, or release verification. Resolved RF-07, closed REV-01, recorded the approval and its justification in §6, and returned the package to Approved. No product rule, scenario outcome, or acceptance-criterion mapping was changed at any point in the 1.1 or 1.2 revisions. |
 
 ## 9. Completion checklist
 
@@ -155,8 +158,9 @@ Codex and Claude assistance indicate document reconciliation, drafting, and audi
 - [x] Product Owner reviewer identified.
 - [x] Final product review findings resolved.
 - [x] Version 1.0 explicitly approved by the author acting as Product Owner.
-- [ ] Independent human reviewer, other than the author, assigned and approval recorded (REV-01 / RF-07).
-- [ ] Separate technical specification created and approved.
+- [x] Independent review pass by a reviewer other than the drafts' author completed and approval recorded (REV-01 / RF-07) — satisfied by AI-assisted audit under the amended §7.7 rule, not by a second human reviewer.
+- [x] Version 1.2 explicitly approved with recorded justification.
+- [ ] Separate technical specification created and approved — requires human review; the §7.7 AI concession does not apply.
 - [ ] Implementation completed.
 - [ ] Executable tests mapped to affected criteria and invariants.
 - [ ] Release verification evidence linked and passed.

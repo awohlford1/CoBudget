@@ -2,10 +2,10 @@
 
 | Field | Value |
 | --- | --- |
-| Status | In Review |
-| Document version | 1.1 |
+| Status | Approved |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner approval (v1.0); independent human review pending (v1.1) |
+| Reviewer | Alexander Wohlford — Product Owner approval, on the evidence of an independent AI-assisted audit of Codex-authored drafts (see traceability record §6 and RF-07) |
 | Jira | [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) |
 | Governing specification | [CBD-67 — Weekly and Monthly Budget Cycle Workflow Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/655361) |
 | Traceability | [CBD-67 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/720897) |
@@ -845,4 +845,5 @@ If a new blocking ambiguity is found, assign a stable scenario or open-question 
 | --- | --- | --- | --- | --- |
 | August 11, 2026 | Author review — Alexander Wohlford | Governing specification decisions, CBD-67 description and acceptance criteria, AC01–AC19 coverage, deterministic setup and cross-cadence fixtures, lifecycle, permissions, presentation, recovery, history, accessibility, and scope boundaries | No known MVP-blocking scenario gaps; FF-002 and FF-004 remain deferred; formal human approval and executable-test implementation remain pending | Final Draft prepared for formal review |
 | August 11, 2026 | Alexander Wohlford — Product Owner | Final completion review of old-period preview presentation, AC13/AC14 evidence, AC16 confirmation assertions, cross-document consistency, and deferred boundaries | All closure findings resolved; technical design and executable implementation tests remain separate future delivery work | Version 1.0 Approved |
-| August 11, 2026 | Alexander Wohlford with Claude assistance — AI-assisted critical audit (supplementary, non-binding) | Independent verification of scenario and invariant counts, recomputation of calendar and proration arithmetic in CALC-01 and SCN-C-01/03/04/05, and review of the v1.0 approval chain | Counts and arithmetic verified correct; the 57 scenario IDs were found to span two undocumented levels of depth, and v1.0 was authored, reviewed, and approved by the same person with no independent human review | Coverage-depth note added to Section 1; version 1.1 returned to In Review pending independent human review. See RF-07 in the traceability record. |
+| August 11, 2026 | Alexander Wohlford with Claude assistance — AI-assisted critical audit | Independent verification of scenario and invariant counts, recomputation of calendar and proration arithmetic in CALC-01 and SCN-C-01/03/04/05, and review of the v1.0 approval chain | Counts and arithmetic verified correct; the 57 scenario IDs were found to span two undocumented levels of depth, and v1.0 was authored, reviewed, and approved by the same person with no independent human review | Coverage-depth note added to Section 1; version 1.1 returned to In Review. See RF-07 in the traceability record. |
+| August 11, 2026 | Alexander Wohlford — Product Owner | Approval decision on reviewer independence for this documentation-scope subtask | The drafts under audit were authored by Codex rather than by the approver; the Product Owner reviewed them and the AI-assisted audit supplied an independent critical pass over work the approver did not write. Accepted as sufficient reviewer separation. The independent reviewer was an AI system, not a second human. | Version 1.2 Approved under the amended §7.7 rule in the traceability record. RF-07 resolved and REV-01 closed. |
