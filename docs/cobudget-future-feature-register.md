@@ -1,0 +1,39 @@
+# CoBudget — Future Feature Register
+
+| Field | Value |
+| --- | --- |
+| Status | Active |
+| Owner | Alexander Wohlford |
+| Purpose | Maintain a reviewable list of potentially valuable capabilities that are intentionally outside the current MVP or task scope. |
+| Last reviewed | 2026-08-11 |
+
+## How to use this register
+
+Add a feature when a useful idea is identified but should not become an undocumented assumption or expand the active task. An entry is not an approved commitment. During product planning, review each entry and decide whether to reject it, retain it for later review, research it, or create linked Jira work.
+
+## Status definitions
+
+| Status | Meaning |
+| --- | --- |
+| Captured | Recorded for later review; no commitment or research is implied. |
+| Research needed | Requires product, user, technical, legal, privacy, or security investigation. |
+| Candidate | Considered potentially suitable for a future roadmap or backlog. |
+| Rejected | Deliberately declined, with rationale retained. |
+| Promoted | Converted into linked Jira work or an approved initiative. |
+
+## Feature register
+
+| ID | Feature | Source | Summary | Why deferred | Questions for future review | Dependencies | Jira work | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| FF-001 | Owner approval workflow for schedule changes | CBD-67 Section 4 | Allow an authorized non-owner to configure and submit a schedule change that does not become confirmed until a Primary Owner or Co-owner approves it. | CBD-67 currently defines one confirmation action performed by an authorized schedule editor; a separate approval lifecycle is not required for the MVP. | Who may submit, approve, reject, withdraw, or edit a request? Does editing reset approval? Can approval expire? What happens when permissions change? Which notifications and audit events are required? How are stale previews handled before approval? | CBD-12 role and permission model; notification and audit design | _TBD_ | Captured |
+| FF-002 | Budget-space time-zone change workflow | CBD-67 Sections 2 and 8.1 | Specify the separate Owner/Co-owner budget-settings workflow for changing a budget’s supported named time zone, including before-and-after calendar previews, confirmation, audit, and recalculation of open state. This workflow is required for the broader MVP but is not a cadence schedule change. | CBD-67 governs weekly and monthly cadence changes and documents only the integration boundary. The complete settings workflow requires its own product specification and implementation work. | When does the setting take effect? How are collaborators notified? What permissions and audit details apply? What recovery behavior is required? How are open non-schedule workflows refreshed? | CBD-12 permissions; budget settings; audit history; named time-zone source; CBD-67 date semantics | _TBD_ | Captured |
+| FF-003 | Balance rollover and carry-forward | CBD-67 MVP scope revision | Allow users to carry eligible positive remaining amounts between normal or changed budget cycles, with explicit choices and explainable destination allocations. | Deferred from the Private MVP to reduce category-matching, execution, correction, recovery, audit, and historical-reconciliation complexity while preserving the core cadence and schedule-change workflows. | Should rollover apply at normal boundaries, schedule changes, or both? Is it automatic, opt-in, or category-specific? How are renamed, archived, deleted, and unmatched categories handled? How do late transactions affect a completed rollover? What provenance, reversal, and audit records are required? | Category and allocation model; completed-period history; transaction corrections; proration; audit and recovery design | _TBD_ | Captured |
+| FF-004 | Projection matching and occurrence resolution | CBD-67 Sections 9 and 15 | Define how projected bill and income occurrences reliably match posted or pending transactions and how unmatched occurrences are resolved after their expected dates. | CBD-67 needs only the display boundary that a reliable match replaces the projection; confidence, control, lifecycle, and audit behavior belong to the financial-item workflows. | What confidence threshold is reliable? When is matching automatic or user-confirmed? How are pending transactions handled? How do users correct or remove matches? When do projections become overdue, skipped, dismissed, rescheduled, expired, or historically resolved? What audit evidence is required? | Recurring bill and income model; transaction lifecycle; pending transactions; notification and audit design | _TBD_ | Research needed |
+| FF-005 | Multi-currency budgeting and currency changes | CBD-67 Section 15 | Support budgets containing or converting multiple currencies, exchange-rate behavior, mixed-currency totals, and changing a budget’s authoritative currency. | CBD-67 uses one budget currency and precision context so schedule, proration, preview, and history amounts remain deterministic and comparable. | Which rates and effective times apply? Are conversions stored or recalculated? How are gains, losses, rounding, offline updates, corrections, exports, and historical displays handled? Can a budget currency change after financial history exists? | Currency and exchange-rate provider; accounting policy; allocation and reporting model; audit and retention design | _TBD_ | Research needed |
+
+## Review history
+
+| Date | Reviewer | Entries reviewed | Decisions | Follow-up |
+| --- | --- | --- | --- | --- |
+| 2026-08-11 | Alexander Wohlford | FF-004–FF-005 | Added projection matching and multi-currency as deferred research topics from CBD-67 Section 15. | Define dedicated product work before implementing either capability. |
+| _YYYY-MM-DD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ |
