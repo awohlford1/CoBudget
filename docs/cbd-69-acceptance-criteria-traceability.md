@@ -57,7 +57,7 @@ Criterion summaries reflect the CBD-69 Acceptance Criteria field verbatim in sub
 
 ## 3. Parent and epic traceability
 
-CBD-69 criteria trace to CBD-11-AC01 through AC06, AC09, AC10, AC14 through AC17, and AC20, plus CBD-1-AC01, AC06, and AC07, as recorded in the CBD-69 Jira Acceptance Criteria field. The traces in §2 are copied from that field rather than independently derived. Final verification before approval must compare the then-current Jira fields rather than rely solely on this summary, because the CBD-69 fields were last modified August 11, 2026.
+CBD-69 criteria trace to CBD-11-AC01 through AC06, AC09, AC10, AC14 through AC17, and AC20, plus CBD-1-AC01, AC06, and AC07, as recorded in the CBD-69 Jira Acceptance Criteria field. The traces in §2 are copied from that field rather than independently derived. Final verification before approval must compare the then-current Jira fields rather than rely solely on this summary. The CBD-69 and CBD-11 fields were last modified August 12, 2026 at 17:48, and this record was verified against that revision (RF-69-07).
 
 ## 4. Coverage roll-up
 
