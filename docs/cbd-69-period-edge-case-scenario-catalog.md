@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | In Review |
-| Version | 0.9.4 |
+| Version | 0.9.5 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
 | Governing specification | [CBD-69 — Period Edge Cases and Validation Rule Specification](cbd-69-period-edge-cases-validation-specification.md) |
@@ -21,7 +21,7 @@ These fixtures demonstrate deterministic outcomes for every row of the governing
 
 ### Coverage depth
 
-Following the CBD-67 catalog convention, this catalog documents two levels of evidence: **fully worked fixtures**, which show concrete dates, amounts, and step-by-step expected outcomes, and **compact assertion-table entries**, which state input and expected outcome without an extended narrative. Both levels are binding acceptance evidence. This version contains **33 fully worked fixtures** and no compact assertion-table entries; every required case family received a full fixture.
+Following the CBD-67 catalog convention, this catalog documents two levels of evidence: **fully worked fixtures**, which show concrete dates, amounts, and step-by-step expected outcomes, and **compact assertion-table entries**, which state input and expected outcome without an extended narrative. Both levels are binding acceptance evidence. This version contains **36 fully worked fixtures** and no compact assertion-table entries; every required case family received a full fixture.
 
 | Prefix | Meaning |
 | --- | --- |
@@ -51,7 +51,7 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 | AC08 | TYPE-01–03, REV-01, REV-01a, REV-02 |
 | AC09 | LATE-01, ALT-02 |
 | AC10 | LATE-01, REP-01 |
-| AC11 | ALT-01, ALT-02, ALT-03 |
+| AC11 | ALT-01, ALT-02, ALT-03, ALT-04, ALT-05, ALT-06 |
 | AC12 | OVR-01, OVR-02, REC-01, REC-02a, REV-01 |
 | AC13 | DATE-04, CAL-01–04 |
 | AC14 | All scenarios |
@@ -253,6 +253,24 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 * Expected: the alert states the overage as a fact, not a possibility, because the money has settled (INV-69-23). It offers an acknowledgement action, and acknowledging it records the actor and timestamp without changing any financial value or clearing the underlying overage. The alert does not clear itself, because the $60.00 overage remains true. A later, smaller settlement inside the same overage state does not re-fire it (§12.2). Contrast ALT-01, where the informational form self-clears and offers no acknowledgement.
 * Evidence: specification §12.1–12.2, §4; INV-69-15, INV-69-23.
 
+### ALT-04 — Accountability Partner receives an informational alert by default
+
+* Input: a budget space has an accepted Accountability Partner with no separate opt-in action taken. A pending $180.00 charge on August 14 in a category with $150.00 remaining triggers an informational pending-activity warning (as in ALT-01).
+* Expected: the Accountability Partner receives the informational alert without any prior opt-in step. Its copy states the charge **would** exceed the category, never that it has been exceeded (INV-69-23), consistent with what CBD-69 v0.9.5 confirmed is gentle enough to deliver by default (INV-69-25).
+* Evidence: INV-69-25; specification §4, §12.2.
+
+### ALT-05 — Primary Owner mutes informational alerts to the Accountability Partner without affecting firm alerts
+
+* Input: the same budget space as ALT-04. The Primary Owner mutes informational alerts to the Accountability Partner. A new pending charge then triggers an informational warning, and separately a settled transaction creates a firm overspending alert.
+* Expected: after the mute, the Accountability Partner does not receive the new informational warning. The firm overspending alert is still delivered, unaffected by the mute. The mute action is recorded with the actor and timestamp. An attempt by a Collaborator, or by the Accountability Partner themself, to perform the same mute is denied and recorded.
+* Evidence: INV-69-25; specification §4, §12.2, §13.
+
+### ALT-06 — Provisioned Viewer receives a scoped firm alert but never an informational one
+
+* Input: a Viewer is explicitly provisioned to see one category's settled activity and audit history (per §4's scoped-visibility pattern). Settled spending in that category later exceeds its remaining budget, producing a firm overspending alert; separately, a pending charge in the same category would exceed the budget, producing an informational warning.
+* Expected: the Viewer receives the firm overspending alert, because it reports a fact about data already provisioned to them. The Viewer never receives the informational warning, regardless of provisioning, because they hold no permission to act on still-changing pending activity (§4).
+* Evidence: INV-69-24; specification §4, §12.2.
+
 ## 13. Calendar and schedule-validation fixtures
 
 ### CAL-01 — Daylight-saving transition
@@ -285,4 +303,4 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 * A refund exceeding its linked expense (driving a category's net actual below zero for that period) is described in specification §9.3 but has no dedicated fixture; add one if that presentation is refined.
 * Automatic-match confidence-scoring fixtures (exact thresholds an implementation would use to distinguish PEND-03 from PEND-04 automatically) are deferred to implementation scope; see FF-007 in the governing specification §18.
 * Export file-format-specific fixtures are deferred; see FF-008 in the governing specification §18.
-* Role-specific fixtures beyond OVR-01/OVR-02 (for example, an Accountability Partner viewing but not acting on a Duplicate-review state) may be added once CBD-12 publishes its role model; the current fixtures use the CBD-67-derived placeholder role set.
+* Role-specific alert-eligibility fixtures now exist (ALT-04, ALT-05, ALT-06); further role-specific fixtures outside alerts and overrides (for example, an Accountability Partner viewing but not acting on a Duplicate-review state) may still be added once CBD-12 publishes its role model. All current fixtures use the CBD-67-derived placeholder role set.
