@@ -198,8 +198,8 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 ### REV-02 — Reversal (void) of a pending authorization before settlement
 
 * Input: a pending authorization of $45.00 appears **August 19, 2026** (Aug 17–23) and is canceled by the merchant before it ever settles, on **August 20, 2026**.
-* Expected: the provisional impact is fully removed; no refund line item is created because nothing ever settled; the Aug 17–23 period returns to its pre-authorization state — directly contrasting REV-01, where a settled expense produces a separate, independently dated refund event.
-* Evidence: EC-69-14; specification §9.3.
+* Expected: the provisional impact is fully removed; no refund line item is created because nothing ever settled; the Aug 17–23 period returns to its pre-authorization state. This contrasts with REV-01 on the dividing line in §9.3: there, the expense reached settlement, so its return is a real refund event that reduces the purchase's own period; here nothing ever settled, so there is no event to date and nothing to net.
+* Evidence: EC-69-14, EC-69-05; specification §9.3.
 
 ## 9. Completed-period adjustment fixtures
 
