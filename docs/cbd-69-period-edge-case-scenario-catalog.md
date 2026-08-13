@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | In Review |
-| Version | 0.9.3 |
+| Version | 0.9.4 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
 | Governing specification | [CBD-69 — Period Edge Cases and Validation Rule Specification](cbd-69-period-edge-cases-validation-specification.md) |
@@ -21,7 +21,7 @@ These fixtures demonstrate deterministic outcomes for every row of the governing
 
 ### Coverage depth
 
-Following the CBD-67 catalog convention, this catalog documents two levels of evidence: **fully worked fixtures**, which show concrete dates, amounts, and step-by-step expected outcomes, and **compact assertion-table entries**, which state input and expected outcome without an extended narrative. Both levels are binding acceptance evidence. This version contains **32 fully worked fixtures** and no compact assertion-table entries; every required case family received a full fixture.
+Following the CBD-67 catalog convention, this catalog documents two levels of evidence: **fully worked fixtures**, which show concrete dates, amounts, and step-by-step expected outcomes, and **compact assertion-table entries**, which state input and expected outcome without an extended narrative. Both levels are binding acceptance evidence. This version contains **33 fully worked fixtures** and no compact assertion-table entries; every required case family received a full fixture.
 
 | Prefix | Meaning |
 | --- | --- |
@@ -51,7 +51,7 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 | AC08 | TYPE-01–03, REV-01, REV-01a, REV-02 |
 | AC09 | LATE-01, ALT-02 |
 | AC10 | LATE-01, REP-01 |
-| AC11 | ALT-01, ALT-02 |
+| AC11 | ALT-01, ALT-02, ALT-03 |
 | AC12 | OVR-01, OVR-02, REC-01, REC-02a, REV-01 |
 | AC13 | DATE-04, CAL-01–04 |
 | AC14 | All scenarios |
@@ -238,14 +238,20 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 ### ALT-01 — Informational warning cleared on removal
 
 * Input: a pending $300.00 charge on August 14 in a category with $250.00 remaining triggers an informational pending-activity warning. The authorization is removed without settlement on August 16 (as in PEND-02).
-* Expected: the informational warning fires once, on August 14; it is cleared — not re-fired — when the authorization is removed on August 16; no firm alert is ever created for this charge.
-* Evidence: specification §12.1–12.2; INV-69-15.
+* Expected: the informational warning fires once, on August 14. Its copy states that the pending charge **would** exceed the category, never that it has been exceeded (INV-69-23). It offers no acknowledgement action. When the authorization is removed on August 16 the warning clears itself with no user action; it is not re-fired, and no firm alert is ever created for this charge.
+* Evidence: specification §12.1–12.2; INV-69-15, INV-69-23.
 
 ### ALT-02 — Late-adjustment alert distinct from a current-period alert
 
 * Input: LATE-01's fixture, where the Aug 10–16 period's settled total rises from $90.00 to $110.00 against a $100.00 budget after the period has ended.
 * Expected: the resulting alert explicitly identifies itself as a late adjustment to the completed Aug 10–16 period, and is visibly distinguishable from any independent current-period overage alert that might fire for Aug 17–23 or later.
 * Evidence: specification §12.1; INV-69-16.
+
+### ALT-03 — Firm alert persists and is acknowledged
+
+* Input: settled spending of $310.00 against a $250.00 category target in the **active** Aug 17–23 period produces a firm settled-overspending alert. A Co-owner acknowledges it. No further transactions are added.
+* Expected: the alert states the overage as a fact, not a possibility, because the money has settled (INV-69-23). It offers an acknowledgement action, and acknowledging it records the actor and timestamp without changing any financial value or clearing the underlying overage. The alert does not clear itself, because the $60.00 overage remains true. A later, smaller settlement inside the same overage state does not re-fire it (§12.2). Contrast ALT-01, where the informational form self-clears and offers no acknowledgement.
+* Evidence: specification §12.1–12.2, §4; INV-69-15, INV-69-23.
 
 ## 13. Calendar and schedule-validation fixtures
 
