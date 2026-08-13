@@ -3,9 +3,9 @@
 | Field | Value |
 | --- | --- |
 | Status | Approved |
-| Document version | 1.0 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner approval |
+| Reviewer | Alexander Wohlford — Product Owner approval, on the evidence of an independent AI-assisted audit of Codex-authored drafts (see traceability record §6 and RF-07) |
 | Jira | [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) |
 | Governing specification | [CBD-67 — Weekly and Monthly Budget Cycle Workflow Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/655361) |
 | Traceability | [CBD-67 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/720897) |
@@ -16,6 +16,8 @@
 This catalog provides deterministic, human-reviewable examples of the product behavior defined in the governing CBD-67 specification. It supports product review, interface examples, implementation fixtures, acceptance testing, and automated regression coverage.
 
 The governing specification remains authoritative. A scenario demonstrates a rule but does not create, override, narrow, or expand one. If a scenario conflicts with the specification, correct the scenario and review the affected traceability.
+
+**Coverage depth.** This catalog uses two intentional levels of depth. Complex or novel behavior — initial setup, cross-cadence changes, and proration — is demonstrated with fully worked fixtures using concrete dates, amounts, and Given/When/Then structure (21 scenario IDs: SCN-W-01–02, SCN-M-01–05, SCN-C-01–05, CALC-01, FIN-01–03, PERM-01–03, A11Y-01, SCOPE-01). Simpler or highly repetitive behavior — validation messages, lifecycle transitions, recovery outcomes, and historical-integrity rules — is captured as compact one-row assertion tables rather than full narrative fixtures (36 scenario IDs: LIFE-01–06, FIN-04, REC-01–05, HIST-01–04, ERR-01–20). Both levels are binding acceptance evidence; the compact-table format is a density choice reflecting the underlying test-fixture role, not a placeholder for missing content.
 
 ### 1.1 Scenario types
 
@@ -843,3 +845,5 @@ If a new blocking ambiguity is found, assign a stable scenario or open-question 
 | --- | --- | --- | --- | --- |
 | August 11, 2026 | Author review — Alexander Wohlford | Governing specification decisions, CBD-67 description and acceptance criteria, AC01–AC19 coverage, deterministic setup and cross-cadence fixtures, lifecycle, permissions, presentation, recovery, history, accessibility, and scope boundaries | No known MVP-blocking scenario gaps; FF-002 and FF-004 remain deferred; formal human approval and executable-test implementation remain pending | Final Draft prepared for formal review |
 | August 11, 2026 | Alexander Wohlford — Product Owner | Final completion review of old-period preview presentation, AC13/AC14 evidence, AC16 confirmation assertions, cross-document consistency, and deferred boundaries | All closure findings resolved; technical design and executable implementation tests remain separate future delivery work | Version 1.0 Approved |
+| August 11, 2026 | Alexander Wohlford with Claude assistance — AI-assisted critical audit | Independent verification of scenario and invariant counts, recomputation of calendar and proration arithmetic in CALC-01 and SCN-C-01/03/04/05, and review of the v1.0 approval chain | Counts and arithmetic verified correct; the 57 scenario IDs were found to span two undocumented levels of depth, and v1.0 was authored, reviewed, and approved by the same person with no independent human review | Coverage-depth note added to Section 1; version 1.1 returned to In Review. See RF-07 in the traceability record. |
+| August 11, 2026 | Alexander Wohlford — Product Owner | Approval decision on reviewer independence for this documentation-scope subtask | The drafts under audit were authored by Codex rather than by the approver; the Product Owner reviewed them and the AI-assisted audit supplied an independent critical pass over work the approver did not write. Accepted as sufficient reviewer separation. The independent reviewer was an AI system, not a second human. | Version 1.2 Approved under the amended §7.7 rule in the traceability record. RF-07 resolved and REV-01 closed. |
