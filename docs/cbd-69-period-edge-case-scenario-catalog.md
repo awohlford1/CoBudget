@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | In Review |
-| Version | 0.9.2 |
+| Version | 0.9.3 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
 | Governing specification | [CBD-69 — Period Edge Cases and Validation Rule Specification](cbd-69-period-edge-cases-validation-specification.md) |
@@ -21,7 +21,7 @@ These fixtures demonstrate deterministic outcomes for every row of the governing
 
 ### Coverage depth
 
-Following the CBD-67 catalog convention, this catalog documents two levels of evidence: **fully worked fixtures**, which show concrete dates, amounts, and step-by-step expected outcomes, and **compact assertion-table entries**, which state input and expected outcome without an extended narrative. Both levels are binding acceptance evidence. This version contains **29 fully worked fixtures** and no compact assertion-table entries; every required case family received a full fixture.
+Following the CBD-67 catalog convention, this catalog documents two levels of evidence: **fully worked fixtures**, which show concrete dates, amounts, and step-by-step expected outcomes, and **compact assertion-table entries**, which state input and expected outcome without an extended narrative. Both levels are binding acceptance evidence. This version contains **32 fully worked fixtures** and no compact assertion-table entries; every required case family received a full fixture.
 
 | Prefix | Meaning |
 | --- | --- |
@@ -42,13 +42,13 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 | AC | Scenario evidence |
 | --- | --- |
 | AC01 | DATE-01–04 |
-| AC02 | DATE-01, DATE-02 |
+| AC02 | DATE-01, DATE-02, DATE-02a |
 | AC03 | DATE-03, DATE-04 |
-| AC04 | PEND-01, PEND-02 |
-| AC05 | PEND-01, PEND-04, REV-01 |
-| AC06 | PEND-02–04, REC-01, REC-02, REC-02a, REC-03 |
+| AC04 | PEND-01, PEND-02, DATE-02a |
+| AC05 | PEND-01, PEND-04, DATE-02a, REV-01 |
+| AC06 | PEND-02–04, REC-01, REC-02, REC-02a, REC-02b, REC-03 |
 | AC07 | INC-01, INC-02 |
-| AC08 | TYPE-01–03, REV-01, REV-02 |
+| AC08 | TYPE-01–03, REV-01, REV-01a, REV-02 |
 | AC09 | LATE-01, ALT-02 |
 | AC10 | LATE-01, REP-01 |
 | AC11 | ALT-01, ALT-02 |
@@ -70,6 +70,12 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 * Input: a grocery expense has no authorization date and posts **Monday, August 17, 2026** for $54.12.
 * Expected: budget date is August 17 with fallback provenance recorded; it belongs to the Aug 17–23 period and is settled directly with no pending stage shown.
 * Evidence: EC-69-02; INV-69-05.
+
+### DATE-02a — Pending transaction with no authorization date
+
+* Input: a linked account reports a **pending** $63.00 charge with no reliable authorization date, supplying only an available date of **August 18, 2026** (Aug 17–23). It later settles for $63.00 on August 21.
+* Expected: the charge is not treated as settled merely because it lacks an authorization date. It takes August 18 as a provisional budget date, appears as pending in Aug 17–23 with the ordinary pending labeling, and produces only an informational warning. On settlement the final amount replaces the provisional one; if an authorization date arrives with the settlement, the budget date is re-derived under EC-69-01.
+* Evidence: EC-69-26; INV-69-06, INV-69-14, INV-69-15.
 
 ### DATE-03 — Date supplied without a reliable time
 
@@ -100,14 +106,14 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 ### PEND-03 — Unmatched posted transaction with weak candidates
 
 * Input: a $48.00 posted expense on **August 19, 2026** (Aug 17–23) has two weak pending candidates from August 17 and 18 that the automatic matcher cannot confidently link.
-* Expected: the posted item is counted exactly once, using the posted-date fallback (EC-69-02), in Aug 17–23; the weak candidates are presented for review rather than silently merged or double-counted.
-* Evidence: EC-69-06, EC-69-07; INV-69-06.
+* Expected: the posted item is counted exactly once at $48.00 in Aug 17–23. Because two candidates exist, no single authorization date can be selected, so the posted date August 19 is used until a user resolves the pair (EC-69-07). The candidates are presented for review rather than silently merged or double-counted.
+* Evidence: EC-69-06, EC-69-07; INV-69-06, INV-69-22.
 
 ### PEND-04 — Apparent pending/posted duplicate
 
 * Input: a pending $49.90 charge authorized August 20 and a posted $50.00 charge on August 21 share the same merchant but have no reliable institution-supplied link.
-* Expected: the pair enters Duplicate-review; only one instance counts toward category and period totals while unresolved; the interface shows an unresolved-match indicator on both records.
-* Evidence: EC-69-07; §7.1–7.2 of the specification.
+* Expected: the pair enters Duplicate-review. The **posted $50.00** is the amount counted, because the money has moved and the figure is final; it is classified to the pending record's August 20 authorization date, since exactly one candidate exists. The pending $49.90 contributes no separate impact, so the category total is $50.00 — never $49.90 and never $99.90. Both records stay visible with an unresolved-match indicator.
+* Evidence: EC-69-07; INV-69-22; specification §7.1–7.2.
 
 ## 5. Manual reconciliation control fixtures (resolves OD-69-01)
 
@@ -120,7 +126,7 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 ### REC-02 — Manual split of one authorization into two settlements
 
 * Input: a single pending authorization of $150.00 on **August 15, 2026** (Aug 10–16) is posted by the institution as two separate settlements on **August 18, 2026**: $90.00 and $60.00. Automatic matching cannot link one pending record to two posted records. An authorized Collaborator selects **Split**.
-* Expected: the split produces two matched records of $90.00 and $60.00, each retaining the original authorization's August 15 budget date (EC-69-01) and therefore both landing in Aug 10–16; the split amounts sum to exactly $150.00, matching the original authorization, or the split is blocked pending correction; each resulting record carries its own audit trail linked to the original authorization.
+* Expected: the split produces two matched records of $90.00 and $60.00, each retaining the original authorization's August 15 budget date (EC-69-01) and therefore both landing in Aug 10–16; each carries its own audit trail linked to the original authorization. Here the settlements happen to sum to the $150.00 authorized, but that is not required — see REC-02b.
 * Evidence: specification §7.3; INV-69-06 (no amount is counted twice across the split).
 
 ### REC-02a — Manual unmatch of an incorrect automatic match
@@ -128,6 +134,12 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 * Input: the automatic matcher links a $75.00 pending charge (August 15) to a $75.00 settled charge (August 17) from a different merchant that coincidentally shares the amount. An authorized Collaborator selects **Unmatch**.
 * Expected: both records return to their independent states — the pending record to Pending-unmatched and the settled record to Settled-unmatched — and each is then classified under its own rule (EC-69-01/05 for the pending side depending on its eventual outcome, EC-69-06 for the settled side); the unmatch actor and timestamp are recorded, and the prior match remains visible in audit history.
 * Evidence: specification §7.2–7.3; INV-69-11.
+
+### REC-02b — Split whose settlements exceed the authorization
+
+* Input: a restaurant authorization of $50.00 on **August 18, 2026** (Aug 17–23) settles as $60.00 after a $10.00 tip is added. A separate case: a $150.00 authorization settles as $90.00 and $45.00 only, totalling $135.00, because part of the order was never fulfilled.
+* Expected: both are accepted. The settled amounts govern — $60.00 in the first case, $135.00 in the second — and neither is blocked for failing to equal the authorization. The variance is displayed (+$10.00 and −$15.00 respectively). This is the same amount-change behavior EC-69-04 already grants an unsplit transaction; the earlier requirement that split amounts sum exactly to the authorization was removed in v0.9.3 because it would have blocked an ordinary tip.
+* Evidence: specification §7.3; EC-69-04; INV-69-06.
 
 ### REC-03 — Dismiss a weak candidate
 
@@ -171,11 +183,17 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 
 ## 8. Refund-versus-reversal fixtures (resolves RF-69-02)
 
-### REV-01 — Refund for a previously settled expense
+### REV-01 — Linked refund nets into the original expense's period
 
-* Input: an expense authorizes and settles **August 12, 2026** (Aug 10–16) for $120.00. A refund posts **August 25, 2026** (Aug 24–30) for $30.00, linked to the original expense.
-* Expected: the refund uses its own August 25 receipt date; net spending in Aug 24–30 is reduced by $30.00; the original Aug 10–16 expense total remains $120.00 and is never retroactively reduced to $90.00.
-* Evidence: EC-69-13; specification §9.3.
+* Input: an expense authorizes and settles **August 12, 2026** (Aug 10–16) for $120.00. A refund of $30.00 posts **August 25, 2026** (Aug 24–30), reliably linked to that expense. "Today" is August 25, so Aug 10–16 has already completed.
+* Expected: the refund retains August 25 as its source posted date, but classifies to the original expense's **August 12** budget date. The Aug 10–16 category actual drops from $120.00 to $90.00, showing the true net cost of the purchase. Aug 24–30 is **not** reduced and gains no additional room. Because Aug 10–16 had already closed, it is labeled "Adjusted after period end"; its boundaries, schedule-version reference, and planned amounts are unchanged. The statement view still shows the −$30.00 on August 25 (see REP-01).
+* Evidence: EC-69-13, EC-69-21; INV-69-10, INV-69-21.
+
+### REV-01a — Unlinked refund falls back to its own posted date
+
+* Input: a $25.00 merchant credit posts **August 26, 2026** (Aug 24–30) with no reliable link to any prior expense.
+* Expected: because EC-69-13's netting cannot be applied, the refund uses its own August 26 posted date and reduces net spending in Aug 24–30. No earlier period is altered and no period is labeled as adjusted. The interface offers a link-to-purchase action; if the user later links it to an expense budgeted to an earlier period, the refund reclassifies under EC-69-13 and EC-69-24, and the earlier period is then labeled as adjusted.
+* Evidence: EC-69-25, EC-69-24; INV-69-21.
 
 ### REV-02 — Reversal (void) of a pending authorization before settlement
 
@@ -209,9 +227,11 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 
 ### REP-01 — Budget-date view versus statement view
 
-* Input: DATE-01's expense (authorized August 14, settled August 18, final $91.40) and REV-01's refund (posted August 25, $30.00).
-* Expected: the budget-date view shows $91.40 in Aug 10–16 and −$30.00 in Aug 24–30. The statement view shows the expense's $91.40 grouped under its posted date, August 18 (Aug 17–23), while the refund appears identically in both views because it has no separate authorization stage. An export of the same data includes both the budget date and the posted date as distinct columns for every item.
-* Evidence: specification §11; INV-69-04, INV-69-17.
+* Input: three items — DATE-01's expense (authorized August 14, posted August 18, final $91.40); REV-01's expense ($120.00, authorized and posted August 12); and REV-01's linked refund (−$30.00, posted August 25).
+* Expected, budget-date view: all three classify to **Aug 10–16**, because the first uses its August 14 authorization date, the second its August 12 date, and the refund nets to the expense it refunds. The period's net actual is $91.40 + $120.00 − $30.00 = **$181.40**. Aug 17–23 and Aug 24–30 show none of these items.
+* Expected, statement view: the same three items spread across three periods by posted date — $120.00 in Aug 10–16 (posted August 12), $91.40 in Aug 17–23 (posted August 18), and −$30.00 in Aug 24–30 (posted August 25).
+* Expected, both: the views disagree about the period for two of the three items, and neither is presented as a correction of the other. An export includes both the budget date and the posted date as distinct columns for every item, so either reconciliation is reproducible outside the product.
+* Evidence: specification §11, §9.3; EC-69-13; INV-69-04, INV-69-17.
 
 ## 12. Alert fixtures (resolves OD-69-03)
 
@@ -256,6 +276,7 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 ## 14. Coverage still to refine
 
 * CAL-04 requires re-verification once CBD-68 reaches Final Draft (RF-69-01, tracked in the traceability record).
+* A refund exceeding its linked expense (driving a category's net actual below zero for that period) is described in specification §9.3 but has no dedicated fixture; add one if that presentation is refined.
 * Automatic-match confidence-scoring fixtures (exact thresholds an implementation would use to distinguish PEND-03 from PEND-04 automatically) are deferred to implementation scope; see FF-007 in the governing specification §18.
 * Export file-format-specific fixtures are deferred; see FF-008 in the governing specification §18.
 * Role-specific fixtures beyond OVR-01/OVR-02 (for example, an Accountability Partner viewing but not acting on a Duplicate-review state) may be added once CBD-12 publishes its role model; the current fixtures use the CBD-67-derived placeholder role set.
