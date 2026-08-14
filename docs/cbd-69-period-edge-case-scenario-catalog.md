@@ -2,13 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | In Review |
-| Version | 0.9.5 |
+| Status | **Approved** |
+| Version | 1.0 |
 | Owner | Alexander Wohlford |
+| Approval | Approved August 13, 2026 after Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
-| Governing specification | [CBD-69 — Period Edge Cases and Validation Rule Specification](cbd-69-period-edge-cases-validation-specification.md) |
-| Traceability | [CBD-69 — Acceptance Criteria Traceability and Review Record](cbd-69-acceptance-criteria-traceability.md) |
-| Last updated | August 12, 2026 |
+| Schedule workflow input | [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) (paycheck/custom, Approved v1.0; RF-69-01 closed August 13, 2026) |
+| Governing specification | [CBD-69 — Period Edge Cases and Validation Rule Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
+| Traceability | [CBD-69 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
+| Last updated | August 13, 2026 |
 
 ## 1. Purpose and conventions
 
@@ -48,7 +50,7 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 | AC05 | PEND-01, PEND-04, DATE-02a, REV-01 |
 | AC06 | PEND-02–04, REC-01, REC-02, REC-02a, REC-02b, REC-03 |
 | AC07 | INC-01, INC-02 |
-| AC08 | TYPE-01–03, REV-01, REV-01a, REV-02 |
+| AC08 | TYPE-01–03, REV-01, REV-01a, REV-01b, REV-02 |
 | AC09 | LATE-01, ALT-02 |
 | AC10 | LATE-01, REP-01 |
 | AC11 | ALT-01, ALT-02, ALT-03, ALT-04, ALT-05, ALT-06 |
@@ -157,9 +159,9 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 
 ### INC-02 — Expected income never arrives
 
-* Input: income expected **August 20, 2026** passes with no matching deposit by the Aug 17–23 period's end (August 23).
-* Expected: the projection is marked missing/unmatched; no actual-income, balance, cash-flow-reporting, or spending-target change occurs; no period boundary changes.
-* Evidence: EC-69-10; INV-69-07.
+* Input: income is expected **Thursday, August 20, 2026** and no matching deposit is confirmed. There are no Federal Reserve closures in the following five-business-day window.
+* Expected: the occurrence is **Expected today** on August 20; **Late** from Friday August 21 through Thursday August 27, the fifth Federal Reserve business day after the expected date; and **Missing** beginning Friday August 28. Late remains in expected totals and the near-term forecast. Missing remains in historical expected totals and variance reporting but leaves forward-looking cash projections. No actual-income, balance, cash-flow-reporting, spending-target, or period-boundary change occurs. The interface offers three distinct actions: **Edit this expected paycheck**, **Skip this occurrence**, and **Review repeating schedule**. Skip removes the occurrence from current expected totals and the forward forecast while preserving the original expectation and action in history; it does not delete the record or change boundaries.
+* Evidence: EC-69-10; INV-69-07; CBD-68 PD-68-07.
 
 ## 7. Other transaction-type fixtures
 
@@ -188,6 +190,12 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 * Input: an expense authorizes and settles **August 12, 2026** (Aug 10–16) for $120.00. A refund of $30.00 posts **August 25, 2026** (Aug 24–30), reliably linked to that expense. "Today" is August 25, so Aug 10–16 has already completed.
 * Expected: the refund retains August 25 as its source posted date, but classifies to the original expense's **August 12** budget date. The Aug 10–16 category actual drops from $120.00 to $90.00, showing the true net cost of the purchase. Aug 24–30 is **not** reduced and gains no additional room. Because Aug 10–16 had already closed, it is labeled "Adjusted after period end"; its boundaries, schedule-version reference, and planned amounts are unchanged. The statement view still shows the −$30.00 on August 25 (see REP-01).
 * Evidence: EC-69-13, EC-69-21; INV-69-10, INV-69-21.
+
+### REV-01b — Linked refund exceeds the original expense
+
+* Input: an expense authorizes and settles **August 12, 2026** in the Aug 10–16 period for **$100.00**. A reliably linked **$120.00** refund posts **August 25, 2026**, after the original period has ended.
+* Expected: budget-date reporting applies the full $120.00 to the original Aug 10–16 period and category. The first $100.00 fully offsets the purchase; the remaining **$20.00 is displayed as an excess refund credit**, producing **−$20.00 net actual spending** for that category and period. The spending target is unchanged, nothing moves to Aug 24–30 or another category, and no allocation action is created. Aug 10–16 is labeled “Adjusted after period end.” Statement reporting shows the full −$120.00 refund on August 25. No overage alert is created; if the category previously had an overage, the refund may resolve it.
+* Evidence: EC-69-13, EC-69-21; INV-69-10, INV-69-16, INV-69-21.
 
 ### REV-01a — Unlinked refund falls back to its own posted date
 
@@ -255,13 +263,13 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 
 ### ALT-04 — Accountability Partner receives an informational alert by default
 
-* Input: a budget space has an accepted Accountability Partner with no separate opt-in action taken. A pending $180.00 charge on August 14 in a category with $150.00 remaining triggers an informational pending-activity warning (as in ALT-01).
-* Expected: the Accountability Partner receives the informational alert without any prior opt-in step. Its copy states the charge **would** exceed the category, never that it has been exceeded (INV-69-23), consistent with what CBD-69 v0.9.5 confirmed is gentle enough to deliver by default (INV-69-25).
+* Input: an invitation has been accepted, so the person now holds the active Accountability Partner role. The Partner is provisioned for the affected category, and applicable masking permits a category-level amount but hides restricted merchant detail. No separate informational-alert opt-in has been taken. A pending $180.00 charge on August 14 in a category with $150.00 remaining triggers an informational warning (as in ALT-01).
+* Expected: the active, provisioned Accountability Partner receives the masked informational alert by default. The alert contains only information permitted by provisioning and masking, states that the charge **would** exceed the category rather than asserting a final overage (INV-69-23), and remains subject to the final CBD-12 consent and notification rules. A pending invitation or a Partner without provisioning for the category receives nothing.
 * Evidence: INV-69-25; specification §4, §12.2.
 
 ### ALT-05 — Primary Owner mutes informational alerts to the Accountability Partner without affecting firm alerts
 
-* Input: the same budget space as ALT-04. The Primary Owner mutes informational alerts to the Accountability Partner. A new pending charge then triggers an informational warning, and separately a settled transaction creates a firm overspending alert.
+* Input: the same active and provisioned Accountability Partner relationship as ALT-04. The Primary Owner mutes informational alerts to the Accountability Partner. A new pending charge then triggers an informational warning, and separately a settled transaction creates a firm overspending alert.
 * Expected: after the mute, the Accountability Partner does not receive the new informational warning. The firm overspending alert is still delivered, unaffected by the mute. The mute action is recorded with the actor and timestamp. An attempt by a Collaborator, or by the Accountability Partner themself, to perform the same mute is denied and recorded.
 * Evidence: INV-69-25; specification §4, §12.2, §13.
 
@@ -289,18 +297,19 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 
 * Input: a proposed custom schedule of August 1–10 followed by August 12–20 (a gap); a separate proposed schedule of August 1–10 followed by August 10–20 (an overlap on August 10).
 * Expected: activation is blocked in both cases; the gap case identifies missing August 11; the overlap case identifies duplicate August 10; no partial schedule is written.
-* Evidence: EC-69-19; CBD-68 §11.
+* Evidence: EC-69-19; CBD-68 §§14–16.
 
-### CAL-04 — Duplicate anchor and skipped payday — **Provisional, pending CBD-68 Final Draft**
+### CAL-04 — Duplicate anchor and skipped payday
 
-* Input: a business-day adjustment collapses two separate anchor occurrences onto the same calendar date; a separate, independently confirmed schedule change skips one anchor occurrence entirely.
-* Expected: the collapsed anchors produce exactly one period boundary; the skip's effect on classification appears only after its schedule change is confirmed under CBD-67/CBD-68 rules — transaction activity is never used to infer or move a boundary in advance of confirmation.
-* Evidence: EC-69-20; CBD-68 §7, §9, §10. This fixture must be re-verified against CBD-68's Final Draft numbering and examples before CBD-69 can be marked Approved (RF-69-01).
+* Input: a business-day adjustment collapses two separate anchor occurrences onto the same calendar date. Separately, a user applies **Skip occurrence** to an expected anchor paycheck and later proposes an explicit CBD-67 schedule change that removes a future boundary.
+* Expected: the collapsed anchor occurrences produce exactly one boundary while retaining separate event identities. **Skip occurrence changes the income projection only and leaves every canonical boundary unchanged.** The future boundary moves or disappears only after the separate schedule change is previewed and confirmed under CBD-67/CBD-68 rules. Transaction activity never infers or moves a boundary.
+* Evidence: EC-69-20; CBD-68 Approved v1.0 §§9–11, §16; PD-68-10, PD-68-15. This fixture was re-verified against the approved boundary rules on August 13, 2026; RF-69-01 is closed.
 
 ## 14. Coverage still to refine
 
-* CAL-04 requires re-verification once CBD-68 reaches Final Draft (RF-69-01, tracked in the traceability record).
-* A refund exceeding its linked expense (driving a category's net actual below zero for that period) is described in specification §9.3 but has no dedicated fixture; add one if that presentation is refined.
+* CAL-04 was re-verified against CBD-68 Approved v1.0 on August 13, 2026 (RF-69-01 closed; see the traceability record).
 * Automatic-match confidence-scoring fixtures (exact thresholds an implementation would use to distinguish PEND-03 from PEND-04 automatically) are deferred to implementation scope; see FF-007 in the governing specification §18.
 * Export file-format-specific fixtures are deferred; see FF-008 in the governing specification §18.
 * Role-specific alert-eligibility fixtures now exist (ALT-04, ALT-05, ALT-06); further role-specific fixtures outside alerts and overrides (for example, an Accountability Partner viewing but not acting on a Duplicate-review state) may still be added once CBD-12 publishes its role model. All current fixtures use the CBD-67-derived placeholder role set.
+
+
