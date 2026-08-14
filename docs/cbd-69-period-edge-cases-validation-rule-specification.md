@@ -3,13 +3,13 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** |
-| Document version | 1.0 |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — final Product Owner approval August 13, 2026, following Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review (traceability record §9). |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
 | Parent | [CBD-11](https://cobudget.atlassian.net/browse/CBD-11) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
-| Schedule workflow input | [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) (weekly/monthly, Approved v1.2), [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) (paycheck/custom, Approved v1.0) |
+| Schedule workflow input | [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) (weekly/monthly, Approved v1.3), [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) (paycheck/custom, Approved v1.0) |
 | Role and permission input | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) (Ready, not yet specified) |
 | Scenario catalog | [CBD-69 — Period Edge-Case Scenario Catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3571722) |
 | Traceability and review | [CBD-69 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
@@ -337,8 +337,8 @@ Automated verification must cover, at minimum: every row of the classification m
 
 ### Dependencies
 
-* [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) — weekly/monthly schedule and period-boundary rules (Approved v1.2). This specification treats CBD-67 boundaries as authoritative input.
-* [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) — paycheck/custom schedule and period-boundary rules (First Draft v0.3). Rows in §6 marked Provisional depend on CBD-68 reaching Final Draft.
+* [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) — weekly/monthly schedule and period-boundary rules (Approved v1.3). This specification treats CBD-67 boundaries as authoritative input.
+* [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) — paycheck/custom schedule and period-boundary rules (Approved v1.0). RF-69-01 was closed on August 13, 2026 after re-verification against CBD-68 v1.0; no row in §6 remains Provisional.
 * [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) — role, permission, and alert-configuration model (Ready, not yet specified). §4, §12.2, and §13 use a placeholder role model pending CBD-12.
 
 ### Risks
@@ -374,11 +374,12 @@ See [FF-007 and FF-008 in the Future Feature Register](https://cobudget.atlassia
 
 ## 20. Revision history and approval
 
-| Version | Date | Author | Change |      
+| Version | Date | Author | Change |  
+| 1.0.1 | August 13, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Editorial correction to §17 Dependencies and the front-matter schedule-workflow input, both of which still carried superseded upstream versions: CBD-67 was listed at Approved v1.2 when it is v1.3, and CBD-68 at First Draft v0.3 when it reached Approved v1.0, with an accompanying sentence claiming §6 rows remained Provisional after RF-69-01 had already closed. No classification rule, invariant, edge-case row, or scenario outcome changed. |  
 | 1.0 | August 13, 2026 | Alexander Wohlford, Product Owner, with Claude and Codex assistance | **Approved.** Applied the same staged approval precedent used for the preceding documentation subtasks: initial analysis by Claude; review and product decisions by Alexander Wohlford; full four-part audit by Codex covering 15 acceptance criteria, 26 edge-case rules, 37 scenario fixtures, and cross-document consistency; final review and approval by Alexander Wohlford. RF-69-06 closed with the named human Product Owner accountable for approval. |  
-| 0.9.10 | August 13, 2026 | Codex with Alexander Wohlford as owner | Final synchronization against CBD-68 Approved v1.0. Re-verified EC-69-20 and CAL-04 against the approved schedule-boundary, duplicate-anchor, occurrence-exception, and confirmed schedule-change rules; closed RF-69-01 and promoted AC-13 to Complete for Final Draft. |    
-| 0.9.9 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Confirmed excess-refund behavior. A linked refund is recorded in full; the original expense is offset and any remainder is shown as an excess refund credit in the same original period/category, allowing clearly labeled negative net actual spending. The excess never changes a spending target or moves automatically. Statement reporting retains the full posted-date refund. Updated INV-69-21 and §9.3; Jira was aligned and REV-01b added. |        
-| 0.9.8 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Aligned EC-69-10 with approved CBD-68 PD-68-07 and adopted the Product Owner compromise for recovery copy. Expected income now progresses Projected → Expected today → Late through the fifth Federal Reserve business day → Missing afterward. Customer actions are explicit: edit this expected paycheck, Skip occurrence while preserving history, or review/edit the repeating schedule. Updated the informational indicator trigger and audit outcomes. |          
+| 0.9.10 | August 13, 2026 | Codex with Alexander Wohlford as owner | Final synchronization against CBD-68 Approved v1.0. Re-verified EC-69-20 and CAL-04 against the approved schedule-boundary, duplicate-anchor, occurrence-exception, and confirmed schedule-change rules; closed RF-69-01 and promoted AC-13 to Complete for Final Draft. |  
+| 0.9.9 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Confirmed excess-refund behavior. A linked refund is recorded in full; the original expense is offset and any remainder is shown as an excess refund credit in the same original period/category, allowing clearly labeled negative net actual spending. The excess never changes a spending target or moves automatically. Statement reporting retains the full posted-date refund. Updated INV-69-21 and §9.3; Jira was aligned and REV-01b added. |  
+| 0.9.8 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Aligned EC-69-10 with approved CBD-68 PD-68-07 and adopted the Product Owner compromise for recovery copy. Expected income now progresses Projected → Expected today → Late through the fifth Federal Reserve business day → Missing afterward. Customer actions are explicit: edit this expected paycheck, Skip occurrence while preserving history, or review/edit the repeating schedule. Updated the informational indicator trigger and audit outcomes. |  
 | 0.9.7 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Clarified INV-69-25 after Product Owner review. An Accountability Partner is an accepted and active role by definition; pending or inactive invitations confer no role or access. Default informational alerts apply only within applicable provisioning, use the same masking as the underlying view, and remain subject to final CBD-12 consent and notification rules. Updated the permission matrix and §12.2 without changing firm-alert eligibility or the Owner/Co-owner mute control. |
 
 | 0.9.6 | August 12, 2026 | Codex with Alexander Wohlford as owner | Interim CBD-68 v0.3 synchronization. Corrected EC-69-20 so shift, skip, extra, and amount occurrence exceptions are projection-only under PD-68-10 and cannot affect canonical boundaries; only an explicit confirmed CBD-67 schedule change can move, add, or remove a boundary. Updated EC-69-19 to the bounded fixed-length recurring custom-cadence model and current CBD-68 section references. Final Draft re-verification remains required under RF-69-01. Cross-document identifier audit passed: 26 EC rows, 25 invariants, and 36 scenario fixtures have no dangling references. |

@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** |
-| Document version | 1.0 |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — final Product Owner approval August 13, 2026 after Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review (§9). |
 | Jira subtask | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
@@ -112,7 +112,7 @@ Manually entered transactions (EC-69-11, TYPE-03) and post-classification catego
 | OD-69-02 | Confirm which reports provide authorization-date, posted-date, or selectable views and define export behavior. | **Resolved in scope.** Specification §11 establishes the budget-date view as default, requires a labeled statement (posted-date) view alongside it, requires both dates as distinct export columns, and requires late-adjustment labeling in both views. Fixture REP-01. | Export file formats and scheduled/automated delivery deferred to FF-008. |
 | OD-69-03 | Confirm alert recipients, thresholds, suppression rules, and delivery channels. | **Resolved in scope.** Specification §12.1 names five alert types with firm/informational classification; §12.2 defines eligibility by role and the CBD-69-scoped suppression rule. Fixtures ALT-01, ALT-02. | Delivery channels, numeric thresholds, cooldowns, deduplication windows, and quiet hours are CBD-12 scope by its own Jira description. |
 | OD-69-04 | Map override and reconciliation privileges to final CBD-12 roles. | **Resolved in scope.** Specification §4 provides a twelve-action permission matrix across the five roles, using the CBD-67 §4 role model as the best-available baseline since CBD-12 is Ready but unspecified. §13 states the override and reconciliation permission and audit requirements. Fixtures OVR-01, OVR-02. | Final role names, exact grant mechanics, and enforcement remain CBD-12 scope and require reconciliation when CBD-12 is specified. |
-| RF-69-02 | Refund/reversal accounting direction needs a deterministic reporting outcome. | **Resolved.** Specification §9.3 separates the two cases on a single deterministic test — whether the original authorization ever reached settlement. A settled-then-returned event is a refund with its own posted date (EC-69-13); a never-settled-then-canceled event is a reversal that removes the provisional impact entirely (EC-69-14). Contrast fixtures REV-01 and REV-02. | None. |
+| RF-69-02 | Refund/reversal accounting direction needs a deterministic reporting outcome. | **Resolved.** Specification §9.3 separates the two cases on a single deterministic test — whether the original authorization ever reached settlement. A settled-then-returned event is a refund: it retains its own posted date as a source date but is classified to the budget date of the expense it refunds (EC-69-13), falling back to its own posted date only when no reliable link exists (EC-69-25). A never-settled-then-canceled event is a reversal that removes the provisional impact entirely (EC-69-14). Contrast fixtures REV-01, REV-01a, and REV-02. | None. |
 
 ## 7. Review findings
 
@@ -188,11 +188,12 @@ This document adopts the CBD-67 §7 governance rules. Restated for CBD-69, with 
 
 ## 11. Revision history
 
-| Version | Date | Author | Change |      
+| Version | Date | Author | Change |  
+| 1.0.1 | August 13, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Editorial correction. Rewrote the RF-69-02 resolution text in §7, which still described a linked refund as using its own posted date and cited EC-69-13 for the opposite of what that row has stated since the v0.9.3 reversal, and which contradicted the AC-08 row in §2 of this same document. No product rule, invariant, scenario outcome, or acceptance-criterion mapping changed. |  
 | 1.0 | August 13, 2026 | Alexander Wohlford, Product Owner, with Claude and Codex assistance | **Approved.** Recorded the staged approval rationale used for the preceding two documentation subtasks: initial analysis by Claude, Product Owner review and product decisions, separate four-part audit by Codex, and final Product Owner review and approval. All four audit checks passed; RF-69-06 closed. |  
-| 0.9.10 | August 13, 2026 | Codex with Alexander Wohlford as owner | Completed final synchronization against CBD-68 Approved v1.0. Closed RF-69-01, promoted AC-13 to Complete for Final Draft, updated CAL-04 and EC-69-20 evidence, and reduced upstream reconciliation gates to zero. |    
-| 0.9.9 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Raised and resolved RF-69-18. Specified excess-refund behavior, aligned Jira, expanded INV-69-21 and §9.3, added deterministic fixture REV-01b, and updated AC08/required-case coverage. Scenario count increased from 36 to 37. |        
-| 0.9.8 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Raised and resolved RF-69-17. Adopted CBD-68 PD-68-07’s Expected today/Late/Missing timing and clarified the compromise recovery actions: edit this expected paycheck, Skip occurrence with preserved history, or review/edit the repeating schedule. Updated EC-69-10, INC-02, alert timing, copy, and audit outcomes. |          
+| 0.9.10 | August 13, 2026 | Codex with Alexander Wohlford as owner | Completed final synchronization against CBD-68 Approved v1.0. Closed RF-69-01, promoted AC-13 to Complete for Final Draft, updated CAL-04 and EC-69-20 evidence, and reduced upstream reconciliation gates to zero. |  
+| 0.9.9 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Raised and resolved RF-69-18. Specified excess-refund behavior, aligned Jira, expanded INV-69-21 and §9.3, added deterministic fixture REV-01b, and updated AC08/required-case coverage. Scenario count increased from 36 to 37. |  
+| 0.9.8 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Raised and resolved RF-69-17. Adopted CBD-68 PD-68-07’s Expected today/Late/Missing timing and clarified the compromise recovery actions: edit this expected paycheck, Skip occurrence with preserved history, or review/edit the repeating schedule. Updated EC-69-10, INC-02, alert timing, copy, and audit outcomes. |  
 | 0.9.7 | August 13, 2026 | Codex with Alexander Wohlford as Product Owner | Raised and resolved RF-69-16. Clarified that Accountability Partner is an accepted, active role—not a status held by an inactive invitation—and that default informational alerts remain gated by applicable provisioning, masking, and final CBD-12 consent/notification rules. Updated INV-69-25, the permission matrix, §12.2, ALT-04, and ALT-05. |
 
 | 0.9.6 | August 12, 2026 | Codex with Alexander Wohlford as owner | Interim synchronization against CBD-68 First Draft v0.3. Raised and resolved RF-69-15: occurrence exceptions are projection-only and cannot move boundaries; only a separately confirmed CBD-67 schedule change can do so. Updated EC-69-19/20 and CAL-04, corrected CBD-68 section references, and recorded a clean identifier audit covering 26 EC rows, 25 invariants, and 36 scenarios. RF-69-01 remains open for the mandatory CBD-68 Final Draft recheck; AC-13 remains Provisional. |
@@ -247,5 +248,3 @@ This document adopts the CBD-67 §7 governance rules. Restated for CBD-69, with 
 - [ ] Implementation completed.
 - [ ] Executable tests mapped to affected criteria and invariants (QA-69-01).
 - [ ] Release verification evidence linked and passed.
-
-
