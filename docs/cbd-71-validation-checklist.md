@@ -4,8 +4,9 @@
 | --- | --- |
 | Status | **Complete — Product Owner approved** |
 | Document version | 1.0 |
-| Decision register | [CBD-71 MVP Schedule Decisions](cbd-71-mvp-schedule-decision-register.md) |
+| Decision register | [CBD-71 MVP Schedule Decisions](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
 | Jira | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
+| Confluence page | [CBD-71 — MVP Schedule Decisions Validation Checklist](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6160404) |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude (see traceability record §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent |
 | Last updated | August 14, 2026 |
@@ -27,12 +28,12 @@ A decision is validated only when it is Product Owner approved, internally consi
 | Deferred behavior is separated from MVP behavior. | Register §5; Future Feature Register | Pass |
 | Unresolved behavior is explicit and blocks affected acceptance. | Register §6 and §8 | Pass |
 | Determinism, interval, reference-data, calculation, and idempotency controls are register-level governance rather than compound product decisions. | Register §3.4 | Pass |
-| Governance controls carry source-criteria and scenario evidence equivalent to a decision row. | Register §3.4, GC-01–08 | Pass (added in v0.3; **Fail** in v0.2) |
+| Governance controls carry source-criteria and scenario evidence equivalent to a decision row. | Register §3.4, GC-01–09 | Pass (added in v0.3; **Fail** in v0.2) |
 | Every approved CBD-70 scenario is referenced by an active decision or governance control. | Register §§3.4, 4; 75 of 75 | Pass (added in v0.3; **Fail** in v0.2 — `VAL-01` and `PREV-02` unreferenced) |
 | Every cited predecessor criterion exists in its approved source. | Register §§3.4, 4; 50 of 50 governing criteria | Pass (added in v0.3; **Fail** in v0.2 — `CBD-68-AC17` does not exist) |
 | Product Owner approval is recorded for this exact revision. | Register §9 | Pass — approved August 14, 2026 |
 | Approved set is issued as MVP Schedule Decisions v1.0. | Register front matter and §9 | Pass — issued August 14, 2026 |
-| Approved artifacts are published to Confluence and mirrored in the repository, per register §8.4. | Product Owner published the CBD-70 and CBD-71 pages August 14, 2026; repository mirror is current | Pass — page links to be added to front matter |
+| Approved artifacts are published to Confluence and mirrored in the repository, per register §8.4. | CBD-71 pages published and synchronized to v1.0 on August 14, 2026; page links recorded in front matter; repository mirror is current | Pass |
 
 ## 3. Active decision validation matrix
 
@@ -72,7 +73,7 @@ A decision is validated only when it is Product Owner approved, internally consi
 | SD-071-049 | Setup input validation | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Approved | Accepted for MVP |
 | SD-071-050 | Budget-date override | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Approved | Accepted for MVP |
 
-**Verification basis.** `Sources` and `Dependencies` were verified mechanically in v0.3: every cited predecessor criterion exists in its approved source, every cited scenario ID exists in the approved CBD-70 catalog, and every dependency reference resolves to an active decision or a governance control. The remaining gates carry the v0.2 content review forward at per-decision granularity; they were re-read against each row in v0.3 but have not been independently reviewed by a second reviewer. The calendar-and-calculation and architecture-alignment passes in §4 remain the outstanding independent checks.
+**Verification basis.** `Sources` and `Dependencies` were verified mechanically in v0.3: every cited predecessor criterion exists in its approved source, every cited scenario ID exists in the approved CBD-70 catalog, and every dependency reference resolves to an active decision or a governance control. The remaining gates carry the v0.2 content review forward at per-decision granularity; they were re-read against each row in v0.3 but have not been independently reviewed by a second reviewer. The calendar-and-calculation and architecture-alignment passes in §4 were subsequently completed and are recorded there.
 
 ### 3.1 Superseded version 0.1 matrix
 
@@ -108,7 +109,7 @@ The Pass results mean each decision has evidence in the frozen baseline. The `PO
 | --- | --- | --- | --- | --- |
 | Source and traceability | Verify all register claims against approved CBD-67 through CBD-70 artifacts and both directions of criterion/scenario mapping. | Codex draft; independent audit by Claude | Complete | Codex consolidation found no blocking source conflict. The independent Claude audit verified that all 50 governing criteria and all 75 approved scenarios are represented, that every cited criterion exists in its approved source, and that every dependency reference resolves; it raised RF-71-05 through RF-71-14, all resolved except the publication item. |
 | Calendar and calculation | Reconfirm anchors, inclusive/exclusive boundaries, short months, leap years, holiday handling, proration, rounding, and reconciliation equations. | Independent audit by Claude, on the CBD-70 re-derivation precedent | Complete | Full sweep of every rule restatement in the active decisions and governance controls against the frozen sources. All calendar and calculation restatements reproduce, including anchors and the Monday default, short-month clamping, the three non-business-day policies, the Federal Reserve holiday authority, the four income projection states, the 1–366 day custom bound, half-up rounding with largest-remainder cent assignment and stable-ID tie-breaking, and the role action matrix. The sweep raised RF-71-15 through RF-71-19, all approved rules omitted from the consolidation rather than errors in it; all five are resolved in register v0.6. Underlying dates, intervals, and monetary results were re-derived under the approved CBD-70 review and are inherited through the §2 baseline. |
-| Decision quality | Check that every selected behavior is singular, implementation-neutral, understandable, and covers exceptional behavior or a linked deferral. | Alexander Wohlford — Product Owner | Initial review complete | Accepted all structural findings; compound v0.1 rows were superseded by SD-071-020–048. Final decision approval remains pending. |
+| Decision quality | Check that every selected behavior is singular, implementation-neutral, understandable, and covers exceptional behavior or a linked deferral. | Alexander Wohlford — Product Owner | Complete | Accepted all structural findings; compound v0.1 rows were superseded by SD-071-020–048. Final decision approval recorded August 14, 2026. |
 | Architecture alignment | Check named dependencies against architecture and identify data-model, interface, security, privacy, accessibility, role, and operational consequences. | Independent audit by Claude | Complete | Checked all 31 active decisions and 9 governance controls against `architecture.md`. No decision contradicts the architecture. Append-only audit, historical-period preservation, changeable imported transactions, deny-by-default authorization, notification deduplication, UTC storage with a budget-space time zone, integer minor units, and idempotent jobs all support named decisions directly. Raised RF-71-20 through RF-71-24 as architecture and technical-design follow-ups; none blocks a product decision, and all fall to technical design, CBD-12, or CBD-15 rather than to CBD-71 scope. |
 | Product Owner approval | Review all proposed, deferred, and unresolved dispositions and approve the exact version. | Alexander Wohlford | Complete | Approved MVP Schedule Decisions v1.0 on August 14, 2026. RF-71-20 through RF-71-24 accepted as out-of-scope follow-ups that do not change an accepted decision. |
 
