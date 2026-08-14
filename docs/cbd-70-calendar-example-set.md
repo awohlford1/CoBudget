@@ -2,9 +2,10 @@
 
 | Field | Value |
 | --- | --- |
-| Status | Working draft — 21 reusable calendar fixtures defined, technically reviewed, and independently reviewed; Product Owner approval pending |
-| Document version | 0.3 |
+| Status | **Approved** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
+| Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of three Codex technical review passes, an independent Claude review that re-derived every date, interval, and monetary result, and the resolution of findings RF-70-01 through RF-70-06 (§8). |
 | Jira subtask | [CBD-70](https://cobudget.atlassian.net/browse/CBD-70) |
 | Scenario catalog | [CBD-70 Deterministic Budget Calendar and Financial Scenario Catalog](cbd-70-scenario-catalog.md) |
 | Traceability record | [CBD-70 Acceptance Criteria Traceability and Review Record](cbd-70-acceptance-criteria-traceability.md) |
@@ -523,18 +524,19 @@ The bill’s due status, payment transaction classification, and statement settl
 | Measure | Count | Status |
 | --- | ---: | --- |
 | Planned calendar IDs from scenario architecture | 21 | Complete |
-| Calendar fixtures defined | 21 | Complete and reviewed |
+| Calendar fixtures defined | 21 | Complete, reviewed, and approved |
 | Duplicate calendar IDs | 0 | Verified |
 | Relative dates | 0 | Verified |
 | Unsupported out-of-MVP calendars | 0 | Verified |
 | Holiday datasets | 2 versioned 2028 fixtures, 1 versioned 2029 fixture, plus 1 explicit absent-year condition | Defined |
 | Years with verified holiday coverage | 2028, 2029 | Covers every previewed occurrence in the fixture set |
-| Calendar and calculation review | 1 of 1 | Complete; Product Owner approval remains pending |
+| Calendar and calculation review | 1 of 1 | Complete; Product Owner approval granted August 14, 2026 |
 
 ## 6. Revision history
 
 | Version | Date | Author | Change |
 | --- | --- | --- | --- |
+| 1.0 | August 14, 2026 | Alexander Wohlford, Product Owner | **Approved.** Product Owner approval granted alongside the traceability record v1.0 and scenario catalog v1.0. No fixture ID, interval, anchor, adjusted date, holiday dataset, or monetary value changed at approval. Confirmed fixture dates are now frozen historical evidence: a later holiday-source correction requires an explicit CBD-70 impact review rather than a silent recalculation. |
 | 0.3 | August 14, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Resolved independent-review findings RF-70-03 and RF-70-04. Added the `HOL-FED-2029-v1` frozen fixture so that E2E-02's 2029-01-08 boundary rests on verified coverage rather than an uncovered year, and referenced it from CAL-HOLIDAY-01. Gave CAL-YEAR-01 an explicit 2027-12-20 reference date so its December-to-January purpose is exercised by PER-M-01, and removed the "available year-boundary variants" phrase, which named no scenario. Re-pinned the repository baseline to `eedd136`. No interval, anchor, adjusted date, or monetary result changed. |
 | 0.2 | August 14, 2026 | Codex with Alexander Wohlford as owner | Added the twice-per-week and remaining paycheck-pattern fixture, versioned holiday correction and uncovered-year conditions, corrected stale reverse references, and completed the calendar/calculation review across all 21 fixtures. |
 | 0.1 | August 13, 2026 | Codex with Alexander Wohlford as owner | Defined all 20 planned reusable calendar fixtures with exact dates, canonical intervals, anchors, holiday provenance, schedule transitions, occurrence exceptions, and representative event timelines. Corrected the catalog rounding convention to the approved CBD-67 overall-total and largest-remainder rule. |
