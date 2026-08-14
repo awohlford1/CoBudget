@@ -2,18 +2,18 @@
 
 | Field | Value |
 | --- | --- |
-| Status | Working draft — 75 of 75 scenarios drafted and technically reviewed; Product Owner approval pending |
-| Document version | 0.9 |
+| Status | Working draft — 75 of 75 scenarios drafted, technically reviewed, and independently reviewed; Product Owner approval pending |
+| Document version | 0.10 |
 | Owner | Alexander Wohlford |
 | Jira subtask | [CBD-70](https://cobudget.atlassian.net/browse/CBD-70) |
 | Governing traceability record | [CBD-70 Acceptance Criteria Traceability and Review Record](cbd-70-acceptance-criteria-traceability.md) |
 | Calendar example set | [CBD-70 Deterministic Calendar Example Set](cbd-70-calendar-example-set.md) |
-| Repository baseline | `d7f75f3` |
+| Repository baseline | `eedd136` |
 | Last updated | August 14, 2026 |
 
 ## 1. Purpose and current scope
 
-This catalog groups the 50 final-approved CBD-67 through CBD-69 acceptance criteria into deterministic scenario families. The registry assigns stable scenario IDs, primary coverage classifications, calendar dependencies, and authoritative requirement mappings. All registry entries have complete draft scenario content and the three technical reviews are complete; Product Owner approval remains pending.
+This catalog groups the 50 final-approved CBD-67 through CBD-69 acceptance criteria into deterministic scenario families. The registry assigns stable scenario IDs, primary coverage classifications, calendar dependencies, and authoritative requirement mappings. All registry entries have complete draft scenario content; the three technical reviews and the independent review are complete and every finding is resolved; Product Owner approval remains pending.
 
 The catalog contains **75 scenarios in six families**. The count is a draft coverage baseline, not a quota: a review may merge equivalent cases or add a case when traceability, risk, or an in-MVP product decision requires it. Any count change must preserve bidirectional coverage.
 
@@ -117,7 +117,7 @@ These IDs identify the reusable calendars defined in the [CBD-70 Deterministic C
 | INC-07 | Received amount differs from expected amount | Boundary | CAL-MULTI-01 | CBD-68-AC04, AC06, AC10; CBD-69-AC07 | Drafted |
 | INC-08 | Previous-business-day adjustment across a versioned holiday | Boundary | CAL-HOLIDAY-01 | CBD-68-AC07, CBD-68-AC08 | Drafted |
 | INC-09 | Supported alternative non-business-day policy | Boundary | CAL-HOLIDAY-01 | CBD-68-AC07, AC08 | Drafted |
-| INC-10 | Amount-only occurrence override changes projection but never a boundary | Boundary | CAL-PAY-SKIP | CBD-68-AC09, AC14 | Drafted |
+| INC-10 | Amount-only occurrence override changes projection but never a boundary | Boundary | CAL-PAY-SKIP | CBD-68-AC08, AC09, AC14 | Drafted |
 | HOL-01 | Missing holiday coverage blocks confirmation and a source correction refreshes only unconfirmed work | Recovery | CAL-HOLIDAY-01 | CBD-68-AC08, AC16 | Drafted |
 
 ### 4.4 Transactions and reconciliation — 15 scenarios
@@ -163,8 +163,8 @@ These IDs identify the reusable calendars defined in the [CBD-70 Deterministic C
 | ALERT-04 | Partner provisioning, masking, mute, and firm-alert independence remain explicit | Boundary | CAL-SAME-DATE | CBD-69-AC11, AC12, AC15 | Drafted |
 | REP-01 | Budget-date and statement-date views explain different period placement | Normal | CAL-CROSS-SETTLE | CBD-69-AC01, AC10, AC15 | Drafted |
 | AUDIT-01 | Disputed match, override, late settlement, and category correction remain reconstructable | End-to-end | CAL-CROSS-SETTLE | CBD-69-AC05, AC06, AC09, AC11, AC12, AC15 | Drafted |
-| E2E-01 | Weekly-to-monthly change preserves target, income, transaction, alert, and audit invariants | End-to-end | CAL-TRANS-MID, CAL-MULTI-01 | CBD-67-AC10–AC18; CBD-68-AC04–AC06; CBD-69-AC04, AC05, AC11, AC12, AC15 | Drafted |
-| E2E-02 | Holiday-adjusted paycheck with late settlement converges across the canonical timeline | End-to-end | CAL-PAY-BIWEEK, CAL-HOLIDAY-01, CAL-CROSS-SETTLE | CBD-68-AC01, AC02, AC04–AC10, AC13, AC14, AC16; CBD-69-AC01, AC02, AC04, AC05, AC07, AC09–AC12, AC15 | Drafted |
+| E2E-01 | Weekly-to-monthly change preserves target, income, transaction, alert, and audit invariants | End-to-end | CAL-TRANS-MID, CAL-MULTI-01 | CBD-67-AC10, AC12, AC14–AC18; CBD-68-AC04–AC06; CBD-69-AC04, AC05, AC11, AC12, AC15 | Drafted |
+| E2E-02 | Holiday-adjusted paycheck with late settlement converges across the canonical timeline | End-to-end | CAL-PAY-BIWEEK, CAL-HOLIDAY-01, CAL-CROSS-SETTLE | CBD-68-AC01, AC02, AC04–AC10, AC13, AC14, AC16; CBD-69-AC01, AC02, AC04, AC05, AC07, AC09–AC12, AC14, AC15 | Drafted |
 
 ## 5. Detailed scenarios
 
@@ -243,27 +243,28 @@ Every scenario uses this fixed structure:
 
 | Field | Value |
 | --- | --- |
-| Classification | Normal |
+| Classification | Normal; tags: `year-boundary` |
 | Authority | CBD-67-AC02, CBD-67-AC03 |
 | Base fixture | CAL-YEAR-01; SPACE-01; ACTOR-01 |
 | Starting state | No authoritative schedule; monthly anchor proposal is the numbered 15th; financial layers are `USD 0.00` or Not applicable |
 
 | Checkpoint | Exact time | Event |
 | --- | --- | --- |
-| T0 — Preview | `2028-01-20T09:00:00-05:00` America/New_York | ACTOR-01 selects Monthly and the numbered 15th anchor |
-| T1 — Confirmation | `2028-01-20T09:05:00-05:00` America/New_York | ACTOR-01 confirms the preview |
+| T0 — Preview | `2027-12-20T09:00:00-05:00` America/New_York | ACTOR-01 selects Monthly and the numbered 15th anchor |
+| T1 — Confirmation | `2027-12-20T09:05:00-05:00` America/New_York | ACTOR-01 confirms the preview |
+| T2 — Year boundary passes | `2028-01-01T00:00:00-05:00` America/New_York | The calendar year changes inside the open current period |
 
-| Outcome layer | Expected result at T1 |
+| Outcome layer | Expected result |
 | --- | --- |
-| Period | Current `[2028-01-15, 2028-02-15)` displayed 2028-01-15–2028-02-14; next `[2028-02-15, 2028-03-15)` |
-| Schedule | One active Monthly schedule version retaining the numbered anchor `15` |
+| Period | Current `[2027-12-15, 2028-01-15)` displayed 2027-12-15–2028-01-14; next `[2028-01-15, 2028-02-15)` and `[2028-02-15, 2028-03-15)`. The current period spans the year change and is not split by it |
+| Schedule | One active Monthly schedule version retaining the numbered anchor `15`; the same version remains authoritative across T2 |
 | Targets / income / cash | Targets Not applicable; expected income, actual income, and cash remain `USD 0.00` |
 | Transactions / bills | Pending, settled, and spending remain `USD 0.00`; bills Not applicable |
-| Validation / alerts | Accepted without clamping explanation or warning |
-| Audit | One schedule-creation event records Monthly, numbered anchor 15, time zone, T1, and schedule-version identity |
-| Non-changes | Crossing 2027–2028 does not reset schedule identity or create a gap |
+| Validation / alerts | Accepted without clamping explanation or warning; T2 produces no notification, rollover prompt, or year-end action |
+| Audit | One schedule-creation event records Monthly, numbered anchor 15, time zone, T1, and schedule-version identity; T2 creates no audit event |
+| Non-changes | Crossing 2027–2028 at T2 does not close or split the open period, reset schedule identity, restart period numbering, reset target history, or create a gap |
 
-**Given** a numbered monthly anchor of 15, **when** ACTOR-01 confirms on 2028-01-20, **then** the complete current period starts on 2028-01-15 and ends immediately before the 2028-02-15 boundary.
+**Given** a numbered monthly anchor of 15 confirmed on 2027-12-20, **when** the calendar year changes on 2028-01-01 inside the open period, **then** the complete current period remains `[2027-12-15, 2028-01-15)` and the next boundary is 2028-01-15 with no year-end effect on schedule identity or history.
 
 #### PER-M-02 — Day-31 anchor clamps in a short month and returns
 
@@ -1012,7 +1013,7 @@ Every scenario uses this fixed structure:
 | Residual-cent order | 1 | 2 | 3 | Two cents required to reach `125.01` |
 | Final reconciled target | `71.43` | `35.72` | `17.86` | `125.01` |
 
-CAT-01 receives the first residual cent. CAT-02 and CAT-03 have equal displayed remainders at the relevant precision; stable category ID makes CAT-02 the deterministic winner of the second cent. The exact overall sum is rounded half-up once; category amounts are not independently rounded as the source of truth.
+CAT-01 receives the first residual cent. CAT-02 and CAT-03 have **exactly equal** fractional remainders — both are `3/7` of a cent, since `35.714285…` and `17.864285…` share the identical repeating tail — so the tie is exact at every precision rather than an artifact of display rounding. Stable category ID is therefore the deterministic discriminator, and it makes CAT-02 the winner of the second cent. The exact overall sum is rounded half-up once; category amounts are not independently rounded as the source of truth.
 
 | Outcome layer | Expected result at T2 |
 | --- | --- |
@@ -2230,12 +2231,12 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | --- | --- |
 | Classification | End-to-end; tags: `holiday`, `paycheck-anchor`, `late-income`, `late-settlement`, `idempotency` |
 | Authority | CBD-68-AC01, CBD-68-AC02, CBD-68-AC04–AC10, CBD-68-AC13, CBD-68-AC14, CBD-68-AC16, CBD-69-AC01, CBD-69-AC02, CBD-69-AC04, CBD-69-AC05, CBD-69-AC07, CBD-69-AC09–AC12, CBD-69-AC15 |
-| Base fixture | A December date variant of CAL-PAY-BIWEEK combined with CAL-HOLIDAY-01 and a December date variant of CAL-CROSS-SETTLE; SPACE-E2E-02; HOL-FED-2028-v1; ACTOR-01; CAT-01–03; TX-E2E-02 |
-| Starting state | Biweekly anchor source dates are 2028-12-11, 2028-12-25, and 2029-01-08 with Previous business day policy; source 2028-12-25 adjusts to 2028-12-22. Reviewed period targets total `USD 175.01`; `[2028-12-11, 2028-12-22)` has CAT-01 target `USD 100.00` and settled spending `USD 40.00`. Expected paycheck is `USD 2,000.00`; cash `USD 1,000.00`; no actual receipt or pending expense |
+| Base fixture | A December date variant of CAL-PAY-BIWEEK combined with CAL-HOLIDAY-01 and a December date variant of CAL-CROSS-SETTLE; SPACE-E2E-02; HOL-FED-2028-v1 and HOL-FED-2029-v1; ACTOR-01; CAT-01–03; TX-E2E-02 |
+| Starting state | Biweekly anchor source dates are 2028-12-11, 2028-12-25, and 2029-01-08 with Previous business day policy; source 2028-12-25 adjusts to 2028-12-22. Because the third source occurrence falls in 2029, verified coverage for both 2028 and 2029 is required before confirmation; `HOL-FED-2029-v1` supplies it, and 2029-01-08 is an open Monday that needs no adjustment. Reviewed period targets total `USD 175.01`; `[2028-12-11, 2028-12-22)` has CAT-01 target `USD 100.00` and settled spending `USD 40.00`. Expected paycheck is `USD 2,000.00`; cash `USD 1,000.00`; no actual receipt or pending expense |
 
 | Checkpoint | Exact time | Event |
 | --- | --- | --- |
-| T0 — Schedule confirmed | `2028-12-01T09:00:00-05:00` America/New_York | ACTOR-01 confirms previewed boundaries 2028-12-11, 2028-12-22, and 2029-01-08 with holiday provenance |
+| T0 — Schedule confirmed | `2028-12-01T09:00:00-05:00` America/New_York | ACTOR-01 confirms previewed boundaries 2028-12-11, 2028-12-22, and 2029-01-08 with verified 2028 and 2029 holiday provenance |
 | T1 — Expense authorized | `2028-12-21T10:00:00-05:00` America/New_York | TX-E2E-02 authorizes `USD 75.00` in `[2028-12-11, 2028-12-22)` |
 | T2 — Adjusted anchor boundary | `2028-12-22T00:00:00-05:00` America/New_York | `[2028-12-22, 2029-01-08)` opens and the paycheck becomes Expected today |
 | T3 — Paycheck late | `2028-12-26T00:00:00-05:00` America/New_York | After the weekend and December 25 closure, the unreconciled paycheck becomes Late on the next Federal Reserve business day |
@@ -2251,7 +2252,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | Income / cash | Expected record remains `USD 2,000.00` on December 22; actual is `USD 2,000.00` on December 26; date variance is four calendar days and one Federal Reserve business day, amount variance `USD 0.00`; cash is `1,000.00 + 2,000.00 − 82.00 = USD 2,918.00` |
 | Transactions / bills | TX-E2E-02 retains budget date December 21 in the completed prior period; pending `USD 75.00` is replaced by settled `USD 82.00`; prior-period actual spending is `40.00 + 82.00 = USD 122.00`; statement view shows settlement December 26; bills unchanged |
 | Validation / alerts | Pending warning and Late-income indicator clear on their respective resolutions; confirmed income link creates one date-variance notification; completed prior period receives one firm late-adjustment alert for `USD 22.00`; no current-period overage alert |
-| Audit | Schedule confirmation retains source/adjusted dates, policy and HOL-FED-2028-v1 provenance; income lifecycle/match, transaction lifecycle, late adjustment, alerts, actors, timestamps, values, and period/version links are append-only and reconstructable |
+| Audit | Schedule confirmation retains source/adjusted dates, policy, and both HOL-FED-2028-v1 and HOL-FED-2029-v1 provenance, including that 2029-01-08 required no adjustment; income lifecycle/match, transaction lifecycle, late adjustment, alerts, actors, timestamps, values, and period/version links are append-only and reconstructable |
 | Non-changes | No live holiday request, income allocation, boundary mutation, target mutation, source-date overwrite, double count, or replay duplicate occurs |
 
 **Given** a Christmas anchor adjusts to December 22 and a December 21 expense later settles with a December 26 paycheck, **when** all lifecycle events and replays finish, **then** the canonical dates stay fixed, cash is `USD 2,918.00`, prior spending is `USD 122.00`, and every alert, variance, and audit outcome occurs exactly once.
@@ -2268,6 +2269,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 
 | Version | Date | Author | Change |
 | --- | --- | --- | --- |
+| 0.10 | August 14, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Resolved independent-review findings RF-70-02 through RF-70-04 and RF-70-06. Replaced E2E-01's `CBD-67-AC10–AC18` range with an explicit list, since the range asserted AC11 (boundary-aligned change without proration) that a mid-period prorated transition cannot demonstrate, and AC13, which has no positive-remainder case in that scenario. Added CBD-68-AC08 to INC-10 and CBD-69-AC14 to E2E-02 to match the traceability record. Moved PER-M-01 to a 2027-12-20 confirmation with a year-boundary checkpoint so CAL-YEAR-01's stated purpose is exercised. Bound E2E-02 to the new `HOL-FED-2029-v1` fixture. Corrected the FIN-01 tie-break note: the CAT-02/CAT-03 remainders are exactly equal at `3/7`, not equal only at display precision. No expected period, monetary result, validation message, alert, or audit outcome changed. |
 | 0.9 | August 14, 2026 | Codex with Alexander Wohlford as owner | Added nine review-driven scenarios for preview freshness and atomicity, accessibility, amount-only exceptions, holiday coverage/corrections, twice-per-week and remaining paycheck patterns, direct-request authorization, Accountability Partner controls, and cross-layer audit/report behavior. Tightened deterministic wording, financial baselines, eligibility semantics, and fixture references; all 75 scenarios are drafted. |
 | 0.8 | August 13, 2026 | Codex with Alexander Wohlford as owner | Drafted ALERT-01–03, REP-01, and E2E-01–02, completing all 66 scenario drafts with alert lifecycle, recipient scope, dual-view reporting, cross-subsystem invariants, holiday provenance, and replay convergence. |
 | 0.7 | August 13, 2026 | Codex with Alexander Wohlford as owner | Drafted VAL-01–04, SEC-01–02, and RECOV-01 with field-specific setup errors, custom-generator integrity and duration limits, duplicate-anchor and occurrence-exception boundaries, hidden read-only controls, audited mid-workflow permission revocation, and evidence-preserving bank-data recovery. |
