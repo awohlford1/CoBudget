@@ -7,8 +7,9 @@
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude (see §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent |
 | Jira | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
-| Decision register | [MVP Schedule Decisions register](cbd-71-mvp-schedule-decision-register.md) |
-| Validation checklist | [Validation checklist](cbd-71-validation-checklist.md) |
+| Confluence page | [CBD-71 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6782985) |
+| Decision register | [MVP Schedule Decisions register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
+| Validation checklist | [Validation checklist](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6160404) |
 | Last updated | August 14, 2026 |
 
 ## 1. Completion rule
@@ -23,12 +24,12 @@ CBD-71 is complete only when the decision register covers the frozen CBD-67 thro
 | CBD-71-AC02 | Every decision has a stable ID and one permitted status. | Register §§3–6 | Checklist §2 | Met |
 | CBD-71-AC03 | Validation is explicitly Product Owner approval, internal consistency, implementation readiness, and architecture alignment without a market-validation claim. | Register §1; checklist §1 | Checklist §§1, 4 | Met |
 | CBD-71-AC04 | Every decision records all required decision fields. | Register §§3–4 | Checklist §§2–3 | Met |
-| CBD-71-AC05 | Cadence and calendar decisions are covered. | SD-071-020–026, SD-071-030, SD-071-033, SD-071-049; governance §3.4 (GC-01–08) | Checklist §3 | Draft evidence complete |
-| CBD-71-AC06 | Income, target, cash, transaction, and reconciliation states are covered. | SD-071-031–042 | Checklist §3 | Draft evidence complete |
-| CBD-71-AC07 | Changes, transition periods, proration, balance disposition, pending-change limit, and history are covered. | SD-071-026–029, SD-071-033, SD-071-045 | Checklist §3 | Draft evidence complete |
-| CBD-71-AC08 | Alerts, explanations, overrides, permissions, provenance, and audit are covered. | SD-071-034–048 | Checklist §3 | Draft evidence complete |
+| CBD-71-AC05 | Cadence and calendar decisions are covered. | SD-071-020–026, SD-071-030, SD-071-033, SD-071-049; governance §3.4 (GC-01–09) | Checklist §3 | Met |
+| CBD-71-AC06 | Income, target, cash, transaction, and reconciliation states are covered. | SD-071-031–042 | Checklist §3 | Met |
+| CBD-71-AC07 | Changes, transition periods, proration, balance disposition, pending-change limit, and history are covered. | SD-071-026–029, SD-071-033, SD-071-045 | Checklist §3 | Met |
+| CBD-71-AC08 | Alerts, explanations, overrides, permissions, provenance, and audit are covered. | SD-071-034–048 | Checklist §3 | Met |
 | CBD-71-AC09 | Accepted decisions have an auditable chain to CBD-1, CBD-11, CBD-67 through CBD-70, and scenarios. | Source column in SD-071-020–050; governance §3.4 chain and GC-01–09 source columns; register §2 | Source/traceability review in checklist §4 | Met; independent verification complete |
-| CBD-71-AC10 | Each accepted decision has one outcome and sufficient normal and exceptional evidence for design and testing. | Atomic selected behavior and scenario evidence in SD-071-020–049 | Checklist §3 | Met |
+| CBD-71-AC10 | Each accepted decision has one outcome and sufficient normal and exceptional evidence for design and testing. | Atomic selected behavior and scenario evidence in SD-071-020–050 | Checklist §3 | Met |
 | CBD-71-AC11 | Contradictory or ambiguous rules cannot be accepted. | Register §§6–8 | Checklist §§2, 4 | Met; all reviews complete with no unresolved contradiction |
 | CBD-71-AC12 | Deferred and unresolved decisions record rationale, impact, dependencies, and follow-up work. | Register §§5–6 | Checklist §§2, 5 | Met |
 | CBD-71-AC13 | Product, technical, security, privacy, accessibility, role, and operational implications are reviewed. | Register §§3.3–3.4 and implication column in SD-071-020–050 | Architecture-alignment review in checklist §4 | Met; architecture-alignment pass complete with RF-71-20 through RF-71-24 recorded as technical-design follow-ups |
@@ -41,14 +42,14 @@ CBD-71 is complete only when the decision register covers the frozen CBD-67 thro
 
 | CBD-11 criteria | Primary CBD-71 disposition | Evidence | Status |
 | --- | --- | --- | --- |
-| AC01–AC05 | Financial states, expected/actual income, targets, cash, and transactions | SD-071-031–042 | Covered in draft |
-| AC06 | Alerts, permissions, provenance, privacy, and audit | SD-071-041–048 | Covered in draft |
-| AC07–AC08 | Weekly, monthly, paycheck, semimonthly, and custom cadences | SD-071-020–026, SD-071-030, SD-071-033, SD-071-049 | Covered in draft |
-| AC09–AC10 | Income and financial-state separation | SD-071-031–036, SD-071-041–042 | Covered in draft |
-| AC11–AC15 | Anchors, boundaries, multiple incomes, and calendar behavior | SD-071-020–025, SD-071-030, SD-071-049; governance §3.4 (GC-01–08) | Covered in draft |
-| AC16 | Immediate/future changes, transitions, proration, and balance disposition | SD-071-026–029, SD-071-033 | Covered in draft |
-| AC17 | History, permissions, audit, alerts, and operational recovery | SD-071-026/029, SD-071-041–048 | Covered in draft |
-| AC18 | Deterministic examples and test-ready traceability | SD-071-020–050; governance §3.4 (GC-01–09); approved CBD-70 package | Covered in draft |
+| AC01–AC05 | Financial states, expected/actual income, targets, cash, and transactions | SD-071-031–042 | Covered |
+| AC06 | Alerts, permissions, provenance, privacy, and audit | SD-071-041–048 | Covered |
+| AC07–AC08 | Weekly, monthly, paycheck, semimonthly, and custom cadences | SD-071-020–026, SD-071-030, SD-071-033, SD-071-049 | Covered |
+| AC09–AC10 | Income and financial-state separation | SD-071-031–036, SD-071-041–042 | Covered |
+| AC11–AC15 | Anchors, boundaries, multiple incomes, and calendar behavior | SD-071-020–025, SD-071-030, SD-071-049; governance §3.4 (GC-01–09) | Covered |
+| AC16 | Immediate/future changes, transitions, proration, and balance disposition | SD-071-026–029, SD-071-033 | Covered |
+| AC17 | History, permissions, audit, alerts, and operational recovery | SD-071-026/029, SD-071-041–048 | Covered |
+| AC18 | Deterministic examples and test-ready traceability | SD-071-020–050; governance §3.4 (GC-01–09); approved CBD-70 package | Covered |
 | AC19 | Internal validation and unresolved-decision control | Register §§1, 6–9; validation checklist | Covered; all five review passes complete |
 | AC20 | Authoritative decision register and change control | Entire register; validation checklist; this record | Covered; register authoritative at v1.0 |
 
@@ -60,7 +61,7 @@ No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted deci
 | --- | --- | --- | --- |
 | DD-071-001–010 | FF-001–FF-010 | Non-blocking for CBD-71; DD-071-002 remains a broader-MVP dependency | Existing Future Feature Register entries cited; Jira links remain to be assigned when future work is scoped |
 | UD-071 series | None identified | A material new item blocks affected approval | Stable ID reserved by policy |
-| CBD-70 and CBD-71 Confluence pages | Register §8.4 | No longer blocking; pages published August 14, 2026 and the repository mirror is current | Published; front-matter page links to be added on the CBD-67 through CBD-69 pattern |
+| CBD-70 and CBD-71 Confluence pages | Register §8.4 | Closed; CBD-71 pages published and synchronized to v1.0 on August 14, 2026 | Published; front-matter page links recorded on the CBD-67 through CBD-69 pattern |
 
 ## 5. Review findings
 
@@ -79,7 +80,7 @@ No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted deci
 | RF-71-11 | Independent final review | The frozen baseline omitted the approved CBD-67 (1.5), CBD-68 (1.0), and CBD-69 (1.0) scenario catalogs while stating that only listed artifacts may determine an accepted outcome. | Add all three to register §2. | Resolved in register v0.4 |
 | RF-71-12 | Independent final review | SD-071-044 cited `CBD-68-AC13/16` for notification behavior, but AC13 is the cadence-change adapter; the alert rules are product decisions PD-68-13 and PD-68-16. | Cite CBD-68-AC10/16 with PD-68-13/16, and add PD-68-17 to the accessibility decision SD-071-048. | Resolved in register v0.4 |
 | RF-71-13 | Independent final review | "19 of 19 required decision groups represented" was circular: the groups were defined by the superseded v0.1 rows being replaced. | Replace with coverage of the 50 approved governing criteria and 75 approved scenarios, both mechanically verifiable. | Resolved in checklist v0.4 and this record v0.4 |
-| RF-71-14 | Independent final review | CBD-70 and CBD-71 documents carry no Confluence page links, while CBD-67 through CBD-69 each do. Register §8.4 requires Jira, repository, and published register to be updated together. | Publish the CBD-70 and CBD-71 pages and add their links before v1.0 issuance; tracked as a checklist §2 gate. | Resolved — Product Owner published both pages August 14, 2026; front-matter page links remain to be added |
+| RF-71-14 | Independent final review | CBD-70 and CBD-71 documents carry no Confluence page links, while CBD-67 through CBD-69 each do. Register §8.4 requires Jira, repository, and published register to be updated together. | Publish the CBD-70 and CBD-71 pages and add their links before v1.0 issuance; tracked as a checklist §2 gate. | Resolved — pages published August 14, 2026, synchronized to v1.0, and front-matter page links recorded |
 | RF-71-15 | Calendar and calculation sweep | SD-071-039 omitted the CBD-69 INV-69-21 excess-refund rule: a linked refund above the original expense stays as an excess credit in the original period and category and may make net actual spending negative. | Restate the rule in SD-071-039. | Resolved in register v0.6 |
 | RF-71-16 | Calendar and calculation sweep | Budget-date override behavior (CBD-69 INV-69-12/13) appeared only as an audit obligation. No active decision stated who may override, what an override changes, or that retained source dates are never altered. | Add an atomic decision for override behavior. | Resolved by SD-071-050 in register v0.6 |
 | RF-71-17 | Calendar and calculation sweep | SD-071-041 omitted CBD-69 INV-69-22: while a pending and posted pair is in Duplicate-review, the settled amount is counted and the pending record contributes no separate impact. | Restate the counting rule in SD-071-041. | Resolved in register v0.6 |

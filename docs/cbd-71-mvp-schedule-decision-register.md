@@ -8,6 +8,7 @@
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude covering source and traceability, calendar and calculation, and architecture alignment (see traceability record §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent |
 | Jira subtask | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
+| Confluence page | [CBD-71 — MVP Schedule Decisions v1.0 Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
 | Parent | [CBD-11](https://cobudget.atlassian.net/browse/CBD-11) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
 | Repository baseline | `88be982` |
@@ -15,7 +16,7 @@
 
 ## 1. Purpose and authority
 
-This register consolidates the approved schedule, income, transaction-classification, validation, and scenario-governance decisions from CBD-67 through CBD-70. Once the Product Owner approves version 1.0, decisions with status **Accepted for MVP** become authoritative for design, technical specification, implementation, and testing.
+This register consolidates the approved schedule, income, transaction-classification, validation, and scenario-governance decisions from CBD-67 through CBD-70 into one atomic, traceable decision set.
 
 Version 1.0 was approved by the Product Owner on August 14, 2026. Decisions with status **Accepted for MVP** are authoritative for design, technical specification, implementation, and testing. The approved source specifications remain in force as the frozen baseline; if this register is found to conflict with a frozen source, the conflict must be resolved through the change control in §8 rather than silently interpreted.
 
@@ -24,20 +25,20 @@ For CBD-71, validated means Product Owner approved, internally consistent, imple
 ## 2. Frozen source baseline
 
 | Source | Approved artifact | Version | Approval date | Repository evidence |
-| --- | --- | ---: | --- | --- |
-| CBD-67 | Weekly and Monthly Budget Cycle Workflow Specification | 1.3 | August 12, 2026 | [Specification](cbd-67-weekly-monthly-cadence-workflow-specification.md) |
-| CBD-67 | Acceptance Criteria Traceability and Review Record | 1.5 | August 12, 2026 | [Traceability](cbd-67-acceptance-criteria-traceability.md) |
-| CBD-67 | Weekly and Monthly Cadence Scenario Catalog | 1.5 | August 12, 2026 | [Scenario catalog](cbd-67-weekly-monthly-cadence-scenario-catalog.md) |
-| CBD-68 | Paycheck and Custom Budget Cadence Workflow Specification | 1.0 | August 13, 2026 | [Specification](cbd-68-paycheck-custom-cadence-workflow-specification.md) |
-| CBD-68 | Acceptance Criteria Traceability and Review Record | 1.0 | August 13, 2026 | [Traceability](cbd-68-acceptance-criteria-traceability.md) |
-| CBD-68 | Paycheck and Custom Cadence Scenario Catalog | 1.0 | August 13, 2026 | [Scenario catalog](cbd-68-paycheck-custom-cadence-scenario-catalog.md) |
-| CBD-69 | Period Edge Cases and Validation Rule Specification | 1.0.1 | August 13, 2026 | [Specification](cbd-69-period-edge-cases-validation-rule-specification.md) |
-| CBD-69 | Acceptance Criteria Traceability and Review Record | 1.0.1 | August 13, 2026 | [Traceability](cbd-69-acceptance-criteria-traceability.md) |
-| CBD-69 | Period Edge-Case Scenario Catalog | 1.0 | August 13, 2026 | [Scenario catalog](cbd-69-period-edge-case-scenario-catalog.md) |
-| CBD-70 | Deterministic Budget Calendar and Financial Scenario Catalog | 1.0 | August 14, 2026 | [Scenario catalog](cbd-70-scenario-catalog.md) |
-| CBD-70 | Deterministic Calendar Example Set | 1.0 | August 14, 2026 | [Calendar examples](cbd-70-calendar-example-set.md) |
-| CBD-70 | Acceptance Criteria Traceability and Review Record | 1.0 | August 14, 2026 | [Traceability](cbd-70-acceptance-criteria-traceability.md) |
-| Cross-cutting | CoBudget Future Feature Register | Current at baseline | August 14, 2026 | [Future features](cobudget-future-feature-register.md) |
+| --- | --- | --- | --- | --- |
+| CBD-67 | Weekly and Monthly Budget Cycle Workflow Specification | 1.3 | August 12, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/655361) |
+| CBD-67 | Acceptance Criteria Traceability and Review Record | 1.5 | August 12, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/720897) |
+| CBD-67 | Weekly and Monthly Cadence Scenario Catalog | 1.5 | August 12, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/688129) |
+| CBD-68 | Paycheck and Custom Budget Cadence Workflow Specification | 1.0 | August 13, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3735553) |
+| CBD-68 | Acceptance Criteria Traceability and Review Record | 1.0 | August 13, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3768321) |
+| CBD-68 | Paycheck and Custom Cadence Scenario Catalog | 1.0 | August 13, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3342349) |
+| CBD-69 | Period Edge Cases and Validation Rule Specification | 1.0.1 | August 13, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
+| CBD-69 | Acceptance Criteria Traceability and Review Record | 1.0.1 | August 13, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
+| CBD-69 | Period Edge-Case Scenario Catalog | 1.0 | August 13, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3571722) |
+| CBD-70 | Deterministic Budget Calendar and Financial Scenario Catalog | 1.0 | August 14, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6422529) |
+| CBD-70 | Deterministic Calendar Example Set | 1.0 | August 14, 2026 | [Calendar examples](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6062090) |
+| CBD-70 | Acceptance Criteria Traceability and Review Record | 1.0 | August 14, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6225922) |
+| Cross-cutting | CoBudget Future Feature Register | Current at baseline | August 14, 2026 | [Future features](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) |
 
 The baseline contains 50 approved governing criteria and 75 approved deterministic scenarios. Only approved artifacts and the exact versions above may determine an accepted outcome. A later source revision requires the impact review in §8 before it changes this register.
 
@@ -125,12 +126,12 @@ Each source entry records the auditable chain from Epic and Story through this s
 | SD-071-046 | Primary Owner, Co-owner, and Collaborator may perform approved schedule and reconciliation mutations. Viewer and Accountability Partner are read-only for those actions, subject to their provisioning and masking. | CBD-1-AC01/07 → CBD-11-AC06/17/20 → CBD-71-AC08/09/10/13; CBD-67-AC09/17; CBD-68-AC12; CBD-69-AC11/12; `SEC-01–03`, `REC-05`. | Shared budgets need an explicit action boundary. | Owner-only editing and unrestricted Viewer or Partner mutation were rejected as unnecessarily restrictive or unsafe. | MVP / Accepted for MVP | P,T,S,Pr,A,R,O | SD-071-047–048; CBD-12, DD-071-001 |
 | SD-071-047 | Unauthorized mutation controls are not offered; authorization is rechecked at mutation, permission loss invalidates open work, and an actual denied attempt produces no state change, shows a clear explanation, and is audited. Concurrent changes never silently overwrite confirmed state. | CBD-1-AC01/07 → CBD-11-AC06/17/20 → CBD-71-AC08–10/13; CBD-67-AC09/17; CBD-68-AC11/12; CBD-69-AC12/14; `SEC-01–03`, `CHG-08–09`, `RECOV-01`. | Users need safe recovery and clear outcomes when authorization or state changes during a workflow. | UI-only authorization and silent last-write-wins behavior were rejected because they permit stale or unauthorized mutation. | MVP / Accepted for MVP | P,T,S,Pr,A,R,O | SD-071-029/041/044–046/048; CBD-12 |
 | SD-071-048 | Schedule and reconciliation forms, previews, errors, statuses, and notification settings provide programmatic labels and relationships, keyboard operation, managed focus, announced validation and state changes, non-color cues, and accessible recovery actions. | CBD-1-AC01/07 → CBD-11-AC06/17/20 → CBD-71-AC08/10/13; CBD-68-AC16; PD-68-17; CBD-69-AC14/15; `A11Y-01`, `SEC-03`, `RECOV-01`. | People using assistive technology need the same decision information and recovery capability. | Visual-only state, color-only meaning, and inaccessible dynamic updates were rejected because they make core budget actions unusable. | MVP / Accepted for MVP | P,T,A,O | SD-071-021/026/029–030/041–044/047/049 |
-| SD-071-050 | An authorized user may override a derived budget date. The override changes only the derived budget date used for classification and never alters the retained source authorization or posted/settlement dates. An override attempt by an unauthorized user is denied with no financial-state change, and every override retains actor, time, before and after values, and provenance. | CBD-1-AC01/07 → CBD-11-AC06/10/17/18/20 → CBD-71-AC06/08–10/13; CBD-69-AC12; `OVR-01`, `AUDIT-01`. | Users need to correct a misclassified transaction without destroying the source record that explains the original classification. | Editing the retained source dates and allowing unrestricted overrides were rejected because they erase reconciliation evidence and bypass the permission model. | MVP / Accepted for MVP | P,T,S,Pr,A,R,O | SD-071-034/045–047; CBD-12 |
 | SD-071-049 | Schedule setup validates every required input before preview or confirmation. A missing budget name, an unsupported time zone, and a missing period anchor each block with a field-specific message that stays associated with its field; valid entries are preserved rather than cleared or silently corrected; and a blocked attempt creates no partial budget, membership, schedule, period, or financial state. A valid numbered anchor that will clamp in a short month is a nonblocking explanation rather than a validation error. | CBD-1-AC01 → CBD-11-AC07/14/15/18/20 → CBD-71-AC05/09/10; CBD-67-AC06; CBD-69-AC14; `VAL-01`, `SET-01–02`. | Users need to correct a setup mistake without losing entered work or creating a half-made budget. | Form-level-only errors were rejected because they do not identify the failing field, and rejecting clamping anchors as invalid was rejected because it turns approved deterministic clamping into an error. | MVP / Accepted for MVP | P,T,A,O | SD-071-020–022/048; governance §3.4 (GC-01) |
+| SD-071-050 | An authorized user may override a derived budget date. The override changes only the derived budget date used for classification and never alters the retained source authorization or posted/settlement dates. An override attempt by an unauthorized user is denied with no financial-state change, and every override retains actor, time, before and after values, and provenance. | CBD-1-AC01/07 → CBD-11-AC06/10/17/18/20 → CBD-71-AC06/08–10/13; CBD-69-AC12; `OVR-01`, `AUDIT-01`. | Users need to correct a misclassified transaction without destroying the source record that explains the original classification. | Editing the retained source dates and allowing unrestricted overrides were rejected because they erase reconciliation evidence and bypass the permission model. | MVP / Accepted for MVP | P,T,S,Pr,A,R,O | SD-071-034/045–047; CBD-12 |
 
 ## 4A. Superseded version 0.1 grouping records
 
-The following 19 grouping rows are retained for change history. They are **Superseded**, regardless of the historical `MVP / Proposed` text in their status cells, and cannot be approved or implemented. SD-071-020–050 replace them with atomic decisions; former SD-071-018 moved to governance §3.4.
+The following 19 grouping rows are retained for change history. They are **Superseded** and cannot be approved or implemented; each status cell records the Superseded status and retains its original v0.1 text for history. SD-071-020–050 replace them with atomic decisions; former SD-071-018 moved to governance §3.4.
 
 Under §8.6, one editorial correction was applied to this superseded block in version 0.3: SD-071-019 cited `CBD-68-AC17`, which does not exist because CBD-68 defines AC01 through AC16 only. The citation now reads `CBD-68-AC16`. No expected outcome changed and the row remains Superseded.
 
@@ -160,7 +161,7 @@ Each source entry records the auditable chain from Epic and Story through this s
 
 ## 5. Deferred decision register
 
-Deferred items are unavailable within the scope stated by their row. Most are outside MVP entirely; DD-071-002 is deferred only from cadence workflow scope and remains required elsewhere in the broader MVP. They do not block this register because the accepted decisions above define a complete consumption boundary. The [Future Feature Register](cobudget-future-feature-register.md) remains authoritative for prioritization and future status.
+Deferred items are unavailable within the scope stated by their row. Most are outside MVP entirely; DD-071-002 is deferred only from cadence workflow scope and remains required elsewhere in the broader MVP. They do not block this register because the accepted decisions above define a complete consumption boundary. The [Future Feature Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) remains authoritative for prioritization and future status.
 
 This section is also the disposition of CBD-68-AC15 (MVP limitations and deferred automation) and its Story-level parent CBD-11-AC19. Those criteria are satisfied by an explicit deferral inventory rather than by a product-behavior decision row, which is why no SD-071 row cites them.
 
