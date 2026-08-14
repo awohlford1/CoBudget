@@ -2,13 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | Working draft — 21 reusable calendar fixtures defined and technically reviewed; Product Owner approval pending |
-| Document version | 0.2 |
+| Status | **Approved** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
+| Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of three Codex technical review passes, an independent Claude review that re-derived every date, interval, and monetary result, and the resolution of findings RF-70-01 through RF-70-06 (§8). |
 | Jira subtask | [CBD-70](https://cobudget.atlassian.net/browse/CBD-70) |
 | Scenario catalog | [CBD-70 Deterministic Budget Calendar and Financial Scenario Catalog](cbd-70-scenario-catalog.md) |
 | Traceability record | [CBD-70 Acceptance Criteria Traceability and Review Record](cbd-70-acceptance-criteria-traceability.md) |
-| Repository baseline | `d7f75f3` |
+| Repository baseline | `eedd136` |
 | Last updated | August 14, 2026 |
 
 ## 1. Purpose
@@ -68,6 +69,26 @@ The 2028 dates frozen for these fixtures are:
 Confirmed historical fixture dates do not change if a later holiday dataset changes. A future source correction requires an explicit CBD-70 impact review.
 
 `HOL-FED-2028-v2` is the controlled corrected-version fixture used only by HOL-01. It retains every 2028 business-day result above but updates the dataset verification metadata on August 14, 2026. The version change is result-affecting provenance: it invalidates an unconfirmed v1 preview and requires a visible refresh, while already confirmed v1 history remains unchanged. `HOL-FED-COVERAGE-2035-ABSENT` is a deliberate no-dataset condition; it contains no inferred holidays and forces confirmation to block rather than falling back to weekdays alone.
+
+### 2.2 Frozen holiday fixture — 2029
+
+A biweekly December 2028 anchor sequence necessarily generates its next occurrence in 2029. Because an uncovered year must block confirmation rather than fall back to weekdays alone, any schedule whose previewed occurrences cross into 2029 requires verified 2029 coverage. `HOL-FED-2029-v1` supplies it. It uses the same jurisdiction, product source, weekend rule, Saturday rule, and Sunday rule as `HOL-FED-2028-v1`, snapshot date August 14, 2026, covered year 2029.
+
+| Holiday | Calendar date | Day | Business-day treatment |
+| --- | --- | --- | --- |
+| New Year’s Day | 2029-01-01 | Monday | Closed |
+| Martin Luther King Jr. Day | 2029-01-15 | Monday | Closed |
+| Washington’s Birthday | 2029-02-19 | Monday | Closed |
+| Memorial Day | 2029-05-28 | Monday | Closed |
+| Juneteenth | 2029-06-19 | Tuesday | Closed |
+| Independence Day | 2029-07-04 | Wednesday | Closed |
+| Labor Day | 2029-09-03 | Monday | Closed |
+| Columbus Day | 2029-10-08 | Monday | Closed |
+| Veterans Day | 2029-11-11 | Sunday | Sunday is non-business; the following Monday 2029-11-12 is closed |
+| Thanksgiving Day | 2029-11-22 | Thursday | Closed |
+| Christmas Day | 2029-12-25 | Tuesday | Closed |
+
+The only 2029 date material to the current fixtures is the E2E-02 boundary 2029-01-08, a Monday that is neither a weekend nor a listed holiday. Under Previous business day it therefore resolves to itself and requires no adjustment. The 2029-01-01 closure one week earlier is exactly why the year must be verified rather than assumed.
 
 ## 3. Shared financial reference data
 
@@ -179,7 +200,8 @@ The generated dates currently match the numbered-31 fixture, but the stored and 
 | --- | --- |
 | Schedule ID | `SCHED-YEAR-01` |
 | Configuration | Monthly, numbered anchor 15 |
-| Applicable scenarios | PER-M-01 and available year-boundary variants |
+| Reference date | 2027-12-20, Monday |
+| Applicable scenarios | PER-M-01 |
 
 | Period ID | Canonical interval | Inclusive display |
 | --- | --- | --- |
@@ -187,7 +209,7 @@ The generated dates currently match the numbered-31 fixture, but the stored and 
 | PERIOD-YEAR-02 | `[2028-01-15, 2028-02-15)` | 2028-01-15–2028-02-14 |
 | PERIOD-YEAR-03 | `[2028-02-15, 2028-03-15)` | 2028-02-15–2028-03-14 |
 
-The year change does not reset schedule identity, target history, or period numbering.
+The complete current anchored period on the reference date is `PERIOD-YEAR-01`, which is open when the calendar year changes on 2028-01-01. The year change does not close or split that period and does not reset schedule identity, target history, or period numbering.
 
 ### 4.6 CAL-PAY-BIWEEK — Biweekly anchor with a three-paycheck month
 
@@ -273,7 +295,7 @@ Secondary expected or actual income never creates a budget boundary or becomes t
 
 | Field | Value |
 | --- | --- |
-| Holiday dataset | `HOL-FED-2028-v1` |
+| Holiday dataset | `HOL-FED-2028-v1`; `HOL-FED-2029-v1` where a previewed occurrence crosses into 2029 |
 | Default policy | Previous business day |
 | Applicable scenarios | PER-SEMI-02, INC-08, INC-09, VAL-04, E2E-02 |
 
@@ -502,16 +524,19 @@ The bill’s due status, payment transaction classification, and statement settl
 | Measure | Count | Status |
 | --- | ---: | --- |
 | Planned calendar IDs from scenario architecture | 21 | Complete |
-| Calendar fixtures defined | 21 | Complete and reviewed |
+| Calendar fixtures defined | 21 | Complete, reviewed, and approved |
 | Duplicate calendar IDs | 0 | Verified |
 | Relative dates | 0 | Verified |
 | Unsupported out-of-MVP calendars | 0 | Verified |
-| Holiday datasets | 2 versioned 2028 fixtures plus 1 explicit absent-year condition | Defined |
-| Calendar and calculation review | 1 of 1 | Complete; Product Owner approval remains pending |
+| Holiday datasets | 2 versioned 2028 fixtures, 1 versioned 2029 fixture, plus 1 explicit absent-year condition | Defined |
+| Years with verified holiday coverage | 2028, 2029 | Covers every previewed occurrence in the fixture set |
+| Calendar and calculation review | 1 of 1 | Complete; Product Owner approval granted August 14, 2026 |
 
 ## 6. Revision history
 
 | Version | Date | Author | Change |
 | --- | --- | --- | --- |
+| 1.0 | August 14, 2026 | Alexander Wohlford, Product Owner | **Approved.** Product Owner approval granted alongside the traceability record v1.0 and scenario catalog v1.0. No fixture ID, interval, anchor, adjusted date, holiday dataset, or monetary value changed at approval. Confirmed fixture dates are now frozen historical evidence: a later holiday-source correction requires an explicit CBD-70 impact review rather than a silent recalculation. |
+| 0.3 | August 14, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Resolved independent-review findings RF-70-03 and RF-70-04. Added the `HOL-FED-2029-v1` frozen fixture so that E2E-02's 2029-01-08 boundary rests on verified coverage rather than an uncovered year, and referenced it from CAL-HOLIDAY-01. Gave CAL-YEAR-01 an explicit 2027-12-20 reference date so its December-to-January purpose is exercised by PER-M-01, and removed the "available year-boundary variants" phrase, which named no scenario. Re-pinned the repository baseline to `eedd136`. No interval, anchor, adjusted date, or monetary result changed. |
 | 0.2 | August 14, 2026 | Codex with Alexander Wohlford as owner | Added the twice-per-week and remaining paycheck-pattern fixture, versioned holiday correction and uncovered-year conditions, corrected stale reverse references, and completed the calendar/calculation review across all 21 fixtures. |
 | 0.1 | August 13, 2026 | Codex with Alexander Wohlford as owner | Defined all 20 planned reusable calendar fixtures with exact dates, canonical intervals, anchors, holiday provenance, schedule transitions, occurrence exceptions, and representative event timelines. Corrected the catalog rounding convention to the approved CBD-67 overall-total and largest-remainder rule. |
