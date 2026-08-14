@@ -2,10 +2,10 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — approval evidence incomplete** |
-| Document version | 0.7 |
+| Status | **Approved — CBD-71 complete** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner approval pending, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude (see §5, RF-71-05 through RF-71-14), consistent with the CBD-68 and CBD-70 precedent |
+| Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude (see §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent |
 | Jira | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
 | Decision register | [MVP Schedule Decisions register](cbd-71-mvp-schedule-decision-register.md) |
 | Validation checklist | [Validation checklist](cbd-71-validation-checklist.md) |
@@ -13,29 +13,29 @@
 
 ## 1. Completion rule
 
-CBD-71 is complete only when the decision register covers the frozen CBD-67 through CBD-70 baseline, every CBD-71 criterion has final evidence, deferred and unresolved work is explicit and linked, all required reviews are complete, and the Product Owner approves MVP Schedule Decisions v1.0.
+CBD-71 is complete only when the decision register covers the frozen CBD-67 through CBD-70 baseline, every CBD-71 criterion has final evidence, deferred and unresolved work is explicit and linked, all required reviews are complete, and the Product Owner approves MVP Schedule Decisions v1.0. All five conditions were met on August 14, 2026.
 
 ## 2. Acceptance-criteria traceability
 
 | Criterion | Requirement | Register evidence | Validation evidence | Status |
 | --- | --- | --- | --- | --- |
-| CBD-71-AC01 | One authoritative register covers confirmed requirements from CBD-67 through CBD-70. | Register §§1–4; SD-071-020–048 | Checklist §2 | Draft evidence complete; approval pending |
-| CBD-71-AC02 | Every decision has a stable ID and one permitted status. | Register §§3–6 | Checklist §2 | Draft evidence complete |
-| CBD-71-AC03 | Validation is explicitly Product Owner approval, internal consistency, implementation readiness, and architecture alignment without a market-validation claim. | Register §1; checklist §1 | Checklist §§1, 4 | Met except Product Owner approval |
-| CBD-71-AC04 | Every decision records all required decision fields. | Register §§3–4 | Checklist §§2–3 | Draft evidence complete |
+| CBD-71-AC01 | One authoritative register covers confirmed requirements from CBD-67 through CBD-70. | Register §§1–4; SD-071-020–050 | Checklist §2 | Met |
+| CBD-71-AC02 | Every decision has a stable ID and one permitted status. | Register §§3–6 | Checklist §2 | Met |
+| CBD-71-AC03 | Validation is explicitly Product Owner approval, internal consistency, implementation readiness, and architecture alignment without a market-validation claim. | Register §1; checklist §1 | Checklist §§1, 4 | Met |
+| CBD-71-AC04 | Every decision records all required decision fields. | Register §§3–4 | Checklist §§2–3 | Met |
 | CBD-71-AC05 | Cadence and calendar decisions are covered. | SD-071-020–026, SD-071-030, SD-071-033, SD-071-049; governance §3.4 (GC-01–08) | Checklist §3 | Draft evidence complete |
 | CBD-71-AC06 | Income, target, cash, transaction, and reconciliation states are covered. | SD-071-031–042 | Checklist §3 | Draft evidence complete |
 | CBD-71-AC07 | Changes, transition periods, proration, balance disposition, pending-change limit, and history are covered. | SD-071-026–029, SD-071-033, SD-071-045 | Checklist §3 | Draft evidence complete |
 | CBD-71-AC08 | Alerts, explanations, overrides, permissions, provenance, and audit are covered. | SD-071-034–048 | Checklist §3 | Draft evidence complete |
 | CBD-71-AC09 | Accepted decisions have an auditable chain to CBD-1, CBD-11, CBD-67 through CBD-70, and scenarios. | Source column in SD-071-020–050; governance §3.4 chain and GC-01–09 source columns; register §2 | Source/traceability review in checklist §4 | Met; independent verification complete |
-| CBD-71-AC10 | Each accepted decision has one outcome and sufficient normal and exceptional evidence for design and testing. | Atomic selected behavior and scenario evidence in SD-071-020–049 | Checklist §3 | Draft evidence complete; approval pending |
-| CBD-71-AC11 | Contradictory or ambiguous rules cannot be accepted. | Register §§6–8 | Checklist §§2, 4 | Control defined; final review pending |
-| CBD-71-AC12 | Deferred and unresolved decisions record rationale, impact, dependencies, and follow-up work. | Register §§5–6 | Checklist §§2, 5 | Draft evidence complete |
+| CBD-71-AC10 | Each accepted decision has one outcome and sufficient normal and exceptional evidence for design and testing. | Atomic selected behavior and scenario evidence in SD-071-020–049 | Checklist §3 | Met |
+| CBD-71-AC11 | Contradictory or ambiguous rules cannot be accepted. | Register §§6–8 | Checklist §§2, 4 | Met; all reviews complete with no unresolved contradiction |
+| CBD-71-AC12 | Deferred and unresolved decisions record rationale, impact, dependencies, and follow-up work. | Register §§5–6 | Checklist §§2, 5 | Met |
 | CBD-71-AC13 | Product, technical, security, privacy, accessibility, role, and operational implications are reviewed. | Register §§3.3–3.4 and implication column in SD-071-020–050 | Architecture-alignment review in checklist §4 | Met; architecture-alignment pass complete with RF-71-20 through RF-71-24 recorded as technical-design follow-ups |
-| CBD-71-AC14 | Owner, approval date, outcome, and conditions are recorded for every accepted decision. | Register §§3.2, 9 | Checklist §§2–3 | **Not met: approval pending** |
-| CBD-71-AC15 | The approved set is versioned as MVP Schedule Decisions v1.0 and made authoritative. | Register §§1, 9 | Checklist §2 | **Not met: version remains 0.2** |
-| CBD-71-AC16 | Material changes create revisions, preserve history, and identify affected artifacts. | Register §8 | Checklist §2 | Control defined; no post-approval change yet |
-| CBD-71-AC17 | Final review confirms disposition and traceability of CBD-11-AC01 through AC20 and links unmet criteria. | Register source chains; this record §3 | Final review in checklist §4 | **Pending final Story-level review** |
+| CBD-71-AC14 | Owner, approval date, outcome, and conditions are recorded for every accepted decision. | Register §§3.2, 9 | Checklist §§2–3 | Met; approved August 14, 2026 |
+| CBD-71-AC15 | The approved set is versioned as MVP Schedule Decisions v1.0 and made authoritative. | Register §§1, 9 | Checklist §2 | Met; v1.0 issued August 14, 2026 |
+| CBD-71-AC16 | Material changes create revisions, preserve history, and identify affected artifacts. | Register §8 | Checklist §2 | Met; control defined and exercised across revisions 0.1 through 1.0 |
+| CBD-71-AC17 | Final review confirms disposition and traceability of CBD-11-AC01 through AC20 and links unmet criteria. | Register source chains; this record §3 | Final review in checklist §4 | Met; §3 confirms all 20 CBD-11 criteria dispositioned |
 
 ## 3. CBD-11 disposition
 
@@ -49,10 +49,10 @@ CBD-71 is complete only when the decision register covers the frozen CBD-67 thro
 | AC16 | Immediate/future changes, transitions, proration, and balance disposition | SD-071-026–029, SD-071-033 | Covered in draft |
 | AC17 | History, permissions, audit, alerts, and operational recovery | SD-071-026/029, SD-071-041–048 | Covered in draft |
 | AC18 | Deterministic examples and test-ready traceability | SD-071-020–050; governance §3.4 (GC-01–09); approved CBD-70 package | Covered in draft |
-| AC19 | Internal validation and unresolved-decision control | Register §§1, 6–9; validation checklist | Covered; all required reviews except approval complete |
-| AC20 | Authoritative decision register and change control | Entire register; validation checklist; this record | Pending Product Owner approval |
+| AC19 | Internal validation and unresolved-decision control | Register §§1, 6–9; validation checklist | Covered; all five review passes complete |
+| AC20 | Authoritative decision register and change control | Entire register; validation checklist; this record | Covered; register authoritative at v1.0 |
 
-No CBD-11 criterion is currently identified as unmet because of a missing product rule. AC19 and AC20 remain incomplete only because the required review and approval evidence has not yet been recorded.
+No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted decision set, and the review and approval evidence required by AC19 and AC20 is recorded in the validation checklist and register §9.
 
 ## 4. Follow-up backlog disposition
 
@@ -96,16 +96,16 @@ No CBD-11 criterion is currently identified as unmet because of a missing produc
 | Measure | Result |
 | --- | --- |
 | Frozen predecessor packages | 4 of 4 |
-| Proposed MVP decisions | 31 atomic decisions |
+| Accepted MVP decisions | 31 atomic decisions |
 | Superseded v0.1 grouping rows | 19 retained for history |
 | Governing criteria represented by an active decision or governance control | 50 of 50 |
 | Approved CBD-70 scenarios referenced | 75 of 75 |
 | Deferred decisions explicitly listed | 10 |
 | Unresolved in-MVP decisions | 0 identified |
 | CBD-71 criteria with draft evidence | 17 of 17 |
-| CBD-71 criteria finally satisfied | 14 of 17 provisionally; AC14, AC15, and AC17 remain gated |
-| Required review passes complete | 4 of 5; only Product Owner approval remains |
-| Product Owner approval | Pending |
+| CBD-71 criteria finally satisfied | 17 of 17 |
+| Required review passes complete | 5 of 5 |
+| Product Owner approval | Approved August 14, 2026 as MVP Schedule Decisions v1.0 |
 
 ## 7. Revision history
 
@@ -118,3 +118,4 @@ No CBD-11 criterion is currently identified as unmet because of a missing produc
 | 0.5 | August 14, 2026 | Claude with Alexander Wohlford as Product Owner | Closed RF-71-14 after Product Owner publication, added the Reviewer field on the CBD-68 and CBD-70 precedent, and updated the review-pass status summary. | Draft; final approval pending |
 | 0.6 | August 14, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the completed calendar-and-calculation and architecture-alignment passes and findings RF-71-15 through RF-71-24. Active set is 31 decisions and 9 governance controls. Product Owner approval is the only remaining gate. | Draft; ready for Product Owner approval |
 | 0.7 | August 14, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the SD-071-034 back-reference to SD-071-050. Editorial; no criterion disposition changed. | Draft; ready for Product Owner approval |
+| 1.0 | August 14, 2026 | Alexander Wohlford — Product Owner | Recorded Product Owner approval of MVP Schedule Decisions v1.0. All 17 CBD-71 criteria met and all 20 CBD-11 criteria dispositioned. | **Approved; CBD-71 complete** |
