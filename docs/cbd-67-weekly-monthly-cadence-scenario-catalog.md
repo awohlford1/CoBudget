@@ -3,13 +3,13 @@
 | Field | Value |
 | --- | --- |
 | Status | Approved |
-| Document version | 1.2 |
+| Document version | 1.5 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval, on the evidence of an independent AI-assisted audit of Codex-authored drafts (see traceability record §6 and RF-07) |
 | Jira | [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) |
 | Governing specification | [CBD-67 — Weekly and Monthly Budget Cycle Workflow Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/655361) |
 | Traceability | [CBD-67 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/720897) |
-| Last updated | August 11, 2026 |
+| Last updated | August 12, 2026 |
 
 ## 1. Purpose and conventions
 
@@ -17,7 +17,7 @@ This catalog provides deterministic, human-reviewable examples of the product be
 
 The governing specification remains authoritative. A scenario demonstrates a rule but does not create, override, narrow, or expand one. If a scenario conflicts with the specification, correct the scenario and review the affected traceability.
 
-**Coverage depth.** This catalog uses two intentional levels of depth. Complex or novel behavior — initial setup, cross-cadence changes, and proration — is demonstrated with fully worked fixtures using concrete dates, amounts, and Given/When/Then structure (21 scenario IDs: SCN-W-01–02, SCN-M-01–05, SCN-C-01–05, CALC-01, FIN-01–03, PERM-01–03, A11Y-01, SCOPE-01). Simpler or highly repetitive behavior — validation messages, lifecycle transitions, recovery outcomes, and historical-integrity rules — is captured as compact one-row assertion tables rather than full narrative fixtures (36 scenario IDs: LIFE-01–06, FIN-04, REC-01–05, HIST-01–04, ERR-01–20). Both levels are binding acceptance evidence; the compact-table format is a density choice reflecting the underlying test-fixture role, not a placeholder for missing content.
+**Coverage depth.** This catalog uses two intentional levels of depth. Complex or novel behavior — initial setup, cross-cadence changes, and proration — is demonstrated with fully worked fixtures using concrete dates, amounts, and Given/When/Then structure (21 scenario IDs: SCN-W-01–02, SCN-M-01–05, SCN-C-01–05, CALC-01, FIN-01–03, PERM-01–03, A11Y-01, SCOPE-01). Simpler or highly repetitive behavior — validation messages, lifecycle transitions, recovery outcomes, and historical-integrity rules — is captured as compact one-row assertion tables rather than full narrative fixtures (40 scenario IDs: LIFE-01–06, ADAPT-01–04, FIN-04, REC-01–05, HIST-01–04, ERR-01–20). Both levels are binding acceptance evidence; the compact-table format is a density choice reflecting the underlying test-fixture role, not a placeholder for missing content.
 
 ### 1.1 Scenario types
 
@@ -59,7 +59,7 @@ The governing specification remains authoritative. A scenario demonstrates a rul
 * Category results reconcile to that target using largest fractional remainder.
 * Equal fractional remainders are resolved by stable category identity, never category label or display order.
 * Actual transactions, pending transactions, projected bills, and projected income are never prorated.
-* Estimated projected amounts use italic presentation with a leading tilde, such as _\~$50.00_.
+* Estimated projected amounts use italic presentation with a leading tilde, such as _\\\~$50.00_.
 * An aggregate containing an estimated amount is displayed as approximate.
 * An item with no usable amount is displayed when otherwise appropriate but contributes nothing to totals.
 
@@ -538,7 +538,7 @@ This is the fixed reference fixture required by Section 16 of the governing spec
 | Posted grocery transaction | June 18 | $84.25 | Transition | Display transaction in normal posted state; never prorate |
 | Pending fuel transaction | June 19 | $32.10 | Transition | Display and label Pending; never prorate |
 | Rent projected occurrence | June 20 | $1,000.00 | Transition | Display one Projected occurrence; never prorate |
-| Paycheck projected occurrence | June 26 | _\~$2,500.00_ | June 22–28 | Display italicized with tilde; income total is approximate |
+| Paycheck projected occurrence | June 26 | _\\\~$2,500.00_ | June 22–28 | Display italicized with tilde; income total is approximate |
 | Utility occurrence without usable amount | July 2 | No usable amount | June 29–July 5 | Display when otherwise authorized; exclude from totals |
 
 **Preview and confirmation assertions**
@@ -588,6 +588,15 @@ The exact overall result is $285.714285…, which half-up rounds to $285.71. The
 | LIFE-05 | During June 17–21 from SCN-C-05, an authorized user changes weekly base allocations and saves. | Transition allocations cannot be edited directly. The user must make a non-default choice: recalculate the complete transition from all current base allocations or keep the transition unchanged. Cancel saves nothing. Recalculation is atomic and never changes financial activity. |
 | LIFE-06 | On or after June 22, an authorized user changes weekly base allocations. | No transition choice appears because the transition ended at local midnight. The normal recurring weekly allocations change prospectively under ordinary audited allocation behavior. |
 
+### Cadence-adapter scenarios
+
+| ID | Given and action | Expected result |
+| --- | --- | --- |
+| ADAPT-01 | Current monthly schedule; proposed biweekly Friday paycheck boundaries are August 7 and August 21, 2026; effective date August 12; user explicitly reviews a $280 full-period Groceries target. | Old period closes August 11. Transition is August 12–20 (9 days). Basis period is August 7–20 (14 days). Groceries transition target is $280 × 9 ÷ 14 = $180. First full paycheck period is August 21–September 3 with the reviewed $280 target. |
+| ADAPT-02 | Same proposed paycheck rule and reviewed target, effective August 21. | August 21 is a natural boundary. A full August 21–September 3 period begins with the reviewed $280 target; no transition or proration appears. |
+| ADAPT-03 | Proposed custom cadence has origin August 1, 2026 and fixed length 10 days; effective date August 14; user reviews a $300 full-period Groceries target. | Adapter returns basis August 11–20 and next boundary August 21. Transition is August 14–20 (7 days), so Groceries target is $300 × 7 ÷ 10 = $210. First full period is August 21–30 with $300. |
+| ADAPT-04 | Old cadence has a $500 Groceries target and the user proposes a differently sized cadence. | Product may prefill $500 with provenance but cannot confirm until the user explicitly reviews the proposed full-period target. It never silently assumes the old amount is appropriate for the new frequency. Editing the reviewed target invalidates and regenerates the preview. |
+
 ## 6. Financial presentation scenarios
 
 ### FIN-01 — Complete authorized proposed-period picture
@@ -598,7 +607,7 @@ Using SCN-C-05:
 * Order items chronologically by authoritative budget date, using normal product tie ordering.
 * Show posted and pending transactions with their business-as-usual presentation.
 * Show each unmatched projected occurrence separately.
-* Display _\~$2,500.00_ as estimated and make the containing income total approximate.
+* Display _\\\~$2,500.00_ as estimated and make the containing income total approximate.
 * Exclude the no-amount utility occurrence from totals.
 * Do not show old financial totals, an aggregate affected count or amount, total affected, net change, or combined net-impact figure.
 * Every displayed total must reconcile to its expandable authorized items.
@@ -691,7 +700,7 @@ Using SCN-C-05:
 | REC-01 | Two Owners confirm competing proposals against the same current version. | At most one proposal commits against that version. The other becomes stale or conflicts, creates no partial or duplicate state, and requires a new preview. |
 | REC-02 | Confirmation commits, but the response is lost and the same request is retried. | Resolve the stable operation identity to the existing Succeeded outcome; return the committed active or pending state; create no duplicate version, period, confirmation record, pending record, or audit event. |
 | REC-03 | The operation is interrupted before authoritative commit. | Resolve to Failed when non-commit is proven; prior schedule and pending state remain complete and unchanged; no partial domain or audit records exist. |
-| REC-04 | A future change reaches its effective date, transient retries fail, and the system proves the atomic change did not commit. | Preserve the prior schedule; retain immutable failed change and audit evidence; show safe explanation and audit reference; Owners and Co-owners may use Review and try again, which opens a newly previewed immediate proposal. |
+| REC-04 | A future change reaches its effective date, transient retries fail, and the system proves the atomic change did not commit. | Preserve the prior schedule; retain immutable failed change and audit evidence; show safe explanation and audit reference; Primary Owners, Co-owners, and Collaborators may use Review and try again, which opens a newly previewed immediate proposal. |
 | REC-05 | Contradictory or partial authoritative records are detected. | Treat as a data-integrity outage; show last safe information; make modifications read-only; recover automatically to one valid state; never display an empty budget or indefinite Processing state; do not require the user to contact support. |
 
 Every recovery scenario must end with exactly one durable **Succeeded** or **Failed** operation outcome. A worker’s Processing response is never the business outcome.
@@ -833,7 +842,7 @@ No known CBD-67 MVP scenario gap blocks implementation planning.
 | Deferred area | CBD-67 boundary | Linked work | Status |
 | --- | --- | --- | --- |
 | Budget-time-zone changes after creation | Time-zone selection during creation is covered; editing an existing budget time zone is unavailable in cadence workflows. | FF-002 in the [Future Feature Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) | Deferred; non-blocking |
-| Projection matching and occurrence resolution | FIN-02 covers consumption of an externally reliable match; discovery, confidence, confirmation, reversal, and correction are outside CBD-67. | FF-004 in the [Future Feature Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) | Deferred; non-blocking |
+| Advanced projection matching and occurrence resolution | FIN-02 consumes a reliable result. CBD-68 governs MVP one-to-one income matching and Late/Missing/Skip. Projected bills, pending interaction, complex cardinality, advanced confidence, and additional resolution behavior remain outside CBD-67. | FF-004 in the [Future Feature Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) | Narrowed deferred remainder; non-blocking |
 | Implementation architecture and executable fixture formats | This catalog defines product inputs and expected outcomes without prescribing frameworks, APIs, storage, clocks, or job design. | Planned CBD-67 technical specification | Required before implementation authorization |
 | Final visual design | Scenarios define required information, state, and accessibility behavior without prescribing final layout. | Future design work | Non-blocking for product-specification review |
 
@@ -847,3 +856,6 @@ If a new blocking ambiguity is found, assign a stable scenario or open-question 
 | August 11, 2026 | Alexander Wohlford — Product Owner | Final completion review of old-period preview presentation, AC13/AC14 evidence, AC16 confirmation assertions, cross-document consistency, and deferred boundaries | All closure findings resolved; technical design and executable implementation tests remain separate future delivery work | Version 1.0 Approved |
 | August 11, 2026 | Alexander Wohlford with Claude assistance — AI-assisted critical audit | Independent verification of scenario and invariant counts, recomputation of calendar and proration arithmetic in CALC-01 and SCN-C-01/03/04/05, and review of the v1.0 approval chain | Counts and arithmetic verified correct; the 57 scenario IDs were found to span two undocumented levels of depth, and v1.0 was authored, reviewed, and approved by the same person with no independent human review | Coverage-depth note added to Section 1; version 1.1 returned to In Review. See RF-07 in the traceability record. |
 | August 11, 2026 | Alexander Wohlford — Product Owner | Approval decision on reviewer independence for this documentation-scope subtask | The drafts under audit were authored by Codex rather than by the approver; the Product Owner reviewed them and the AI-assisted audit supplied an independent critical pass over work the approver did not write. Accepted as sufficient reviewer separation. The independent reviewer was an AI system, not a second human. | Version 1.2 Approved under the amended §7.7 rule in the traceability record. RF-07 resolved and REV-01 closed. |
+| August 12, 2026 | Alexander Wohlford — Product Owner, with Codex assistance | Permission consistency against the authoritative CBD-67 matrix and CBD-68 PD-68-12 | REC-04 and permission outcomes now include Collaborators as authorized schedule editors; Viewer and Accountability Partner remain read-only. | Version 1.3 Approved. |
+| August 12, 2026 | Alexander Wohlford — Product Owner, with Codex assistance | Cadence-neutral adapter and proposed-target review | Added ADAPT-01–04 for mid-period and boundary-aligned paycheck/custom transitions and explicit full-period target review. | Version 1.4 Approved. |
+| August 12, 2026 | Alexander Wohlford — Product Owner, with Codex assistance | Matching-scope reconciliation | Recognized CBD-68 as authoritative for MVP one-to-one income matching and narrowed the FF-004 scenario boundary to projected bills, pending interaction, complex cardinality, advanced confidence, and additional resolution behavior. | Version 1.5 Approved. |

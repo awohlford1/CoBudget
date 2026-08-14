@@ -3,12 +3,13 @@
 | Field | Value |
 | --- | --- |
 | Status | Approved |
+| Document version | 1.3 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval |
 | Jira | [CBD-67](https://cobudget.atlassian.net/browse/CBD-67) |
 | Parent | [CBD-11](https://cobudget.atlassian.net/browse/CBD-11) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
-| Last updated | August 11, 2026 |
+| Last updated | August 12, 2026 |
 
 ## 1. Purpose and outcome
 
@@ -197,7 +198,7 @@ An invariant is a rule that must remain true in every valid workflow and system 
 | INV-44 | Each unmatched projected occurrence of recurring income within the preview horizon is displayed separately in its proposed period, and projected income has its own period total apart from transactions, bills, and planned allocations. | Prevents expected inflows from being hidden or confused with outflows or posted activity. | Generate multiple unmatched income occurrences and verify separate projected rows, correct independent period totals, and no extra item or amount for the recurring definition. |
 | INV-45 | Every usable estimated projected amount is italicized and prefixed with “\~”; any period-category total containing an estimate is also approximate, while occurrences with no usable amount remain visible but are excluded from monetary totals. | Prevents estimates and missing values from being presented as exact financial amounts. | Mix exact, estimated, and missing occurrence amounts; verify item formatting, approximate period totals, missing-value disclosures, and exclusion of missing values from monetary totals. |
 | INV-46 | A known pending bank transaction with an authoritative budget date appears in its proposed period using its current known amount and a visible Pending status, and contributes to that period’s transaction total. | Includes currently known financial activity without presenting provisional status as final. | Mix posted and pending transactions across proposed periods; verify assignment, Pending labels, period transaction totals, and current-impact refresh after posting changes. |
-| INV-47 | A preview, current-impact estimate, or compact confirmation record never exposes restricted financial items through details, counts, totals, or derived indicators; Owners, Co-owners, and Accountability Partners receive complete authorized visibility, while Viewers receive only explicitly provisioned information. | Preserves least-privilege Viewer access without weakening the Accountability Partner’s complete read-only picture or leaking hidden financial information through aggregates. | Compare the same preview and confirmed change across every role and Viewer scope; verify complete authorized views, omission of restricted details and aggregates, and a permission explanation rather than a misleading zero value. |
+| INV-47 | A preview, current-impact estimate, or compact confirmation record never exposes restricted financial items through details, counts, totals, or derived indicators; Primary Owners and Co-owners receive complete authorized visibility, Collaborators receive the detail permitted by CBD-12, Accountability Partners receive complete read-only visibility, and Viewers receive only explicitly provisioned information. | Preserves least-privilege Viewer access without weakening the Accountability Partner’s complete read-only picture or leaking hidden financial information through aggregates. | Compare the same preview and confirmed change across every role and Viewer scope; verify complete authorized views, omission of restricted details and aggregates, and a permission explanation rather than a misleading zero value. |
 | INV-48 | Stale or temporarily unavailable external account synchronization does not block confirmation when the preview can be calculated completely and reliably from the authoritative financial data already stored for the budget; incomplete stored data or an incomplete or unreliable impact calculation does block confirmation. | Separates data freshness from calculation integrity so a connector delay does not unnecessarily prevent a schedule decision while an untrustworthy preview can never be confirmed. | Test current, stale, and unavailable synchronization states with complete stored data, then repeat with incomplete data and calculation failures; verify freshness notices and last-synchronized times for the former and blocked confirmation for the latter. |
 | INV-49 | A posted or pending transaction reliably matched by the separate matching workflow replaces its projected bill or income occurrence in the preview; the projection is neither displayed nor included separately in any period total. | Prevents one financial event from appearing or being counted twice while leaving matching behavior to its owning workflow. | Test posted and pending reliable matches, removed matches, and unmatched projections; verify single-row presentation, transaction-based totals, and projection restoration after unmatching. |
 | INV-50 | The preview shows only the proposed resulting financial picture, with all authorized known items and separate transaction, unmatched projected-bill, unmatched projected-income, and planned-allocation totals for each displayed period; it shows no old-schedule financial totals, aggregate affected total, or combined net-impact figure. | Lets users evaluate what the schedule will produce without misleading comparisons or implying that reassignment changes the budget’s net balance. | Preview changes with changed and unchanged items across roles; reconcile every proposed-period category total, verify permission filtering, and verify prohibited comparison and aggregate totals are absent. |
@@ -285,7 +286,7 @@ Confirmation is the single action that commits the proposal. After confirmation:
 * The pending change is visible according to the permission matrix and remains editable or cancelable by an authorized schedule editor until execution.
 * Creation, editing, cancellation, confirmation, and execution are audited.
 
-The MVP does not include a separate owner-approval step. A possible multi-person approval workflow is recorded as [FF-001 in the CoBudget Future Feature Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274).
+The permission matrix above is authoritative for cadence workflows: Primary Owners, Co-owners, and Collaborators are authorized schedule editors and may create, configure, preview, confirm, edit, cancel, and retry schedule changes. Viewer and Accountability Partner remain read-only. The MVP does not include a separate owner-approval step. A possible multi-person approval workflow is recorded as [FF-001 in the CoBudget Future Feature Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274).
 
 ### Authorization changes during a workflow
 
@@ -856,7 +857,7 @@ Conversely, the schedule-change workflow does not offer a shortcut that edits th
 A budget space can have at most one confirmed pending future schedule change in the MVP. If one exists when a user enters the schedule-change workflow, the product opens the existing pending-change summary rather than a blank schedule-change proposal.
 
 * The summary identifies the current authoritative schedule, the pending cadence and anchor, the exact effective date, and the resulting transition or first full period.
-* An authorized Owner or Co-owner can choose **Edit pending change** or **Cancel pending change**.
+* An authorized schedule editor can choose **Edit pending change** or **Cancel pending change**.
 * A user with read-only access can review the pending-change details but cannot edit or cancel them.
 * The workflow does not create or allow a second proposal while the confirmed pending change exists.
 * The interface explains: **“This budget already has a scheduled change. Edit or cancel it before creating another change.”**
@@ -953,7 +954,7 @@ A future scheduled change has an exact effective date later than the current bud
 
 When a confirmed pending future schedule change exists, the schedule-change entry point opens its summary.
 
-* Owners and Co-owners can access **Edit pending change** and **Cancel pending change**.
+* Primary Owners, Co-owners, and Collaborators can access **Edit pending change** and **Cancel pending change**.
 * Accountability Partners and any Viewers explicitly provisioned access to pending schedule information can view the summary without modification actions.
 * Other Viewers receive only the schedule information permitted by their provisioned scope.
 * No role can create a concurrent second proposal.
@@ -1104,12 +1105,32 @@ After a definitive future execution failure:
 * Normal budget access returns once integrity of the unchanged prior state is established.
 * The failed pending record and audit evidence remain immutable.
 * The product shows a safe failure explanation and audit reference.
-* Owners and Co-owners may choose **Review and try again**, which creates a new immediate-change proposal prefilled from the failed change.
+* Primary Owners, Co-owners, and Collaborators may choose **Review and try again**, which creates a new immediate-change proposal prefilled from the failed change.
 * The new proposal requires a current preview and explicit confirmation because its original effective date may be past and financial inputs may have changed.
 * Accountability Partners see the complete failure history read-only, and Viewers see only provisioned information.
 * A permanently invalid request is never replayed automatically.
 
 Contradictory or partial authoritative records violate atomic execution and constitute a data-integrity outage. Affected modifications remain read-only while automated repair restores one valid outcome. Operational escalation occurs automatically; the user is not responsible for recovery. Detailed service objectives and incident procedures belong to the future technical specification.
+
+### 8.10 Cadence-neutral boundary adapter
+
+CBD-67 governs the shared schedule-change lifecycle for every supported cadence. A cadence-specific specification may add a new schedule type only by supplying this deterministic adapter contract:
+
+* Stable proposed cadence type and rule identity.
+* Human-readable rule summary for preview, confirmation, history, and audit.
+* The complete recurrence inputs and versioned calendar provenance required to reproduce boundaries.
+* A function that, for any supported budget-space date, returns the natural boundary immediately before or on that date and the next natural boundary after it.
+* The first three complete periods after any transition, with inclusive start and end dates.
+* Validation proving that generated periods are chronological, contiguous, non-overlapping, and open-ended.
+* The proposed cadence's explicitly reviewed full-period spending targets by stable category identity.
+
+Paycheck cadence supplies boundaries from its confirmed recurring anchor schedule after business-day adjustment. One-time income-occurrence exceptions are excluded. Fixed-length custom cadence supplies boundaries from its confirmed start boundary plus integer multiples of its fixed calendar-day length.
+
+The adapter never decides effective-date eligibility, pending-change lifecycle, transition creation, proration, no-carry-forward, permissions, confirmation, execution, history, or audit. CBD-67 remains authoritative for those behaviors.
+
+A schedule change cannot be previewed or confirmed if the adapter cannot return complete deterministic boundaries across the preview horizon or if the proposed full-period spending targets have not been explicitly reviewed.
+
+**Decision PD-67-09 / CBD-68 PD-68-15:** A cadence extension integrates through this boundary-and-target adapter. Existing weekly and monthly behavior is unchanged. Approved by Alexander Wohlford on August 12, 2026.
 
 ## 9. Change preview requirements
 
@@ -1119,8 +1140,8 @@ A schedule-change preview is a non-authoritative projection of the result that w
 
 The preview must display:
 
-* The current authoritative cadence and anchor.
-* The proposed cadence and anchor.
+* The current authoritative cadence and cadence-specific rule summary.
+* The proposed cadence and cadence-specific rule summary, including anchor or fixed-length origin where applicable.
 * The configured budget-space time zone used to interpret the effective date.
 * The exact effective date and whether it will execute immediately or remain pending.
 * The date and time at which the preview was generated, expressed in the budget-space time zone.
@@ -1144,6 +1165,10 @@ For a boundary-aligned change, the preview explicitly states that no transition 
 The preview visibly identifies the final included date. That date is the end of the third complete new-schedule period and defines the preview horizon for proposed-period item details and totals.
 
 ### 9.3 Planned-allocation impact
+
+Before the preview is confirmable, the user must explicitly review the proposed full-period spending target for every active category. The product may prefill values for convenience, but it must not silently treat an amount from the old cadence as the intended amount for a differently sized new cadence. Prefill provenance is displayed, and the user may edit the proposed full-period targets before regenerating the preview.
+
+The reviewed proposed-cadence targets become the base planned allocations used for the first full new period and for any transition proration. Changing one makes the preview stale.
 
 The preview must distinguish short-transition allocations from full-period allocations and show:
 
@@ -1180,7 +1205,7 @@ Transaction treatment follows these rules:
 * A transaction that the separate transaction-matching workflow has reliably matched to a projected bill or income occurrence replaces that projection in the preview, whether the transaction is posted or pending.
 * The matched projection is not displayed and contributes no separate item or amount to any period total. The transaction’s date, amount, and status are used instead.
 * If the reliable match is removed and the projection remains applicable within the preview horizon, the projection becomes visible again and the preview recalculates.
-* Matching confidence, matching controls, user explanations, and match-management behavior are outside this specification. A matched transaction uses its normal business-as-usual presentation; the schedule preview adds no matching-specific label or interaction.
+* CBD-67 does not define matching controls. MVP one-to-one income matching, suggestions, correction, permissions, audit, and Late/Missing/Skip behavior are governed by CBD-68 PD-68-06 and PD-68-07. Projected-bill matching, pending-transaction interaction, complex reconciliation cardinality, and advanced confidence remain FF-004. A matched transaction uses its normal business-as-usual presentation; the schedule preview adds no matching-specific label or interaction.
 
 For recurring bills and income, the preview evaluates projected occurrences rather than counting the recurring definition itself:
 
@@ -1214,7 +1239,7 @@ Actual transaction amounts and projected bill or income occurrence amounts are n
 
 #### Permission-filtered visibility
 
-* Owners and Co-owners receive the complete preview and itemized financial-impact details and may confirm when otherwise authorized.
+* Primary Owners, Co-owners, and Collaborators receive the complete authorized preview and itemized financial-impact details and may confirm when otherwise authorized.
 * Accountability Partners receive the same complete financial and schedule picture in read-only form and cannot confirm or modify the proposal.
 * Viewers receive only the schedule and financial information explicitly provisioned to them.
 * A Viewer with schedule access but without access to transactions, bills, income, or another financial resource may see the permitted timeline but not restricted descriptions, details, counts, totals, or derived indicators.
@@ -1265,7 +1290,7 @@ For a confirmed future schedule change:
 * At execution, all then-current financial data is treated using its authoritative budget dates, the confirmed schedule boundaries, and the applicable calculation rules.
 * Only an authorized change to the pending cadence, anchor, or effective date creates a pending-change revision that requires a new preview and explicit confirmation under Section 8.5.
 
-The compact immutable confirmation record remains complete and authoritative as stored, but every presentation of that record and every current-impact estimate is filtered using the current viewer’s permissions. Owners, Co-owners, and Accountability Partners may view the complete record, with Accountability Partners remaining read-only. Viewers see only provisioned information, and restricted references, counts, totals, and derived indicators are withheld using the same rules and permission explanation as the preview.
+The compact immutable confirmation record remains complete and authoritative as stored, but every presentation of that record and every current-impact estimate is filtered using the current viewer’s permissions. Primary Owners and Co-owners may view the complete record. Collaborators receive the detail permitted by CBD-12, and Accountability Partners receive the complete record read-only. Viewers see only provisioned information, and restricted references, counts, totals, and derived indicators are withheld using the same rules and permission explanation as the preview.
 
 ### 9.8 Preview-horizon example
 
@@ -1295,7 +1320,7 @@ For each affected category:
 
 `exact transition allocation = base planned allocation × transition calendar days ÷ proration-basis-period calendar days`
 
-The **proration basis period** is the complete natural period under the proposed cadence and anchor that contains the transition dates. It begins at the new schedule’s natural boundary immediately before or on the effective date and ends the day before the next natural boundary. The effective date itself is not moved backward; the earlier portion is used only to establish the denominator.
+The **proration basis period** is the complete natural period returned by the proposed cadence adapter that contains the transition dates. It begins at the new schedule’s natural boundary immediately before or on the effective date and ends the day before the next natural boundary. Its base planned allocation is the explicitly reviewed full-period target for the proposed cadence, not an automatically frequency-converted amount from the old cadence. The effective date itself is not moved backward; the earlier portion is used only to establish the denominator.
 
 Calendar days are inclusive:
 
@@ -1303,6 +1328,8 @@ Calendar days are inclusive:
 * Basis-period calendar days include every date in the complete natural period.
 * Weekly schedules always use seven basis days.
 * Monthly schedules use the actual number of calendar days between their applicable natural boundaries, so the denominator may vary with month length, leap years, and anchor rules.
+* Paycheck schedules use the actual number of calendar days between the applicable adjusted recurring anchor boundaries.
+* Fixed-length custom schedules use the confirmed fixed calendar-day length.
 * Time-zone offsets and daylight-saving changes do not add or remove a calendar day from either count.
 
 Examples:
@@ -1363,7 +1390,7 @@ For an immediate schedule change, the latest inputs are authoritatively revalida
 
 ### 10.6 Base-allocation changes during an active transition
 
-Once a schedule change has activated, users cannot directly edit the transition period’s planned allocations. They edit the normal weekly or monthly base planned allocations through the existing allocation workflow.
+Once a schedule change has activated, users cannot directly edit the transition period’s planned allocations. They edit the normal full-period spending targets for the active cadence through the existing target workflow.
 
 When one or more base planned allocations are saved while the transition period is active, an authorized user must explicitly choose one of these options:
 
@@ -1437,14 +1464,14 @@ Future rollover support requires a separate specification covering normal bounda
 
 ## 12. Confirmation requirements
 
-Confirmation is a final review state reached only after the product has generated a complete, current schedule-change preview. It allows an authorized Owner or Co-owner to deliberately authorize the displayed schedule decision. For a future change, confirmation fixes the cadence, anchor, effective date, transition boundaries, and applicable calculation behavior without freezing mutable financial data.
+Confirmation is a final review state reached only after the product has generated a complete, current schedule-change preview. It allows an authorized schedule editor—Primary Owner, Co-owner, or Collaborator—to deliberately authorize the displayed schedule decision. For a future change, confirmation fixes the cadence, anchor, effective date, transition boundaries, and applicable calculation behavior without freezing mutable financial data.
 
 ### 12.1 Required review content
 
 The final review must show, without requiring the user to return to an earlier step:
 
-* The current authoritative cadence and anchor.
-* The proposed cadence and anchor.
+* The current authoritative cadence and cadence-specific rule summary.
+* The proposed cadence and cadence-specific rule summary.
 * The configured budget-space time zone.
 * The exact effective date.
 * Whether the change will apply immediately or remain pending until a future date.
@@ -1489,7 +1516,7 @@ Immediately before committing, the product revalidates:
 * The actor’s current permission.
 * The current budget-space date and time zone.
 * The current authoritative schedule and pending-change state.
-* The proposed cadence, anchor, and exact effective date.
+* The proposed cadence, cadence-specific rule inputs, reviewed full-period targets, and exact effective date.
 * Every schedule boundary and proration input.
 * Relevant planned allocations, posted and pending transactions, projected bills, and projected income.
 * The integrity and freshness of the preview being confirmed.
@@ -1589,11 +1616,11 @@ Events produced by one atomic action share a correlation ID. Repeated delivery o
 
 | Event | Actor | Required event-specific data |
 | --- | --- | --- |
-| Schedule created | Confirming Owner or Co-owner | Initial schedule version; cadence; anchor; budget-space time zone; initial active-period boundaries; weekly or monthly classification; creation request/correlation ID; confirmation timestamp; resulting active state. No before-schedule value exists. |
-| Change confirmed | Confirming Owner or Co-owner | Current authoritative version; proposed cadence and anchor; exact effective date and time zone; immediate or future classification; confirmation-record reference; preview generation timestamp; proposed old-period closure, transition, and first-full-period boundaries; confirmed proration inputs and results; correlation to the resulting scheduled or executed event. |
+| Schedule created | Confirming authorized schedule editor | Initial schedule version; cadence; anchor; budget-space time zone; initial active-period boundaries; weekly or monthly classification; creation request/correlation ID; confirmation timestamp; resulting active state. No before-schedule value exists. |
+| Change confirmed | Confirming authorized schedule editor | Current authoritative version; proposed cadence and anchor; exact effective date and time zone; immediate or future classification; confirmation-record reference; preview generation timestamp; proposed old-period closure, transition, and first-full-period boundaries; confirmed proration inputs and results; correlation to the resulting scheduled or executed event. |
 | Change scheduled | System | Pending-change ID; initial confirmed revision; effective date; proposed cadence and anchor; unchanged current authoritative version; pending lifecycle state; confirmation-record reference; correlation to Change confirmed. No future schedule version exists. |
-| Pending change edited | Owner or Co-owner who confirmed the revision | Pending-change ID; prior and new immutable confirmed revisions; before-and-after cadence, anchor, effective date, and preview/confirmation references; whether the revision remains future or executes immediately. |
-| Pending change cancelled | Owner or Co-owner who explicitly confirmed cancellation | Pending-change ID and cancelled confirmed revision; cadence; anchor; effective date; confirmation-record reference; cancelled lifecycle state; unchanged current authoritative version. No cancellation reason is requested or stored for the MVP. |
+| Pending change edited | Authorized schedule editor who confirmed the revision | Pending-change ID; prior and new immutable confirmed revisions; before-and-after cadence, anchor, effective date, and preview/confirmation references; whether the revision remains future or executes immediately. |
+| Pending change cancelled | Authorized schedule editor who explicitly confirmed cancellation | Pending-change ID and cancelled confirmed revision; cadence; anchor; effective date; confirmation-record reference; cancelled lifecycle state; unchanged current authoritative version. No cancellation reason is requested or stored for the MVP. |
 | Change executed | System | Pending-change ID and exact confirmed revision when applicable; old and new schedule versions; authoritative execution inputs; created or closed period boundaries; proration inputs and final results; resulting active state. |
 | Change execution failed | System | Pending-change ID and confirmed revision; safe failure category; definitive failed state; unchanged authoritative schedule version; recovery correlation. Temporary retries and indeterminate attempts are operational recovery data rather than separate user-facing audit events. |
 | Budget time zone changed | Authorized settings actor | Previous and new named time zones; resulting budget-space date; related pending-change reference when applicable. This is a settings event and creates no schedule version. |
@@ -1614,7 +1641,7 @@ History distinguishes:
 
 A completed period links directly to the schedule version that governed it. An executed pending change links both ways between its final confirmed revision and the resulting schedule version.
 
-Owners and Co-owners receive complete authorized history. Accountability Partners receive the complete history in read-only form. Viewers receive only explicitly provisioned history; restricted details, counts, summaries, and derived indicators cannot reveal hidden financial information.
+Primary Owners and Co-owners receive complete authorized history. Collaborators receive the schedule history and financial detail permitted by CBD-12. Accountability Partners receive the complete history in read-only form. Viewers receive only explicitly provisioned history; restricted details, counts, summaries, and derived indicators cannot reveal hidden financial information.
 
 ### 13.6 Immutability and corrections
 
@@ -1648,10 +1675,10 @@ A temporary workflow never replaces authoritative state until its confirmation s
 | State | User-visible content | Role-appropriate actions | Exceptional behavior |
 | --- | --- | --- | --- |
 | Pre-creation unconfigured | Schedule inputs required to create the budget; no budget ID, period, or schedule version yet | Continue setup, preview, Back, or Cancel | Cancelling or abandoning creates no budget. |
-| Active | Current cadence and anchor; active-period dates and status; next natural boundary; budget time zone; transition status when applicable; history access | Owners and Co-owners may start a schedule change; Accountability Partners have complete read-only access; Viewers receive provisioned access | If the active period cannot be established reliably, retain safe visible information and enter read-only integrity recovery. |
-| Active with pending future change | Complete current authoritative schedule plus a visually separate pending summary with cadence, anchor, effective date, time zone, transition outcome, current-impact estimate, and confirmed revision | Owners and Co-owners may edit or cancel the pending change; other independent schedule changes are unavailable; read-only roles follow their permissions | The current schedule remains authoritative until successful execution. |
+| Active | Current cadence and anchor; active-period dates and status; next natural boundary; budget time zone; transition status when applicable; history access | Primary Owners, Co-owners, and Collaborators may start a schedule change; Accountability Partners have complete read-only access; Viewers receive provisioned access | If the active period cannot be established reliably, retain safe visible information and enter read-only integrity recovery. |
+| Active with pending future change | Complete current authoritative schedule plus a visually separate pending summary with cadence, anchor, effective date, time zone, transition outcome, current-impact estimate, and confirmed revision | Primary Owners, Co-owners, and Collaborators may edit or cancel the pending change; other independent schedule changes are unavailable; read-only roles follow their permissions | The current schedule remains authoritative until successful execution. |
 | Executing | **Applying schedule change**, effective date, and last safely established schedule information | Viewing remains available where consistent; modification actions are temporarily unavailable; no second Apply or manual retry action exists | The durable request outcome resolves automatically to Succeeded or Failed; a worker Processing status is never authoritative. |
-| Failed execution | Unchanged prior authoritative schedule; failed change summary; safe explanation and audit reference | Owners and Co-owners may choose **Review and try again**; read-only roles see permitted history | Retry opens a new immediate proposal and requires a current preview and confirmation. |
+| Failed execution | Unchanged prior authoritative schedule; failed change summary; safe explanation and audit reference | Primary Owners, Co-owners, and Collaborators may choose **Review and try again**; read-only roles see permitted history | Retry opens a new immediate proposal and requires a current preview and confirmation. |
 | Integrity recovery or service unavailable | Last safe schedule information plus a clear explanation of temporarily unavailable actions | Safe read-only viewing and automatic refresh where possible | Never masquerades as an empty budget or indefinite schedule processing state. |
 
 An existing persisted budget without an authoritative schedule is not a normal empty state. It is a data-integrity recovery state, and affected budget modifications remain read-only until the invariant is restored.
@@ -1694,7 +1721,7 @@ The current authoritative schedule and a confirmed future change are never blend
 
 Only one pending future change is supported during the MVP. Starting another independent change is unavailable with an explanation. Editing produces an unconfirmed revision; abandoning it preserves the existing confirmed revision.
 
-If another Owner or Co-owner changes the authoritative schedule or pending revision while a workflow is open:
+If another authorized schedule editor changes the authoritative schedule or pending revision while a workflow is open:
 
 * The product detects the version or confirmed-revision mismatch.
 * The open preview and final review become stale and cannot be confirmed.
@@ -1846,7 +1873,7 @@ Recurring bill and income definitions are separate from projected occurrences:
 * When the separate matching workflow reports a reliable match, the transaction replaces the projection in preview display and totals without deleting the relationship.
 * Removing a match permits a still-applicable projection to reappear.
 
-The confidence, automation, confirmation, correction, unmatching, overdue, skip, dismissal, rescheduling, expiration, and matching-audit rules are unresolved and deferred to **Projection matching and occurrence resolution** in the future-feature register.
+CBD-68 supplies the resolved MVP income rules consumed here. The unresolved remainder—projected-bill matching, pending-transaction interaction, split/combined/partial or grouped reconciliation, advanced confidence, and additional occurrence-resolution behavior—is deferred as **FF-004 Advanced projection matching and occurrence resolution**.
 
 ### 15.6 Schedule operations and deterministic outcomes
 
@@ -1927,7 +1954,7 @@ Automated verification must cover:
 
 ### 16.4 Roles, permissions, masking, and accessibility
 
-The automated role-state matrix must cover Owner, Co-owner, Accountability Partner, and Viewers with full schedule provision, partial financial provision, or no applicable access. Each combination must verify visible content, available actions, read-only behavior, confirmation rights, permission changes during an open workflow, and masking without count, amount, or aggregate leakage.
+The automated role-state matrix must cover Primary Owner, Co-owner, Collaborator, Accountability Partner, and Viewers with full schedule provision, partial financial provision, or no applicable access. Each combination must verify visible content, available actions, read-only behavior, confirmation rights, permission changes during an open workflow, and masking without count, amount, or aggregate leakage.
 
 Automated accessibility checks must verify:
 
@@ -2021,7 +2048,7 @@ Dependencies are scoped. An unresolved dependency blocks only the behavior that 
 | [CBD-85](https://cobudget.atlassian.net/browse/CBD-85) schedule-first onboarding | Scoped integration dependency | Integrated budget-creation and onboarding experience | CBD-67 owns schedule selection, validation, preview, and initial-cycle behavior; CBD-85 owns the surrounding creation and onboarding journey. |
 | [CBD-83](https://cobudget.atlassian.net/browse/CBD-83) account-level financial dashboard | Related downstream work | Non-budget aggregate financial presentation | It does not block CBD-67. It must consume canonical financial data without double-counting transactions assigned to multiple budgets. |
 | Budget-time-zone change workflow | Future related work | Changes to an existing budget's authoritative time zone | The unresolved effective-date behavior remains in Section 18 and cannot be silently assumed during implementation. |
-| Projection matching behavior | Future related work | Determining when a transaction reliably replaces a projection | CBD-67 consumes a reliable match result but does not define matching rules. |
+| Projection matching behavior | CBD-68 governing MVP income behavior plus narrowed future work | CBD-68 defines one-to-one income matching and Late/Missing/Skip; FF-004 covers bill, pending, complex-cardinality, and advanced behavior | CBD-67 consumes a reliable match result but does not redefine matching rules. |
 
 CBD-67 and CBD-85 must preserve the same non-negotiable outcome: no persistent budget may exist without an authoritative initial schedule. A delay or unresolved decision in one linked item does not authorize CBD-67 to invent substitute ownership, membership, permission, or onboarding behavior.
 
@@ -2060,7 +2087,7 @@ The following assumptions support this specification but do not override an expl
 * GMT is used only when no usable user time zone exists during budget creation.
 * Transaction categorization uses the transaction's authoritative date, not its timestamp or the viewer's time zone.
 * Each budget has one authoritative currency context in the CBD-67 MVP.
-* Owner and Co-owner are the only roles authorized to create, change, cancel, or confirm schedules.
+* Primary Owner, Co-owner, and Collaborator are the only roles authorized to create, change, cancel, or confirm schedules; Viewer and Accountability Partner are read-only.
 * Accountability Partners receive complete schedule visibility but no modification authority.
 * Viewer access remains provisioned and may expose less than the full schedule or financial picture.
 * Upstream account systems can identify synchronization freshness and provide an authoritative transaction date, amount status, and posted or pending status when available.
@@ -2097,7 +2124,7 @@ This statement does not mean every adjacent or future capability has been specif
 | ID | Deferred question | Current CBD-67 boundary | Decisions required before the future capability is released | Linked work | Status |
 | --- | --- | --- | --- | --- | --- |
 | OQ-TZ-01 | When does a change to an existing budget's authoritative time zone become effective, and how does it affect an active cycle or pending schedule change? | CBD-67 allows a named time zone to be selected during budget creation. Time-zone editing is not available inside schedule-creation or schedule-change workflows and does not block the MVP. | Define authorization, effective-date choices, treatment of the active cycle, local-midnight execution, pending-change invalidation or recalculation, preview and confirmation behavior, history, audit, failure recovery, and effects on future versus completed periods. | [FF-002 — Budget-space time-zone change workflow](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) | Deferred; non-blocking |
-| OQ-PM-01 | How is a projection-to-transaction match discovered, judged reliable, confirmed, corrected, or reversed? | CBD-67 consumes a reliable match result: the transaction replaces the projection in presentation and totals exactly once. CBD-67 does not determine match reliability, and automated matching is not required for cadence release. | Define confidence and automation, manual confirmation, correction and unmatching, late-arriving transactions, overdue or skipped occurrences, dismissal, rescheduling, expiration, audit, permission behavior, and recovery from an incorrect match. | [FF-004 — Projection matching and occurrence resolution](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) | Deferred; non-blocking |
+| OQ-PM-01 | Which projection-matching behavior remains outside the resolved CBD-68 MVP income rules? | CBD-67 consumes reliable results. CBD-68 PD-68-06 and PD-68-07 govern one-to-one income matching, exact automation, ±5-day/±5% suggestions, correction, permissions, audit, Late, Missing, and Skip occurrence. | Define projected-bill matching, pending-transaction interaction, split/combined/partial and reconciliation-group behavior, advanced confidence, and any additional resolution states. | [FF-004 — Advanced projection matching and occurrence resolution](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) | Deferred; non-blocking remainder |
 
 The CoBudget Future Feature Register is authoritative for prioritization and future status. This section preserves the CBD-67 boundary and the specific decisions that later work must resolve.
 
@@ -2225,3 +2252,6 @@ Approval of this product specification does not approve a technical design or pr
 | 0.1 | August 9, 2026 | Alexander Wohlford | Established the initial structured working draft for CBD-67. | Not assigned | Working draft |
 | 0.9 | August 11, 2026 | Alexander Wohlford | Completed the weekly and monthly cadence product-behavior specification, including workflows, invariants, previews, transitions, history, recovery, domain concepts, verification requirements, dependencies, risks, assumptions, deferred work, and supporting-artifact governance. | Unassigned | Final Draft published; formal approval pending |
 | 1.0 | August 11, 2026 | Alexander Wohlford | Resolved final completion-review findings: clarified that the shortened old period has no financial details or totals, aligned complete-authorized-set wording, corrected supporting acceptance mappings, and approved the CBD-67 product-document package. | Alexander Wohlford — Product Owner | Approved |
+| 1.1 | August 12, 2026 | Alexander Wohlford with Codex assistance | Reconciled narrative permission language with the authoritative matrix: Primary Owner, Co-owner, and Collaborator may perform cadence schedule actions; Viewer and Accountability Partner remain read-only. Owner/Co-owner-only authority remains for the separate budget-time-zone setting. | Alexander Wohlford — Product Owner | Approved |
+| 1.2 | August 12, 2026 | Alexander Wohlford with Codex assistance | Added the cadence-neutral boundary-and-target adapter used by paycheck and fixed-length custom schedules. Required explicit review of proposed full-period spending targets and generalized proration inputs without changing weekly/monthly outcomes. | Alexander Wohlford — Product Owner | Approved |
+| 1.3 | August 12, 2026 | Alexander Wohlford with Codex assistance | Reconciled CBD-67 matching boundaries with CBD-68 PD-68-06/07 and narrowed FF-004 to projected bills, pending interaction, complex cardinality, advanced confidence, and additional resolution behavior. | Alexander Wohlford — Product Owner | Approved |
