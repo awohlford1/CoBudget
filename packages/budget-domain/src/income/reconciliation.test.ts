@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import { buildPaycheckSchedule } from "../schedule/paycheck-period.ts";
-import { validateCadenceDefinition } from "../schedule/validate.ts";
+import { incomeSchedule } from "./fixtures.test.ts";
 import { toISODate } from "../shared/iso-date.ts";
 import {
   identityOf,
@@ -10,7 +10,6 @@ import {
   type ExpectedOccurrence,
   type OccurrenceIdentity,
 } from "./occurrence.ts";
-import type { IncomeSchedule } from "./schedule.ts";
 import {
   classifyCandidate,
   reconcile,
@@ -44,24 +43,7 @@ function received(date: string, amountMinorUnits = 200_000, currency = "USD"): A
   return { id: "ACT-1", receivedOn: toISODate(date), amountMinorUnits, currency };
 }
 
-/** A real weekly-Friday schedule, for the tests that need generated boundaries. */
-function paycheckSchedule(): IncomeSchedule {
-  const result = validateCadenceDefinition({
-    cadence: "paycheck",
-    pattern: { kind: "weekly", weekday: "friday" },
-    businessDayPolicy: "previous-business-day",
-  });
-  if (!result.ok || result.value.cadence !== "paycheck") {
-    throw new Error("fixture failed validation");
-  }
-  return {
-    id: "payroll",
-    name: "Payroll",
-    recurrence: result.value,
-    projectedAmountMinorUnits: 200_000,
-    active: true,
-  };
-}
+
 
 describe("amount tolerance is exact at the boundary (§13.2, AC4)", () => {
   it("admits a difference of precisely five percent, above and below", () => {
@@ -437,7 +419,7 @@ describe("no reconciliation outcome moves a boundary (§13.3, AC8)", () => {
   // effect. That holds structurally — reconciliation is not an input to
   // generation — so this exists to fail if anyone ever wires one into the
   // other, which is the only way it could stop being true.
-  const schedule = paycheckSchedule();
+  const schedule = incomeSchedule();
   const horizon = { from: toISODate("2026-08-01"), through: toISODate("2026-09-30") };
   const built = buildPaycheckSchedule(schedule.recurrence, horizon);
   const projected = projectOccurrences(schedule, built.occurrences, []);

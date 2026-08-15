@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import type { PaycheckPattern } from "../schedule/definition.ts";
-import { buildPaycheckSchedule, type PaycheckDefinition } from "../schedule/paycheck-period.ts";
-import { validateCadenceDefinition } from "../schedule/validate.ts";
+import { FRIDAY_WEEKLY } from "../schedule/fixtures.test.ts";
+import { buildPaycheckSchedule } from "../schedule/paycheck-period.ts";
+import { incomeSchedule } from "./fixtures.test.ts";
 import { toISODate } from "../shared/iso-date.ts";
 import {
   countsTowardExpectedIncome,
@@ -15,33 +15,9 @@ import {
   type OccurrenceException,
   type OccurrenceRef,
 } from "./occurrence.ts";
-import type { IncomeSchedule } from "./schedule.ts";
 
-function recurrence(pattern: PaycheckPattern): PaycheckDefinition {
-  const result = validateCadenceDefinition({
-    cadence: "paycheck",
-    pattern,
-    businessDayPolicy: "previous-business-day",
-  });
-  if (!result.ok) {
-    throw new Error(`fixture failed validation: ${result.issues.map((i) => i.code).join(", ")}`);
-  }
-  if (result.value.cadence !== "paycheck") throw new Error("fixture is not a paycheck cadence");
-  return result.value;
-}
 
-function schedule(pattern: PaycheckPattern): IncomeSchedule {
-  return {
-    id: "payroll",
-    name: "Payroll",
-    recurrence: recurrence(pattern),
-    projectedAmountMinorUnits: 200_000,
-    active: true,
-  };
-}
 
-/** Every Friday in the window is a business day, so no adjustment moves a date. */
-const FRIDAY_WEEKLY: PaycheckPattern = { kind: "weekly", weekday: "friday" };
 const HORIZON = { from: toISODate("2026-08-01"), through: toISODate("2026-09-30") };
 
 function ref(unadjustedDate: string, ordinal = 0): OccurrenceRef {
@@ -76,7 +52,7 @@ function expectedOn(date: string, overrides: Partial<ExpectedOccurrence> = {}): 
 }
 
 describe("occurrence exceptions are projection-only (§11, INV-68-21)", () => {
-  const payroll = schedule(FRIDAY_WEEKLY);
+  const payroll = incomeSchedule(FRIDAY_WEEKLY);
   const built = buildPaycheckSchedule(payroll.recurrence, HORIZON);
 
   const allFour: readonly OccurrenceException[] = [
@@ -235,7 +211,7 @@ describe("occurrence exceptions are projection-only (§11, INV-68-21)", () => {
 describe("occurrences sharing an unadjusted date stay distinct (INV-68-16)", () => {
   // Day-31 and last-day both land on 2026-07-31, a configuration CBD-29 treats
   // as legitimate rather than duplicate. They must remain separately targetable.
-  const payroll = schedule({
+  const payroll = incomeSchedule({
     kind: "twice-per-month",
     anchors: [{ kind: "day-of-month", day: 31 }, { kind: "last-day" }],
   });

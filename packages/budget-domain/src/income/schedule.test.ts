@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import { toISODate } from "../shared/iso-date.ts";
-import type { BusinessDayPolicy, PaycheckPattern } from "../schedule/definition.ts";
-import { buildPaycheckSchedule, type PaycheckDefinition } from "../schedule/paycheck-period.ts";
-import { validateCadenceDefinition, type ValidationResult } from "../schedule/validate.ts";
+import type { PaycheckPattern } from "../schedule/definition.ts";
+import { buildPaycheckSchedule } from "../schedule/paycheck-period.ts";
+import { paycheckDefinition } from "../schedule/fixtures.test.ts";
+import type { ValidationResult } from "../schedule/validate.ts";
 import {
   activeSecondarySchedules,
   anchorSchedule,
@@ -13,17 +14,7 @@ import {
   type IncomeScheduleSet,
 } from "./schedule.ts";
 
-function recurrence(
-  pattern: PaycheckPattern,
-  businessDayPolicy: BusinessDayPolicy = "previous-business-day",
-): PaycheckDefinition {
-  const result = validateCadenceDefinition({ cadence: "paycheck", pattern, businessDayPolicy });
-  if (!result.ok) {
-    throw new Error(`fixture failed validation: ${result.issues.map((i) => i.code).join(", ")}`);
-  }
-  if (result.value.cadence !== "paycheck") throw new Error("fixture is not a paycheck cadence");
-  return result.value;
-}
+
 
 // 2026-01-02 is a Friday, which the origin-weekday rule requires of these two.
 const FRIDAY_WEEKLY: PaycheckPattern = { kind: "weekly", weekday: "friday" };
@@ -40,7 +31,7 @@ function income(
   return {
     id,
     name: `${id} income`,
-    recurrence: recurrence(pattern),
+    recurrence: paycheckDefinition(pattern),
     projectedAmountMinorUnits: 250_000,
     active: true,
     ...overrides,

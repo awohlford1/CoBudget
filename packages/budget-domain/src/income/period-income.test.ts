@@ -3,12 +3,11 @@ import { describe, it } from "node:test";
 
 import { buildPaycheckSchedule } from "../schedule/paycheck-period.ts";
 import { periodsFrom } from "../schedule/period.ts";
-import { validateCadenceDefinition } from "../schedule/validate.ts";
+import { incomeSchedule } from "./fixtures.test.ts";
 import { toISODate } from "../shared/iso-date.ts";
 import { identityOf, projectOccurrences, type OccurrenceException } from "./occurrence.ts";
 import { periodIncome } from "./period-income.ts";
 import type { ActualIncome, MatchProvenance, ReconciliationLink } from "./reconciliation.ts";
-import type { IncomeSchedule } from "./schedule.ts";
 
 const MATCHED: MatchProvenance = {
   by: "automatic",
@@ -25,27 +24,12 @@ function provenance() {
   };
 }
 
-/** Weekly on Friday: boundaries 2026-08-07, 08-14, 08-21, 08-28, 09-04. */
-function payroll(): IncomeSchedule {
-  const result = validateCadenceDefinition({
-    cadence: "paycheck",
-    pattern: { kind: "weekly", weekday: "friday" },
-    businessDayPolicy: "previous-business-day",
-  });
-  if (!result.ok || result.value.cadence !== "paycheck") throw new Error("fixture invalid");
-  return {
-    id: "payroll",
-    name: "Payroll",
-    recurrence: result.value,
-    projectedAmountMinorUnits: 200_000,
-    active: true,
-  };
-}
+
 
 const HORIZON = { from: toISODate("2026-08-01"), through: toISODate("2026-09-30") };
 
 function setUp(exceptions: readonly OccurrenceException[] = []) {
-  const schedule = payroll();
+  const schedule = incomeSchedule();
   const built = buildPaycheckSchedule(schedule.recurrence, HORIZON);
   const occurrences = projectOccurrences(schedule, built.occurrences, exceptions);
   const periods = periodsFrom(built.boundaries, toISODate("2026-08-07"), 3);

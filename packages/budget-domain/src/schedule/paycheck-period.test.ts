@@ -3,28 +3,16 @@ import { describe, it } from "node:test";
 
 import { addDays, daysBetween, toISODate } from "../shared/iso-date.ts";
 import { HolidayCoverageError } from "./business-day.ts";
-import type { CadenceDefinition, BusinessDayPolicy, PaycheckPattern } from "./definition.ts";
+import type { CadenceDefinition, PaycheckPattern } from "./definition.ts";
 import {
   buildPaycheckSchedule,
   type PaycheckDefinition,
   type PaycheckHorizon,
 } from "./paycheck-period.ts";
 import { periodContaining, periodLengthInDays, periodsFrom, type BudgetPeriod } from "./period.ts";
-import { validateCadenceDefinition } from "./validate.ts";
+import { paycheckDefinition } from "./fixtures.test.ts";
 
-function paycheck(
-  pattern: PaycheckPattern,
-  businessDayPolicy: BusinessDayPolicy = "previous-business-day",
-): PaycheckDefinition {
-  const result = validateCadenceDefinition({ cadence: "paycheck", pattern, businessDayPolicy });
-  if (!result.ok) {
-    throw new Error(`fixture failed validation: ${result.issues.map((i) => i.code).join(", ")}`);
-  }
-  if (result.value.cadence !== "paycheck") {
-    throw new Error("fixture is not a paycheck cadence");
-  }
-  return result.value;
-}
+
 
 function forged(definition: CadenceDefinition): PaycheckDefinition {
   return definition as PaycheckDefinition;
@@ -41,7 +29,7 @@ function span(period: BudgetPeriod): string {
 describe("period formula — CBD-68 §7.3", () => {
   it("runs period n from A[n] through the day before A[n+1]", () => {
     const schedule = buildPaycheckSchedule(
-      paycheck({ kind: "weekly", weekday: "friday" }),
+      paycheckDefinition({ kind: "weekly", weekday: "friday" }),
       horizon("2026-08-01", "2026-09-30"),
     );
     const first = periodContaining(schedule.boundaries, toISODate("2026-08-10"));
@@ -51,7 +39,7 @@ describe("period formula — CBD-68 §7.3", () => {
 
   it("plugs into the shared period helpers unchanged", () => {
     const schedule = buildPaycheckSchedule(
-      paycheck({ kind: "weekly", weekday: "friday" }),
+      paycheckDefinition({ kind: "weekly", weekday: "friday" }),
       horizon("2026-08-01", "2026-10-31"),
     );
     assert.deepEqual(periodsFrom(schedule.boundaries, toISODate("2026-08-07"), 3).map(span), [
@@ -67,7 +55,7 @@ describe("interval recurrence — CBD-68 §9.1", () => {
     // The acceptance criterion states this directly. An origin well before the
     // horizon must still set the phase of every generated occurrence.
     const schedule = buildPaycheckSchedule(
-      paycheck({
+      paycheckDefinition({
         kind: "every-two-weeks",
         weekday: "friday",
         recurrenceOrigin: toISODate("2026-01-02"),
@@ -91,7 +79,7 @@ describe("interval recurrence — CBD-68 §9.1", () => {
     // days after the unadjusted January 1, not after the adjusted date.
     // Otherwise one holiday would permanently shift every future payday.
     const schedule = buildPaycheckSchedule(
-      paycheck({
+      paycheckDefinition({
         kind: "every-two-weeks",
         weekday: "friday",
         recurrenceOrigin: toISODate("2026-01-02"),
@@ -118,7 +106,7 @@ describe("interval recurrence — CBD-68 §9.1", () => {
   it("supports the 1, 2, 3, and 4 week custom interval", () => {
     for (const everyWeeks of [1, 2, 3, 4] as const) {
       const schedule = buildPaycheckSchedule(
-        paycheck({
+        paycheckDefinition({
           kind: "custom-weekly-interval",
           weekday: "wednesday",
           everyWeeks,
@@ -145,7 +133,7 @@ describe("duplicate adjusted anchors — INV-68-17, INV-68-16", () => {
     // previous-business-day they land on July 31 and August 14 respectively —
     // distinct. Use a month where two anchors genuinely collide instead.
     const schedule = buildPaycheckSchedule(
-      paycheck({
+      paycheckDefinition({
         kind: "twice-per-month",
         anchors: [
           { kind: "day-of-month", day: 4 },
@@ -172,7 +160,7 @@ describe("duplicate adjusted anchors — INV-68-17, INV-68-16", () => {
 
   it("never produces a zero-day period", () => {
     const schedule = buildPaycheckSchedule(
-      paycheck({
+      paycheckDefinition({
         kind: "twice-per-month",
         anchors: [
           { kind: "day-of-month", day: 4 },
@@ -193,7 +181,7 @@ describe("duplicate adjusted anchors — INV-68-17, INV-68-16", () => {
 describe("monthly anchors clamp — INV-18", () => {
   it("clamps a 31st anchor and records that it was clamped", () => {
     const schedule = buildPaycheckSchedule(
-      paycheck({ kind: "monthly", anchor: { kind: "day-of-month", day: 31 } }),
+      paycheckDefinition({ kind: "monthly", anchor: { kind: "day-of-month", day: 31 } }),
       horizon("2026-01-01", "2026-04-30"),
     );
     assert.deepEqual(
@@ -208,7 +196,7 @@ describe("monthly anchors clamp — INV-18", () => {
 
   it("supports the last-day anchor", () => {
     const schedule = buildPaycheckSchedule(
-      paycheck({ kind: "monthly", anchor: { kind: "last-day" } }),
+      paycheckDefinition({ kind: "monthly", anchor: { kind: "last-day" } }),
       horizon("2028-01-01", "2028-03-31"),
     );
     assert.deepEqual(
@@ -222,7 +210,7 @@ describe("monthly anchors clamp — INV-18", () => {
 describe("provenance — CBD-68 §10.2", () => {
   it("retains the unadjusted date, policy, reason, and dataset version", () => {
     const schedule = buildPaycheckSchedule(
-      paycheck({ kind: "monthly", anchor: { kind: "day-of-month", day: 4 } }, "previous-business-day"),
+      paycheckDefinition({ kind: "monthly", anchor: { kind: "day-of-month", day: 4 } }, "previous-business-day"),
       horizon("2026-07-01", "2026-07-31"),
     );
     const [occurrence] = schedule.occurrences;
@@ -236,7 +224,7 @@ describe("provenance — CBD-68 §10.2", () => {
 
   it("records no reason when no adjustment was needed", () => {
     const schedule = buildPaycheckSchedule(
-      paycheck({ kind: "monthly", anchor: { kind: "day-of-month", day: 14 } }),
+      paycheckDefinition({ kind: "monthly", anchor: { kind: "day-of-month", day: 14 } }),
       horizon("2026-08-01", "2026-08-31"),
     );
     const [occurrence] = schedule.occurrences;
@@ -253,7 +241,7 @@ describe("horizon and coverage — CBD-68 §10.3", () => {
     assert.throws(
       () =>
         buildPaycheckSchedule(
-          paycheck({ kind: "weekly", weekday: "friday" }),
+          paycheckDefinition({ kind: "weekly", weekday: "friday" }),
           horizon("2030-01-01", "2031-06-30"),
         ),
       HolidayCoverageError,
@@ -264,7 +252,7 @@ describe("horizon and coverage — CBD-68 §10.3", () => {
     assert.throws(
       () =>
         buildPaycheckSchedule(
-          paycheck({ kind: "weekly", weekday: "friday" }),
+          paycheckDefinition({ kind: "weekly", weekday: "friday" }),
           horizon("2026-09-30", "2026-08-01"),
         ),
       /precedes start/u,
@@ -275,7 +263,7 @@ describe("horizon and coverage — CBD-68 §10.3", () => {
     // Unlike the other cadences, a paycheck boundary cannot be derived from
     // arithmetic alone, so answering beyond the horizon would mean inventing it.
     const schedule = buildPaycheckSchedule(
-      paycheck({ kind: "weekly", weekday: "friday" }),
+      paycheckDefinition({ kind: "weekly", weekday: "friday" }),
       horizon("2026-08-01", "2026-08-31"),
     );
     assert.throws(
@@ -329,7 +317,7 @@ describe("the horizon selects by adjusted date, not by calendar anchor", () => {
     // boundary belongs to a horizon starting 2026-03-02 even though its anchor
     // does not.
     const schedule = buildPaycheckSchedule(
-      paycheck(firstOfMonth, "next-business-day"),
+      paycheckDefinition(firstOfMonth, "next-business-day"),
       horizon("2026-03-02", "2026-06-30"),
     );
     assert.equal(schedule.boundaryDates[0], "2026-03-02");
@@ -340,7 +328,7 @@ describe("the horizon selects by adjusted date, not by calendar anchor", () => {
     // Sunday 2026-03-01 becomes Friday 2026-02-27 under previous-business-day,
     // landing inside a horizon that ends 2026-02-28.
     const schedule = buildPaycheckSchedule(
-      paycheck(firstOfMonth, "previous-business-day"),
+      paycheckDefinition(firstOfMonth, "previous-business-day"),
       horizon("2026-01-05", "2026-02-28"),
     );
     assert.equal(schedule.boundaryDates.at(-1), "2026-02-27");
@@ -350,7 +338,7 @@ describe("the horizon selects by adjusted date, not by calendar anchor", () => {
     // The mirror of the above: membership follows the adjusted date in both
     // directions, or the two windows would disagree about the same occurrence.
     const schedule = buildPaycheckSchedule(
-      paycheck(firstOfMonth, "previous-business-day"),
+      paycheckDefinition(firstOfMonth, "previous-business-day"),
       horizon("2026-03-01", "2026-06-30"),
     );
     assert.ok(
@@ -363,12 +351,12 @@ describe("the horizon selects by adjusted date, not by calendar anchor", () => {
   it("agrees with a wider horizon everywhere the two overlap", () => {
     // The general property the three cases above are instances of.
     for (const policy of ["previous-business-day", "next-business-day"] as const) {
-      const wide = buildPaycheckSchedule(paycheck(firstOfMonth, policy), horizon("2026-02-01", "2026-12-31"));
+      const wide = buildPaycheckSchedule(paycheckDefinition(firstOfMonth, policy), horizon("2026-02-01", "2026-12-31"));
       for (const [from, through] of [
         ["2026-03-02", "2026-06-30"],
         ["2026-05-04", "2026-09-30"],
       ] as const) {
-        const narrow = buildPaycheckSchedule(paycheck(firstOfMonth, policy), horizon(from, through));
+        const narrow = buildPaycheckSchedule(paycheckDefinition(firstOfMonth, policy), horizon(from, through));
         assert.deepEqual(
           [...narrow.boundaryDates],
           wide.boundaryDates.filter((d) => d >= from && d <= through),
