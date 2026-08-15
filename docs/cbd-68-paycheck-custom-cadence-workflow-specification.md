@@ -545,14 +545,14 @@ CBD-68 inherits the CBD-67 schedule-workflow roles. Exact provisioning mechanics
 
 | Action | Primary Owner | Co-owner | Collaborator | Viewer | Accountability Partner |
 | --- | --- | --- | --- | --- | --- |
-| View schedule and projections | Yes | Yes | Yes | Only when explicitly provisioned | Yes |
-| View reconciliation and variance history | Yes | Yes | Yes | Only when explicitly provisioned | Yes, excluding restricted security or credential details |
+| View schedule and projections | Yes | Yes | Yes | Only when inherited through current CBD-72 profile | Yes |
+| View reconciliation and variance history | Yes | Yes | Yes | Only when inherited through a profile with complete required actual inputs | Yes, excluding restricted security or credential details |
 | Configure, preview, and confirm paycheck or custom schedule | Yes | Yes | Yes | No | No |
 | Select or change anchor | Yes | Yes | Yes | No | No |
 | Shift, skip, add, or edit projected occurrence | Yes | Yes | Yes | No | No |
 | Confirm or reject a suggested reconciliation | Yes | Yes | Yes | No | No |
 | Manually match or unmatch income | Yes | Yes | Yes | No | No |
-| View detailed audit history | Yes | Yes | As permitted by CBD-12 | Only when explicitly provisioned | Yes, excluding restricted details |
+| View detailed audit history | Yes | Yes | As permitted by CBD-12 | Only within current CBD-72 profile scope | Yes, excluding restricted details |
 
 Rules:
 
@@ -563,9 +563,9 @@ Rules:
 * Permission loss invalidates an open preview or pending mutation.
 * Removing the actor who created a confirmed future change does not cancel that change; an authorized user must cancel it explicitly.
 * Concurrent edits surface a conflict and never silently overwrite confirmed state.
-* Exact grant, revocation, provisioning, and masking mechanics remain CBD-12 scope.
+* Exact Viewer profile/group assignment and invalidation mechanics and fixed role-field boundaries remain CBD-12/CBD-72 scope. Accountability Partner has no resource-level provisioning.
 
-**Decision PD-68-12 / resolved OD-68-08:** Primary Owner, Co-owner, and Collaborator may perform CBD-68 schedule and reconciliation mutations; Viewer and Accountability Partner are read-only subject to provisioning and masking. Approved by Alexander Wohlford on August 12, 2026.
+**Decision PD-68-12 / resolved OD-68-08, amended August 15, 2026 by CBD-72:** Primary Owner, Co-owner, and Collaborator may perform CBD-68 schedule and reconciliation mutations. Viewer is read-only within one current CBD-72 profile and its inherited scope. Accountability Partner is financially read-only across the comprehensive accepted-role resource scope and uses the fixed CBD-72 field boundary; it may create personal firm-alert acknowledgements and attributed comments on supported readable targets, but has no resource-level provisioning or financial mutation authority.
 
 ## 19. Notifications and customer explanations
 
@@ -600,7 +600,7 @@ CBD-68 produces built-in notification events for:
 * Material status changes may create a new notification.
 * Every notification deep-links to an authorized relevant context.
 * Acknowledging a notification never confirms a schedule, reconciles income, skips an occurrence, or changes financial state.
-* Accountability Partners receive only events and detail permitted by provisioning and masking.
+* An active Accountability Partner is eligible for events across the comprehensive accepted-role resource scope; event content uses the fixed CBD-72 field boundary and personal delivery preferences. Partial resource sharing requires Viewer instead.
 * Language is neutral and factual: “Expected income has not been received,” not “You missed a paycheck.”
 * Notifications never imply that income funds categories or increases permitted spending.
 
@@ -758,7 +758,7 @@ Required compatibility characteristics:
 | PD-68-09 | Custom recurrence | Explicit recurrence required | Confirmed; finite/expiration portion superseded by PD-68-14 |
 | PD-68-10 | Occurrence exceptions | Exceptions change projections only; boundary changes use CBD-67 | Confirmed August 12, 2026 |
 | PD-68-11 | Preview integrity | 30-minute lifetime; result-affecting changes and local midnight invalidate; idempotent confirmation | Confirmed August 12, 2026 |
-| PD-68-12 | Permissions | Owner, Co-owner, and Collaborator may mutate; Viewer and Accountability Partner are read-only | Confirmed August 12, 2026 |
+| PD-68-12 | Permissions | Owner, Co-owner, and Collaborator may mutate; Viewer is read-only; Accountability Partner is financially read-only with personal acknowledgements and attributed comments permitted | Confirmed August 12, 2026; terminology clarified August 15, 2026 |
 | PD-68-13 | Notifications | In-app always; email, push, and SMS optional per user and event; custom alerts deferred | Confirmed August 12, 2026 |
 | PD-68-14 | Recurring continuity and bounded customization | Paycheck and custom cadences are repetitive, deterministic, open-ended, and remain authoritative until replaced. Finite/expiring schedules and arbitrary period lists are FF-010. | Confirmed August 12, 2026 |
 | PD-68-15 | Cadence-change adapter and targets | Cadence supplies deterministic natural boundaries; user explicitly reviews proposed full-period targets; CBD-67 governs transition and proration mechanics. Supersedes PD-68-04 in detail. | Confirmed August 12, 2026 |

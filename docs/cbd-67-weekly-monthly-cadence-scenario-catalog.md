@@ -104,7 +104,7 @@ AC references below mean CBD-67-AC01 through CBD-67-AC19.
 | FIN-04 | Stale synchronization | Preview | Informational or blocking | AC15 | Defined |
 | PERM-01 | Role and provisioned-access matrix | All | Permission states | AC09, AC15 | Defined |
 | PERM-02 | Permission lost during workflow | Open workflow | Authorization changed | AC09 | Defined |
-| PERM-03 | Accountability Partner history visibility | Pending and history | Read-only | AC09, AC18 | Defined |
+| PERM-03 | Accountability Partner history visibility | Pending and history | Financially read-only; personal acknowledgements and attributed comments permitted | AC09, AC18 | Defined |
 | REC-01 | Concurrent confirmation | Immediate or future | Same version | AC17 | Defined |
 | REC-02 | Response lost after commit | Any operation | Recovery | AC17 | Defined |
 | REC-03 | Interruption before commit | Any operation | Recovery | AC17 | Defined |
@@ -658,9 +658,9 @@ Using SCN-C-05:
 | --- | --- | --- | --- | --- |
 | Owner | Complete | Complete | Complete subject to underlying account authority | Yes |
 | Co-owner | Complete | Complete | Complete subject to underlying account authority | Yes |
-| Accountability Partner | Complete read-only | Complete read-only, including confirmed pending changes and failures | Complete budget financial picture | No |
-| Viewer with full schedule provision | Provisioned complete schedule view | Only provisioned history and pending information | Only provisioned financial information | No |
-| Viewer with partial financial provision | Provisioned schedule information | Only provisioned history and pending information | Only explicitly provisioned items and totals | No |
+| Accountability Partner | Complete financial read access | Complete financial read access, including confirmed pending changes and failures | Complete budget financial picture; personal acknowledgements and attributed comments permitted | No financial or schedule mutation |
+| Viewer with Planning profile | Complete planning/schedule view | Planning-scope history and pending information | Planned values only; no accounts, transactions, balances, actuals, or actual-derived totals | No |
+| Viewer with Category-group or Account-group profile | Only schedule context inherited for selected groups | Only profile-inherited history and pending information | Only complete profile-supported values and labeled derived output | No |
 | Viewer with no applicable access | No restricted schedule details | No restricted history or pending details | No restricted details, counts, or totals | No |
 
 **Assertions**
@@ -668,7 +668,7 @@ Using SCN-C-05:
 * Restricted financial content appears as one consolidated meaningful masked block.
 * Masking reveals no restricted item count, subtotal, amount, category, or timing.
 * Unavailable actions have accessible explanations and are not represented only by disabled styling.
-* Accountability Partner is never treated as a flexible Viewer and always retains comprehensive read-only schedule visibility.
+* Accountability Partner is never treated as a flexible Viewer and always retains comprehensive, financially read-only schedule visibility; personal acknowledgements and attributed comments remain permitted.
 
 ### PERM-02 — Permission changes during an open workflow
 
@@ -828,7 +828,7 @@ Generated allocation sets must verify:
 
 Exercise every relevant combination of:
 
-* Owner, Co-owner, Accountability Partner, and each Viewer provisioning level;
+* Owner, Co-owner, Accountability Partner, and each Viewer profile/no-profile state;
 * active, active-with-pending, executing, failed, recovery, and historical states;
 * current, stale, unavailable, incomplete, and permission-filtered preview data;
 * interruption before and after commit;
@@ -856,6 +856,6 @@ If a new blocking ambiguity is found, assign a stable scenario or open-question 
 | August 11, 2026 | Alexander Wohlford — Product Owner | Final completion review of old-period preview presentation, AC13/AC14 evidence, AC16 confirmation assertions, cross-document consistency, and deferred boundaries | All closure findings resolved; technical design and executable implementation tests remain separate future delivery work | Version 1.0 Approved |
 | August 11, 2026 | Alexander Wohlford with Claude assistance — AI-assisted critical audit | Independent verification of scenario and invariant counts, recomputation of calendar and proration arithmetic in CALC-01 and SCN-C-01/03/04/05, and review of the v1.0 approval chain | Counts and arithmetic verified correct; the 57 scenario IDs were found to span two undocumented levels of depth, and v1.0 was authored, reviewed, and approved by the same person with no independent human review | Coverage-depth note added to Section 1; version 1.1 returned to In Review. See RF-07 in the traceability record. |
 | August 11, 2026 | Alexander Wohlford — Product Owner | Approval decision on reviewer independence for this documentation-scope subtask | The drafts under audit were authored by Codex rather than by the approver; the Product Owner reviewed them and the AI-assisted audit supplied an independent critical pass over work the approver did not write. Accepted as sufficient reviewer separation. The independent reviewer was an AI system, not a second human. | Version 1.2 Approved under the amended §7.7 rule in the traceability record. RF-07 resolved and REV-01 closed. |
-| August 12, 2026 | Alexander Wohlford — Product Owner, with Codex assistance | Permission consistency against the authoritative CBD-67 matrix and CBD-68 PD-68-12 | REC-04 and permission outcomes now include Collaborators as authorized schedule editors; Viewer and Accountability Partner remain read-only. | Version 1.3 Approved. |
+| August 12, 2026 | Alexander Wohlford — Product Owner, with Codex assistance | Permission consistency against the authoritative CBD-67 matrix and CBD-68 PD-68-12 | REC-04 and permission outcomes now include Collaborators as authorized schedule editors; Viewer remains read-only and Accountability Partner remains financially read-only with personal acknowledgements and attributed comments separately permitted. | Version 1.3 Approved; terminology clarified August 15, 2026. |
 | August 12, 2026 | Alexander Wohlford — Product Owner, with Codex assistance | Cadence-neutral adapter and proposed-target review | Added ADAPT-01–04 for mid-period and boundary-aligned paycheck/custom transitions and explicit full-period target review. | Version 1.4 Approved. |
 | August 12, 2026 | Alexander Wohlford — Product Owner, with Codex assistance | Matching-scope reconciliation | Recognized CBD-68 as authoritative for MVP one-to-one income matching and narrowed the FF-004 scenario boundary to projected bills, pending interaction, complex cardinality, advanced confidence, and additional resolution behavior. | Version 1.5 Approved. |
