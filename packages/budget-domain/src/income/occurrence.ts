@@ -21,6 +21,12 @@
  * Callers exclude skipped occurrences from a total using
  * {@link countsTowardExpectedIncome}.
  *
+ * **Exceptions carry their own audit evidence.** §11 requires each one to store
+ * before and after values, actor, timestamp, schedule version, and an optional
+ * reason. {@link ExceptionProvenance} is a required field rather than a
+ * convention, so an exception cannot be constructed without saying who made it
+ * and against which schedule version. None of it is computed with here.
+ *
  * **Two statuses are inputs, not derivations.**
  *
  * - `reconciled` and `reconciled-late` depend on a confirmed match, which CBD-101
@@ -77,28 +83,77 @@ export interface OccurrenceRef {
 }
 
 /**
+ * The evidence §11 requires every exception to carry.
+ *
+ * Held on the exception itself rather than left to a separate audit store, for
+ * the same reason `BusinessDayAdjustment` carries its dataset version: a
+ * requirement that lives only in a convention is one a caller can skip without
+ * anything noticing. Making it a required field means an exception cannot be
+ * constructed anonymously.
+ *
+ * Nothing here is computed with. `recordedAt` is an ISO 8601 instant supplied by
+ * the edge and is deliberately opaque — the domain never parses, orders, or
+ * compares it, so it is typed as the string it is rather than dressed up as a
+ * date the domain understands. `scheduleVersionId` links the exception to the
+ * lineage CBD-28 owns, which is what makes it interpretable once the recurring
+ * rule has moved on.
+ */
+export interface ExceptionProvenance {
+  readonly actorId: string;
+  /** ISO 8601 instant from the edge. Opaque here; never ordered or parsed. */
+  readonly recordedAt: string;
+  /** The schedule version in force when the exception was applied. */
+  readonly scheduleVersionId: string;
+  /** §11 makes the reason optional, so absence is `null` rather than "". */
+  readonly reason: string | null;
+}
+
+/**
  * The four projection-only adjustments in §11.
  *
  * There is deliberately no `dismiss` or `not-expected` member. §12 states that
  * no such action exists and that Skip expresses the same intention reversibly,
  * so the closed union is what makes that true rather than an interface
  * convention that a later screen could break.
+ *
+ * Shift and amount-override record what they moved *from* as well as to. That
+ * looks redundant — the generated occurrence still holds the original — but it
+ * is not: §11 requires before and after values to be stored, and once a later
+ * schedule version changes the recurring rule, regenerating no longer
+ * reproduces the value the user actually changed. The stored before-value is
+ * the only self-contained record. Skip has none because suppression has no
+ * "after" value, and extra has none because nothing preceded it.
  */
 export type OccurrenceException =
-  | { readonly kind: "shift"; readonly id: string; readonly target: OccurrenceRef; readonly toDate: ISODate }
-  | { readonly kind: "skip"; readonly id: string; readonly target: OccurrenceRef }
+  | {
+      readonly kind: "shift";
+      readonly id: string;
+      readonly target: OccurrenceRef;
+      readonly fromDate: ISODate;
+      readonly toDate: ISODate;
+      readonly provenance: ExceptionProvenance;
+    }
+  | {
+      readonly kind: "skip";
+      readonly id: string;
+      readonly target: OccurrenceRef;
+      readonly provenance: ExceptionProvenance;
+    }
   | {
       readonly kind: "extra";
       readonly id: string;
       readonly scheduleId: string;
       readonly date: ISODate;
       readonly amountMinorUnits: number;
+      readonly provenance: ExceptionProvenance;
     }
   | {
       readonly kind: "amount-override";
       readonly id: string;
       readonly target: OccurrenceRef;
+      readonly fromAmountMinorUnits: number;
       readonly amountMinorUnits: number;
+      readonly provenance: ExceptionProvenance;
     };
 
 /** Where an expected occurrence came from. */

@@ -1,4 +1,5 @@
 export type {
+  ExceptionProvenance,
   ExpectedOccurrence,
   OccurrenceException,
   OccurrenceOrigin,

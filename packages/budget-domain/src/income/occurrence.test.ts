@@ -10,6 +10,7 @@ import {
   countsTowardForwardProjection,
   occurrenceStatus,
   projectOccurrences,
+  type ExceptionProvenance,
   type ExpectedOccurrence,
   type OccurrenceException,
   type OccurrenceRef,
@@ -47,6 +48,16 @@ function ref(unadjustedDate: string, ordinal = 0): OccurrenceRef {
   return { scheduleId: "payroll", unadjustedDate: toISODate(unadjustedDate), ordinal };
 }
 
+function provenance(overrides: Partial<ExceptionProvenance> = {}): ExceptionProvenance {
+  return {
+    actorId: "ACTOR-01",
+    recordedAt: "2026-08-15T09:00:00-04:00",
+    scheduleVersionId: "SV-3",
+    reason: null,
+    ...overrides,
+  };
+}
+
 /**
  * A lifecycle fixture. Uses an `extra` origin so the status tests need no
  * generated occurrence — the status depends only on the projected date.
@@ -68,15 +79,30 @@ describe("occurrence exceptions are projection-only (§11, INV-68-21)", () => {
   const built = buildPaycheckSchedule(payroll.recurrence, HORIZON);
 
   const allFour: readonly OccurrenceException[] = [
-    { kind: "shift", id: "e1", target: ref("2026-08-07"), toDate: toISODate("2026-08-10") },
-    { kind: "skip", id: "e2", target: ref("2026-08-14") },
-    { kind: "amount-override", id: "e3", target: ref("2026-08-21"), amountMinorUnits: 150_000 },
+    {
+      kind: "shift",
+      id: "e1",
+      target: ref("2026-08-07"),
+      fromDate: toISODate("2026-08-07"),
+      toDate: toISODate("2026-08-10"),
+      provenance: provenance({ reason: "Employer moved the run date" }),
+    },
+    { kind: "skip", id: "e2", target: ref("2026-08-14"), provenance: provenance() },
+    {
+      kind: "amount-override",
+      id: "e3",
+      target: ref("2026-08-21"),
+      fromAmountMinorUnits: 200_000,
+      amountMinorUnits: 150_000,
+      provenance: provenance(),
+    },
     {
       kind: "extra",
       id: "e4",
       scheduleId: "payroll",
       date: toISODate("2026-08-18"),
       amountMinorUnits: 50_000,
+      provenance: provenance({ reason: "One-off bonus" }),
     },
   ];
 
@@ -96,6 +122,21 @@ describe("occurrence exceptions are projection-only (§11, INV-68-21)", () => {
     assert.ok(
       adjusted.some((o) => o.amountMinorUnits === 150_000),
       "override changed an amount",
+    );
+  });
+
+  it("keeps each exception's audit evidence reachable from the occurrence (§11)", () => {
+    const adjusted = projectOccurrences(payroll, built.occurrences, allFour);
+    const shifted = adjusted.find((o) => o.date === "2026-08-10");
+    const applied = allFour.find((e) => e.id === shifted?.appliedExceptionIds[0]);
+
+    assert.equal(applied?.provenance.actorId, "ACTOR-01");
+    assert.equal(applied?.provenance.scheduleVersionId, "SV-3");
+    assert.equal(applied?.provenance.reason, "Employer moved the run date");
+    assert.equal(
+      applied?.kind === "shift" ? applied.fromDate : null,
+      "2026-08-07",
+      "the before value is stored, not only inferable from the generated occurrence",
     );
   });
 
@@ -142,6 +183,7 @@ describe("occurrence exceptions are projection-only (§11, INV-68-21)", () => {
       kind: "skip",
       id: "other",
       target: { scheduleId: "freelance", unadjustedDate: toISODate("2026-08-14"), ordinal: 0 },
+      provenance: provenance(),
     };
     assert.deepEqual(
       projectOccurrences(payroll, built.occurrences, [foreign]),
@@ -171,7 +213,7 @@ describe("occurrences sharing an unadjusted date stay distinct (INV-68-16)", () 
 
   it("targets one of them by ordinal without touching the other", () => {
     const projected = projectOccurrences(payroll, built.occurrences, [
-      { kind: "skip", id: "s", target: ref("2026-07-31", 0) },
+      { kind: "skip", id: "s", target: ref("2026-07-31", 0), provenance: provenance() },
     ]);
     assert.deepEqual(
       projected.map((o) => o.skipped),
@@ -269,8 +311,33 @@ describe("which totals a status belongs to (§12)", () => {
 
 /** Compile-time assertions. Never executed — `tsc --noEmit` is the assertion. */
 export function _noDismissAction(): void {
-  // @ts-expect-error §12 confirms no Dismiss, Mark not expected, or Not
-  // received action exists; Skip expresses that intention reversibly.
-  const dismissed: OccurrenceException = { kind: "dismiss", id: "x", target: ref("2026-08-07") };
+  const dismissed: OccurrenceException = {
+    // @ts-expect-error §12 confirms no Dismiss, Mark not expected, or Not
+    // received action exists; Skip expresses that intention reversibly.
+    kind: "dismiss",
+    id: "x",
+    target: ref("2026-08-07"),
+    provenance: provenance(),
+  };
   void dismissed;
+}
+
+export function _provenanceIsRequired(): void {
+  // @ts-expect-error §11 requires actor, timestamp, schedule version, and an
+  // optional reason on every exception, so one cannot be created anonymously.
+  const anonymous: OccurrenceException = { kind: "skip", id: "x", target: ref("2026-08-07") };
+  void anonymous;
+}
+
+export function _beforeValuesAreRequired(): void {
+  // @ts-expect-error §11 requires the before value as well as the after, so a
+  // shift cannot record only where it moved to.
+  const oneSided: OccurrenceException = {
+    kind: "shift",
+    id: "x",
+    target: ref("2026-08-07"),
+    toDate: toISODate("2026-08-10"),
+    provenance: provenance(),
+  };
+  void oneSided;
 }
