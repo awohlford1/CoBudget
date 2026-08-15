@@ -190,6 +190,29 @@ export type OccurrenceStatus =
   | "replaced";
 
 /**
+ * Every projected amount must stay a positive whole number of minor units.
+ *
+ * `IncomeSchedule` already guarantees this for the recurring amount, but an
+ * amount-override or an extra occurrence supplies its own and nothing checked
+ * it. A zero or negative projection is not merely odd: §13.2 computes its
+ * reconciliation tolerance from the expected amount and requires it to be
+ * positive, so the failure would otherwise surface much later, inside matching,
+ * pointing at the wrong thing.
+ *
+ * Throws rather than clamping or dropping the exception. A projection silently
+ * corrected to something the user did not ask for is the worse outcome.
+ */
+function assertProjectedAmount(amountMinorUnits: number, exceptionId: string | null): void {
+  if (Number.isInteger(amountMinorUnits) && amountMinorUnits > 0) return;
+
+  const blame = exceptionId === null ? "the schedule" : `exception ${JSON.stringify(exceptionId)}`;
+  throw new RangeError(
+    `projected amount must be a positive integer of minor units, received ` +
+      `${String(amountMinorUnits)} from ${blame}. Validate the exception before projecting.`,
+  );
+}
+
+/**
  * Apply one schedule's exceptions to the occurrences CBD-29 generated for it.
  *
  * Exceptions belonging to other schedules are ignored rather than rejected, so a
@@ -212,6 +235,7 @@ export function projectOccurrences(
 
     let date = occurrence.adjustedDate;
     let amountMinorUnits = schedule.projectedAmountMinorUnits;
+    let amountFrom: string | null = null;
     let skipped = false;
     const appliedExceptionIds: string[] = [];
 
@@ -229,9 +253,13 @@ export function projectOccurrences(
       appliedExceptionIds.push(exception.id);
       if (exception.kind === "shift") date = exception.toDate;
       else if (exception.kind === "skip") skipped = true;
-      else amountMinorUnits = exception.amountMinorUnits;
+      else {
+        amountMinorUnits = exception.amountMinorUnits;
+        amountFrom = exception.id;
+      }
     }
 
+    assertProjectedAmount(amountMinorUnits, amountFrom);
     projected.push({
       scheduleId: schedule.id,
       date,
@@ -244,6 +272,7 @@ export function projectOccurrences(
 
   for (const exception of exceptions) {
     if (exception.kind !== "extra" || exception.scheduleId !== schedule.id) continue;
+    assertProjectedAmount(exception.amountMinorUnits, exception.id);
     projected.push({
       scheduleId: schedule.id,
       date: exception.date,

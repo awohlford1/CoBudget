@@ -178,6 +178,45 @@ describe("occurrence exceptions are projection-only (§11, INV-68-21)", () => {
     assert.deepEqual(projectOccurrences(payroll, built.occurrences, []), base);
   });
 
+  it("refuses an override or extra that is not a positive whole amount", () => {
+    // §13.2 computes its reconciliation tolerance from the expected amount and
+    // requires it to be positive, so a zero, negative, or fractional projection
+    // must fail here rather than much later inside matching.
+    for (const amount of [0, -1, 1250.5, Number.NaN]) {
+      assert.throws(
+        () =>
+          projectOccurrences(payroll, built.occurrences, [
+            {
+              kind: "amount-override",
+              id: "bad",
+              target: ref("2026-08-21"),
+              fromAmountMinorUnits: 200_000,
+              amountMinorUnits: amount,
+              provenance: provenance(),
+            },
+          ]),
+        /projected amount must be a positive integer.*exception "bad"/su,
+        `override ${amount}`,
+      );
+
+      assert.throws(
+        () =>
+          projectOccurrences(payroll, built.occurrences, [
+            {
+              kind: "extra",
+              id: "bad-extra",
+              scheduleId: "payroll",
+              date: toISODate("2026-08-18"),
+              amountMinorUnits: amount,
+              provenance: provenance(),
+            },
+          ]),
+        /projected amount must be a positive integer.*exception "bad-extra"/su,
+        `extra ${amount}`,
+      );
+    }
+  });
+
   it("ignores exceptions belonging to another schedule", () => {
     const foreign: OccurrenceException = {
       kind: "skip",
