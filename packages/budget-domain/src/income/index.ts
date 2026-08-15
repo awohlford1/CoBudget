@@ -17,6 +17,12 @@ export {
   sameIdentity,
 } from "./occurrence.ts";
 export type {
+  CrossPeriodFulfilment,
+  PeriodIncome,
+  PeriodIncomeOptions,
+} from "./period-income.ts";
+export { periodIncome } from "./period-income.ts";
+export type {
   ActualIncome,
   CandidatePair,
   CandidateTier,

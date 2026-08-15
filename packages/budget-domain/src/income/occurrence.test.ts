@@ -67,6 +67,7 @@ function expectedOn(date: string, overrides: Partial<ExpectedOccurrence> = {}): 
     scheduleId: "payroll",
     date: toISODate(date),
     amountMinorUnits: 200_000,
+    priorAmountMinorUnits: null,
     origin: { kind: "extra", exceptionId: "fixture" },
     skipped: false,
     appliedExceptionIds: [],

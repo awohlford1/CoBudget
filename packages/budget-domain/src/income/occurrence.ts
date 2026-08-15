@@ -212,6 +212,18 @@ export interface ExpectedOccurrence {
   /** The projected date. A shift moves this; the origin keeps the original. */
   readonly date: ISODate;
   readonly amountMinorUnits: number;
+  /**
+   * What this occurrence was projected at before any exception changed it, or
+   * `null` for one an `extra` created, since nothing preceded it.
+   *
+   * §12.1 reports a "prior expectation / forecast revision" — the historical
+   * projected values changed by skips and amount overrides — and only the
+   * projection has both figures in hand. Taken from the override's recorded
+   * before-value rather than the schedule's current amount, because the two
+   * diverge once the recurring amount changes after the exception was written,
+   * and §11 makes the stored before-value the authoritative one.
+   */
+  readonly priorAmountMinorUnits: number | null;
   readonly origin: OccurrenceOrigin;
   readonly skipped: boolean;
   /** Exceptions applied to this occurrence, for audit display and reversal. */
@@ -275,6 +287,7 @@ export function projectOccurrences(
 
     let date = occurrence.adjustedDate;
     let amountMinorUnits = schedule.projectedAmountMinorUnits;
+    let priorAmountMinorUnits = schedule.projectedAmountMinorUnits;
     let amountFrom: string | null = null;
     let skipped = false;
     const appliedExceptionIds: string[] = [];
@@ -295,6 +308,7 @@ export function projectOccurrences(
       else if (exception.kind === "skip") skipped = true;
       else {
         amountMinorUnits = exception.amountMinorUnits;
+        priorAmountMinorUnits = exception.fromAmountMinorUnits;
         amountFrom = exception.id;
       }
     }
@@ -304,6 +318,7 @@ export function projectOccurrences(
       scheduleId: schedule.id,
       date,
       amountMinorUnits,
+      priorAmountMinorUnits,
       origin: { kind: "generated", ordinal, generated: occurrence },
       skipped,
       appliedExceptionIds,
@@ -317,6 +332,7 @@ export function projectOccurrences(
       scheduleId: schedule.id,
       date: exception.date,
       amountMinorUnits: exception.amountMinorUnits,
+      priorAmountMinorUnits: null,
       origin: { kind: "extra", exceptionId: exception.id },
       skipped: false,
       appliedExceptionIds: [exception.id],

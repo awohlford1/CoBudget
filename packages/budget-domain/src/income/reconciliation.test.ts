@@ -33,6 +33,7 @@ function expectedOn(date: string, amountMinorUnits = 200_000, skipped = false): 
     scheduleId: "payroll",
     date: toISODate(date),
     amountMinorUnits,
+    priorAmountMinorUnits: null,
     origin: { kind: "extra", exceptionId: "fixture" },
     skipped,
     appliedExceptionIds: [],
