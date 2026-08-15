@@ -13,6 +13,20 @@ export {
   occurrenceStatus,
   projectOccurrences,
 } from "./occurrence.ts";
+export type {
+  ActualIncome,
+  CandidateTier,
+  MatchContext,
+  MatchVariance,
+} from "./reconciliation.ts";
+export {
+  AMOUNT_TOLERANCE_PERCENT,
+  SUGGESTION_WINDOW_BUSINESS_DAYS,
+  classifyCandidate,
+  varianceOf,
+  withinAmountTolerance,
+  withinDateWindow,
+} from "./reconciliation.ts";
 export type { IncomeSchedule, IncomeScheduleSet } from "./schedule.ts";
 export {
   activeSecondarySchedules,
