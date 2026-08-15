@@ -29,7 +29,14 @@ export { validateCadenceDefinition, validateScheduleVersion } from "./validate.t
 
 export { parseCadenceDefinition, parseScheduleVersion } from "./parse.ts";
 
-export type { BudgetPeriod, WeeklyOrMonthlyDefinition } from "./period.ts";
+export type { CustomFixedLengthDefinition } from "./custom-period.ts";
+export {
+  customBoundaries,
+  customBoundaryAtOrBefore,
+  customNextBoundaryAfter,
+} from "./custom-period.ts";
+
+export type { BoundaryFunctions, BudgetPeriod, WeeklyOrMonthlyDefinition } from "./period.ts";
 export {
   MAX_GENERATED_PERIODS,
   SETUP_PREVIEW_PERIOD_COUNT,
@@ -41,4 +48,5 @@ export {
   periodLengthInDays,
   periodsFrom,
   setupPreview,
+  weeklyMonthlyBoundaries,
 } from "./period.ts";

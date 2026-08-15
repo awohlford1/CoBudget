@@ -15,6 +15,7 @@ import {
   periodLengthInDays,
   periodsFrom,
   setupPreview,
+  weeklyMonthlyBoundaries,
   type BudgetPeriod,
   type WeeklyOrMonthlyDefinition,
 } from "./period.ts";
@@ -57,24 +58,52 @@ function span(period: BudgetPeriod): string {
   return `${period.start}..${period.end}`;
 }
 
+/**
+ * The generic helpers take a {@link BoundaryFunctions} (CBD-67 §8.10) so that all
+ * four cadences share one implementation. These wrappers keep the test bodies
+ * reading in terms of a definition, which is what each assertion is about.
+ */
+function containing(definition: WeeklyOrMonthlyDefinition, date: ISODate): BudgetPeriod {
+  return periodContaining(weeklyMonthlyBoundaries(definition), date);
+}
+
+function afterOf(definition: WeeklyOrMonthlyDefinition, period: BudgetPeriod): BudgetPeriod {
+  return periodAfter(weeklyMonthlyBoundaries(definition), period);
+}
+
+function periodsOf(
+  definition: WeeklyOrMonthlyDefinition,
+  from: ISODate,
+  count: number,
+): readonly BudgetPeriod[] {
+  return periodsFrom(weeklyMonthlyBoundaries(definition), from, count);
+}
+
+function previewOf(
+  definition: WeeklyOrMonthlyDefinition,
+  budgetSpaceDate: ISODate,
+): readonly BudgetPeriod[] {
+  return setupPreview(weeklyMonthlyBoundaries(definition), budgetSpaceDate);
+}
+
 describe("weekly periods — CBD-67 §5.2 worked example", () => {
   // The specification states these outcomes directly for a budget-space date of
   // Wednesday, August 12, 2026, so they are used verbatim rather than invented.
   const budgetSpaceDate = toISODate("2026-08-12");
 
   it("matches the published anchor table", () => {
-    assert.equal(span(periodContaining(weekly("monday"), budgetSpaceDate)), "2026-08-10..2026-08-16");
+    assert.equal(span(containing(weekly("monday"), budgetSpaceDate)), "2026-08-10..2026-08-16");
     assert.equal(
-      span(periodContaining(weekly("wednesday"), budgetSpaceDate)),
+      span(containing(weekly("wednesday"), budgetSpaceDate)),
       "2026-08-12..2026-08-18",
     );
-    assert.equal(span(periodContaining(weekly("friday"), budgetSpaceDate)), "2026-08-07..2026-08-13");
+    assert.equal(span(containing(weekly("friday"), budgetSpaceDate)), "2026-08-07..2026-08-13");
   });
 
   it("opens the complete current period even when it began before today (§5.2)", () => {
     // A Friday anchor on a Wednesday means the current period started six days
     // ago. Setup must open that whole period, not a partial one from today.
-    const period = periodContaining(weekly("friday"), budgetSpaceDate);
+    const period = containing(weekly("friday"), budgetSpaceDate);
     assert.equal(period.start, "2026-08-07");
     assert.equal(periodLengthInDays(period), 7);
   });
@@ -89,12 +118,12 @@ describe("weekly periods — CBD-67 §5.2 worked example", () => {
       "saturday",
       "sunday",
     ] as const) {
-      assert.equal(periodLengthInDays(periodContaining(weekly(anchor), budgetSpaceDate)), 7);
+      assert.equal(periodLengthInDays(containing(weekly(anchor), budgetSpaceDate)), 7);
     }
   });
 
   it("treats a date that is itself a boundary as starting its own period (INV-69-20)", () => {
-    const period = periodContaining(weekly("monday"), toISODate("2026-08-10"));
+    const period = containing(weekly("monday"), toISODate("2026-08-10"));
     assert.equal(period.start, "2026-08-10");
     assert.equal(period.end, "2026-08-16");
   });
@@ -112,7 +141,7 @@ describe("monthly clamping — CBD-67 INV-18", () => {
 
   it("returns to the saved date in the next month that contains it", () => {
     // February clamps to 28; March must go back to 31 rather than staying at 28.
-    const periods = periodsFrom(onDay(31), toISODate("2026-01-31"), 4).map(span);
+    const periods = periodsOf(onDay(31), toISODate("2026-01-31"), 4).map(span);
     assert.deepEqual(periods, [
       "2026-01-31..2026-02-27",
       "2026-02-28..2026-03-30",
@@ -132,7 +161,7 @@ describe("monthly clamping — CBD-67 INV-18", () => {
     // are modelled as different anchors rather than the same number.
     assert.equal(boundaryAtOrBefore(lastDay, toISODate("2026-01-31")), "2026-01-31");
     assert.equal(boundaryAtOrBefore(lastDay, toISODate("2026-02-28")), "2026-02-28");
-    assert.deepEqual(periodsFrom(lastDay, toISODate("2026-01-31"), 3).map(span), [
+    assert.deepEqual(periodsOf(lastDay, toISODate("2026-01-31"), 3).map(span), [
       "2026-01-31..2026-02-27",
       "2026-02-28..2026-03-30",
       "2026-03-31..2026-04-29",
@@ -140,7 +169,7 @@ describe("monthly clamping — CBD-67 INV-18", () => {
   });
 
   it("handles a first-of-month anchor across a year boundary", () => {
-    assert.deepEqual(periodsFrom(onDay(1), toISODate("2026-12-15"), 2).map(span), [
+    assert.deepEqual(periodsOf(onDay(1), toISODate("2026-12-15"), 2).map(span), [
       "2026-12-01..2026-12-31",
       "2027-01-01..2027-01-31",
     ]);
@@ -166,15 +195,15 @@ describe("contiguity and coverage — INV-02, INV-04, INV-05", () => {
     for (const definition of definitions) {
       let date = toISODate("2026-01-01");
       for (let offset = 0; offset < 400; offset += 1) {
-        const period = periodContaining(definition, date);
+        const period = containing(definition, date);
 
         assert.ok(periodContains(period, date), `${date} not inside its own period`);
         // Both ends of a period must resolve back to that same period, which is
         // what "exactly one" means operationally.
-        assert.deepEqual(periodContaining(definition, period.start), period);
-        assert.deepEqual(periodContaining(definition, period.end), period);
+        assert.deepEqual(containing(definition, period.start), period);
+        assert.deepEqual(containing(definition, period.end), period);
         // No gap and no overlap: the next day after the end starts the next period.
-        const next = periodContaining(definition, addDays(period.end, 1));
+        const next = containing(definition, addDays(period.end, 1));
         assert.equal(next.start, addDays(period.end, 1));
 
         date = addDays(date, 1);
@@ -184,9 +213,9 @@ describe("contiguity and coverage — INV-02, INV-04, INV-05", () => {
 
   it("crosses February 29 without gap or duplication (INV-69-19)", () => {
     for (const definition of definitions) {
-      const before = periodContaining(definition, toISODate("2028-02-28"));
-      const leapDay = periodContaining(definition, toISODate("2028-02-29"));
-      const after = periodContaining(definition, toISODate("2028-03-01"));
+      const before = containing(definition, toISODate("2028-02-28"));
+      const leapDay = containing(definition, toISODate("2028-02-29"));
+      const after = containing(definition, toISODate("2028-03-01"));
       for (const period of [before, leapDay, after]) {
         assert.ok(periodContains(period, period.start));
       }
@@ -196,10 +225,10 @@ describe("contiguity and coverage — INV-02, INV-04, INV-05", () => {
 
   it("keeps periodAfter consistent with recomputing from the next day", () => {
     for (const definition of definitions) {
-      const period = periodContaining(definition, toISODate("2026-05-20"));
+      const period = containing(definition, toISODate("2026-05-20"));
       assert.deepEqual(
-        periodAfter(definition, period),
-        periodContaining(definition, addDays(period.end, 1)),
+        afterOf(definition, period),
+        containing(definition, addDays(period.end, 1)),
       );
     }
   });
@@ -211,15 +240,15 @@ describe("daylight saving — CBD-69 INV-69-18", () => {
     // Date-only arithmetic should be blind to both, and this test exists to
     // keep it that way if the implementation ever changes.
     for (const transition of ["2026-03-08", "2026-11-01"]) {
-      const period = periodContaining(weekly("monday"), toISODate(transition));
+      const period = containing(weekly("monday"), toISODate(transition));
       assert.equal(periodLengthInDays(period), 7, `week containing ${transition}`);
       assert.ok(periodContains(period, toISODate(transition)));
     }
   });
 
   it("gives March and November their true lengths under a first-of-month anchor", () => {
-    assert.equal(periodLengthInDays(periodContaining(onDay(1), toISODate("2026-03-08"))), 31);
-    assert.equal(periodLengthInDays(periodContaining(onDay(1), toISODate("2026-11-01"))), 30);
+    assert.equal(periodLengthInDays(containing(onDay(1), toISODate("2026-03-08"))), 31);
+    assert.equal(periodLengthInDays(containing(onDay(1), toISODate("2026-11-01"))), 30);
   });
 });
 
@@ -241,13 +270,13 @@ describe("boundary adapter contract — CBD-67 §8.10", () => {
   it("supplies the first periods after a transition date (INV-29 example)", () => {
     // CBD-67 INV-29 works this through: a change to weekly-on-Monday effective
     // Wednesday June 17 puts the first full weekly period at June 22-28.
-    assert.equal(span(periodContaining(weekly("monday"), toISODate("2026-06-22"))), "2026-06-22..2026-06-28");
+    assert.equal(span(containing(weekly("monday"), toISODate("2026-06-22"))), "2026-06-22..2026-06-28");
   });
 });
 
 describe("setup preview — CBD-67 §5.4", () => {
   it("returns the current period plus the next three", () => {
-    const preview = setupPreview(weekly("monday"), toISODate("2026-08-12"));
+    const preview = previewOf(weekly("monday"), toISODate("2026-08-12"));
     assert.equal(preview.length, SETUP_PREVIEW_PERIOD_COUNT);
     assert.deepEqual(preview.map(span), [
       "2026-08-10..2026-08-16",
@@ -258,7 +287,7 @@ describe("setup preview — CBD-67 §5.4", () => {
   });
 
   it("is contiguous across the whole preview", () => {
-    const preview = setupPreview(onDay(31), toISODate("2026-01-15"));
+    const preview = previewOf(onDay(31), toISODate("2026-01-15"));
     for (let index = 1; index < preview.length; index += 1) {
       const previous = preview[index - 1];
       const current = preview[index];
@@ -268,8 +297,8 @@ describe("setup preview — CBD-67 §5.4", () => {
   });
 
   it("rejects a negative or fractional count", () => {
-    assert.throws(() => periodsFrom(weekly("monday"), toISODate("2026-08-12"), -1), RangeError);
-    assert.throws(() => periodsFrom(weekly("monday"), toISODate("2026-08-12"), 1.5), RangeError);
+    assert.throws(() => periodsOf(weekly("monday"), toISODate("2026-08-12"), -1), RangeError);
+    assert.throws(() => periodsOf(weekly("monday"), toISODate("2026-08-12"), 1.5), RangeError);
   });
 });
 
@@ -280,15 +309,15 @@ describe("resolution is computed, never stored — CBD-67 INV-22", () => {
     // that did not run, so this asserts the property the invariant protects.
     const definition = onDay(15);
     const date = toISODate("2026-08-14");
-    const first = periodContaining(definition, date);
+    const first = containing(definition, date);
 
     // Interleave unrelated calls that would disturb any hidden state.
-    periodContaining(definition, toISODate("2027-01-01"));
-    periodsFrom(weekly("sunday"), toISODate("2020-06-06"), 12);
-    periodContaining(weekly("monday"), toISODate("2026-08-14"));
+    containing(definition, toISODate("2027-01-01"));
+    periodsOf(weekly("sunday"), toISODate("2020-06-06"), 12);
+    containing(weekly("monday"), toISODate("2026-08-14"));
 
-    assert.deepEqual(periodContaining(definition, date), first);
-    assert.deepEqual(periodContaining(definition, date), first);
+    assert.deepEqual(containing(definition, date), first);
+    assert.deepEqual(containing(definition, date), first);
   });
 });
 
@@ -298,7 +327,7 @@ describe("defence against unvalidated definitions", () => {
     // it: the result was 2026-08-09..2026-08-15, a plausible period that is
     // silently one day wrong. Loud and wrong beats quiet and wrong.
     assert.throws(
-      () => periodContaining(forged({ cadence: "weekly", anchor: "funday" as Weekday }), toISODate("2026-08-12")),
+      () => containing(forged({ cadence: "weekly", anchor: "funday" as Weekday }), toISODate("2026-08-12")),
       /unrecognised weekday anchor/u,
     );
   });
@@ -308,7 +337,7 @@ describe("defence against unvalidated definitions", () => {
     for (const day of [40, 0, -3, 15.5]) {
       assert.throws(
         () =>
-          periodContaining(
+          containing(
             forged({ cadence: "monthly", anchor: { kind: "day-of-month", day } }),
             toISODate("2026-08-14"),
           ),
@@ -321,7 +350,7 @@ describe("defence against unvalidated definitions", () => {
   it("accepts every anchor the validator accepts", () => {
     // The defence must not be stricter than validation, or valid schedules break.
     for (const day of [1, 15, 28, 29, 30, 31]) {
-      assert.doesNotThrow(() => periodContaining(onDay(day), toISODate("2026-08-14")));
+      assert.doesNotThrow(() => containing(onDay(day), toISODate("2026-08-14")));
     }
   });
 });
@@ -329,11 +358,11 @@ describe("defence against unvalidated definitions", () => {
 describe("generation is bounded", () => {
   it("allows the maximum and refuses one more", () => {
     assert.equal(
-      periodsFrom(weekly("monday"), toISODate("2026-01-05"), MAX_GENERATED_PERIODS).length,
+      periodsOf(weekly("monday"), toISODate("2026-01-05"), MAX_GENERATED_PERIODS).length,
       MAX_GENERATED_PERIODS,
     );
     assert.throws(
-      () => periodsFrom(weekly("monday"), toISODate("2026-01-05"), MAX_GENERATED_PERIODS + 1),
+      () => periodsOf(weekly("monday"), toISODate("2026-01-05"), MAX_GENERATED_PERIODS + 1),
       /must not exceed/u,
     );
   });
@@ -361,7 +390,7 @@ describe("review gaps", () => {
     // and it is the exact boundary between the two February behaviours.
     assert.equal(boundaryAtOrBefore(onDay(29), toISODate("2026-02-28")), "2026-02-28");
     assert.equal(boundaryAtOrBefore(onDay(29), toISODate("2028-02-29")), "2028-02-29");
-    assert.deepEqual(periodsFrom(onDay(29), toISODate("2026-01-29"), 3).map(span), [
+    assert.deepEqual(periodsOf(onDay(29), toISODate("2026-01-29"), 3).map(span), [
       "2026-01-29..2026-02-27",
       "2026-02-28..2026-03-28",
       "2026-03-29..2026-04-28",
@@ -369,7 +398,7 @@ describe("review gaps", () => {
   });
 
   it("periodContains is inclusive at both ends and false outside", () => {
-    const period = periodContaining(weekly("monday"), toISODate("2026-08-12"));
+    const period = containing(weekly("monday"), toISODate("2026-08-12"));
     assert.equal(periodContains(period, toISODate("2026-08-10")), true, "start is inside");
     assert.equal(periodContains(period, toISODate("2026-08-16")), true, "end is inside");
     assert.equal(periodContains(period, toISODate("2026-08-09")), false);
@@ -377,10 +406,10 @@ describe("review gaps", () => {
   });
 
   it("periodLengthInDays reports inclusive calendar days", () => {
-    assert.equal(periodLengthInDays(periodContaining(weekly("monday"), toISODate("2026-08-12"))), 7);
-    assert.equal(periodLengthInDays(periodContaining(onDay(1), toISODate("2026-02-10"))), 28);
-    assert.equal(periodLengthInDays(periodContaining(onDay(1), toISODate("2028-02-10"))), 29);
-    assert.equal(periodLengthInDays(periodContaining(onDay(1), toISODate("2026-07-10"))), 31);
+    assert.equal(periodLengthInDays(containing(weekly("monday"), toISODate("2026-08-12"))), 7);
+    assert.equal(periodLengthInDays(containing(onDay(1), toISODate("2026-02-10"))), 28);
+    assert.equal(periodLengthInDays(containing(onDay(1), toISODate("2028-02-10"))), 29);
+    assert.equal(periodLengthInDays(containing(onDay(1), toISODate("2026-07-10"))), 31);
   });
 
   it("throws at the calendar extremes rather than wrapping", () => {
@@ -389,7 +418,94 @@ describe("review gaps", () => {
     // a range a budgeting product will never reach — recorded here so the
     // behaviour is a known choice rather than a surprise.
     assert.throws(() => boundaryAtOrBefore(onDay(15), toISODate("0001-01-10")), RangeError);
-    assert.throws(() => periodContaining(weekly("monday"), toISODate("9999-12-30")), RangeError);
+    assert.throws(() => containing(weekly("monday"), toISODate("9999-12-30")), RangeError);
+  });
+});
+
+describe("boundary-function contract — CBD-67 §8.10 validation requirement", () => {
+  // BoundaryFunctions is a public extension point, so the contract cannot be
+  // assumed from the implementations in this package. §8.10 requires
+  // "validation proving that generated periods are chronological, contiguous,
+  // non-overlapping, and open-ended"; these are the properties every other rule
+  // depends on.
+  const anyDate = toISODate("2026-08-15");
+
+  it("refuses a boundary that falls after the requested date", () => {
+    assert.throws(
+      () =>
+        periodContaining(
+          {
+            boundaryAtOrBefore: () => toISODate("2026-08-20"),
+            nextBoundaryAfter: () => toISODate("2026-08-25"),
+          },
+          anyDate,
+        ),
+      /is after the requested date/u,
+    );
+  });
+
+  it("refuses a next boundary that is not strictly after the requested date", () => {
+    assert.throws(
+      () =>
+        periodContaining(
+          {
+            boundaryAtOrBefore: () => toISODate("2026-08-10"),
+            nextBoundaryAfter: () => anyDate,
+          },
+          anyDate,
+        ),
+      /not strictly after the requested date/u,
+    );
+  });
+
+  it("refuses boundaries that would produce a period ending before it starts", () => {
+    // This previously produced the period 2026-08-20..2026-08-09 — an end before
+    // its own start — with no error at all. It is caught by the strictly-after
+    // rule rather than a separate chronology check, because start <= date < next
+    // already implies chronology. Writing this test is what revealed the third
+    // check was unreachable.
+    assert.throws(
+      () =>
+        periodContaining(
+          {
+            boundaryAtOrBefore: () => toISODate("2026-08-20"),
+            nextBoundaryAfter: () => toISODate("2026-08-10"),
+          },
+          toISODate("2026-08-20"),
+        ),
+      /not strictly after the requested date/u,
+    );
+  });
+
+  it("never returns a period whose end precedes its start", () => {
+    // The property the two checks exist to guarantee, asserted directly rather
+    // than inferred from them.
+    for (const definition of [weekly("monday"), onDay(31), monthly({ kind: "last-day" })]) {
+      for (const date of ["2026-01-01", "2026-02-28", "2026-08-15", "2028-02-29"]) {
+        const period = containing(definition, toISODate(date));
+        assert.ok(
+          period.start <= period.end,
+          `${span(period)} ends before it starts`,
+        );
+      }
+    }
+  });
+
+  it("refuses a non-advancing implementation instead of repeating a period", () => {
+    // periodsFrom previously returned the same period three times and presented
+    // it as a consecutive sequence.
+    const stuck = {
+      boundaryAtOrBefore: () => toISODate("2026-08-10"),
+      nextBoundaryAfter: () => toISODate("2026-08-11"),
+    };
+    assert.throws(() => periodsFrom(stuck, toISODate("2026-08-10"), 3), RangeError);
+  });
+
+  it("accepts every well-formed implementation in this package", () => {
+    // The contract check must not be stricter than the cadences it guards.
+    for (const definition of [weekly("monday"), onDay(31), monthly({ kind: "last-day" })]) {
+      assert.doesNotThrow(() => containing(definition, anyDate));
+    }
   });
 });
 
@@ -401,8 +517,8 @@ describe("determinism — CBD-67 INV-87", () => {
       'const weekly = { cadence: "weekly", anchor: "monday" };',
       'const monthly = { cadence: "monthly", anchor: { kind: "day-of-month", day: 31 } };',
       "const out = [",
-      '  ...m.setupPreview(weekly, d.toISODate("2026-08-12")),',
-      '  ...m.setupPreview(monthly, d.toISODate("2026-01-15")),',
+      '  ...m.setupPreview(m.weeklyMonthlyBoundaries(weekly), d.toISODate("2026-08-12")),',
+      '  ...m.setupPreview(m.weeklyMonthlyBoundaries(monthly), d.toISODate("2026-01-15")),',
       "].map((p) => `${p.start}..${p.end}`);",
       'process.stdout.write(out.join(","));',
     ].join("");
@@ -431,9 +547,9 @@ describe("determinism — CBD-67 INV-87", () => {
  */
 export function _onlyValidatedWeeklyAndMonthly(date: ISODate): void {
   // @ts-expect-error paycheck generation is CBD-29, not CBD-27.
-  periodContaining({ cadence: "paycheck", pattern: { kind: "weekly", weekday: "friday" }, businessDayPolicy: "previous-business-day" }, date);
+  containing({ cadence: "paycheck", pattern: { kind: "weekly", weekday: "friday" }, businessDayPolicy: "previous-business-day" }, date);
   // @ts-expect-error fixed-length custom generation is CBD-29, not CBD-27.
-  periodContaining({ cadence: "custom-fixed-length", startBoundary: date, lengthInDays: 14 }, date);
+  containing({ cadence: "custom-fixed-length", startBoundary: date, lengthInDays: 14 }, date);
   // @ts-expect-error an unvalidated definition cannot reach the generator at all.
-  periodContaining({ cadence: "weekly", anchor: "monday" }, date);
+  containing({ cadence: "weekly", anchor: "monday" }, date);
 }

@@ -44,6 +44,35 @@ export interface BudgetPeriod {
 }
 
 /**
+ * Where a cadence's boundaries fall.
+ *
+ * This implements exactly one of the seven elements CBD-67 §8.10 requires of a
+ * full cadence adapter: "a function that, for any supported budget-space date,
+ * returns the natural boundary immediately before or on that date and the next
+ * natural boundary after it". Everything below — containment, contiguity,
+ * previews — needs nothing else from a cadence, which is why the walking logic
+ * is written once here rather than repeated per cadence.
+ *
+ * It is deliberately **not** named `BoundaryFunctions`. That name is reserved for
+ * the complete §8.10 contract, which also requires a stable cadence type and
+ * rule identity, a human-readable rule summary, complete recurrence inputs with
+ * versioned calendar provenance, the first three complete periods after a
+ * transition, validation evidence, and reviewed full-period targets by category.
+ * Of those, only the rule summary exists today, as `describeCadence`. Calling
+ * this the adapter would tell a future reader that §8.10 is satisfied when it is
+ * not.
+ *
+ * Boundaries are all this answers. Effective dates, transitions, proration,
+ * permissions, and history remain CBD-67's, per §8.10.
+ */
+export interface BoundaryFunctions {
+  /** The natural boundary falling on or before `date`. */
+  readonly boundaryAtOrBefore: (date: ISODate) => ISODate;
+  /** The next natural boundary strictly after `date`. */
+  readonly nextBoundaryAfter: (date: ISODate) => ISODate;
+}
+
+/**
  * The cadences this module generates, and only after validation.
  *
  * Two constraints are encoded in this one type:
@@ -177,25 +206,56 @@ export function nextBoundaryAfter(
  * wrong. Delayed or disabled background processing cannot change the result,
  * because the result is computed rather than looked up.
  */
-export function periodContaining(
-  definition: WeeklyOrMonthlyDefinition,
-  date: ISODate,
-): BudgetPeriod {
-  return {
-    start: boundaryAtOrBefore(definition, date),
-    end: addDays(nextBoundaryAfter(definition, date), -1),
-  };
+export function periodContaining(boundaries: BoundaryFunctions, date: ISODate): BudgetPeriod {
+  const start = boundaries.boundaryAtOrBefore(date);
+  const next = boundaries.nextBoundaryAfter(date);
+
+  // CBD-67 §8.10 requires "validation proving that generated periods are
+  // chronological, contiguous, non-overlapping, and open-ended". Because
+  // BoundaryFunctions is a public extension point, that validation cannot be
+  // assumed from the implementations in this package.
+  //
+  // These are the three properties every other rule depends on. Without them a
+  // malformed implementation produced a period running 2026-08-20..2026-08-09,
+  // and one that never advanced made periodsFrom return the same period
+  // repeatedly while presenting it as a sequence — both silently.
+  if (compareDates(start, date) > 0) {
+    throw new RangeError(
+      `boundaryAtOrBefore returned ${start}, which is after the requested date ${date}`,
+    );
+  }
+  if (compareDates(next, date) <= 0) {
+    throw new RangeError(
+      `nextBoundaryAfter returned ${next}, which is not strictly after the requested date ${date}`,
+    );
+  }
+
+  // Chronology needs no third check: the two above give start <= date < next,
+  // so next always follows start and the returned period can never end before it
+  // begins. An earlier version asserted that separately, which was unreachable
+  // code masquerading as a safeguard.
+  return { start, end: addDays(next, -1) };
 }
 
-/** The period immediately following `period` under the same definition. */
-export function periodAfter(
-  definition: WeeklyOrMonthlyDefinition,
-  period: BudgetPeriod,
-): BudgetPeriod {
+/** The period immediately following `period` under the same boundary functions. */
+export function periodAfter(boundaries: BoundaryFunctions, period: BudgetPeriod): BudgetPeriod {
   // Starting from the day after the current end guarantees contiguity (INV-02):
   // the next period begins on the calendar day after this one ends, by
   // construction rather than by arithmetic that could drift.
-  return periodContaining(definition, addDays(period.end, 1));
+  return periodContaining(boundaries, addDays(period.end, 1));
+}
+
+/**
+ * The weekly and monthly implementation of {@link BoundaryFunctions}.
+ *
+ * CBD-29 supplies the equivalent for paycheck and fixed-length custom cadences,
+ * and both plug into exactly the same helpers below.
+ */
+export function weeklyMonthlyBoundaries(definition: WeeklyOrMonthlyDefinition): BoundaryFunctions {
+  return {
+    boundaryAtOrBefore: (date) => boundaryAtOrBefore(definition, date),
+    nextBoundaryAfter: (date) => nextBoundaryAfter(definition, date),
+  };
 }
 
 /**
@@ -207,7 +267,7 @@ export function periodAfter(
  * authoritative record that invariant forbids.
  */
 export function periodsFrom(
-  definition: WeeklyOrMonthlyDefinition,
+  adapter: BoundaryFunctions,
   from: ISODate,
   count: number,
 ): readonly BudgetPeriod[] {
@@ -222,10 +282,10 @@ export function periodsFrom(
   }
 
   const periods: BudgetPeriod[] = [];
-  let current = periodContaining(definition, from);
+  let current = periodContaining(adapter, from);
   for (let index = 0; index < count; index += 1) {
     periods.push(current);
-    current = periodAfter(definition, current);
+    current = periodAfter(adapter, current);
   }
   return periods;
 }
@@ -241,10 +301,10 @@ export function periodsFrom(
 export const SETUP_PREVIEW_PERIOD_COUNT = 4;
 
 export function setupPreview(
-  definition: WeeklyOrMonthlyDefinition,
+  adapter: BoundaryFunctions,
   budgetSpaceDate: ISODate,
 ): readonly BudgetPeriod[] {
-  return periodsFrom(definition, budgetSpaceDate, SETUP_PREVIEW_PERIOD_COUNT);
+  return periodsFrom(adapter, budgetSpaceDate, SETUP_PREVIEW_PERIOD_COUNT);
 }
 
 /** Inclusive length of a period in calendar days. */

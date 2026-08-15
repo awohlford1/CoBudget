@@ -6,65 +6,84 @@
  * simply cannot reach it. Nothing else in the toolchain notices, because an
  * unexported symbol is not an error.
  *
- * These tests compare each module's runtime exports against its barrel. They
- * cover values only — type-only exports do not exist at runtime and cannot be
- * enumerated this way, so a forgotten `export type` still slips through. That
- * is a narrower gap than the one being closed, and worth stating rather than
- * implying the check is total.
+ * Modules are discovered from the filesystem rather than listed here. An earlier
+ * version enumerated them by hand, which meant a newly added module had no
+ * coverage until someone remembered to add it — reintroducing exactly the
+ * "rely on remembering" weakness this file exists to remove.
+ *
+ * Coverage is runtime values only. Type-only exports do not exist at runtime and
+ * cannot be enumerated this way, so a forgotten `export type` still slips
+ * through. That gap is narrower than the one being closed, and is tracked in
+ * CBD-96 rather than implied away.
  */
 
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { describe, it } from "node:test";
 
-import * as isoDateModule from "./shared/iso-date.ts";
-import * as sharedBarrel from "./shared/index.ts";
-
-import * as definitionModule from "./schedule/definition.ts";
-import * as parseModule from "./schedule/parse.ts";
-import * as periodModule from "./schedule/period.ts";
-import * as validateModule from "./schedule/validate.ts";
-import * as scheduleBarrel from "./schedule/index.ts";
-
-function assertFullyReExported(
-  moduleLabel: string,
-  barrelLabel: string,
-  module: Record<string, unknown>,
-  barrel: Record<string, unknown>,
-): void {
-  const missing = Object.keys(module)
-    .filter((name) => !(name in barrel))
-    .sort();
-  assert.deepEqual(
-    missing,
-    [],
-    `${moduleLabel} exports ${missing.join(", ")} which ${barrelLabel} does not re-export`,
-  );
+interface BarrelGroup {
+  readonly label: string;
+  readonly directory: URL;
 }
 
-describe("shared barrel", () => {
-  it("re-exports every runtime export of iso-date.ts", () => {
-    assertFullyReExported("iso-date.ts", "shared/index.ts", isoDateModule, sharedBarrel);
-  });
-});
+const GROUPS: readonly BarrelGroup[] = [
+  { label: "shared", directory: new URL("./shared/", import.meta.url) },
+  { label: "schedule", directory: new URL("./schedule/", import.meta.url) },
+];
 
-describe("schedule barrel", () => {
-  it("re-exports every runtime export of definition.ts", () => {
-    assertFullyReExported("definition.ts", "schedule/index.ts", definitionModule, scheduleBarrel);
-  });
+/**
+ * Every non-test source module beneath a directory, excluding barrels.
+ *
+ * Recursive on purpose. A non-recursive `readdirSync` only sees modules at one
+ * exact depth, so a file at `schedule/nested/orphan.ts` was invisible — the same
+ * "only checks what it happens to look at" failure as the hand-written list this
+ * replaced, moved down one level rather than removed.
+ *
+ * Paths are normalised to forward slashes because `recursive: true` returns
+ * platform separators, and a URL needs `/` on every platform.
+ */
+function sourceModulesIn(directory: URL): readonly string[] {
+  return readdirSync(directory, { recursive: true })
+    .map((entry) => String(entry).replaceAll("\\", "/"))
+    .filter(
+      (name) =>
+        name.endsWith(".ts") &&
+        !name.endsWith(".test.ts") &&
+        !name.split("/").includes("index.ts"),
+    )
+    .sort();
+}
 
-  it("re-exports every runtime export of validate.ts", () => {
-    assertFullyReExported("validate.ts", "schedule/index.ts", validateModule, scheduleBarrel);
-  });
+for (const group of GROUPS) {
+  const fileNames = sourceModulesIn(group.directory);
+  const barrel: Record<string, unknown> = await import(
+    new URL("index.ts", group.directory).href
+  );
 
-  it("re-exports every runtime export of parse.ts", () => {
-    assertFullyReExported("parse.ts", "schedule/index.ts", parseModule, scheduleBarrel);
-  });
+  describe(`${group.label} barrel`, () => {
+    it("has at least one module to check", () => {
+      // Guards the guard: a discovery bug that found nothing would otherwise
+      // make every assertion below vacuously pass.
+      assert.ok(fileNames.length > 0, `no source modules discovered in ${group.label}/`);
+    });
 
-  it("re-exports every runtime export of period.ts", () => {
-    assertFullyReExported("period.ts", "schedule/index.ts", periodModule, scheduleBarrel);
+    for (const fileName of fileNames) {
+      it(`re-exports every runtime export of ${fileName}`, async () => {
+        const module: Record<string, unknown> = await import(
+          new URL(fileName, group.directory).href
+        );
+        const missing = Object.keys(module)
+          .filter((name) => !(name in barrel))
+          .sort();
+        assert.deepEqual(
+          missing,
+          [],
+          `${fileName} exports ${missing.join(", ")} which ${group.label}/index.ts does not re-export`,
+        );
+      });
+    }
   });
-});
+}
 
 describe("package entry points", () => {
   it("exposes no root barrel, keeping the §8.10 seam structural", () => {
