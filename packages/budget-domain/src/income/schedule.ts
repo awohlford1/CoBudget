@@ -28,10 +28,16 @@
  *    (INV-68-15). A pair of narrower mutators would have to reconstruct that
  *    guarantee, and could be called in the wrong order.
  *
- * Not here: the schedule-change lifecycle — effective dates, preview,
- * confirmation, audit — which belongs to CBD-67 and CBD-28; occurrence and
- * boundary generation, which is CBD-29; and the expected-income lifecycle and
- * projected amounts over time, which is CBD-100.
+ * Not here: the schedule-change lifecycle, which CBD-67 governs — versioning
+ * and history are CBD-28, while configuring, previewing, and confirming a
+ * change is a separate CBD-5 story per CBD-28's own scope note. Nor occurrence
+ * and boundary generation, which is CBD-29, nor the expected-income lifecycle
+ * and projected amounts over time, which is CBD-100.
+ *
+ * So changing the anchor here produces a validated candidate, not an activated
+ * schedule. Turning that candidate into a new authoritative schedule version,
+ * behind preview and confirmation, is the missing half of §8 and belongs to
+ * those stories rather than this one.
  *
  * Nothing in this module accepts a transaction. That is what makes "an
  * unexpected deposit never becomes an anchor occurrence" (§8, INV-68-07) true by
