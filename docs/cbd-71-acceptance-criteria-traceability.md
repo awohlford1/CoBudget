@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **v1.1 amendment traceability complete — Product Owner approval outstanding** |
-| Document version | 1.1.0 |
+| Status | **Approved — MVP Schedule Decisions v1.1, Product Owner approved August 15, 2026** |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude (see §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent |
 | Jira | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
@@ -87,7 +87,7 @@ No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted deci
 | RF-71-18 | Calendar and calculation sweep | The CBD-69 INV-69-18 daylight-saving invariant had no home; GC-01 covered the time zone but not the calendar-day-count guarantee. | Add the invariant as a governance control. | Resolved by GC-09 in register v0.6 |
 | RF-71-19 | Calendar and calculation sweep | SD-071-043 labeled alerts informational without CBD-69 INV-69-23's testable properties: never asserts a limit was exceeded, self-clears when the provisional record resolves, requires no acknowledgement. | Restate the lifecycle in SD-071-043. | Resolved in register v0.6 |
 | RF-71-20 | Architecture alignment | The versioned holiday reference dataset required by SD-071-030 and GC-04 has no home in `architecture.md`: it is neither a domain module nor a key data rule, and the block-on-unsupported-year behavior has no stated owner. | Add reference-data storage, versioning, and refresh verification to the architecture before schedule implementation. | Open — technical design follow-up |
-| RF-71-21 | Architecture alignment | SD-071-044 treats email, push, and SMS as opt-in MVP channels, while `architecture.md` phases delivery as in-app and email first with push and SMS later. | Reconcile before implementation: either scope the MVP channel set in the register or record the phasing in the architecture. Not a product-rule conflict. | Open — requires Product Owner and technical-design decision |
+| RF-71-21 | Architecture alignment | SD-071-044 treats email, push, and SMS as opt-in MVP channels, while `architecture.md` phases delivery as in-app and email first with push and SMS later. | Reconcile before implementation: either scope the MVP channel set in the register or record the phasing in the architecture. Not a product-rule conflict. | **Closed August 15, 2026.** Product Owner decided in favour of the register: in-app, email, push, and SMS are all MVP channels, each opt-in per user and per supported event or category except the mandatory in-app instance. `SD-071-044` is unchanged; `architecture.md` is amended to match under a separate change. Tracked as `UD-071-02` |
 | RF-71-22 | Architecture alignment | Three data-model consequences of accepted decisions are not recorded in the architecture: a schedule version must reference its boundary-anchoring income schedule (SD-071-024), category identifiers must be stable and never reused for the residual-cent tie-break (SD-071-027, CBD-67 INV-84), and a confirmation identity must persist so activation replay stays idempotent (SD-071-029, GC-08). | Record all three as key data rules. | Open — technical design follow-up |
 | RF-71-23 | Architecture alignment | SD-071-048 makes accessible schedule and reconciliation interaction MVP behavior, but `architecture.md` states no accessibility baseline and its critical automated tests include no accessibility coverage. | Add an accessibility baseline and automated coverage to the architecture. | Open — technical design follow-up |
 | RF-71-24 | Architecture alignment | SD-071-034 depends on the financial-data provider supplying reliable authorization dates. The architecture names a provider adapter with Plaid first; if authorization dates are unreliable, the approved posted-or-settlement fallback becomes the normal path and changes observed period attribution. | Confirm provider authorization-date reliability under CBD-15 before implementation. | Open — provider evidence needed, tracked with FF-007 |
@@ -108,12 +108,13 @@ No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted deci
 | CBD-71 criteria with draft evidence | 17 of 17 |
 | CBD-71 criteria finally satisfied | 17 of 17 |
 | Required review passes complete | 5 of 5 |
-| Product Owner approval | Approved August 14, 2026 as MVP Schedule Decisions v1.0 |
+| Product Owner approval | v1.0 approved August 14, 2026; **v1.1 approved August 15, 2026** and now authoritative |
 
 ## 7. Revision history
 
 | Version | Date | Author | Summary | Decision |
 | --- | --- | --- | --- | --- |
+| 1.1 | August 15, 2026 | Alexander Wohlford — Product Owner | Recorded Product Owner approval of MVP Schedule Decisions v1.1 and closed RF-71-21 by the `UD-071-02` decision that in-app, email, push, and SMS are all MVP channels. | **Approved; CBD-71 v1.1 complete** |
 | 1.1.0 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Closed RF-71-25 after the CBD-69 v1.1 approval and aligned this record's version with the register and checklist, which had drifted to three different numbers for one amendment. | Product Owner approval is the only remaining v1.1 gate |
 | 0.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Created initial CBD-71 criterion mapping, CBD-11 disposition, follow-up disposition, and review-finding record against the approved CBD-70 baseline. | Draft; approval pending |
 | 0.2 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Recorded the accepted decision-quality findings and remapped traceability from the 19 superseded grouping rows to 29 active atomic decisions and 10 explicit deferrals. | Draft; final approval pending |

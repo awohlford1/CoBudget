@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **v1.1 amendment validation complete — Product Owner approval outstanding** |
-| Document version | 1.1.0 |
+| Status | **Approved — MVP Schedule Decisions v1.1, Product Owner approved August 15, 2026** |
+| Document version | 1.1 |
 | Decision register | [CBD-71 MVP Schedule Decisions](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
 | Jira | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
 | Confluence page | [CBD-71 — MVP Schedule Decisions Validation Checklist](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6160404) |
@@ -31,9 +31,9 @@ A decision is validated only when it is Product Owner approved, internally consi
 | Governance controls carry source-criteria and scenario evidence equivalent to a decision row. | Register §3.4, GC-01–09 | Pass (added in v0.3; **Fail** in v0.2) |
 | Every approved CBD-70 scenario is referenced by an active decision or governance control. | Register §§3.4, 4; 75 of 75 | Pass (added in v0.3; **Fail** in v0.2 — `VAL-01` and `PREV-02` unreferenced) |
 | Every cited predecessor criterion exists in its approved source. | Register §§3.4, 4; 50 of 50 governing criteria | Pass (added in v0.3; **Fail** in v0.2 — `CBD-68-AC17` does not exist) |
-| Product Owner approval is recorded for this exact revision. | Register §9 | **Pending** — the only outstanding v1.1 gate |
-| Approved set is issued as MVP Schedule Decisions v1.1. | Register front matter and §9 | Pending on the approval above |
-| Approved artifacts are published to Confluence and mirrored in the repository, per register §8.4. | v1.0 remains published; v1.1 repository amendment is not yet published | Pending |
+| Product Owner approval is recorded for this exact revision. | Register §9 | **Pass** — v1.1 approved August 15, 2026 |
+| Approved set is issued as MVP Schedule Decisions v1.1. | Register front matter and §9 | **Pass** |
+| Approved artifacts are published to Confluence and mirrored in the repository, per register §8.4. | v1.0 remains published; the approved v1.1 mirror publishes after the merge to `main` | Pending — deferred by the repository working rules |
 
 ## 3. Active decision validation matrix
 
@@ -65,7 +65,7 @@ A decision is validated only when it is Product Owner approved, internally consi
 | SD-071-041 | Pending-to-settled reconciliation | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Approved | Accepted for MVP |
 | SD-071-042 | Late settlement in an ended period | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Approved | Accepted for MVP |
 | SD-071-043 | Alert certainty | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Approved | Accepted for MVP |
-| SD-071-044 | Personal notification channels and consent; recipient-only preference control | Pass | Pass | Pass | **Pass** — source evidence approved as CBD-69 v1.1 | Pass | Pass | Pass | Pass | Pass | Pending | Proposed v1.1 amendment |
+| SD-071-044 | Personal notification channels and consent; recipient-only preference control | Pass | Pass | Pass | **Pass** — source evidence approved as CBD-69 v1.1 | **Pass** — `UD-071-02` closed; in-app, email, push, and SMS are all MVP channels | Pass | Pass | Pass | Pass | **Approved** | Accepted for MVP |
 | SD-071-045 | History and audit retention | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Approved | Accepted for MVP |
 | SD-071-046 | Role action boundary | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Approved | Accepted for MVP |
 | SD-071-047 | Authorization enforcement and concurrency | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Pass | Approved | Accepted for MVP |
@@ -121,18 +121,19 @@ The Pass results mean each decision has evidence in the frozen baseline. The `PO
 | Deferred decisions | 10 |
 | Unresolved in-MVP decisions | 0 identified |
 | Active decisions with baseline evidence | 31 of 31 |
-| Active decisions Accepted for MVP | 30 of 31 — `SD-071-044` is Proposed pending the v1.1 approval |
+| Active decisions Accepted for MVP | 31 of 31 |
 | Governing criteria represented | 50 of 50 |
-| Proposed MVP decisions | 1 — `SD-071-044` |
+| Proposed MVP decisions | 0 |
 | Approved scenarios referenced | 75 of 75 |
-| Blocking gate | Product Owner approval of the v1.1 revision. The CBD-69 source approval, consistency review, change record, and impact assessment are complete; Confluence publication follows the merge to `main` |
+| Blocking gate | None. Confluence publication of the approved v1.1 follows the merge to `main` |
 
-MVP Schedule Decisions v1.0 remains the approved release until v1.1 is approved. Every v1.1 gate is now closed except the Product Owner approval itself; `SD-071-044` stays Proposed and its v1.0 text stays authoritative until that approval is recorded in register §9.
+**MVP Schedule Decisions v1.1 is the approved release**, recorded in register §9 on August 15, 2026. v1.0 becomes retained history. `SD-071-044` is Accepted for MVP with its v1.1 text; `UD-071-01` and `UD-071-02` are both closed.
 
 ## 6. Revision history
 
 | Version | Date | Author | Summary | Outcome |
 | --- | --- | --- | --- | --- |
+| 1.1 | August 15, 2026 | Alexander Wohlford — Product Owner | Recorded Product Owner approval of MVP Schedule Decisions v1.1. All register-level gates pass. `SD-071-044` is Accepted for MVP after `UD-071-02` closed in favour of the register's channel set. | **Complete;** SD-071-020 through SD-071-050 Accepted for MVP |
 | 1.1.0 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Closed the CBD-69 source gate after CBD-69 v1.1 was approved, and corrected §5, which simultaneously reported 31 of 31 decisions approved and 31 proposed. The counts now read 30 Accepted and 1 Proposed. Restated the blocking gate as the Product Owner approval alone. | Product Owner approval is the only remaining v1.1 gate |
 | 0.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Created the validation framework and performed the initial source-consistency pass over SD-071-001–019. | In review |
 | 0.2 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Recorded the Product Owner's agreement with all review recommendations; validated the 29 replacement decisions for atomicity and separated governance and deferral concerns. | In review; final approval pending |

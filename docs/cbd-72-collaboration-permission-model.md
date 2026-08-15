@@ -8,7 +8,7 @@
 | Jira | [CBD-72](https://cobudget.atlassian.net/browse/CBD-72) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
-| Governing schedule decisions | CBD-71 MVP Schedule Decisions v1.0 (approved baseline). §5.4.1 additionally depends on the **pending v1.1 amendment** SD-071-044, which is not yet authoritative — see OD-72-06. |
+| Governing schedule decisions | CBD-71 **MVP Schedule Decisions v1.1**, approved August 15, 2026. §5.4.1 inherits SD-071-044 from that approved set. |
 | Scenario catalog | `docs/cbd-72-authorization-scenario-catalog.md` |
 | Traceability and review | `docs/cbd-72-acceptance-criteria-traceability.md` |
 | Last updated | August 15, 2026 |
@@ -330,7 +330,7 @@ Every event records an event ID, time, actor/principal, acting membership and ro
 | OD-72-03 | Owner-authorized Viewer snapshot authority and semantic schema | **Closed August 15, 2026.** Owners may create a one-time snapshot under §5.8; Viewer self-service export remains denied. Exact physical format/field names are implementation design constrained by the approved semantic allowlist. | None for authorization; implementation design may finalize serialization only. |
 | OD-72-04 | Connection-authorizer loss or account-deletion recovery | No other role inherits connection authority automatically. | Blocks recovery/reauthorization mechanics for affected connections. |
 | OD-72-05 | Restoration authority, retention duration, member access, and any archived-to-deleted transition for an archived budget space | Primary-only archival authority and the preservation guarantee in §6.5 are fixed; nothing is erased. | Blocks archival lifecycle mechanics, not the sole-owner exit rule or the authorization boundary. |
-| OD-72-06 | Whether CBD-72 inherits CBD-71 MVP Schedule Decisions v1.0 or the pending v1.1 amendment | §5.4.1's three-record alert model depends on SD-071-044, which the CBD-71 register marks "not authoritative until the review and approval gates in §8–9 pass." CBD-71 is closed as Done in Jira while its register remains a v1.1 draft. The safe position is that §5.4.1 is drafted against v1.1 and cannot be approved ahead of it. | **Blocks CBD-72 package approval.** The alert-model section cannot be approved as inherited-and-settled while its source amendment is pending. |
+| OD-72-06 | Whether CBD-72 inherits CBD-71 MVP Schedule Decisions v1.0 or the pending v1.1 amendment | **Closed August 15, 2026.** The Product Owner decided CBD-72 inherits v1.1. CBD-69 v1.1 was approved, then CBD-71 v1.1 was approved with SD-071-044 Accepted for MVP, so §5.4.1 now inherits from an approved source. CBD-71 was reopened to In Review for the amendment rather than being amended while closed. | None. The inheritance chain CBD-69 v1.1 → CBD-71 v1.1 → CBD-72 §5.4.1 rests on approved sources at every link. |
 
 CBD-14 threat-model findings may refine affected security mechanics. They cannot reopen inherited CBD-11/CBD-71 role outcomes without explicit change control.
 
