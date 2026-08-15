@@ -18,7 +18,7 @@ the operational cost.
 | Identity | Managed identity provider with MFA/passkeys |
 | Financial data | Provider adapter with Plaid as the first implementation |
 | Jobs | Durable queues, scheduled reconciliation, dedicated workers |
-| Notifications | In-app and email first; push and SMS later |
+| Notifications | In-app, email, push, and SMS in MVP. In-app is mandatory for every eligible recipient; email, push, and SMS are opt-in per user and per supported event or category |
 | Infrastructure | Containerized services, managed cloud resources, Terraform |
 | Observability | Structured logs, traces, error reporting, and job-health metrics |
 
