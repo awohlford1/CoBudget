@@ -28,16 +28,19 @@
  *    (INV-68-15). A pair of narrower mutators would have to reconstruct that
  *    guarantee, and could be called in the wrong order.
  *
- * Not here: the schedule-change lifecycle, which CBD-67 governs — versioning
- * and history are CBD-28, while configuring, previewing, and confirming a
- * change is a separate CBD-5 story per CBD-28's own scope note. Nor occurrence
- * and boundary generation, which is CBD-29, nor the expected-income lifecycle
- * and projected amounts over time, which is CBD-100.
+ * Not here: the schedule-change lifecycle, which CBD-67 governs and which is
+ * split three ways — configuring, previewing, and confirming a change is
+ * CBD-86, the resulting version lineage and history is CBD-28, and executing a
+ * confirmed pending change is separate again. Nor occurrence and boundary
+ * generation, which is CBD-29, nor the expected-income lifecycle and projected
+ * amounts over time, which is CBD-100.
  *
  * So changing the anchor here produces a validated candidate, not an activated
- * schedule. Turning that candidate into a new authoritative schedule version,
- * behind preview and confirmation, is the missing half of §8 and belongs to
- * those stories rather than this one.
+ * schedule. CBD-86 is what turns that candidate into a previewed, confirmed
+ * change; this module only decides whether the candidate is one a user is
+ * allowed to propose. That division is why §8's "blocked until another valid
+ * anchor is selected" lives here while §8's "creates a new canonical schedule
+ * version" does not.
  *
  * Nothing in this module accepts a transaction. That is what makes "an
  * unexpected deposit never becomes an anchor occurrence" (§8, INV-68-07) true by
