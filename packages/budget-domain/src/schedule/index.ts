@@ -29,6 +29,30 @@ export { validateCadenceDefinition, validateScheduleVersion } from "./validate.t
 
 export { parseCadenceDefinition, parseScheduleVersion } from "./parse.ts";
 
+export type {
+  BusinessDayAdjustment,
+  FederalReserveHoliday,
+  HolidayCalendarProvenance,
+  NonBusinessDayReason,
+} from "./business-day.ts";
+export {
+  FEDERAL_RESERVE_CALENDAR,
+  HolidayCoverageError,
+  adjustToBusinessDay,
+  federalReserveHolidays,
+  isBusinessDay,
+  isYearCovered,
+  nonBusinessDayReason,
+} from "./business-day.ts";
+
+export type {
+  PaycheckDefinition,
+  PaycheckHorizon,
+  PaycheckOccurrence,
+  PaycheckSchedule,
+} from "./paycheck-period.ts";
+export { buildPaycheckSchedule } from "./paycheck-period.ts";
+
 export type { CustomFixedLengthDefinition } from "./custom-period.ts";
 export {
   customBoundaries,
