@@ -119,8 +119,12 @@ describe("paycheck definitions (CBD-68 §9.3)", () => {
         cadence: "paycheck",
         pattern: {
           kind: "custom-weekly-interval",
-          weekday: "thursday",
+          weekday: "friday",
           everyWeeks: 3,
+          // 2026-08-14 is a Friday. The origin must fall on the stated weekday,
+          // because the generator strides from the origin and never reads the
+          // weekday; a mismatch would make describeCadence contradict the
+          // boundaries. This fixture originally said "thursday" and was wrong.
           recurrenceOrigin: origin,
         },
         businessDayPolicy: "previous-business-day",
@@ -165,6 +169,51 @@ describe("paycheck definitions (CBD-68 §9.3)", () => {
     // They coincide in a 31-day month but express different intents, so this is
     // a legitimate configuration rather than a duplicate.
     assert.equal(result.ok, true);
+  });
+
+  it("requires the recurrence origin to fall on the stated weekday", () => {
+    // 2026-01-01 is a Thursday. Without this rule the definition validated, the
+    // generator strode 14 days from Thursday, and describeCadence still said
+    // "on friday" — a recurrence summary that contradicted its own boundaries.
+    const result = validateCadenceDefinition({
+      cadence: "paycheck",
+      pattern: {
+        kind: "every-two-weeks",
+        weekday: "friday",
+        recurrenceOrigin: toISODate("2026-01-01"),
+      },
+      businessDayPolicy: "previous-business-day",
+    });
+    assert.deepEqual(codesOf(result), ["paycheck.origin-weekday-mismatch"]);
+  });
+
+  it("applies the same rule to a custom weekly interval", () => {
+    const result = validateCadenceDefinition({
+      cadence: "paycheck",
+      pattern: {
+        kind: "custom-weekly-interval",
+        weekday: "monday",
+        everyWeeks: 2,
+        recurrenceOrigin: toISODate("2026-01-01"),
+      },
+      businessDayPolicy: "previous-business-day",
+    });
+    assert.deepEqual(codesOf(result), ["paycheck.origin-weekday-mismatch"]);
+  });
+
+  it("reports only the invalid date when the origin is not a date at all", () => {
+    // A malformed origin has no weekday, so piling a mismatch on top would be
+    // noise addressed to a field the user has not yet filled in correctly.
+    const result = validateCadenceDefinition({
+      cadence: "paycheck",
+      pattern: {
+        kind: "every-two-weeks",
+        weekday: "friday",
+        recurrenceOrigin: "2026-02-30" as never,
+      },
+      businessDayPolicy: "previous-business-day",
+    });
+    assert.deepEqual(codesOf(result), ["recurrence-origin.invalid-date"]);
   });
 
   // An out-of-range everyWeeks cannot be expressed as a typed CadenceDefinition

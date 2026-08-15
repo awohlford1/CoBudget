@@ -216,8 +216,15 @@ export interface BusinessDayAdjustment {
   readonly datasetVersion: string;
 }
 
-/** Guard against an unbounded walk if the calendar were ever misconfigured. */
-const MAX_ADJUSTMENT_STEPS = 14;
+/**
+ * Guard against an unbounded walk if the calendar were ever misconfigured.
+ *
+ * Exported because it is also the *reach* of adjustment: no policy can move a
+ * date further than this, so a caller generating anchors for a date window must
+ * look this far outside it to find every anchor that could adjust into range.
+ * {@link adjustToBusinessDay} throws rather than exceeding it.
+ */
+export const MAX_ADJUSTMENT_STEPS = 14;
 
 /**
  * Apply a non-business-day policy, retaining the evidence of what happened.

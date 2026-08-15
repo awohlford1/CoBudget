@@ -38,6 +38,7 @@ export type {
 export {
   FEDERAL_RESERVE_CALENDAR,
   HolidayCoverageError,
+  MAX_ADJUSTMENT_STEPS,
   adjustToBusinessDay,
   federalReserveHolidays,
   isBusinessDay,

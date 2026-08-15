@@ -317,6 +317,68 @@ describe("defence against unvalidated definitions", () => {
   });
 });
 
+describe("the horizon selects by adjusted date, not by calendar anchor", () => {
+  // Regression. Boundaries are adjusted dates but the horizon filter was applied
+  // to unadjusted ones, so an anchor just outside the window that adjusted into
+  // it was dropped. The same schedule then reported different boundaries for the
+  // same date depending on the window asked for.
+  const firstOfMonth: PaycheckPattern = { kind: "monthly", anchor: { kind: "day-of-month", day: 1 } };
+
+  it("keeps a boundary whose anchor precedes the horizon (leading edge)", () => {
+    // Sunday 2026-03-01 becomes Monday 2026-03-02 under next-business-day. That
+    // boundary belongs to a horizon starting 2026-03-02 even though its anchor
+    // does not.
+    const schedule = buildPaycheckSchedule(
+      paycheck(firstOfMonth, "next-business-day"),
+      horizon("2026-03-02", "2026-06-30"),
+    );
+    assert.equal(schedule.boundaryDates[0], "2026-03-02");
+    assert.equal(schedule.occurrences[0]?.unadjustedDate, "2026-03-01");
+  });
+
+  it("keeps a boundary whose anchor follows the horizon (trailing edge)", () => {
+    // Sunday 2026-03-01 becomes Friday 2026-02-27 under previous-business-day,
+    // landing inside a horizon that ends 2026-02-28.
+    const schedule = buildPaycheckSchedule(
+      paycheck(firstOfMonth, "previous-business-day"),
+      horizon("2026-01-05", "2026-02-28"),
+    );
+    assert.equal(schedule.boundaryDates.at(-1), "2026-02-27");
+  });
+
+  it("drops an occurrence whose anchor is inside but adjusts out", () => {
+    // The mirror of the above: membership follows the adjusted date in both
+    // directions, or the two windows would disagree about the same occurrence.
+    const schedule = buildPaycheckSchedule(
+      paycheck(firstOfMonth, "previous-business-day"),
+      horizon("2026-03-01", "2026-06-30"),
+    );
+    assert.ok(
+      !schedule.boundaryDates.includes(toISODate("2026-02-27")),
+      "2026-02-27 precedes the horizon and must not appear",
+    );
+    assert.equal(schedule.occurrences[0]?.unadjustedDate, "2026-04-01");
+  });
+
+  it("agrees with a wider horizon everywhere the two overlap", () => {
+    // The general property the three cases above are instances of.
+    for (const policy of ["previous-business-day", "next-business-day"] as const) {
+      const wide = buildPaycheckSchedule(paycheck(firstOfMonth, policy), horizon("2026-02-01", "2026-12-31"));
+      for (const [from, through] of [
+        ["2026-03-02", "2026-06-30"],
+        ["2026-05-04", "2026-09-30"],
+      ] as const) {
+        const narrow = buildPaycheckSchedule(paycheck(firstOfMonth, policy), horizon(from, through));
+        assert.deepEqual(
+          [...narrow.boundaryDates],
+          wide.boundaryDates.filter((d) => d >= from && d <= through),
+          `${policy} disagrees on ${from}..${through}`,
+        );
+      }
+    }
+  });
+});
+
 /** Compile-time assertions. Never executed — `tsc --noEmit` is the assertion. */
 export function _requiresValidatedPaycheckDefinition(h: PaycheckHorizon): void {
   // @ts-expect-error an unvalidated definition cannot reach the generator.

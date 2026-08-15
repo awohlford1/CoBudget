@@ -43,9 +43,17 @@ import {
   adjustToBusinessDay,
   isYearCovered,
   HolidayCoverageError,
+  MAX_ADJUSTMENT_STEPS,
   type BusinessDayAdjustment,
 } from "./business-day.ts";
-import { WEEKDAYS, type MonthlyAnchor, type PaycheckPattern, type Weekday } from "./definition.ts";
+import {
+  MAX_DAY_OF_MONTH,
+  MIN_DAY_OF_MONTH,
+  WEEKDAYS,
+  type MonthlyAnchor,
+  type PaycheckPattern,
+  type Weekday,
+} from "./definition.ts";
 import type { BoundaryFunctions } from "./period.ts";
 import type { ValidatedCadenceDefinition } from "./validate.ts";
 
@@ -78,7 +86,15 @@ export interface PaycheckSchedule {
   readonly horizon: PaycheckHorizon;
 }
 
-/** The inclusive date range a schedule is built for. */
+/**
+ * The inclusive date range a schedule is built for.
+ *
+ * Membership is decided by an occurrence's **adjusted** date, not its calendar
+ * anchor, because the adjusted date is what becomes a boundary (§7.3). An anchor
+ * outside this range that adjusts into it is included; one inside that adjusts
+ * out is not. That makes the generated set independent of how the window was
+ * chosen: any two horizons agree on every boundary they both cover.
+ */
 export interface PaycheckHorizon {
   readonly from: ISODate;
   readonly through: ISODate;
@@ -104,10 +120,14 @@ function monthlyAnchorIn(
   if (anchor.kind === "last-day") {
     return { date: isoDateOf(year, month, lastValidDay), clampedFromDay: null };
   }
-  if (!Number.isInteger(anchor.day) || anchor.day < 1 || anchor.day > 31) {
+  if (
+    !Number.isInteger(anchor.day) ||
+    anchor.day < MIN_DAY_OF_MONTH ||
+    anchor.day > MAX_DAY_OF_MONTH
+  ) {
     throw new RangeError(
-      `monthly anchor day must be an integer 1-31, received ${String(anchor.day)}. ` +
-        "Validate the definition before generating periods.",
+      `monthly anchor day must be an integer ${MIN_DAY_OF_MONTH}-${MAX_DAY_OF_MONTH}, ` +
+        `received ${String(anchor.day)}. Validate the definition before generating periods.`,
     );
   }
   const clamped = Math.min(anchor.day, lastValidDay);
@@ -184,7 +204,9 @@ function unadjustedAnchors(
     case "monthly":
     case "twice-per-month": {
       const anchors = pattern.kind === "monthly" ? [pattern.anchor] : pattern.anchors;
-      // Start a month early so an anchor clamped backwards still lands in range.
+      // Every month the window touches. Clamping can only move an anchor
+      // backwards within its own month, never out of it, so the months spanned
+      // by the window are exactly the months that can contribute an anchor.
       const start = partsOf(horizon.from);
       const end = partsOf(horizon.through);
       const firstMonth = start.year * 12 + (start.month - 1);
@@ -223,6 +245,37 @@ function assertHorizonCovered(horizon: PaycheckHorizon): void {
 }
 
 /**
+ * Adjust one anchor, tolerating uncovered years only outside the horizon.
+ *
+ * The widened generation window can reach into a year the holiday dataset does
+ * not cover — a horizon starting 2026-01-05 looks back to 2025-12-22. Such an
+ * anchor could in principle adjust forward into the horizon, but PD-68-05
+ * forbids guessing, so it is dropped rather than assumed. Returning `null`
+ * rather than throwing is correct here because the caller never asked about
+ * that date; an anchor *inside* the horizon that cannot be adjusted still
+ * throws, because that one was asked about.
+ *
+ * The practical consequence is the same lower-edge narrowing documented in
+ * `business-day.ts`: within the first two weeks of the earliest covered year, a
+ * boundary produced by adjusting an earlier anchor forward cannot be known.
+ * CBD-98 covers preloading history so the product has no hard floor.
+ */
+function adjustAnchor(
+  date: ISODate,
+  policy: PaycheckDefinition["businessDayPolicy"],
+  horizon: PaycheckHorizon,
+): BusinessDayAdjustment | null {
+  const insideHorizon =
+    compareDates(date, horizon.from) >= 0 && compareDates(date, horizon.through) <= 0;
+  try {
+    return adjustToBusinessDay(date, policy);
+  } catch (error) {
+    if (!insideHorizon && error instanceof HolidayCoverageError) return null;
+    throw error;
+  }
+}
+
+/**
  * Build a paycheck schedule over a stated horizon.
  *
  * Implements the §9.2 ordering exactly: generate calendar anchors, clamp a
@@ -240,22 +293,43 @@ export function buildPaycheckSchedule(
   assertHorizonCovered(horizon);
 
   // Steps 1-4: generate calendar anchors, clamping numbered anchors as needed.
-  const anchors = unadjustedAnchors(definition.pattern, horizon);
+  //
+  // Generation is deliberately wider than the horizon. A boundary is an
+  // *adjusted* date, so an anchor lying just outside the horizon can adjust
+  // into it: with `next-business-day`, Sunday 2026-03-01 becomes Monday
+  // 2026-03-02, which belongs to a horizon starting 2026-03-02 even though the
+  // anchor does not. Filtering unadjusted dates against the horizon dropped
+  // those boundaries, which made the result depend on which window was asked
+  // for — the same schedule reported different boundaries for the same date.
+  // Widening by the adjustment reach and filtering on the adjusted date instead
+  // makes membership a property of the occurrence rather than of the query.
+  const anchors = unadjustedAnchors(definition.pattern, {
+    from: addDays(horizon.from, -MAX_ADJUSTMENT_STEPS),
+    through: addDays(horizon.through, MAX_ADJUSTMENT_STEPS),
+  });
 
   // Step 5: sort unadjusted dates before adjusting, so the policy is applied in
   // calendar order rather than in pattern-emission order.
   const sortedAnchors = [...anchors].sort((a, b) => compareDates(a.date, b.date));
 
   // Step 6: apply the business-day policy. Step 9: retain every occurrence.
-  const occurrences: PaycheckOccurrence[] = sortedAnchors.map((anchor) => {
-    const adjustment = adjustToBusinessDay(anchor.date, definition.businessDayPolicy);
-    return {
+  const occurrences: PaycheckOccurrence[] = [];
+  for (const anchor of sortedAnchors) {
+    const adjustment = adjustAnchor(anchor.date, definition.businessDayPolicy, horizon);
+    if (adjustment === null) continue;
+    if (
+      compareDates(adjustment.adjustedDate, horizon.from) < 0 ||
+      compareDates(adjustment.adjustedDate, horizon.through) > 0
+    ) {
+      continue;
+    }
+    occurrences.push({
       unadjustedDate: anchor.date,
       adjustedDate: adjustment.adjustedDate,
       adjustment,
       clampedFromDay: anchor.clampedFromDay,
-    };
-  });
+    });
+  }
 
   // Step 7: sort adjusted dates. Adjustment can reorder two anchors that were
   // adjacent, so this cannot be folded into the earlier sort.

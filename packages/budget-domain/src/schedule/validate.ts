@@ -17,7 +17,7 @@
  * malformed date literal in our own source is a bug, not user input.
  */
 
-import { isISODate } from "../shared/iso-date.ts";
+import { dayOfWeekIndex, isISODate } from "../shared/iso-date.ts";
 import {
   BUSINESS_DAY_POLICIES,
   MAX_CUSTOM_PERIOD_DAYS,
@@ -116,12 +116,45 @@ function sameMonthlyAnchor(a: MonthlyAnchor, b: MonthlyAnchor): boolean {
   return a.day === b.day;
 }
 
-function checkRecurrenceOrigin(origin: string, path: string, issues: ValidationIssue[]): void {
+/**
+ * Check the recurrence origin, including that it agrees with the stated weekday.
+ *
+ * The agreement check matters because the generator strides from the origin and
+ * never consults the weekday (§9.1 requires the cadence to be preserved from the
+ * unadjusted origin). Without this, a Friday schedule with a Thursday origin
+ * validates, generates Thursdays, and `describeCadence` reports "every two weeks
+ * on friday" — so the human-readable recurrence summary that CBD-67 §8.10
+ * requires would misdescribe the boundaries the same definition produces.
+ *
+ * Rejecting here rather than snapping the origin forward keeps §9.1 intact: the
+ * origin is the user's stated first occurrence, and silently moving it would
+ * shift every subsequent payday.
+ */
+function checkRecurrenceOrigin(
+  origin: string,
+  weekday: Weekday,
+  path: string,
+  issues: ValidationIssue[],
+): void {
   if (!isISODate(origin)) {
     issues.push({
       code: "recurrence-origin.invalid-date",
       path,
       message: `Enter a valid calendar date. Received ${JSON.stringify(origin)}.`,
+    });
+    return;
+  }
+  // A bad weekday is already reported by checkWeekday; do not pile on.
+  if (!isWeekday(weekday)) return;
+
+  const originWeekday = WEEKDAYS[dayOfWeekIndex(origin)];
+  if (originWeekday !== weekday) {
+    issues.push({
+      code: "paycheck.origin-weekday-mismatch",
+      path,
+      message:
+        `${origin} is a ${String(originWeekday)}, but this schedule pays on ${weekday}. ` +
+        `Choose a start date that falls on a ${weekday}.`,
     });
   }
 }
@@ -149,7 +182,12 @@ function checkPaycheckPattern(
       return;
     case "every-two-weeks":
       checkWeekday(pattern.weekday, "pattern.weekday", issues);
-      checkRecurrenceOrigin(pattern.recurrenceOrigin, "pattern.recurrenceOrigin", issues);
+      checkRecurrenceOrigin(
+        pattern.recurrenceOrigin,
+        pattern.weekday,
+        "pattern.recurrenceOrigin",
+        issues,
+      );
       return;
     case "twice-per-month": {
       const [first, second] = pattern.anchors;
@@ -169,7 +207,12 @@ function checkPaycheckPattern(
       return;
     case "custom-weekly-interval":
       checkWeekday(pattern.weekday, "pattern.weekday", issues);
-      checkRecurrenceOrigin(pattern.recurrenceOrigin, "pattern.recurrenceOrigin", issues);
+      checkRecurrenceOrigin(
+        pattern.recurrenceOrigin,
+        pattern.weekday,
+        "pattern.recurrenceOrigin",
+        issues,
+      );
       if (![1, 2, 3, 4].includes(pattern.everyWeeks)) {
         issues.push({
           code: "paycheck.interval-out-of-range",
