@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved — MVP Schedule Decisions v1.1, Product Owner approved August 15, 2026** |
-| Document version | 1.1 |
+| Document version | 1.1.1 |
 | Decision-set target | MVP Schedule Decisions v1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval of **v1.0** on August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude covering source and traceability, calendar and calculation, and architecture alignment (see traceability record §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent. **v1.1** carries its own review evidence in §8A and its approval state in §9. |
@@ -40,7 +40,7 @@ For CBD-71, validated means Product Owner approved, internally consistent, imple
 | CBD-70 | Deterministic Budget Calendar and Financial Scenario Catalog | 1.0 | August 14, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6422529) |
 | CBD-70 | Deterministic Calendar Example Set | 1.0 | August 14, 2026 | [Calendar examples](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6062090) |
 | CBD-70 | Acceptance Criteria Traceability and Review Record | 1.0 | August 14, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6225922) |
-| Cross-cutting | CoBudget Future Feature Register | Current at baseline | August 14, 2026 | [Future features](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) |
+| Cross-cutting | CoBudget Future Feature Register | Current at baseline | August 15, 2026 | [Future features](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) |
 
 The v1.0 baseline contained 50 approved governing criteria and 75 approved deterministic scenarios. Version 1.1 is a controlled amendment incorporating **CBD-69 v1.1, approved August 15, 2026**: notification preferences become recipient-controlled personal-account settings, and ALT-07 supplies the active cross-account denial evidence. The §8.5 impact assessment for that source-version change is recorded in the CBD-69 traceability record §12 and summarized in §8A below.
 
@@ -241,10 +241,13 @@ Required by §8.3 and §8.5. The v1.1 amendment previously carried neither.
 
 **Consumers.** CBD-72 §5.4.1 inherits this decision. Its open decision `OD-72-06` narrows to this register's approval and closes when §9 records it.
 
+**Editorial correction under §8.6, August 15, 2026.** The §2 baseline row for the CoBudget Future Feature Register moved from August 14 to August 15, 2026 after `FF-011` (category-specific budget horizons) was captured there. Impact review: `FF-011` is a newly captured future concept with target `_TBD_` and status `Captured`. It maps to no `DD-071` row — the deferrals in §5 map to `FF-001` through `FF-010` — and it changes no accepted decision, no deferral, and no expected outcome. `FF-011` sits adjacent to `FF-003` (carry-forward) and `FF-006` (allocation), and the Future Feature Register carries a disambiguation note confirming it reopens neither; the MVP positions stay fixed by `SD-071-028` and `SD-071-031`. Every decision status is unchanged, so the correction retains status under §8.6.
+
 ## 9. Approval record
 
 | Version | Date | Author | Review evidence | Product Owner decision |
 | --- | --- | --- | --- | --- |
+| 1.1.1 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Editorial correction under §8.6: the §2 baseline row for the CoBudget Future Feature Register moves from August 14 to August 15, 2026 after `FF-011` was captured there. The impact review in §8A records that `FF-011` maps to no `DD-071` row and changes no accepted decision, deferral, or expected outcome. | Editorial under §8.6; every decision status retained, v1.1 remains the approved set |
 | 0.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Initial consolidation of the frozen CBD-67 through CBD-70 baseline; validation and traceability review pending | Pending |
 | 0.2 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Product Owner review accepted all structural recommendations: split compound rows into SD-071-020–048, moved determinism to governance, enumerated business-day policies and alert triggers, separated permissions/enforcement/accessibility, reclassified DD-071-002, and split DD-071-004 from DD-071-010. | Content changes approved for continued review; final v1.0 approval pending |
 | 0.3 | August 14, 2026 | Claude with Alexander Wohlford as Product Owner | Resolved independent-review findings RF-71-05 through RF-71-07: corrected the nonexistent `CBD-68-AC17` citation to `CBD-68-AC16` in SD-071-048 and superseded SD-071-019, added source-criteria and scenario evidence to governance §3.4 as GC-01–08, restored the atomic-activation and idempotent-replay clause to SD-071-029 with `PREV-02` evidence, and added SD-071-049 for schedule-setup input validation. | Corrections applied for continued review; final v1.0 approval pending |
