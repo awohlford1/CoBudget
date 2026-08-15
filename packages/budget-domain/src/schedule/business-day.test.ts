@@ -5,6 +5,7 @@ import { addDays, daysBetween, toISODate } from "../shared/iso-date.ts";
 import {
   FEDERAL_RESERVE_CALENDAR,
   HolidayCoverageError,
+  addBusinessDays,
   adjustToBusinessDay,
   federalReserveHolidays,
   isBusinessDay,
@@ -229,5 +230,48 @@ describe("adjustment policies — CBD-68 §10.1", () => {
       }
       date = addDays(date, 1);
     }
+  });
+});
+
+describe("counting business days forward (CBD-68 §12, §13.2)", () => {
+  it("treats the starting date as day zero", () => {
+    // REC-03 fixes this: one business day after Friday 2026-08-21 is Monday
+    // 2026-08-24, not the Saturday and not the Friday itself.
+    assert.equal(addBusinessDays(toISODate("2026-08-21"), 1), "2026-08-24");
+  });
+
+  it("counts the fifth business day for the Late and suggestion windows", () => {
+    // Mon 24th is 1, Tue 25th 2, Wed 26th 3, Thu 27th 4, Fri 28th 5.
+    assert.equal(addBusinessDays(toISODate("2026-08-21"), 5), "2026-08-28");
+  });
+
+  it("skips a holiday inside the window rather than consuming a count", () => {
+    // Thanksgiving 2026 is Thursday 2026-11-26. From Monday 2026-11-23 the
+    // fifth business day is Tuesday 2026-12-01; a weekday-only count would
+    // wrongly give Monday 2026-11-30.
+    assert.equal(addBusinessDays(toISODate("2026-11-23"), 5), "2026-12-01");
+    assert.equal(isBusinessDay(toISODate("2026-11-26")), false);
+  });
+
+  it("counts from a start date that is not itself a business day", () => {
+    // A keep-original-date policy can leave an expectation on a Sunday. Day
+    // zero is still the date given, so counting begins the following Monday.
+    assert.equal(addBusinessDays(toISODate("2026-08-23"), 1), "2026-08-24");
+  });
+
+  it("refuses a count that is not a positive integer", () => {
+    for (const count of [0, -1, 1.5, Number.NaN]) {
+      assert.throws(
+        () => addBusinessDays(toISODate("2026-08-21"), count),
+        /count must be a positive integer/u,
+      );
+    }
+  });
+
+  it("throws rather than walking past verified coverage", () => {
+    assert.throws(
+      () => addBusinessDays(toISODate("2030-12-24"), 10),
+      (error: unknown) => error instanceof HolidayCoverageError,
+    );
   });
 });

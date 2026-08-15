@@ -201,6 +201,39 @@ export function isBusinessDay(date: ISODate): boolean {
 }
 
 /**
+ * The `count`th Federal Reserve business day strictly after `date`.
+ *
+ * `date` is day zero and is never counted, whether or not it is itself a
+ * business day — CBD-68 §13.2 states this directly ("The expected date is day
+ * zero") and §12 counts the Late window the same way. Scenario REC-03 fixes the
+ * behaviour: one business day after Friday 2026-08-21 is Monday 2026-08-24.
+ *
+ * Non-business days inside the run are skipped rather than consumed, so the
+ * fifth business day after Monday 2026-11-23 is Tuesday 2026-12-01 and not
+ * Monday 2026-11-30, because Thanksgiving falls inside the window.
+ *
+ * The walk needs no step cap of its own: {@link isBusinessDay} throws as soon
+ * as it leaves verified coverage, and inside coverage a business day never sits
+ * more than four days away. Leaving coverage throws rather than assuming
+ * weekday-only logic beyond it (PD-68-05).
+ */
+export function addBusinessDays(date: ISODate, count: number): ISODate {
+  if (!Number.isInteger(count) || count < 1) {
+    throw new RangeError(
+      `count must be a positive integer, received ${String(count)}. ` +
+        "Day zero is the date itself; there is nothing to count.",
+    );
+  }
+
+  let candidate = date;
+  for (let counted = 0; counted < count; ) {
+    candidate = addDays(candidate, 1);
+    if (isBusinessDay(candidate)) counted += 1;
+  }
+  return candidate;
+}
+
+/**
  * The evidence CBD-68 §10.2 requires every adjusted occurrence to retain.
  *
  * Returned rather than a bare date because §10.2 lists the unadjusted date, the
