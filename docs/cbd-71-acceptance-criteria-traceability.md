@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved — CBD-71 complete** |
-| Document version | 1.0 |
+| Status | **Draft v1.1 amendment — traceability review in progress** |
+| Document version | 1.1.0-draft |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude (see §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent |
 | Jira | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
@@ -27,15 +27,15 @@ CBD-71 is complete only when the decision register covers the frozen CBD-67 thro
 | CBD-71-AC05 | Cadence and calendar decisions are covered. | SD-071-020–026, SD-071-030, SD-071-033, SD-071-049; governance §3.4 (GC-01–09) | Checklist §3 | Met |
 | CBD-71-AC06 | Income, target, cash, transaction, and reconciliation states are covered. | SD-071-031–042 | Checklist §3 | Met |
 | CBD-71-AC07 | Changes, transition periods, proration, balance disposition, pending-change limit, and history are covered. | SD-071-026–029, SD-071-033, SD-071-045 | Checklist §3 | Met |
-| CBD-71-AC08 | Alerts, explanations, overrides, permissions, provenance, and audit are covered. | SD-071-034–048 | Checklist §3 | Met |
+| CBD-71-AC08 | Alerts, explanations, overrides, permissions, provenance, and audit are covered. | SD-071-034–048; amended SD-071-044 | Checklist §3 | Pending v1.1 approval; amendment evidence drafted |
 | CBD-71-AC09 | Accepted decisions have an auditable chain to CBD-1, CBD-11, CBD-67 through CBD-70, and scenarios. | Source column in SD-071-020–050; governance §3.4 chain and GC-01–09 source columns; register §2 | Source/traceability review in checklist §4 | Met; independent verification complete |
 | CBD-71-AC10 | Each accepted decision has one outcome and sufficient normal and exceptional evidence for design and testing. | Atomic selected behavior and scenario evidence in SD-071-020–050 | Checklist §3 | Met |
-| CBD-71-AC11 | Contradictory or ambiguous rules cannot be accepted. | Register §§6–8 | Checklist §§2, 4 | Met; all reviews complete with no unresolved contradiction |
+| CBD-71-AC11 | Contradictory or ambiguous rules cannot be accepted. | Register §§6–8 | Checklist §§2, 4 | Pending synchronization with CBD-70 and published Confluence mirrors |
 | CBD-71-AC12 | Deferred and unresolved decisions record rationale, impact, dependencies, and follow-up work. | Register §§5–6 | Checklist §§2, 5 | Met |
 | CBD-71-AC13 | Product, technical, security, privacy, accessibility, role, and operational implications are reviewed. | Register §§3.3–3.4 and implication column in SD-071-020–050 | Architecture-alignment review in checklist §4 | Met; architecture-alignment pass complete with RF-71-20 through RF-71-24 recorded as technical-design follow-ups |
 | CBD-71-AC14 | Owner, approval date, outcome, and conditions are recorded for every accepted decision. | Register §§3.2, 9 | Checklist §§2–3 | Met; approved August 14, 2026 |
-| CBD-71-AC15 | The approved set is versioned as MVP Schedule Decisions v1.0 and made authoritative. | Register §§1, 9 | Checklist §2 | Met; v1.0 issued August 14, 2026 |
-| CBD-71-AC16 | Material changes create revisions, preserve history, and identify affected artifacts. | Register §8 | Checklist §2 | Met; control defined and exercised across revisions 0.1 through 1.0 |
+| CBD-71-AC15 | The approved set is versioned and made authoritative. | Register §§1, 9 | Checklist §2 | v1.0 remains historical; v1.1 approval pending |
+| CBD-71-AC16 | Material changes create revisions, preserve history, and identify affected artifacts. | Register §8 | Checklist §2 | Met for revision creation; affected-artifact synchronization remains open |
 | CBD-71-AC17 | Final review confirms disposition and traceability of CBD-11-AC01 through AC20 and links unmet criteria. | Register source chains; this record §3 | Final review in checklist §4 | Met; §3 confirms all 20 CBD-11 criteria dispositioned |
 
 ## 3. CBD-11 disposition
@@ -91,6 +91,8 @@ No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted deci
 | RF-71-22 | Architecture alignment | Three data-model consequences of accepted decisions are not recorded in the architecture: a schedule version must reference its boundary-anchoring income schedule (SD-071-024), category identifiers must be stable and never reused for the residual-cent tie-break (SD-071-027, CBD-67 INV-84), and a confirmation identity must persist so activation replay stays idempotent (SD-071-029, GC-08). | Record all three as key data rules. | Open — technical design follow-up |
 | RF-71-23 | Architecture alignment | SD-071-048 makes accessible schedule and reconciliation interaction MVP behavior, but `architecture.md` states no accessibility baseline and its critical automated tests include no accessibility coverage. | Add an accessibility baseline and automated coverage to the architecture. | Open — technical design follow-up |
 | RF-71-24 | Architecture alignment | SD-071-034 depends on the financial-data provider supplying reliable authorization dates. The architecture names a provider adapter with Plaid first; if authorization dates are unreliable, the approved posted-or-settlement fallback becomes the normal path and changes observed period attribution. | Confirm provider authorization-date reliability under CBD-15 before implementation. | Open — provider evidence needed, tracked with FF-007 |
+| RF-71-25 | Product Owner v1.1 amendment | CBD-72 review established that notification channels and delivery preferences belong exclusively to the recipient's personal account, superseding the earlier relationship-level notification policy. | Amend CBD-69 INV-69-25 and scenarios; amend SD-071-044 and its evidence; re-run consistency and scenario checks; synchronize CBD-70 and Confluence; obtain Product Owner approval of the exact revision. | Implemented in repository drafts; downstream synchronization and approval pending |
+| RF-71-26 | Product Owner v1.1 amendment | CBD-72 AUD-72-011 separated the shared alert fact, recipient-personal state, and external delivery outcome. | Amend SD-071-044 and the permission-12 note to use shared event, mandatory personal instance, and optional delivery attempt; preserve event dedup, instance acknowledgement/archive, and delivery retry/privacy boundaries. | Implemented and synchronized August 15, 2026 |
 
 ## 6. Completion summary
 
@@ -120,3 +122,5 @@ No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted deci
 | 0.6 | August 14, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the completed calendar-and-calculation and architecture-alignment passes and findings RF-71-15 through RF-71-24. Active set is 31 decisions and 9 governance controls. Product Owner approval is the only remaining gate. | Draft; ready for Product Owner approval |
 | 0.7 | August 14, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the SD-071-034 back-reference to SD-071-050. Editorial; no criterion disposition changed. | Draft; ready for Product Owner approval |
 | 1.0 | August 14, 2026 | Alexander Wohlford — Product Owner | Recorded Product Owner approval of MVP Schedule Decisions v1.0. All 17 CBD-71 criteria met and all 20 CBD-11 criteria dispositioned. | **Approved; CBD-71 complete** |
+| 1.1.0-draft | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Recorded RF-71-25 and reopened affected traceability gates for the recipient-controlled personal-notification amendment. | Draft; synchronization and approval pending |
+| 1.1.1-draft | August 15, 2026 | Codex with Alexander Wohlford as Product Owner | Recorded RF-71-26 and synchronized SD-071-044 to the CBD-72 three-record alert model without changing calendar or financial decisions. | Draft; synchronization completed |

@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** |
-| Version | 1.0 |
+| Status | **Draft amendment — Product Owner review in progress** |
+| Version | 1.1.0-draft |
 | Owner | Alexander Wohlford |
 | Approval | Approved August 13, 2026 after Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
 | Schedule workflow input | [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) (paycheck/custom, Approved v1.0; RF-69-01 closed August 13, 2026) |
 | Governing specification | [CBD-69 — Period Edge Cases and Validation Rule Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
 | Traceability | [CBD-69 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
-| Last updated | August 13, 2026 |
+| Last updated | August 14, 2026 |
 
 ## 1. Purpose and conventions
 
@@ -53,7 +53,7 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 | AC08 | TYPE-01–03, REV-01, REV-01a, REV-01b, REV-02 |
 | AC09 | LATE-01, ALT-02 |
 | AC10 | LATE-01, REP-01 |
-| AC11 | ALT-01, ALT-02, ALT-03, ALT-04, ALT-05, ALT-06 |
+| AC11 | ALT-01, ALT-02, ALT-03, ALT-04, ALT-06, ALT-07 |
 | AC12 | OVR-01, OVR-02, REC-01, REC-02a, REV-01 |
 | AC13 | DATE-04, CAL-01–04 |
 | AC14 | All scenarios |
@@ -246,7 +246,7 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 ### ALT-01 — Informational warning cleared on removal
 
 * Input: a pending $300.00 charge on August 14 in a category with $250.00 remaining triggers an informational pending-activity warning. The authorization is removed without settlement on August 16 (as in PEND-02).
-* Expected: the informational warning fires once, on August 14. Its copy states that the pending charge **would** exceed the category, never that it has been exceeded (INV-69-23). It offers no acknowledgement action. When the authorization is removed on August 16 the warning clears itself with no user action; it is not re-fired, and no firm alert is ever created for this charge.
+* Expected: one deduplicated informational shared event is created on August 14 and fans out one mandatory instance per eligible recipient; optional external sends are separate attempts. Copy states the charge **would** exceed the category and no instance offers acknowledgement. Removal on August 16 resolves the event, closes all instances, suppresses queued attempts, creates no re-fire, and creates no firm event.
 * Evidence: specification §12.1–12.2; INV-69-15, INV-69-23.
 
 ### ALT-02 — Late-adjustment alert distinct from a current-period alert
@@ -258,26 +258,26 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 ### ALT-03 — Firm alert persists and is acknowledged
 
 * Input: settled spending of $310.00 against a $250.00 category target in the **active** Aug 17–23 period produces a firm settled-overspending alert. A Co-owner acknowledges it. No further transactions are added.
-* Expected: the alert states the overage as a fact, not a possibility, because the money has settled (INV-69-23). It offers an acknowledgement action, and acknowledging it records the actor and timestamp without changing any financial value or clearing the underlying overage. The alert does not clear itself, because the $60.00 overage remains true. A later, smaller settlement inside the same overage state does not re-fire it (§12.2). Contrast ALT-01, where the informational form self-clears and offers no acknowledgement.
+* Expected: one firm shared event fans out one mandatory instance per eligible recipient. The Co-owner acknowledges only their instance; event/fact, financial values, other instances, and delivery attempts remain unchanged. The event does not self-clear; optional channel retries create no duplicate event or instance. Contrast ALT-01's resolved informational event.
 * Evidence: specification §12.1–12.2, §4; INV-69-15, INV-69-23.
 
 ### ALT-04 — Accountability Partner receives an informational alert by default
 
-* Input: an invitation has been accepted, so the person now holds the active Accountability Partner role. The Partner is provisioned for the affected category, and applicable masking permits a category-level amount but hides restricted merchant detail. No separate informational-alert opt-in has been taken. A pending $180.00 charge on August 14 in a category with $150.00 remaining triggers an informational warning (as in ALT-01).
-* Expected: the active, provisioned Accountability Partner receives the masked informational alert by default. The alert contains only information permitted by provisioning and masking, states that the charge **would** exceed the category rather than asserting a final overage (INV-69-23), and remains subject to the final CBD-12 consent and notification rules. A pending invitation or a Partner without provisioning for the category receives nothing.
+* Input: an invitation has been accepted, so the person now holds the active Accountability Partner role with comprehensive financial and schedule resource scope. No resource grant or separate informational-alert opt-in exists. A pending $180.00 charge on August 14 in a category with $150.00 remaining triggers an informational warning (as in ALT-01).
+* Expected: the shared informational event creates one Partner-personal in-app instance under the fixed boundary. Optional delivery attempts follow only the Partner's settings. Content may include readable merchant/payee, amount, date, category, and pending state, but no secrets, other instance/delivery state, administration/security data, or cross-space data. Pending/inactive invitations receive no instance or attempt.
 * Evidence: INV-69-25; specification §4, §12.2.
 
-### ALT-05 — Primary Owner mutes informational alerts to the Accountability Partner without affecting firm alerts
+### ALT-06 — Category-group Viewer receives a scoped firm alert but never an informational one
 
-* Input: the same active and provisioned Accountability Partner relationship as ALT-04. The Primary Owner mutes informational alerts to the Accountability Partner. A new pending charge then triggers an informational warning, and separately a settled transaction creates a firm overspending alert.
-* Expected: after the mute, the Accountability Partner does not receive the new informational warning. The firm overspending alert is still delivered, unaffected by the mute. The mute action is recorded with the actor and timestamp. An attempt by a Collaborator, or by the Accountability Partner themself, to perform the same mute is denied and recorded.
-* Evidence: INV-69-25; specification §4, §12.2, §13.
-
-### ALT-06 — Provisioned Viewer receives a scoped firm alert but never an informational one
-
-* Input: a Viewer is explicitly provisioned to see one category's settled activity and audit history (per §4's scoped-visibility pattern). Settled spending in that category later exceeds its remaining budget, producing a firm overspending alert; separately, a pending charge in the same category would exceed the budget, producing an informational warning.
-* Expected: the Viewer receives the firm overspending alert, because it reports a fact about data already provisioned to them. The Viewer never receives the informational warning, regardless of provisioning, because they hold no permission to act on still-changing pending activity (§4).
+* Input: a Viewer has a Category-group profile whose selected “Housing categories” group includes the tested category, settled activity, and required audit context. Settled spending later exceeds the remaining target, producing a firm alert; a separate pending charge would produce an informational warning for eligible modifying roles.
+* Expected: the Viewer receives the personal firm-alert instance because every settled fact is readable through the current profile. The Viewer never receives the informational warning. Removing/changing the profile immediately invalidates alert access.
 * Evidence: INV-69-24; specification §4, §12.2.
+
+### ALT-07 — Accountability Partner controls personal notification preferences
+
+* Input: the same active and authorized Accountability Partner relationship as ALT-04. The Partner enables push but disables email for the supported informational event/category in their personal account. The Primary Owner then attempts to change those preferences through a direct request.
+* Expected: eligible informational content may be delivered through push but not email, subject to current authorization and masking. The owner's request is denied because notification channels and delivery preferences belong only to the Partner's personal account. No budget-space relationship control exists, and the denial changes no preference, access, or alert-eligibility state.
+* Evidence: INV-69-25; specification §4, §12.2.
 
 ## 13. Calendar and schedule-validation fixtures
 
@@ -310,6 +310,6 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 * CAL-04 was re-verified against CBD-68 Approved v1.0 on August 13, 2026 (RF-69-01 closed; see the traceability record).
 * Automatic-match confidence-scoring fixtures (exact thresholds an implementation would use to distinguish PEND-03 from PEND-04 automatically) are deferred to implementation scope; see FF-007 in the governing specification §18.
 * Export file-format-specific fixtures are deferred; see FF-008 in the governing specification §18.
-* Role-specific alert-eligibility fixtures now exist (ALT-04, ALT-05, ALT-06); further role-specific fixtures outside alerts and overrides (for example, an Accountability Partner viewing but not acting on a Duplicate-review state) may still be added once CBD-12 publishes its role model. All current fixtures use the CBD-67-derived placeholder role set.
+* Active role-specific alert-eligibility fixtures are ALT-04, ALT-06, and ALT-07. Further role-specific fixtures outside alerts and overrides may still be added as CBD-12/CBD-72 progresses.
 
 

@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** |
-| Document version | 1.0 |
+| Status | **Draft v1.1 synchronization review** |
+| Document version | 1.1.0-draft |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of three Codex technical review passes, an independent Claude review that re-derived every date, interval, and monetary result, and the resolution of findings RF-70-01 through RF-70-06 (§8). |
 | Jira subtask | [CBD-70](https://cobudget.atlassian.net/browse/CBD-70) |
@@ -161,7 +161,7 @@ These IDs identify the reusable calendars defined in the [CBD-70 Deterministic C
 | ALERT-01 | Informational pending warning clears when pending activity disappears | Recovery | CAL-CROSS-SETTLE | CBD-69-AC04, AC06, AC11 | Approved |
 | ALERT-02 | Settled overspending creates a firm alert that can be acknowledged | Boundary | CAL-HISTORY-01 | CBD-67-AC14; CBD-69-AC11 | Approved |
 | ALERT-03 | Late adjustment creates a distinct completed-period alert | Boundary | CAL-HISTORY-01 | CBD-69-AC09, AC10, AC11 | Approved |
-| ALERT-04 | Partner provisioning, masking, mute, and firm-alert independence remain explicit | Boundary | CAL-SAME-DATE | CBD-69-AC11, AC12, AC15 | Approved |
+| ALERT-04 | Partner authorization, masking, personal delivery preferences, and alert-type behavior remain explicit | Boundary | CAL-SAME-DATE | CBD-69-AC11, AC12, AC15 | Draft amendment |
 | REP-01 | Budget-date and statement-date views explain different period placement | Normal | CAL-CROSS-SETTLE | CBD-69-AC01, AC10, AC15 | Approved |
 | AUDIT-01 | Disputed match, override, late settlement, and category correction remain reconstructable | End-to-end | CAL-CROSS-SETTLE | CBD-69-AC05, AC06, AC09, AC11, AC12, AC15 | Approved |
 | E2E-01 | Weekly-to-monthly change preserves target, income, transaction, alert, and audit invariants | End-to-end | CAL-TRANS-MID, CAL-MULTI-01 | CBD-67-AC10, AC12, AC14–AC18; CBD-68-AC04–AC06; CBD-69-AC04, AC05, AC11, AC12, AC15 | Approved |
@@ -1521,7 +1521,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | Targets | CAT-01 target remains `USD 100.00` |
 | Income / cash | Income remains `USD 0.00`; cash remains `USD 1,000.00` because no settlement occurred |
 | Transactions / bills | T0 shows settled `USD 40.00` plus provisional `USD 75.00`, never settled `USD 115.00`; T1 moves TX-HOLD-01 to Removed-without-settlement, removes the provisional amount, and restores settled spending `USD 40.00`; no bill changes |
-| Validation / alerts | T0 creates one informational warning stating that provisional activity would make CAT-01 `USD 15.00` over if it settles; it does not assert a settled overage. T1 self-clears that warning and creates no firm alert |
+| Validation / alerts | T0 creates one deduplicated informational shared event and one mandatory instance per eligible recipient; copy says provisional activity would make CAT-01 `USD 15.00` over. Optional sends are separate attempts. T1 resolves the event, closes instances, suppresses queued attempts, and creates no firm event |
 | Audit | Removal event retains stable ID, last-known amount/date/category, prior Pending-unmatched state, removal timestamp, source, and `75.00 → 0.00` provisional effect |
 | Non-changes | No settled expense, refund, reversal line item, firm alert, target change, cash movement, or period change is created |
 
@@ -1915,7 +1915,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | --- | --- |
 | Classification | Failure; tags: `read-only`, `hidden-controls`, `least-privilege` |
 | Authority | CBD-67-AC09, CBD-69-AC12 |
-| Base fixture | CAL-TRANS-BOUND; SPACE-01; ACTOR-02 as explicitly provisioned Viewer |
+| Base fixture | CAL-TRANS-BOUND; SPACE-01; ACTOR-02 as Planning-profile Viewer |
 | Starting state | Monthly/1st schedule is active; one confirmed Weekly/Monday change is pending effective 2028-06-19; ACTOR-02 may view this schedule and pending summary but has no schedule-mutation permission |
 
 | Checkpoint | Exact time | Event |
@@ -1927,13 +1927,13 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | --- | --- |
 | Period / schedule | Authorized schedule dates and pending effective date are read-only; active and pending versions remain unchanged |
 | Targets | Only provisioned target information is visible; no target edit control exists and no value changes |
-| Income / cash | Only explicitly provisioned values are visible; restricted values are omitted or masked rather than shown as zero; no financial value changes |
+| Income / cash | Planning profile exposes no accounts, transactions, balances, actuals, or actual-derived values; restricted values are omitted rather than shown as zero; no financial value changes |
 | Transactions / bills | Only provisioned records are visible; no mutation or override control exists |
 | Validation / alerts | Configure, Preview change, Confirm, Edit pending change, and Cancel pending change controls are absent; read-only context explains that schedule changes require an authorized role; no denied-action error because no action was attempted |
 | Audit | Viewing creates no successful or denied schedule-mutation audit event; ordinary access logging, if present, remains separate from financial audit history |
 | Non-changes | Merely viewing cannot create a proposal, preview, pending revision, cancellation, schedule version, period, target, financial mutation, or security-denial event |
 
-**Given** an explicitly provisioned Viewer may read the active schedule and pending summary, **when** ACTOR-02 opens both views, **then** authorized data is visible but every schedule-mutation control is absent and no denied action is fabricated.
+**Given** a Planning-profile Viewer may read the active schedule and pending summary, **when** ACTOR-02 opens both views, **then** profile-authorized data is visible but every schedule-mutation control is absent and no denied action is fabricated.
 
 #### SEC-02 — Permission revoked during editing causes a denied and audited mutation
 
@@ -1969,12 +1969,12 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | --- | --- |
 | Classification | Failure; tags: `least-privilege`, `direct-request`, `override`, `reconciliation`, `security-audit` |
 | Authority | CBD-69-AC12, CBD-69-AC14, CBD-69-AC15 |
-| Base fixture | CAL-CROSS-SETTLE; independent SPACE-SEC-OVERRIDE and SPACE-SEC-MATCH; provisioned VIEWER-01 and active provisioned PARTNER-01; CAT-01 target `USD 200.00` |
+| Base fixture | CAL-CROSS-SETTLE; independent SPACE-SEC-OVERRIDE and SPACE-SEC-MATCH; Category-group VIEWER-01 scoped to the CAT-01 group and active PARTNER-01; CAT-01 target `USD 200.00` |
 | Starting state | SPACE-SEC-OVERRIDE contains settled TX-SEC-OVR `USD 82.00`, posted and budget-dated 2028-03-02, cash `USD 918.00`, spending `USD 82.00`. SPACE-SEC-MATCH contains pending `USD 75.00` authorized 2028-02-29 plus posted `USD 82.00` dated 2028-03-02 in Duplicate-review, counted once at `USD 82.00`, cash `USD 918.00`. Income and bills are `USD 0.00` or empty; neither actor has override or reconciliation permission; no denial event exists |
 
 | Checkpoint | Exact time | Event |
 | --- | --- | --- |
-| T0 — Read-only views | `2028-03-02T13:00:00-05:00` America/New_York | Each actor opens explicitly provisioned transaction detail; override and Match/Unmatch/Split/Dismiss controls are absent |
+| T0 — Read-only views | `2028-03-02T13:00:00-05:00` America/New_York | Each actor opens currently authorized transaction/category activity; override and Match/Unmatch/Split/Dismiss controls are absent |
 | T1 — Direct override request | `2028-03-02T13:05:00-05:00` America/New_York | VIEWER-01 submits a direct request to change TX-SEC-OVR's budget date to 2028-02-29 |
 | T2 — Direct match request | `2028-03-02T13:10:00-05:00` America/New_York | PARTNER-01 submits a direct request to match the Duplicate-review records |
 
@@ -2025,8 +2025,8 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | --- | --- |
 | Classification | Recovery; tags: `informational-alert`, `pending`, `self-clear`, `recipient-scope` |
 | Authority | CBD-69-AC04, CBD-69-AC06, CBD-69-AC11 |
-| Base fixture | CAL-CROSS-SETTLE; SPACE-01; CAT-01; TX-ALERT-PEND; ACTOR-01; provisioned VIEWER-01 and active provisioned PARTNER-01 |
-| Starting state | PERIOD-XSET-01 CAT-01 target `USD 100.00`, settled spending `USD 40.00`, pending `USD 0.00`, cash `USD 1,000.00`; PARTNER-01 informational delivery is unmuted; no alert exists |
+| Base fixture | CAL-CROSS-SETTLE; SPACE-01; CAT-01; TX-ALERT-PEND; ACTOR-01; Category-group VIEWER-01 scoped to CAT-01 and active PARTNER-01 |
+| Starting state | PERIOD-XSET-01 CAT-01 target `USD 100.00`, settled spending `USD 40.00`, pending `USD 0.00`, cash `USD 1,000.00`; active PARTNER-01 is authorized for the category and has personal delivery preferences configured; no alert exists |
 
 | Checkpoint | Exact time | Event |
 | --- | --- | --- |
@@ -2039,9 +2039,9 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | Targets | CAT-01 target remains `USD 100.00` |
 | Income / cash | Income remains `USD 0.00`; cash remains `USD 1,000.00` because nothing settles |
 | Transactions / bills | T0 keeps settled spending `USD 40.00` and separately shows provisional `USD 75.00`; T1 moves the hold to Removed-without-settlement and restores pending to `USD 0.00`; bills unchanged |
-| Validation / alerts | T0 creates one informational warning stating that pending activity would make CAT-01 `USD 15.00` over if it settles; it never says the target has been exceeded. Eligibility includes ACTOR-01 and active, provisioned, unmuted PARTNER-01 but excludes VIEWER-01. Actual external delivery remains subject to CBD-12 consent and channel rules. T1 clears the in-product warning automatically without acknowledgement and creates no firm alert |
-| Audit | Pending import and removal preserve amount/date/category, recipient eligibility result, alert creation/clear reason, timestamps, and last-known state |
-| Non-changes | Informational delivery does not change permission, provisioning, financial state, or acknowledgement state; removal creates no settled spending, cash movement, firm alert, target change, or boundary change |
+| Validation / alerts | T0 creates one informational shared event; ACTOR-01 and active PARTNER-01 receive mandatory personal instances while VIEWER-01 is ineligible. Optional external sends become separate attempts under each recipient's preferences. T1 resolves the event, closes both instances, suppresses queued attempts, and creates no firm event or acknowledgement state |
+| Audit | Pending import/removal, shared event trigger/dedup/resolution, instance eligibility/closure, and privacy-safe delivery outcomes retain correlated identities and timestamps |
+| Non-changes | Informational resolution/delivery changes no permission, profile, financial state, acknowledgement state, or another event; removal creates no settled spending, cash movement, firm event, target change, or boundary change |
 
 **Given** a pending hold would exceed CAT-01 only provisionally, **when** the hold disappears, **then** the informational warning clears itself, no Viewer is eligible for it, and settled spending remains exactly `USD 40.00`.
 
@@ -2051,7 +2051,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | --- | --- |
 | Classification | Boundary; tags: `firm-alert`, `settled-overspending`, `acknowledgement` |
 | Authority | CBD-67-AC14, CBD-69-AC11 |
-| Base fixture | CAL-HISTORY-01; SPACE-01; CAT-01; TX-ALERT-SETTLED; ACTOR-01; provisioned VIEWER-01 and active provisioned PARTNER-01 |
+| Base fixture | CAL-HISTORY-01; SPACE-01; CAT-01; TX-ALERT-SETTLED; ACTOR-01; Category-group VIEWER-01 scoped to CAT-01 and active PARTNER-01 |
 | Starting state | February `[2028-02-01, 2028-03-01)` is active; CAT-01 target `USD 100.00`, settled spending `USD 90.00`, cash `USD 1,000.00`; no pending activity or alert |
 
 | Checkpoint | Exact time | Event |
@@ -2065,9 +2065,9 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | Targets | CAT-01 target remains `USD 100.00`; no negative amount carries to March |
 | Income / cash | Income remains `USD 0.00`; cash becomes `1,000.00 − 20.00 = USD 980.00` |
 | Transactions / bills | Settled spending becomes `90.00 + 20.00 = USD 110.00`; overspending is `110.00 − 100.00 = USD 10.00`; bills unchanged |
-| Validation / alerts | T0 creates one firm alert that states CAT-01 is `USD 10.00` over. Recipient eligibility includes ACTOR-01, provisioned VIEWER-01, and active provisioned PARTNER-01; actual external delivery remains subject to CBD-12 consent and channel rules. T1 records acknowledgement but the firm alert does not self-clear while underlying overspending remains |
-| Audit | Settlement, alert identity/type/eligible scope, overage calculation, acknowledgement actor, and acknowledgement timestamp are recorded |
-| Non-changes | Acknowledgement changes no spending, target, cash, transaction, period, role, provisioning, or alert fact and does not create a second alert |
+| Validation / alerts | T0 creates one firm shared event and one mandatory instance for ACTOR-01, profile-eligible VIEWER-01, and active PARTNER-01. Optional delivery attempts follow personal settings. T1 acknowledges only ACTOR-01's instance; Viewer/Partner instances and the shared event remain unchanged and no instance self-clears |
+| Audit | Settlement, shared event identity/type/material revision, instance identities/eligibility, overage calculation, ACTOR-01 acknowledgement, and privacy-safe delivery-attempt outcomes are correlated without exposing destinations |
+| Non-changes | Acknowledgement changes no spending, target, cash, transaction, period, role, profile, shared event/fact, other instance, or delivery attempt and creates no duplicate event/instance |
 
 **Given** settled spending rises from `USD 90.00` to `USD 110.00` against a `USD 100.00` target, **when** ACTOR-01 acknowledges the firm alert, **then** `USD 10.00` overspending remains a settled fact and the acknowledgement is recorded without clearing or changing it.
 
@@ -2099,24 +2099,24 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 
 **Given** a May 14 authorization settles June 1 and makes its completed period `USD 22.00` overspent, **when** the alert is viewed, **then** it is unmistakably a firm late-adjustment alert and every completed-period boundary, version, and target remains unchanged.
 
-#### ALERT-04 — Partner provisioning, masking, mute, and firm-alert independence remain explicit
+#### ALERT-04 — Partner authorization, masking, and personal notification control remain explicit
 
 | Field | Value |
 | --- | --- |
-| Classification | Boundary; tags: `accountability-partner`, `masking`, `mute`, `firm-independence`, `denied-action` |
+| Classification | Boundary; tags: `accountability-partner`, `masking`, `personal-notification-settings`, `firm-alert`, `denied-action` |
 | Authority | CBD-69-AC11, CBD-69-AC12, CBD-69-AC15 |
-| Base fixture | CAL-SAME-DATE; SPACE-ALERT-ROLE; CAT-01 target `USD 100.00`; settled spending `USD 90.00`; cash `USD 1,000.00`; Primary Owner ACTOR-01; authorized COLLAB-01; provisioned VIEWER-01; active provisioned PARTNER-01; pending invite INVITEE-01; active unprovisioned PARTNER-02 |
-| Starting state | PARTNER-01 may see category name and amount but merchant detail is masked; informational delivery is initially unmuted. INVITEE-01 has no role or access. PARTNER-02 has no CAT-01 provisioning. No pending activity, alert, acknowledgement, mute audit event, transaction, bill, or income exists |
+| Base fixture | CAL-SAME-DATE; SPACE-ALERT-ROLE; CAT-01 target `USD 100.00`; settled spending `USD 90.00`; cash `USD 1,000.00`; Primary Owner ACTOR-01; authorized COLLAB-01; Category-group VIEWER-01 scoped to CAT-01; active PARTNER-01; pending invite INVITEE-01; inactive/revoked PARTNER-02 |
+| Starting state | PARTNER-01 may see category name and amount but merchant detail is masked; push is enabled and email is disabled in PARTNER-01's personal preferences. INVITEE-01 has no role or access. PARTNER-02 has no CAT-01 authorization. No pending activity, alert, acknowledgement, transaction, bill, or income exists |
 
 | Checkpoint | Exact time | Event |
 | --- | --- | --- |
 | T0 — First pending warning | `2028-04-03T10:00:00-04:00` America/New_York | TX-ROLE-A authorizes `USD 15.00`, which would make provisional spending `USD 105.00` |
-| T1 — Owner mute | `2028-04-03T10:05:00-04:00` America/New_York | ACTOR-01 mutes informational alerts to PARTNER-01 |
+| T1 — Owner preference-change attempt | `2028-04-03T10:05:00-04:00` America/New_York | ACTOR-01 submits a direct request to disable PARTNER-01's push delivery and enable email |
 | T2 — First hold removed | `2028-04-03T10:10:00-04:00` America/New_York | TX-ROLE-A disappears without settlement and its warning clears |
 | T3 — Second pending warning | `2028-04-03T10:15:00-04:00` America/New_York | TX-ROLE-B authorizes `USD 20.00`, which would make provisional spending `USD 110.00` |
 | T4 — Second hold settles | `2028-04-03T10:20:00-04:00` America/New_York | TX-ROLE-B settles for `USD 20.00`, producing settled overspending `USD 10.00` |
-| T5 — Collaborator unmute attempt | `2028-04-03T10:25:00-04:00` America/New_York | COLLAB-01 submits a direct request to unmute PARTNER-01 |
-| T6 — Partner unmute attempt | `2028-04-03T10:30:00-04:00` America/New_York | PARTNER-01 submits the same direct request |
+| T5 — Collaborator preference-change attempt | `2028-04-03T10:25:00-04:00` America/New_York | COLLAB-01 submits a direct request to change PARTNER-01's email preference |
+| T6 — Partner changes own preference | `2028-04-03T10:30:00-04:00` America/New_York | PARTNER-01 disables push for the supported event/category through personal account settings |
 
 | Outcome layer | Expected result at T6 |
 | --- | --- |
@@ -2124,11 +2124,11 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | Targets | CAT-01 target remains `USD 100.00` |
 | Income / cash | Income remains `USD 0.00`; cash becomes `1,000.00 − 20.00 = USD 980.00` only at settlement |
 | Transactions / bills | TX-ROLE-A ends Removed-without-settlement. TX-ROLE-B replaces pending `USD 20.00` with settled `USD 20.00`; settled spending is `90.00 + 20.00 = USD 110.00`; bills remain empty |
-| Validation / alerts | T0 eligibility includes ACTOR-01, COLLAB-01, and masked PARTNER-01; it excludes VIEWER-01, INVITEE-01, and PARTNER-02. After T1, T3 eligibility excludes PARTNER-01 but still includes ACTOR-01/COLLAB-01. T4 creates a firm alert eligible to ACTOR-01, COLLAB-01, provisioned VIEWER-01, and PARTNER-01 despite the informational mute. External delivery remains subject to CBD-12. T5/T6 are denied with the permission explanation |
-| Audit | Warning create/clear identities, eligibility and masking results, Owner mute actor/time, settlement, firm alert, and both denied unmute security events are append-only; the mute value remains true |
-| Non-changes | Mute changes no provisioning, masking, role, financial value, or firm eligibility; pending/inactive/unprovisioned identities receive no eligibility; denied requests change no mute or alert state |
+| Validation / alerts | T0 eligibility includes ACTOR-01, COLLAB-01, and masked PARTNER-01; it excludes VIEWER-01, INVITEE-01, and PARTNER-02. T1 is denied and changes no Partner preference. T3 again includes PARTNER-01, with external delivery following the Partner's unchanged personal settings. T4 creates a firm alert eligible to ACTOR-01, COLLAB-01, authorized VIEWER-01, and PARTNER-01. T5 is denied. T6 succeeds because the Partner controls their own settings and affects only later external delivery, not underlying alert eligibility or access. |
+| Audit | Warning create/clear identities, authorization and masking results, denied cross-account preference-change attempts, settlement, firm alert, and PARTNER-01's own preference change are attributable without copying private destinations into budget-space audit data. |
+| Non-changes | Personal preference changes do not alter authorization, masking, role, financial values, or alert eligibility; pending/inactive/unauthorized identities receive no eligible alert; denied requests change no preference or alert state. |
 
-**Given** active, inactive, provisioned, unprovisioned, muted, Viewer, and Collaborator cases, **when** pending and settled overages occur, **then** informational and firm eligibility, masking, mute independence, and denied actions resolve exactly without presuming CBD-12 delivery consent.
+**Given** active, inactive, authorized, unauthorized, Viewer, Partner, Owner, and Collaborator cases, **when** pending and settled overages and preference-change requests occur, **then** alert eligibility and masking remain budget-space authorization outcomes while notification channels and delivery preferences remain controlled only by each recipient.
 
 #### REP-01 — Budget-date and statement-date views explain different period placement
 
@@ -2270,6 +2270,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 
 | Version | Date | Author | Change |
 | --- | --- | --- | --- |
+| 1.1.0-draft | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Synchronized ALERT-01 and ALERT-04 with CBD-69/CBD-71/CBD-72: personal notification preferences replace relationship-level notification control; owner and Collaborator cross-account changes are denied; the Partner may change only their own settings. Scenario count remains 75. |
 | 1.0 | August 14, 2026 | Alexander Wohlford, Product Owner | **Approved.** Product Owner approval granted alongside the traceability record v1.0 and calendar example set v1.0. All 75 registry rows move from Drafted to Approved. No scenario ID, classification, calendar dependency, checkpoint, expected outcome, calculation, or Given/When/Then statement changed at approval. |
 | 0.10 | August 14, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Resolved independent-review findings RF-70-02 through RF-70-04 and RF-70-06. Replaced E2E-01's `CBD-67-AC10–AC18` range with an explicit list, since the range asserted AC11 (boundary-aligned change without proration) that a mid-period prorated transition cannot demonstrate, and AC13, which has no positive-remainder case in that scenario. Added CBD-68-AC08 to INC-10 and CBD-69-AC14 to E2E-02 to match the traceability record. Moved PER-M-01 to a 2027-12-20 confirmation with a year-boundary checkpoint so CAL-YEAR-01's stated purpose is exercised. Bound E2E-02 to the new `HOL-FED-2029-v1` fixture. Corrected the FIN-01 tie-break note: the CAT-02/CAT-03 remainders are exactly equal at `3/7`, not equal only at display precision. No expected period, monetary result, validation message, alert, or audit outcome changed. |
 | 0.9 | August 14, 2026 | Codex with Alexander Wohlford as owner | Added nine review-driven scenarios for preview freshness and atomicity, accessibility, amount-only exceptions, holiday coverage/corrections, twice-per-week and remaining paycheck patterns, direct-request authorization, Accountability Partner controls, and cross-layer audit/report behavior. Tightened deterministic wording, financial baselines, eligibility semantics, and fixture references; all 75 scenarios are drafted. |
