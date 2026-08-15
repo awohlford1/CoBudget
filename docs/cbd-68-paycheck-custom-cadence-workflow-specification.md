@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | Approved |
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval, on the evidence of an independent AI-assisted critical audit of Codex-authored drafts by Claude (see traceability record §11, RF-68-17–20), consistent with the CBD-67 precedent (CBD-67 traceability record §7) |
 | Jira | [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) |
@@ -13,7 +13,7 @@
 | Scenario catalog | [CBD-68 scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3342349) |
 | Traceability and review | [CBD-68 traceability record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3768321) |
 | Future features | [CoBudget Future Feature Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) |
-| Last updated | August 13, 2026 |
+| Last updated | August 15, 2026 |
 
 > **Approved:** This document defines binding product behavior for paycheck-based and custom budget periods. All product decisions (PD-68-01–17) are confirmed, no open decisions remain, and all cross-document review findings (RF-68-01–20) are resolved. Approved by Alexander Wohlford — Product Owner — on August 13, 2026.
 
@@ -367,7 +367,7 @@ Income is actual only on its posted, settled, or manually confirmed receipt date
 Reconciliation uses two tiers:
 
 1. **Automatic exact match:** The system may reconcile automatically only when one unique eligible expected occurrence and one unique eligible actual transaction have the same receipt date and exact currency amount, have compatible source identity, and have no competing candidate.
-2. **Suggested match:** A non-exact candidate is shown for user confirmation when the actual receipt date is within five Federal Reserve business days before or after the expected date, inclusive, and the actual amount is within 5% above or below the expected amount, inclusive.
+2. **Suggested match:** A non-exact candidate is shown for user confirmation only when **both** tolerances are satisfied: the actual receipt date is within five Federal Reserve business days before or after the expected date, inclusive, **and** the actual amount is within 5% above or below the expected amount, inclusive. A candidate that satisfies only one of the two tolerances is not suggested.
 
 A business day for the matching window uses PD-68-05. The expected date is day zero. The window includes the fifth qualifying business day on each side and excludes weekends and Federal Reserve closure days when counting.
 
@@ -393,8 +393,8 @@ Additional rules:
 | Situation | Projection outcome | Actual outcome | Boundary/target effect |
 | --- | --- | --- | --- |
 | Unique exact date, amount, currency, and compatible source | Automatically reconciled | Count actual income | None |
-| Within ±5 Federal Reserve business days, non-exact date | Suggested; user confirmation required | Count on actual receipt date independently of matching | None |
-| Within ±5% expected amount, non-exact amount | Suggested; user confirmation required | Count actual amount independently of matching | None |
+| Within ±5 Federal Reserve business days **and** within ±5% of the expected amount, with the date, the amount, or both non-exact | Suggested; user confirmation required | Count on the actual receipt date and amount independently of matching | None |
+| Within one tolerance but outside the other | Not suggested automatically; remains available to an explicitly initiated manual search | Count actual if qualified | None |
 | Missing | Past due/unmatched | No actual income | None |
 | Unexpected | No projection or candidate match | Count actual if qualified | None |
 | Multiple candidates | Suggestions require review; no automatic match | Actual retained | None |
@@ -781,5 +781,3 @@ No CBD-68 product decision remains open. All cross-document findings are reconci
 - [x] Complete final customer-language and accessibility review.
 - [x] Complete final scenario and traceability review.
 - [x] Record formal approval.
-
-
