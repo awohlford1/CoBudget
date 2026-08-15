@@ -1,0 +1,22 @@
+{
+  "name": "@cobudget/budget-domain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure domain logic for budget schedules, periods, and transaction classification. No I/O, no framework, no persistence.",
+  "exports": {
+    "./shared": "./src/shared/index.ts",
+    "./schedule": "./src/schedule/index.ts",
+    "./income": "./src/income/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.66.0",
+    "eslint": "^9.39.5",
+    "typescript": "^5.9.0"
+  }
+}
