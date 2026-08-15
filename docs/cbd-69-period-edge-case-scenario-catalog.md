@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft amendment — Product Owner review in progress** |
-| Version | 1.1.0-draft |
+| Version | 1.1.1-draft |
 | Owner | Alexander Wohlford |
-| Approval | Approved August 13, 2026 after Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review |
+| Approval | **v1.0 approved** August 13, 2026 after Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review. **v1.1 is not approved** — see the traceability record's Version 1.1 amendment gates. |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
 | Schedule workflow input | [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) (paycheck/custom, Approved v1.0; RF-69-01 closed August 13, 2026) |
 | Governing specification | [CBD-69 — Period Edge Cases and Validation Rule Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
 | Traceability | [CBD-69 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
-| Last updated | August 14, 2026 |
+| Last updated | August 15, 2026 |
 
 ## 1. Purpose and conventions
 
@@ -23,7 +23,9 @@ These fixtures demonstrate deterministic outcomes for every row of the governing
 
 ### Coverage depth
 
-Following the CBD-67 catalog convention, this catalog documents two levels of evidence: **fully worked fixtures**, which show concrete dates, amounts, and step-by-step expected outcomes, and **compact assertion-table entries**, which state input and expected outcome without an extended narrative. Both levels are binding acceptance evidence. This version contains **36 fully worked fixtures** and no compact assertion-table entries; every required case family received a full fixture.
+Following the CBD-67 catalog convention, this catalog documents two levels of evidence: **fully worked fixtures**, which show concrete dates, amounts, and step-by-step expected outcomes, and **compact assertion-table entries**, which state input and expected outcome without an extended narrative. Both levels are binding acceptance evidence. This version contains **37 fully worked fixtures** and no compact assertion-table entries; every required case family received a full fixture.
+
+One further ID, `ALT-05`, is retained as a **withdrawn** entry rather than a fixture: the capability it verified was removed by the v1.1 amendment. It is counted separately and its ID is never reassigned. The count previously read 36 and had not been updated when `REV-01b` and `ALT-07` were added.
 
 | Prefix | Meaning |
 | --- | --- |
@@ -53,7 +55,7 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 | AC08 | TYPE-01–03, REV-01, REV-01a, REV-01b, REV-02 |
 | AC09 | LATE-01, ALT-02 |
 | AC10 | LATE-01, REP-01 |
-| AC11 | ALT-01, ALT-02, ALT-03, ALT-04, ALT-06, ALT-07 |
+| AC11 | ALT-01, ALT-02, ALT-03, ALT-04, ALT-06, ALT-07 (`ALT-05` withdrawn in v1.1) |
 | AC12 | OVR-01, OVR-02, REC-01, REC-02a, REV-01 |
 | AC13 | DATE-04, CAL-01–04 |
 | AC14 | All scenarios |
@@ -266,6 +268,12 @@ Following the CBD-67 catalog convention, this catalog documents two levels of ev
 * Input: an invitation has been accepted, so the person now holds the active Accountability Partner role with comprehensive financial and schedule resource scope. No resource grant or separate informational-alert opt-in exists. A pending $180.00 charge on August 14 in a category with $150.00 remaining triggers an informational warning (as in ALT-01).
 * Expected: the shared informational event creates one Partner-personal in-app instance under the fixed boundary. Optional delivery attempts follow only the Partner's settings. Content may include readable merchant/payee, amount, date, category, and pending state, but no secrets, other instance/delivery state, administration/security data, or cross-space data. Pending/inactive invitations receive no instance or attempt.
 * Evidence: INV-69-25; specification §4, §12.2.
+
+### ALT-05 — Withdrawn in v1.1 (relationship-level alert muting)
+
+* **Status: Withdrawn, not renumbered.** ALT-05 tested a Primary Owner muting informational alerts to an Accountability Partner while firm alerts continued. The v1.1 amendment (RF-69-19) removed relationship-level notification control entirely: notification channels and delivery preferences are personal-account settings that no other member may view or alter.
+* The fixture is withdrawn rather than deleted because the capability it verified no longer exists, and because a removed record must remain visible as removed rather than vanish. `ALT-05` is retired and must never be reassigned.
+* Replacement coverage: `ALT-07` verifies that an owner's attempt to change a Partner's delivery preferences is denied and changes no preference, access, or eligibility state.
 
 ### ALT-06 — Category-group Viewer receives a scoped firm alert but never an informational one
 
