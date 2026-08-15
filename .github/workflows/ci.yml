@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  web:
-    name: Web checks
+  checks:
+    name: Lint, type-check, test, and build
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -27,5 +27,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint, type-check, and build
+      - name: Run all workspace checks
         run: npm run check
