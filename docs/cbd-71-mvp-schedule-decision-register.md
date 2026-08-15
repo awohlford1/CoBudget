@@ -1,24 +1,26 @@
-# CBD-71 — MVP Schedule Decisions v1.1 Draft Register
+# CBD-71 — MVP Schedule Decisions v1.1 Register
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v1.1 amendment — Product Owner review in progress** |
-| Document version | 1.1.0-draft |
+| Status | **v1.1 amendment complete — ready for Product Owner approval** |
+| Document version | 1.1.0 |
 | Decision-set target | MVP Schedule Decisions v1.1 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude covering source and traceability, calendar and calculation, and architecture alignment (see traceability record §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent |
+| Reviewer | Alexander Wohlford — Product Owner approval of **v1.0** on August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude covering source and traceability, calendar and calculation, and architecture alignment (see traceability record §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent. **v1.1** carries its own review evidence in §8A and its approval state in §9. |
 | Jira subtask | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
 | Confluence page | [CBD-71 — MVP Schedule Decisions v1.0 Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
 | Parent | [CBD-11](https://cobudget.atlassian.net/browse/CBD-11) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
 | Repository baseline | `88be982` |
-| Last updated | August 14, 2026 |
+| Last updated | August 15, 2026 |
 
 ## 1. Purpose and authority
 
 This register consolidates the approved schedule, income, transaction-classification, validation, and scenario-governance decisions from CBD-67 through CBD-70 into one atomic, traceable decision set.
 
-Version 1.0 was approved by the Product Owner on August 14, 2026. Decisions with status **Accepted for MVP** are authoritative for design, technical specification, implementation, and testing. The approved source specifications remain in force as the frozen baseline; if this register is found to conflict with a frozen source, the conflict must be resolved through the change control in §8 rather than silently interpreted.
+Version 1.0 was approved by the Product Owner on August 14, 2026. Version 1.1 is a controlled amendment to a single decision, `SD-071-044`; §9 records its approval state, and until that row shows an approval this document's v1.1 changes are proposals rather than authority. Every other decision carries its v1.0 approval unchanged.
+
+Decisions with status **Accepted for MVP** are authoritative for design, technical specification, implementation, and testing. The approved source specifications remain in force as the frozen baseline; if this register is found to conflict with a frozen source, the conflict must be resolved through the change control in §8 rather than silently interpreted.
 
 For CBD-71, validated means Product Owner approved, internally consistent, implementation-ready, and architecture-aligned. It does not mean customer or market validated.
 
@@ -32,21 +34,25 @@ For CBD-71, validated means Product Owner approved, internally consistent, imple
 | CBD-68 | Paycheck and Custom Budget Cadence Workflow Specification | 1.0 | August 13, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3735553) |
 | CBD-68 | Acceptance Criteria Traceability and Review Record | 1.0 | August 13, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3768321) |
 | CBD-68 | Paycheck and Custom Cadence Scenario Catalog | 1.0 | August 13, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3342349) |
-| CBD-69 | Period Edge Cases and Validation Rule Specification | 1.1.0-draft | August 14, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
-| CBD-69 | Acceptance Criteria Traceability and Review Record | 1.1.0-draft | August 14, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
-| CBD-69 | Period Edge-Case Scenario Catalog | 1.1.0-draft | August 14, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3571722) |
+| CBD-69 | Period Edge Cases and Validation Rule Specification | 1.1 | August 15, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
+| CBD-69 | Acceptance Criteria Traceability and Review Record | 1.1 | August 15, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
+| CBD-69 | Period Edge-Case Scenario Catalog | 1.1 | August 15, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3571722) |
 | CBD-70 | Deterministic Budget Calendar and Financial Scenario Catalog | 1.0 | August 14, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6422529) |
 | CBD-70 | Deterministic Calendar Example Set | 1.0 | August 14, 2026 | [Calendar examples](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6062090) |
 | CBD-70 | Acceptance Criteria Traceability and Review Record | 1.0 | August 14, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6225922) |
 | Cross-cutting | CoBudget Future Feature Register | Current at baseline | August 14, 2026 | [Future features](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) |
 
-The v1.0 baseline contained 50 approved governing criteria and 75 approved deterministic scenarios. Version 1.1 is a controlled amendment incorporating CBD-69 v1.1.0-draft: notification preferences become recipient-controlled personal-account settings, and ALT-07 supplies the active cross-account denial evidence. This amendment is not authoritative until the review and approval gates in §8–9 pass.
+The v1.0 baseline contained 50 approved governing criteria and 75 approved deterministic scenarios. Version 1.1 is a controlled amendment incorporating **CBD-69 v1.1, approved August 15, 2026**: notification preferences become recipient-controlled personal-account settings, and ALT-07 supplies the active cross-account denial evidence. The §8.5 impact assessment for that source-version change is recorded in the CBD-69 traceability record §12 and summarized in §8A below.
+
+The amendment changes exactly one decision, `SD-071-044`. It touches no calendar, financial, classification, reconciliation, or date-derivation rule, so the 50 governing criteria and 75 scenarios carry forward unchanged in count and in content, with `CBD-69-AC11` and `INV-69-25` now citing their approved v1.1 text. This amendment becomes authoritative when the approval gate in §9 records it.
 
 ## 3. Register conventions
 
 ### 3.1 Status and classification
 
-Allowed decision statuses are **Proposed**, **Accepted for MVP**, **Deferred**, **Unresolved**, and **Superseded**. Classification states whether the behavior belongs to MVP, deferred scope, or unresolved scope. A proposed MVP decision becomes Accepted for MVP only after every validation gate passes and Product Owner approval is recorded. Both conditions were met for SD-071-020 through SD-071-050 on August 14, 2026.
+Allowed decision statuses are **Proposed**, **Accepted for MVP**, **Deferred**, **Unresolved**, and **Superseded**. Classification states whether the behavior belongs to MVP, deferred scope, or unresolved scope. A proposed MVP decision becomes Accepted for MVP only after every validation gate passes and Product Owner approval is recorded. Both conditions were met for SD-071-020 through SD-071-050 on August 14, 2026, at version 1.0.
+
+**One exception applies at version 1.1.** `SD-071-044` was reopened by the v1.1 amendment and carries the status **Proposed v1.1 amendment** until §9 records approval of this revision. Its v1.0 text remains the approved historical behavior in the meantime. No other decision's status changed.
 
 ### 3.2 Common ownership and approval fields
 
@@ -57,7 +63,7 @@ Unless a row says otherwise:
 * Revision history: active SD-071-020–048 were introduced in register version 0.2 on August 14, 2026 from the frozen approved source baseline; SD-071-049 was introduced in version 0.3 and SD-071-050 in version 0.6, both on August 14, 2026; superseded SD-071-001–019 retain their version 0.1 history.
 * Status: Accepted for MVP.
 
-These common values are part of every row. They were recorded when the Product Owner approved this exact revision as MVP Schedule Decisions v1.0.
+These common values are part of every row **except `SD-071-044`**, whose approval date and status are superseded by the pending v1.1 amendment described in §3.1 and tracked in §9. Read that row's own Class / status cell rather than these defaults. For every other row the values above were recorded when the Product Owner approved that exact revision as MVP Schedule Decisions v1.0.
 
 ### 3.3 Implication codes
 
@@ -91,7 +97,9 @@ Common chain for every control: CBD-1-AC01/07 → CBD-11-AC13–15/18/20 → CBD
 
 These controls consolidate former SD-071-018 and the replay rule formerly grouped into SD-071-014. Their acceptance is evaluated through the validation checklist rather than as user-facing behavior. GC-01 through GC-09 are governance IDs for citation only; they are not product decisions and were not approved as MVP behavior. They are binding validation controls on every accepted decision.
 
-## 4. Accepted atomic MVP decisions
+## 4. Atomic MVP decisions
+
+Every row below is **Accepted for MVP** except `SD-071-044`, which is **Proposed v1.1 amendment** pending the §9 approval of this revision. Read each row's Class / status cell as authoritative over the section heading and over the §3.2 common fields.
 
 Each source entry records the auditable chain from Epic and Story through this subtask, predecessor criteria, and CBD-70 scenario evidence. Scenario IDs refer to the approved CBD-70 catalog.
 
@@ -186,7 +194,9 @@ DD-071-001–009 were introduced in version 0.1. DD-071-010 was introduced in ve
 
 | ID | Question | MVP impact | Dependency | Owner | Status |
 | --- | --- | --- | --- | --- | --- |
-| None | No unresolved in-MVP product decision was identified in the frozen approved baseline. | No block identified. Any new ambiguity found during review must receive a stable `UD-071-*` ID and block the affected decision’s acceptance. | — | Product Owner | Current |
+| UD-071-01 | Does `SD-071-044`'s v1.1 amendment carry approved source evidence? | Blocked `SD-071-044`'s promotion to Accepted for MVP while its cited CBD-69 evidence was a draft. | CBD-69 v1.1 | Product Owner | **Closed August 15, 2026.** CBD-69 v1.1 was approved, so the cited `CBD-69-AC11`/`INV-69-25` evidence is approved source. `SD-071-044` now waits only on the §9 approval of this register revision. |
+| UD-071-02 | Does the MVP channel set in `SD-071-044` match the delivery phasing in `architecture.md`? | `SD-071-044` treats email, push, and SMS as opt-in MVP channels; `architecture.md` phases delivery as in-app and email first with push and SMS later. Raised as RF-71-21. | Product Owner decision plus technical design | Product Owner | **Open.** Recorded rather than silently resolved. Classified non-blocking for the v1.1 amendment because the amendment changes alert-record structure and preference ownership, not the channel set; the conflict predates it and is unchanged by it. Must be closed before schedule implementation. |
+| Other | No further unresolved in-MVP product decision was identified in the frozen approved baseline. | No block identified. Any new ambiguity found during review must receive a stable `UD-071-*` ID and block the affected decision's acceptance. | — | Product Owner | Current |
 
 ## 7. Cross-decision consistency findings
 
@@ -206,6 +216,31 @@ DD-071-001–009 were introduced in version 0.1. DD-071-010 was introduced in ve
 5. A source-version change requires an impact assessment before its behavior enters this register.
 6. Editorial corrections may retain the decision status only when the impact review proves that no expected outcome changed.
 
+## 8A. Version 1.1 change record and impact assessment
+
+Required by §8.3 and §8.5. The v1.1 amendment previously carried neither.
+
+**Source-version change (§8.5).** CBD-69 moved from Approved v1.0 to Approved v1.1 on August 15, 2026. The impact assessment for that change is recorded in the CBD-69 traceability record §12 and is accepted here. Exactly one CBD-69 criterion changed (`AC-11`); one invariant was revised (`INV-69-25`) and one clarified (`INV-69-24`); one fixture was added (`ALT-07`) and one withdrawn (`ALT-05`). No CBD-69 classification rule, calculation, or date-derivation rule changed.
+
+**Affected scope (§8.3).**
+
+| Dimension | Affected items |
+| --- | --- |
+| Decision | `SD-071-044` only. No other SD-071 or DD-071 row changes status, text, or evidence. |
+| CBD-1 criteria | AC01, AC07 — unchanged in disposition; cited through the existing chain. |
+| CBD-11 criteria | AC06, AC17, AC20 — unchanged in disposition. |
+| CBD-67 / CBD-68 criteria | None. CBD-68-AC10/AC16 and PD-68-13/16 remain cited without change. |
+| CBD-69 criteria | `AC-11`; invariants `INV-69-23`, `INV-69-24`, `INV-69-25`. |
+| CBD-71 criteria | AC08, AC09, AC10, AC13 — the criteria `SD-071-044` reports against; dispositions unchanged. |
+| Scenario IDs | `ALERT-04`, `ALT-07`, `INC-03–07`, `SEC-03` remain cited. `ALT-05` is withdrawn in CBD-69 and was never cited by this register. CBD-70's 75 approved scenarios are unaffected. |
+| Data-model fields | Three alert layers replace a single alert record: shared event (type, source/material revision, safe fact, dedup key, lifecycle, audit correlation), recipient-personal instance (event/recipient/membership, authorization version, read state, firm acknowledgement, archive/dismiss), and delivery attempt (channel, privacy-safe destination reference, template version, status/times, provider outcome, retry lineage). Personal settings remain account-scoped. |
+| Interfaces | Informational instances expose no acknowledgement control; firm instances expose recipient-only acknowledgement and archive; personal notification settings and delivery status are visible only to the account holder; no interface exposes another recipient's instance or delivery attempt. |
+| Alerts | Event-level deduplication and cooldown; idempotent per-recipient fan-out; informational resolution closing instances and suppressing queued attempts; firm events that do not self-clear; retries that create no new event or instance. |
+| Audit events | Layer-separated: shared-event trigger/dedup/resolution, instance eligibility and personal state changes, delivery outcome without raw destinations or secrets. |
+| Tests | CBD-69 §16 alert-eligibility coverage under `INV-69-24` and `INV-69-25`; `ALT-07` cross-account denial; per-layer deduplication, fan-out idempotency, and retry-without-duplication assertions. |
+
+**Consumers.** CBD-72 §5.4.1 inherits this decision. Its open decision `OD-72-06` narrows to this register's approval and closes when §9 records it.
+
 ## 9. Approval record
 
 | Version | Date | Author | Review evidence | Product Owner decision |
@@ -219,5 +254,7 @@ DD-071-001–009 were introduced in version 0.1. DD-071-010 was introduced in ve
 | 0.7 | August 14, 2026 | Claude with Alexander Wohlford as Product Owner | Added the SD-071-050 back-reference to SD-071-034 at Product Owner direction, so the expense-date rule names the override that may change its derived result. Editorial under §8.6; no expected outcome changed. | Corrections applied for continued review; final v1.0 approval pending |
 | 1.0 | August 14, 2026 | Alexander Wohlford — Product Owner | All five required review passes complete: source and traceability, calendar and calculation, decision quality, architecture alignment, and Product Owner approval. Findings RF-71-01 through RF-71-19 resolved; RF-71-20 through RF-71-24 recorded as out-of-scope follow-ups. | **Approved.** SD-071-020 through SD-071-050 are Accepted for MVP and authoritative. |
 | 1.1.0-draft | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Incorporated the CBD-69/CBD-72 notification amendment into SD-071-044: personal channels and delivery preferences are recipient-controlled. Updated the CBD-69 source baseline and scenario evidence. | Draft; source, scenario, consistency, and Product Owner approval gates pending |
+| 1.1.1-draft | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Synchronized SD-071-044 to the CBD-72 three-record alert model. | Draft; approval gates pending |
+| 1.1.0 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Completed the v1.1 amendment so it can be approved. Updated the §2 baseline to CBD-69 **Approved v1.1** and recorded the §8.5 impact assessment plus the §8.3 change record as new §8A — the amendment previously carried neither. Carved `SD-071-044` out of the §3.1 and §3.2 blanket-approval clauses, which asserted that every row through SD-071-050 was approved on August 14; retitled §4 so a Proposed row no longer sits under an "Accepted" heading. Replaced the empty §6 unresolved register with `UD-071-01` (closed by the CBD-69 v1.1 approval) and `UD-071-02` (the open RF-71-21 channel-scope conflict). Aligned the three companion documents on one version number and corrected the v1.0 reviewer evidence carried on a v1.1 document. No decision text other than `SD-071-044` changed. | **Ready for Product Owner approval.** All amendment gates closed except the approval itself |
 
 Version 1.0 was issued on August 14, 2026 after the companion validation checklist and traceability record were completed and the Product Owner explicitly approved this exact decision set. Findings RF-71-20 through RF-71-24 remain open as technical-design, CBD-12, and CBD-15 follow-ups; none changes an accepted decision, and each must be resolved in its own scope. Any later change to this register follows §8.
