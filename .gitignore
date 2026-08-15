@@ -5,6 +5,16 @@ node_modules/
 .next/
 dist/
 build/
+
+# Next.js regenerates this on every dev/build and rewrites its own contents
+# depending on which one ran last: `next build` points it at .next/types,
+# `next dev` at .next/dev/types. Tracking it made every switch between the two
+# show up as a spurious modification. Safe to ignore here because apps/web
+# tsconfig.json already includes both .next/types and .next/dev/types directly,
+# so `tsc --noEmit` passes without this file even on a clean checkout with no
+# .next directory — verified, not assumed. Note this departs from the
+# create-next-app default, which commits it.
+next-env.d.ts
 coverage/
 .turbo/
 .expo/
