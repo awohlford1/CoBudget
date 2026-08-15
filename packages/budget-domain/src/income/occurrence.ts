@@ -31,16 +31,18 @@
  *   {@link OccurrenceStatus} because §12 confirms it, but this module never
  *   returns it — a caller holding version lineage assigns it.
  *
- * **One gap in §12, resolved deliberately.** Late "begins on the next Federal
- * Reserve business day", so for a Friday payday the Saturday and Sunday after it
- * are past the expected date but before the Late window opens, and §12's table
- * names no status for them. Scenario REC-03 confirms the timing without closing
- * the gap: a Friday 2026-08-21 expectation becomes Late on Monday 2026-08-24.
- * Those days are reported as `expected-today`, whose income and forecast
- * behaviour §12 defines identically to Late minus the label. Reporting them as
- * Late instead would contradict the rule and would tell a user their pay is late
- * while the banks that owe it are shut. Worth tightening in CBD-68 so the label
- * is stated rather than inferred.
+ * **The Late window opens and closes on different bases, deliberately.** It
+ * opens on the calendar day after the expected date: that business day has
+ * closed without the paycheck, so the expectation is already unmet the moment it
+ * ends. It closes at the end of the fifth Federal Reserve business day, which
+ * measures how long a legitimate interbank transfer may still take.
+ *
+ * The asymmetry is the point rather than an oversight. §12 originally opened the
+ * window "on the next Federal Reserve business day", which left a Friday payday
+ * with no status at all across the following weekend — neither still due nor yet
+ * late. Opening on the calendar day labels those days for what they are; closing
+ * on business days keeps the deadline fair to the banking system. Corrected in
+ * CBD-68 §12 under CBD-100.
  *
  * Coverage bound: the Late window is computed from the Federal Reserve calendar,
  * so this module inherits `business-day.ts`'s verified range and throws outside
@@ -209,10 +211,8 @@ function elapsedStatus(
   if (elapsed < 0) return "projected";
   if (elapsed === 0) return "expected-today";
 
-  // The gap described in the module doc: past the expected date, but the Late
-  // window has not opened because the next business day has not arrived.
-  if (compareDates(asOf, addBusinessDays(expected, 1)) < 0) return "expected-today";
-
+  // Late opens on the calendar day after, and closes on the fifth business day.
+  // See the module doc for why the two ends are measured differently.
   const lateEnds = addBusinessDays(expected, LATE_WINDOW_BUSINESS_DAYS);
   return compareDates(asOf, lateEnds) <= 0 ? "late" : "missing";
 }

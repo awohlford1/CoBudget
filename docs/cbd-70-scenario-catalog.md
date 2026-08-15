@@ -1182,7 +1182,7 @@ Reconciliation at both checkpoints: `cash 3,000.00 + secondary actual receipt 0.
 | --- | --- | --- |
 | T0 — Early receipt | `2028-03-15T09:00:00-04:00` America/New_York | SPACE-EARLY imports settled INCOME-ACT-EARLY `USD 2,000.00` dated 2028-03-15 |
 | T1 — Early link confirmed | `2028-03-15T09:05:00-04:00` America/New_York | ACTOR-01 confirms the unique suggested match to INCOME-EXP-MAR17 |
-| T2 — Late status | `2028-03-20T00:00:00-04:00` America/New_York | SPACE-LATE's unreconciled occurrence is Late on the next Federal Reserve business day |
+| T2 — Late status | `2028-03-20T00:00:00-04:00` America/New_York | SPACE-LATE's unreconciled occurrence is Late, having become so on 2028-03-18, the calendar day after its expected date |
 | T3 — Late receipt | `2028-03-20T09:00:00-04:00` America/New_York | SPACE-LATE imports settled INCOME-ACT-LATE `USD 2,000.00` dated 2028-03-20 and ACTOR-01 confirms the unique suggestion |
 
 | Outcome layer | Expected result after the applicable confirmation |
@@ -2240,7 +2240,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | T0 — Schedule confirmed | `2028-12-01T09:00:00-05:00` America/New_York | ACTOR-01 confirms previewed boundaries 2028-12-11, 2028-12-22, and 2029-01-08 with verified 2028 and 2029 holiday provenance |
 | T1 — Expense authorized | `2028-12-21T10:00:00-05:00` America/New_York | TX-E2E-02 authorizes `USD 75.00` in `[2028-12-11, 2028-12-22)` |
 | T2 — Adjusted anchor boundary | `2028-12-22T00:00:00-05:00` America/New_York | `[2028-12-22, 2029-01-08)` opens and the paycheck becomes Expected today |
-| T3 — Paycheck late | `2028-12-26T00:00:00-05:00` America/New_York | After the weekend and December 25 closure, the unreconciled paycheck becomes Late on the next Federal Reserve business day |
+| T3 — Paycheck late | `2028-12-26T00:00:00-05:00` America/New_York | The unreconciled paycheck has been Late since 2028-12-23, the calendar day after its expected date, across the weekend and the December 25 closure |
 | T4 — Paycheck received | `2028-12-26T09:00:00-05:00` America/New_York | Actual income `USD 2,000.00` posts on 2028-12-26 |
 | T5 — Date-variance match confirmed | `2028-12-26T09:05:00-05:00` America/New_York | ACTOR-01 confirms the unique suggested link to the December 22 expectation |
 | T6 — Expense settles late | `2028-12-26T10:00:00-05:00` America/New_York | TX-E2E-02 settles for `USD 82.00` after its authorization-date period ended |

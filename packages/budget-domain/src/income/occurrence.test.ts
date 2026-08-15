@@ -187,13 +187,13 @@ describe("the expected-income lifecycle (§12)", () => {
     assert.equal(occurrenceStatus(occurrence, toISODate("2026-08-21"), null), "expected-today");
   });
 
-  it("does not report Late before the window opens", () => {
-    // §12 opens Late on the next business day, and REC-03 confirms that is
-    // Monday 2026-08-24 for a Friday 2026-08-21 expectation. The weekend in
-    // between is past the expected date but not Late — see the module doc.
+  it("reports Late from the calendar day after, weekend included", () => {
+    // The expected business day closed without the paycheck, so the expectation
+    // is unmet from the next day whether or not banks are open. Waiting for the
+    // next business day would leave a Friday payday unlabelled all weekend.
     const occurrence = expectedOn("2026-08-21");
-    assert.equal(occurrenceStatus(occurrence, toISODate("2026-08-22"), null), "expected-today");
-    assert.equal(occurrenceStatus(occurrence, toISODate("2026-08-23"), null), "expected-today");
+    assert.equal(occurrenceStatus(occurrence, toISODate("2026-08-22"), null), "late");
+    assert.equal(occurrenceStatus(occurrence, toISODate("2026-08-23"), null), "late");
     assert.equal(occurrenceStatus(occurrence, toISODate("2026-08-24"), null), "late");
   });
 
@@ -223,6 +223,9 @@ describe("the expected-income lifecycle (§12)", () => {
     const asOf = toISODate("2026-12-31");
 
     assert.equal(occurrenceStatus(occurrence, asOf, toISODate("2026-08-21")), "reconciled");
+    // Saturday: already Late under the calendar-day rule, so a receipt that day
+    // is a late fulfilment rather than an on-time one.
+    assert.equal(occurrenceStatus(occurrence, asOf, toISODate("2026-08-22")), "reconciled-late");
     assert.equal(occurrenceStatus(occurrence, asOf, toISODate("2026-08-24")), "reconciled-late");
     assert.equal(occurrenceStatus(occurrence, asOf, toISODate("2026-09-30")), "reconciled-late");
   });

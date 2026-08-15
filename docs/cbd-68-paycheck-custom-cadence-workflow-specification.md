@@ -331,12 +331,14 @@ Confirmed statuses and transitions:
 | --- | --- | --- |
 | Projected | Before the adjusted expected date | Included in current expected-income total and forward cash-flow projection; excluded from actual income |
 | Expected today | On the adjusted expected date | Included in expected income and near-term forecast; excluded from actual income until qualifying receipt |
-| Late | Beginning on the next Federal Reserve business day through the end of the fifth Federal Reserve business day after the expected date | Remains in expected-income total and near-term forecast, visibly labeled Late; excluded from actual income |
+| Late | Beginning the calendar day after the expected date, once that business day has closed without receipt, through the end of the fifth Federal Reserve business day after the expected date | Remains in expected-income total and near-term forecast, visibly labeled Late; excluded from actual income |
 | Missing | After the fifth Federal Reserve business day passes without a confirmed match | Remains in the historical expected-income total and expected-versus-actual variance; excluded from forward-looking cash projections and actual income |
 | Reconciled | Linked under PD-68-06 | Expected and actual remain separate; actual is counted on actual receipt date |
 | Reconciled late | A Late or Missing occurrence later reconciles | Original period preserves its expectation; actual belongs to the receipt-date period; cross-period link explains fulfillment |
 | Skipped occurrence | User explicitly applies the existing Skip occurrence exception before or after the expected date | Removed from the current expected-income total and forward forecast; original expectation and skip remain in audit/forecast-revision history |
 | Replaced | Superseded by a regenerated schedule version while history is retained | Governed by schedule-version history |
+
+The Late window opens and closes on different bases, which is deliberate. It opens on the **calendar** day after the expected date, because that business day has closed without the paycheck and the expectation is unmet from that moment. It closes at the end of the fifth Federal Reserve **business** day, because that measures how long a legitimate interbank transfer may still take. An earlier revision opened the window on the next Federal Reserve business day, which left a Friday payday with no status across the following weekend — neither still due nor yet late.
 
 There is no separate Dismiss, Mark not expected, or Not received resolution action. **Skip occurrence** expresses the same user intention at any lifecycle stage and is reversible. If actual income arrives after a skip, it is unexpected actual income unless the user reverses the skip and reconciles it.
 

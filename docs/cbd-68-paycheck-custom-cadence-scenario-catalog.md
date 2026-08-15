@@ -318,7 +318,7 @@ Every scenario records:
 
 **Then:**
 
-* On the next Federal Reserve business day it becomes Late and remains in current expected income and the near-term forecast.
+* On the calendar day after the expected date it becomes Late and remains in current expected income and the near-term forecast. A Friday expectation is Late on the Saturday, not on the following Monday.
 * After the fifth Federal Reserve business day passes, it becomes Missing.
 * Missing remains in the expected-date period's expected-income total and negative variance but is removed from forward-looking cash projection.
 * Actual income, balances, targets, and boundaries do not change.
