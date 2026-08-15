@@ -713,11 +713,11 @@ Every scenario records:
 
 **Then:** Information is visible subject to masking, but schedule, exception, match, unmatch, and confirmation controls are unavailable.
 
-### PERM-03 — Provisioned Viewer
+### PERM-03 — Profile-scoped Viewer
 
 **Evidence:** AC13, AC16.
 
-**Given:** Viewer is explicitly provisioned for schedule/projection access.
+**Given:** Viewer has a Planning or Full-budget profile that includes schedule/projection access.
 
 **When:** The user attempts the described schedule action.
 

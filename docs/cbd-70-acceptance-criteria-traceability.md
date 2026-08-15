@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** |
-| Document version | 1.0 |
+| Status | **Draft v1.1 synchronization review** |
+| Document version | 1.1.0-draft |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of three Codex technical review passes, an independent Claude review that re-derived every date, interval, and monetary result, and the resolution of findings RF-70-01 through RF-70-06 (§8). |
 | Jira subtask | [CBD-70](https://cobudget.atlassian.net/browse/CBD-70) |
@@ -30,12 +30,12 @@ Only the final-approved artifacts in this table may determine CBD-70 expected ou
 | CBD-67 | Acceptance Criteria Traceability and Review Record | 1.5 | August 12, 2026 | [Traceability](cbd-67-acceptance-criteria-traceability.md) | 19 |
 | CBD-68 | Paycheck and Custom Budget Cadence Workflow Specification | 1.0 | August 13, 2026 | [Specification](cbd-68-paycheck-custom-cadence-workflow-specification.md) | 16 |
 | CBD-68 | Acceptance Criteria Traceability and Review Record | 1.0 | August 13, 2026 | [Traceability](cbd-68-acceptance-criteria-traceability.md) | 16 |
-| CBD-69 | Period Edge Cases and Validation Rule Specification | 1.0.1 | August 13, 2026 | [Specification](cbd-69-period-edge-cases-validation-rule-specification.md) | 15 |
-| CBD-69 | Acceptance Criteria Traceability and Review Record | 1.0.1 | August 13, 2026 | [Traceability](cbd-69-acceptance-criteria-traceability.md) | 15 |
+| CBD-69 | Period Edge Cases and Validation Rule Specification | 1.1.0-draft | August 14, 2026 | [Specification](cbd-69-period-edge-cases-validation-rule-specification.md) | 15 |
+| CBD-69 | Acceptance Criteria Traceability and Review Record | 1.1.0-draft | August 14, 2026 | [Traceability](cbd-69-acceptance-criteria-traceability.md) | 15 |
 
 The superseded `cbd-69-period-edge-cases-validation-specification.md` draft was removed from the repository in `6ea0d31`. It was never authoritative for CBD-70 and no longer exists as a file that could be read by mistake.
 
-The frozen baseline contains **50 governing criteria**: 19 from CBD-67, 16 from CBD-68, and 15 from CBD-69. A governing-source revision requires an explicit CBD-70 impact assessment and traceability review before it can change expected outcomes.
+The v1.0 frozen baseline contains **50 governing criteria**: 19 from CBD-67, 16 from CBD-68, and 15 from CBD-69. The v1.1 draft performs the required impact assessment for CBD-69's notification-preference amendment; no calendar or financial calculation changes.
 
 ### 2.1 Baseline re-pin and D04 impact assessment
 
@@ -50,6 +50,7 @@ The cited CBD-67 Specification version `1.0` was additionally an inferred value:
 | CBD-68 Specification / Traceability | 1.0 | 1.0 | No change. |
 | CBD-69 Specification | 1.0 | 1.0.1 | **Editorial only.** v1.0.1 corrected §17 Dependencies and a front-matter row that cited stale CBD-67 and CBD-68 versions. No classification rule, invariant, or edge-case row changed. No CBD-70 outcome is affected. |
 | CBD-69 Traceability | 1.0 | 1.0.1 | **Editorial only.** v1.0.1 rewrote the RF-69-02 resolution text, which had described a linked refund as using its own posted date. TYPE-03 already implements the corrected rule — a linked refund classifies to the budget date of the expense it refunds and falls back to its own posted date only without a reliable link — so the record now agrees with the catalog. No CBD-70 outcome is affected. |
+| CBD-69 Specification / Traceability | 1.0.1 | 1.1.0-draft | **Material alert-permission amendment.** Personal notification preferences replace relationship-level notification control. ALERT-01 and ALERT-04 are synchronized; no date, interval, category, amount, cash, target, or schedule result changes. |
 
 No expected period, monetary result, validation message, alert, audit outcome, or acceptance-criterion mapping changed as a result of this re-pin. The 50-criterion inventory in §3 was re-verified against the re-pinned sources and remains 19 / 16 / 15.
 
@@ -252,6 +253,8 @@ These mechanical checks support, but do not replace, the four required review pa
 
 | Version | Date | Author | Change |
 | --- | --- | --- | --- |
+| 1.1.0-draft | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Re-pinned the CBD-69 source amendment and synchronized ALERT-01/04 to recipient-controlled personal notification preferences. All 50 criteria and 75 scenarios remain mapped; monetary and calendar results are unchanged. |
+| 1.1.1-draft | August 15, 2026 | Codex with Alexander Wohlford as Product Owner | Synchronized ALERT-01/02 and pending-removal fixtures to the CBD-72 three-record model: shared event, recipient-personal instance, and delivery attempt. Calendar and financial outcomes remain unchanged. |
 | 1.0 | August 14, 2026 | Alexander Wohlford, Product Owner | **Approved.** Product Owner approval granted for the complete CBD-70 package: this record, the scenario catalog v1.0, and the calendar example set v1.0. Approval follows three Codex technical review passes, an independent Claude review, and the resolution of RF-70-01 through RF-70-06. All D22 conditions are satisfied: bidirectional traceability is complete and mechanically enforced, fixtures and calculations reproduce, exceptional coverage is present across all six families, no in-MVP decision remains open, and every review pass is complete. Status, inventory labels, delivery-criterion evidence, and the coverage roll-up are moved from draft to approved. No product rule, expected period, monetary result, scenario outcome, or acceptance-criterion mapping changed at approval. |
 | 0.11 | August 14, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Recorded the independent review pass and resolved all six of its findings (§8.2). Re-pinned the §2 frozen baseline to the authoritative CBD-67 v1.3/v1.5 and CBD-69 v1.0.1 versions with a per-source D04 impact assessment in §2.1, replacing mirror versions that had drifted from Confluence and an inferred CBD-67 Specification version. Reconciled eleven asymmetric criterion mappings, declared CBD-68-AC14 and AC16 collective-coverage criteria, and added a bidirectional-symmetry check to §8.3 to enforce D22 mechanically. Corrected the superseded-file reference in §2. No product rule, expected period, monetary result, scenario outcome, or acceptance-criterion outcome changed. |
 | 0.10 | August 14, 2026 | Codex with Alexander Wohlford as owner | Recorded the full source/traceability, calendar/calculation, and scenario-quality review; resolved all identified findings by expanding to 75 scenarios and 21 calendars; refreshed bidirectional mappings, deterministic checks, and evidence counts. Product Owner approval remains pending. |
