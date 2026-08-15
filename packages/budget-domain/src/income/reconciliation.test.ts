@@ -1,12 +1,21 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
+import { buildPaycheckSchedule } from "../schedule/paycheck-period.ts";
+import { validateCadenceDefinition } from "../schedule/validate.ts";
 import { toISODate } from "../shared/iso-date.ts";
-import { identityOf, type ExpectedOccurrence, type OccurrenceIdentity } from "./occurrence.ts";
+import {
+  identityOf,
+  projectOccurrences,
+  type ExpectedOccurrence,
+  type OccurrenceIdentity,
+} from "./occurrence.ts";
+import type { IncomeSchedule } from "./schedule.ts";
 import {
   classifyCandidate,
   reconcile,
   rejectionOf,
+  unmatch,
   validateReconciliationLink,
   varianceOf,
   withinAmountTolerance,
@@ -32,6 +41,25 @@ function expectedOn(date: string, amountMinorUnits = 200_000, skipped = false): 
 
 function received(date: string, amountMinorUnits = 200_000, currency = "USD"): ActualIncome {
   return { id: "ACT-1", receivedOn: toISODate(date), amountMinorUnits, currency };
+}
+
+/** A real weekly-Friday schedule, for the tests that need generated boundaries. */
+function paycheckSchedule(): IncomeSchedule {
+  const result = validateCadenceDefinition({
+    cadence: "paycheck",
+    pattern: { kind: "weekly", weekday: "friday" },
+    businessDayPolicy: "previous-business-day",
+  });
+  if (!result.ok || result.value.cadence !== "paycheck") {
+    throw new Error("fixture failed validation");
+  }
+  return {
+    id: "payroll",
+    name: "Payroll",
+    recurrence: result.value,
+    projectedAmountMinorUnits: 200_000,
+    active: true,
+  };
 }
 
 describe("amount tolerance is exact at the boundary (§13.2, AC4)", () => {
@@ -232,6 +260,7 @@ describe("set resolution (§13.3 rows 1, 5, 6)", () => {
           occurrences: [identityOf(occurrence)],
           actualIds: [actual.id],
           provenance: { by: "automatic", recordedAt: "2026-08-21T09:00:00-04:00", tier: "exact" },
+          unmatchedBy: null,
         },
       ],
     });
@@ -306,7 +335,7 @@ describe("the link model permits groups that MVP refuses (AC9)", () => {
   const two: OccurrenceIdentity = { kind: "extra", exceptionId: "EXC-1" };
 
   it("accepts one expectation matched to one receipt", () => {
-    const link = { id: "L1", occurrences: [one], actualIds: ["ACT-1"], provenance };
+    const link = { id: "L1", occurrences: [one], actualIds: ["ACT-1"], provenance, unmatchedBy: null };
     assert.equal(validateReconciliationLink(link).ok, true);
   });
 
@@ -314,7 +343,13 @@ describe("the link model permits groups that MVP refuses (AC9)", () => {
     // That this compiles is half the assertion: §13.2 requires the model not to
     // preclude future reconciliation groups, so the restriction is policy in
     // the validator rather than a shape that would have to change later.
-    const group = { id: "L2", occurrences: [one, two], actualIds: ["ACT-1", "ACT-2"], provenance };
+    const group = {
+      id: "L2",
+      occurrences: [one, two],
+      actualIds: ["ACT-1", "ACT-2"],
+      provenance,
+      unmatchedBy: null,
+    };
     const result = validateReconciliationLink(group);
     assert.equal(result.ok, false);
     assert.deepEqual(
@@ -324,13 +359,150 @@ describe("the link model permits groups that MVP refuses (AC9)", () => {
   });
 
   it("requires both sides to be present", () => {
-    const empty = { id: "L3", occurrences: [], actualIds: [], provenance };
+    const empty = { id: "L3", occurrences: [], actualIds: [], provenance, unmatchedBy: null };
     const result = validateReconciliationLink(empty);
     assert.deepEqual(
       result.ok ? [] : result.issues.map((issue) => issue.code).sort(),
       ["reconciliation.no-actual", "reconciliation.no-occurrence"],
     );
   });
+});
+
+describe("unmatching (§13.3 row 7, AC7)", () => {
+  const options: ReconcileOptions = {
+    budgetCurrency: "USD",
+    sourceCompatible: () => true,
+    rejected: [],
+    links: [],
+  };
+  const matched: MatchProvenance = {
+    by: "automatic",
+    recordedAt: "2026-08-21T09:00:00-04:00",
+    tier: "exact",
+  };
+  const undone: MatchProvenance = {
+    by: "user",
+    actorId: "ACTOR-01",
+    recordedAt: "2026-08-26T11:00:00-04:00",
+    tier: "exact",
+  };
+
+  function boundLink(occurrence: ExpectedOccurrence, actual: ActualIncome) {
+    return {
+      id: "LINK-1",
+      occurrences: [identityOf(occurrence)],
+      actualIds: [actual.id],
+      provenance: matched,
+      unmatchedBy: null,
+    };
+  }
+
+  it("returns both records to candidacy and keeps both actions on record", () => {
+    const occurrence = expectedOn("2026-08-21");
+    const actual = received("2026-08-21");
+    const link = boundLink(occurrence, actual);
+
+    assert.equal(
+      reconcile([occurrence], [actual], { ...options, links: [link] }).automatic.length,
+      0,
+      "while bound, neither side is a candidate",
+    );
+
+    const removed = unmatch(link, undone);
+    assert.deepEqual(removed.provenance, matched, "who matched them survives the undoing");
+    assert.deepEqual(removed.unmatchedBy, undone, "and so does who undid it");
+
+    assert.equal(
+      reconcile([occurrence], [actual], { ...options, links: [removed] }).automatic.length,
+      1,
+      "separate again, so the pair is matchable once more",
+    );
+  });
+
+  it("does not mutate the link it was given", () => {
+    const link = boundLink(expectedOn("2026-08-21"), received("2026-08-21"));
+    unmatch(link, undone);
+    assert.equal(link.unmatchedBy, null);
+  });
+
+  it("refuses a second unmatch rather than overwriting the first", () => {
+    const link = boundLink(expectedOn("2026-08-21"), received("2026-08-21"));
+    assert.throws(() => unmatch(unmatch(link, undone), undone), /already unmatched/u);
+  });
+});
+
+describe("no reconciliation outcome moves a boundary (§13.3, AC8)", () => {
+  // Every row of the §13.3 matrix records "None" under boundary and target
+  // effect. That holds structurally — reconciliation is not an input to
+  // generation — so this exists to fail if anyone ever wires one into the
+  // other, which is the only way it could stop being true.
+  const schedule = paycheckSchedule();
+  const horizon = { from: toISODate("2026-08-01"), through: toISODate("2026-09-30") };
+  const built = buildPaycheckSchedule(schedule.recurrence, horizon);
+  const projected = projectOccurrences(schedule, built.occurrences, []);
+
+  const first = projected[0];
+  const second = projected[1];
+  assert.ok(first !== undefined && second !== undefined, "fixture needs two occurrences");
+
+  const link = {
+    id: "LINK-1",
+    occurrences: [identityOf(first)],
+    actualIds: ["ACT-1"],
+    provenance: {
+      by: "automatic" as const,
+      recordedAt: "2026-08-07T09:00:00-04:00",
+      tier: "exact" as const,
+    },
+    unmatchedBy: null,
+  };
+  const options: ReconcileOptions = {
+    budgetCurrency: "USD",
+    sourceCompatible: () => true,
+    rejected: [],
+    links: [],
+  };
+
+  const rows: readonly { readonly label: string; readonly run: () => void }[] = [
+    { label: "1 unique exact", run: () => void reconcile([first], [received(first.date)], options) },
+    { label: "2 within both tolerances", run: () => void reconcile([first], [received("2026-08-10")], options) },
+    { label: "3 within one tolerance only", run: () => void reconcile([first], [received(first.date, 100_000)], options) },
+    { label: "4 missing", run: () => void reconcile([first], [], options) },
+    { label: "5 unexpected", run: () => void reconcile([], [received("2026-08-07")], options) },
+    { label: "6 multiple candidates", run: () => void reconcile([first, second], [received(first.date)], options) },
+    {
+      label: "7 match removed",
+      run: () => {
+        const removed = unmatch(link, {
+          by: "user",
+          actorId: "ACTOR-01",
+          recordedAt: "2026-08-26T11:00:00-04:00",
+          tier: "exact",
+        });
+        void reconcile([first], [received(first.date)], { ...options, links: [removed] });
+      },
+    },
+  ];
+
+  for (const row of rows) {
+    it(`row ${row.label} leaves boundaries and projections untouched`, () => {
+      const boundariesBefore = [...built.boundaryDates];
+      const projectionsBefore = projected.map((o) => `${o.date}:${String(o.amountMinorUnits)}`);
+
+      row.run();
+
+      assert.deepEqual(
+        [...buildPaycheckSchedule(schedule.recurrence, horizon).boundaryDates],
+        boundariesBefore,
+        "boundaries regenerate identically",
+      );
+      assert.deepEqual(
+        projected.map((o) => `${o.date}:${String(o.amountMinorUnits)}`),
+        projectionsBefore,
+        "an actual never overwrites a projected date or amount (§13.2)",
+      );
+    });
+  }
 });
 
 describe("variance (§13.2)", () => {

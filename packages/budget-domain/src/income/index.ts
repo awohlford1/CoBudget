@@ -34,6 +34,7 @@ export {
   classifyCandidate,
   reconcile,
   rejectionOf,
+  unmatch,
   validateReconciliationLink,
   varianceOf,
   withinAmountTolerance,

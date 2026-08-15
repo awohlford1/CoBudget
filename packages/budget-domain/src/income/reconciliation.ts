@@ -249,6 +249,41 @@ export interface ReconciliationLink {
   readonly occurrences: readonly OccurrenceIdentity[];
   readonly actualIds: readonly string[];
   readonly provenance: MatchProvenance;
+  /**
+   * Who unmatched this link, or `null` while it still binds.
+   *
+   * Required rather than optional so a caller must say which it is, and
+   * recorded on the link rather than deleting the row because §13.2 requires
+   * unmatching to preserve audit history: the record of who matched these two
+   * has to survive the undoing, alongside who undid it.
+   */
+  readonly unmatchedBy: MatchProvenance | null;
+}
+
+/**
+ * Undo a match, leaving both records and the history of both actions (§13.3
+ * row 7).
+ *
+ * The expectation and the receipt return to candidacy automatically, because
+ * {@link reconcile} only treats a link as binding while `unmatchedBy` is null.
+ *
+ * "Leaves the actual income intact" is structural rather than checked: this
+ * takes a link and a provenance, so there is no `ActualIncome` in scope for it
+ * to alter. Unmatching twice throws instead of being quietly idempotent, since
+ * the second actor's action would otherwise vanish from the history the
+ * operation exists to preserve.
+ */
+export function unmatch(
+  link: ReconciliationLink,
+  provenance: MatchProvenance,
+): ReconciliationLink {
+  if (link.unmatchedBy !== null) {
+    throw new RangeError(
+      `link ${JSON.stringify(link.id)} was already unmatched; unmatching it again would ` +
+        "overwrite the record of who did so first.",
+    );
+  }
+  return { ...link, unmatchedBy: provenance };
 }
 
 /** Enforce the MVP cardinality that {@link ReconciliationLink} deliberately permits. */
@@ -386,8 +421,11 @@ export function reconcile(
   actuals: readonly ActualIncome[],
   options: ReconcileOptions,
 ): ReconciliationOutcome {
-  const linkedActuals = new Set(options.links.flatMap((link) => link.actualIds));
-  const linkedOccurrences = options.links.flatMap((link) => link.occurrences);
+  // An unmatched link is history, not a binding, so both sides are candidates
+  // again (§13.3 row 7).
+  const binding = options.links.filter((link) => link.unmatchedBy === null);
+  const linkedActuals = new Set(binding.flatMap((link) => link.actualIds));
+  const linkedOccurrences = binding.flatMap((link) => link.occurrences);
 
   const open = occurrences.filter(
     (occurrence) =>
