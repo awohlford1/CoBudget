@@ -565,9 +565,9 @@ Rules:
 * Permission loss invalidates an open preview or pending mutation.
 * Removing the actor who created a confirmed future change does not cancel that change; an authorized user must cancel it explicitly.
 * Concurrent edits surface a conflict and never silently overwrite confirmed state.
-* Exact grant, revocation, provisioning, and masking mechanics remain CBD-12 scope.
+* Exact Viewer grant/revocation mechanics and fixed role-field boundaries remain CBD-12 scope. Accountability Partner has no resource-level provisioning.
 
-**Decision PD-68-12 / resolved OD-68-08:** Primary Owner, Co-owner, and Collaborator may perform CBD-68 schedule and reconciliation mutations; Viewer and Accountability Partner are read-only subject to provisioning and masking. Approved by Alexander Wohlford on August 12, 2026.
+**Decision PD-68-12 / resolved OD-68-08, amended August 15, 2026 by CBD-72:** Primary Owner, Co-owner, and Collaborator may perform CBD-68 schedule and reconciliation mutations. Viewer is read-only only for explicitly granted resources. Accountability Partner is financially read-only across the comprehensive accepted-role resource scope and uses the fixed CBD-72 field boundary; it has no resource-level provisioning.
 
 ## 19. Notifications and customer explanations
 
@@ -602,7 +602,7 @@ CBD-68 produces built-in notification events for:
 * Material status changes may create a new notification.
 * Every notification deep-links to an authorized relevant context.
 * Acknowledging a notification never confirms a schedule, reconciles income, skips an occurrence, or changes financial state.
-* Accountability Partners receive only events and detail permitted by provisioning and masking.
+* An active Accountability Partner is eligible for events across the comprehensive accepted-role resource scope; event content uses the fixed CBD-72 field boundary and personal delivery preferences. Partial resource sharing requires Viewer instead.
 * Language is neutral and factual: “Expected income has not been received,” not “You missed a paycheck.”
 * Notifications never imply that income funds categories or increases permitted spending.
 
