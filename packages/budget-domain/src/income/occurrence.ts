@@ -166,6 +166,46 @@ export type OccurrenceOrigin =
     }
   | { readonly kind: "extra"; readonly exceptionId: string };
 
+/**
+ * A stable, storable identity for a projected occurrence.
+ *
+ * {@link ExpectedOccurrence} carries the whole generated occurrence, which is
+ * far more than a stored reference needs and includes the adjusted date, which
+ * moves whenever the business-day policy changes. This is the part that does
+ * not move, so a record written today still names the same occurrence later.
+ *
+ * The generated case reuses {@link OccurrenceRef} rather than restating its
+ * fields, because identifying an occurrence and targeting one with an exception
+ * are the same problem.
+ */
+export type OccurrenceIdentity =
+  | ({ readonly kind: "generated" } & OccurrenceRef)
+  | { readonly kind: "extra"; readonly exceptionId: string };
+
+export function identityOf(occurrence: ExpectedOccurrence): OccurrenceIdentity {
+  if (occurrence.origin.kind === "extra") {
+    return { kind: "extra", exceptionId: occurrence.origin.exceptionId };
+  }
+  return {
+    kind: "generated",
+    scheduleId: occurrence.scheduleId,
+    unadjustedDate: occurrence.origin.generated.unadjustedDate,
+    ordinal: occurrence.origin.ordinal,
+  };
+}
+
+export function sameIdentity(a: OccurrenceIdentity, b: OccurrenceIdentity): boolean {
+  if (a.kind === "generated" && b.kind === "generated") {
+    return (
+      a.scheduleId === b.scheduleId &&
+      a.unadjustedDate === b.unadjustedDate &&
+      a.ordinal === b.ordinal
+    );
+  }
+  if (a.kind === "extra" && b.kind === "extra") return a.exceptionId === b.exceptionId;
+  return false;
+}
+
 /** One expected payday after any exceptions have been applied. */
 export interface ExpectedOccurrence {
   readonly scheduleId: string;

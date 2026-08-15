@@ -2,14 +2,19 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import { toISODate } from "../shared/iso-date.ts";
-import type { ExpectedOccurrence } from "./occurrence.ts";
+import { identityOf, type ExpectedOccurrence, type OccurrenceIdentity } from "./occurrence.ts";
 import {
   classifyCandidate,
+  reconcile,
+  rejectionOf,
+  validateReconciliationLink,
   varianceOf,
   withinAmountTolerance,
   withinDateWindow,
   type ActualIncome,
   type MatchContext,
+  type MatchProvenance,
+  type ReconcileOptions,
 } from "./reconciliation.ts";
 
 const USD: MatchContext = { budgetCurrency: "USD", sourceCompatible: true };
@@ -164,6 +169,167 @@ describe("candidate classification (§13.3 matrix)", () => {
       assert.notEqual(tier, "exact", `${amount}`);
       assert.notEqual(tier, "suggested", `${amount}`);
     }
+  });
+});
+
+describe("set resolution (§13.3 rows 1, 5, 6)", () => {
+  const options: ReconcileOptions = {
+    budgetCurrency: "USD",
+    sourceCompatible: () => true,
+    rejected: [],
+    links: [],
+  };
+
+  it("row 1 — reconciles a unique exact pair automatically", () => {
+    const outcome = reconcile([expectedOn("2026-08-21")], [received("2026-08-21")], options);
+    assert.equal(outcome.automatic.length, 1);
+    assert.equal(outcome.suggested.length, 0);
+    assert.deepEqual(outcome.unmatchedActualIds, []);
+  });
+
+  it("row 6 — two expectations qualifying for one receipt produce no automatic match (AC2)", () => {
+    // The exact pair does not win: §13.2 requires no competing candidate, and
+    // the second expectation is inside both tolerances of the same receipt.
+    const outcome = reconcile(
+      [expectedOn("2026-08-21"), expectedOn("2026-08-24")],
+      [received("2026-08-21")],
+      options,
+    );
+    assert.equal(outcome.automatic.length, 0, "ambiguity blocks automatic matching");
+    assert.equal(outcome.suggested.length, 2, "both are offered for confirmation");
+  });
+
+  it("row 5 — a receipt with no candidate is reported unmatched", () => {
+    const outcome = reconcile(
+      [expectedOn("2026-08-21")],
+      [received("2026-12-01", 900_000)],
+      options,
+    );
+    assert.deepEqual(outcome.unmatchedActualIds, ["ACT-1"]);
+    assert.equal(outcome.automatic.length + outcome.suggested.length, 0);
+  });
+
+  it("does not offer a manual-only pair, and reports its receipt unmatched", () => {
+    // Same date, amount far outside tolerance: reachable by explicit search,
+    // never offered.
+    const outcome = reconcile(
+      [expectedOn("2026-08-21")],
+      [received("2026-08-21", 100_000)],
+      options,
+    );
+    assert.equal(outcome.automatic.length + outcome.suggested.length, 0);
+    assert.deepEqual(outcome.unmatchedActualIds, ["ACT-1"]);
+  });
+
+  it("treats an already-linked expectation and receipt as no longer available", () => {
+    const occurrence = expectedOn("2026-08-21");
+    const actual = received("2026-08-21");
+    const outcome = reconcile([occurrence], [actual], {
+      ...options,
+      links: [
+        {
+          id: "LINK-1",
+          occurrences: [identityOf(occurrence)],
+          actualIds: [actual.id],
+          provenance: { by: "automatic", recordedAt: "2026-08-21T09:00:00-04:00", tier: "exact" },
+        },
+      ],
+    });
+    assert.equal(outcome.automatic.length, 0);
+    assert.equal(outcome.suggested.length, 0);
+  });
+});
+
+describe("rejection memory (§13.2, AC6)", () => {
+  const base: ReconcileOptions = {
+    budgetCurrency: "USD",
+    sourceCompatible: () => true,
+    rejected: [],
+    links: [],
+  };
+  const declined: MatchProvenance = {
+    by: "user",
+    actorId: "ACTOR-01",
+    recordedAt: "2026-08-25T09:00:00-04:00",
+    tier: "suggested",
+  };
+
+  it("does not offer the same unchanged pairing again", () => {
+    const occurrence = expectedOn("2026-08-21");
+    const actual = received("2026-08-24");
+    assert.equal(reconcile([occurrence], [actual], base).suggested.length, 1);
+
+    const rejected = [rejectionOf(occurrence, actual, declined)];
+    const after = reconcile([occurrence], [actual], { ...base, rejected });
+    assert.equal(after.suggested.length, 0);
+    assert.deepEqual(after.unmatchedActualIds, ["ACT-1"]);
+  });
+
+  it("offers it again once either side changes", () => {
+    const occurrence = expectedOn("2026-08-21");
+    const rejected = [rejectionOf(occurrence, received("2026-08-24"), declined)];
+
+    // A corrected amount is a different proposition, so the bar lifts.
+    const corrected = received("2026-08-24", 195_000);
+    assert.equal(reconcile([occurrence], [corrected], { ...base, rejected }).suggested.length, 1);
+  });
+
+  it("lets a rejection promote the surviving pair to automatic", () => {
+    // Declining the competitor removes it from consideration, so the exact
+    // pair is no longer contested.
+    const exact = expectedOn("2026-08-21");
+    const competitor = expectedOn("2026-08-24");
+    const actual = received("2026-08-21");
+
+    assert.equal(reconcile([exact, competitor], [actual], base).automatic.length, 0);
+
+    const rejected = [rejectionOf(competitor, actual, declined)];
+    const after = reconcile([exact, competitor], [actual], { ...base, rejected });
+    assert.equal(after.automatic.length, 1);
+    assert.equal(after.suggested.length, 0);
+  });
+});
+
+describe("the link model permits groups that MVP refuses (AC9)", () => {
+  const provenance: MatchProvenance = {
+    by: "user",
+    actorId: "ACTOR-01",
+    recordedAt: "2026-08-24T09:00:00-04:00",
+    tier: "suggested",
+  };
+  const one: OccurrenceIdentity = {
+    kind: "generated",
+    scheduleId: "payroll",
+    unadjustedDate: toISODate("2026-08-21"),
+    ordinal: 0,
+  };
+  const two: OccurrenceIdentity = { kind: "extra", exceptionId: "EXC-1" };
+
+  it("accepts one expectation matched to one receipt", () => {
+    const link = { id: "L1", occurrences: [one], actualIds: ["ACT-1"], provenance };
+    assert.equal(validateReconciliationLink(link).ok, true);
+  });
+
+  it("represents a group in the type but rejects it in MVP", () => {
+    // That this compiles is half the assertion: §13.2 requires the model not to
+    // preclude future reconciliation groups, so the restriction is policy in
+    // the validator rather than a shape that would have to change later.
+    const group = { id: "L2", occurrences: [one, two], actualIds: ["ACT-1", "ACT-2"], provenance };
+    const result = validateReconciliationLink(group);
+    assert.equal(result.ok, false);
+    assert.deepEqual(
+      result.ok ? [] : result.issues.map((issue) => issue.code),
+      ["reconciliation.group-not-supported"],
+    );
+  });
+
+  it("requires both sides to be present", () => {
+    const empty = { id: "L3", occurrences: [], actualIds: [], provenance };
+    const result = validateReconciliationLink(empty);
+    assert.deepEqual(
+      result.ok ? [] : result.issues.map((issue) => issue.code).sort(),
+      ["reconciliation.no-actual", "reconciliation.no-occurrence"],
+    );
   });
 });
 

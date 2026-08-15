@@ -47,8 +47,14 @@
  */
 
 import { addBusinessDays, businessDaysBetween } from "../schedule/business-day.ts";
+import type { ValidationIssue, ValidationResult } from "../schedule/validate.ts";
 import { compareDates, daysBetween, type ISODate } from "../shared/iso-date.ts";
-import type { ExpectedOccurrence } from "./occurrence.ts";
+import {
+  identityOf,
+  sameIdentity,
+  type ExpectedOccurrence,
+  type OccurrenceIdentity,
+} from "./occurrence.ts";
 
 /** §13.2: the window reaches five business days either side of the expectation. */
 export const SUGGESTION_WINDOW_BUSINESS_DAYS = 5;
@@ -204,5 +210,223 @@ export function varianceOf(occurrence: ExpectedOccurrence, actual: ActualIncome)
     businessDays: businessDaysBetween(occurrence.date, actual.receivedOn),
     amountMinorUnits,
     percent: (amountMinorUnits / occurrence.amountMinorUnits) * 100,
+  };
+}
+
+/**
+ * How a link came about, and how much confidence stands behind it (§13.2).
+ *
+ * The tier doubles as the "confidence where applicable" §13.2 asks for, rather
+ * than inventing a second scale that could disagree with it. Narrowing the
+ * automatic case to `"exact"` in the type is the point: an automatic link can
+ * only ever have been an exact correspondence, and now cannot be recorded
+ * otherwise.
+ */
+export type MatchProvenance =
+  | { readonly by: "automatic"; readonly recordedAt: string; readonly tier: "exact" }
+  | {
+      readonly by: "user";
+      readonly actorId: string;
+      readonly recordedAt: string;
+      readonly tier: CandidateTier;
+    };
+
+/**
+ * A confirmed correspondence between expectations and receipts.
+ *
+ * Holds arrays on both sides even though MVP only ever populates one of each.
+ * §13.2 defers split, combined, partial, and many-to-many reconciliation "while
+ * the domain model must not preclude future reconciliation groups", and a pair
+ * of scalar fields would preclude exactly that — the shape would have to change
+ * and every stored link migrate. The one-to-one restriction is therefore MVP
+ * policy enforced by {@link validateReconciliationLink}, not a shape.
+ *
+ * Expected and actual stay separate records throughout; a link references them
+ * and never absorbs or rewrites either (§13.2).
+ */
+export interface ReconciliationLink {
+  readonly id: string;
+  readonly occurrences: readonly OccurrenceIdentity[];
+  readonly actualIds: readonly string[];
+  readonly provenance: MatchProvenance;
+}
+
+/** Enforce the MVP cardinality that {@link ReconciliationLink} deliberately permits. */
+export function validateReconciliationLink(
+  link: ReconciliationLink,
+): ValidationResult<ReconciliationLink> {
+  const issues: ValidationIssue[] = [];
+
+  if (link.occurrences.length === 0) {
+    issues.push({
+      code: "reconciliation.no-occurrence",
+      path: "occurrences",
+      message: "A match needs an expected paycheck.",
+    });
+  }
+  if (link.actualIds.length === 0) {
+    issues.push({
+      code: "reconciliation.no-actual",
+      path: "actualIds",
+      message: "A match needs a received payment.",
+    });
+  }
+  if (link.occurrences.length > 1 || link.actualIds.length > 1) {
+    issues.push({
+      code: "reconciliation.group-not-supported",
+      path: link.occurrences.length > 1 ? "occurrences" : "actualIds",
+      message: "Match one expected paycheck to one received payment.",
+    });
+  }
+
+  return issues.length === 0 ? { ok: true, value: link } : { ok: false, issues };
+}
+
+/**
+ * A pairing the user declined, recorded so it is not offered again (§13.2).
+ *
+ * Stores the values that were current when it was declined, not just the two
+ * identities, because §13.2 only bars re-suggesting "the same **unchanged**
+ * pairing". A corrected amount or a re-dated receipt is a different proposition
+ * and becomes suggestible again on its own merits.
+ */
+export interface RejectedPairing {
+  readonly occurrence: OccurrenceIdentity;
+  readonly occurrenceDate: ISODate;
+  readonly occurrenceAmountMinorUnits: number;
+  readonly actualId: string;
+  readonly actualReceivedOn: ISODate;
+  readonly actualAmountMinorUnits: number;
+  readonly provenance: MatchProvenance;
+}
+
+/** Snapshot a pairing at the moment it is declined. */
+export function rejectionOf(
+  occurrence: ExpectedOccurrence,
+  actual: ActualIncome,
+  provenance: MatchProvenance,
+): RejectedPairing {
+  return {
+    occurrence: identityOf(occurrence),
+    occurrenceDate: occurrence.date,
+    occurrenceAmountMinorUnits: occurrence.amountMinorUnits,
+    actualId: actual.id,
+    actualReceivedOn: actual.receivedOn,
+    actualAmountMinorUnits: actual.amountMinorUnits,
+    provenance,
+  };
+}
+
+function wasRejected(
+  occurrence: ExpectedOccurrence,
+  actual: ActualIncome,
+  rejected: readonly RejectedPairing[],
+): boolean {
+  const identity = identityOf(occurrence);
+  return rejected.some(
+    (rejection) =>
+      sameIdentity(identity, rejection.occurrence) &&
+      rejection.occurrenceDate === occurrence.date &&
+      rejection.occurrenceAmountMinorUnits === occurrence.amountMinorUnits &&
+      rejection.actualId === actual.id &&
+      rejection.actualReceivedOn === actual.receivedOn &&
+      rejection.actualAmountMinorUnits === actual.amountMinorUnits,
+  );
+}
+
+/** One expectation paired with one receipt, and how closely they correspond. */
+export interface CandidatePair {
+  readonly occurrence: ExpectedOccurrence;
+  readonly actual: ActualIncome;
+  readonly tier: CandidateTier;
+}
+
+export interface ReconciliationOutcome {
+  /** Unique exact pairs, reconcilable without asking (§13.3 row 1). */
+  readonly automatic: readonly CandidatePair[];
+  /** Pairs needing confirmation, including every ambiguity (rows 2 and 6). */
+  readonly suggested: readonly CandidatePair[];
+  /**
+   * Receipts with no automatic or suggested pair (row 5).
+   *
+   * A `manual-only` candidate may still exist for one of these: row 3 keeps
+   * such a pair reachable by an explicitly initiated search but never offers
+   * it, so it is absent here by design rather than by oversight.
+   */
+  readonly unmatchedActualIds: readonly string[];
+}
+
+export interface ReconcileOptions {
+  readonly budgetCurrency: string;
+  /** See {@link MatchContext.sourceCompatible} — the caller decides this. */
+  readonly sourceCompatible: (actual: ActualIncome, occurrence: ExpectedOccurrence) => boolean;
+  readonly rejected: readonly RejectedPairing[];
+  /** Existing links. Anything already linked is no longer a candidate. */
+  readonly links: readonly ReconciliationLink[];
+}
+
+/**
+ * Decide what may reconcile automatically, what to offer, and what is left.
+ *
+ * The uniqueness rule is applied conservatively. §13.2 permits an automatic
+ * match only where there is "no competing candidate", and §13.3 row 6 sends
+ * multiple candidates to review, so a pair reconciles automatically only when
+ * it is the sole surviving candidate for both its expectation and its receipt —
+ * even when the competitor is merely a suggestion and this pair is exact.
+ * Asking a question that turns out to be unnecessary is recoverable; matching
+ * the wrong paycheck silently is not.
+ *
+ * Rejected pairings are removed before uniqueness is assessed, so declining a
+ * competitor can promote the remaining pair to automatic. That follows from
+ * §13.2 treating rejection as removing the pairing from consideration rather
+ * than merely hiding it.
+ */
+export function reconcile(
+  occurrences: readonly ExpectedOccurrence[],
+  actuals: readonly ActualIncome[],
+  options: ReconcileOptions,
+): ReconciliationOutcome {
+  const linkedActuals = new Set(options.links.flatMap((link) => link.actualIds));
+  const linkedOccurrences = options.links.flatMap((link) => link.occurrences);
+
+  const open = occurrences.filter(
+    (occurrence) =>
+      !linkedOccurrences.some((linked) => sameIdentity(identityOf(occurrence), linked)),
+  );
+  const openActuals = actuals.filter((actual) => !linkedActuals.has(actual.id));
+
+  const pairs: CandidatePair[] = [];
+  for (const occurrence of open) {
+    for (const actual of openActuals) {
+      const tier = classifyCandidate(occurrence, actual, {
+        budgetCurrency: options.budgetCurrency,
+        sourceCompatible: options.sourceCompatible(actual, occurrence),
+      });
+      // Row 3 is never offered, only reachable by an explicit manual search.
+      if (tier !== "exact" && tier !== "suggested") continue;
+      if (wasRejected(occurrence, actual, options.rejected)) continue;
+      pairs.push({ occurrence, actual, tier });
+    }
+  }
+
+  const automatic: CandidatePair[] = [];
+  const suggested: CandidatePair[] = [];
+  for (const pair of pairs) {
+    const identity = identityOf(pair.occurrence);
+    const competitors = pairs.filter(
+      (other) =>
+        other !== pair &&
+        (other.actual.id === pair.actual.id ||
+          sameIdentity(identityOf(other.occurrence), identity)),
+    );
+    if (pair.tier === "exact" && competitors.length === 0) automatic.push(pair);
+    else suggested.push(pair);
+  }
+
+  const offered = new Set([...automatic, ...suggested].map((pair) => pair.actual.id));
+  return {
+    automatic,
+    suggested,
+    unmatchedActualIds: actuals.filter((a) => !offered.has(a.id)).map((a) => a.id),
   };
 }
