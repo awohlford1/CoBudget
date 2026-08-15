@@ -2,17 +2,20 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Audit complete — permission contradictions resolved; delivery-evidence findings remain** |
+| Status | **Superseded in part — a later in-depth review found further contradictions (RF-72-55 through RF-72-59)** |
 | Audit date | August 14, 2026 |
 | Dispositions current through | August 15, 2026 |
+| Superseding record | `docs/cbd-72-acceptance-criteria-traceability.md` §6, RF-72-55 through RF-72-59 |
 | Scope | CBD-72 matrix, scenario catalog, traceability, local CBD-68–CBD-71 decisions, live Jira CBD-12/CBD-72 |
 | Method | Cell-by-cell contradiction, ambiguity, lifecycle, least-privilege, testability, and implementation-complexity review |
 
 ## 1. Executive conclusion
 
-The initial audit found governing-scope conflicts, predecessor-package inconsistencies, ambiguous lifecycle rules, duplicate scenario identifiers, and stale expectations. The permission contradictions and duplicate-ID findings have since been resolved through the recorded Product Owner dispositions. The package is not yet implementation-ready because formal acceptance-criteria extraction, deterministic fixture completion, remaining review gates, and final package approval are still outstanding.
+The initial audit found governing-scope conflicts, predecessor-package inconsistencies, ambiguous lifecycle rules, duplicate scenario identifiers, and stale expectations. The permission contradictions and duplicate-ID findings recorded here have since been resolved through the recorded Product Owner dispositions.
 
-No product decision was changed by this audit.
+This audit's own conclusion has since been narrowed. A later in-depth review found five further contradictions this pass did not cover, recorded as RF-72-55 through RF-72-59 in the traceability record and summarized in §7. The scope statement above explains why: this pass compared matrix cells against each other and against Jira descriptions, and did not examine Jira acceptance-criteria fields, cross-document citation keys, or the approval state of cited upstream decisions.
+
+No product decision was changed by this audit. The later review did produce one: the sole-owner archival decision in RF-72-55.
 
 ## 2. Blocking contradictions
 
@@ -154,8 +157,9 @@ This is security-correct but operationally demanding. It requires version-bound 
 2. **Resolved August 15, 2026:** The contradictory Collaborator unrestricted-export/connection-repair scaffold was removed. Connection cases now follow actor-specific authorizer authority, and the retained creation scenario expressly permits Collaborator self-consent.
 3. **Resolved August 15, 2026:** `OD-72-03` is closed. Permission 21 is an owner-authorized, recipient-bound Viewer snapshot—not Viewer self-service bulk export. Matrix §5.8 now defines profile-specific semantic content, exclusions, confirmation, binding, invalidation, 24-hour expiry, and audit; implementation may finalize only the physical serialization schema.
 4. **Resolved August 15, 2026:** Document headers now match the current artifact versions and distinguish approved permission decisions from remaining fixture, formal-criteria, review-gate, and final-approval work.
-5. Many scenarios remain `To detail`, so “approved matrix” currently lacks complete deterministic negative-test evidence.
-6. **Partially resolved August 15, 2026:** Scenario-ID uniqueness and affected traceability references were mechanically checked after normalization. A complete bidirectional criterion-to-scenario coverage check remains required when formal acceptance criteria are extracted.
+5. **Partially resolved August 15, 2026:** Scenarios remaining `To detail` were reduced by the in-depth review, which gave `ROLE-04`, `VIEW-07`, `PART-06`, and `CONN-06` real content — RF-72-53 had renumbered them but left one-line placeholders. Fifteen scenarios across `XSP`, `AUTH`, and `LIFE` remain undetailed, and the documented `AUD` family still has no scenarios at all, so the approved matrix continues to lack complete deterministic negative-test evidence. See RF-72-59.
+6. **Partially resolved August 15, 2026:** Scenario-ID uniqueness and affected traceability references were mechanically checked after normalization. A complete bidirectional criterion-to-scenario coverage check remains required, and is now possible because matrix permission numbers 1–35 resolve (RF-72-56).
+7. **Resolved August 15, 2026:** The scenario family table documented ten prefixes while the inventory used twenty-one. The table is complete and the inventory is sorted to match it.
 
 ## 6. Recommended disposition order
 
@@ -170,12 +174,14 @@ This is security-correct but operationally demanding. It requires version-bound 
 
 ## 7. Audit verdict
 
-**Permission review:** complete.
+**Permission review:** complete for the fourteen findings audited here.
 
-**Contradiction-free:** yes within the currently audited and approved permission scope; remaining review gates may still identify new findings.
+**Contradiction-free:** **no.** This verdict previously read "yes within the currently audited and approved permission scope." The in-depth review of August 15, 2026 falsified it by finding five further contradictions outside that scope, recorded as RF-72-55 through RF-72-59: an unreachable exit for a sole Primary Owner, unresolvable permission-number citations, a partial Jira synchronization that left both CBD-72 and CBD-12 acceptance criteria contradicting their own descriptions, an inheritance claim on an unapproved CBD-71 amendment, and a scenario catalog whose family table and renumbered scenarios were incomplete. Four are now resolved; OD-72-06 remains open.
+
+The pattern worth carrying forward: this audit examined matrix cells against each other and against Jira **descriptions**, and did not check Jira **acceptance-criteria fields**, cross-document citation keys, or whether a cited upstream decision was itself approved. Those three classes are where every later finding came from.
 
 **Implementation-ready:** no.
 
-**Primary blockers:** formal acceptance-criteria extraction, deterministic fixture completion, remaining recovery/deletion and specialist review gates, bidirectional traceability, and final package approval.
+**Primary blockers:** OD-72-06 (CBD-71 v1.0/v1.1 inheritance), per-criterion bidirectional mapping of the rewritten acceptance criteria, deterministic fixture completion including the empty `AUD` family, remaining recovery/deletion/archival and specialist review gates, and final package approval.
 
-**Recommended next action:** Extract and map the formal CBD-72 acceptance criteria, complete deterministic scenario fixtures, and then rerun the full bidirectional consistency review before final package approval.
+**Recommended next action:** Resolve OD-72-06, then map the rewritten acceptance criteria to specification and scenario evidence in both directions, complete deterministic fixtures, and rerun the full consistency review before final package approval.
