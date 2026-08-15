@@ -22,6 +22,7 @@ import * as sharedBarrel from "./shared/index.ts";
 
 import * as definitionModule from "./schedule/definition.ts";
 import * as parseModule from "./schedule/parse.ts";
+import * as periodModule from "./schedule/period.ts";
 import * as validateModule from "./schedule/validate.ts";
 import * as scheduleBarrel from "./schedule/index.ts";
 
@@ -58,6 +59,10 @@ describe("schedule barrel", () => {
 
   it("re-exports every runtime export of parse.ts", () => {
     assertFullyReExported("parse.ts", "schedule/index.ts", parseModule, scheduleBarrel);
+  });
+
+  it("re-exports every runtime export of period.ts", () => {
+    assertFullyReExported("period.ts", "schedule/index.ts", periodModule, scheduleBarrel);
   });
 });
 

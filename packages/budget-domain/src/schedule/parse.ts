@@ -31,6 +31,7 @@ import {
 import {
   validateCadenceDefinition,
   validateScheduleVersion,
+  type ValidatedCadenceDefinition,
   type ValidationIssue,
   type ValidationResult,
 } from "./validate.ts";
@@ -239,7 +240,9 @@ function parsePaycheckPattern(
  * that is not the right type. When the shape is sound, every value rule in
  * `validateCadenceDefinition` still applies.
  */
-export function parseCadenceDefinition(input: unknown): ValidationResult<CadenceDefinition> {
+export function parseCadenceDefinition(
+  input: unknown,
+): ValidationResult<ValidatedCadenceDefinition> {
   const issues: ValidationIssue[] = [];
 
   if (!isRecord(input)) {

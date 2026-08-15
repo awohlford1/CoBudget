@@ -46,6 +46,33 @@ export type ValidationResult<T> =
   | { readonly ok: true; readonly value: T }
   | { readonly ok: false; readonly issues: readonly ValidationIssue[] };
 
+declare const validatedBrand: unique symbol;
+
+/**
+ * Marks a value as having passed validation.
+ *
+ * Written as a distributive conditional so that `Validated<A | B>` becomes
+ * `(A & brand) | (B & brand)` rather than `(A | B) & brand`. That keeps
+ * discriminated-union narrowing and `Extract` working normally on the result.
+ */
+export type Validated<T> = T extends unknown
+  ? T & { readonly [validatedBrand]: true }
+  : never;
+
+/**
+ * A cadence definition that has passed {@link validateCadenceDefinition}.
+ *
+ * This exists because value ranges are not expressible in the type system:
+ * `MonthlyAnchor.day` is a plain `number`, so `{ kind: "day-of-month", day: 40 }`
+ * is type-valid and only validation rejects it. Without this brand, the period
+ * generator had no way to require that its input had been checked, and quietly
+ * produced a boundary of 2026-07-31 for a day-40 anchor instead of refusing.
+ *
+ * Only this module can mint the brand, so "unvalidated definition reaches the
+ * generator" becomes a compile error rather than a silent wrong answer.
+ */
+export type ValidatedCadenceDefinition = Validated<CadenceDefinition>;
+
 function isWeekday(value: string): value is Weekday {
   return (WEEKDAYS as readonly string[]).includes(value);
 }
@@ -164,7 +191,7 @@ function checkPaycheckPattern(
  */
 export function validateCadenceDefinition(
   definition: CadenceDefinition,
-): ValidationResult<CadenceDefinition> {
+): ValidationResult<ValidatedCadenceDefinition> {
   const issues: ValidationIssue[] = [];
 
   switch (definition.cadence) {
@@ -214,8 +241,10 @@ export function validateCadenceDefinition(
       break;
   }
 
+  // The single minting site for the brand, exactly as isoDateOf is for ISODate.
+  // A lint rule forbids this cast anywhere else in production source.
   return issues.length === 0
-    ? { ok: true, value: definition }
+    ? { ok: true, value: definition as ValidatedCadenceDefinition }
     : { ok: false, issues };
 }
 

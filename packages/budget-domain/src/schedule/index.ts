@@ -19,7 +19,26 @@ export {
   describeCadence,
 } from "./definition.ts";
 
-export type { ValidationIssue, ValidationResult } from "./validate.ts";
+export type {
+  Validated,
+  ValidatedCadenceDefinition,
+  ValidationIssue,
+  ValidationResult,
+} from "./validate.ts";
 export { validateCadenceDefinition, validateScheduleVersion } from "./validate.ts";
 
 export { parseCadenceDefinition, parseScheduleVersion } from "./parse.ts";
+
+export type { BudgetPeriod, WeeklyOrMonthlyDefinition } from "./period.ts";
+export {
+  MAX_GENERATED_PERIODS,
+  SETUP_PREVIEW_PERIOD_COUNT,
+  boundaryAtOrBefore,
+  nextBoundaryAfter,
+  periodAfter,
+  periodContaining,
+  periodContains,
+  periodLengthInDays,
+  periodsFrom,
+  setupPreview,
+} from "./period.ts";

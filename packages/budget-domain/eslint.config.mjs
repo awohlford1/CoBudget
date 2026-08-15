@@ -47,16 +47,26 @@ const CLOCK_SELECTORS = [
   },
 ];
 
-/** Banned everywhere except the module that legitimately mints the brand. */
-const BRAND_CAST_SELECTORS = [
-  {
-    selector: 'TSAsExpression > TSTypeReference > Identifier[name="ISODate"]',
-    message: BRAND_MESSAGE,
-  },
-  {
-    selector: 'TSTypeAssertion > TSTypeReference > Identifier[name="ISODate"]',
-    message: BRAND_MESSAGE,
-  },
+const VALIDATED_MESSAGE =
+  "Casting to a validated definition bypasses validateCadenceDefinition, which " +
+  "is the only thing standing between the period generator and a value the " +
+  "type system cannot check — MonthlyAnchor.day is a plain number, so a day of " +
+  "40 is type-valid and once produced a silently wrong boundary. Validate or " +
+  "parse the definition instead.";
+
+function brandCastSelectors(typeName, message) {
+  return [
+    { selector: `TSAsExpression > TSTypeReference > Identifier[name="${typeName}"]`, message },
+    { selector: `TSTypeAssertion > TSTypeReference > Identifier[name="${typeName}"]`, message },
+  ];
+}
+
+/** Banned everywhere except the module that legitimately mints each brand. */
+const ISO_DATE_CAST_SELECTORS = brandCastSelectors("ISODate", BRAND_MESSAGE);
+
+const VALIDATED_CAST_SELECTORS = [
+  ...brandCastSelectors("ValidatedCadenceDefinition", VALIDATED_MESSAGE),
+  ...brandCastSelectors("WeeklyOrMonthlyDefinition", VALIDATED_MESSAGE),
 ];
 
 function forbidImportsFrom(...patterns) {
@@ -79,20 +89,43 @@ export default defineConfig([
       sourceType: "module",
     },
     rules: {
-      "no-restricted-syntax": ["error", ...CLOCK_SELECTORS, ...BRAND_CAST_SELECTORS],
+      "no-restricted-syntax": [
+        "error",
+        ...CLOCK_SELECTORS,
+        ...ISO_DATE_CAST_SELECTORS,
+        ...VALIDATED_CAST_SELECTORS,
+      ],
       "no-restricted-globals": ["error", { name: "Date", message: DATE_MESSAGE }],
     },
   },
 
   {
-    // The single audited exception. This module owns the brand, so it is the
-    // one place allowed to construct one and the one place allowed to touch
-    // Date. Its own tests assert the arithmetic is identical under five
-    // different machine time zones.
+    // Owns the ISODate brand, so it is the one place allowed to construct one
+    // and the one place allowed to touch Date. Its own tests assert the
+    // arithmetic is identical under five different machine time zones.
     files: ["src/shared/iso-date.ts"],
     rules: {
-      "no-restricted-syntax": ["error", ...CLOCK_SELECTORS],
+      "no-restricted-syntax": ["error", ...CLOCK_SELECTORS, ...VALIDATED_CAST_SELECTORS],
       "no-restricted-globals": "off",
+    },
+  },
+
+  {
+    // Owns the validation brand, and is the only place allowed to mint it.
+    files: ["src/schedule/validate.ts"],
+    rules: {
+      "no-restricted-syntax": ["error", ...CLOCK_SELECTORS, ...ISO_DATE_CAST_SELECTORS],
+    },
+  },
+
+  {
+    // Tests must be able to forge invalid values, because proving a defence
+    // fires requires constructing the state it defends against. The exception
+    // is narrow and greppable: it applies only to the validation brand, only in
+    // test files, and never to ISODate or the clock rules.
+    files: ["src/**/*.test.ts"],
+    rules: {
+      "no-restricted-syntax": ["error", ...CLOCK_SELECTORS, ...ISO_DATE_CAST_SELECTORS],
     },
   },
 

@@ -4,6 +4,7 @@ export {
   MIN_YEAR,
   addDays,
   compareDates,
+  dayOfWeekIndex,
   daysBetween,
   daysInMonth,
   inclusiveDayCount,

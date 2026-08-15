@@ -171,6 +171,22 @@ export function addDays(date: ISODate, days: number): ISODate {
   return isoDateOf(shifted.year, shifted.month, shifted.day);
 }
 
+/**
+ * Day of week as an index, Monday = 0 through Sunday = 6.
+ *
+ * Returns a number rather than a named weekday on purpose. The `Weekday` union
+ * belongs to the schedule layer, and this module sits below it and must not
+ * depend on it — a constraint the lint rules enforce rather than merely
+ * document. Callers map the index to their own vocabulary.
+ *
+ * Epoch day 0 is 1970-01-01, a Thursday, which is index 3 under this scheme.
+ */
+export function dayOfWeekIndex(date: ISODate): number {
+  const { year, month, day } = partsOf(date);
+  const epochDay = toEpochDay(year, month, day);
+  return (((epochDay + 3) % 7) + 7) % 7;
+}
+
 /** Total ordering: negative if `a` precedes `b`, zero if equal, positive if `a` follows `b`. */
 export function compareDates(a: ISODate, b: ISODate): number {
   // ISO 8601 dates are zero-padded, so lexicographic order is chronological order.
