@@ -57,3 +57,6 @@ test-results/
 # Local database files
 *.sqlite
 *.sqlite3
+
+# Confluence sync previews (scripts/sync-confluence.py --dry-run)
+.confluence-preview/
