@@ -7,6 +7,7 @@ import {
   HolidayCoverageError,
   addBusinessDays,
   adjustToBusinessDay,
+  businessDaysBetween,
   federalReserveHolidays,
   isBusinessDay,
   isYearCovered,
@@ -259,11 +260,23 @@ describe("counting business days forward (CBD-68 §12, §13.2)", () => {
     assert.equal(addBusinessDays(toISODate("2026-08-23"), 1), "2026-08-24");
   });
 
-  it("refuses a count that is not a positive integer", () => {
-    for (const count of [0, -1, 1.5, Number.NaN]) {
+  it("counts backward for a negative count", () => {
+    // §13.2's suggestion window reaches five business days either side.
+    assert.equal(addBusinessDays(toISODate("2026-08-24"), -1), "2026-08-21");
+    assert.equal(addBusinessDays(toISODate("2026-08-28"), -5), "2026-08-21");
+  });
+
+  it("skips a holiday counting backward too", () => {
+    // Mirror of the forward case: from Tuesday 2026-12-01 the fifth business
+    // day back is Monday 2026-11-23, with Thanksgiving inside the window.
+    assert.equal(addBusinessDays(toISODate("2026-12-01"), -5), "2026-11-23");
+  });
+
+  it("refuses a count of zero or a non-integer", () => {
+    for (const count of [0, 1.5, -2.5, Number.NaN]) {
       assert.throws(
         () => addBusinessDays(toISODate("2026-08-21"), count),
-        /count must be a positive integer/u,
+        /count must be a non-zero integer/u,
       );
     }
   });
@@ -273,5 +286,50 @@ describe("counting business days forward (CBD-68 §12, §13.2)", () => {
       () => addBusinessDays(toISODate("2030-12-24"), 10),
       (error: unknown) => error instanceof HolidayCoverageError,
     );
+  });
+});
+
+describe("measuring business days between two dates (CBD-68 §13.2 variance)", () => {
+  it("reproduces the REC-03 worked example", () => {
+    // Expected Friday 2026-08-21, received Monday 2026-08-24: the scenario
+    // states +3 calendar days and +1 business day.
+    const expected = toISODate("2026-08-21");
+    const received = toISODate("2026-08-24");
+    assert.equal(daysBetween(expected, received), 3);
+    assert.equal(businessDaysBetween(expected, received), 1);
+  });
+
+  it("is zero for the same date and signed by direction", () => {
+    assert.equal(businessDaysBetween(toISODate("2026-08-21"), toISODate("2026-08-21")), 0);
+    assert.equal(businessDaysBetween(toISODate("2026-08-24"), toISODate("2026-08-21")), -1);
+  });
+
+  it("excludes a holiday from the count", () => {
+    // Monday 2026-11-23 to Tuesday 2026-12-01 spans 8 calendar days but only 5
+    // business days, because Thanksgiving and two weekends fall inside.
+    const from = toISODate("2026-11-23");
+    const to = toISODate("2026-12-01");
+    assert.equal(daysBetween(from, to), 8);
+    assert.equal(businessDaysBetween(from, to), 5);
+  });
+
+  it("inverts addBusinessDays when the anchor is a business day", () => {
+    const anchor = toISODate("2026-08-21");
+    assert.equal(isBusinessDay(anchor), true);
+    for (const n of [1, 2, 3, 4, 5]) {
+      assert.equal(businessDaysBetween(anchor, addBusinessDays(anchor, n)), n, `+${n}`);
+      assert.equal(businessDaysBetween(anchor, addBusinessDays(anchor, -n)), -n, `-${n}`);
+    }
+  });
+
+  it("does not invert from a non-business anchor, as documented", () => {
+    // Saturday. The only date in the half-open range back to Friday is the
+    // Saturday itself, which is not a business day — so the count is 0, not -1.
+    // Reachable under keep-original-date, where an expectation can sit on a
+    // weekend, so it is pinned rather than left to surprise someone.
+    const saturday = toISODate("2026-08-22");
+    assert.equal(isBusinessDay(saturday), false);
+    assert.equal(addBusinessDays(saturday, -1), "2026-08-21");
+    assert.equal(businessDaysBetween(saturday, toISODate("2026-08-21")), 0);
   });
 });

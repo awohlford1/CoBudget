@@ -41,6 +41,7 @@ export {
   MAX_ADJUSTMENT_STEPS,
   addBusinessDays,
   adjustToBusinessDay,
+  businessDaysBetween,
   federalReserveHolidays,
   isBusinessDay,
   isYearCovered,

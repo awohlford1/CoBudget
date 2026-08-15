@@ -40,6 +40,7 @@
 
 import {
   addDays,
+  compareDates,
   dayOfWeekIndex,
   daysInMonth,
   isoDateOf,
@@ -201,7 +202,8 @@ export function isBusinessDay(date: ISODate): boolean {
 }
 
 /**
- * The `count`th Federal Reserve business day strictly after `date`.
+ * The `count`th Federal Reserve business day away from `date`, forward when
+ * `count` is positive and backward when it is negative.
  *
  * `date` is day zero and is never counted, whether or not it is itself a
  * business day — CBD-68 §13.2 states this directly ("The expected date is day
@@ -212,25 +214,66 @@ export function isBusinessDay(date: ISODate): boolean {
  * fifth business day after Monday 2026-11-23 is Tuesday 2026-12-01 and not
  * Monday 2026-11-30, because Thanksgiving falls inside the window.
  *
+ * Both directions are needed because §13.2's suggestion window reaches five
+ * business days either side of the expected date, while §12's Late window only
+ * runs forward. Counting backward from early in the earliest covered year
+ * throws, for the reason given at the top of this file.
+ *
  * The walk needs no step cap of its own: {@link isBusinessDay} throws as soon
  * as it leaves verified coverage, and inside coverage a business day never sits
  * more than four days away. Leaving coverage throws rather than assuming
  * weekday-only logic beyond it (PD-68-05).
  */
 export function addBusinessDays(date: ISODate, count: number): ISODate {
-  if (!Number.isInteger(count) || count < 1) {
+  if (!Number.isInteger(count) || count === 0) {
     throw new RangeError(
-      `count must be a positive integer, received ${String(count)}. ` +
+      `count must be a non-zero integer, received ${String(count)}. ` +
         "Day zero is the date itself; there is nothing to count.",
     );
   }
 
+  const step = count < 0 ? -1 : 1;
+  const target = Math.abs(count);
   let candidate = date;
-  for (let counted = 0; counted < count; ) {
-    candidate = addDays(candidate, 1);
+  for (let counted = 0; counted < target; ) {
+    candidate = addDays(candidate, step);
     if (isBusinessDay(candidate)) counted += 1;
   }
   return candidate;
+}
+
+/**
+ * Federal Reserve business days from `from` to `to`, signed by direction.
+ *
+ * Counts business days strictly after the earlier date, up to and including the
+ * later one, then applies the sign — so the earlier date is day zero on both
+ * sides, matching how §13.2 counts its window. Scenario REC-03 is the worked
+ * case: Friday 2026-08-21 to Monday 2026-08-24 is +3 calendar days and +1
+ * business day, because the weekend between them is not counted.
+ *
+ * This is the inverse of {@link addBusinessDays} whenever the anchor is itself
+ * a business day. It is not when the anchor is not: counting from Saturday
+ * 2026-08-22 back to Friday 2026-08-21 gives 0, because the only date in the
+ * half-open range is the Saturday, which is not a business day. Stated because
+ * it is a real edge under `keep-original-date`, where an expectation can sit on
+ * a weekend.
+ */
+export function businessDaysBetween(from: ISODate, to: ISODate): number {
+  const direction = compareDates(to, from);
+  if (direction === 0) return 0;
+
+  const [start, end] = direction > 0 ? [from, to] : [to, from];
+  let counted = 0;
+  let candidate = start;
+  while (candidate !== end) {
+    candidate = addDays(candidate, 1);
+    if (isBusinessDay(candidate)) counted += 1;
+  }
+
+  // Returned before negating, because `-0` is not `0` under Object.is and
+  // would fail an equality check in any caller comparing a variance to zero.
+  if (counted === 0) return 0;
+  return direction > 0 ? counted : -counted;
 }
 
 /**
