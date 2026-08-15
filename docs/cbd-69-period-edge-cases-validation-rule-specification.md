@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft amendment — Product Owner review in progress** |
-| Document version | 1.1.1-draft |
+| Status | **Approved v1.1 — Product Owner approved August 15, 2026** |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — final Product Owner approval August 13, 2026, following Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review (traceability record §9). |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
@@ -381,6 +381,7 @@ See [FF-007 and FF-008 in the Future Feature Register](https://cobudget.atlassia
 
 | Version | Date | Author | Change |
 | --- | --- | --- | --- |
+| 1.1 | August 15, 2026 | Alexander Wohlford — Product Owner | **Approved.** Version 1.1 approved after the independent amendment audit (RF-69-20), a passing cross-document reference audit over 25 invariants, 26 edge-case rules, and 38 scenario IDs, and end-to-end re-verification of AC-11. The amendment makes notification channels and delivery preferences recipient-controlled personal-account settings and removes relationship-level notification control. No classification rule, calculation, or date-derivation rule changed. Confluence republication follows the merge to `main`. |
 | 1.1.1-draft | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Independent audit of the v1.1 amendment (RF-69-20), run because CBD-71 SD-071-044 and CBD-72 §5.4.1 both inherit from this draft. Scoped every approval claim to the version that carries it: §20's approval block, the §12.2 eligibility headings, and §18 no longer assert approved status on a pending draft. Added CBD-72 to §17 dependencies, restated the CBD-12 risk as materialized-and-reconciled, and recorded RF-69-19 as the open v1.1 item. Rebuilt this table, which had a header with no separator row, a blank line splitting it, a stray separator mid-table, and scrambled chronology. No classification rule, invariant, or scenario outcome changed. |
 | 1.1.0-draft | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Material amendment at Product Owner direction: established recipient-controlled personal notification settings and removed relationship-level notification control; updated INV-69-25, the permission matrix, eligibility, audit, interface, data-model, test, and dependency language. |
 | 1.0.1 | August 13, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Editorial correction to §17 Dependencies and the front-matter schedule-workflow input, both of which still carried superseded upstream versions: CBD-67 was listed at Approved v1.2 when it is v1.3, and CBD-68 at First Draft v0.3 when it reached Approved v1.0, with an accompanying sentence claiming §6 rows remained Provisional after RF-69-01 had already closed. No classification rule, invariant, edge-case row, or scenario outcome changed. |
@@ -400,4 +401,6 @@ See [FF-007 and FF-008 in the Future Feature Register](https://cobudget.atlassia
 
 **Approval status.** Version 1.0 was approved on August 13, 2026 by Alexander Wohlford, Product Owner, following the staged precedent used for the preceding documentation subtasks: initial analysis by Claude, product decisions by Alexander, a four-part audit by Codex, and final review and approval by Alexander. At v1.0 all findings were resolved, RF-69-01 and RF-69-06 were closed, and all 15 acceptance criteria were Complete for Final Draft.
 
-**This document is not currently in that approved state.** Version 1.1.0-draft is a pending material amendment (RF-69-19) that makes notification channels and delivery preferences recipient-controlled personal-account settings and removes relationship-level notification control. Until the Product Owner approves this exact revision, v1.0 remains the approved release and the v1.1 changes in §4, §12.2, §13, and the scenario catalog are proposals. AC-11 is the one criterion whose product evidence is not Complete for Final Draft; it reads Revised draft complete. Downstream artifacts must not treat the v1.1 text as settled inheritance — CBD-71 SD-071-044 and CBD-72 §5.4.1 both depend on it. See the traceability record §7 and §9.
+**Version 1.1 was approved on August 15, 2026 by Alexander Wohlford, Product Owner.** It is a material amendment (RF-69-19) making notification channels and delivery preferences recipient-controlled personal-account settings and removing relationship-level notification control. Approval followed an independent audit of the amendment (RF-69-20), a passing cross-document reference audit across 25 invariants, 26 edge-case rules, and 38 scenario IDs, and end-to-end re-verification of AC-11 — the sole criterion the amendment changes.
+
+The amendment altered no classification rule, invariant other than `INV-69-25`, calculation, or date-derivation rule. One fixture was added (`ALT-07`) and one withdrawn (`ALT-05`). CBD-71 `SD-071-044` and CBD-72 §5.4.1 inherit this amendment; the downstream impact assessment is recorded in the traceability record §12. See also the traceability record §7 and §9.

@@ -2,10 +2,10 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft amendment — Product Owner review in progress** |
-| Version | 1.1.1-draft |
+| Status | **Approved v1.1 — Product Owner approved August 15, 2026** |
+| Version | 1.1 |
 | Owner | Alexander Wohlford |
-| Approval | **v1.0 approved** August 13, 2026 after Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review. **v1.1 is not approved** — see the traceability record's Version 1.1 amendment gates. |
+| Approval | **v1.0 approved** August 13, 2026 after Claude initial analysis, Product Owner review, Codex audit, and final Product Owner review. **v1.1 approved** August 15, 2026 after the independent amendment audit (RF-69-20), a passing cross-document reference audit, and AC-11 re-verification. |
 | Jira | [CBD-69](https://cobudget.atlassian.net/browse/CBD-69) |
 | Schedule workflow input | [CBD-68](https://cobudget.atlassian.net/browse/CBD-68) (paycheck/custom, Approved v1.0; RF-69-01 closed August 13, 2026) |
 | Governing specification | [CBD-69 — Period Edge Cases and Validation Rule Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
