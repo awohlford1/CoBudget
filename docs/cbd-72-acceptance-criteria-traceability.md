@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Matrix decisions current — formal criteria extraction and final review pending** |
-| Document version | 0.1.8 |
+| Status | **Matrix decisions current — per-criterion mapping and final review pending; OD-72-06 blocks approval** |
+| Document version | 0.1.9 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-72](https://cobudget.atlassian.net/browse/CBD-72) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -21,7 +21,7 @@ CBD-72 is complete only when the permission model covers every required role, ac
 | --- | --- | --- | --- |
 | Versioned permission matrix | Specification §§2–4, 11 | ROLE, COLL, PART | Drafted |
 | Resource-scope rules | Specification §5 | VIEW, PART | Drafted; fixtures pending |
-| Ownership and recovery decision record | Specification §6 and OD-72-01–04 | OWN, CONN, LIFE | Drafted; open mechanics recorded |
+| Ownership and recovery decision record | Specification §6 and OD-72-01–06 | OWN, CONN, LIFE | Drafted; sole-owner exit decided; open mechanics recorded |
 | Cross-budget isolation requirements | Specification §7 and PM-72-010 | XSP | Drafted; fixtures pending |
 | Authorization-test inventory | Specification §§8–9; scenario catalog | All families | Initial inventory drafted |
 
@@ -31,7 +31,7 @@ CBD-72 is complete only when the permission model covers every required role, ac
 | --- | --- | --- | --- |
 | CBD-71 SD-071-046 | Primary Owner, Co-owner, and Collaborator may perform approved schedule/reconciliation mutations; Viewer is read-only; Partner is financially read-only while retaining personal acknowledgements and attributed comments. | Specification §4.1; ROLE-01/PART-02–03 | Preserved and terminologically clarified |
 | CBD-71 SD-071-047 | Hide unauthorized controls, recheck authorization, invalidate stale work, audit denials, prevent silent overwrite. | PM-72-002–005; AUTH-01–03 | Preserved |
-| CBD-71 alert decisions | Informational and firm alert semantics, mandatory in-app eligibility, optional privacy-safe personal channels, deduplication, and recipient-controlled delivery preferences. | Specification §§4–5; VIEW-05, PART-02–05 | Preserved in the synchronized v1.1 draft package |
+| CBD-71 alert decisions | Informational and firm alert semantics, mandatory in-app eligibility, optional privacy-safe personal channels, deduplication, and recipient-controlled delivery preferences. | Specification §§4–5; VIEW-05, PART-02–05 | **Preserved.** Inherited from CBD-71 MVP Schedule Decisions v1.1 (SD-071-044), approved August 15, 2026, which in turn rests on CBD-69 v1.1. OD-72-06 closed. |
 | CBD-11/CBD-71 masking | No restricted financial leakage through previews, counts, totals, history, or derived indicators. | PM-72-006; §5.2; VIEW-02–04, XSP-03 | Preserved and generalized |
 
 ## 4. Review gates
@@ -40,7 +40,7 @@ CBD-72 is complete only when the permission model covers every required role, ac
 | --- | --- | --- |
 | Matrix completeness | Every action category and role has an explicit cell; no blank or implied allow. | Initial pass; independent review pending |
 | Role/resource consistency | Viewer profiles never elevate role authority; Partner is not treated as broad Viewer. | Draft pass |
-| Ownership safety | Exactly one Primary, multiple Co-owners permitted, protected actions fail atomically. | Draft pass; OD-72-01/02/04 remain |
+| Ownership safety | Exactly one Primary, multiple Co-owners permitted, protected actions fail atomically, and a sole Primary Owner always has a supported exit. | Draft pass; OD-72-01/02/04/05 remain |
 | Cross-space isolation | All synchronous and asynchronous data paths bind membership and target to one space. | Requirements drafted; detailed fixtures pending |
 | Server-side enforcement | Inputs, decision timing, default deny, stale work, and concurrency are explicit. | Draft pass; architecture review pending |
 | Security and privacy | CBD-14 findings reconciled; credentials and restricted derived data cannot leak. | Pending CBD-14 review |
@@ -57,6 +57,8 @@ CBD-72 is complete only when the permission model covers every required role, ac
 | Budget-space deletion lifecycle | OD-72-02 | Product Owner + data/privacy review | Define retention, grace period, restoration, bank-connection handling, and audit. | Open |
 | Owner-authorized Viewer snapshot | OD-72-03 | Product Owner | Permit only an owner-initiated, recipient-bound snapshot from the current Viewer profile; deny Viewer self-service export and constrain physical schema design to the approved semantic allowlist. | **Closed August 15, 2026** |
 | Connection-authorizer loss | OD-72-04 | Product Owner + security review | Define reauthorization/recovery without automatic authority inheritance. | Open |
+| Budget-space archival lifecycle | OD-72-05 | Product Owner + data/privacy review | Define restoration authority, retention duration, member access after archival, and any archived-to-deleted transition. Primary-only authority and the preservation guarantee are already fixed. | Open |
+| CBD-71 v1.0 / v1.1 inheritance | OD-72-06 | Product Owner | Decide whether CBD-72 inherits the approved v1.0 baseline or the pending v1.1 amendment. | **Closed August 15, 2026** — inherits v1.1; CBD-69 v1.1 and CBD-71 v1.1 both approved |
 
 ## 6. Review findings
 
@@ -116,16 +118,21 @@ CBD-72 is complete only when the permission model covers every required role, ac
 | RF-72-52 | Intensive audit — AUD-72-014 | “Read-only Accountability Partner” could be interpreted as denying the role's approved acknowledgement and comment writes. | Standardize the role as financially read-only; explicitly permit only personal firm-alert acknowledgements and attributed comments on supported readable targets; state that those interactions never mutate financial, schedule, permission, membership, or configuration state. | Product Owner approved August 15, 2026; CBD-67–CBD-76 terminology and PART-06 aligned |
 | RF-72-53 | Intensive audit — supporting-artifact integrity findings 1, 2, and 6 | Duplicate scenario IDs, redundant rows, and a stale Collaborator denial scaffold made test references ambiguous and contradicted approved export and connection authority. | Preserve the approved detailed scenario under each established referenced ID; merge weaker duplicate coverage into that scenario; delete redundant or contradictory scaffolds; renumber genuinely distinct cases as ROLE-04, VIEW-07, PART-06, and CONN-06; mechanically enforce catalog ID uniqueness. | Product Owner approved August 15, 2026; scenario catalog v0.1.6 and audit findings aligned; permission decisions unchanged |
 | RF-72-54 | Intensive audit — OD-72-03 and supporting-artifact integrity finding 3 | Permission 21 approved owner-created Viewer packages while the open-decision register still questioned whether they were allowed, and “Viewer bulk export is categorically denied” did not identify the controlled exception. | Close OD-72-03. Classify the capability as a one-time owner-authorized snapshot, not Viewer self-service export; define profile-specific semantic allowlists, categorical exclusions, owner confirmation, recipient binding, non-transferability, non-renewable 24-hour expiry, authorization-version invalidation, rate limits, and audit. Defer only physical serialization details, which may narrow but not broaden the approved schema. | Product Owner approved August 15, 2026; matrix v0.1.48, §5.8, EXP-03, audit, CBD-12, and CBD-72 aligned |
+| RF-72-55 | In-depth package review, August 15, 2026 | A sole Primary Owner could not leave a budget space at all. CBD-12-AC17 grants every member an unconditional right to revoke participation, and CBD-12-AC22 ties revocation to coercion safety, but PM-72-008, §6.3, and the universal denial on Primary demotion left transfer as the only exit — with exceptional recovery blocked under OD-72-01. A sole owner with no transfer recipient was trapped. | Product Owner decision: a sole Primary Owner cannot self-revoke, because departure would leave the budget space with no owner, but archival is the supported alternative. Added permission 35 and §6.5, bounded the CBD-12-AC17 revocation right with an explicit ownership carve-out, and recorded archival lifecycle mechanics as OD-72-05. | Product Owner approved August 15, 2026; specification §§4.3/6.3/6.5, LIFE-02/LIFE-04, and CBD-12/CBD-72 Jira aligned |
+| RF-72-56 | In-depth package review, August 15, 2026 | The audit, traceability record, and scenario catalog cited permission numbers 1–34 throughout, but only rows 11a–11d carried numbers in the matrix. Every numeric cross-reference in the package was unresolvable, which would have blocked the bidirectional traceability check. | Assign stable citation numbers to every matrix row, retain letter suffixes for rows split during review (`2a`/`2b`, `6a`–`6e`, `11a`–`11d`, `20a`/`20b`), and state that numbers are never reused or renumbered. | Product Owner approved August 15, 2026; specification §4 aligned |
+| RF-72-57 | In-depth package review, August 15, 2026 | The August 15 change-control work synchronized Jira **descriptions** but never updated the **Acceptance Criteria fields** on either CBD-72 or CBD-12. RF-72-38, RF-72-39, RF-72-41, RF-72-47, and RF-72-49 each recorded "CBD-12 Jira aligned" or "synchronized" on that partial basis. CBD-12-AC06 still capped Co-owners at one, AC19 still made cooldown/deduplication member-configurable, AC30 still made resources independently shareable, and AC33 still barred Collaborator connections — each contradicting CBD-12's own description. | Correct both AC fields against the approved specification, and treat "synchronized" as satisfied only when description, acceptance criteria, and traceability summary all match. A future synchronization claim must name the fields it covers. | Product Owner approved August 15, 2026; CBD-72 and CBD-12 acceptance criteria corrected |
+| RF-72-58 | In-depth package review, August 15, 2026 | The specification header claimed inheritance from CBD-71 MVP Schedule Decisions v1.0, while §5.4.1's three-record alert model actually depends on SD-071-044 — a v1.1 amendment the CBD-71 register marks "not authoritative until the review and approval gates in §8–9 pass." This record's §3 already said "v1.1 draft package," contradicting the specification header. CBD-71 is additionally closed as Done in Jira while its register remains a v1.1 draft. | Correct the header to name both the approved baseline and the pending dependency, and record the unresolved inheritance as OD-72-06. §5.4.1 cannot be approved as inherited-and-settled ahead of its source amendment. | **Resolved August 15, 2026.** The Product Owner chose to inherit v1.1. CBD-69 v1.1 was approved after an independent audit, then CBD-71 v1.1 was approved with SD-071-044 Accepted for MVP, so §5.4.1 inherits from an approved source at every link |
+| RF-72-59 | In-depth package review, August 15, 2026 | The scenario family table documented ten prefixes while the inventory used twenty-one; `ROLE-04`, `VIEW-07`, `PART-06`, and `CONN-06` had been renumbered by RF-72-53 but left as one-line `To detail` placeholders; and the documented `AUD` family had no scenarios at all. RF-72-53 assigned identifiers without content. | Complete the family table, give the four renumbered scenarios real content, sort the inventory to match the table, and record the empty `AUD` family and absent revoked-consent coverage as explicit gaps against CBD-72-AC13. | Product Owner approved August 15, 2026; scenario catalog v0.1.9 aligned |
 
 ## 7. Work remaining before approval
 
-1. Extract the formal CBD-72 Acceptance Criteria field and map every criterion individually.
-2. Expand the scenario inventory into concrete fixtures with actor, scope, versions, result, state delta, audit, and notification assertions.
-3. Perform independent matrix-cell and cross-document consistency audits.
-4. Reconcile CBD-14 security findings and disposition OD-72-01 through OD-72-04.
-5. Complete accessibility, architecture, privacy, and quality reviews.
+1. Map each rewritten CBD-72 acceptance criterion to specification evidence and scenario evidence individually, in both directions. The AC field was rewritten against permissions 1–35 on August 15, 2026 under RF-72-57; per-criterion mapping is the remaining half.
+2. Expand the scenario inventory into concrete fixtures with actor, scope, versions, result, state delta, audit, and notification assertions. Close the empty `AUD` family and the absent revoked-consent coverage recorded in scenario catalog §4.
+3. Perform independent matrix-cell and cross-document consistency audits, now that permission numbers 1–35 resolve.
+4. Reconcile CBD-14 security findings and disposition OD-72-01, OD-72-02, OD-72-04, and OD-72-05. OD-72-03 and OD-72-06 are closed; OD-72-05 must at minimum be accepted as scoped-out.
+5. Complete accessibility, architecture, privacy, and quality reviews. Note that CBD-14 is due September 9, 2026, after CBD-72's own due date, so either the security gate or the due date must move.
 6. Record Product Owner approval for the exact version.
-7. Publish all three artifacts to Confluence, synchronize repository mirrors, and link the evidence from Jira.
+7. Publish all three artifacts to Confluence, synchronize repository mirrors, and link the evidence from Jira. A synchronization claim is satisfied only when description, acceptance criteria, and traceability summary all match (RF-72-57).
 
 ## 8. Revision history
 
@@ -140,3 +147,4 @@ CBD-72 is complete only when the permission model covers every required role, ac
 | 0.1.6 | August 15, 2026 | Codex with Alexander Wohlford as Product Owner | Resolved scenario-ID collisions, removed contradictory/redundant scaffolds, renumbered distinct cases, and recorded a mechanical uniqueness requirement without changing permission decisions. | Product Owner approved; synchronized with scenario catalog v0.1.6 |
 | 0.1.7 | August 15, 2026 | Codex with Alexander Wohlford as Product Owner | Closed OD-72-03 by separating the approved owner-authorized Viewer snapshot from denied Viewer self-service export and defining its semantic schema, lifecycle, invalidation, and audit contract. | Product Owner approved; synchronized with matrix v0.1.48 and scenario catalog v0.1.7 |
 | 0.1.8 | August 15, 2026 | Codex with Alexander Wohlford as Product Owner | Synchronized the header with the current review record while retaining the open formal-criteria extraction and final package review work. No requirement mapping changed. | Metadata correction approved; synchronized with matrix v0.1.49 and scenario catalog v0.1.8 |
+| 0.1.9 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-72-55 through RF-72-59 from the in-depth package review: the sole-owner archive decision, matrix permission numbering, the partial Jira synchronization that left both AC fields stale, the unresolved CBD-71 v1.0/v1.1 inheritance, and the incomplete scenario catalog. Opened OD-72-05 and OD-72-06, corrected the CBD-71 inheritance status, and rewrote the remaining-work list against actual state. | Product Owner approved; synchronized with matrix v0.1.50 and scenario catalog v0.1.9; OD-72-06 remains open |
