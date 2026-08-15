@@ -18,7 +18,7 @@
  */
 
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { describe, it } from "node:test";
 
 interface BarrelGroup {
@@ -26,10 +26,33 @@ interface BarrelGroup {
   readonly directory: URL;
 }
 
-const GROUPS: readonly BarrelGroup[] = [
-  { label: "shared", directory: new URL("./shared/", import.meta.url) },
-  { label: "schedule", directory: new URL("./schedule/", import.meta.url) },
-];
+/**
+ * Every directory under `src/` that publishes a barrel.
+ *
+ * Discovered rather than listed, for the same reason the modules below are. An
+ * earlier version named `shared` and `schedule` by hand, which meant a newly
+ * added directory had no coverage until someone remembered to add it — the
+ * exact "rely on remembering" weakness this file exists to remove, moved up one
+ * level from the modules to the groups.
+ */
+function barrelGroups(): readonly BarrelGroup[] {
+  return readdirSync(new URL("./", import.meta.url), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .filter((label) => existsSync(new URL(`./${label}/index.ts`, import.meta.url)))
+    .sort()
+    .map((label) => ({ label, directory: new URL(`./${label}/`, import.meta.url) }));
+}
+
+const GROUPS = barrelGroups();
+
+describe("barrel discovery", () => {
+  it("finds at least one barrel directory", () => {
+    // Guards the guard, as within each group below: a discovery bug that found
+    // nothing would register no assertions at all and pass in silence.
+    assert.ok(GROUPS.length > 0, "no barrel directories discovered under src/");
+  });
+});
 
 /**
  * Every non-test source module beneath a directory, excluding barrels.
@@ -86,15 +109,21 @@ for (const group of GROUPS) {
 }
 
 describe("package entry points", () => {
-  it("exposes no root barrel, keeping the §8.10 seam structural", () => {
-    // The package.json exports map deliberately offers only ./shared and
-    // ./schedule. A root barrel would give classification a convenient path
-    // into schedule and undo the boundary the lint rules enforce.
+  it("publishes exactly the discovered barrels, and no root barrel", () => {
+    // Deriving the expectation from the barrels found on disk stops the two
+    // drifting in either direction: a new directory with an index.ts must be
+    // published, and a published path must exist. Asserted separately, the
+    // absence of a "." entry keeps the §8.10 seam structural — a root barrel
+    // would give classification a convenient path into schedule and undo the
+    // boundary the lint rules enforce.
     const packageJson = JSON.parse(
       readFileSync(new URL("../package.json", import.meta.url), "utf8"),
     ) as { exports: Record<string, unknown> };
 
-    assert.deepEqual(Object.keys(packageJson.exports).sort(), ["./schedule", "./shared"]);
+    assert.deepEqual(
+      Object.keys(packageJson.exports).sort(),
+      GROUPS.map((group) => `./${group.label}`),
+    );
     assert.equal(Object.hasOwn(packageJson.exports, "."), false, "no root entry point");
   });
 });

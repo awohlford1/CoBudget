@@ -6,7 +6,8 @@
   "description": "Pure domain logic for budget schedules, periods, and transaction classification. No I/O, no framework, no persistence.",
   "exports": {
     "./shared": "./src/shared/index.ts",
-    "./schedule": "./src/schedule/index.ts"
+    "./schedule": "./src/schedule/index.ts",
+    "./income": "./src/income/index.ts"
   },
   "scripts": {
     "lint": "eslint .",

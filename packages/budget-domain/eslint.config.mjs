@@ -19,6 +19,12 @@ const SEAM_MESSAGE =
   "input rather than something classification derives. Pass the values you " +
   "need in as arguments instead of importing across the seam.";
 
+const INCOME_DIRECTION_MESSAGE =
+  "Income is built on top of cadence definitions, not the other way round: " +
+  "CBD-68 §8 has the anchor income schedule supply the paycheck cadence that " +
+  "CBD-29 generates boundaries from. Importing income here would make that a " +
+  "cycle. Pass the anchor's recurrence in as an argument instead.";
+
 const CLOCK_MESSAGE =
   "Reading the wall clock makes results depend on when and where the code " +
   "runs, which CBD-67 INV-87 forbids. The budget-space date is resolved at " +
@@ -69,11 +75,20 @@ const VALIDATED_CAST_SELECTORS = [
   ...brandCastSelectors("WeeklyOrMonthlyDefinition", VALIDATED_MESSAGE),
 ];
 
-function forbidImportsFrom(...patterns) {
+/**
+ * Forbid a layer from importing layers it must sit above or beside.
+ *
+ * Takes `[pattern, message]` pairs rather than one message for all of them.
+ * Two different rules are enforced here — the CBD-67 §8.10 cadence and
+ * classification seam, and the direction of the income dependency — and a
+ * single block carries only one `no-restricted-imports` entry, so a shared
+ * message would have to explain the wrong rule for half the violations.
+ */
+function forbidImportsFrom(...groups) {
   return {
     "no-restricted-imports": [
       "error",
-      { patterns: patterns.map((group) => ({ group: [group], message: SEAM_MESSAGE })) },
+      { patterns: groups.map(([group, message]) => ({ group: [group], message })) },
     ],
   };
 }
@@ -130,18 +145,36 @@ export default defineConfig([
   },
 
   {
-    // Primitives sit below both engines and may depend on neither.
+    // Primitives sit below every engine and may depend on none of them.
     files: ["src/shared/**/*.ts"],
-    rules: forbidImportsFrom("**/schedule/**", "**/classification/**"),
+    rules: forbidImportsFrom(
+      ["**/schedule/**", SEAM_MESSAGE],
+      ["**/classification/**", SEAM_MESSAGE],
+      ["**/income/**", INCOME_DIRECTION_MESSAGE],
+    ),
   },
 
   {
     files: ["src/schedule/**/*.ts"],
-    rules: forbidImportsFrom("**/classification/**"),
+    rules: forbidImportsFrom(
+      ["**/classification/**", SEAM_MESSAGE],
+      ["**/income/**", INCOME_DIRECTION_MESSAGE],
+    ),
   },
 
   {
     files: ["src/classification/**/*.ts"],
-    rules: forbidImportsFrom("**/schedule/**"),
+    rules: forbidImportsFrom(
+      ["**/schedule/**", SEAM_MESSAGE],
+      ["**/income/**", INCOME_DIRECTION_MESSAGE],
+    ),
+  },
+
+  {
+    // Income reads cadence definitions and primitives, and nothing else. It is
+    // above schedule, so it may import it; classification is across the §8.10
+    // seam either way.
+    files: ["src/income/**/*.ts"],
+    rules: forbidImportsFrom(["**/classification/**", SEAM_MESSAGE]),
   },
 ]);
