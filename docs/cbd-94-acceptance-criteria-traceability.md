@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved v1.0 — provider-independent CBD-94 baseline.** All seven independent-review findings are closed. Approval accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
-| Document version | 1.0 |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-94](https://cobudget.atlassian.net/browse/CBD-94) |
 | Primary evidence | `docs/cbd-94-risk-mitigation-requirement-register.md` v1.0 |
@@ -549,7 +549,7 @@ implied.
 | RV-94-016 | Two normative passages in the risk register scoped themselves to `v0.1.1` while the document was at v0.1.2: §3.6 “No residual in this v0.1.1 draft is newly accepted” and the §4 residual-rating state “for all `RK-94-001–021` at v0.1.1”. Both statements remained true of the current draft, so the defect was confined to the version label, but a reader could not tell from the text whether either rule still bound the current draft. | **Closed in risk register v0.1.3.** Both passages are now version-agnostic, which removes the recurrence rather than resetting it to the current version number |
 | RV-94-017 | The `VT-94-054–068` suite row in verification inventory §5 listed its requirements as `SR-94-031–038`, `SR-94-035–036`, restating a sub-range already contained in the first range. | **Closed in verification inventory v0.1.3.** The redundant restatement was removed; the requirement set is unchanged |
 | RV-94-018 | Product Owner approval of the complete CBD-94 document set. Alexander Wohlford approved the register, verification inventory, traceability record, and independent-review findings as **CBD-94 v1.0** on August 16, 2026, following the substantive review at v0.1.1, the CBD-92/93 source reconciliation at v0.1.2, and the independent exhaustive review and its seven dispositions at v0.1.3–v0.1.4. | **Closed.** Promotion to v1.0 changed only status, version, cross-references, and self-descriptive “draft” wording; no risk, rating, override, requirement, verification case, disposition, gate, route, or release effect was altered. Approval establishes the provider-independent baseline only: all 21 families remain residual-unscored and evidence-pending, no gate is closed, no `EG-91-*`/`EG-93-*` gap is closed, and no `RI-93-*` candidate is adopted |
-| RV-94-019 | `scripts/sync-confluence.py` has no CBD-94 targets. Its registry ends at CBD-93, whose comment anticipates that “CBD-94 will” cite it. Each target requires an existing Confluence page ID and an expected title, so publication cannot run until pages are created and registered. Confluence credentials are also absent from the current environment. | **Open — publication follow-up, not a content defect.** The approved v1.0 set is complete and merged; only the Confluence mirror is outstanding. Closure requires creating four pages, adding targets in dependency order after the CBD-93 target, setting `CONFLUENCE_BASE_URL`/`CONFLUENCE_EMAIL`/`CONFLUENCE_API_TOKEN`, and running the script so each page is read back and verified |
+| RV-94-019 | `scripts/sync-confluence.py` had no CBD-94 targets; its registry ended at CBD-93, whose comment anticipated that “CBD-94 will” cite it. The script publishes by `PUT` to an existing page ID and cannot create pages, so publication was blocked on four pages that did not exist. | **Partially closed in v1.0.1.** Four placeholder pages were created in space `CBD` under homepage `98415` on August 16, 2026 — register `9601026`, verification inventory `9535490`, review findings `9633793`, traceability record `9273364` — and registered as targets in dependency order, with `cbd-93-abuse-analysis` promoted to `baseline=True` as its own comment instructed. **Remaining:** set `CONFLUENCE_BASE_URL`, `CONFLUENCE_EMAIL`, and `CONFLUENCE_API_TOKEN` and run `python scripts/sync-confluence.py --set cbd-94`, which converts the merged Markdown deterministically and reads each page back to verify it. Until that run completes the repository files are authoritative and the placeholder pages must not be cited |
 
 ## 14. Completion checklist
 
@@ -593,15 +593,19 @@ implied.
   Wohlford on August 16, 2026**, recorded in `RV-94-018` and in each document's
   revision history.
 - [ ] Approved repository change is merged to `main` before Confluence sync.
-- [ ] Confluence pages created for the four CBD-94 documents, targets registered
-  in `scripts/sync-confluence.py`, and the pages published and read back. The
-  script currently has no CBD-94 targets; see `RV-94-019`.
+- [x] Confluence pages created for the four CBD-94 documents and targets
+  registered in `scripts/sync-confluence.py` in dependency order. Done
+  August 16, 2026; see `RV-94-019`.
+- [ ] The four pages are published and read back by
+  `python scripts/sync-confluence.py --set cbd-94`. The pages currently hold
+  placeholder text and must not be cited until this run completes.
 - [ ] CBD-94 Jira completion is recorded only after merged evidence is linked.
 
 ## 15. Revision history
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.1 | August 16, 2026 | Claude | Publication-status revision only, recorded after the approved v1.0 set merged to `main` at `c84e491`. Created the four CBD-94 Confluence placeholder pages, registered them as targets in `scripts/sync-confluence.py` in dependency order, promoted `cbd-93-abuse-analysis` to a baseline, and updated `RV-94-019` and the §14 publication gates to match. No approved content changed: no risk, rating, override, requirement, verification case, disposition, gate, route, or release effect was touched, and the approval recorded at v1.0 stands unaltered. | Approved v1.0 content unchanged; publication status only |
 | 1.0 | August 16, 2026 | Alexander Wohlford as Product Owner, Claude assisting | **Approved as CBD-94 v1.0.** Promoted the v0.1.4 content unchanged; the only edits were status, version, cross-references, the §1 and §10.1/§14 self-descriptive “draft” wording, the approval checkbox, and the new `RV-94-018` approval record and `RV-94-019` publication follow-up. No source routing, rating, override, requirement, verification case, disposition, gate, or release effect was altered by approval. Confluence publication follows the merge to `main` and remains open under `RV-94-019`. | **Product Owner approved** |
 | 0.1.4 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner dispositions closing the three remaining review findings. Recorded the `RV-94-011` scoped Critical override, the `RV-94-012` fixture binding, and the `RV-94-015` §3.7 dependency/ownership rule in §13. Added `FX-94` to the §12.1 tracked sets and corrected the `RV-94-005` identifier count to 325. Added §12.2 audit obligations 11 (one gate per scope class) and 12 (bidirectional fixture binding), and strengthened obligation 10 to require a per-trigger override check, since the existing wording already covered overrides yet did not surface `RV-94-011`. Updated the audit result to Pass and closed the approval-checklist gate. No source routing, requirement text, disposition, owner, or release effect was changed. | Product Owner rating and method decisions incorporated; complete record remains draft |
 | 0.1.3 | August 16, 2026 | Claude | Recorded the independent exhaustive review as `RV-94-011`–`RV-94-017` in §13 and linked `docs/cbd-94-exhaustive-review-findings.md`. Corrected `RV-94-014` by removing `RG-94-006` from the feature/provider/channel gate class so every gate is classified exactly once. Re-executed the §12.2 audit independently rather than restating it, and rewrote the result block to Pass-with-three-open-findings, naming `RV-94-011`, `RV-94-012`, and `RV-94-015` against the specific rows that did not previously cover them. Added the corresponding approval-checklist gate. No risk, rating, disposition, requirement, verification case, gate, route, or source mapping was changed. | Review record and editorial correction only; complete record remains draft |
