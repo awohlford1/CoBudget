@@ -8,7 +8,8 @@
 | Reviewer | Pending Product Owner review |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | [Hard-Gate Catalog](cbd-102-provider-requirements-hard-gate-catalog.md) v0.1.0; [Evaluation Rubric](cbd-102-provider-evaluation-rubric.md) v0.1.0; [Demand Model](cbd-102-demand-model.md) v0.1.0 |
+| Companions | Hard-Gate Catalog v0.1.0; Evaluation Rubric v0.1.0; Demand Model v0.1.0 |
+| Confluence page | [CBD-102 — Provider Cost Template](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9469982) |
 | Repository baseline | `52d764a` |
 | Last updated | August 16, 2026 |
 
