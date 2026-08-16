@@ -24,7 +24,6 @@ Usage
     python scripts/sync-confluence.py --set cbd-69         # publish one document set
     python scripts/sync-confluence.py --set cross-cutting  # the Future Feature Register
     python scripts/sync-confluence.py                      # publish everything, in order
-    python scripts/sync-confluence.py --set cbd-92 --dry-run --mermaid-macro NAME
 
 Publish one page first and look at it in Confluence before doing a whole set.
 Markdown-to-storage conversion is deterministic but not visually identical to
@@ -46,10 +45,10 @@ Safety behavior
   reports every target instead of stopping, since it writes nothing.
 * `--dry-run` writes converted previews to `.confluence-preview/` and makes no
   remote call other than reading current page metadata.
-* A ```mermaid fence publishes as a code block by default. Passing
-  `--mermaid-macro NAME` renders it through that Confluence macro instead, but
-  a macro no installed app provides publishes as "Unknown macro", so confirm
-  the macro exists and read the dry-run preview before publishing with it.
+* A ```mermaid fence publishes as a code block, keeping the diagram source
+  readable on the page. The installed mermaid app stores diagrams as page
+  attachments rendered in the browser, which a server-side publisher cannot
+  produce; see the MERMAID_FENCE comment before attempting macro output again.
 * After each write the page is read back and compared on a normalized text
   projection. A mismatch is reported and sets a non-zero exit code.
 """
@@ -78,17 +77,25 @@ except ImportError:  # pragma: no cover - dependency guidance
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PREVIEW_DIR = REPO_ROOT / ".confluence-preview"
 
-# A ```mermaid fence renders as a diagram only when a Confluence app supplies a
-# mermaid macro, and `ac:name` takes the macro key, not the app's display name.
-# The "Mermaid Diagrams for Confluence" app is keyed `mermaid-cloud` on the
-# CoBudget instance, confirmed by the Product Owner on August 16, 2026. A key no
-# installed app provides publishes as "Unknown macro", which on an approved
-# governing document is worse than the code block it replaces, so re-confirm
-# this before pointing the script at another Confluence site. Pass
-# --mermaid-macro "" to fall back to code blocks for a single run. CBD-92 is the
-# first synchronized document that contains diagrams.
-MERMAID_MACRO: str | None = "mermaid-cloud"
-
+# A ```mermaid fence publishes as a code block. This is a decision, not a gap.
+#
+# The "Mermaid Diagrams for Confluence" app installed here (macro key
+# `mermaid-cloud`) does not read a diagram from the macro body. It keeps two
+# page attachments per diagram — an extensionless file holding the mermaid
+# source, and a sibling `.png` of the rendered image — and the macro carries
+# only `filename`, `toolbar`, `zoom` and `revision` pointing at that pair. The
+# PNG is produced by the app's renderer in the browser when someone edits the
+# macro, so a server-side publisher cannot generate it.
+#
+# Publishing the macro with the source in `ac:plain-text-body` was tried on
+# 2026-08-16: Confluence accepted the macro, silently discarded the body, and
+# CBD-92 section 4 published as four empty diagrams with the source lost from
+# the page. Code blocks keep the source readable and are the approved behavior
+# per the Product Owner decision that day. Diagrams render from the same
+# markdown on GitHub.
+#
+# Reviving macro output requires uploading both attachments per diagram and
+# solving the browser-side render, not a flag.
 MERMAID_FENCE = re.compile(r"^```mermaid[ \t]*\n(.*?)^```[ \t]*$", re.MULTILINE | re.DOTALL)
 
 
@@ -267,60 +274,32 @@ def session_from_env() -> tuple[requests.Session, str]:
     return session, base
 
 
-def to_storage(markdown_text: str, mermaid_macro: str | None = None) -> str:
+def to_storage(markdown_text: str) -> str:
     """Convert repository markdown to Confluence storage format.
 
     Confluence storage is XHTML. `markdown` with the table and fenced-code
     extensions produces the subset these documents need: headings, paragraphs,
-    tables, lists, inline code, bold, and links.
-
-    A ```mermaid fence stays a code block unless `mermaid_macro` names a macro
-    the target instance actually provides, in which case the diagram source is
-    handed to that macro. The source is lifted out before conversion and put
-    back afterwards, because the markdown renderer would otherwise escape the
-    arrows and quoted labels a diagram is made of.
+    tables, lists, inline code, bold, and links. A ```mermaid fence becomes a
+    code block; see the MERMAID_FENCE comment for why that is the decision.
     """
-    diagrams: list[str] = []
-
-    def lift(match: re.Match[str]) -> str:
-        diagrams.append(match.group(1))
-        return f"\n\nMERMAIDBLOCK{len(diagrams) - 1}ENDMERMAID\n\n"
-
-    if mermaid_macro:
-        markdown_text = MERMAID_FENCE.sub(lift, markdown_text)
-
     rendered = markdown.markdown(
         markdown_text,
         extensions=["tables", "fenced_code", "sane_lists", "attr_list"],
         output_format="xhtml",
     )
     # Confluence rejects a bare ampersand in storage format.
-    rendered = re.sub(r"&(?!(?:[a-zA-Z][a-zA-Z0-9]*|#\d+|#x[0-9a-fA-F]+);)", "&amp;", rendered)
-
-    for index, source in enumerate(diagrams):
-        # CDATA keeps the diagram's own <, > and & literal. A diagram cannot
-        # contain the CDATA terminator, but split it rather than emit malformed
-        # storage if one ever does.
-        body = source.strip().replace("]]>", "]]]]><![CDATA[>")
-        macro = (
-            f'<ac:structured-macro ac:name="{mermaid_macro}" ac:schema-version="1">'
-            f"<ac:plain-text-body><![CDATA[{body}]]></ac:plain-text-body>"
-            "</ac:structured-macro>"
-        )
-        token = f"MERMAIDBLOCK{index}ENDMERMAID"
-        rendered = re.sub(rf"<p>\s*{token}\s*</p>", macro, rendered)
-        rendered = rendered.replace(token, macro)
-
-    return rendered
+    return re.sub(r"&(?!(?:[a-zA-Z][a-zA-Z0-9]*|#\d+|#x[0-9a-fA-F]+);)", "&amp;", rendered)
 
 
 def normalize(text: str) -> str:
     """Collapse a page to comparable text so a read-back can be verified.
 
-    CDATA content is held aside before tags are stripped. A mermaid body is
-    literal text containing `<`, `>` and `-->`, so stripping tags over it would
-    consume part of the diagram and leave the read-back comparing two equally
-    damaged projections rather than the diagram it is supposed to verify.
+    CDATA content is held aside before tags are stripped. Confluence stores a
+    code-macro body as CDATA, and that body is literal text that may contain
+    `<`, `>` or `-->`; stripping tags over it consumes from the CDATA opener to
+    the first `>` inside the code and leaves the read-back comparing two equally
+    damaged projections rather than the content it is supposed to verify. That
+    matters most for the documents whose diagrams publish as code blocks.
     """
     literals: list[str] = []
 
@@ -373,13 +352,6 @@ def main() -> int:
     parser.add_argument("--only", metavar="KEY", help="publish a single target by key")
     parser.add_argument("--set", metavar="DOC_SET", dest="doc_set", help="publish one document set, e.g. cbd-69")
     parser.add_argument("--list", action="store_true", help="list targets and exit")
-    parser.add_argument(
-        "--mermaid-macro",
-        metavar="NAME",
-        default=MERMAID_MACRO,
-        help="render ```mermaid fences through this Confluence macro instead of as code blocks; "
-        "the macro must be installed on the target instance, so dry-run and check the preview first",
-    )
     args = parser.parse_args()
 
     if args.list:
@@ -407,7 +379,7 @@ def main() -> int:
             continue
 
         source = target.file.read_text(encoding="utf-8")
-        storage = to_storage(source, args.mermaid_macro)
+        storage = to_storage(source)
         diagrams = len(MERMAID_FENCE.findall(source))
 
         try:
@@ -435,8 +407,7 @@ def main() -> int:
         if args.dry_run:
             preview = PREVIEW_DIR / f"{target.key}.html"
             preview.write_text(storage, encoding="utf-8")
-            rendering = "code blocks" if not args.mermaid_macro else f"{args.mermaid_macro} macro"
-            note = f"; {diagrams} mermaid diagram(s) as {rendering}" if diagrams else ""
+            note = f"; {diagrams} mermaid diagram(s) as code blocks" if diagrams else ""
             print(
                 f"DRY  {target.key}: {len(source):,} chars markdown -> {len(storage):,} chars storage; "
                 f"page v{version}; preview {preview.relative_to(REPO_ROOT)}{note}"
