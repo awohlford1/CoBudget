@@ -44,3 +44,23 @@ These instructions apply throughout the repository unless a more specific
 - Jira changes do not authorize early edits to Confluence. Any resulting
   Confluence-backed document change still follows the repository-first,
   merge-to-`main`, then synchronize workflow above.
+
+## GitHub publishing authentication
+
+- Treat a successful authenticated `git fetch` or `git push` through Windows
+  Git Credential Manager as the authority for local GitHub transport. A stale
+  `gh auth status` result does not prove that repository publishing is
+  unavailable.
+- Use ordinary `git` commands for staging, committing, fetching, and pushing.
+  Prefer the connected GitHub app for pull-request reads and writes when its
+  installation permissions allow the requested operation.
+- If the GitHub app can read the repository but a requested write returns
+  `403 Resource not accessible by integration`, use the GitHub REST API with
+  the credential supplied in memory by `git credential fill`. Never print,
+  log, persist, or place that credential in a command argument, file, PR body,
+  or tool result.
+- Before merging, verify the exact PR head SHA, mergeability, and required
+  check results. Submit the merge with that expected head SHA and follow the
+  repository's established merge method.
+- Do not assume the in-app browser is authenticated. Use browser UI for GitHub
+  mutations only after its signed-in state is visibly confirmed.
