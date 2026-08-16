@@ -79,13 +79,15 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 PREVIEW_DIR = REPO_ROOT / ".confluence-preview"
 
 # A ```mermaid fence renders as a diagram only when a Confluence app supplies a
-# mermaid macro. Emitting a macro name no installed app provides renders
-# "Unknown macro" on the published page, which is worse than the code block it
-# replaces, so this stays None until the macro name is confirmed on the target
-# instance. Confirm it, then either set this constant or pass --mermaid-macro
-# for a single run, and read the --dry-run preview before publishing. CBD-92 is
-# the first synchronized document that contains diagrams.
-MERMAID_MACRO: str | None = None
+# mermaid macro, and `ac:name` takes the macro key, not the app's display name.
+# The "Mermaid Diagrams for Confluence" app is keyed `mermaid-cloud` on the
+# CoBudget instance, confirmed by the Product Owner on August 16, 2026. A key no
+# installed app provides publishes as "Unknown macro", which on an approved
+# governing document is worse than the code block it replaces, so re-confirm
+# this before pointing the script at another Confluence site. Pass
+# --mermaid-macro "" to fall back to code blocks for a single run. CBD-92 is the
+# first synchronized document that contains diagrams.
+MERMAID_MACRO: str | None = "mermaid-cloud"
 
 MERMAID_FENCE = re.compile(r"^```mermaid[ \t]*\n(.*?)^```[ \t]*$", re.MULTILINE | re.DOTALL)
 
