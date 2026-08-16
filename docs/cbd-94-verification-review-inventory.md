@@ -2,11 +2,11 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft for internal review** |
-| Document version | 0.1.2 |
+| Status | **Approved v1.0 — provider-independent CBD-94 baseline.** Approval fixes the verification obligations. It records no passing result, closes no release gate, and closes no evidence or specialist gap. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-94](https://cobudget.atlassian.net/browse/CBD-94) |
-| Governing register | `docs/cbd-94-risk-mitigation-requirement-register.md` v0.1.2 |
+| Governing register | `docs/cbd-94-risk-mitigation-requirement-register.md` v1.0 |
 | Repository baseline | `be20177` on `main` |
 | Last updated | August 16, 2026 |
 
@@ -144,32 +144,38 @@ Execution class is fixed as follows:
 
 | Class | Exact cases | Completion rule |
 | --- | --- | --- |
-| `M` mixed | `VT-94-164/166/187–193/199–200/219–232/235/247–250/255–262/266–267/269` | Automated behavior/absence assertions plus the mapped `ME/SRV` copy, accessibility, safety, residual, or comprehension judgment must both pass. |
+| `M` mixed | `VT-94-164/166/187–193/199–200/217/219–232/235/247–250/255–262/266–267/269` | Automated behavior/absence assertions plus the mapped `ME/SRV` copy, accessibility, safety, residual, or comprehension judgment must both pass. |
 | `A` automated | Every other `VT-94-*` case | The full executable case and forbidden-effect oracle run without human judgment as the deciding assertion. Provider/fault harness setup may be manual, but the result is machine-observed. |
 
-| Cases | Suite | Requirements | Principal source | Release gate |
-| --- | --- | --- | --- | --- |
-| `VT-94-001–008` | Authentication, recovery, session, assurance, origin | `SR-94-001–006` | `TH-92-001–004` | `RG-94-002` |
-| `VT-94-009–017` | Invitation enumeration, locator, consent, atomicity | `SR-94-007–011`, `SR-94-132–133/141/144` | `TH-92-005–007`; `AB-93-004/010/065–066/079` | `RG-94-003/005/012` |
-| `VT-94-018–035` | Authorization, tenant isolation, stale/race, masking, cache/search/report | `SR-94-012–021`, `SR-94-093–095/125–131/135/139` | `TH-92-008–013/017–018`; inference scenarios | `RG-94-003` |
-| `VT-94-036–053` | Provider link, connection authority, provenance, association/split/unlink | `SR-94-022–030`, `SR-94-118` | `TH-92-014/019/035–037` | `RG-94-004` |
-| `VT-94-054–068` | Queue/job/retry/rate/calculation/alert-state layers | `SR-94-031–038`, `SR-94-035–036` | `TH-92-015/023/034/038–040` | `RG-94-005` |
-| `VT-94-069–076` | Secret non-propagation, custody, rotation | `SR-94-039–043` | `TH-92-016` | `RG-94-006` |
-| `VT-94-077–096` | Alert eligibility, templates, providers, channels, shared devices | `SR-94-044–054`, `SR-94-104–109` | `TH-92-020–023/041`; `AB-93-023–032` | `RG-94-007/012` |
-| `VT-94-097–111` | Export schemas, authorization, snapshot, locator, download, custody | `SR-94-055–062`, `SR-94-113` | `TH-92-024–026`; export abuse/residual scenarios | `RG-94-008` |
-| `VT-94-112–132` | Audit/telemetry/support/exceptional access/platform boundary | `SR-94-063–074`, `SR-94-136–140` | `TH-92-027–030/042`; `AB-93-067–074/081` | `RG-94-009/011` |
-| `VT-94-133–153` | Archive/delete/restore/backups/recovery/authority resurrection | `SR-94-075–084`, `SR-94-110–124` | `TH-92-031–033/043–045`; lifecycle abuse scenarios | `RG-94-010` |
-| `VT-94-154–166` | Coercion/consent/role/transfer/export/connection disclosures and non-escalation | `SR-94-085–092`, `SR-94-110/115` | `AB-93-001–010` | `RG-94-012/014` |
-| `VT-94-167–180` | Role visibility, monitoring, sensitive content, search/read aggregation | `SR-94-093–101`, `SR-94-125–129` | `AB-93-011–022` | `RG-94-003/012/014` |
-| `VT-94-181–187` | Lifecycle notice/safety-channel residual fixtures | `SR-94-052–054`, `SR-94-111/116–117` | `AB-93-028–029/057–058`; `EG-93-001/010` | `RG-94-007/012/014` |
-| `VT-94-188–200` | Shame/pressure/acknowledgement/comment noninterference | `SR-94-089–090`, `SR-94-098–109` | `AB-93-033–038` | `RG-94-011/012` |
-| `VT-94-201–218` | Retaliatory removal, scope change, lockout, lifecycle agency | `SR-94-110–120` | `AB-93-039–048` | `RG-94-003/008/010/012` |
-| `VT-94-219–224` | Former member, stale access, copy custody | `SR-94-112/119/121–124` | `AB-93-049–054` | `RG-94-008/010/012` |
-| `VT-94-225–235` | Inference, existence, timing, health, withheld results | `SR-94-016–020`, `SR-94-116–118/125–129` | `AB-93-055–062` | `RG-94-003/005/012/014` |
-| `VT-94-236–246` | Cross-space isolation, correlation, invitation re-contact | `SR-94-130–135` | `AB-93-063–066` | `RG-94-003/005/012` |
-| `VT-94-247–254` | Audit/history audience, aggregation, self-record candidate | `SR-94-063–065`, `SR-94-136–140` | `AB-93-067–070` | `RG-94-009/012` |
-| `VT-94-255–263` | Healthy/mistaken role, invitation, export, departure, support, archive | `SR-94-141–145` plus applicable domain requirements | `AB-93-075–082` | Applicable domain gate and `RG-94-012` |
-| `VT-94-264–270` | Personal-account deletion and joint-account association/coercion/dissolution | `SR-94-022–030/075–092/110–124/146–147` | `AB-93-083–086`; `SG-93-096/097`; `RI-93-019` | `RG-94-004/010/012/014` |
+The **Fixtures** column names the §4 fixture families a suite consumes. It is a
+minimum, not a ceiling: an individual case MUST still record the exact fixture,
+variants, and preconditions required by §3, and MAY require a family the suite
+row does not name. Every `FX-94-001–010` family is consumed by at least one
+suite, and every suite names at least one family.
+
+| Cases | Suite | Requirements | Principal source | Fixtures | Release gate |
+| --- | --- | --- | --- | --- | --- |
+| `VT-94-001–008` | Authentication, recovery, session, assurance, origin | `SR-94-001–006` | `TH-92-001–004` | `FX-94-001` | `RG-94-002` |
+| `VT-94-009–017` | Invitation enumeration, locator, consent, atomicity | `SR-94-007–011`, `SR-94-132–133/141/144` | `TH-92-005–007`; `AB-93-004/010/065–066/079` | `FX-94-001–002` | `RG-94-003/005/012` |
+| `VT-94-018–035` | Authorization, tenant isolation, stale/race, masking, cache/search/report | `SR-94-012–021`, `SR-94-093–095/125–131/135/139` | `TH-92-008–013/017–018`; inference scenarios | `FX-94-001–003` | `RG-94-003` |
+| `VT-94-036–053` | Provider link, connection authority, provenance, association/split/unlink | `SR-94-022–030`, `SR-94-118` | `TH-92-014/019/035–037` | `FX-94-003–004` | `RG-94-004` |
+| `VT-94-054–068` | Queue/job/retry/rate/calculation/alert-state layers | `SR-94-031–038` | `TH-92-015/023/034/038–040` | `FX-94-005–006` | `RG-94-005` |
+| `VT-94-069–076` | Secret non-propagation, custody, rotation | `SR-94-039–043` | `TH-92-016` | `FX-94-005/009` | `RG-94-006` |
+| `VT-94-077–096` | Alert eligibility, templates, providers, channels, shared devices | `SR-94-044–054`, `SR-94-104–109` | `TH-92-020–023/041`; `AB-93-023–032` | `FX-94-006` | `RG-94-007/012` |
+| `VT-94-097–111` | Export schemas, authorization, snapshot, locator, download, custody | `SR-94-055–062`, `SR-94-113` | `TH-92-024–026`; export abuse/residual scenarios | `FX-94-002/007` | `RG-94-008` |
+| `VT-94-112–132` | Audit/telemetry/support/exceptional access/platform boundary | `SR-94-063–074`, `SR-94-136–140` | `TH-92-027–030/042`; `AB-93-067–074/081` | `FX-94-009` | `RG-94-009/011` |
+| `VT-94-133–153` | Archive/delete/restore/backups/recovery/authority resurrection | `SR-94-075–084`, `SR-94-110–124` | `TH-92-031–033/043–045`; lifecycle abuse scenarios | `FX-94-008` | `RG-94-010` |
+| `VT-94-154–166` | Coercion/consent/role/transfer/export/connection disclosures and non-escalation | `SR-94-085–092`, `SR-94-110/115` | `AB-93-001–010` | `FX-94-002/010` | `RG-94-012/014` |
+| `VT-94-167–180` | Role visibility, monitoring, sensitive content, search/read aggregation | `SR-94-093–101`, `SR-94-125–129` | `AB-93-011–022` | `FX-94-002/010` | `RG-94-003/012/014` |
+| `VT-94-181–187` | Lifecycle notice/safety-channel residual fixtures | `SR-94-052–054`, `SR-94-111/116–117` | `AB-93-028–029/057–058`; `EG-93-001/010` | `FX-94-006/010` | `RG-94-007/012/014` |
+| `VT-94-188–200` | Shame/pressure/acknowledgement/comment noninterference | `SR-94-089–090`, `SR-94-098–109` | `AB-93-033–038` | `FX-94-006/010` | `RG-94-011/012` |
+| `VT-94-201–218` | Retaliatory removal, scope change, lockout, lifecycle agency | `SR-94-110–120` | `AB-93-039–048` | `FX-94-002/008/010` | `RG-94-003/008/010/012` |
+| `VT-94-219–224` | Former member, stale access, copy custody | `SR-94-112/119/121–124` | `AB-93-049–054` | `FX-94-002/007–008` | `RG-94-008/010/012` |
+| `VT-94-225–235` | Inference, existence, timing, health, withheld results | `SR-94-016–020`, `SR-94-116–118/125–129` | `AB-93-055–062` | `FX-94-003/010` | `RG-94-003/005/012/014` |
+| `VT-94-236–246` | Cross-space isolation, correlation, invitation re-contact | `SR-94-130–135` | `AB-93-063–066` | `FX-94-003/010` | `RG-94-003/005/012` |
+| `VT-94-247–254` | Audit/history audience, aggregation, self-record candidate | `SR-94-063–065`, `SR-94-136–140` | `AB-93-067–070` | `FX-94-002/009` | `RG-94-009/012` |
+| `VT-94-255–263` | Healthy/mistaken role, invitation, export, departure, support, archive | `SR-94-141–145` plus applicable domain requirements | `AB-93-075–082` | `FX-94-002/007/010` | Applicable domain gate and `RG-94-012` |
+| `VT-94-264–270` | Personal-account deletion and joint-account association/coercion/dissolution | `SR-94-022–030/075–092/110–124/146–147` | `AB-93-083–086`; `SG-93-096/097`; `RI-93-019` | `FX-94-004/008/010` | `RG-94-004/010/012/014` |
 
 ## 6. Ordered implementation verification case registry
 
@@ -466,7 +472,7 @@ contract and record jurisdictions/populations/scope/limitations.
 | SRV-94-008 | Platform-safety operating review/exercise | Scope, prohibited powers, intake/severity/SLO/staffing/on-call, evidence, communication, escalation/appeal, audit/training, exercised cases | `RG-94-011`; `EG-93-009` |
 | SRV-94-009 | Notification/recovery channel architecture review | Compromise/retirement/recovery/stale-token/no-channel outcomes prove separation of destination and recovery authority | `RG-94-002/007`; `EG-93-010` |
 | SRV-94-010 | Independent public-launch security review | Before public product launch, independently challenge diagram completeness, boundary placement, STRIDE coverage, technical triage, evidence-gap scope, and resulting CBD-94 mitigations/residual decisions; trace and incorporate accepted findings | `RG-94-015`; public product launch only |
-| SRV-94-011 | Penetration test — optional pending future decision | If separately commissioned, record implementation scope, methods, findings, owner/date/retest and limitations across auth/session/IDOR/cross-tenant/provider/webhook/queue/export/audit/operations/lifecycle/recovery | No current release gate; this draft does not require a penetration test for Private MVP or public launch |
+| SRV-94-011 | Penetration test — optional pending future decision | If separately commissioned, record implementation scope, methods, findings, owner/date/retest and limitations across auth/session/IDOR/cross-tenant/provider/webhook/queue/export/audit/operations/lifecycle/recovery | No current release gate; this version does not require a penetration test for Private MVP or public launch |
 | SRV-94-012 | Incident-response/tabletop | Identity/provider/secret/cross-tenant/notification/deletion/backup incidents, evidence/notice/duty separation and lessons tracked | `RG-94-009` |
 | SRV-94-013 | Recovery exercise | Isolated restore, deletion-ledger reconciliation, non-resurrection, return-to-service authorization | `RG-94-010` |
 | SRV-94-014 | Content/localization review | Product Owner copy approval, privacy/legal as applicable, normative localization equivalence, no legacy authority terms | `RG-94-012` |
@@ -540,12 +546,15 @@ behavior.
    not the customer-audit or product-measurement path.
 8. `RG-94-015` and `SRV-94-010` apply to public product launch only. Neither an
    independent review nor a penetration test is a Private-MVP prerequisite in
-   the approved CBD-92 policy baseline preserved by this draft.
+   the approved CBD-92 policy baseline preserved by this document.
 
 ## 12. Revision history
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 16, 2026 | Alexander Wohlford as Product Owner, Claude assisting | **Approved as CBD-94 v1.0.** Promoted the v0.1.4 content unchanged; the only edits were status, version, the governing-register reference, and one self-descriptive “draft” wording in §11. No case, requirement, fixture, parameter, monitor, evidence package, gate, or execution class was altered by approval. Approval fixes the verification obligations as the controlling baseline; it records no `Pass`, `Fail`, or `Blocked` result and closes no gate. Every `VT`, `ME`, `SRV`, `PR`, and `MON` route remains unexecuted. Confluence publication follows the merge to `main`. | **Product Owner approved** |
+| 0.1.4 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner disposition on `RV-94-012`: bound the ten `FX-94-*` fixture families to the verification suites that consume them by adding a Fixtures column to §5, so every family is consumed by at least one suite and every suite names at least one family. Recorded that the column is a minimum and that §3 still requires each individual evidence record to name its exact fixture, variants, and preconditions. No case, requirement, parameter, monitor, evidence package, gate, or source mapping was changed. | Product Owner method decision incorporated; complete inventory remains draft |
+| 0.1.3 | August 16, 2026 | Claude | Independent exhaustive-review corrections. `RV-94-013`: moved `VT-94-217` from the `A` automated class to the `M` mixed class, because its own §6.7 text makes `SRV-94-014` the deciding judgment on copy meaning, which §5 forbids an `A` case from doing; the mixed set is now 42 cases. `RV-94-017`: removed the redundant `SR-94-035–036` restatement from the `VT-94-054–068` suite row, where those requirements are already inside `SR-94-031–038`. No case, requirement, fixture, parameter, monitor, evidence package, or gate mapping was added or removed. Open review finding `RV-94-012` (unreferenced `FX-94-001–010` fixture families) remains recorded in the traceability record §13 and is not resolved here. | Editorial and classification correction only; complete inventory remains draft |
 | 0.1.2 | August 16, 2026 | Codex | Reconciled CBD-93 v1.1 by adding seven contiguous cases for `AB-93-083–086`, `SG-93-096/097`, and `RI-93-019`; mapped `SR-94-146/147`; and retained the public-launch-only independent-security policy and optional penetration-test status. | Source reconciliation only; complete inventory remains draft |
 | 0.1.1 | August 16, 2026 | Codex with Alexander Wohlford as Product Owner | Substantive-review revision: preserved the public-launch-only independent-security gate and made penetration testing optional pending a future decision; classified automated versus mixed cases; separated automated assertions from human judgment; defined coverage-combination rules and five stable parameter contracts; and added ten privacy-bounded operational-security monitors with escalation routes. | Product Owner gate decision incorporated; complete inventory remains draft |
 | 0.1.0 | August 16, 2026 | Codex | Initial inventory defining 263 ordered automated cases, 15 manual evidence packages, 15 specialist reviews/exercises, reusable fixtures, evidence schema, and complete `SR-94-001–145` verification mapping. | Draft for internal review |
