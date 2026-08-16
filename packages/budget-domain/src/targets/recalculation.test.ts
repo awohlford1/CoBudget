@@ -33,7 +33,7 @@ function baseTargets(rent: number, food: number): BaseTargetSet {
 function context(set: BaseTargetSet, budgetSpaceDate: string): TransitionRecalculation {
   return {
     baseTargets: set,
-    newCadence: "monthly",
+    scheduleCadence: "monthly",
     transition: TRANSITION,
     basis: BASIS,
     budgetSpaceDate: toISODate(budgetSpaceDate),

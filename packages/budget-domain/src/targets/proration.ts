@@ -50,6 +50,33 @@ function compareIds(a: CategoryId, b: CategoryId): number {
 }
 
 /**
+ * Establish that this proration stays inside exact integer arithmetic.
+ *
+ * This is a precondition for the whole calculation, not merely for the rounding
+ * step that first needed it. `Math.floor(n / d)` and `n % d` are exact for safe
+ * integers and lossy beyond them, so every floor and remainder below depends on
+ * this having passed. Because the total is the sum of non-negative amounts, no
+ * per-category product can exceed the total product — checking the total once
+ * therefore covers every category, and no per-category check is needed.
+ *
+ * `2n + d` rather than `n` is the bound, because that is the largest
+ * intermediate {@link roundHalfUp} forms. Rejecting a value that is safe as `n`
+ * but not as `2n + d` costs nothing real: it would take a budget of roughly
+ * forty-five trillion in major units to reach.
+ */
+function assertExactArithmetic(numerator: number, denominator: number): void {
+  if (numerator < 0) {
+    throw new RangeError(`proration requires a non-negative numerator, received ${numerator}`);
+  }
+  if (!Number.isSafeInteger(2 * numerator + denominator)) {
+    throw new RangeError(
+      `proration overflows exact integer arithmetic at ${numerator}/${denominator}. ` +
+        "Amounts are whole minor units and must stay within the safe integer range.",
+    );
+  }
+}
+
+/**
  * Half-up rounding of a non-negative rational, in exact integer arithmetic.
  *
  * `floor((2n + d) / 2d)` is `floor(n/d + 1/2)`, which rounds a midpoint upward:
@@ -58,22 +85,10 @@ function compareIds(a: CategoryId, b: CategoryId): number {
  * that would make a value "exactly at the midpoint" land on either side
  * depending on the amount.
  *
- * Negative numerators are unreachable — base targets are validated
- * zero-or-positive — and are rejected rather than handled, because the identity
- * above only rounds half *up* for non-negative values.
+ * Requires {@link assertExactArithmetic} to have passed for the same operands.
  */
 function roundHalfUp(numerator: number, denominator: number): number {
-  if (numerator < 0) {
-    throw new RangeError(`half-up rounding requires a non-negative numerator, received ${numerator}`);
-  }
-  const scaled = 2 * numerator + denominator;
-  if (!Number.isSafeInteger(scaled)) {
-    throw new RangeError(
-      `proration overflows exact integer arithmetic at ${numerator}/${denominator}. ` +
-        "Amounts are whole minor units and must stay within the safe integer range.",
-    );
-  }
-  return Math.floor(scaled / (2 * denominator));
+  return Math.floor((2 * numerator + denominator) / (2 * denominator));
 }
 
 /** One category's exact share, split into whole units and the leftover fraction. */
@@ -99,10 +114,17 @@ interface Share {
  * could not do — a caller who computed it wrongly would simply not call the
  * helper.
  *
- * `newCadence` must match the base target set's own cadence. Passing it
- * separately is what makes INV-78 enforceable: the caller has to state which
- * cadence context it believes it is in, and a set belonging to the other context
- * fails loudly instead of being silently converted.
+ * `scheduleCadence` must come from the authoritative schedule version, and must
+ * match the base target set's own cadence. That comparison is what catches a
+ * weekly set being spent against a monthly schedule, which INV-78 forbids
+ * converting silently.
+ *
+ * The limit of that guard is worth stating rather than implying: a caller who
+ * passes `baseTargets.cadence` here compares the value with itself and learns
+ * nothing. The check catches a set fetched for the wrong context — the realistic
+ * mistake — and cannot catch a caller who declines to consult the schedule at
+ * all. Nothing available at this layer can, because the schedule version is not
+ * an input to arithmetic over periods.
  *
  * A transition spanning the whole basis period is permitted and computes to the
  * identity. Whether a transition should have been created at all is INV-30's
@@ -110,17 +132,17 @@ interface Share {
  */
 export function prorateTransitionTargets(
   baseTargets: BaseTargetSet,
-  newCadence: Cadence,
+  scheduleCadence: Cadence,
   transition: BudgetPeriod,
   basis: BudgetPeriod,
 ): readonly PeriodTarget[] {
   validateBaseTargetSet(baseTargets);
 
-  if (baseTargets.cadence !== newCadence) {
+  if (baseTargets.cadence !== scheduleCadence) {
     throw new RangeError(
-      `base targets belong to the ${baseTargets.cadence} context but the new schedule is ` +
-        `${newCadence}. Weekly and monthly base targets are separate contexts and a cadence ` +
-        "change requires explicit target review, never a silent conversion (INV-78).",
+      `base targets belong to the ${baseTargets.cadence} context but the schedule is ` +
+        `${scheduleCadence}. Weekly and monthly base targets are separate contexts and a ` +
+        "cadence change requires explicit target review, never a silent conversion (INV-78).",
     );
   }
 
@@ -140,9 +162,15 @@ export function prorateTransitionTargets(
     );
   }
 
-  // INV-37: the overall total is rounded once, before any category is allocated.
+  // Guarding the total product first is what makes every floor and remainder
+  // below exact; see assertExactArithmetic. This call must stay above the share
+  // loop, not merely above the rounding.
   const totalBase = baseTargets.targets.reduce((sum, target) => sum + target.amountMinorUnits, 0);
-  const roundedTotal = roundHalfUp(totalBase * transitionDays, basisDays);
+  const totalNumerator = totalBase * transitionDays;
+  assertExactArithmetic(totalNumerator, basisDays);
+
+  // INV-37: the overall total is rounded once, before any category is allocated.
+  const roundedTotal = roundHalfUp(totalNumerator, basisDays);
 
   const shares: readonly Share[] = baseTargets.targets.map((target) => {
     const exact = target.amountMinorUnits * transitionDays;
@@ -214,15 +242,15 @@ export function prorateTransitionTargets(
  */
 export function fullPeriodTargets(
   baseTargets: BaseTargetSet,
-  newCadence: Cadence,
+  scheduleCadence: Cadence,
   period: BudgetPeriod,
 ): readonly PeriodTarget[] {
   validateBaseTargetSet(baseTargets);
 
-  if (baseTargets.cadence !== newCadence) {
+  if (baseTargets.cadence !== scheduleCadence) {
     throw new RangeError(
       `base targets belong to the ${baseTargets.cadence} context but the schedule is ` +
-        `${newCadence} (INV-78).`,
+        `${scheduleCadence} (INV-78).`,
     );
   }
 

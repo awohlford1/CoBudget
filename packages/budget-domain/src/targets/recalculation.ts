@@ -28,10 +28,15 @@ export const TRANSITION_TARGET_CHOICES = ["recalculate", "leave-unchanged"] as c
 
 export type TransitionTargetChoice = (typeof TRANSITION_TARGET_CHOICES)[number];
 
-/** Everything a recalculation needs, grouped so the choice stays the leading argument. */
+/**
+ * Everything a recalculation needs, grouped so the choice stays the leading
+ * argument. `scheduleCadence` comes from the authoritative schedule version, not
+ * from `baseTargets`; see {@link prorateTransitionTargets} for what comparing
+ * the two does and does not catch.
+ */
 export interface TransitionRecalculation {
   readonly baseTargets: BaseTargetSet;
-  readonly newCadence: Cadence;
+  readonly scheduleCadence: Cadence;
   readonly transition: BudgetPeriod;
   readonly basis: BudgetPeriod;
   readonly budgetSpaceDate: ISODate;
@@ -78,7 +83,7 @@ export function applyBaseTargetChange(
   current: readonly PeriodTarget[],
   recalculation: TransitionRecalculation,
 ): readonly PeriodTarget[] {
-  const { baseTargets, newCadence, transition, basis, budgetSpaceDate } = recalculation;
+  const { baseTargets, scheduleCadence, transition, basis, budgetSpaceDate } = recalculation;
 
   const foreign = current.find((target) => !samePeriod(target.period, transition));
   if (foreign !== undefined) {
@@ -100,5 +105,5 @@ export function applyBaseTargetChange(
     );
   }
 
-  return prorateTransitionTargets(baseTargets, newCadence, transition, basis);
+  return prorateTransitionTargets(baseTargets, scheduleCadence, transition, basis);
 }

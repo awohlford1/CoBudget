@@ -350,12 +350,77 @@ describe("INV-84 stable category identity", () => {
     assert.deepEqual(amounts(recreated), { bravo: 4, charlie: 3, zulu: 3 });
   });
 
-  it("carries no display name for a rename to change", () => {
-    // The strongest form of the rename criterion: a mutable label is not part of
-    // the input, so no rename can reach the calculation at all. If a name field
-    // is ever added to BaseTarget, this fails and the claim gets re-examined.
-    const [first] = targets;
-    assert.deepEqual(Object.keys(first ?? {}).sort(), ["amountMinorUnits", "categoryId"]);
+  it("ignores a display label attached to a category", () => {
+    // The rename criterion, actually exercised. An earlier version asserted on
+    // the keys of a fixture this file had just written, which proved only that
+    // the test wrote it that way. Assigning through a variable drops TypeScript's
+    // excess-property check, so these objects really do carry a name at runtime
+    // — and renaming every one of them changes nothing, because the calculation
+    // reads only identity and amount.
+    const labelled = [
+      { categoryId: "alpha", amountMinorUnits: 10, name: "Groceries" },
+      { categoryId: "bravo", amountMinorUnits: 10, name: "Fuel" },
+      { categoryId: "charlie", amountMinorUnits: 10, name: "Rent" },
+    ];
+    const renamed: readonly BaseTarget[] = labelled;
+
+    assert.deepEqual(thirdsOf(renamed), thirdsOf(targets));
+  });
+});
+
+describe("INV-79 period target record", () => {
+  it("retains identity, period, origin, currency, and calculation history", () => {
+    // One assertion over the whole record rather than a field at a time: it also
+    // fails if a field is added and left unpopulated, which per-field checks
+    // silently tolerate.
+    const result = prorateTransitionTargets(
+      {
+        cadence: "monthly",
+        currency: "BHD",
+        targets: [{ categoryId: "rent", amountMinorUnits: 90_000 }],
+      },
+      "monthly",
+      period("2026-06-17", "2026-06-30"),
+      period("2026-06-01", "2026-06-30"),
+    );
+
+    assert.deepEqual(result[0], {
+      categoryId: "rent",
+      period: { start: toISODate("2026-06-17"), end: toISODate("2026-06-30") },
+      origin: "prorated-transition",
+      currency: "BHD",
+      amountMinorUnits: 42_000,
+      calculation: {
+        baseAmountMinorUnits: 90_000,
+        transitionDays: 14,
+        basisDays: 30,
+        remainderUnitAwarded: false,
+      },
+    });
+  });
+});
+
+describe("exact integer arithmetic", () => {
+  /** A 1/2 ratio, where the guarded intermediate is `2 * amount + 2`. */
+  function halve(amountMinorUnits: number): readonly PeriodTarget[] {
+    return prorateTransitionTargets(
+      set("custom-fixed-length", [{ categoryId: "vast", amountMinorUnits }]),
+      "custom-fixed-length",
+      period("2026-06-02", "2026-06-02"),
+      period("2026-06-01", "2026-06-02"),
+    );
+  }
+
+  it("refuses a proration that would leave the safe integer range", () => {
+    // Beyond this bound, floor and remainder stop being exact and every category
+    // silently drifts. Refusing is the only honest option.
+    assert.throws(() => halve(Number.MAX_SAFE_INTEGER), /safe integer range/u);
+  });
+
+  it("still computes at an amount comfortably inside the bound", () => {
+    // Four quadrillion minor units, which is far past any real budget and well
+    // clear of the limit — the guard rejects the impossible, not the large.
+    assert.equal(total(halve(4_000_000_000_000_000)), 2_000_000_000_000_000);
   });
 });
 

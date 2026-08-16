@@ -99,21 +99,33 @@ export interface ProrationRecord {
   readonly remainderUnitAwarded: boolean;
 }
 
+/** The fields every period target carries, whatever its origin. */
+interface PeriodTargetFields {
+  readonly categoryId: CategoryId;
+  readonly period: BudgetPeriod;
+  readonly currency: string;
+  readonly amountMinorUnits: number;
+}
+
 /**
  * The amount that governed one category for one specific period.
  *
- * Every field is `readonly`, and `calculation` is `null` exactly when `origin`
- * is `full-period` — a full period's amount is its base amount, so there is no
- * derivation to record.
+ * A union on `origin` rather than two independent fields. A full period's amount
+ * is its base amount, so it has no derivation to record, and a prorated one
+ * always does — pairing `origin` and `calculation` in one discriminant is what
+ * makes "a full period with a proration record" unrepresentable instead of
+ * merely undocumented. An earlier version stated the correspondence in prose
+ * while the types still permitted every combination.
+ *
+ * Every field is `readonly`, because INV-79 requires a completed period's target
+ * never to change and the compiler is a cheaper guard than a review.
  */
-export interface PeriodTarget {
-  readonly categoryId: CategoryId;
-  readonly period: BudgetPeriod;
-  readonly origin: TargetOrigin;
-  readonly currency: string;
-  readonly amountMinorUnits: number;
-  readonly calculation: ProrationRecord | null;
-}
+export type PeriodTarget =
+  | (PeriodTargetFields & { readonly origin: "full-period"; readonly calculation: null })
+  | (PeriodTargetFields & {
+      readonly origin: "prorated-transition";
+      readonly calculation: ProrationRecord;
+    });
 
 /**
  * Reject a base target set that cannot be prorated correctly.
