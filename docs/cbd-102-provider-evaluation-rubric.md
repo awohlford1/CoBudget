@@ -123,9 +123,11 @@ is not a supported use of this rubric.
 | Accessibility | 7 | 5 | 12 | 4 | 10 | 8 | 8 |
 | **Total** | **100** | **100** | **100** | **100** | **100** | **100** | **100** |
 
-Columns Base through F were approved on August 16, 2026. **Column N is a later
-proposal and is not covered by that approval** — see `OI-102-004` in the
-catalog.
+**Every column was approved by the Product Owner on August 16, 2026.** Base
+through F were approved first; column N was added later the same day with
+provider category N and approved on the same reasoning. The profiles are fixed
+for the duration of CBD-103–107 and CBD-130 — changing a weight mid-evaluation
+invalidates comparison within that category.
 
 ### 4.1 Why the weights differ
 
@@ -317,6 +319,6 @@ on points; R1 settles the order before any total is compared.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-102-006 | **Resolved August 16, 2026** for columns Base through F: Product Owner approved the weights as proposed. Column **N** was added afterwards and is not covered by that approval. | Base–F closed; changing one of those weights after scoring begins invalidates comparison within that category. Column N still needs approval before a push/SMS provider is scored. |
+| OI-102-006 | **Resolved August 16, 2026.** Product Owner approved every weight column as proposed, including column N added later the same day. | Closed. Changing any weight after scoring begins invalidates comparison within that category, so the profiles are fixed for the duration of CBD-103–107 and CBD-130. |
 | OI-102-007 | `WR-102-011` names WCAG 2.2 AA as the level a vendor claim is measured against. No approved CoBudget source fixes a conformance level for a provider surface; the level is chosen here as the current common standard. | Confirm the level, or replace it with whatever CoBudget's own accessibility position turns out to be. Related to catalog §11. |
 | OI-102-008 | **Resolved August 16, 2026.** `WR-102-019` scores support targets against a plan within the base demand tier, which the demand model now defines. | Closed. The base tier is 30 monthly active users, 15,600 requests/month, 0.4 GB, 250 emails in the peak month, and 61 financial connections. |

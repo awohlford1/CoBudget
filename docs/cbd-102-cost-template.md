@@ -133,7 +133,7 @@ provider's rate for its own unit against these.
 | **E** | Messages/month, peak | 250 | 1,600 | `DM-102-039` | Dedicated IP, domain authentication, validation |
 | **F** | Connections/month | 61 | 375 | `DM-102-010` | Per-account, per-API-product, per-request |
 | **N** | Push messages/month, peak | 200 | 1,400 | `DM-102-046` | Per-device registration, per-topic, platform fee |
-| **N** | SMS **segments**/month, peak | 60+ | 500+ | `DM-102-047` | Per-destination-country rate, sender ID or short-code rental, carrier surcharge |
+| **N** | SMS **segments**/month, peak | 60 | 500 | `DM-102-047` at 1 segment/message, US only | Per-destination-country rate, sender ID or short-code rental, carrier surcharge |
 
 ### 5.1 Watch the unit mismatch
 
@@ -147,13 +147,21 @@ than 2× at Base and 3× at High. Identity providers vary in what counts as
 explicitly stated demand row.** A conversion that is not written down is the
 most likely place for a cost comparison to go quietly wrong.
 
-SMS is the sharpest case. `DM-102-047` counts *messages*, but billing is per
-*segment* and per destination country, and a localized `NT-92-001` body that
-tips into a second segment doubles the line. The `60+` and `500+` above are
-message counts pending that conversion; the segment count cannot be fixed until
-the approved localized templates exist under `EG-91-006`. Record the assumed
-segments-per-message and the destination countries in scope, or the figure is
-not comparable between providers.
+SMS is the sharpest case. Billing is per *segment* and per destination country,
+while `DM-102-047` counts messages. The Product Owner assumption of August 16,
+2026 — **one segment per message, US destinations only** — makes the two equal
+so a cost record can be produced now.
+
+That assumption is provisional and **must be restated in every SMS cost
+record**, not silently inherited. It breaks in two ways: a localized
+`NT-92-001` body longer than the English one, and any non-Latin-script locale
+falling back to UCS-2 encoding at 70 characters per segment instead of 160.
+Either doubles the line. Adding a destination country adds a per-country rate
+and may add sender-ID or short-code registration, which is a floor rather than a
+per-message charge. `EG-91-006` owns the template text that settles this.
+
+An SMS figure that does not state its assumed segments-per-message and
+destination scope is not comparable between providers.
 
 ## 6. Rules that keep cost from distorting the decision
 

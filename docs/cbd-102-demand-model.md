@@ -149,12 +149,30 @@ with a different opt-in share.
 | DM-102-046 | Peak monthly push | messages | 20 | 200 | 1,400 | Judgment over `DM-102-044`, allowing an onboarding burst. | Low |
 | DM-102-047 | Peak monthly SMS | messages | 5 | 60 | 500 | Judgment over `DM-102-045`, allowing an onboarding burst. | Low |
 
-**SMS is billed per segment, not per message, and per destination country.** The
-`NT-92-001` fixed body is short enough to fit one segment in most encodings, but
-a localized equivalent may not — a body that tips into a second segment doubles
-the line. `DM-102-045` counts messages; the cost template must convert to
-segments using the approved template's actual length, and record the
-destination countries in scope.
+**SMS is billed per segment, not per message, and per destination country.**
+`DM-102-045` counts messages, so a conversion is required before it can be
+priced.
+
+**Product Owner assumption, August 16, 2026 — provisional.** Assume **one
+segment per message** and **US destinations only** for Private MVP. The English
+`NT-92-001` body fits one GSM-7 segment comfortably, so segments equal messages
+and `DM-102-047` can be priced directly.
+
+Both halves of the assumption are provisional and must be revisited when
+`EG-91-006` approves the localized template text:
+
+* A localized equivalent with identical information content may be longer, and a
+  body that tips past the segment boundary **doubles** the SMS line. Non-Latin
+  scripts fall back to UCS-2 encoding at 70 characters per segment rather than
+  160, which makes this likely rather than hypothetical for some locales.
+* US-only destination scope is a Private MVP boundary, not a product decision.
+  Adding a destination country adds a per-country rate and may add sender-ID or
+  short-code registration requirements that are a cost floor rather than a
+  per-message charge.
+
+The cost record states the assumed segments-per-message and destination scope
+explicitly, per cost template §5.1. An SMS figure without both stated is not
+comparable between providers.
 
 ## 9. Category sizing summary
 
@@ -170,7 +188,7 @@ The figure each provider category is actually priced on.
 | **E** email | Messages/month, peak | 40 | 250 | 1,600 | `DM-102-039` |
 | **F** financial | Connections/month | 8 | 61 | 375 | `DM-102-010` |
 | **N** push | Messages/month, peak | 20 | 200 | 1,400 | `DM-102-046` |
-| **N** SMS | Messages/month, peak | 5 | 60 | 500 | `DM-102-047` (convert to segments) |
+| **N** SMS | Segments/month, peak | 5 | 60 | 500 | `DM-102-047` at 1 segment/message, US only — provisional per §8.1 |
 
 ### 9.1 The finding that matters most for cost
 
@@ -210,6 +228,6 @@ Ranks 1 and 4 are the two worth measuring first once real traffic exists.
 | --- | --- | --- |
 | OI-102-009 | Every figure is judgment; confidence is `Low` on most totals because they compound several `Medium` inputs. No measurement exists or will exist pre-launch. | The model is fit for choosing a plan tier and comparing providers. It is **not** fit for a capacity commitment, an SLO, or a rate ceiling stated as a hard number. |
 | OI-102-010 | `DM-102-020` assumes fan-out of three downstream jobs per sync. The actual number depends on an implementation that does not exist yet. | Largest multiplier in the model. Confirm against the CBD-103 runtime design before treating `DM-102-021` as a sizing commitment. |
-| OI-102-011 | **Resolved August 16, 2026.** Push and SMS are modelled in §8.1 following the category **N** decision. | Closed. One dependency remains: `DM-102-045` counts SMS messages, and converting to billable segments requires the approved localized template text, which `EG-91-006` and `EG-91-024` still own. |
+| OI-102-011 | **Resolved August 16, 2026.** Push and SMS are modelled in §8.1 following the category **N** decision, with a provisional assumption of one segment per message and US-only destinations so that CBD-130 can produce a cost record now. | Closed as a decision, provisional as a figure. Revisit when `EG-91-006` approves localized templates: a longer localized body, or any non-Latin-script locale falling back to UCS-2 at 70 characters per segment, doubles the SMS line. Adding a destination country may also add a registration cost floor. |
 | OI-102-012 | The model assumes a single deployment region. `HG-102-011` gates region selection but no approved source fixes how many regions Private MVP runs in. | Multi-region would multiply hosting and database figures. Confirm single-region before CBD-103 pricing. |
 | OI-102-013 | `PR-94-002` requires a capacity basis per `RL-92-001` surface. §9 supplies aggregate volumes, not per-surface ones. | CBD-94 must decompose these totals per entry point before setting ceilings. This model does not do that decomposition. |
