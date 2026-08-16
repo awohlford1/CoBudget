@@ -33,11 +33,15 @@ Safety behavior
 ---------------
 * Every target records the page title it expects. If the live title differs the
   page is skipped, so a wrong or reused page ID cannot silently overwrite an
-  unrelated page.
+  unrelated page. Page titles are managed in Confluence and are not derived from
+  the document heading; several intentionally differ. Read the live title before
+  changing an expected_title, and never relax the comparison to make a mismatch
+  pass.
 * Targets publish in dependency order. CBD-71 §2 cites the CBD-69 package and
-  the Future Feature Register as frozen source baselines, so both publish first
-  and a failure on either stops the run before CBD-71 can reference a stale
-  published source.
+  the Future Feature Register as frozen source baselines, so both publish first.
+  A baseline that fails *or is skipped* stops the run, so CBD-71 can never
+  publish while citing a source that did not. A dry run reports every target
+  instead of stopping, since it writes nothing.
 * `--dry-run` writes converted previews to `.confluence-preview/` and makes no
   remote call other than reading current page metadata.
 * After each write the page is read back and compared on a normalized text
@@ -95,7 +99,7 @@ TARGETS: tuple[Target, ...] = (
         key="cbd-69-specification",
         doc_set="cbd-69",
         page_id="3538946",
-        expected_title="CBD-69 — Period Edge Cases and Validation Rule Specification",
+        expected_title="CBD-69 — Period Edge Cases & Validation Rule Specification",
         path="docs/cbd-69-period-edge-cases-validation-rule-specification.md",
         baseline=True,
     ),
@@ -103,7 +107,7 @@ TARGETS: tuple[Target, ...] = (
         key="cbd-69-scenarios",
         doc_set="cbd-69",
         page_id="3571722",
-        expected_title="CBD-69 — Period Edge-Case Scenario Catalog",
+        expected_title="CBD-69 — Period Edge Case Scenario Catalog",
         path="docs/cbd-69-period-edge-case-scenario-catalog.md",
         baseline=True,
     ),
@@ -111,7 +115,7 @@ TARGETS: tuple[Target, ...] = (
         key="cbd-69-traceability",
         doc_set="cbd-69",
         page_id="3670026",
-        expected_title="CBD-69 — Acceptance Criteria Traceability and Review Record",
+        expected_title="CBD-69 — Acceptance Criteria Traceability",
         path="docs/cbd-69-acceptance-criteria-traceability.md",
         baseline=True,
     ),
@@ -270,7 +274,11 @@ def main() -> int:
                 f"SKIP {target.key}: page {target.page_id} is titled {live_title!r}, "
                 f"expected {target.expected_title!r}. Refusing to overwrite an unexpected page."
             )
+            print(f"     If the page was deliberately renamed, update expected_title for {target.key}.")
             failures += 1
+            if target.baseline and not args.dry_run:
+                print(f"Stopping: CBD-71 §2 cites {target.key} as a frozen source baseline.")
+                break
             continue
 
         version = int(page["version"]["number"])
