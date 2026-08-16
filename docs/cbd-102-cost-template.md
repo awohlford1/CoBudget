@@ -78,7 +78,7 @@ One record per provider per category. Line items are stable citation keys.
 | --- | --- | --- |
 | CT-102-001 | Plan or tier base fee | For the tier named under CR0 |
 | CT-102-002 | Platform, account, or project fee | Charged separately from the plan on some providers |
-| CT-102-003 | Per-seat cost | Operator seats. One seat for a single-operator project, but record the per-seat rate, since `HG-102-006` duty separation may require a second principal |
+| CT-102-003 | Per-seat cost | **Two seats**, not one: the operator, plus the named second principal from catalog §2.5.1 who holds key-recovery custody and restore approval. Record the per-seat rate as well as the total, and note where a provider charges full price for a seat that only approves |
 | CT-102-004 | Minimum committed spend | Where a contract sets a floor above the plan fee |
 | CT-102-005 | Support plan fee | Flat, or a percentage of spend — state which |
 
@@ -132,6 +132,8 @@ provider's rate for its own unit against these.
 | **D** | Database GB | 0.4 | 4.1 | `DM-102-030` | Instance size, IOPS, backup GB, PITR window |
 | **E** | Messages/month, peak | 250 | 1,600 | `DM-102-039` | Dedicated IP, domain authentication, validation |
 | **F** | Connections/month | 61 | 375 | `DM-102-010` | Per-account, per-API-product, per-request |
+| **N** | Push messages/month, peak | 200 | 1,400 | `DM-102-046` | Per-device registration, per-topic, platform fee |
+| **N** | SMS **segments**/month, peak | 60+ | 500+ | `DM-102-047` | Per-destination-country rate, sender ID or short-code rental, carrier surcharge |
 
 ### 5.1 Watch the unit mismatch
 
@@ -144,6 +146,14 @@ than 2× at Base and 3× at High. Identity providers vary in what counts as
 **Record the provider's own unit and its definition, then convert using an
 explicitly stated demand row.** A conversion that is not written down is the
 most likely place for a cost comparison to go quietly wrong.
+
+SMS is the sharpest case. `DM-102-047` counts *messages*, but billing is per
+*segment* and per destination country, and a localized `NT-92-001` body that
+tips into a second segment doubles the line. The `60+` and `500+` above are
+message counts pending that conversion; the segment count cannot be fixed until
+the approved localized templates exist under `EG-91-006`. Record the assumed
+segments-per-message and the destination countries in scope, or the figure is
+not comparable between providers.
 
 ## 6. Rules that keep cost from distorting the decision
 
@@ -220,6 +230,6 @@ Unknown: <line items that could not be sourced>       [CR4]
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-102-014 | The template assumes a single operating currency and billing region. `CT-102-015` records FX exposure but no approved source fixes CoBudget's billing currency or jurisdiction. | Confirm before comparing providers that quote in different currencies. |
-| OI-102-015 | `CT-102-003` records a per-seat rate because `HG-102-006` duty separation may require a second principal, which for a single-operator project may be a second identity rather than a second person. | Depends on `OI-102-001`. A resolution requiring genuine organizational separation changes the seat count in every category. |
+| OI-102-015 | **Resolved August 16, 2026.** Catalog §2.5.1 names a second principal holding key custody and restore approval, so `CT-102-003` is priced at two seats in every category. | Closed. Watch for providers that charge a full seat for an approval-only role, and for providers whose cheapest tier caps seats at one — that becomes an `HG-102-006` failure, not merely a cost line. |
 | OI-102-016 | 36-month totals (`CT-102-019`) extend well beyond the Private MVP phase the demand model describes. | Use it to see past credit and introductory windows, not as a volume forecast. The demand model explicitly does not project growth. |
-| OI-102-017 | No approved source sets a budget ceiling for the provider set. The template compares providers but cannot say whether a total is affordable. | A Product Owner budget constraint would let CBD-103–107 reject a provider on cost. Without one, cost informs but cannot exclude. |
+| OI-102-017 | **Decided August 16, 2026: no budget ceiling.** Cost is recorded and compared but cannot exclude a provider. | Closed as a decision, with a consequence worth stating plainly: CBD-103–107 can produce a fully evidenced, gate-clearing recommendation that turns out to be unaffordable, and there will be no documented basis for having ruled it out earlier. `CT-102-017` and `CT-102-019` are the figures to watch for that, and a ceiling can be introduced later if one becomes obvious. |

@@ -32,7 +32,7 @@ load-bearing rather than editorial:
 A criterion appears here precisely because it has **no** approved binding
 source. If a candidate criterion can cite a `DI-91-*` class, a CBD-92 contract
 ID, a CBD-72 permission, or the architecture security baseline, it is a gate and
-belongs in the catalog instead. §10 of the catalog lists the candidates moved
+belongs in the catalog instead. §11 of the catalog lists the candidates moved
 here for exactly this reason, and every one of them is scored below.
 
 ## 2. Scoring scale
@@ -112,16 +112,20 @@ against each other — so per-category weight profiles preserve valid comparison
 rather than undermining it. Cross-category score comparison is meaningless and
 is not a supported use of this rubric.
 
-| Dimension | Base | H hosting | I identity | D PostgreSQL | E email | F financial |
-| --- | --- | --- | --- | --- | --- | --- |
-| Security | 20 | 20 | 24 | 20 | 16 | 24 |
-| Privacy | 18 | 15 | 16 | 14 | 22 | 20 |
-| Solo-operator ongoing effort | 18 | 22 | 10 | 20 | 12 | 8 |
-| Reliability | 15 | 18 | 16 | 20 | 18 | 16 |
-| Portability | 12 | 12 | 14 | 14 | 14 | 16 |
-| Support | 10 | 8 | 8 | 8 | 8 | 8 |
-| Accessibility | 7 | 5 | 12 | 4 | 10 | 8 |
-| **Total** | **100** | **100** | **100** | **100** | **100** | **100** |
+| Dimension | Base | H hosting | I identity | D PostgreSQL | E email | F financial | N push/SMS |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Security | 20 | 20 | 24 | 20 | 16 | 24 | 16 |
+| Privacy | 18 | 15 | 16 | 14 | 22 | 20 | 26 |
+| Solo-operator ongoing effort | 18 | 22 | 10 | 20 | 12 | 8 | 10 |
+| Reliability | 15 | 18 | 16 | 20 | 18 | 16 | 18 |
+| Portability | 12 | 12 | 14 | 14 | 14 | 16 | 14 |
+| Support | 10 | 8 | 8 | 8 | 8 | 8 | 8 |
+| Accessibility | 7 | 5 | 12 | 4 | 10 | 8 | 8 |
+| **Total** | **100** | **100** | **100** | **100** | **100** | **100** | **100** |
+
+Columns Base through F were approved on August 16, 2026. **Column N is a later
+proposal and is not covered by that approval** — see `OI-102-004` in the
+catalog.
 
 ### 4.1 Why the weights differ
 
@@ -152,6 +156,13 @@ is not a supported use of this rubric.
 * **Support is uniformly low (8).** `OP-92-001` and `OP-92-002` already prohibit
   the vendor-support model that would make support most valuable — direct staff
   access to customer content. What remains is genuine but bounded.
+* **Push and SMS carry the highest privacy weight in the set (26).** It is the
+  least controllable channel CoBudget uses. SMS crosses an unencrypted carrier
+  network that retains and may mirror the message; push places a device-resident
+  copy on a lock screen. `DI-91-049` and `EG-91-024` treat both as recipient- and
+  platform-controlled copies CoBudget cannot retract. Security is comparatively
+  low (16) only because `NT-92-001` already removes the content that would make
+  a breach damaging — the body is fixed and carries nothing.
 
 ## 5. Security (non-gating)
 
@@ -254,10 +265,14 @@ a single-operator project.
 | WR-102-031 | Cognitive surface | Many consoles and concepts to hold to operate safely | Coherent model with a manageable concept count | Small, coherent surface; safe operation does not require holding vendor-specific trivia |
 | WR-102-032 | *Setup effort (context only — does not score)* | — | — | — |
 
-`WR-102-030` interacts with `OI-102-001` in the gate catalog. Where a provider's
-recovery model assumes separated operator duties that a single-operator project
-cannot staff, that is a gate question under `HG-102-006`, not a score
-adjustment here.
+`WR-102-030` interacts with the catalog §2.5.1 second-principal disposition.
+CoBudget now staffs separated recovery duties rather than relaxing them, so a
+provider's recovery model assuming separated duties is satisfiable — but a
+provider that requires the *same* principal to hold data and keys is a gate
+failure under `HG-102-006`, not a low score here. What this criterion scores is
+how much of a recovery a single operator can complete without vendor
+escalation, given that the second principal approves return to service and never
+executes it.
 
 ## 12. Producing a result
 
@@ -302,6 +317,6 @@ on points; R1 settles the order before any total is compared.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-102-006 | The weights in §4 are a proposal. They encode judgments — that identity and financial security outrank hosting security, that email privacy outranks email security, that setup effort should not score — which are defensible but not derived from an approved source. | Needs Product Owner approval before CBD-103–107 score anything. Changing a weight after scoring begins invalidates comparison within that category. |
-| OI-102-007 | `WR-102-011` names WCAG 2.2 AA as the level a vendor claim is measured against. No approved CoBudget source fixes a conformance level for a provider surface; the level is chosen here as the current common standard. | Confirm the level, or replace it with whatever CoBudget's own accessibility position turns out to be. Related to catalog §10. |
-| OI-102-008 | `WR-102-019` scores support targets against "a plan within the base demand tier", which depends on the demand model that is not yet written. | Resolves when the CBD-102 demand model lands; until then this criterion cannot be scored. |
+| OI-102-006 | **Resolved August 16, 2026** for columns Base through F: Product Owner approved the weights as proposed. Column **N** was added afterwards and is not covered by that approval. | Base–F closed; changing one of those weights after scoring begins invalidates comparison within that category. Column N still needs approval before a push/SMS provider is scored. |
+| OI-102-007 | `WR-102-011` names WCAG 2.2 AA as the level a vendor claim is measured against. No approved CoBudget source fixes a conformance level for a provider surface; the level is chosen here as the current common standard. | Confirm the level, or replace it with whatever CoBudget's own accessibility position turns out to be. Related to catalog §11. |
+| OI-102-008 | **Resolved August 16, 2026.** `WR-102-019` scores support targets against a plan within the base demand tier, which the demand model now defines. | Closed. The base tier is 30 monthly active users, 15,600 requests/month, 0.4 GB, 250 emails in the peak month, and 61 financial connections. |

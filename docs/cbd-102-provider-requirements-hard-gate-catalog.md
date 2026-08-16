@@ -55,7 +55,7 @@ A candidate becomes a gate only when it cites one of four approved sources:
 **A candidate with no citation is a preference, and belongs in the weighted
 rubric instead.** This rule is applied strictly below; several plausible
 provider requirements were moved to the rubric for exactly this reason and are
-listed in §9 so the omission is visible rather than silent.
+listed in §11 so the omission is visible rather than silent.
 
 ### 2.2 Measurability
 
@@ -130,15 +130,45 @@ ledger reconciliation, authority non-resurrection, independent review."* That is
 pending **evidence that the requirement is implemented**, not a pending
 threshold for the requirement itself. Evidence pending does not soften a gate.
 
-Two consequences follow, and both are recorded rather than resolved here:
+Two consequences follow:
 
 * CBD-102 has **no dependency on CBD-94**. The ticket's dependency note can be
   corrected.
-* `SR-94-069`'s *organizationally* separated duties are in genuine tension with
-  a single-operator project. Nothing in CBD-91, CBD-92, CBD-93, or CBD-94
-  records or resolves that tension. It is carried as `OI-102-001` in §10 and
-  needs a Product Owner disposition — but it is an unrecorded gap in CBD-94, not
-  something this catalog can settle by weakening a gate.
+* `SR-94-069`'s *organizationally* separated duties were in genuine tension with
+  a single-operator project, which nothing in CBD-91, CBD-92, CBD-93, or CBD-94
+  records or resolves. That tension is now settled by the disposition below
+  rather than by weakening a gate.
+
+### 2.5.1 Named second principal — Product Owner disposition, August 16, 2026
+
+`SR-94-069` stands **unamended**. CoBudget staffs the separation instead of
+relaxing it: a **named second principal** holds key-recovery custody and
+restore return-to-service approval.
+
+The second principal's boundary is deliberately narrow, because adding a person
+must not quietly add a second route to customer data:
+
+| The second principal **holds** | The second principal **does not hold** |
+| --- | --- |
+| Key-recovery custody as a `DI-91-072` recovery custodian | Any path to customer content, database contents, or readable backups |
+| Restore return-to-service approval under `OP-92-006` | Restore *execution* |
+| Approver role for exceptional access under `OP-92-004` and `SR-94-068` | Requester role for the access they approve |
+| — | Any budget-space membership, product role, or support tooling |
+
+This satisfies both contracts without widening exposure. `OP-92-004` gets a
+requester and approver who are distinct strongly authenticated identities.
+`OP-92-006` gets data access, key custody, restore execution, and approval held
+such that no one principal combines data and keys. And because the second
+principal never reaches customer content, the number of people who can read S3
+financial data stays at exactly one, which is what `OP-92-001` default-deny is
+protecting.
+
+**Evaluation consequence.** `HG-102-006` now tests something CoBudget can
+actually staff, so it is a genuine vendor-capability question rather than an
+unsatisfiable one. It also acquires a second edge, recorded in the gate's pass
+test: a provider fails if key custody or restore approval **implies** the
+ability to read customer data, because that would collapse the boundary above no
+matter how the roles are named.
 
 ### 2.6 Identifier stability
 
@@ -158,11 +188,14 @@ convention.
 | **D** — Managed PostgreSQL | CBD-105 | Primary datastore, replicas, backup, restore |
 | **E** — Transactional email | CBD-106 | Invitation, lifecycle/security, and routine product email |
 | **F** — Financial-data connectivity | CBD-107 | Provider consent, accounts, transactions, webhooks |
+| **N** — Push and SMS | New sibling subtask, not yet created | Device push delivery, SMS delivery, token lifecycle |
 
-Push and SMS are bounded by `NT-92-*` and appear in this catalog only through
-the cross-category gates and `HG-102-047`. CBD-102's scope names five provider
-categories; a dedicated push/SMS category is not one of them, and `EG-91-006`
-still owns that selection. §10 records this as `OI-102-004`.
+Category **N** was added by Product Owner decision on August 16, 2026. CBD-102's
+written scope named five categories, but `NT-92-*` is an approved content
+contract with no evaluating subtask, which would have left a provider touching
+`DI-91-073` push tokens and `DI-91-049` delivered copies unmeasured. `EG-91-006`
+continues to own the eventual selection; this catalog supplies the gates that
+selection must clear. The Jira sibling to CBD-103–107 still needs creating.
 
 ## 4. Cross-category gates
 
@@ -176,7 +209,7 @@ these fails in every category it is proposed for.
 | HG-102-003 | X | Reliability, security, support, audit, and aggregate-measurement data remain in distinct schemas, stores, access roles, and retention policies. An identifier or event collected for one purpose cannot be joined, enriched, exported, sold, shared, or reused for another. | The provider's own data model is inspected for a shared identity graph across its telemetry, support, and analytics surfaces. A platform whose unified observability product co-mingles reliability, security, and behavioural data under one access role and one retention policy fails. | `AN-92-006`; `DI-91-038`; `DI-91-041`; `DI-91-062` | Vendor |
 | HG-102-004 | X | Any product analytics, session replay, heatmap, keystroke or form capture, DOM or screenshot recording, cross-site tracker, advertising identifier, or third-party behavioural pixel injected by the platform can be disabled **provably** — not merely by an unverified setting. | Disablement is verified by observed absence in network traffic and stored data, not by a configuration screenshot. A platform that injects any of these by default and offers no verifiable off-switch fails. Consent banners and pseudonymization do not satisfy this gate. | `AN-92-001`; `AN-92-002` | Vendor |
 | HG-102-005 | X | The provider does not require a durable human-held production credential for ordinary operation. Operator access can be made just-in-time, least-privilege, time-bound, and non-renewing by default, and standing production access is unavailable. | The access model supports expiry and revocation conditions bound to a named change or incident record. A platform whose only administrative path is a permanent console login held by a named person fails. **Firm — see §2.5.** | `OP-92-004`; `SR-94-068` | Vendor |
-| HG-102-006 | X | Backup data access, key recovery, restore execution, and approval are separable so that no single operator can combine customer data and keys, or return a restore to service unilaterally. | Distinct permissions exist for backup read, key use/recovery, restore execution, and restore approval, and can be held by different principals. A provider where one role implies all four fails. **Firm — see §2.5.** | `OP-92-006`; `SR-94-069`; `SR-94-081` | Vendor |
+| HG-102-006 | X | Backup data access, key recovery, restore execution, and approval are separable so that no single operator can combine customer data and keys, or return a restore to service unilaterally. Key custody and restore approval must additionally be holdable **without** the ability to read customer data. | Distinct permissions exist for backup read, key use/recovery, restore execution, and restore approval, and can be held by different principals. A provider where one role implies all four fails. A provider also fails where key custody or restore approval implies customer-data read, since that collapses the §2.5.1 second-principal boundary regardless of role naming. **Firm — see §2.5.** | `OP-92-006`; `SR-94-069`; `SR-94-081` | Vendor |
 | HG-102-007 | X | Vendor personnel have no routine path to CoBudget customer content. Employment, ticket assignment, platform administration, or a customer support request does not create customer-data authority for vendor staff. | The vendor's documented support and operations model is examined for a default staff read path to stored customer data, logs containing it, or database contents. A support model granting vendor personnel ordinary customer-data access fails. | `OP-92-001`; `DI-91-043` | Vendor |
 | HG-102-008 | X | The provider's operational model contains no general customer impersonation, no password or factor bypass, and no unrestricted database or log browsing for vendor staff. | Vendor break-glass documentation is reviewed for an impersonation or unrestricted-query capability. Where such a capability exists, the gate fails unless it is technically constrained to a mediated, audited, non-impersonating path. | `OP-92-005` | Vendor |
 | HG-102-009 | X | Vendor-side access to CoBudget data produces durable, attributable evidence — actor, time, approved scope, actions, and result — obtainable by CoBudget, without copying customer payloads into the evidence record. | An access-log or audit export covering vendor personnel actions is available to the customer. A provider that logs only CoBudget's own API calls and not its own staff's access fails. | `OP-92-007` | Vendor |
@@ -264,7 +297,25 @@ these fails in every category it is proposed for.
 | HG-102-066 | F | Provider error and failure detail can be kept out of budget-space-visible surfaces, so that only the `DI-91-056` allowlisted health status reaches members. | The integration can map provider failure codes to the safe derived status without leaking institution configuration, cursor internals, or the authorizer's personal circumstance. | `DI-91-056`; CBD-72 permission 33; `CR-91-011` | Config |
 | HG-102-067 | F | Raw incremental-sync payloads can be confined to a service-only processing boundary and deleted after durable source observations exist. | Payload handling is designed for minimum retention. `DI-91-057` prohibits this class from reaching any customer role, ordinary support, logs, analytics, or exports. | `DI-91-057`; `TB-92-011` | Config |
 
-## 10. Candidates deliberately not made gates
+## 10. Push and SMS (new sibling subtask)
+
+Added by Product Owner decision on August 16, 2026 under §3. `NT-92-*` is the
+tightest content ceiling in the approved set: push and SMS are optional
+transport hints, never a copy of the in-app view, and never an authentication,
+authorization, or protected-action channel.
+
+| ID | Cat | Hard gate | Pass test | Source | Type |
+| --- | --- | --- | --- | --- | --- |
+| HG-102-068 | N | The message body is fully controlled by CoBudget, so every push and SMS can carry the fixed `NT-92-001` content-free body with no vendor-injected, appended, or substituted content. | A delivered message is inspected on the device for any vendor footer, branding, or substitution. A provider that requires per-recipient personalization tokens, or appends its own content to the body, fails. | `NT-92-001` | Vendor |
+| HG-102-069 | N | The provider payload can be limited to destination or token, fixed body or template identifier, channel controls, an opaque attempt/correlation identifier, and minimum delivery metadata. | The send API is exercised with a minimal payload. Collapse keys, topics, tags, analytics labels, and callback echoes must not be *required* to carry event, resource, or customer context; a provider that mandates a descriptive topic or segment fails. | `NT-92-003` | Vendor |
+| HG-102-070 | N | Neither channel's destination becomes authority: a push tap can target a generic authenticated entry point, and any SMS URL can be the ordinary public application URL, with no token, resource identifier, recipient state, or query parameter. | Delivered messages are inspected for rewritten or parameter-decorated URLs. A provider that rewrites links for click tracking, or requires deep-link parameters identifying the event, fails. | `NT-92-002` | Vendor |
+| HG-102-071 | N | The provider reports unregistered and invalid token results, and a registration token can be deleted on request, so `DI-91-073` tokens can be purged on logout, account switch, uninstall, or rotation. | Token invalidation feedback is observed, and a deletion is exercised. A platform that silently drops sends to dead tokens without reporting them fails, because CoBudget cannot then purge the class. | `DI-91-073`; `NT-92-005` | Vendor |
+| HG-102-072 | N | Delivery, bounce, opt-out, and retry callbacks are authenticatable and replay/idempotency protected, and can be constrained to update only delivery and preference state. | Callback authentication and replay protection are verified. A callback that could acknowledge an in-app event or alter product authority fails. | `NT-92-005`; `EP-92-010` | Vendor |
+| HG-102-073 | N | SMS opt-out keyword handling and per-channel suppression state are programmatically readable and writable, so revocation, opt-out, or a lifecycle change stops delivery on the channel. | Suppression entries are created, read, and removed via API, and a carrier opt-out keyword is observed to register. | `NT-92-004`; `NT-92-005`; `DI-91-059` | Vendor |
+| HG-102-074 | N | The provider discloses carrier and platform retention for delivered messages, and CoBudget is not required to rely on platform preview-hiding as a confidentiality control. | Written, dated retention evidence is obtained for the carrier and push platform. `NT-92-006` applies the generic-body rule *even when a platform claims previews are hidden*, so a provider whose privacy story depends on preview suppression fails. | `NT-92-006`; `DI-91-049`; `EG-91-024` | Vendor |
+| HG-102-075 | N | Neither channel is used as an authentication, authorization, or protected-action channel, and a push token is never an authorization input or a stable cross-context identifier. | The integration is designed and reviewed against `NT-92-001`. This is a CoBudget obligation rather than a vendor property, but a provider marketing the channel as an authentication factor is a signal to check the integration carefully. | `NT-92-001`; `NT-92-002`; `DI-91-073` | Config |
+
+## 11. Candidates deliberately not made gates
 
 Under §2.1, a candidate with no approved citation is a preference and belongs in
 the weighted rubric. These were considered and moved, and are listed so the
@@ -284,17 +335,17 @@ out of this catalog is silently dropped. The rubric is
 | Stronger authentication for "access" generally | `docs/architecture.md` requires this, but `CR-91-010` classifies the wording as an unresolved ambiguity rather than an approved decision, pending `EG-91-004/007`. Only the action-bound assurance in `HG-102-030` is gated. | Rubric — security, `WR-102-033`, pending `EG-91-004` |
 | Named provider suitability (e.g. Plaid) | `CR-91-006` fixes that provider names in `docs/architecture.md` are hypotheses until CBD-15 selects. A name is not a gate. | Neither; evaluation input only |
 
-## 11. Open items
+## 12. Open items
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-102-001 | `SR-94-069` requires organizationally separated duties, which is in genuine tension with a single-operator project. No CBD-9x document records or resolves this. `HG-102-005/006` are recorded firm on the approved text. | Needs a Product Owner disposition. Does not block this catalog; will determine whether any realistic provider can pass `HG-102-006` without a compensating control under §2.4. |
+| OI-102-001 | **Resolved August 16, 2026.** `SR-94-069`'s organizationally separated duties were in tension with a single-operator project. Product Owner disposition: `SR-94-069` stands unamended and CoBudget staffs a named second principal holding key-recovery custody and restore approval with no customer-data path. Recorded in §2.5.1. | Closed. `HG-102-006` becomes a genuine vendor-capability test and gains a second edge — key custody or restore approval must not imply customer-data read. Follow-on work is operational, not documentary: the second principal must be named and their access provisioned before any recovery claim is made. |
 | OI-102-002 | The CBD-102 ticket states CBD-94 sets a pending threshold for the custody gates via a solo-operator disposition that does not exist, and its `RL-92-006` paraphrase omits per-tenant and per-connection concurrency caps. | Ticket text should be corrected. No effect on this catalog, which follows the approved documents. |
 | OI-102-003 | Rate, quota, and resource **values** remain unselected under `RL-92-007` and `ME-94-010`. The gates here test provider *capability* to enforce a ceiling, not the ceiling itself. | Capability gates are decidable now; values remain a CBD-94/architecture obligation before any `RL-92-001` surface is released. |
-| OI-102-004 | Push and SMS have an approved `NT-92-*` content ceiling but no CBD-102 provider category and no CBD-10x subtask in scope. `EG-91-006` still owns that selection. | A push/SMS provider cannot be evaluated against this catalog as written. Needs a scope decision on the CBD-15 track. |
+| OI-102-004 | **Resolved August 16, 2026.** Push and SMS had an approved `NT-92-*` ceiling but no evaluating category. Product Owner disposition: add category **N** with a new Jira sibling to CBD-103–107. Gates `HG-102-068`–`075` are in §10. | Closed for this catalog. Two items remain: the Jira subtask is not yet created, and the category **N** rubric weights in the rubric §4 are a new proposal that the August 16 weight approval did not cover. |
 | OI-102-005 | `HG-102-004`, `HG-102-007`, `HG-102-008`, and `HG-102-043` may only be answerable from vendor assertion rather than observation for some providers. | The evidence register must record confidence and limitation per §2.2; an assertion-only pass is a weaker result than an observed one and must be visible as such. |
 
-## 12. Traceability
+## 13. Traceability
 
 | Approved source | Gates derived |
 | --- | --- |
@@ -315,15 +366,20 @@ out of this catalog is silently dropped. The rubric is
 | `SA-92-001`–`008` | HG-102-016, 017 |
 | `CA-92-001`–`013` | HG-102-057, 058, 060, 061, 062, 063, 064 |
 | `EM-92-001`–`007` | HG-102-047, 048, 049, 050, 051, 052, 054, 055 |
-| `NT-92-001/002/005` | HG-102-034, 051 |
+| `NT-92-001` | HG-102-034, 068, 075 |
+| `NT-92-002` | HG-102-034, 070, 075 |
+| `NT-92-003` | HG-102-069 |
+| `NT-92-004` | HG-102-073 |
+| `NT-92-005` | HG-102-051, 071, 072, 073 |
+| `NT-92-006` | HG-102-074 |
 | `PA-92-006` | HG-102-035 |
 | CBD-72 `PM-72-001/002/003/009/010/011` | HG-102-031, 045, 057, 061 |
 | CBD-72 permissions 20a/20b/27/29/31/32/33/34/35 | HG-102-030, 057, 063, 066 |
 | CBD-72 §8, §9, `XSP-02` | HG-102-015, 020, 045 |
 | CBD-91 §2.1 tiers, §4 rules, §5.1 surfaces | HG-102-011, 012, 013, 014, 035, 046, 052, 053, 065 |
-| `DI-91-*` classes | HG-102-001, 003, 009–012, 014, 024–031, 033, 035, 037–044, 046, 049–053, 055–067 |
+| `DI-91-*` classes | HG-102-001, 003, 009–012, 014, 024–031, 033, 035, 037–044, 046, 049–053, 055–067, 071, 074, 075 |
 | Architecture § Security baseline | HG-102-010, 012, 015, 029, 038, 039, 040, 056, 058, 059 |
 | Architecture § Synchronization flow | HG-102-038, 060 |
 
-Every gate in §4–§9 appears at least once above. A gate that cannot be placed in
-this table has no approved source and must be moved to the rubric under §2.1.
+Every gate in §4–§10 appears at least once above. A gate that cannot be placed
+in this table has no approved source and must be moved to the rubric under §2.1.

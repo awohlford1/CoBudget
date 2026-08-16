@@ -131,6 +131,31 @@ every eligible recipient and generates **no** external cost.
 | DM-102-038 | Total emails, year 1 | messages | 230 | 1,956 | 13,418 | `DM-102-033 + DM-102-034 + DM-102-037`. **Billable-unit figure for CBD-106.** | Low |
 | DM-102-039 | Peak monthly email | messages | 40 | 250 | 1,600 | Judgment, allowing for an onboarding burst rather than an even spread. ESP plans meter monthly. | Low |
 
+### 8.1 Push and SMS
+
+Added August 16, 2026 with provider category **N**. Both channels are per-user
+and per-category opt-in under `NT-92-004`, and both carry only the fixed
+`NT-92-001` content-free body, so volume follows the same alert driver as email
+with a different opt-in share.
+
+| ID | Driver | Unit | Low | Base | High | Basis | Conf. |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| DM-102-040 | Devices per subject | devices | 1.2 | 1.5 | 2.0 | Judgment. A phone plus, for some, a tablet or second browser install. Each is a separate `DI-91-073` registration. | Medium |
+| DM-102-041 | Registered push tokens | tokens | 12 | 75 | 400 | `DM-102-005 × DM-102-040`. Tokens rotate and are reissued, so this is a live count rather than a cumulative one. | Low |
+| DM-102-042 | Push opt-in share | fraction of recipients | 0.30 | 0.35 | 0.45 | Judgment. Lower than in-app, which is mandatory, and higher than SMS, which costs the recipient nothing but feels more intrusive. | Low |
+| DM-102-043 | SMS opt-in share | fraction of recipients | 0.05 | 0.10 | 0.15 | Judgment. SMS is the least-adopted channel: it carries the same content-free body as push with more intrusion and, in `EG-91-024` terms, the worst custody properties. | Low |
+| DM-102-044 | Push messages, year 1 | messages | 144 | 1,512 | 11,232 | `DM-102-001 × DM-102-035 × DM-102-002 × DM-102-042 × 12`. | Low |
+| DM-102-045 | SMS messages, year 1 | messages | 24 | 432 | 3,744 | `DM-102-001 × DM-102-035 × DM-102-002 × DM-102-043 × 12`. | Low |
+| DM-102-046 | Peak monthly push | messages | 20 | 200 | 1,400 | Judgment over `DM-102-044`, allowing an onboarding burst. | Low |
+| DM-102-047 | Peak monthly SMS | messages | 5 | 60 | 500 | Judgment over `DM-102-045`, allowing an onboarding burst. | Low |
+
+**SMS is billed per segment, not per message, and per destination country.** The
+`NT-92-001` fixed body is short enough to fit one segment in most encodings, but
+a localized equivalent may not — a body that tips into a second segment doubles
+the line. `DM-102-045` counts messages; the cost template must convert to
+segments using the approved template's actual length, and record the
+destination countries in scope.
+
 ## 9. Category sizing summary
 
 The figure each provider category is actually priced on.
@@ -144,6 +169,8 @@ The figure each provider category is actually priced on.
 | **D** PostgreSQL | Database GB | 0.1 | 0.4 | 4.1 | `DM-102-030` |
 | **E** email | Messages/month, peak | 40 | 250 | 1,600 | `DM-102-039` |
 | **F** financial | Connections/month | 8 | 61 | 375 | `DM-102-010` |
+| **N** push | Messages/month, peak | 20 | 200 | 1,400 | `DM-102-046` |
+| **N** SMS | Messages/month, peak | 5 | 60 | 500 | `DM-102-047` (convert to segments) |
 
 ### 9.1 The finding that matters most for cost
 
@@ -183,6 +210,6 @@ Ranks 1 and 4 are the two worth measuring first once real traffic exists.
 | --- | --- | --- |
 | OI-102-009 | Every figure is judgment; confidence is `Low` on most totals because they compound several `Medium` inputs. No measurement exists or will exist pre-launch. | The model is fit for choosing a plan tier and comparing providers. It is **not** fit for a capacity commitment, an SLO, or a rate ceiling stated as a hard number. |
 | OI-102-010 | `DM-102-020` assumes fan-out of three downstream jobs per sync. The actual number depends on an implementation that does not exist yet. | Largest multiplier in the model. Confirm against the CBD-103 runtime design before treating `DM-102-021` as a sizing commitment. |
-| OI-102-011 | Push and SMS volumes are not modelled, because `OI-102-004` records that CBD-102 has no push/SMS provider category. | A push/SMS provider cannot be priced from this model. Resolves with `OI-102-004`. |
+| OI-102-011 | **Resolved August 16, 2026.** Push and SMS are modelled in §8.1 following the category **N** decision. | Closed. One dependency remains: `DM-102-045` counts SMS messages, and converting to billable segments requires the approved localized template text, which `EG-91-006` and `EG-91-024` still own. |
 | OI-102-012 | The model assumes a single deployment region. `HG-102-011` gates region selection but no approved source fixes how many regions Private MVP runs in. | Multi-region would multiply hosting and database figures. Confirm single-region before CBD-103 pricing. |
 | OI-102-013 | `PR-94-002` requires a capacity basis per `RL-92-001` surface. §9 supplies aggregate volumes, not per-surface ones. | CBD-94 must decompose these totals per entry point before setting ceilings. This model does not do that decomposition. |

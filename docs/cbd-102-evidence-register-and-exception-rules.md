@@ -178,6 +178,10 @@ Where a cited source states its constraint unconditionally and supplies no
 amendment path, no compensating control is meaningful and no exception may be
 granted. Changing these requires amending the source.
 
+**This list was confirmed by the Product Owner on August 16, 2026.** It bounds
+what may be approved under `EX-102-001`, so adding to or removing from it is
+itself a Product Owner decision.
+
 | Gate | Why it cannot be excepted |
 | --- | --- |
 | `HG-102-056` — provider-hosted institution authentication | The architecture security baseline states *do not collect or store online-banking credentials* without qualification, and `DI-91-010` records that raw online-banking credentials are never collected. There is no control that compensates for collecting them. |
@@ -226,5 +230,5 @@ model repeatedly treats undetectable compromise as the more severe case.
 | --- | --- | --- |
 | OI-102-018 | §3.3 adds `ELIGIBLE-PENDING-EVIDENCE` to the three verdicts in rubric rule R1. The rubric is updated to match in the same change. | Both documents must stay synchronized; a future edit to one requires the other. |
 | OI-102-019 | The shelf lives in §4 are judgment. No approved source sets an evidence-currency period. | Reasonable defaults; adjust if evaluation runs long enough for staleness to bite. |
-| OI-102-020 | §5.2 lists three non-exceptable gates. The reasoning is stated per gate, but the list is a judgment about which sources admit no compensating control. | Confirm the list is complete and correct before any exception is granted, since it bounds what the Product Owner may approve. |
+| OI-102-020 | **Resolved August 16, 2026.** Product Owner confirmed the three non-exceptable gates in §5.2 as complete and correct: `HG-102-056`, `HG-102-028`, and `HG-102-014`. | Closed. Adding to or removing from the list is now itself a Product Owner decision, and `HG-102-004` remains deliberately outside it because `AN-92-007` supplies an amendment path. |
 | OI-102-021 | `EX-102-006` sets the stacking threshold at more than two exceptions. The number is arbitrary. | Adjust if it proves too tight or too loose in CBD-103–107. |
