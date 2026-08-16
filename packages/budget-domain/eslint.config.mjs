@@ -25,6 +25,18 @@ const INCOME_DIRECTION_MESSAGE =
   "CBD-29 generates boundaries from. Importing income here would make that a " +
   "cycle. Pass the anchor's recurrence in as an argument instead.";
 
+const TARGETS_DIRECTION_MESSAGE =
+  "Category targets are built on top of periods, not beneath them: CBD-30 " +
+  "prorates against boundaries that CBD-27 and CBD-29 generate. Importing " +
+  "targets here would make that a cycle. Pass the amounts you need in as " +
+  "arguments instead.";
+
+const INCOME_TARGETS_MESSAGE =
+  "CBD-68 INV-68-06 keeps income separate from spending targets — receipt " +
+  "never changes a target — and CBD-67 INV-09 never prorates an actual. " +
+  "Joining the two modules is what would make those violations expressible at " +
+  "all. Combine them in a layer above both.";
+
 const CLOCK_MESSAGE =
   "Reading the wall clock makes results depend on when and where the code " +
   "runs, which CBD-67 INV-87 forbids. The budget-space date is resolved at " +
@@ -151,6 +163,7 @@ export default defineConfig([
       ["**/schedule/**", SEAM_MESSAGE],
       ["**/classification/**", SEAM_MESSAGE],
       ["**/income/**", INCOME_DIRECTION_MESSAGE],
+      ["**/targets/**", TARGETS_DIRECTION_MESSAGE],
     ),
   },
 
@@ -159,6 +172,7 @@ export default defineConfig([
     rules: forbidImportsFrom(
       ["**/classification/**", SEAM_MESSAGE],
       ["**/income/**", INCOME_DIRECTION_MESSAGE],
+      ["**/targets/**", TARGETS_DIRECTION_MESSAGE],
     ),
   },
 
@@ -167,14 +181,29 @@ export default defineConfig([
     rules: forbidImportsFrom(
       ["**/schedule/**", SEAM_MESSAGE],
       ["**/income/**", INCOME_DIRECTION_MESSAGE],
+      ["**/targets/**", TARGETS_DIRECTION_MESSAGE],
     ),
   },
 
   {
     // Income reads cadence definitions and primitives, and nothing else. It is
     // above schedule, so it may import it; classification is across the §8.10
-    // seam either way.
+    // seam either way. Targets are a sibling, not a dependency.
     files: ["src/income/**/*.ts"],
-    rules: forbidImportsFrom(["**/classification/**", SEAM_MESSAGE]),
+    rules: forbidImportsFrom(
+      ["**/classification/**", SEAM_MESSAGE],
+      ["**/targets/**", INCOME_TARGETS_MESSAGE],
+    ),
+  },
+
+  {
+    // Targets sit above schedule for the same reason income does: proration
+    // consumes periods it does not generate. Income is a sibling it must not
+    // reach, which is what keeps INV-68-06 and INV-09 inexpressible here.
+    files: ["src/targets/**/*.ts"],
+    rules: forbidImportsFrom(
+      ["**/classification/**", SEAM_MESSAGE],
+      ["**/income/**", INCOME_TARGETS_MESSAGE],
+    ),
   },
 ]);
