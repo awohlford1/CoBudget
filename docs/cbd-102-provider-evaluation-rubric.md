@@ -8,7 +8,7 @@
 | Reviewer | Pending Product Owner review |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companion | [CBD-102 Provider Requirements and Hard-Gate Catalog](cbd-102-provider-requirements-hard-gate-catalog.md) v0.1.0 |
+| Companions | [Hard-Gate Catalog](cbd-102-provider-requirements-hard-gate-catalog.md) v0.1.0; [Demand Model](cbd-102-demand-model.md) v0.1.0; [Cost Template](cbd-102-cost-template.md) v0.1.0; [Evidence Register and Exception Rules](cbd-102-evidence-register-and-exception-rules.md) v0.1.0 |
 | Repository baseline | `c88a7c8` |
 | Last updated | August 16, 2026 |
 
@@ -66,8 +66,15 @@ verdict attached:
 | Verdict | Meaning |
 | --- | --- |
 | `ELIGIBLE` | Every applicable gate passed. |
-| `CONDITIONAL` | One or more gates failed but carry a recorded compensating control, residual risk, and named approver under catalog §2.4. |
-| `INELIGIBLE` | One or more gates failed with no compensating control. |
+| `ELIGIBLE-PENDING-EVIDENCE` | One or more gates are `UNPROVEN` — evidence was Asserted or Absent, so the property is neither confirmed nor refuted — and none failed. Not disqualified, but cannot be selected until the evidence is obtained. |
+| `CONDITIONAL` | One or more gates failed but carry a recorded compensating control, residual risk, and named approver under catalog §2.4 and the exception rules. |
+| `INELIGIBLE` | One or more gates failed with no approved exception. |
+
+`UNPROVEN` is defined in the evidence register §3.3 and is kept distinct from
+`FAIL` because the remedy differs entirely: an unproven gate needs better
+evidence, a failed one needs a compensating control or a different provider.
+Collapsing them would either discard a viable provider or let an unsupported
+claim through as a pass.
 
 A high score on an `INELIGIBLE` provider is not a recommendation and is not a
 tie-breaker. It is recorded only so the evaluation is reproducible.

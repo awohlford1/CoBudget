@@ -8,6 +8,7 @@
 | Reviewer | Pending Product Owner review |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
+| Companions | [Evaluation Rubric](cbd-102-provider-evaluation-rubric.md); [Demand Model](cbd-102-demand-model.md); [Cost Template](cbd-102-cost-template.md); [Evidence Register and Exception Rules](cbd-102-evidence-register-and-exception-rules.md) |
 | Repository baseline | `2e372f6` |
 | Last updated | August 16, 2026 |
 
@@ -91,9 +92,18 @@ as a pass. The evaluation records, as a distinct outcome:
 4. the accountable approver, because accepting a residual against an approved
    contract is a Product Owner decision, not an evaluator's judgment.
 
-`Fail + compensating control` is a third outcome alongside `Pass` and `Fail`. It
-never aggregates into a score. This preserves the CBD-102 acceptance criterion
-that scores cannot hide a failed hard gate.
+`Fail + compensating control` is a distinct outcome alongside `Pass` and `Fail`.
+It never aggregates into a score. This preserves the CBD-102 acceptance
+criterion that scores cannot hide a failed hard gate.
+
+A gate also has a fourth possible outcome, `UNPROVEN`, defined in the evidence
+register §3.3: the evidence was vendor assertion or absent, so the property is
+neither confirmed nor refuted. A gate never passes on assertion alone. An
+`UNPROVEN` gate is not a failure and needs no compensating control — it needs
+better evidence — but it does block selection until resolved. The exception
+rules in that document govern who may approve a `Fail + compensating control`
+outcome, and §5.2 there lists the gates for which no exception may be granted at
+all.
 
 ### 2.5 Threshold status of the two custody gates
 
