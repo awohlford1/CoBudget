@@ -38,10 +38,11 @@ Safety behavior
   changing an expected_title, and never relax the comparison to make a mismatch
   pass.
 * Targets publish in dependency order. CBD-71 §2 cites the CBD-69 package and
-  the Future Feature Register as frozen source baselines, so both publish first.
-  A baseline that fails *or is skipped* stops the run, so CBD-71 can never
-  publish while citing a source that did not. A dry run reports every target
-  instead of stopping, since it writes nothing.
+  the Future Feature Register as frozen source baselines, so both publish first;
+  CBD-91 cites the CBD-72 permission model and traceability record, so CBD-72
+  publishes before it. A baseline that fails *or is skipped* stops the run, so a
+  citing document can never publish while a source it cites did not. A dry run
+  reports every target instead of stopping, since it writes nothing.
 * `--dry-run` writes converted previews to `.confluence-preview/` and makes no
   remote call other than reading current page metadata.
 * After each write the page is read back and compared on a normalized text
@@ -81,10 +82,12 @@ class Target:
     expected_title: str
     path: str
     baseline: bool = False
-    """True when CBD-71 §2 cites this document as a frozen source baseline.
+    """True when a later target cites this document as a frozen source baseline.
 
-    A failure on a baseline target halts the run, so CBD-71 can never publish
-    while citing a source that failed to publish.
+    A failure on a baseline target halts the run, so a citing document can never
+    publish while the source it cites failed to publish. CBD-71 §2 cites the
+    CBD-69 package and the Future Feature Register; CBD-91 cites the CBD-72
+    permission model and traceability record.
     """
 
     @property
@@ -94,6 +97,7 @@ class Target:
 
 # Dependency order matters. CBD-71 §2 cites both the CBD-69 package and the
 # Future Feature Register as frozen source baselines, so both publish first.
+# CBD-72 then publishes before CBD-91, which cites its closed decisions.
 TARGETS: tuple[Target, ...] = (
     Target(
         key="cbd-69-specification",
@@ -148,10 +152,37 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-71 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-71-acceptance-criteria-traceability.md",
     ),
+    # CBD-72 inherits CBD-71 v1.1 under its closed decision OD-72-06, so it
+    # publishes after CBD-71. The permission model and the traceability record
+    # are baselines: CBD-91 §1 and §8 cite the model's closed OD-72 decisions,
+    # and CBD-91 v1.0.1 additionally cites RF-72-61, which lives in the
+    # traceability record. The scenario catalog is not a baseline because no
+    # later target cites it.
+    Target(
+        key="cbd-72-model",
+        doc_set="cbd-72",
+        page_id="8880130",
+        expected_title="CBD-72 — Collaboration Permission Model",
+        path="docs/cbd-72-collaboration-permission-model.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-72-scenarios",
+        doc_set="cbd-72",
+        page_id="8880151",
+        expected_title="CBD-72 — Authorization Scenario Catalog",
+        path="docs/cbd-72-authorization-scenario-catalog.md",
+    ),
+    Target(
+        key="cbd-72-traceability",
+        doc_set="cbd-72",
+        page_id="8880172",
+        expected_title="CBD-72 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-72-acceptance-criteria-traceability.md",
+        baseline=True,
+    ),
     # CBD-91 cites the approved CBD-71 v1.1 decision set and the closed CBD-72
-    # decisions as its controlling inputs, so it publishes after CBD-71. Note
-    # that CBD-72 has no Confluence page or sync target yet, so a reader of this
-    # page cannot follow its CBD-72 citations to a published source.
+    # decisions as its controlling inputs, so it publishes after both.
     Target(
         key="cbd-91-inventory",
         doc_set="cbd-91",
@@ -288,7 +319,7 @@ def main() -> int:
             print(f"     If the page was deliberately renamed, update expected_title for {target.key}.")
             failures += 1
             if target.baseline and not args.dry_run:
-                print(f"Stopping: CBD-71 §2 cites {target.key} as a frozen source baseline.")
+                print(f"Stopping: a later target cites {target.key} as a frozen source baseline.")
                 break
             continue
 
@@ -309,7 +340,7 @@ def main() -> int:
             print(f"FAIL {target.key}: publish failed: {error}")
             failures += 1
             if target.baseline:
-                print(f"Stopping: CBD-71 §2 cites {target.key} as a frozen source baseline.")
+                print(f"Stopping: a later target cites {target.key} as a frozen source baseline.")
                 break
             continue
 
