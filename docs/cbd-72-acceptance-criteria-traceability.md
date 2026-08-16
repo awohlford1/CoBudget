@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Matrix decisions and per-criterion mapping complete — fixture completion, OD-72-01/02/04/05, and the CBD-14 security gate remain** |
-| Document version | 0.1.10 |
+| Status | **Matrix decisions, per-criterion mapping, and all open decisions complete — fixture completion and the CBD-14 security gate remain** |
+| Document version | 0.1.11 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-72](https://cobudget.atlassian.net/browse/CBD-72) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -21,7 +21,7 @@ CBD-72 is complete only when the permission model covers every required role, ac
 | --- | --- | --- | --- |
 | Versioned permission matrix | Specification §§2–4, 11 | ROLE, COLL, PART | Drafted |
 | Resource-scope rules | Specification §5 | VIEW, PART | Drafted; fixtures pending |
-| Ownership and recovery decision record | Specification §6 and OD-72-01–06 | OWN, CONN, LIFE | Drafted; sole-owner exit decided; open mechanics recorded |
+| Ownership and recovery decision record | Specification §6 and OD-72-01–06 | OWN, CONN, LIFE | **Complete.** Sole-owner exit, lost-owner recovery, archival and deletion lifecycle, and orphaned-connection disposition all decided |
 | Cross-budget isolation requirements | Specification §7 and PM-72-010 | XSP | Drafted; fixtures pending |
 | Authorization-test inventory | Specification §§8–9; scenario catalog | All families | Initial inventory drafted |
 
@@ -42,9 +42,9 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 | CBD-72-AC09 | No Co-owner removes or demotes the Primary; protected actions need reauthentication; one Primary always retained. | §6.1–§6.3; permissions 28, 29, 34, 35 | `OWN-03`, `LIFE-02`, `LIFE-03`, `LIFE-04` |
 | CBD-72-AC10 | Primary Owner removes a specific Co-owner unilaterally; other Co-owners unchanged. | §6.1; permission 27 | `OWN-02` |
 | CBD-72-AC11 | Primary ownership transfer eligibility, consent, atomic commit, and resulting roles. | §6.2; permission 29 | `OWN-04`, `OWN-05`, `OWN-06` |
-| CBD-72-AC12 | A sole Primary Owner cannot self-revoke; transfer and archival are the supported exits. | §6.3, §6.5; permissions 29, 35 | `LIFE-02` |
-| CBD-72-AC13 | Budget-space archival is Primary-only, preserves records, stops active use, notifies, and is audited. | §6.5; permission 35 | `LIFE-04` |
-| CBD-72-AC14 | Budget-space deletion is Primary-only and distinct from archival and from leaving. | §6.4; permission 34 | `LIFE-03` |
+| CBD-72-AC12 | A sole Primary Owner cannot self-revoke; transfer and archival are the supported exits. | §6.3, §6.5; permissions 29, 35 | `LIFE-02`, `LIFE-06` |
+| CBD-72-AC13 | Budget-space archival is Primary-only, preserves records, stops active use, notifies, and is audited. | §6.5; permission 35 | `LIFE-04`, `LIFE-06` |
+| CBD-72-AC14 | Budget-space deletion is Primary-only and distinct from archival and from leaving. | §6.4; permission 34 | `LIFE-03`, `LIFE-07` |
 | CBD-72-AC15 | Viewer is read-only and default-deny; no profile means no visibility. | §5.1 items 1–2 | `VIEW-01` |
 | CBD-72-AC16 | Exactly one visibility profile of four types; same-type group unions; no mixing; not item grants. | §5.1 items 2–7 | `VIEW-02`, `VIEW-06` |
 | CBD-72-AC17 | Profile contents, inherited descendants, interpretation envelope, and synthetic split activity. | §5.1 items 3–9 | `VIS-02`, `VIS-03`, `VIS-04`, `VIEW-05` |
@@ -59,7 +59,7 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 | CBD-72-AC26 | Partner may create personal firm acknowledgements and attributed comments that mutate no protected state. | §5.3, §5.6; permissions 11a, 12 | `PART-02`, `PART-06`, `INT-01` |
 | CBD-72-AC27 | Owners and Collaborators may authorize a connection for an account they may access; the actor becomes sole authorizer. | permission 31; PM-72-011 | `CONN-01` |
 | CBD-72-AC28 | One authorizer per connection; authorizer-only management; joint accounts use independent connections. | PM-72-009/011; permissions 32, 33 | `CONN-03`, `CONN-04`, `CONN-05`, `CONN-06` |
-| CBD-72-AC29 | Authorizer membership loss stops that connection's sync, preserves history, and transfers no authority. | §6.3; PM-72-011 | `CONN-02` |
+| CBD-72-AC29 | Authorizer membership loss stops that connection's sync, preserves history, and transfers no authority. | §6.3; PM-72-011 | `CONN-02`, `CONN-07` |
 | CBD-72-AC30 | Comment authorship, author-only mutation, universal moderation denial, and MVP attachment and mention exclusions. | §5.6; permissions 11a–11d | `INT-01`, `INT-02`, `INT-03` |
 | CBD-72-AC31 | Confirmed resources archive rather than hard-delete; drafts discard; manual transactions restore for 30 days then purge to a tombstone. | §5.5; permissions 2b, 3, 4, 9 | `ROLE-02`, `ROLE-03`, `CAT-01`, `MAN-01`, `MAN-02` |
 | CBD-72-AC32 | Financial export, Primary-only administrative-history export, categorical Viewer and Partner denial, and the owner-authorized snapshot. | §5.7, §5.8; permissions 20a, 20b, 21 | `EXP-01`–`EXP-06` |
@@ -68,7 +68,7 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 | CBD-72-AC35 | Cross-space isolation; identifiers never authorize by themselves. | §7; PM-72-010 | `XSP-01`, `XSP-02`, `XSP-03` |
 | CBD-72-AC36 | Server-side enforcement at open and mutation time; denied mutations change nothing and are audited. | PM-72-002–004 | `AUTH-01`, `AUTH-02`, `AUD-02` |
 | CBD-72-AC37 | Six case types per protected feature group. | Scenario catalog §4 coverage table | See the case-type table in scenario catalog §4 |
-| CBD-72-AC38 | Assumptions, open decisions, and deferred permissions identified with nothing implicitly allowed. | §10 OD-72-01 through OD-72-06 | `LIFE-03`, `LIFE-04`, `CONN-02` |
+| CBD-72-AC38 | Assumptions, open decisions, and deferred permissions identified with nothing implicitly allowed. | §10 OD-72-01 through OD-72-06, all closed | `LIFE-03`, `LIFE-04`, `LIFE-06`, `LIFE-07`, `CONN-07` |
 
 **Reverse direction.** Every scenario family resolves to at least one criterion: `ROLE`/`CAT`/`REC`/`DATE`/`COLL`/`MAN` to AC08 and AC22 and AC31; `VIEW`/`VIS`/`REP` to AC15 through AC20; `PART` to AC25 and AC26; `OWN`/`LIFE` to AC07 and AC09 through AC14; `CONN` to AC27 through AC29; `INT` to AC30; `EXP` to AC32; `ALERT` to AC33; `MEM`/`SET` to AC08; `XSP` to AC35; `AUTH` to AC05 and AC34 and AC36; `AUD` to AC24 and AC36. No scenario is orphaned and no criterion lacks evidence.
 
@@ -89,7 +89,7 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 | --- | --- | --- |
 | Matrix completeness | Every action category and role has an explicit cell; no blank or implied allow. | Initial pass; independent review pending |
 | Role/resource consistency | Viewer profiles never elevate role authority; Partner is not treated as broad Viewer. | Draft pass |
-| Ownership safety | Exactly one Primary, multiple Co-owners permitted, protected actions fail atomically, and a sole Primary Owner always has a supported exit. | Draft pass; OD-72-01/02/04/05 remain |
+| Ownership safety | Exactly one Primary, multiple Co-owners permitted, protected actions fail atomically, a sole Primary Owner always has a supported exit, and a permanently unavailable owner cannot strand the other members. | **Pass.** All six open decisions closed |
 | Cross-space isolation | All synchronous and asynchronous data paths bind membership and target to one space. | Requirements drafted; detailed fixtures pending |
 | Server-side enforcement | Inputs, decision timing, default deny, stale work, and concurrency are explicit. | Draft pass; architecture review pending |
 | Security and privacy | CBD-14 findings reconciled; credentials and restricted derived data cannot leak. | Pending CBD-14 review |
@@ -102,11 +102,11 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 
 | Item | Specification source | Owner | Required disposition | Status |
 | --- | --- | --- | --- | --- |
-| Exceptional Primary-owner recovery | OD-72-01 | Product Owner + security review | Approve identity proofing, authority, notification, audit, and abuse recovery or link blocking follow-up. | Open |
-| Budget-space deletion lifecycle | OD-72-02 | Product Owner + data/privacy review | Define retention, grace period, restoration, bank-connection handling, and audit. | Open |
+| Exceptional Primary-owner recovery | OD-72-01 | Product Owner | Recover a permanently unavailable sole Primary Owner by archival, never takeover: 90 days of Primary inactivity, member notification, a 14-day objection window cancelled by any Primary activity, and no new authority granted to anyone. Support-mediated ownership transfer stays blocked pending an identity-verified procedure. | **Closed August 15, 2026** |
+| Budget-space deletion lifecycle | OD-72-02 | Product Owner | Deletion routes through archival; a Primary-only request opens a 30-day restore window; the payload then purges irreversibly to a minimal non-financial tombstone, reusing the §5.5 destructive-resource contract. | **Closed August 15, 2026** |
 | Owner-authorized Viewer snapshot | OD-72-03 | Product Owner | Permit only an owner-initiated, recipient-bound snapshot from the current Viewer profile; deny Viewer self-service export and constrain physical schema design to the approved semantic allowlist. | **Closed August 15, 2026** |
-| Connection-authorizer loss | OD-72-04 | Product Owner + security review | Define reauthorization/recovery without automatic authority inheritance. | Open |
-| Budget-space archival lifecycle | OD-72-05 | Product Owner + data/privacy review | Define restoration authority, retention duration, member access after archival, and any archived-to-deleted transition. Primary-only authority and the preservation guarantee are already fixed. | Open |
+| Connection-authorizer loss | OD-72-04 | Product Owner | A permanently orphaned connection stays read-only forever, is labeled as such, and may never be adopted or reauthorized. Coverage resumes only through a new connection authorized by an entitled member and deduplicated under PM-72-011. | **Closed August 15, 2026** |
+| Budget-space archival lifecycle | OD-72-05 | Product Owner | Archival is retained indefinitely with no countdown; restoration is Primary-only and restores roles and profiles as they stood at archival; members keep read-only access at that same scope; the archived-to-deleted transition is the §6.4 path. | **Closed August 15, 2026** |
 | CBD-71 v1.0 / v1.1 inheritance | OD-72-06 | Product Owner | Decide whether CBD-72 inherits the approved v1.0 baseline or the pending v1.1 amendment. | **Closed August 15, 2026** — inherits v1.1; CBD-69 v1.1 and CBD-71 v1.1 both approved |
 
 ## 6. Review findings
@@ -172,13 +172,14 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 | RF-72-57 | In-depth package review, August 15, 2026 | The August 15 change-control work synchronized Jira **descriptions** but never updated the **Acceptance Criteria fields** on either CBD-72 or CBD-12. RF-72-38, RF-72-39, RF-72-41, RF-72-47, and RF-72-49 each recorded "CBD-12 Jira aligned" or "synchronized" on that partial basis. CBD-12-AC06 still capped Co-owners at one, AC19 still made cooldown/deduplication member-configurable, AC30 still made resources independently shareable, and AC33 still barred Collaborator connections — each contradicting CBD-12's own description. | Correct both AC fields against the approved specification, and treat "synchronized" as satisfied only when description, acceptance criteria, and traceability summary all match. A future synchronization claim must name the fields it covers. | Product Owner approved August 15, 2026; CBD-72 and CBD-12 acceptance criteria corrected |
 | RF-72-58 | In-depth package review, August 15, 2026 | The specification header claimed inheritance from CBD-71 MVP Schedule Decisions v1.0, while §5.4.1's three-record alert model actually depends on SD-071-044 — a v1.1 amendment the CBD-71 register marks "not authoritative until the review and approval gates in §8–9 pass." This record's §3 already said "v1.1 draft package," contradicting the specification header. CBD-71 is additionally closed as Done in Jira while its register remains a v1.1 draft. | Correct the header to name both the approved baseline and the pending dependency, and record the unresolved inheritance as OD-72-06. §5.4.1 cannot be approved as inherited-and-settled ahead of its source amendment. | **Resolved August 15, 2026.** The Product Owner chose to inherit v1.1. CBD-69 v1.1 was approved after an independent audit, then CBD-71 v1.1 was approved with SD-071-044 Accepted for MVP, so §5.4.1 inherits from an approved source at every link |
 | RF-72-59 | In-depth package review, August 15, 2026 | The scenario family table documented ten prefixes while the inventory used twenty-one; `ROLE-04`, `VIEW-07`, `PART-06`, and `CONN-06` had been renumbered by RF-72-53 but left as one-line `To detail` placeholders; and the documented `AUD` family had no scenarios at all. RF-72-53 assigned identifiers without content. | Complete the family table, give the four renumbered scenarios real content, sort the inventory to match the table, and record the empty `AUD` family and absent revoked-consent coverage as explicit gaps against CBD-72-AC13. | Product Owner approved August 15, 2026; scenario catalog v0.1.9 aligned |
+| RF-72-60 | Open-decision closure, August 15, 2026 | The package carried four open decisions that between them left a permanently unavailable sole Primary Owner able to freeze every other member's contributed financial data indefinitely, no defined budget-space retention or restoration behaviour, and no disposition for a permanently orphaned bank connection. | Close all four. Recover a lost sole owner by archival rather than takeover, so the remedy grants no new authority and cannot be used to seize a budget space. Route deletion through archival with a 30-day restore window and an irreversible purge to a minimal non-financial tombstone, reusing the §5.5 contract rather than inventing a second lifecycle. Retain archived spaces indefinitely with members read-only at their archival-time scope. Leave a permanently orphaned connection read-only forever and resume coverage only through a newly authorized connection. | Product Owner approved August 15, 2026; specification §§6.3–6.5 and §10, `CONN-07`, `LIFE-06`, `LIFE-07` aligned |
 
 ## 7. Work remaining before approval
 
 1. **Done.** All 38 rewritten criteria map to specification and scenario evidence in §2A, verified in both directions: no criterion lacks evidence and no scenario family is orphaned.
 2. Expand the scenario inventory into concrete fixtures with actor, scope, versions, result, state delta, audit, and notification assertions. The empty `AUD` family and absent revoked-consent coverage are now closed — `AUD-01` through `AUD-04` and `LIFE-05` exist, and no scenario remains a placeholder — but every scenario is still at rule level rather than fixture level.
 3. Perform independent matrix-cell and cross-document consistency audits, now that permission numbers 1–35 resolve.
-4. Reconcile CBD-14 security findings and disposition OD-72-01, OD-72-02, OD-72-04, and OD-72-05. OD-72-03 and OD-72-06 are closed; OD-72-05 must at minimum be accepted as scoped-out.
+4. **Done for the open-decision half.** All six open decisions are closed as of August 15, 2026. Reconciling CBD-14 security findings against them remains, and CBD-14 may still require a scoped mitigation to any of these outcomes without reopening the product decision.
 5. Complete accessibility, architecture, privacy, and quality reviews. Note that CBD-14 is due September 9, 2026, after CBD-72's own due date, so either the security gate or the due date must move.
 6. Record Product Owner approval for the exact version.
 7. Publish all three artifacts to Confluence, synchronize repository mirrors, and link the evidence from Jira. A synchronization claim is satisfied only when description, acceptance criteria, and traceability summary all match (RF-72-57).
@@ -187,6 +188,7 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.1.11 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-72-60 closing OD-72-01, OD-72-02, OD-72-04, and OD-72-05. All six open decisions are now closed. Updated the ownership-safety review gate to Pass and extended the per-criterion mapping with the new lifecycle scenarios. | Product Owner approved; fixture completion and the CBD-14 gate remain |
 | 0.1.10 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Added §2A mapping all 38 rewritten criteria to specification and scenario evidence, with the reverse direction recorded so no scenario family is orphaned. This closes the per-criterion half of the bidirectional check that RF-72-57 left open. Recorded that the mapping asserts rule-level evidence rather than completed fixtures. | Product Owner approved; fixture completion remains |
 | 0.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Created delivery mapping, inheritance record, review gates, open-decision register, and initial findings. | Draft; review required |
 | 0.1.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Recorded recipient-controlled personal notification preferences and synchronized the governing CBD-69 through CBD-72 boundary. | Draft; synchronized review required |
