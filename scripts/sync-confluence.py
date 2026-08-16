@@ -22,6 +22,7 @@ Usage
     python scripts/sync-confluence.py --dry-run            # convert only, write previews
     python scripts/sync-confluence.py --only cbd-71-register
     python scripts/sync-confluence.py --set cbd-69         # publish one document set
+    python scripts/sync-confluence.py --set cross-cutting  # the Future Feature Register
     python scripts/sync-confluence.py                      # publish everything, in order
 
 Publish one page first and look at it in Confluence before doing a whole set.
@@ -33,9 +34,10 @@ Safety behavior
 * Every target records the page title it expects. If the live title differs the
   page is skipped, so a wrong or reused page ID cannot silently overwrite an
   unrelated page.
-* Targets publish in dependency order. CBD-69 is the source baseline CBD-71
-  cites, so CBD-69 pages publish first and a failure there stops the run before
-  CBD-71 can reference a stale published source.
+* Targets publish in dependency order. CBD-71 §2 cites the CBD-69 package and
+  the Future Feature Register as frozen source baselines, so both publish first
+  and a failure on either stops the run before CBD-71 can reference a stale
+  published source.
 * `--dry-run` writes converted previews to `.confluence-preview/` and makes no
   remote call other than reading current page metadata.
 * After each write the page is read back and compared on a normalized text
@@ -74,13 +76,20 @@ class Target:
     page_id: str
     expected_title: str
     path: str
+    baseline: bool = False
+    """True when CBD-71 §2 cites this document as a frozen source baseline.
+
+    A failure on a baseline target halts the run, so CBD-71 can never publish
+    while citing a source that failed to publish.
+    """
 
     @property
     def file(self) -> Path:
         return REPO_ROOT / self.path
 
 
-# Dependency order matters: CBD-71 cites CBD-69 as its approved source baseline.
+# Dependency order matters. CBD-71 §2 cites both the CBD-69 package and the
+# Future Feature Register as frozen source baselines, so both publish first.
 TARGETS: tuple[Target, ...] = (
     Target(
         key="cbd-69-specification",
@@ -88,6 +97,7 @@ TARGETS: tuple[Target, ...] = (
         page_id="3538946",
         expected_title="CBD-69 — Period Edge Cases and Validation Rule Specification",
         path="docs/cbd-69-period-edge-cases-validation-rule-specification.md",
+        baseline=True,
     ),
     Target(
         key="cbd-69-scenarios",
@@ -95,6 +105,7 @@ TARGETS: tuple[Target, ...] = (
         page_id="3571722",
         expected_title="CBD-69 — Period Edge-Case Scenario Catalog",
         path="docs/cbd-69-period-edge-case-scenario-catalog.md",
+        baseline=True,
     ),
     Target(
         key="cbd-69-traceability",
@@ -102,12 +113,21 @@ TARGETS: tuple[Target, ...] = (
         page_id="3670026",
         expected_title="CBD-69 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-69-acceptance-criteria-traceability.md",
+        baseline=True,
+    ),
+    Target(
+        key="future-feature-register",
+        doc_set="cross-cutting",
+        page_id="950274",
+        expected_title="CoBudget Future Feature Register",
+        path="docs/cobudget-future-feature-register.md",
+        baseline=True,
     ),
     Target(
         key="cbd-71-register",
         doc_set="cbd-71",
         page_id="6914050",
-        expected_title="CBD-71 — MVP Schedule Decisions v1.0 Register",
+        expected_title="CBD-71 — MVP Schedule Decisions",
         path="docs/cbd-71-mvp-schedule-decision-register.md",
     ),
     Target(
@@ -269,8 +289,8 @@ def main() -> int:
         except Exception as error:  # noqa: BLE001 - surfaced to the operator
             print(f"FAIL {target.key}: publish failed: {error}")
             failures += 1
-            if target.doc_set == "cbd-69":
-                print("Stopping: CBD-71 cites CBD-69 as its approved source baseline.")
+            if target.baseline:
+                print(f"Stopping: CBD-71 §2 cites {target.key} as a frozen source baseline.")
                 break
             continue
 
