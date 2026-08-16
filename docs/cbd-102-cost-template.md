@@ -69,7 +69,7 @@ One record per provider per category. Line items are stable citation keys.
 | --- | --- |
 | Provider and category | Name, and one of H / I / D / E / F |
 | **Tier priced** | The exact plan, and **the gates that forced it** under CR0 |
-| Eligibility verdict | Carried from the gate evaluation: `ELIGIBLE`, `CONDITIONAL`, or `INELIGIBLE` |
+| Eligibility verdict | Carried from the gate evaluation: `ELIGIBLE`, `ELIGIBLE-PENDING-EVIDENCE`, `CONDITIONAL`, or `INELIGIBLE` |
 | Currency and billing region | As quoted |
 | Quote date and source | Per the evidence register |
 

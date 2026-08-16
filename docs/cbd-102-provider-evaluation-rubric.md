@@ -25,9 +25,9 @@ load-bearing rather than editorial:
 | | Hard-gate catalog | This rubric |
 | --- | --- | --- |
 | Question | May this provider be used at all? | How good is it, among those that may? |
-| Result | Pass / Fail / Fail + compensating control | 0–4 per criterion, weighted to 100 |
+| Result | Pass / Unproven / Fail / Fail + compensating control | 0–4 per criterion, weighted to 100 |
 | Authority | Cites an approved source; not discretionary | Judgment against defined anchors |
-| Effect of a bad result | Ineligible | Lower score |
+| Effect of a bad result | Ineligible, or blocked pending evidence | Lower score |
 | Order | **First** | Only after every gate is evaluated |
 
 A criterion appears here precisely because it has **no** approved binding
@@ -281,8 +281,10 @@ executes it.
 
 An evaluation record for one provider in one category contains, in this order:
 
-1. **Eligibility verdict** — `ELIGIBLE`, `CONDITIONAL`, or `INELIGIBLE` per R1,
-   with every failed gate and its cited source listed.
+1. **Eligibility verdict** — `ELIGIBLE`, `ELIGIBLE-PENDING-EVIDENCE`,
+   `CONDITIONAL`, or `INELIGIBLE` per R1, with every failed gate and its cited
+   source listed, and every `UNPROVEN` gate listed separately since its remedy
+   is evidence rather than a control.
 2. **Compensating controls and residuals** — for a `CONDITIONAL` verdict, each
    entry per catalog §2.4, including the named approver.
 3. **Per-dimension subscores** — all seven, weighted for the category, per R4.
