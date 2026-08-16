@@ -8,7 +8,8 @@
 | Reviewer | Pending Product Owner review |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | [Evaluation Rubric](cbd-102-provider-evaluation-rubric.md); [Demand Model](cbd-102-demand-model.md); [Cost Template](cbd-102-cost-template.md); [Evidence Register and Exception Rules](cbd-102-evidence-register-and-exception-rules.md) |
+| Companions | Evaluation Rubric v0.1.0; Demand Model v0.1.0; Cost Template v0.1.0; Evidence Register and Exception Rules v0.1.0 |
+| Confluence page | [CBD-102 — Provider Requirements and Hard-Gate Catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9371654) |
 | Repository baseline | `2e372f6` |
 | Last updated | August 16, 2026 |
 
@@ -323,8 +324,8 @@ the weighted rubric. These were considered and moved, and are listed so the
 omission is visible:
 
 Each row names the rubric criteria that pick the candidate up, so nothing moved
-out of this catalog is silently dropped. The rubric is
-[CBD-102 Weighted Provider Evaluation Rubric](cbd-102-provider-evaluation-rubric.md).
+out of this catalog is silently dropped. The criteria live in the CBD-102
+Weighted Provider Evaluation Rubric.
 
 | Candidate | Why it is not a gate | Where it goes |
 | --- | --- | --- |
