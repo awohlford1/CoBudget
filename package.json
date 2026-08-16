@@ -19,5 +19,8 @@
   "engines": {
     "node": ">=24 <25"
   },
-  "packageManager": "npm@11.12.1"
+  "packageManager": "npm@11.12.1",
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "11.16.0"
+  }
 }
