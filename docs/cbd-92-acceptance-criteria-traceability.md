@@ -2,11 +2,11 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v0.1.19 on August 16, 2026 |
-| Document version | 0.1.19 |
+| Status | **Approved** — Product Owner approved v1.0 on August 16, 2026 |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-92](https://cobudget.atlassian.net/browse/CBD-92) |
-| Primary evidence | `docs/cbd-92-system-flow-technical-threat-model.md` v0.1.19 |
+| Primary evidence | `docs/cbd-92-system-flow-technical-threat-model.md` v1.0 |
 | Approved input | [CBD-91 — Private MVP Data Inventory](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/8781826) v1.0 |
 | Last updated | August 16, 2026 |
 
@@ -221,7 +221,7 @@ approved architecture decision.
 | RV-92-005P | The flow-to-boundary relation is stated once and verified in both directions: §6 is authoritative, §5 is its reverse index, and every §7 threat cites only boundaries its own flows reach. Reconciliation added DF-91-002 × TB-92-004 and DF-91-011 × TB-92-001, which both earlier registers had omitted, and restored DF-91-004 × TB-92-003 and DF-91-010 × TB-92-003 because EP-92-005 and EP-92-011 require fresh reauthentication. | Product Owner-approved crossing rule; concrete enforcement remains open |
 | RV-92-005Q | `RL-92-001–007` close the rate and resource decision that no approved input supplied: a closed list of bounded surfaces, per-surface rather than global ceilings, uniform throttled response/header/timing, counting keys that assert no unverified subject fact, exhaustion that cannot lock out a legitimate subject, and bounded background/provider retry with a terminal state. | Product Owner-approved rate-ceiling decision; values and negative tests remain RF-92-012 |
 | RV-92-006 | Diagram correctness, threat completeness and technical triage have not received independent security review. | Open public-launch gate; does not block CBD-92 approval |
-| RV-92-007 | Product Owner approved CBD-92 v0.1.19 as the provider-independent threat-model baseline on August 16, 2026. Approval authorizes CBD-93 and CBD-94 to consume the model; it approves no downstream mitigation or residual-risk disposition and no implementation whose named gap remains blocking. | Closed |
+| RV-92-007 | Product Owner approved CBD-92 v1.0 as the provider-independent threat-model baseline on August 16, 2026. Approval authorizes CBD-93 and CBD-94 to consume the model; it approves no downstream mitigation or residual-risk disposition and no implementation whose named gap remains blocking. | Closed |
 
 ### 10.2 Limitations
 
@@ -233,7 +233,7 @@ implemented, tested, mitigated, accepted, or safe.
 
 ### 10.3 CBD-92 approval and public-launch gates
 
-The approval gates are satisfied as of v0.1.19:
+The approval gates are satisfied as of v1.0:
 
 1. The Product Owner reviewed the system responsibility split and confirmed no
    approved behavior was weakened, broadened, or silently reopened.
@@ -257,6 +257,7 @@ incorporated before the public-launch gate can close.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Promoted the approved 0.1.19 content to the 1.0 approved baseline alongside the technical model, and repointed the primary-evidence reference, RV-92-007 and the §10.3 gate statement at v1.0. No traceability, coverage, or finding content changed. | **Product Owner approved** |
 | 0.1.19 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the settlement of both open findings: RF-92-011's crossing rule with the DF-91-004/DF-91-010 assurance-flow restoration synchronized into §4, and RF-92-012's `RL-92-*` contract as a new deliverable, missing-evidence row and RV-92-005Q. Closed RV-92-007 and restated §10.3 as satisfied approval gates. | **Product Owner approved** |
 | 0.1.18 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Synchronized §4 with the reconciled technical model §6 crossing map, qualified the CBD-92-AC01 assessment and RV-92-001 with the reconciliation that produced it, added RV-92-005P and RF-92-011 to the finding set, extended the non-privileged-actor note to name ACT-92-001 and ACT-92-002, supplied the missing spoofing-omission justifications for EP-92-004/008/012/013/015, and corrected the §9 closing sentence that re-listed evidence gaps already cited in the table above it. Recorded the CBD-72 citation verification in §8 and RV-92-004, and added the rate/resource-ceiling gap to §9 as RF-92-012. | Consistency, ambiguity and citation review; complete document remains pending Product Owner approval |
 | 0.1.17 | August 16, 2026 | Codex with Alexander Wohlford as Product Owner | Completed a high-scrutiny cross-document review, classified every remaining RF item as a concrete external-evidence gate rather than an unresolved CBD-92 product choice, corrected stale flow assessments for the approved authority/account/alert decisions, and prepared the package for Product Owner approval. | Decision review complete; complete document remains pending Product Owner approval |

@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v0.1.19 on August 16, 2026 |
-| Document version | 0.1.19 |
+| Status | **Approved** — Product Owner approved v1.0 on August 16, 2026 |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-92](https://cobudget.atlassian.net/browse/CBD-92) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -799,6 +799,7 @@ require re-review of affected `DF`, `TB`, `EP`, and `TH` IDs.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Promoted the approved 0.1.19 content to the 1.0 approved baseline, matching the CBD-91 convention that an approved governing document carries a 1.0 version. No diagram, register, contract, threat, triage, or finding content changed; only the version and the references to it. | **Product Owner approved** as the CBD-92 provider-independent threat-model baseline |
 | 0.1.19 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Settled both open review findings. `RF-92-011`: confirmed the §6 crossing rule and restored DF-91-004 × TB-92-003 and DF-91-010 × TB-92-003, because EP-92-005 and EP-92-011 require fresh reauthentication and the rule already counted obtaining or refreshing an assurance result as a crossing; DF-91-003 and DF-91-009 remain removed as session consumers only. `RF-92-012`: established `RL-92-001–007`, a ninth normative contract fixing the closed list of bounded surfaces, per-surface ceilings, uniform throttled response and timing, safe counting keys, non-weaponizable exhaustion, and bounded background/provider retry, with values and verification deferred. | **Product Owner approved** as the CBD-92 provider-independent threat-model baseline |
 | 0.1.18 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Reconciled the flow-to-boundary relation, which §5, §6 and §7 had stated inconsistently, into one authoritative §6 map with §5 as its reverse index and §7 constrained to reachable boundaries; recorded the reconciliation and its two substantive additions as `RF-92-011`. Removed the stale §2.5 claim that personal-account deletion grace/restoration was undecided after §2.7 decided it. Bound `PA-92-008` and `OP-92-008` notice content to the `NT-92-001`/`EM-92-003` channel ceilings. Made the §2.3 severity bands total. Added non-privileged-actor coverage including ACT-92-001, the `S1`–`S4` scale pointer, and the §1 statement that §2 carries binding contracts. Verified all 37 CBD-72 governing-input citations against the source documents and repointed those that named a non-governing invariant, replaced unciteable prose locators with exact permissions, sections and scenario IDs, and opened `RF-92-012` for the rate and resource ceilings that no approved input supplies. | Consistency, ambiguity and citation review; complete document remains pending Product Owner approval |
 | 0.1.17 | August 16, 2026 | Codex with Alexander Wohlford as Product Owner | Completed a high-scrutiny consistency review across all flows, actors, entry points, boundaries, threats and RF findings. Confirmed that the remaining RF items require concrete architecture, provider, schema, legal or verification evidence rather than another CBD-92 product choice; clarified the downstream fixed built-in alert-catalog gate. | Decision review complete; complete document remains pending Product Owner approval |
