@@ -295,6 +295,72 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-94 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-94-acceptance-criteria-traceability.md",
     ),
+    # CBD-102 derives its gates from the approved CBD-72 permission model, the
+    # CBD-91 inventory, the CBD-92 contract registers, and the architecture
+    # security baseline, so the whole set publishes after those.
+    #
+    # Within the set the ordering rule differs from every set above, and the
+    # difference is deliberate rather than an oversight. The CBD-9x sets form an
+    # acyclic citation chain, so their order is the citation order. CBD-102 does
+    # not: the catalog §2.4 cites the evidence register §3.3 for the UNPROVEN
+    # gate outcome, and the evidence register cites catalog gates throughout.
+    # The rubric and the demand model are mutually referential the same way,
+    # since WR-102-019 scores against the demand model's base tier while the
+    # demand model exists to serve the rubric and cost template. No acyclic
+    # order exists to follow.
+    #
+    # The five documents were written and merged as one unit at one version in
+    # PR #47, so the order below is reading order — the gates, the rubric that
+    # scores what the gates deliberately do not, the demand quantities, the cost
+    # structure those quantities feed, and the evidence rules that govern all
+    # four. The first four carry baseline=True so that any failure or skip halts
+    # the run and the set cannot publish half-way, which is the property that
+    # actually matters for a mutually-referential set. The evidence register is
+    # not a baseline only because nothing publishes after it.
+    #
+    # These five pages were created as placeholders on August 16, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged v0.1.0 content. Until then the repository files are
+    # authoritative and the pages must not be cited.
+    Target(
+        key="cbd-102-gate-catalog",
+        doc_set="cbd-102",
+        page_id="9371654",
+        expected_title="CBD-102 — Provider Requirements and Hard-Gate Catalog",
+        path="docs/cbd-102-provider-requirements-hard-gate-catalog.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-102-rubric",
+        doc_set="cbd-102",
+        page_id="9142327",
+        expected_title="CBD-102 — Weighted Provider Evaluation Rubric",
+        path="docs/cbd-102-provider-evaluation-rubric.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-102-demand-model",
+        doc_set="cbd-102",
+        page_id="9273396",
+        expected_title="CBD-102 — Private MVP Demand Model",
+        path="docs/cbd-102-demand-model.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-102-cost-template",
+        doc_set="cbd-102",
+        page_id="9469982",
+        expected_title="CBD-102 — Provider Cost Template",
+        path="docs/cbd-102-cost-template.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-102-evidence-register",
+        doc_set="cbd-102",
+        page_id="9601048",
+        expected_title="CBD-102 — Evidence Register and Exception Rules",
+        path="docs/cbd-102-evidence-register-and-exception-rules.md",
+    ),
 )
 
 
