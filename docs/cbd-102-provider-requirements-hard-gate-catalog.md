@@ -188,14 +188,15 @@ convention.
 | **D** — Managed PostgreSQL | CBD-105 | Primary datastore, replicas, backup, restore |
 | **E** — Transactional email | CBD-106 | Invitation, lifecycle/security, and routine product email |
 | **F** — Financial-data connectivity | CBD-107 | Provider consent, accounts, transactions, webhooks |
-| **N** — Push and SMS | New sibling subtask, not yet created | Device push delivery, SMS delivery, token lifecycle |
+| **N** — Push and SMS | CBD-130 | Device push delivery, SMS delivery, token lifecycle |
 
 Category **N** was added by Product Owner decision on August 16, 2026. CBD-102's
 written scope named five categories, but `NT-92-*` is an approved content
 contract with no evaluating subtask, which would have left a provider touching
 `DI-91-073` push tokens and `DI-91-049` delivered copies unmeasured. `EG-91-006`
 continues to own the eventual selection; this catalog supplies the gates that
-selection must clear. The Jira sibling to CBD-103–107 still needs creating.
+selection must clear. The Jira sibling to CBD-103–107 is
+[CBD-130](https://cobudget.atlassian.net/browse/CBD-130).
 
 ## 4. Cross-category gates
 
@@ -297,7 +298,7 @@ these fails in every category it is proposed for.
 | HG-102-066 | F | Provider error and failure detail can be kept out of budget-space-visible surfaces, so that only the `DI-91-056` allowlisted health status reaches members. | The integration can map provider failure codes to the safe derived status without leaking institution configuration, cursor internals, or the authorizer's personal circumstance. | `DI-91-056`; CBD-72 permission 33; `CR-91-011` | Config |
 | HG-102-067 | F | Raw incremental-sync payloads can be confined to a service-only processing boundary and deleted after durable source observations exist. | Payload handling is designed for minimum retention. `DI-91-057` prohibits this class from reaching any customer role, ordinary support, logs, analytics, or exports. | `DI-91-057`; `TB-92-011` | Config |
 
-## 10. Push and SMS (new sibling subtask)
+## 10. Push and SMS (CBD-130)
 
 Added by Product Owner decision on August 16, 2026 under §3. `NT-92-*` is the
 tightest content ceiling in the approved set: push and SMS are optional
@@ -342,7 +343,7 @@ out of this catalog is silently dropped. The rubric is
 | OI-102-001 | **Resolved August 16, 2026.** `SR-94-069`'s organizationally separated duties were in tension with a single-operator project. Product Owner disposition: `SR-94-069` stands unamended and CoBudget staffs a named second principal holding key-recovery custody and restore approval with no customer-data path. Recorded in §2.5.1. | Closed. `HG-102-006` becomes a genuine vendor-capability test and gains a second edge — key custody or restore approval must not imply customer-data read. Follow-on work is operational, not documentary: the second principal must be named and their access provisioned before any recovery claim is made. |
 | OI-102-002 | The CBD-102 ticket states CBD-94 sets a pending threshold for the custody gates via a solo-operator disposition that does not exist, and its `RL-92-006` paraphrase omits per-tenant and per-connection concurrency caps. | Ticket text should be corrected. No effect on this catalog, which follows the approved documents. |
 | OI-102-003 | Rate, quota, and resource **values** remain unselected under `RL-92-007` and `ME-94-010`. The gates here test provider *capability* to enforce a ceiling, not the ceiling itself. | Capability gates are decidable now; values remain a CBD-94/architecture obligation before any `RL-92-001` surface is released. |
-| OI-102-004 | **Resolved August 16, 2026.** Push and SMS had an approved `NT-92-*` ceiling but no evaluating category. Product Owner disposition: add category **N** with a new Jira sibling to CBD-103–107. Gates `HG-102-068`–`075` are in §10. | Closed for this catalog. Two items remain: the Jira subtask is not yet created, and the category **N** rubric weights in the rubric §4 are a new proposal that the August 16 weight approval did not cover. |
+| OI-102-004 | **Resolved August 16, 2026.** Push and SMS had an approved `NT-92-*` ceiling but no evaluating category. Product Owner disposition: add category **N** with a new Jira sibling to CBD-103–107. Gates `HG-102-068`–`075` are in §10, and the subtask is [CBD-130](https://cobudget.atlassian.net/browse/CBD-130). | Closed for this catalog. One item remains: the category **N** rubric weights in rubric §4 are a new proposal that the August 16 weight approval did not cover. |
 | OI-102-005 | `HG-102-004`, `HG-102-007`, `HG-102-008`, and `HG-102-043` may only be answerable from vendor assertion rather than observation for some providers. | The evidence register must record confidence and limitation per §2.2; an assertion-only pass is a weaker result than an observed one and must be visible as such. |
 
 ## 13. Traceability
