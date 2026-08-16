@@ -7,7 +7,7 @@
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the inventory, classification, flows, rules, and recorded policies as a CBD-92/CBD-93 baseline. It does not approve the open evidence gaps, the recommended account-authority option in §7.1, or Private-MVP launch readiness. Independent security, privacy, legal, and data-governance review remain outstanding. |
 | Jira | [CBD-91](https://cobudget.atlassian.net/browse/CBD-91) |
-| Confluence page | _Not yet published. Publication follows merge of the approved revision._ |
+| Confluence page | [CBD-91 — Private MVP Data Inventory](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/8781826) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
 | Repository baseline | `d2f4c32` |
