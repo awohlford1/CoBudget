@@ -182,13 +182,26 @@ TARGETS: tuple[Target, ...] = (
         baseline=True,
     ),
     # CBD-91 cites the approved CBD-71 v1.1 decision set and the closed CBD-72
-    # decisions as its controlling inputs, so it publishes after both.
+    # decisions as its controlling inputs, so it publishes after both. It is
+    # itself a baseline because CBD-93 §1 and §12 cite the v1.0.1 inventory as
+    # the authoritative input its whole analysis is built on.
     Target(
         key="cbd-91-inventory",
         doc_set="cbd-91",
         page_id="8781826",
         expected_title="CBD-91 — Private MVP Data Inventory",
         path="docs/cbd-91-private-mvp-data-inventory.md",
+        baseline=True,
+    ),
+    # CBD-93 consumes the CBD-91 inventory and the CBD-72 permission model, so
+    # it publishes last. Nothing cites it yet; CBD-94 will, and that target
+    # should make this one a baseline when it is added.
+    Target(
+        key="cbd-93-abuse-analysis",
+        doc_set="cbd-93",
+        page_id="8749076",
+        expected_title="CBD-93 — Privacy, Coercion, Surveillance, and Abuse-Case Analysis",
+        path="docs/cbd-93-privacy-coercion-abuse-analysis.md",
     ),
 )
 
