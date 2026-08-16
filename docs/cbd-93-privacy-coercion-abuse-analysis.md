@@ -3,13 +3,13 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved — Product Owner** |
-| Document version | 1.0.1 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Claude completed the initial analysis and internal review; Codex completed internal consistency, security/product-decision, decision-readiness, and final normalization reviews; Alexander Wohlford completed the final Product Owner analysis and approval on August 16, 2026. No independent safety, privacy, legal, accessibility, security, data-governance, or survivor-research review has occurred. |
 | Approval | Alexander Wohlford, Product Owner — August 16, 2026 |
 | Approval scope | Approved as the authoritative CBD-93 analysis baseline and input to CBD-94/CBD-95, subject to §1.2. |
 | Jira | [CBD-93](https://cobudget.atlassian.net/browse/CBD-93) |
-| Confluence page | [Published v0.1.2 copy](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/8749076). Repository v1.0.1 is authoritative for this change; synchronize only after merge to `main`. |
+| Confluence page | [Published v0.1.2 copy](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/8749076). Repository v1.1 is authoritative for this change; synchronize only after merge to `main`. |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
 | Repository baseline | `4d957e2` |
@@ -82,11 +82,11 @@ connection. The harm is unchanged.
 
 `CA-92-008`, `CA-92-010`, and `CA-92-011` introduce budget-scoped joint-account
 projection, including a unanimous confirmation ceremony among contributing
-profile subjects. This catalog has no scenario for it, and a consent ceremony
-binding several people is exactly the coercive-posture surface §2.1 exists to
-model. §13 records that as a coverage gap. v1.0.1 does not close it, because
-modelling a new surface is analysis for Product Owner approval, not an editorial
-correction.
+profile subjects. v1.0.1 recorded that as an uncovered surface. v1.1 closes it:
+§4.12 models the surface in `AB-93-084`–`AB-93-086`, and `AB-93-083` supplies
+the normal-use personal-account deletion case that `PA-92-002`/`PA-92-004`/
+`PA-92-005` created. Both additions were approved by the Product Owner on
+August 16, 2026 and are recorded in §14.
 
 `RL-92-*` is the ninth CBD-92 contract and was established in v0.1.19, after
 CBD-93 v1.0 was approved. §4 and §6 now cite it in the enumeration, invitation
@@ -126,6 +126,23 @@ This is a scoped document approval. It does **not**:
 Any later approval of a candidate safeguard, risk disposition, evidence-gap
 closure, or release claim requires the separate authority and closure evidence
 named in §6.14, §8.1, and CBD-94.
+
+#### v1.1 extension of scope
+
+On August 16, 2026 the Product Owner extended the approval to the four
+scenarios added in v1.1 — `AB-93-083` and `AB-93-084`–`AB-93-086` — closing the
+two coverage gaps v1.0.1 had recorded. One consequence must be stated plainly
+rather than left to inference from the bullet above: `AB-93-086` is recorded as
+an **Accepted residual**, so v1.1 does accept one new residual that v1.0 did
+not. It follows from the approved `CA-92-011` contract, it is entered in the
+§9.3 register with its reasoning, and `RI-93-019` records the narrowing
+question rather than treating the matter as settled.
+
+The extension changes nothing else. `SG-93-096` and `SG-93-097` are added as
+candidates and are classified in §6.14 like every other candidate; neither is
+approved for implementation. `RI-93-019` is referred to CBD-12, not decided.
+No evidence gap closes, no other residual is accepted, and every limit in the
+bullets above continues to apply.
 
 ## 2. Method and conventions
 
@@ -226,6 +243,7 @@ coverage proof; §4 through §6 contain the scenarios.
 | Former member | `AB-93-080` | `AB-93-049`, `AB-93-050`, `AB-93-051`, `AB-93-052`, `AB-93-066` |
 | Support / operations actor | `AB-93-081` | `AB-93-071`, `AB-93-072`, `AB-93-073`, `AB-93-074` |
 | Connection authorizer | `AB-93-019` | `AB-93-007`, `AB-93-045`, `AB-93-059` |
+| Contributing profile subject | `AB-93-084` | `AB-93-085`, `AB-93-086` |
 | Non-user third party | — | `AB-93-020`, `AB-93-062`, `AB-93-070` |
 
 ### 3.2 Lifecycle-state coverage
@@ -256,7 +274,10 @@ what does a transition between states do to the person it happens to.
 | Connection authorizer active | PM-72-011 | `AB-93-019` | `AB-93-007` |
 | Connection authorizer membership lost | CBD-72 §6.3 | `AB-93-019` | `AB-93-045` |
 | Connection permanently orphaned | OD-72-04; `DI-91-056` | — | `AB-93-045`, `AB-93-059` |
-| Personal account deleted | CBD-92 `PA-92-001`–`PA-92-008`; `EG-91-002` for per-class disposition | — (see §13) | `AB-93-052`, `AB-93-059` |
+| Joint projection active | CBD-92 `CA-92-008`, `CA-92-010` | `AB-93-084` | `AB-93-085` |
+| Projection dissolved | CBD-92 `CA-92-011` | `AB-93-084` | `AB-93-086` |
+| Account deletion-pending | CBD-92 `PA-92-004`, `PA-92-005` | `AB-93-083` | `AB-93-052` |
+| Personal account deleted | CBD-92 `PA-92-001`–`PA-92-008`; `EG-91-002` for per-class disposition | `AB-93-083` | `AB-93-052`, `AB-93-059` |
 
 ### 3.3 Disclosure-channel coverage
 
@@ -265,12 +286,12 @@ Every scenario in §4 is tagged with its channel; this table is the index.
 
 | Channel | Kind | Scenarios |
 | --- | --- | --- |
-| Direct in-app read within an authorized scope | Direct | `AB-93-011`–`AB-93-022`, `AB-93-033`–`AB-93-038` |
+| Direct in-app read within an authorized scope | Direct | `AB-93-011`–`AB-93-022`, `AB-93-033`–`AB-93-038`, `AB-93-084`, `AB-93-085` |
 | Notification content on a delivered channel | Direct | `AB-93-023`–`AB-93-032` |
 | Export, snapshot, or downloaded copy | Direct | `AB-93-005`, `AB-93-006`, `AB-93-050`, `AB-93-051`, `AB-93-067` |
 | Audit and administrative history | Direct | `AB-93-067`–`AB-93-070` |
 | Metadata — status labels, lifecycle state, reasons | Inference | `AB-93-055`–`AB-93-059`, `AB-93-064` |
-| Aggregates, totals, and derived indicators | Inference | `AB-93-021`, `AB-93-036`, `AB-93-060` |
+| Aggregates, totals, and derived indicators | Inference | `AB-93-021`, `AB-93-036`, `AB-93-060`, `AB-93-086` |
 | Previews, counts, search, and empty states | Inference | `AB-93-060`, `AB-93-061` |
 | Timing, cadence, and delivery patterns | Inference | `AB-93-030`, `AB-93-031`, `AB-93-057` |
 | Existence and non-existence of a record | Inference | `AB-93-061`, `AB-93-062`, `AB-93-064` |
@@ -493,6 +514,26 @@ defaults every household gets.
 | AB-93-080 | Normal · former member | A member revokes their own participation without another party's approval. Access and derived artifacts invalidate immediately; their attributed contributions remain with the targets they belong to. | Baseline | — | CBD-72 §6.3; §5.6 item 7 | SG-93-052, SG-93-061 | Modelled |
 | AB-93-081 | Normal · operations actor | Support resolves a routine case through the `OP-92-002` content-free surface using allowlisted service health, public version information, a safe status/error class, and a customer-provided opaque correlation identifier. Staff do not inspect customer content, infer resource existence, impersonate the customer, or reassign any role. A genuine incident or recovery need uses the separate `OP-92-003`–`OP-92-008` exceptional path. | Baseline | — | `DI-91-063`; CBD-92 `OP-92-001`–`OP-92-008` | SG-93-083, SG-93-087 | Modelled |
 | AB-93-082 | Normal · archived budget space | A Primary Owner archives a space that is no longer in use. Everything is preserved and readable, every member is notified, no countdown starts, and restoration returns every role and profile to exactly where it stood. | Baseline | — | CBD-72 §6.5; `DI-91-075` | SG-93-054, SG-93-055 | Modelled |
+| AB-93-083 | Normal · departing account holder | A person who no longer wants a CoBudget account deletes it. `PA-92-001` blocks the request while they are the sole active Primary Owner of any space and offers the approved transfer or archival exits first, so no space is orphaned. `PA-92-002` requires fresh reauthentication and explicit confirmation of the exact account, the immediate access and connection consequences, the 30-day restoration deadline, the authorities that will not return, and the retained shared-history boundary. `PA-92-003` then shuts down authority atomically, `PA-92-004` holds the account deletion-pending and unavailable for ordinary use, and `PA-92-005` lets the person cancel before the deadline through an identity-verified ceremony that returns the profile to an inactive state without resurrecting any prior authority. No other member gains anything from the departure. | Baseline | — | CBD-92 `PA-92-001`–`PA-92-005`; `EG-91-002` | SG-93-052, SG-93-091 | Modelled |
+
+### 4.12 Financial-profile stewardship and joint-account projection
+
+CBD-92 §2.5 adopts CBD-91 §7.1 option 1: the person-level financial profile is
+the authoritative steward, and a budget space receives only an explicitly
+linked, revocable representation. `CA-92-008` then permits a budget-scoped
+joint-account projection so that two people's independently authorized accounts
+can be presented once rather than twice. Creating one requires unanimous
+confirmation from every contributing profile subject under `CA-92-010`;
+dissolving one does not. The rows below concern that asymmetry and the consent
+ceremony that opens it. The projection is budget-scoped and creates no
+cross-space or application-wide identity, so these are cases about consent and
+presentation authority rather than about isolation failure.
+
+| ID | Posture · actor | Case and mechanism | Harm | Affected | Governing input | Safeguards | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| AB-93-084 | Normal · contributing profile subjects | Two people who genuinely share a bank account each link their own independently authorized connection to the same budget space. Because approved reliable provider identity does not establish the association on its own, `CA-92-010` asks each of them to explicitly confirm the exact budget space, the safe account representations, the association effect, the duplicate-prevention behavior, and the absence of any private-connection or cross-space authority. Both confirm, the proposal commits atomically against current profile, account, link, and disclosure versions, and the space stops double-counting the account. Either person may later remove their own source under `CA-92-011`. | Baseline | — | CBD-92 `CA-92-008`–`CA-92-011` | SG-93-096 | Modelled |
+| AB-93-085 | Coercive · contributing profile subject | The abuser proposes a joint-account projection and pressures the subject into confirming it. Every protection in `CA-92-010` holds: the confirmation is explicit, versioned, atomic, and attributable, and a decline would leave the candidate accounts separate without revealing the subject's response to anyone. None of that establishes willingness, which is the standing limit §4.1 records for all consent evidence in this catalog. The effect of confirming is that the subject's separately authorized account is presented as part of a shared whole and deduplicated against the abuser's, so the household view the subject can be held accountable against now includes their own account, by their own recorded consent. The undo in `CA-92-011` is real but visible: removing your own source is an observable act inside the relationship, carrying the same interpersonal cost `AB-93-007` records for revoking a coerced connection. | HC-93-01, HC-93-02, HC-93-04 | Subject | CBD-92 `CA-92-010`, `CA-92-011`; `DI-91-007`, `DI-91-052` | SG-93-011, SG-93-096, SG-93-097 | Modelled |
+| AB-93-086 | Malicious · Primary Owner or Co-owner | `CA-92-011` lets a current Primary Owner or Co-owner dissolve a projection for the space, while a contributing subject may remove only their own source. Creation is unanimous; destruction is unilateral. Dissolution atomically replaces the shared representation with separate budget-visible account representations and recomputes deduplication, balances, transactions, reconciliation, alerts, reports, and derivatives. In an abusive household that is forced itemization: an owner can convert a shared account view into a per-person one in which each contributor's balance and transactions are individually attributable again, without the contributors' agreement and at any time. No unentitled data is disclosed, because each source was already explicitly linked to the space. The harm is that presentation authority over a jointly consented view rests with one role, and the people whose consent created it hold no position when it ends. | HC-93-01, HC-93-02, HC-93-04 | Subject, other members | CBD-92 `CA-92-008`, `CA-92-011` | SG-93-092, SG-93-097 | Accepted residual |
 
 ## 5. Harm and affected-user analysis
 
@@ -500,10 +541,10 @@ defaults every household gets.
 
 | Harm class | Scenarios | Who bears it | What makes it distinctive |
 | --- | --- | --- | --- |
-| HC-93-01 Financial surveillance | `AB-93-001`, `AB-93-004`–`AB-93-007`, `AB-93-009`, `AB-93-016`–`AB-93-018`, `AB-93-020`–`AB-93-025`, `AB-93-030`, `AB-93-031`, `AB-93-032`, `AB-93-049`–`AB-93-051`, `AB-93-053`, `AB-93-054`, `AB-93-055`, `AB-93-060`, `AB-93-063`, `AB-93-067`, `AB-93-069`, `AB-93-071`, `AB-93-076`, `AB-93-078` | Subject, other members, non-user third party | Almost never requires a scope violation. The observer sees what the model grants; the harm is in continuity and intent, which the model does not represent. |
-| HC-93-02 Loss of agency | `AB-93-001`–`AB-93-004`, `AB-93-006`, `AB-93-008`, `AB-93-010`, `AB-93-018`, `AB-93-026`, `AB-93-027`, `AB-93-028`, `AB-93-039`–`AB-93-043`, `AB-93-046`–`AB-93-049`, `AB-93-052`, `AB-93-056`, `AB-93-058`, `AB-93-061`, `AB-93-070`, `AB-93-072`, `AB-93-073` | Subject, former member | Concentrated in lifecycle transitions. The person loses control at exactly the moment they most need it, and the transition is usually irreversible by them alone. |
+| HC-93-01 Financial surveillance | `AB-93-001`, `AB-93-004`–`AB-93-007`, `AB-93-009`, `AB-93-016`–`AB-93-018`, `AB-93-020`–`AB-93-025`, `AB-93-030`, `AB-93-031`, `AB-93-032`, `AB-93-049`–`AB-93-051`, `AB-93-053`, `AB-93-054`, `AB-93-055`, `AB-93-060`, `AB-93-063`, `AB-93-067`, `AB-93-069`, `AB-93-071`, `AB-93-076`, `AB-93-078`, `AB-93-085`, `AB-93-086` | Subject, other members, non-user third party | Almost never requires a scope violation. The observer sees what the model grants; the harm is in continuity and intent, which the model does not represent. |
+| HC-93-02 Loss of agency | `AB-93-001`–`AB-93-004`, `AB-93-006`, `AB-93-008`, `AB-93-010`, `AB-93-018`, `AB-93-026`, `AB-93-027`, `AB-93-028`, `AB-93-039`–`AB-93-043`, `AB-93-046`–`AB-93-049`, `AB-93-052`, `AB-93-056`, `AB-93-058`, `AB-93-061`, `AB-93-070`, `AB-93-072`, `AB-93-073`, `AB-93-085`, `AB-93-086` | Subject, former member | Concentrated in lifecycle transitions. The person loses control at exactly the moment they most need it, and the transition is usually irreversible by them alone. |
 | HC-93-03 Physical-safety exposure | `AB-93-005`, `AB-93-016`, `AB-93-017`, `AB-93-020`, `AB-93-023`, `AB-93-024`, `AB-93-026`, `AB-93-028`–`AB-93-030`, `AB-93-032`, `AB-93-037`, `AB-93-046`, `AB-93-050`, `AB-93-056`–`AB-93-058`, `AB-93-071`, `AB-93-073`, `AB-93-074` | Subject | The only class where a disclosure can lead to physical harm. Concentrated in merchant/payee names, goal labels, delivered notification copies, and lifecycle notices routed to monitored channels. |
-| HC-93-04 Psychological harm | `AB-93-001`, `AB-93-009`, `AB-93-018`, `AB-93-022`–`AB-93-024`, `AB-93-031`, `AB-93-033`–`AB-93-038`, `AB-93-040`, `AB-93-061`, `AB-93-065`, `AB-93-069` | Subject, author | The product surfaces are working correctly in nearly every case. The harm lives in the relationship and is delivered through attribution, visibility, and acknowledgement. |
+| HC-93-04 Psychological harm | `AB-93-001`, `AB-93-009`, `AB-93-018`, `AB-93-022`–`AB-93-024`, `AB-93-031`, `AB-93-033`–`AB-93-038`, `AB-93-040`, `AB-93-061`, `AB-93-065`, `AB-93-069`, `AB-93-085`, `AB-93-086` | Subject, author | The product surfaces are working correctly in nearly every case. The harm lives in the relationship and is delivered through attribution, visibility, and acknowledgement. |
 | HC-93-05 Economic harm | `AB-93-002`, `AB-93-008`, `AB-93-036`, `AB-93-039`, `AB-93-041`, `AB-93-042`, `AB-93-044`, `AB-93-045`, `AB-93-047`, `AB-93-048`, `AB-93-072` | Subject, other members | Loss of records or planning capability rather than loss of money. CoBudget moves no money, so every economic harm here is informational. |
 | HC-93-06 Relationship disclosure | `AB-93-004`, `AB-93-010`, `AB-93-020`, `AB-93-025`, `AB-93-055`, `AB-93-056`, `AB-93-059`, `AB-93-062`–`AB-93-064`, `AB-93-066`–`AB-93-068`, `AB-93-076`, `AB-93-078` | Subject, other members, invited non-member | Usually metadata rather than content. Membership state, invitation state, connection state, and audit history each disclose who is connected to whom and when that changed. |
 | HC-93-07 Loss of evidentiary records | `AB-93-003`, `AB-93-039`, `AB-93-041`, `AB-93-042`, `AB-93-047`, `AB-93-051`, `AB-93-062`, `AB-93-070` | Subject, former member | Matters most in exactly the situations this analysis exists for. A person leaving an abusive household often needs the financial record they are about to lose access to. |
@@ -522,6 +563,7 @@ defaults every household gets.
 | Invited non-member | Receives a delivered message and a bearer secret before any relationship exists | Reject, or let the invitation expire | No block, no per-inviter refusal, and no recipient-scoped cross-space limit; CBD-92 `RL-92-001` bounds the invitation surface by volume only (`AB-93-065`) |
 | Former member | Attributed content remains readable to others; downloaded copies they hold remain theirs | Revoke participation; delete the personal account under the CBD-92 `PA-92-*` ceremony, with 30-day restoration | Cannot read, edit, or remove their own prior content; `PA-92-006` retains shared budget history, so deletion does not retract attribution, and the per-class disposition remains open under `EG-91-002` and `RF-92-010` (`AB-93-052`) |
 | Non-user third party | Appears in another person's financial record by name, amount, and date | None | No notice, no consent, no revocation path. Structural and unresolvable within the product (`AB-93-020`) |
+| Contributing profile subject | An account they authorized in their own financial profile is presented as part of a shared joint projection, and the presentation can be re-separated by someone else | Confirm or decline the association under `CA-92-010`; remove their own source at any time under `CA-92-011` | Declining and withdrawing are both visible acts inside the relationship, and a contributor holds no position when a Primary Owner or Co-owner dissolves the projection (`AB-93-085`, `AB-93-086`; `RI-93-019`) |
 | Operations actor | Holds privileged access to restricted content | Governed by the CBD-92 `OP-92-001`–`OP-92-008` model: routine access is content-free, exceptional access is dual-approved, just-in-time, mediated, reviewed, and followed by customer notice | The model is conceptual only. `RF-92-008` and `EG-91-009` are open for identities, tooling, separation of duties, evidence, and rehearsal, so every operational safeguard here is a requirement rather than a control (`AB-93-071`) |
 
 ### 5.3 The structural pattern
@@ -574,6 +616,8 @@ the CBD-93 non-escalation criterion.
 | SG-93-009 | Copy | The pre-download warning must state that CoBudget cannot delete, expire, or revoke a copy once downloaded, restating CBD-91 §4 rule 7 in customer language. | AB-93-005, AB-93-006 | EXP family test against approved copy |
 | SG-93-010 | Product | Generating an owner-authorized Viewer snapshot notifies the recipient Viewer and every owner, so the disclosure is never silent. | AB-93-006 | EXP family test |
 | SG-93-015 | Copy | Invitation copy names the specific role, states the exact scope in plain terms, and states that the recipient may end it. | AB-93-010, AB-93-079 | Input to CBD-73/CBD-75 |
+| SG-93-096 | Copy | Joint-association confirmation carries a versioned pre-confirmation disclosure, within the `CA-92-010` required confirmation set, stating in plain language what the other contributors will see, what duplicate prevention changes about balances, reports, and alerts, that the association is budget-scoped and grants no cross-space or private-connection authority, and that the person may withdraw their own source at any time. It must not imply that withdrawal is invisible to the other contributors. | AB-93-084, AB-93-085 | Input to CBD-75; then CONN/XSP test |
+| SG-93-097 | Product | Dissolving a joint projection notifies every contributing profile subject before the change takes effect where the approved lifecycle permits, and always immediately after. The notice states the operational effect and never characterizes a contributor's circumstances or reasons. Whether a contributor holds any objection position, given that creation is unanimous under `CA-92-010` and dissolution is not, is referred to CBD-12 as `RI-93-019`. | AB-93-085, AB-93-086 | Input to CBD-12 and CBD-75; then CONN/ALERT test |
 
 ### 6.2 Visibility scope and monitoring
 
@@ -731,8 +775,8 @@ the surfaces this analysis identified.
 
 ### 6.14 Decision-readiness register
 
-This register is exhaustive over the 94 active safeguards in
-`SG-93-001`–`SG-93-095`. `SG-93-020` is retired, consolidated into
+This register is exhaustive over the 96 active safeguards in
+`SG-93-001`–`SG-93-097`. `SG-93-020` is retired, consolidated into
 `SG-93-001`, and never reused. The categories are mutually exclusive and
 describe the **primary remaining gate**. They do not rate risk or assign an
 implementation phase; CBD-94 owns those decisions. A baseline-derived item is
@@ -748,13 +792,13 @@ rather than duplicating those mutable fields.
 | Decision status | Count and safeguard IDs | Accountable route | Closure evidence | Effect until closed |
 | --- | --- | --- | --- | --- |
 | **Decided and documented; implementation evidence pending** | **1:** `SG-93-053` | CBD-72 controlling specification; CBD-94 verification | Merged controlling rule plus passing `LIFE-08` fixture and package authorization tests | The archived-export decision is authoritative. Release still requires the named evidence. |
-| **Proposed product decision** | **18:** `SG-93-001`, `SG-93-004`, `SG-93-005`, `SG-93-011`, `SG-93-014`, `SG-93-031`, `SG-93-033`, `SG-93-037`, `SG-93-050`–`SG-93-052`, `SG-93-056`, `SG-93-058`, `SG-93-066`, `SG-93-074`, `SG-93-075`, `SG-93-081`, `SG-93-095` | CBD-12, with CBD-73 or CBD-74 where §11 routes the decision | Explicit Jira/Product Owner disposition; corresponding CBD-72/73/74 and CBD-76 text merged; positive, negative, stale-state, and non-escalation scenarios named in the decision | The current approved model remains in force. No candidate behavior may be implemented or represented as approved. |
-| **Customer-copy approval pending** | **17:** `SG-93-007`, `SG-93-015`, `SG-93-021`, `SG-93-024`, `SG-93-025`, `SG-93-036`, `SG-93-039`, `SG-93-042`, `SG-93-055`, `SG-93-062`, `SG-93-071`, `SG-93-089`–`SG-93-094` | CBD-75, with CBD-73/74 and the applicable specialist gate | Versioned copy inventory mapped to each ID; Product Owner approval; accessibility review; legal/privacy review where the text makes a custody, safety, or legal claim; approved localization-equivalence rule; copy tests | A dependent surface cannot claim safety, consent, confidentiality, erasure, or authority beyond already approved baseline text. Safety-critical unresolved copy blocks that surface. |
+| **Proposed product decision** | **19:** `SG-93-001`, `SG-93-004`, `SG-93-005`, `SG-93-011`, `SG-93-014`, `SG-93-031`, `SG-93-033`, `SG-93-037`, `SG-93-050`–`SG-93-052`, `SG-93-056`, `SG-93-058`, `SG-93-066`, `SG-93-074`, `SG-93-075`, `SG-93-081`, `SG-93-095`, `SG-93-097` | CBD-12, with CBD-73 or CBD-74 where §11 routes the decision | Explicit Jira/Product Owner disposition; corresponding CBD-72/73/74 and CBD-76 text merged; positive, negative, stale-state, and non-escalation scenarios named in the decision | The current approved model remains in force. No candidate behavior may be implemented or represented as approved. |
+| **Customer-copy approval pending** | **18:** `SG-93-007`, `SG-93-015`, `SG-93-021`, `SG-93-024`, `SG-93-025`, `SG-93-036`, `SG-93-039`, `SG-93-042`, `SG-93-055`, `SG-93-062`, `SG-93-071`, `SG-93-089`–`SG-93-094`, `SG-93-096` | CBD-75, with CBD-73/74 and the applicable specialist gate | Versioned copy inventory mapped to each ID; Product Owner approval; accessibility review; legal/privacy review where the text makes a custody, safety, or legal claim; approved localization-equivalence rule; copy tests | A dependent surface cannot claim safety, consent, confidentiality, erasure, or authority beyond already approved baseline text. Safety-critical unresolved copy blocks that surface. |
 | **Specialist-gated; do not implement or claim validated** | **2:** `SG-93-017`, `SG-93-046` | `EG-93-001` and `EG-93-006`, then CBD-94 | Written advocacy/privacy/security review answering the stated question; approved data/event fields, purpose, access, retention, deletion, and monitoring boundaries where applicable; recorded Product Owner disposition | Observation detection stays off. The inactive-owner notice residual remains unvalidated and cannot be described as safe for people experiencing abuse. |
 | **Operational or security design/evidence pending** | **7:** `SG-93-038`, `SG-93-080`, `SG-93-083`, `SG-93-084`, `SG-93-086`–`SG-93-088` | CBD-94 and the operational owner; CBD-92 `RF-92-008` for privileged access; `EG-93-009` for the platform safety process | Approved operating procedure; named roles and separation of duties; tool-enforced permissions; training/escalation path; audit and notice evidence; abuse-case exercises; recovery rehearsal where applicable | Comments remain unshippable without the safety process. The approved `OP-92-*` default-deny boundary applies; missing tooling is not permission for manual access. |
 | **Baseline-derived requirement; CBD-94 adoption and verification pending** | **49:** `SG-93-002`, `SG-93-003`, `SG-93-006`, `SG-93-008`–`SG-93-010`, `SG-93-012`, `SG-93-013`, `SG-93-016`, `SG-93-018`, `SG-93-019`, `SG-93-022`, `SG-93-023`, `SG-93-026`–`SG-93-030`, `SG-93-032`, `SG-93-034`, `SG-93-035`, `SG-93-040`, `SG-93-041`, `SG-93-043`–`SG-93-045`, `SG-93-047`–`SG-93-049`, `SG-93-054`, `SG-93-057`, `SG-93-059`–`SG-93-061`, `SG-93-063`–`SG-93-065`, `SG-93-067`–`SG-93-070`, `SG-93-072`, `SG-93-073`, `SG-93-076`–`SG-93-079`, `SG-93-082`, `SG-93-085` | CBD-94 requirement catalog, then the architecture/product/copy/operations owner named there | CBD-94 risk row and disposition; normative requirement text; named owner and target phase; executable positive/negative/stale/race tests or named manual evidence; unresolved `EG-91-*`/`RF-92-*` dependencies linked rather than assumed closed | The controlling CBD-72/91/92 rule still applies. CBD-93 supplies candidate requirement language, not proof of implementation or release readiness. |
 
-The counts total 94 active safeguards. Identifier `SG-93-020` is retained only
+The counts total 96 active safeguards. Identifier `SG-93-020` is retained only
 as a historical tombstone: it was introduced as a duplicate observer-removal
 requirement and was consolidated into canonical `SG-93-001` in v0.1.5. All
 scenario, non-escalation, and reconciliation references now use `SG-93-001`.
@@ -940,7 +984,7 @@ approved behavior stands and this residual is real.
 
 ### 9.3 Residual register
 
-Twelve §4 rows carry the **Accepted residual** status and map to the eleven
+Thirteen §4 rows carry the **Accepted residual** status and map to the twelve
 entries below; `AB-93-028` and `AB-93-056` are two faces of the same residual
 and share the last row.
 
@@ -952,6 +996,7 @@ and share the last row.
 | Downloaded copies are permanent | `AB-93-050` | `DI-91-050`; CBD-91 §4 rule 7 | Custody transfers on download; the honest response is disclosure (`SG-93-057`, `SG-93-091`), not a false assurance |
 | Orphaned-connection reason discloses permanent unavailability | `AB-93-059` | OD-72-04; `DI-91-056` | Members cannot otherwise understand why data stopped or that a new connection is the only remedy |
 | Departing authorizer permanently ends a connection | `AB-93-045` | OD-72-04; PM-72-011 | Anti-inheritance is the point; allowing adoption would let someone inherit another person's provider authorization |
+| Joint-projection dissolution is unilateral while creation is unanimous | `AB-93-086` | CBD-92 `CA-92-008`, `CA-92-011` | Someone must be able to correct a wrong or stale association for the space, and requiring unanimity to dissolve would let one contributor hold a mistaken projection in place. `RI-93-019` asks whether contributors should hold a notice or objection position, which narrows the residual without removing the owner authority |
 | Withheld reports and split-activity records imply hidden inputs | `AB-93-060` | CBD-72 §5.1 items 9–10 | The alternative is a misleading partial report, which is worse |
 | Cross-space correlation by a person entitled to both views | `AB-93-063` | PM-72-010 scope | No server-side control prevents a person from remembering |
 | Concentrated administrative history in the Primary Owner | `AB-93-067` | CBD-72 §5.7 item 1 | The package's purpose is relationship history; `RI-93-007` gives the subject their own record rather than narrowing this one |
@@ -962,7 +1007,7 @@ and share the last row.
 
 The third CBD-93 acceptance criterion requires that no safeguard grant another
 user money movement, spending approval, transaction blocking, external-account
-control, or user lockout. All 94 active safeguards were checked against each
+control, or user lockout. All 96 active safeguards were checked against each
 prohibition.
 
 | Prohibited capability | Result | Basis |
@@ -971,15 +1016,16 @@ prohibition.
 | Spending approval | No safeguard grants it | No safeguard makes one member's action conditional on another member's approval of a purchase. `SG-93-004`, `SG-93-051`, and `SG-93-056` add reversal windows, export offers, and a proposed objection position around **administrative** actions only. |
 | Transaction blocking | No safeguard grants it | No safeguard prevents, delays, reverses, or flags an external transaction. `SG-93-040` and `SG-93-050` add attribution and annotation to records already created; PM-72-009 keeps bank-provided fields immutable to every role. |
 | External-account control | No safeguard grants it | `SG-93-012` and `SG-93-059` operate only on the CoBudget connection record and its label. `SG-93-069` narrows a status allowlist. No safeguard reaches a provider account, and none permits adoption or reauthorization of another person's connection, which OD-72-04 forbids. |
-| User lockout | No safeguard grants it | Checked individually against the four safeguards that could be read as approaching it, below. |
+| User lockout | No safeguard grants it | Checked individually against the five safeguards that could be read as approaching it, below. |
 
-The four safeguards that required individual scrutiny:
+The five safeguards that required individual scrutiny:
 
 | Safeguard | Why it was checked | Determination |
 | --- | --- | --- |
 | `SG-93-001` — end a specific observer's access to your own data without leaving | Removes someone's read access | Not lockout. CBD-12 prohibits locking an **Owner out of a budget space**. This ends one person's view of another person's data; it removes nobody's membership, account, or access to their own space. Raised as `RI-93-002` for CBD-12 to decide, not asserted here. Retired duplicate `SG-93-020` adds no separate authority. |
 | `SG-93-037`, `SG-93-050` — remedy for the subject of another author's comment | Touches CBD-72 §5.6 item 4, which denies every role authority to moderate another author's contribution | Not asserted as a decision. §5.6 item 4 stands. Raised as `RI-93-008`. The minimum proposed — report to platform, detach from one's own attributed record — does not edit, hide, or delete another author's content. |
 | `SG-93-056` — member position in the deletion window | Constrains a Primary Owner's protected action | Not lockout. The Primary Owner retains their account, their membership, their ownership, and the space. Raised as `RI-93-006` with the standoff problem recorded as `EG-93-007`; not asserted. |
+| `SG-93-097` — notice to contributors when a joint projection is dissolved | Raises whether a contributor holds an objection position against an owner's action | Not lockout, and not asserted. The safeguard itself grants only notice, which confers no authority over anyone. The objection question is referred to CBD-12 as `RI-93-019` rather than decided here, exactly as `SG-93-056` refers the deletion-window position. Even if CBD-12 later grants a position, it would constrain one presentation action inside one budget space and would remove no membership, account, financial access, or authority from any person. |
 | `SG-93-074`, `SG-93-075`, `SG-93-095` — block an inviter, make a decline persistent, and rate-limit cross-space invitation attempts | Prevent or limit one person from sending invitations to another | Not lockout. These safeguards limit unsolicited contact with a person who is not a member of the inviter's space. They remove no existing membership, financial access, account access, or authority in any budget space either person already belongs to. Rate-limit denials must remain non-disclosing under CBD-92 `RL-92-003`. `SG-93-095` carries the one lockout-adjacent risk in this set, and it comes from the ceiling rather than from the safeguard's intent: a per-recipient counter that any attempted inviter can drive is a subject-bound limit, and CBD-92 `RL-92-005` forbids letting exhaustion become a way to deny a legitimate invitation to that recipient. The safeguard is not lockout, but the CBD-73 decision that adopts it must name the independent recovery path `RL-92-005` requires. |
 
 Three safeguards widen a read audience and were checked for scope expansion:
@@ -1008,6 +1054,7 @@ the scenarios that produced it.
 | RI-93-006 | A defined member position in the §6.4 deletion window. Deletion destroys every member's records with notice but no objection right, while a §6.3 archival request — which erases nothing — grants a 14-day objection window. The asymmetry runs against the members with the least authority. | SG-93-055, SG-93-056 | `AB-93-042` |
 | RI-93-007 | Self-service access to the administrative record about oneself, without holding Primary ownership. | SG-93-081 | `AB-93-070` |
 | RI-93-008 | A remedy for a person who is the subject of another author's comment. CBD-72 §5.6 item 4 denies every role the authority to moderate another author's contribution, and §5.6 item 9 routes serious abuse to a platform process that does not yet exist. | SG-93-037, SG-93-050 | `AB-93-034` |
+| RI-93-019 | Whether a contributing profile subject holds any notice or objection position when a Primary Owner or Co-owner dissolves a joint projection they unanimously consented to create. `CA-92-010` requires unanimity to create and `CA-92-011` requires none to dissolve; the asymmetry may be correct, but it is currently undecided rather than decided. | SG-93-097 | `AB-93-086` |
 
 ### 11.2 Invitations
 
@@ -1061,24 +1108,24 @@ ready.
 
 | CBD-93 criterion | Evidence | Status |
 | --- | --- | --- |
-| Every CBD-12 role and lifecycle state is represented in normal and adversarial scenarios | §3.1 maps all five roles plus invite recipient, former member, support/operations actor, connection authorizer, and non-user third party to at least one normal and one adversarial scenario. §3.2 maps 20 lifecycle states, including every membership state, Viewer profile state, ownership transition, connection-authorizer state, and budget-space lifecycle state | Satisfied structurally with two known coverage gaps, both created by CBD-92 decisions taken after v1.0 was approved. Three lifecycle states — the inactivity threshold, permanent connection orphaning, and personal-account deletion — carry adversarial scenarios only. The first two have no normal-use form and are marked in §3.2 rather than padded with invented cases. The third had no normal-use form when v1.0 was approved, but CBD-92 `PA-92-002`, `PA-92-004`, and `PA-92-005` have since established one: a subject requests deletion through a protected ceremony, holds a 30-day restoration window, and may cancel through an identity-verified route. v1.0.1 records that coverage gap rather than closing it, because adding a scenario to an approved catalog is a Product Owner decision, not an editorial correction. The second gap is budget-scoped joint-account projection under CBD-92 `CA-92-008`, `CA-92-010`, and `CA-92-011`. No role, lifecycle state, or scenario in this catalog covers it, and `CA-92-010`'s unanimous confirmation among contributing profile subjects is a multi-party consent ceremony — the coercive posture in §2.1 applies directly, and `CA-92-011` lets a Primary Owner or Co-owner dissolve a projection that a contributor may only partially withdraw from. Both gaps are named for the Product Owner and neither is closed here |
+| Every CBD-12 role and lifecycle state is represented in normal and adversarial scenarios | §3.1 maps all five roles plus invite recipient, former member, support/operations actor, connection authorizer, contributing profile subject, and non-user third party to at least one normal and one adversarial scenario. §3.2 maps 23 lifecycle states, including every membership state, Viewer profile state, ownership transition, connection-authorizer state, joint-projection state, personal-account deletion state, and budget-space lifecycle state | Satisfied. §3.1 maps ten roles, now including the contributing profile subject, to at least one normal and one adversarial scenario. §3.2 maps 23 lifecycle states. Two lifecycle states — the inactivity threshold and permanent connection orphaning — carry adversarial scenarios only, because neither has a normal-use form; this is marked in §3.2 rather than padded with invented cases. The two coverage gaps v1.0.1 recorded are closed in v1.1: `AB-93-083` supplies the normal-use personal-account deletion case that CBD-92 `PA-92-002`/`PA-92-004`/`PA-92-005` created, and §4.12 models budget-scoped joint-account projection in `AB-93-084`–`AB-93-086`, including the `CA-92-010` unanimous confirmation ceremony as a coercive-posture case and the `CA-92-011` create/dissolve asymmetry as an accepted residual |
 | Scenarios cover both direct disclosure and inference through metadata, aggregates, previews, or timing | §3.3 indexes every scenario by channel across four direct and five inference channels. §4.7 is dedicated to inference and holds `AB-93-055`–`AB-93-062` | Satisfied |
-| Safeguards do not grant money movement, spending approval, transaction blocking, external-account control, or user lockout | §10 checks all 94 active safeguards against each prohibition, scrutinizes the active safeguards that approach user lockout individually, and confirms that the three audience-widening safeguards return only data the recipient could already read. Retired `SG-93-020` adds no separate behavior | Satisfied |
+| Safeguards do not grant money movement, spending approval, transaction blocking, external-account control, or user lockout | §10 checks all 96 active safeguards against each prohibition, scrutinizes the active safeguards that approach user lockout individually, and confirms that the three audience-widening safeguards return only data the recipient could already read. Retired `SG-93-020` adds no separate behavior | Satisfied |
 | Unresolved legal, accessibility, privacy, and research questions are labelled without unsupported validation claims | §8 records `EG-93-001`–`EG-93-010` covering advocacy, legal, accessibility, sensitive-content scope, absent user research, read-side monitoring, the deletion-objection standoff, third-party rights, the platform safety process, and channel retirement. §1.1 states plainly that no survivor has reviewed this work | Satisfied. `EG-93-005` is load-bearing: no claim in this document is validated by research |
-| Findings are testable or assigned a concrete review/evidence gate | Every active §6 safeguard carries a Verification route. §6.14 assigns all 94 active safeguards to one mutually exclusive decision-readiness category with an accountable Jira route, minimum closure evidence, and interim effect, and preserves retired `SG-93-020` as a historical tombstone. §8.1 defines a closure artifact and required disposition for every evidence gap. `SG-93-053` is the only safeguard decided and documented through this analysis; its implementation fixture remains pending | Satisfied at the analysis-output level. This does not assert that any gate has completed, any control is implemented, or any risk is release-ready |
+| Findings are testable or assigned a concrete review/evidence gate | Every active §6 safeguard carries a Verification route. §6.14 assigns all 96 active safeguards to one mutually exclusive decision-readiness category with an accountable Jira route, minimum closure evidence, and interim effect, and preserves retired `SG-93-020` as a historical tombstone. §8.1 defines a closure artifact and required disposition for every evidence gap. `SG-93-053` is the only safeguard decided and documented through this analysis; its implementation fixture remains pending | Satisfied at the analysis-output level. This does not assert that any gate has completed, any control is implemented, or any risk is release-ready |
 
 | Deliverable | Location |
 | --- | --- |
-| Stable-ID abuse/coercion/privacy scenario catalog | §4, `AB-93-001`–`AB-93-082` |
+| Stable-ID abuse/coercion/privacy scenario catalog | §4, `AB-93-001`–`AB-93-086` |
 | Harm and affected-user analysis | §5, `HC-93-01`–`HC-93-10` and §5.2 |
-| Required safeguards and evidence gaps | §6, 94 active IDs within `SG-93-001`–`SG-93-095`, with `SG-93-020` retired into `SG-93-001`; §8, `EG-93-001`–`EG-93-010` |
-| CBD-12 reconciliation inputs for permissions, invitations, alerts, copy, and recovery | §11, `RI-93-001`–`RI-93-018` across all five named areas |
+| Required safeguards and evidence gaps | §6, 96 active IDs within `SG-93-001`–`SG-93-097`, with `SG-93-020` retired into `SG-93-001`; §8, `EG-93-001`–`EG-93-010` |
+| CBD-12 reconciliation inputs for permissions, invitations, alerts, copy, and recovery | §11, `RI-93-001`–`RI-93-019` across all five named areas |
 
 | Readiness question | Current disposition |
 | --- | --- |
 | Is this catalog approved? | Yes. Alexander Wohlford approved v1.0 as Product Owner on August 16, 2026, after Claude and Codex review and his final analysis. The approval is limited by §1.2 and does not substitute for the independent reviews or downstream decisions recorded there. |
-| May CBD-94 risk prioritization begin? | Yes, on the understanding that scenarios are unrated by design and that eleven residuals in §9.3 are real rather than mitigated. |
-| Are the safeguards approved product decisions? | No blanket approval exists. §6.14 classifies all 94 active safeguards: one is decided and documented (`SG-93-053`); 18 await product decisions; 17 await customer-copy approval; two are specialist-gated; seven await operational/security design or evidence; and 49 are baseline-derived candidate requirements awaiting CBD-94 adoption and verification. `SG-93-020` is retired and adds no behavior. |
+| May CBD-94 risk prioritization begin? | Yes, on the understanding that scenarios are unrated by design and that twelve residuals in §9.3 are real rather than mitigated. |
+| Are the safeguards approved product decisions? | No blanket approval exists. §6.14 classifies all 96 active safeguards: one is decided and documented (`SG-93-053`); 19 await product decisions; 18 await customer-copy approval; two are specialist-gated; seven await operational/security design or evidence; and 49 are baseline-derived candidate requirements awaiting CBD-94 adoption and verification. `SG-93-020` is retired and adds no behavior. |
 | Is `EG-91-014` closed? | No. §7.2 produces the handling requirement CBD-91 asked for; closure additionally needs `EG-93-001`–`EG-93-004`. |
 | Is the `DI-91-076` residual resolved? | No. §9.2 bounds it and states what remains. Resolution needs `EG-93-001`. |
 | Does this document validate CoBudget's safety for people experiencing financial abuse? | No, and it must not be cited as though it does. `EG-93-005` records that no research and no lived-experience review exist. |
@@ -1119,7 +1166,15 @@ governing the §4 connection scenarios and an uncovered joint-account projection
 surface, both recorded above and in §13. The lesson is recorded plainly: the
 first reconciliation adopted the contracts it went looking for, and a contract
 that decides a matter this catalog never raised is the harder case to notice.
-Live Jira was not
+
+v1.1 then closed both gaps on Product Owner instruction, adding `AB-93-083` to
+§4.11 and a new §4.12 holding `AB-93-084`–`AB-93-086`, with `SG-93-096`,
+`SG-93-097`, and `RI-93-019`. The additions were propagated through every
+register that restates a count or a relation: §3.1, §3.2, §3.3, §5.1, §5.2,
+§6.1, §6.14, §9.3, §10, §11.1, §12, and §13. Counts were verified
+programmatically against the tables rather than by reading, because this
+catalog states most relations two or three times and a hand count is the thing
+most likely to drift. Live Jira was not
 re-read for v1.0.1, so the workflow states named in §6.14 remain as checked on
 August 16, 2026; Jira stays authoritative for them.
 
@@ -1143,17 +1198,18 @@ Known limitations:
 * The scenario set is not claimed to be exhaustive. It is claimed to cover every
   role, lifecycle state, and disclosure channel identified in §3, which is a
   weaker and checkable claim.
-* Two surfaces decided by CBD-92 after v1.0 was approved are named in §13 and
-  carry no scenario: the normal-use personal-account deletion flow under
-  `PA-92-002`/`PA-92-004`/`PA-92-005`, and budget-scoped joint-account
-  projection under `CA-92-008`/`CA-92-010`/`CA-92-011`. The second is the more
-  consequential omission, because a unanimous multi-party consent ceremony is a
-  coercion surface of exactly the kind this document exists to model. Until a
-  Product Owner decision extends the catalog, no reader should treat §4 as
-  covering either surface.
+* The two surfaces v1.0.1 named as uncovered are modelled in v1.1
+  (`AB-93-083`, `AB-93-084`–`AB-93-086`). They are the newest rows in the
+  catalog and the least reviewed: they were written against the `PA-92-*` and
+  `CA-92-*` contract text rather than against a CBD-72 scenario family, no
+  Codex pass has interrogated them, and `AB-93-085`'s central claim — that a
+  coerced joint-association confirmation is materially different from a coerced
+  role invitation — is an unvalidated product assumption of exactly the kind
+  `EG-93-005` governs.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.1 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Closed the two coverage gaps v1.0.1 recorded, on Product Owner instruction. Added `AB-93-083`, the normal-use personal-account deletion case created by CBD-92 `PA-92-002`/`PA-92-004`/`PA-92-005`, to §4.11. Added §4.12 for financial-profile stewardship and joint-account projection, holding `AB-93-084` (normal unanimous association), `AB-93-085` (coerced confirmation, where every `CA-92-010` protection holds and none establishes willingness), and `AB-93-086` (unilateral `CA-92-011` dissolution against unanimous creation, recorded as an accepted residual). Added `SG-93-096` pre-confirmation disclosure and `SG-93-097` dissolution notice to §6.1, and `RI-93-019` to §11.1 for the objection-position question the asymmetry raises. Propagated the additions through §3.1 (new contributing-profile-subject role), §3.2 (three new lifecycle states; personal-account deletion now has a normal case), §3.3, §5.1, §5.2, §6.14 (96 active safeguards; proposed product decisions 18→19; customer-copy pending 17→18), §9.3 (twelve residual entries over thirteen rows), §10 (five safeguards individually scrutinized for lockout), §12, and §13. The catalog is now `AB-93-001`–`AB-93-086` and `SG-93-001`–`SG-93-097`. No existing scenario, harm, safeguard, residual, or classification was altered, and no safeguard is approved by being added. | **Product Owner approved** the scenario additions; the added safeguards remain candidates under §6.14 |
 | 1.0.1 | August 16, 2026 | Claude | Corrected the stale CBD-92 status. CBD-92 was Product Owner-approved as v0.1.19 on August 16, 2026 and merged in PR #36; §1.1, §12, and §14 no longer describe it as a draft, and now state the accurate limit instead — approved without an independent security review, with no architecture, provider, threshold, or value selected and the `RF-92-*` findings open. Rebaselined from `bb4d3bb` to `4d957e2`. Adopted `RL-92-001`–`RL-92-007`, the ninth CBD-92 contract, which was established after CBD-93 v1.0: cited in `AB-93-023` (bounded delivery retry), `AB-93-055` (lifecycle-surface ceiling and uniform throttled response), `AB-93-064` (throttling as a recipient-existence oracle, and safe counting keys), and `AB-93-065`; and in `SG-93-027`, `SG-93-044`, `SG-93-095`, `RI-93-010`, and the §10 lockout check. Recorded that `RL-92-001` bounds the invitation surface by volume but supplies no recipient-scoped protection, so `RI-93-010` stays a live decision, and that `SG-93-095`'s per-recipient counter must satisfy `RL-92-005` non-weaponization with a named independent recovery path. Adopted `PA-92-001`–`PA-92-008`, which decide the personal-account deletion lifecycle that four places still described as unresolved under `EG-91-002`: `AB-93-052`, the §3.2 lifecycle map, the §5.2 former-member row, and `RI-93-018` now state that the lifecycle and the `PA-92-006` retained-shared-history boundary are settled while the per-class terminal disposition stays open under `EG-91-002` and `RF-92-010`. Corrected the §5.2 operations-actor row, which claimed staff access was governed by a model that does not exist after §4.10 had already adopted `OP-92-001`–`OP-92-008` in v0.1.3; `RF-92-008` and `EG-91-009` remain the open part. Recorded in §13 that `PA-92-002`/`PA-92-004`/`PA-92-005` give personal-account deletion a normal-use form the catalog does not yet cover, as a gap rather than a new scenario. Adopted `CA-92-*` financial-profile and budget-link stewardship, which a first pass had wrongly recorded as contradicting nothing here: `AB-93-019` now cites `CA-92-002` and `CA-92-012`, and `AB-93-045` cites `CA-92-009` and `CA-92-013` with its mechanism restated, since membership loss invalidates the account-to-space link rather than the profile-level connection. The harm and status of both rows are unchanged. Recorded a second §13 coverage gap: `CA-92-008`, `CA-92-010`, and `CA-92-011` budget-scoped joint-account projection has no scenario in this catalog, and `CA-92-010`'s unanimous multi-party confirmation is a coercive-posture surface. `SA-92-*` is consistent with the catalog and is cited only in §12. Separately from the CBD-92 reconciliation, corrected the §5.2 other-members row, which still recorded "no export path once archived" as a gap after the August 15, 2026 Product Owner decision closed it; `AB-93-041`, CBD-72 §6.5 item 11 under RF-72-61, and CBD-91 v1.0.1 `DI-91-034`–`DI-91-036` all carry the decision and are merged, so this aligns §5.2 with a decision the document already records rather than making a new one. No scenario, harm, safeguard, evidence gap, residual, or decision-readiness classification changed; no scenario was added; and no rate value or deletion disposition is selected here — all remain deferred to `RF-92-010`, `RF-92-012`, and CBD-94. | Editorial correction and contract adoption under the v1.0 approval; no new decision |
 | 1.0 | August 16, 2026 | Alexander Wohlford as Product Owner, with Claude and Codex review | Formally approved the CBD-93 analysis after final Product Owner analysis. Established the method, catalogs, safeguard/evidence-gap analysis, decision-readiness register, decision-derived residual record, non-escalation check, traceability, and reconciliation inputs as the authoritative CBD-93 baseline for CBD-94/CBD-95. Added §1.2 to state the approval boundary explicitly. No candidate safeguard, new residual-risk acceptance, evidence-gap closure, implementation evidence, specialist validation, launch readiness, Jira workflow change, or Confluence synchronization is included in this approval. | **Product Owner approved** |
 | 0.1.5 | August 16, 2026 | Codex | Resolved both decision-normalization findings from v0.1.4. Consolidated duplicate observer-removal safeguard `SG-93-020` into canonical `SG-93-001`, updated all scenario/non-escalation/reconciliation references, and preserved `SG-93-020` as a retired never-reused tombstone. Split the former compound invitation safeguard without repurposing a stable ID: `SG-93-074` now governs only a per-inviter block, `SG-93-075` retains its original persistent-decline meaning, and new `SG-93-095` governs only cross-space per-recipient/per-inviter rate limiting with non-disclosing denial behavior. The catalog therefore retains 94 active safeguards plus one retired historical ID. No product decision was approved or rejected. | Internal normalization review only; document remains draft |
