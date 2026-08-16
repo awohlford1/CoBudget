@@ -33,7 +33,7 @@ A decision is validated only when it is Product Owner approved, internally consi
 | Every cited predecessor criterion exists in its approved source. | Register §§3.4, 4; 50 of 50 governing criteria | Pass (added in v0.3; **Fail** in v0.2 — `CBD-68-AC17` does not exist) |
 | Product Owner approval is recorded for this exact revision. | Register §9 | **Pass** — v1.1 approved August 15, 2026 |
 | Approved set is issued as MVP Schedule Decisions v1.1. | Register front matter and §9 | **Pass** |
-| Approved artifacts are published to Confluence and mirrored in the repository, per register §8.4. | v1.0 remains published; the approved v1.1 mirror publishes after the merge to `main` | Pending — deferred by the repository working rules |
+| Approved artifacts are published to Confluence and mirrored in the repository, per register §8.4. | Published August 15, 2026 by `scripts/sync-confluence.py` after the merge to `main`; each page was read back and verified | **Pass** |
 
 ## 3. Active decision validation matrix
 
@@ -125,7 +125,7 @@ The Pass results mean each decision has evidence in the frozen baseline. The `PO
 | Governing criteria represented | 50 of 50 |
 | Proposed MVP decisions | 0 |
 | Approved scenarios referenced | 75 of 75 |
-| Blocking gate | None. Confluence publication of the approved v1.1 follows the merge to `main` |
+| Blocking gate | None. All v1.1 gates are closed, including Confluence publication on August 15, 2026 |
 
 **MVP Schedule Decisions v1.1 is the approved release**, recorded in register §9 on August 15, 2026. v1.0 becomes retained history. `SD-071-044` is Accepted for MVP with its v1.1 text; `UD-071-01` and `UD-071-02` are both closed.
 
