@@ -2,11 +2,11 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v0.1.19 on August 16, 2026 |
-| Document version | 0.1.19 |
+| Status | **Approved** — Product Owner approved v1.0 on August 16, 2026 |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-92](https://cobudget.atlassian.net/browse/CBD-92) |
-| Primary evidence | `docs/cbd-92-system-flow-technical-threat-model.md` v0.1.19 |
+| Primary evidence | `docs/cbd-92-system-flow-technical-threat-model.md` v1.0 |
 | Approved input | [CBD-91 — Private MVP Data Inventory](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/8781826) v1.0 |
 | Last updated | August 16, 2026 |
 
@@ -37,9 +37,9 @@ and is not a reason to mark a missing CBD-92 threat or boundary complete.
 
 | CBD-92 deliverable | Evidence | Status |
 | --- | --- | --- |
-| Context diagram | Technical model §4.1 | Drafted |
-| Data-flow diagrams | Technical model §§4.2–4.4 | Drafted; four views cover DF-91-001–013 |
-| Actor, system, and entry-point inventory | Technical model §3 | Drafted; 15 actors, 16 systems, 15 entry points |
+| Context diagram | Technical model §4.1 | Approved |
+| Data-flow diagrams | Technical model §§4.2–4.4 | Approved; four views cover DF-91-001–013 |
+| Actor, system, and entry-point inventory | Technical model §3 | Approved; 15 actors, 16 systems, 15 entry points |
 | Closed-list background service-authority purpose register | Technical model §2.4 | Product Owner-approved decision; eight stable `SA-92-*` purposes with effects and stop rules |
 | Financial-profile and budget-link stewardship contract | Technical model §2.5 | Product Owner-approved conceptual decisions and derived lifecycle reconciliation; thirteen stable `CA-92-*` rules include one profile per account subject for Private MVP, logical cardinalities, profile-local identities, budget-scoped joint projections, link/association controls, and distinct space-membership versus permanent-subject-loss effects; physical schema and remaining evidence stay in RF-92-006 |
 | Online-only Private MVP client contract | Technical model §2.6 | Product Owner-approved decision; seven stable `CL-92-*` rules permit only a static offline shell and transient active-tab display, prohibit persisted customer-data/offline reads/writes/queues, and require live reauthorization on reconnect |
@@ -49,13 +49,13 @@ and is not a reason to mark a missing CBD-92 threat or boundary complete.
 | No routine staff-content and dual-controlled exceptional-access contract | Technical model §2.10 | Product Owner-delegated decision; eight stable `OP-92-*` rules limit routine support to content-free diagnostics and exceptional access to incident/recovery purposes under dual approval, JIT scope, mediated execution, separated custody, evidence, review and safe customer notice |
 | Rate, quota, and resource-ceiling contract | Technical model §2.12 | Product Owner-approved decision; seven stable `RL-92-*` rules fix the closed list of bounded surfaces, per-surface ceilings, uniform throttled response/header/timing, counting keys that assert no unverified subject fact, non-weaponizable exhaustion, and bounded background/provider retry; values and verification stay in RF-92-012 |
 | Product-analytics-disabled Private MVP contract | Technical model §2.11 | Product Owner-delegated decision; seven stable `AN-92-*` rules prohibit product analytics/behavioral capture, allow only content-free reliability telemetry and separately governed S3 security evidence, permit non-drillable coarse aggregates, and require new approval for future analytics |
-| Trust-boundary register | Technical model §5 | Drafted; 17 stable boundaries |
-| Stable-ID technical threat register | Technical model §7 | Drafted; 45 STRIDE threats |
-| Initial technical-risk triage | Technical model §§2.3 and 7 | Drafted; exposure, impact ceiling, and evidence confidence only; CBD-94 owns formal likelihood and risk disposition |
-| Evidence-gap disposition | Technical model §9.1 | Drafted; EG-91-001–024 consumed without invented closure |
-| Architecture/provider findings | Technical model §9.2 | Drafted as RF-92-001–012 |
-| CBD-93/CBD-94 handoff | Technical model §10 | Drafted |
-| Acceptance and review evidence | This document §§3–10 | Drafted; review pending |
+| Trust-boundary register | Technical model §5 | Approved; 17 stable boundaries |
+| Stable-ID technical threat register | Technical model §7 | Approved; 45 STRIDE threats |
+| Initial technical-risk triage | Technical model §§2.3 and 7 | Approved; exposure, impact ceiling, and evidence confidence only; CBD-94 owns formal likelihood and risk disposition |
+| Evidence-gap disposition | Technical model §9.1 | Approved; EG-91-001–024 consumed without invented closure |
+| Architecture/provider findings | Technical model §9.2 | Approved as RF-92-001–012 |
+| CBD-93/CBD-94 handoff | Technical model §10 | Approved |
+| Acceptance and review evidence | This document §§3–10 | Approved; structural, decision and citation review complete |
 
 ## 3. Acceptance-criteria traceability
 
@@ -68,7 +68,7 @@ their published order; they do not create new Jira fields.
 | CBD-92-AC02 | Every entry point and privileged actor has applicable threats. | Technical model §§3.1, 3.3, 7, 8; this record §§5–6 | Structurally met: all 15 entry points and 10 privileged actor classes map to threats. Independent review may add threats. |
 | CBD-92-AC03 | Cross-budget, invitation, session, revocation, queue, notification, export, deletion, audit, and provider paths are covered. | Technical model §§4–7; this record §7 | Structurally met for all ten named paths. Mitigation/verification belongs to CBD-94. |
 | CBD-92-AC04 | Threats cite affected data/assets and approved product decisions. | Technical model §7 and §11; this record §8 | Structurally met: each threat identifies DI assets and a governing approved input or explicitly identifies an unresolved decision. |
-| CBD-92-AC05 | Missing architecture/provider evidence is explicitly scoped. | Technical model §§1, 9, 12; this record §9 | Met for draft: EG-91-001–024 and RF-92-001–010 state what is missing and the blocking effect. |
+| CBD-92-AC05 | Missing architecture/provider evidence is explicitly scoped. | Technical model §§1, 9, 12; this record §9 | Met: EG-91-001–024 and RF-92-001–012 state what is missing and the blocking effect. |
 
 ## 4. CBD-91 flow-to-boundary verification
 
@@ -221,7 +221,7 @@ approved architecture decision.
 | RV-92-005P | The flow-to-boundary relation is stated once and verified in both directions: §6 is authoritative, §5 is its reverse index, and every §7 threat cites only boundaries its own flows reach. Reconciliation added DF-91-002 × TB-92-004 and DF-91-011 × TB-92-001, which both earlier registers had omitted, and restored DF-91-004 × TB-92-003 and DF-91-010 × TB-92-003 because EP-92-005 and EP-92-011 require fresh reauthentication. | Product Owner-approved crossing rule; concrete enforcement remains open |
 | RV-92-005Q | `RL-92-001–007` close the rate and resource decision that no approved input supplied: a closed list of bounded surfaces, per-surface rather than global ceilings, uniform throttled response/header/timing, counting keys that assert no unverified subject fact, exhaustion that cannot lock out a legitimate subject, and bounded background/provider retry with a terminal state. | Product Owner-approved rate-ceiling decision; values and negative tests remain RF-92-012 |
 | RV-92-006 | Diagram correctness, threat completeness and technical triage have not received independent security review. | Open public-launch gate; does not block CBD-92 approval |
-| RV-92-007 | Product Owner approved CBD-92 v0.1.19 as the provider-independent threat-model baseline on August 16, 2026. Approval authorizes CBD-93 and CBD-94 to consume the model; it approves no downstream mitigation or residual-risk disposition and no implementation whose named gap remains blocking. | Closed |
+| RV-92-007 | Product Owner approved CBD-92 v1.0 as the provider-independent threat-model baseline on August 16, 2026. Approval authorizes CBD-93 and CBD-94 to consume the model; it approves no downstream mitigation or residual-risk disposition and no implementation whose named gap remains blocking. | Closed |
 
 ### 10.2 Limitations
 
@@ -233,7 +233,7 @@ implemented, tested, mitigated, accepted, or safe.
 
 ### 10.3 CBD-92 approval and public-launch gates
 
-The approval gates are satisfied as of v0.1.19:
+The approval gates are satisfied as of v1.0:
 
 1. The Product Owner reviewed the system responsibility split and confirmed no
    approved behavior was weakened, broadened, or silently reopened.
@@ -257,6 +257,7 @@ incorporated before the public-launch gate can close.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Promoted the approved 0.1.19 content to the 1.0 approved baseline alongside the technical model, and repointed the primary-evidence reference, RV-92-007 and the §10.3 gate statement at v1.0. No traceability, coverage, or finding content changed. | **Product Owner approved** |
 | 0.1.19 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the settlement of both open findings: RF-92-011's crossing rule with the DF-91-004/DF-91-010 assurance-flow restoration synchronized into §4, and RF-92-012's `RL-92-*` contract as a new deliverable, missing-evidence row and RV-92-005Q. Closed RV-92-007 and restated §10.3 as satisfied approval gates. | **Product Owner approved** |
 | 0.1.18 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Synchronized §4 with the reconciled technical model §6 crossing map, qualified the CBD-92-AC01 assessment and RV-92-001 with the reconciliation that produced it, added RV-92-005P and RF-92-011 to the finding set, extended the non-privileged-actor note to name ACT-92-001 and ACT-92-002, supplied the missing spoofing-omission justifications for EP-92-004/008/012/013/015, and corrected the §9 closing sentence that re-listed evidence gaps already cited in the table above it. Recorded the CBD-72 citation verification in §8 and RV-92-004, and added the rate/resource-ceiling gap to §9 as RF-92-012. | Consistency, ambiguity and citation review; complete document remains pending Product Owner approval |
 | 0.1.17 | August 16, 2026 | Codex with Alexander Wohlford as Product Owner | Completed a high-scrutiny cross-document review, classified every remaining RF item as a concrete external-evidence gate rather than an unresolved CBD-92 product choice, corrected stale flow assessments for the approved authority/account/alert decisions, and prepared the package for Product Owner approval. | Decision review complete; complete document remains pending Product Owner approval |
