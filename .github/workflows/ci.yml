@@ -18,6 +18,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      # Runs before the Node setup so a documentation-only change fails fast
+      # without installing dependencies. Uses the standard library only, so it
+      # needs no pip install on the runner.
+      - name: Check document vocabulary consistency
+        run: python3 scripts/check-doc-vocabulary.py
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
