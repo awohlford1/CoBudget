@@ -37,9 +37,9 @@ and is not a reason to mark a missing CBD-92 threat or boundary complete.
 
 | CBD-92 deliverable | Evidence | Status |
 | --- | --- | --- |
-| Context diagram | Technical model §4.1 | Drafted |
-| Data-flow diagrams | Technical model §§4.2–4.4 | Drafted; four views cover DF-91-001–013 |
-| Actor, system, and entry-point inventory | Technical model §3 | Drafted; 15 actors, 16 systems, 15 entry points |
+| Context diagram | Technical model §4.1 | Approved |
+| Data-flow diagrams | Technical model §§4.2–4.4 | Approved; four views cover DF-91-001–013 |
+| Actor, system, and entry-point inventory | Technical model §3 | Approved; 15 actors, 16 systems, 15 entry points |
 | Closed-list background service-authority purpose register | Technical model §2.4 | Product Owner-approved decision; eight stable `SA-92-*` purposes with effects and stop rules |
 | Financial-profile and budget-link stewardship contract | Technical model §2.5 | Product Owner-approved conceptual decisions and derived lifecycle reconciliation; thirteen stable `CA-92-*` rules include one profile per account subject for Private MVP, logical cardinalities, profile-local identities, budget-scoped joint projections, link/association controls, and distinct space-membership versus permanent-subject-loss effects; physical schema and remaining evidence stay in RF-92-006 |
 | Online-only Private MVP client contract | Technical model §2.6 | Product Owner-approved decision; seven stable `CL-92-*` rules permit only a static offline shell and transient active-tab display, prohibit persisted customer-data/offline reads/writes/queues, and require live reauthorization on reconnect |
@@ -49,13 +49,13 @@ and is not a reason to mark a missing CBD-92 threat or boundary complete.
 | No routine staff-content and dual-controlled exceptional-access contract | Technical model §2.10 | Product Owner-delegated decision; eight stable `OP-92-*` rules limit routine support to content-free diagnostics and exceptional access to incident/recovery purposes under dual approval, JIT scope, mediated execution, separated custody, evidence, review and safe customer notice |
 | Rate, quota, and resource-ceiling contract | Technical model §2.12 | Product Owner-approved decision; seven stable `RL-92-*` rules fix the closed list of bounded surfaces, per-surface ceilings, uniform throttled response/header/timing, counting keys that assert no unverified subject fact, non-weaponizable exhaustion, and bounded background/provider retry; values and verification stay in RF-92-012 |
 | Product-analytics-disabled Private MVP contract | Technical model §2.11 | Product Owner-delegated decision; seven stable `AN-92-*` rules prohibit product analytics/behavioral capture, allow only content-free reliability telemetry and separately governed S3 security evidence, permit non-drillable coarse aggregates, and require new approval for future analytics |
-| Trust-boundary register | Technical model §5 | Drafted; 17 stable boundaries |
-| Stable-ID technical threat register | Technical model §7 | Drafted; 45 STRIDE threats |
-| Initial technical-risk triage | Technical model §§2.3 and 7 | Drafted; exposure, impact ceiling, and evidence confidence only; CBD-94 owns formal likelihood and risk disposition |
-| Evidence-gap disposition | Technical model §9.1 | Drafted; EG-91-001–024 consumed without invented closure |
-| Architecture/provider findings | Technical model §9.2 | Drafted as RF-92-001–012 |
-| CBD-93/CBD-94 handoff | Technical model §10 | Drafted |
-| Acceptance and review evidence | This document §§3–10 | Drafted; review pending |
+| Trust-boundary register | Technical model §5 | Approved; 17 stable boundaries |
+| Stable-ID technical threat register | Technical model §7 | Approved; 45 STRIDE threats |
+| Initial technical-risk triage | Technical model §§2.3 and 7 | Approved; exposure, impact ceiling, and evidence confidence only; CBD-94 owns formal likelihood and risk disposition |
+| Evidence-gap disposition | Technical model §9.1 | Approved; EG-91-001–024 consumed without invented closure |
+| Architecture/provider findings | Technical model §9.2 | Approved as RF-92-001–012 |
+| CBD-93/CBD-94 handoff | Technical model §10 | Approved |
+| Acceptance and review evidence | This document §§3–10 | Approved; structural, decision and citation review complete |
 
 ## 3. Acceptance-criteria traceability
 
@@ -68,7 +68,7 @@ their published order; they do not create new Jira fields.
 | CBD-92-AC02 | Every entry point and privileged actor has applicable threats. | Technical model §§3.1, 3.3, 7, 8; this record §§5–6 | Structurally met: all 15 entry points and 10 privileged actor classes map to threats. Independent review may add threats. |
 | CBD-92-AC03 | Cross-budget, invitation, session, revocation, queue, notification, export, deletion, audit, and provider paths are covered. | Technical model §§4–7; this record §7 | Structurally met for all ten named paths. Mitigation/verification belongs to CBD-94. |
 | CBD-92-AC04 | Threats cite affected data/assets and approved product decisions. | Technical model §7 and §11; this record §8 | Structurally met: each threat identifies DI assets and a governing approved input or explicitly identifies an unresolved decision. |
-| CBD-92-AC05 | Missing architecture/provider evidence is explicitly scoped. | Technical model §§1, 9, 12; this record §9 | Met for draft: EG-91-001–024 and RF-92-001–010 state what is missing and the blocking effect. |
+| CBD-92-AC05 | Missing architecture/provider evidence is explicitly scoped. | Technical model §§1, 9, 12; this record §9 | Met: EG-91-001–024 and RF-92-001–012 state what is missing and the blocking effect. |
 
 ## 4. CBD-91 flow-to-boundary verification
 
