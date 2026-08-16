@@ -148,6 +148,17 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-71 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-71-acceptance-criteria-traceability.md",
     ),
+    # CBD-91 cites the approved CBD-71 v1.1 decision set and the closed CBD-72
+    # decisions as its controlling inputs, so it publishes after CBD-71. Note
+    # that CBD-72 has no Confluence page or sync target yet, so a reader of this
+    # page cannot follow its CBD-72 citations to a published source.
+    Target(
+        key="cbd-91-inventory",
+        doc_set="cbd-91",
+        page_id="8781826",
+        expected_title="CBD-91 — Private MVP Data Inventory",
+        path="docs/cbd-91-private-mvp-data-inventory.md",
+    ),
 )
 
 
