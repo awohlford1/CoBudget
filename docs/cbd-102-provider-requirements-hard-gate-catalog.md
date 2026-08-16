@@ -260,14 +260,18 @@ Under §2.1, a candidate with no approved citation is a preference and belongs i
 the weighted rubric. These were considered and moved, and are listed so the
 omission is visible:
 
+Each row names the rubric criteria that pick the candidate up, so nothing moved
+out of this catalog is silently dropped. The rubric is
+[CBD-102 Weighted Provider Evaluation Rubric](cbd-102-provider-evaluation-rubric.md).
+
 | Candidate | Why it is not a gate | Where it goes |
 | --- | --- | --- |
-| Uptime SLA percentage | No approved input sets an availability threshold. CBD-92 records denial-of-service threats but assigns no SLO. | Rubric — reliability |
-| Support responsiveness and plan tier | No approved source sets a support threshold. `OP-92-*` constrains what support may *access*, not how fast it answers. | Rubric — support |
-| Accessibility conformance level | Required to be represented by CBD-102's acceptance criteria, but no approved source makes a specific conformance level binding on a *provider*. `SR-94-109` binds CoBudget's own copy, not a vendor's console. | Rubric — accessibility |
-| Data export and portability format | `HG-102-012` gates deletion because CBD-91 §5.1 requires it. Portability of CoBudget's own data out of a vendor is an exit-cost question with no approved threshold. | Rubric — portability |
-| Solo-operator ongoing operational burden | Required to be represented and scored on ongoing burden rather than setup, but no approved source makes any burden level binding. | Rubric — solo-operator effort |
-| Stronger authentication for "access" generally | `docs/architecture.md` requires this, but `CR-91-010` classifies the wording as an unresolved ambiguity rather than an approved decision, pending `EG-91-004/007`. Only the action-bound assurance in `HG-102-030` is gated. | Rubric — security, pending `EG-91-004` |
+| Uptime SLA percentage | No approved input sets an availability threshold. CBD-92 records denial-of-service threats but assigns no SLO. | Rubric — reliability, `WR-102-014`, `WR-102-015` |
+| Support responsiveness and plan tier | No approved source sets a support threshold. `OP-92-*` constrains what support may *access*, not how fast it answers. | Rubric — support, `WR-102-019`, `WR-102-020` |
+| Accessibility conformance level | Required to be represented by CBD-102's acceptance criteria, but no approved source makes a specific conformance level binding on a *provider*. `SR-94-109` binds CoBudget's own copy, not a vendor's console. | Rubric — accessibility, `WR-102-011`, `WR-102-013` |
+| Data export and portability format | `HG-102-012` gates deletion because CBD-91 §5.1 requires it. Portability of CoBudget's own data out of a vendor is an exit-cost question with no approved threshold. | Rubric — portability, `WR-102-023`, `WR-102-024` |
+| Solo-operator ongoing operational burden | Required to be represented and scored on ongoing burden rather than setup, but no approved source makes any burden level binding. | Rubric — solo-operator effort, `WR-102-027`–`WR-102-031` |
+| Stronger authentication for "access" generally | `docs/architecture.md` requires this, but `CR-91-010` classifies the wording as an unresolved ambiguity rather than an approved decision, pending `EG-91-004/007`. Only the action-bound assurance in `HG-102-030` is gated. | Rubric — security, `WR-102-033`, pending `EG-91-004` |
 | Named provider suitability (e.g. Plaid) | `CR-91-006` fixes that provider names in `docs/architecture.md` are hypotheses until CBD-15 selects. A name is not a gate. | Neither; evaluation input only |
 
 ## 11. Open items
