@@ -2,12 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — substantive review corrections incorporated; Product Owner document approval pending** |
-| Document version | 0.1.2 |
+| Status | **Approved v1.0 — provider-independent CBD-94 baseline.** All seven independent-review findings are closed. Approval accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-94](https://cobudget.atlassian.net/browse/CBD-94) |
-| Primary evidence | `docs/cbd-94-risk-mitigation-requirement-register.md` v0.1.2 |
-| Verification evidence | `docs/cbd-94-verification-review-inventory.md` v0.1.2 |
+| Primary evidence | `docs/cbd-94-risk-mitigation-requirement-register.md` v1.0 |
+| Verification evidence | `docs/cbd-94-verification-review-inventory.md` v1.0 |
+| Independent review | `docs/cbd-94-exhaustive-review-findings.md` v1.0 |
 | Repository baseline | `be20177` on `main` |
 | Last updated | August 16, 2026 |
 
@@ -19,10 +20,11 @@ identifiers consumed by CBD-94, records contradictions and downstream update
 targets without editing them out of scope, and defines the checks required
 before Product Owner approval.
 
-The companion documents are drafts. “Complete” below means the draft contains
-the required definition/route; it does not mean implementation evidence exists,
-a risk is accepted, a specialist gap is closed, a dependent feature is
-release-ready, or CBD-94 is approved.
+The companion documents are approved at v1.0. “Complete” below means the
+document contains the required definition/route; it does not mean implementation
+evidence exists, a risk is accepted, a specialist gap is closed, or a dependent
+feature is release-ready. Approval establishes the provider-independent CBD-94
+baseline and nothing beyond it.
 
 Live Jira was re-read on August 16, 2026 immediately before this record was
 drafted. CBD-92 and CBD-93 are **Done**; CBD-94 and CBD-95 are **Ready**; CBD-14
@@ -391,7 +393,7 @@ requires an explicit Product Owner decision.
 
 ## 10. Disposition and release-gate review
 
-### 10.1 Draft family-workstream disposition inventory
+### 10.1 Family-workstream disposition inventory
 
 | Workstream disposition | Risks | Count | Review note |
 | --- | --- | --- | --- |
@@ -409,7 +411,7 @@ requires an explicit Product Owner decision.
 | --- | --- | --- |
 | CBD-94/CBD-14 process | RG-94-001, RG-94-016 | Blocks CBD-94 approval/CBD-95/final CBD-14 reconciliation, not implementation by itself |
 | Whole authenticated/protected Private MVP | RG-94-002–003, RG-94-006 | Blocks broad Private-MVP implementation/launch because authority and topology are foundational |
-| Feature/provider/channel | RG-94-004–011 | Blocks synchronized financial data, workers/bounded surfaces, individual channels, exports, operations/recovery, lifecycle claims, or comments exactly as stated |
+| Feature/provider/channel | RG-94-004–005, RG-94-007–011 | Blocks synchronized financial data, workers/bounded surfaces, individual channels, exports, operations/recovery, lifecycle claims, or comments exactly as stated |
 | Copy/specialist/jurisdiction | RG-94-012–014 | Blocks the affected surface/claim/jurisdiction; does not silently block unrelated safe features |
 | Public product launch | RG-94-015 | Independent security review is mandatory before public product launch only; no Private-MVP review or penetration-test prerequisite is created |
 
@@ -463,6 +465,7 @@ phase/owner, and avoid silently adding a deferred capability to MVP.
 | `VT-94-*` | 270 (`001–270`) | Verification inventory §§5–6 |
 | `ME-94-*` | 15 (`001–015`) | Verification inventory §7 |
 | `SRV-94-*` | 15 (`001–015`) | Verification inventory §8 |
+| `FX-94-*` | 10 (`001–010`) | Verification inventory §4; consumed by the §5 suite fixtures column |
 | `PR-94-*` | 5 (`001–005`) | Verification inventory §4.2 |
 | `MON-94-*` | 10 (`001–010`) | Verification inventory §9 |
 | `RG-94-*` | 16 (`001–016`) | Risk register §7; this record §10.2; `RG-94-015` is public-launch-only |
@@ -484,21 +487,44 @@ Before approval, a repository audit MUST:
    alternatives except when explicitly quoting a discrepancy;
 9. scan for unsupported claims including safe, secure, private, anonymous,
    erased, deleted everywhere, real-time, consent proves voluntariness, and
-   review proves compliance; and
-10. compare risk scores against §3 formulas/overrides and flag a residual score
-    assigned without verified mitigation.
+   review proves compliance;
+10. compare risk scores against §3 formulas/overrides, confirm that **every**
+    §3.4 override trigger is either applied to each qualifying row or carries a
+    written non-application rationale, and flag a residual score assigned
+    without verified mitigation;
+11. verify every release gate is classified into exactly one §10.2 scope class
+    and that its blocked scope agrees with risk-register §7; and
+12. verify every `FX-94-*` fixture family is consumed by at least one
+    verification suite and that every suite names at least one family.
 
-**v0.1.2 audit result — Pass (August 16, 2026).**
+**v0.1.4 audit result — Pass (August 16, 2026).**
+
+The v0.1.2 result was re-executed independently rather than restated. Every
+identifier range was expanded mechanically and each relation the document set
+states more than once was diffed. All twelve obligations pass, and the seven
+findings the re-execution produced are dispositioned in §13 as
+`RV-94-011`–`RV-94-017`.
+
+Obligations 11 and 12 were added because the ten-obligation list could not
+detect `RV-94-012` or `RV-94-014`. Obligation 10 was strengthened for a
+different reason: it already required comparing scores against §3
+formulas/**overrides**, yet `RV-94-011` still passed a clean audit, so the
+obligation now names the per-trigger check explicitly rather than leaving it
+implied.
 
 | Audit | Result |
 | --- | --- |
-| Defined sets | `RK 21`, `SR 147`, `VT 270`, `ME 15`, `SRV 15`, `PR 5`, `MON 10`, `RG 16`; each unique and contiguous |
-| Source ledger | `TH 45 + AB 86 = 131`; every source appears exactly once and maps to the same family as the risk register |
-| Safeguard readiness | 96 active `SG-93-*` IDs exactly once; no missing/duplicate ID; retired `SG-93-020` absent |
-| Ratings/owners | 21 score formulas/bands pass; 21 rating-rationale rows present; all family rows have exactly one accountable owner and a scoped lifecycle override where required |
+| Defined sets | `RK 21`, `SR 147`, `VT 270`, `ME 15`, `SRV 15`, `FX 10`, `PR 5`, `MON 10`, `RG 16`; each unique and contiguous. `FX` is now a tracked set under `RV-94-012` |
+| Source ledger | `TH 45 + AB 86 = 131`; every source appears exactly once and maps to the same family as the risk register, verified across all four statements of the relation |
+| Safeguard readiness | 96 active `SG-93-*` IDs exactly once; no missing/duplicate ID; retired `SG-93-020` absent; all six readiness classes match CBD-93 §6.14 identifier for identifier |
+| Ratings/owners | 21 score formulas/bands pass; 21 rating-rationale rows present; all family rows have exactly one accountable owner and the scoped overrides on `TH-92-001/002/004` and `TH-92-032/033/044`. All three §3.4 override triggers are now applied to their qualifying rows under `RV-94-011`, and the applied set reconciles with CBD-92's frozen initial triage |
 | Requirements/candidates | 147 normative definitions pass; type exceptions are non-overlapping; `SG-93-005/014/095/097` remain explicit guards rather than adopted behavior, and `SG-93-096` remains copy-approval gated |
-| Verification | All 270 case IDs expand once; automated/mixed execution, parameter, monitor, manual and specialist routes are defined without making optional `SRV-94-011` a gate |
-| Markdown/references | Table widths, headings, trailing whitespace, patch markers, placeholders, ID bounds, eight local document paths, section references, versions, and four frozen Git blobs pass |
+| Requirement routing | Every `SR-94-*` carries a `VT` route in both verification inventory §5 and §10 with no disjoint pairing, and every requirement a risk names is carried by a `VT` suite that risk also names. The 54 one-directional edges are dependency edges under the §3.7 rule added by `RV-94-015`, not traceability defects |
+| Verification | All 270 case IDs expand once; parameter, monitor, manual and specialist routes are defined without making optional `SRV-94-011` a gate. Execution class corrected under `RV-94-013`: the mixed set is 42 cases and every case delegating a deciding judgment to an `ME`/`SRV` reviewer is now classified `M` |
+| Gate scope | All 16 gates carry at least one `VT`/`ME`/`SRV` evidence row, and register §7 assigns each gate exactly one accountable owner. §10.2 now classifies each gate into exactly one scope class following the `RV-94-014` correction |
+| Fixture binding | All ten `FX-94-*` families are consumed by at least one verification suite and all 21 suites name at least one family, so every case inherits a fixture route while §3 still requires the exact per-case fixture record |
+| Markdown/references | Table widths, headings, trailing whitespace, patch markers, placeholders, ID bounds, local document paths, section references, versions, and four frozen Git blobs pass; the blobs were re-resolved against `be20177` and are unchanged at `cb54da7` |
+| Unsupported claims | Scan clean; no assertive use of safe, secure, private, anonymous, erased, deleted everywhere, real-time, or guarantee outside an explicit prohibition |
 | Release policy | Every `RG-94-015` reference is public-launch-only; no Private-MVP independent-review or penetration-test prerequisite remains |
 
 ## 13. Current findings and approval gates
@@ -509,16 +535,25 @@ Before approval, a repository audit MUST:
 | RV-94-002 | All 45 technical threats and 86 human scenarios have one terminal source route under deterministic source/family precedence; control-positive rows are unrated fixtures. | Passed substantive and automated source audit |
 | RV-94-003 | All 96 active safeguards have a readiness route; `SG-93-020` remains retired. | Passed complete active-set and readiness-route audit |
 | RV-94-004 | All 24 `EG-91`, 12 `RF-92`, 10 `EG-93`, and 19 `RI-93` items have downstream routes. | Passed route audit; live Jira state reconciled without mutation |
-| RV-94-005 | The draft defines 147 requirements and 315 verification/evidence/review/parameter/monitor IDs (`270 VT + 15 ME + 15 SRV + 5 PR + 10 MON`). | Passed definition, range, duplicate, reference, and evidence-route audit |
+| RV-94-005 | The draft defines 147 requirements and 325 verification/evidence/review/fixture/parameter/monitor IDs (`270 VT + 15 ME + 15 SRV + 10 FX + 5 PR + 10 MON`). | Passed definition, range, duplicate, reference, and evidence-route audit. Count corrected in v0.1.4 to include the ten `FX-94-*` families that `RV-94-012` brought into the tracked sets |
 | RV-94-006 | No formal residual risk is newly accepted; no capability is newly deferred; no product candidate is silently adopted. | Correct draft limitation; Product Owner/residual decisions pending |
 | RV-94-007 | Product-plan and architecture contradictions are isolated in §9.2 and the update list, not edited outside task scope. | Correct repository-scope handling; separate changes required after approval |
 | RV-94-008 | Jira and Confluence were read but not modified. | Correct repository-first behavior |
 | RV-94-009 | Independent security, legal/privacy, accessibility, advocacy, research, provider, operational, and recovery evidence is absent. Penetration testing is optional pending a future explicit decision. | Explicit blockers by applicable scope; independent security blocks public launch only |
 | RV-94-010 | Substantive internal review occurred on August 16, 2026 and the Product Owner decided to preserve the approved public-launch-only independent-security policy. Complete-document Product Owner approval has not occurred. | Gate-scope decision closed; document-approval gate remains open |
+| RV-94-011 | The §3.4 mandatory Critical override names three triggers. Terminal-deletion corruption and unrecoverable authority resurrection are applied as a scoped source-level override on `TH-92-032/033/044` within `RK-94-010`. The third trigger, systemic authentication compromise, is applied to no row. `RK-94-001` carries `TH-92-001–004`, covers forged/replayed/stolen/stale/misbound authentication, recovery, session, and assurance requests, and its §4.1 impact rationale states that wrong-subject authority can persist through sessions and cause systemic compromise — yet it is rated 3/5/**15 High** in the §4.2 `High / 15` band with no override recorded. | **Closed in risk register v0.1.4 by Product Owner decision.** A scoped source-level Critical override is recorded on `TH-92-001/002/004` within `RK-94-001`, mirroring the `TH-92-032/033/044` treatment in `RK-94-010`; the family inherent rating remains 3/5/15 High and non-overridden `TH-92-003` remains High. §4.1 records the rationale and §4.2 moves the overridden sources into the Critical/20 band. Supporting evidence: CBD-92's frozen initial triage independently rated `TH-92-001/002/004` Critical and `TH-92-003` High, so the correction reconciles CBD-94 with its source as well as with §3.4. Those three sources now carry same-business-day triage and stop-ship under §3.8 and the §3.6 Critical acceptance authority |
+| RV-94-012 | `FX-94-001–010` is defined in verification inventory §4 as ten required reusable fixture families, §3 makes **Fixture** a mandatory field of every `VT`/`ME`/`SRV`/`MON` evidence record, and §4.1 defines coverage completeness over “every listed fixture variant” — but no `FX-94-*` identifier is cited anywhere in the document set outside its own defining table. `FX` is also absent from §12.1 and from the `RV-94-005` identifier count, so the bidirectional graph required by `ME-94-015` cannot detect that no case binds a fixture. | **Closed in verification inventory v0.1.4 and this record v0.1.4.** A Fixtures column was added to the 21 suite rows in verification inventory §5, so all ten families are consumed and every suite names at least one; the column is explicitly a minimum and §3 still requires the exact per-case fixture record. `FX-94` is now a tracked set in §12.1, is counted in `RV-94-005`, and new audit obligation 12 checks the binding in both directions |
+| RV-94-013 | `VT-94-217` was classified `A` automated while its own §6.7 text makes `SRV-94-014` the deciding judgment on copy meaning, which the §5 class definition reserves to `M`. It was the only one of the fifteen reviewer-delegating cases classified `A`. The case is the shut-out-subject support response reached through `RK-94-015` and `RI-93-017`, where §3 already warns that automation cannot decide whether language is accessible, comprehensible, non-coercive, or survivor-safe. | **Closed in verification inventory v0.1.3.** `VT-94-217` moved to the `M` mixed set, which is now 42 cases. No case, requirement, or route was added or removed |
+| RV-94-014 | §10.2 placed `RG-94-006` in two mutually exclusive gate-scope classes — “Whole authenticated/protected Private MVP” and “Feature/provider/channel” — which assign it different blocked scope, against register §7's rule that no gate is implied to block more scope than its table states. Every other gate was classified once. The feature-class scope text enumerates the surfaces of `RG-94-004–005` and `RG-94-007–011` and never describes secrets/topology. | **Closed in this record v0.1.3.** The feature/provider/channel class now reads `RG-94-004–005`, `RG-94-007–011`; `RG-94-006` remains solely in the foundational class, consistent with its stated rationale that authority and topology are foundational |
+| RV-94-015 | Applying the §2 rule that a range is shorthand for every individual identifier in it, the risk-register §4 mitigation column and the §6 `Principal risk/source` column disagree in one direction for 54 pairs, across 10 risks, touching 46 distinct requirements. The reverse direction is documented by §3.7; the forward direction, where a risk's mitigation set sweeps in requirements whose own row names a different accountable family, is not. | **Closed in risk register v0.1.4 by Product Owner decision.** §3.7 now states that the §4 requirement column is the dependency set and the §6 `Principal risk/source` column is the ownership set, that the two are deliberately not symmetric, that §6 controls ownership and §4 controls release-effect dependency, and that an audit MUST treat a §4-only edge as a dependency edge rather than a traceability defect. No requirement row was edited, so the `Principal risk` column keeps its meaning |
+| RV-94-016 | Two normative passages in the risk register scoped themselves to `v0.1.1` while the document was at v0.1.2: §3.6 “No residual in this v0.1.1 draft is newly accepted” and the §4 residual-rating state “for all `RK-94-001–021` at v0.1.1”. Both statements remained true of the current draft, so the defect was confined to the version label, but a reader could not tell from the text whether either rule still bound the current draft. | **Closed in risk register v0.1.3.** Both passages are now version-agnostic, which removes the recurrence rather than resetting it to the current version number |
+| RV-94-017 | The `VT-94-054–068` suite row in verification inventory §5 listed its requirements as `SR-94-031–038`, `SR-94-035–036`, restating a sub-range already contained in the first range. | **Closed in verification inventory v0.1.3.** The redundant restatement was removed; the requirement set is unchanged |
+| RV-94-018 | Product Owner approval of the complete CBD-94 document set. Alexander Wohlford approved the register, verification inventory, traceability record, and independent-review findings as **CBD-94 v1.0** on August 16, 2026, following the substantive review at v0.1.1, the CBD-92/93 source reconciliation at v0.1.2, and the independent exhaustive review and its seven dispositions at v0.1.3–v0.1.4. | **Closed.** Promotion to v1.0 changed only status, version, cross-references, and self-descriptive “draft” wording; no risk, rating, override, requirement, verification case, disposition, gate, route, or release effect was altered. Approval establishes the provider-independent baseline only: all 21 families remain residual-unscored and evidence-pending, no gate is closed, no `EG-91-*`/`EG-93-*` gap is closed, and no `RI-93-*` candidate is adopted |
+| RV-94-019 | `scripts/sync-confluence.py` has no CBD-94 targets. Its registry ends at CBD-93, whose comment anticipates that “CBD-94 will” cite it. Each target requires an existing Confluence page ID and an expected title, so publication cannot run until pages are created and registered. Confluence credentials are also absent from the current environment. | **Open — publication follow-up, not a content defect.** The approved v1.0 set is complete and merged; only the Confluence mirror is outstanding. Closure requires creating four pages, adding targets in dependency order after the CBD-93 target, setting `CONFLUENCE_BASE_URL`/`CONFLUENCE_EMAIL`/`CONFLUENCE_API_TOKEN`, and running the script so each page is read back and verified |
 
 ## 14. Completion checklist
 
-### Draft structure
+### Document structure
 
 - [x] Repository baseline fast-forwarded and frozen.
 - [x] Five Jira deliverables mapped.
@@ -545,15 +580,31 @@ Before approval, a repository audit MUST:
   side effects sufficient to prove its requirement.
 - [x] Live Jira follow-up inventory is fetched and proposals are reconciled
   without overwriting current state.
-- [ ] Product Owner decides whether the draft may be approved as the
-  provider-independent CBD-94 baseline.
+- [x] Independent exhaustive review of the complete document set is executed
+  against the §12.2 obligations and recorded as `RV-94-011`–`RV-94-017`.
+- [x] All seven independent-review findings `RV-94-011`–`RV-94-017` are
+  dispositioned and closed in the v0.1.4 document set. `RV-94-011` raised
+  `TH-92-001/002/004` to Critical by scoped override, which tightens `RG-94-002`
+  escalation to same-business-day stop-ship; it is a rating decision and accepts
+  no residual, so the §3.6 written accountable-security recommendation is still
+  required before any residual on those sources may be accepted.
+- [x] Product Owner decides whether the document set may be approved as the
+  provider-independent CBD-94 baseline. **Approved as CBD-94 v1.0 by Alexander
+  Wohlford on August 16, 2026**, recorded in `RV-94-018` and in each document's
+  revision history.
 - [ ] Approved repository change is merged to `main` before Confluence sync.
+- [ ] Confluence pages created for the four CBD-94 documents, targets registered
+  in `scripts/sync-confluence.py`, and the pages published and read back. The
+  script currently has no CBD-94 targets; see `RV-94-019`.
 - [ ] CBD-94 Jira completion is recorded only after merged evidence is linked.
 
 ## 15. Revision history
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 16, 2026 | Alexander Wohlford as Product Owner, Claude assisting | **Approved as CBD-94 v1.0.** Promoted the v0.1.4 content unchanged; the only edits were status, version, cross-references, the §1 and §10.1/§14 self-descriptive “draft” wording, the approval checkbox, and the new `RV-94-018` approval record and `RV-94-019` publication follow-up. No source routing, rating, override, requirement, verification case, disposition, gate, or release effect was altered by approval. Confluence publication follows the merge to `main` and remains open under `RV-94-019`. | **Product Owner approved** |
+| 0.1.4 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner dispositions closing the three remaining review findings. Recorded the `RV-94-011` scoped Critical override, the `RV-94-012` fixture binding, and the `RV-94-015` §3.7 dependency/ownership rule in §13. Added `FX-94` to the §12.1 tracked sets and corrected the `RV-94-005` identifier count to 325. Added §12.2 audit obligations 11 (one gate per scope class) and 12 (bidirectional fixture binding), and strengthened obligation 10 to require a per-trigger override check, since the existing wording already covered overrides yet did not surface `RV-94-011`. Updated the audit result to Pass and closed the approval-checklist gate. No source routing, requirement text, disposition, owner, or release effect was changed. | Product Owner rating and method decisions incorporated; complete record remains draft |
+| 0.1.3 | August 16, 2026 | Claude | Recorded the independent exhaustive review as `RV-94-011`–`RV-94-017` in §13 and linked `docs/cbd-94-exhaustive-review-findings.md`. Corrected `RV-94-014` by removing `RG-94-006` from the feature/provider/channel gate class so every gate is classified exactly once. Re-executed the §12.2 audit independently rather than restating it, and rewrote the result block to Pass-with-three-open-findings, naming `RV-94-011`, `RV-94-012`, and `RV-94-015` against the specific rows that did not previously cover them. Added the corresponding approval-checklist gate. No risk, rating, disposition, requirement, verification case, gate, route, or source mapping was changed. | Review record and editorial correction only; complete record remains draft |
 | 0.1.2 | August 16, 2026 | Codex | Rebased onto `be20177`; reconciled CBD-92 v1.0 and CBD-93 v1.1; routed all four new scenarios, both new safeguards, and `RI-93-019`; expanded the source, requirement, verification, readiness, and audit sets; and preserved the approved public-launch-only independent-security policy without adopting any candidate. | Source reconciliation only; complete record remains draft |
 | 0.1.1 | August 16, 2026 | Codex with Alexander Wohlford as Product Owner | Substantive-review revision: incorporated the decision to preserve CBD-92's public-launch-only independent-security policy; corrected source/family disposition precedence and positive-fixture rating behavior; recorded singular accountability and rating review; verified candidate safeguards remain guards; added parameter/monitor coverage; updated gate/finding expectations; and completed the range, source, safeguard, rating, owner, requirement, verification, syntax, reference, and policy audits. | Product Owner gate-scope decision incorporated; complete record remains draft |
 | 0.1.0 | August 16, 2026 | Codex | Initial deliverable/acceptance mapping; exhaustive source/gap/finding/reconciliation routes; CBD-11 preservation and contradiction review; disposition/gate audit; follow-up register; expected identifier sets; findings and completion checklist. | Draft for internal review |

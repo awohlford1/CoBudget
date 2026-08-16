@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft for internal review** |
-| Document version | 0.1.2 |
+| Status | **Approved v1.0 — provider-independent CBD-94 baseline.** Approval fixes the risk model, requirements, and gates. It accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-94](https://cobudget.atlassian.net/browse/CBD-94) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -27,7 +27,7 @@ silently replace that behavior. Candidate `SG-93-*` or `RI-93-*` behavior that
 would change CBD-12 remains unapproved until its accountable product route
 records a decision.
 
-This draft is an internal, provider-independent product/security analysis. It
+This document is an internal, provider-independent product/security analysis. It
 is not implementation evidence, legal advice, penetration testing,
 certification, survivor-informed validation, an independent security review,
 or launch approval. Jira remains authoritative for workflow status, assignee,
@@ -155,7 +155,7 @@ Where several classes apply, their evidence/authority requirements are
 cumulative. `RG-94-015` adds independent review at public launch; it is not
 silently pulled into Private-MVP acceptance.
 
-No residual in this v0.1.1 draft is newly accepted. CBD-93's “accepted
+No residual in this version is newly accepted. CBD-93's “accepted
 residual” label records harm inherited from an approved product decision; it
 does not substitute for CBD-94 formal rating and acceptance.
 
@@ -185,6 +185,16 @@ receive an explicit source-rating override or be split into a new family.
 For a requirement that cites several risks, the first listed `RK-94-*` is the
 accountable owner and target phase; later risks identify consulted workstreams.
 No plus-separated list of functions constitutes shared accountability.
+
+The §4 requirement column and the §6 `Principal risk/source` column encode two
+different relations and are deliberately not symmetric. The §4 column is the
+**dependency set**: every requirement a family's mitigation depends on,
+including requirements another family owns. The §6 column is the **ownership
+set**: the accountable family first, then consulted workstreams. A requirement
+may therefore appear in a family's §4 mitigation set without naming that family
+in §6. Where the two differ, §6 controls ownership, phase, and accountability,
+and §4 controls what that family's release effect depends on. An audit MUST
+treat a §4-only edge as a dependency edge rather than a traceability defect.
 
 ### 3.8 Escalation, stop-ship, and reopening rules
 
@@ -218,7 +228,7 @@ companion traceability record §5.3, and the `RK-94-*` family row below under
 
 | Risk | Risk statement and affected people/assets | Source findings | Existing controls | Inherent L/I/score | Required mitigation and requirements | Accountable owner / contributors / phase / verification | Workstream disposition | Release effect and residual position |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| RK-94-001 | A forged, replayed, stolen, stale, or misbound authentication, recovery, session, assurance, origin, or protected-action request can grant another subject's authority or execute a Critical action. Affects every account/member and `DI-91-001–003`, `005`, `047–048`, `052–053`. | `TH-92-001–004` | Managed-IdP direction; fresh-assurance and server-authorization rules; no factor secrets in CoBudget | 3/5/**15 High** | `SR-94-001–006`, action-bound assurance, session rotation/revocation, origin/CSRF defense, account-switch isolation, recovery non-escalation | Accountable: Security; contributor: Identity / before authenticated feature release / `VT-94-001–008` | Blocking | All authenticated customer surfaces blocked until identity architecture and negative tests pass; residual unscored pending provider choice and `EG-91-004/010`. |
+| RK-94-001 | A forged, replayed, stolen, stale, or misbound authentication, recovery, session, assurance, origin, or protected-action request can grant another subject's authority or execute a Critical action. Affects every account/member and `DI-91-001–003`, `005`, `047–048`, `052–053`. | `TH-92-001–004` | Managed-IdP direction; fresh-assurance and server-authorization rules; no factor secrets in CoBudget | 3/5/**15 High**; `TH-92-001/002/004` are **Critical by override** | `SR-94-001–006`, action-bound assurance, session rotation/revocation, origin/CSRF defense, account-switch isolation, recovery non-escalation | Accountable: Security; contributor: Identity / before authenticated feature release / `VT-94-001–008` | Blocking | All authenticated customer surfaces blocked until identity architecture and negative tests pass; residual unscored pending provider choice and `EG-91-004/010`. |
 | RK-94-002 | Invitation enumeration, intercepted/replayed locators, or partial membership commits can disclose relationships or create membership without current recipient consent and inviter authority. Affects invitees, members, `DI-91-005–007`, `039`, `054`, `065`. | `TH-92-005–007` | Pending/rejected/expired states grant nothing; invitation locator is non-authoritative; audit/notice/token-invalidation rules | 4/5/**20 Critical** | `SR-94-007–011`, uniform responses, recipient binding, one-time/versioned locators, commit-time eligibility, transactional state/audit/notice, `RL-92-*` values | Accountable: Identity; contributor: Collaboration / before invitations / `VT-94-009–017` | Blocking | Invitation surface blocked; residual requires CBD-73 invitation-copy and re-contact decisions plus provider evidence. |
 | RK-94-003 | A coarse role check, IDOR, stale authority, cache/index omission, hidden-field residue, error/count/timing oracle, service confused-deputy, or concurrent stale commit can cross subject/profile/budget/resource/field/purpose boundaries. Affects all scoped S2–S4 data and every role. | `TH-92-008–013`, `TH-92-017–018` | CBD-72 matrix, default denial, versioned authority, `SA-92-*`, complete-input/withholding rules | 4/5/**20 Critical** | `SR-94-012–021`, typed policy decisions, tenant/subject/resource/field keys everywhere, purpose/effect enforcement, commit-time versions, differential noninterference | Accountable: Security Architecture; contributor: Application Architecture / before protected API, worker, search, report, or cache release / `VT-94-018–035` | Blocking | Every protected/derived surface blocked until enforcement and tests pass; `RF-92-001/004` remain open. |
 | RK-94-004 | Forged provider callbacks, ambiguous financial identity, stale/incorrect profile links, normalization/projection errors, or over-broad unlink/disconnect can transfer authority, leak across spaces, lose provenance, or terminate the wrong connection. | `TH-92-014`, `TH-92-019`, `TH-92-035–037`; control-positive `AB-93-084` | One profile per account subject; individual connection authority; explicit links; immutable source provenance; no authority inheritance | 3/5/**15 High** | `SR-94-022–030/146`, state/nonce/callback binding, reversible provenance graph, confirmation/non-association evidence, per-connection custody, split/recompute and space-loss/subject-loss tests | Accountable: Financial Data; contributors: Architecture, Security / before provider integration / `VT-94-036–053`, `VT-94-265/268–269` | Blocking | Synchronized financial data blocked pending provider evidence, physical schema, approved joint-association copy, and `EG-91-005/012/013/021–022`; manual accounts may proceed if isolated. |
@@ -241,7 +251,7 @@ companion traceability record §5.3, and the `RK-94-*` family row below under
 | RK-94-021 | Ordinary or mistaken role assignment, export, invitation, former-member, archive, or personal-account departure behavior can over-share or fail because the role/copy/lifecycle consequence is misunderstood despite technically correct enforcement. | `AB-93-075–080`, `AB-93-082–083` | Current role descriptions, consent, audit, archive/read-scope export, no-access pending states, `PA-92-*` protected deletion/restoration | 4/4/**16 High** for material `AB-93-076/078`; control-positive rows are unrated | `SR-94-085–101`, `SR-94-141–145`, versioned disclosure, comprehension/accessibility, exact current-rule copy, and explicit absence of unapproved recommendation/disclosure candidates | Accountable: Product; contributors: Content Design, Accessibility, Privacy / before collaboration onboarding or personal-account deletion / `VT-94-154–180`, `VT-94-255–264` | Evidence pending | Collaboration copy/onboarding and personal-account deletion surfaces are blocked where Product Owner copy and accessibility evidence are incomplete. |
 
 **Residual-rating state for every row.** Residual likelihood, impact, and score
-are **Unscored — evidence pending** for all `RK-94-001–021` at v0.1.1 because
+are **Unscored — evidence pending** for all `RK-94-001–021` in this version because
 none of the complete required mitigation sets has implementation and
 verification evidence. A Blocking or Transferred family-workstream disposition does not
 permit a speculative residual score. After the applicable `VT/ME/SRV` evidence
@@ -257,7 +267,7 @@ absent; it does not lower the score.
 
 | Risk | Likelihood rationale | Impact rationale and evidence confidence |
 | --- | --- | --- |
-| RK-94-001 | A credential/session attacker or ordinary recovery/session binding failure can reach authentication, recovery, assurance, logout, switch, and protected-action surfaces during expected use. Managed-IdP and server-check directions reduce reachability, but provider and implementation evidence are absent; **Possible (3)** is the highest supported frequency. | Wrong-subject authority can affect every account and S3/S4 authority evidence, persist through sessions, and cause systemic compromise; **Severe (5)**. Implementation confidence is low. |
+| RK-94-001 | A credential/session attacker or ordinary recovery/session binding failure can reach authentication, recovery, assurance, logout, switch, and protected-action surfaces during expected use. Managed-IdP and server-check directions reduce reachability, but provider and implementation evidence are absent; **Possible (3)** is the highest supported frequency. | Wrong-subject authority can affect every account and S3/S4 authority evidence, persist through sessions, and cause systemic compromise; **Severe (5)**. `TH-92-001/002/004` additionally meet the mandatory Critical override because a forged or misbound authentication result, a session that survives logout/revocation/account switch, and a protected action forced under a valid session each constitute systemic authentication compromise; CBD-92 independently triaged all three as Critical. Non-overridden `TH-92-003` remains High, matching its CBD-92 triage. Implementation confidence is low. |
 | RK-94-002 | Invitation status is routinely reachable by inviters and recipients, while locators pass through external channels; enumeration, interception, replay, and partial commit are credible recurring attempts despite no-access pending states; **Likely (4)**. | Relationship disclosure or unauthorized membership can expose multiple people's financial data and durable collaboration authority; **Severe (5)**. Baseline confidence is high; implementation/provider confidence is low. |
 | RK-94-003 | Every protected API, worker, cache, index, search, and report exercises scope enforcement; stale versions, omitted keys, IDOR, and confused-deputy failures are readily reachable until a typed enforcement contract exists; **Likely (4)**. | A defect can cross subject/profile/space/resource/field boundaries and expose or mutate S3/S4 data at systemic scale; **Severe (5)**. Requirements confidence is high; implementation confidence is low. |
 | RK-94-004 | Provider callbacks, normalization, identity evidence, links, and lifecycle changes are ordinary integration paths, but exploitation or failure requires provider/integration conditions; **Possible (3)**. | Wrong-subject or cross-space financial authority, provenance loss, or destructive disconnect can create substantial or irreversible financial/privacy harm; **Severe (5)**. Provider/schema evidence confidence is low. |
@@ -286,9 +296,9 @@ Stable IDs remain domain-ordered; formal risk priority is score-ordered:
 | Order | Priority/score | Risks |
 | --- | --- | --- |
 | 1 | Critical / 25 | `RK-94-012/015/016` |
-| 2 | Critical / 20 | `RK-94-002/003/008/011/013/014/017/018/019`; source-specific `TH-92-032/033/044` within `RK-94-010` |
+| 2 | Critical / 20 | `RK-94-002/003/008/011/013/014/017/018/019`; source-specific `TH-92-001/002/004` within `RK-94-001` and `TH-92-032/033/044` within `RK-94-010` |
 | 3 | High / 16 | `RK-94-005/007/021` |
-| 4 | High / 15 | `RK-94-001/004/006/009/020`; non-overridden `RK-94-010` sources |
+| 4 | High / 15 | `RK-94-004/006/009/020`; non-overridden `RK-94-001` and `RK-94-010` sources |
 
 Within one score, release work follows the narrowest dependency order that
 unblocks foundational authority/topology first, then the affected feature or
@@ -617,7 +627,7 @@ a Product Owner gate.
 No gate is implied to block more scope than the table states. In particular,
 `RG-94-015` preserves the approved CBD-92 public-launch policy and creates no
 Private-MVP penetration-test or independent-review prerequisite. Penetration
-testing may be commissioned through a future explicit decision, but this draft
+testing may be commissioned through a future explicit decision, but this version
 does not make it a release gate. Excluding a capability from Private MVP is a
 documented `Deferred` decision with follow-up work; it is not evidence that the
 underlying risk was resolved.
@@ -664,6 +674,9 @@ provider custody, deletion completion, backup expiry, or safety outcome.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 16, 2026 | Alexander Wohlford as Product Owner, Claude assisting | **Approved as CBD-94 v1.0.** Promoted the v0.1.4 content unchanged to the approved provider-independent CBD-94 baseline; the only edits were status, version, and the self-descriptive “draft” wording in §1, §3.6, §4, and §7. No risk, rating, override, disposition, requirement, gate, route, or release effect was altered by approval. Approval fixes the risk model, requirements, and gates as the controlling baseline; it accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. All 21 families remain residual-unscored and evidence-pending. Confluence publication follows the merge to `main` under the repository working rules. | **Product Owner approved** |
+| 0.1.4 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner dispositions on two open review findings. `RV-94-011`: applied the §3.4 mandatory Critical override as a scoped source-level override on `TH-92-001/002/004` within `RK-94-001`, mirroring the existing `TH-92-032/033/044` treatment in `RK-94-010`; the family inherent rating remains 3/5/15 High, non-overridden `TH-92-003` remains High, and §4.1 and §4.2 were updated. The override also reconciles CBD-94 with CBD-92's frozen initial triage, which independently rated those same three threats Critical and `TH-92-003` High. `RV-94-015`: added the §3.7 rule that the §4 requirement column is the dependency set and the §6 `Principal risk/source` column is the ownership set, making the 54 one-directional edges correct by definition rather than a traceability defect. No source routing, requirement text, disposition, owner, gate, or release effect was changed. | Product Owner rating and method decisions incorporated; complete document remains draft |
+| 0.1.3 | August 16, 2026 | Claude | Independent exhaustive-review corrections recorded as `RV-94-016`: replaced two stale `v0.1.1` self-scopes in §3.6 and §4 with version-agnostic wording so the no-new-acceptance rule and the unscored-residual rule cannot silently expire against a later draft. No risk, rating, requirement, disposition, gate, or route was changed. Open review findings `RV-94-011` (unapplied §3.4 authentication override) and `RV-94-015` (one-directional risk→requirement edges) remain recorded in the traceability record §13 and are not resolved here. | Editorial correction only; complete document remains draft |
 | 0.1.2 | August 16, 2026 | Codex | Rebased the draft onto `be20177` after CBD-92 v1.0 and CBD-93 v1.1 merged. Routed `AB-93-083–086`, `SG-93-096/097`, and `RI-93-019` without changing any approved source behavior; added joint-association disclosure and dissolution-decision guards; and preserved the approved public-launch-only independent-security policy. | Source reconciliation only; complete document remains draft |
 | 0.1.1 | August 16, 2026 | Codex with Alexander Wohlford as Product Owner | Substantive-review revision: preserved the approved public-launch-only independent-security policy; removed a mandatory penetration-test implication; corrected CBD-93 residual count; defined source/family precedence, singular accountability and escalation; added complete rating rationales; corrected inherent-residual likelihoods and scoped lifecycle overrides; classified requirements; parameterized open values; and converted `SG-93-005/014/095` requirements into candidate guards. | Product Owner decision on independent-security gate incorporated; complete document remains draft |
 | 0.1.0 | August 16, 2026 | Codex | Initial CBD-94 formal risk method; 21 risk families covering all 45 CBD-92 threats and 82 CBD-93 scenarios; 145 normative requirements; 16 release gates; and architecture/roadmap/Jira update list. | Draft for internal review; no risk acceptance or product decision granted |
