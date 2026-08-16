@@ -240,14 +240,60 @@ TARGETS: tuple[Target, ...] = (
         path="docs/cbd-92-acceptance-criteria-traceability.md",
     ),
     # CBD-93 consumes the CBD-91 inventory, the CBD-72 permission model, and the
-    # CBD-92 contracts, so it publishes last. Nothing cites it yet; CBD-94 will,
-    # and that target should make this one a baseline when it is added.
+    # CBD-92 contracts, so it publishes before CBD-94. It is a baseline because
+    # CBD-94 §2 freezes its v1.1 blob and routes all 86 AB-93 scenarios, 96
+    # active SG-93 safeguards, EG-93-001–010, and RI-93-001–019 from it.
     Target(
         key="cbd-93-abuse-analysis",
         doc_set="cbd-93",
         page_id="8749076",
         expected_title="CBD-93 — Privacy, Coercion, Surveillance, and Abuse-Case Analysis",
         path="docs/cbd-93-privacy-coercion-abuse-analysis.md",
+        baseline=True,
+    ),
+    # CBD-94 consumes the frozen CBD-91 v1.0.1, CBD-92 v1.0, and CBD-93 v1.1
+    # blobs listed in its §2 source baseline, so the whole set publishes after
+    # them. Within the set the order follows the header citations: the register
+    # is cited by the inventory's "Governing register" field and the
+    # traceability record's "Primary evidence" field; the inventory is cited by
+    # "Verification evidence"; the findings record is cited by "Independent
+    # review". The traceability record therefore publishes last and is not a
+    # baseline, since nothing cites it. This mirrors the CBD-92 arrangement.
+    #
+    # These four pages were created as placeholders on August 16, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged v1.0 content. Until then the repository files are
+    # authoritative, per traceability record RV-94-019.
+    Target(
+        key="cbd-94-register",
+        doc_set="cbd-94",
+        page_id="9601026",
+        expected_title="CBD-94 — Risk, Mitigation, and Security/Privacy Requirement Register",
+        path="docs/cbd-94-risk-mitigation-requirement-register.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-94-verification-inventory",
+        doc_set="cbd-94",
+        page_id="9535490",
+        expected_title="CBD-94 — Verification, Negative-Test, and Specialist-Review Inventory",
+        path="docs/cbd-94-verification-review-inventory.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-94-review-findings",
+        doc_set="cbd-94",
+        page_id="9633793",
+        expected_title="CBD-94 — Exhaustive Review Findings",
+        path="docs/cbd-94-exhaustive-review-findings.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-94-traceability",
+        doc_set="cbd-94",
+        page_id="9273364",
+        expected_title="CBD-94 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-94-acceptance-criteria-traceability.md",
     ),
 )
 
