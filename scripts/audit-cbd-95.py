@@ -1,0 +1,715 @@
+#!/usr/bin/env python3
+"""Repeatable mechanical audit for the CBD-95 documentation package.
+
+This script deliberately checks documentation structure and traceability only.
+It does not execute the CBD-94 verification inventory or prove that any runtime
+control is implemented, effective, compliant, or secure.
+"""
+
+from __future__ import annotations
+
+import re
+import subprocess
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+PACKAGE_FILES = (
+    Path("docs/cbd-95-execution-plan.md"),
+    Path("docs/cbd-95-threat-model-package-manifest.md"),
+    Path("docs/cbd-95-cbd-12-reconciliation-matrix.md"),
+    Path("docs/cbd-95-architecture-roadmap-follow-up-register.md"),
+    Path("docs/cbd-95-acceptance-criteria-traceability.md"),
+    Path("scripts/audit-cbd-95.py"),
+)
+
+FROZEN_BASELINE = "43e87be93a37097bf0e91cd4d3b4c2f98aa4aa15"
+
+FROZEN_BLOBS = {
+    Path("docs/cbd-91-private-mvp-data-inventory.md"): (
+        "1e1134415915238752440da4b2e4acaa293d20e6"
+    ),
+    Path("docs/cbd-92-system-flow-technical-threat-model.md"): (
+        "7c69addb47f843e080827ba8241636cb948ccad5"
+    ),
+    Path("docs/cbd-92-acceptance-criteria-traceability.md"): (
+        "6938bbb0ca8eafad11b4712f1b3d35da432723af"
+    ),
+    Path("docs/cbd-93-privacy-coercion-abuse-analysis.md"): (
+        "b84aa6f2aed66c7ffad35a4fc58eead1602bcf65"
+    ),
+    Path("docs/cbd-94-risk-mitigation-requirement-register.md"): (
+        "8be224d4ef5779f1743bdd7b4a53f731f31d564e"
+    ),
+    Path("docs/cbd-94-verification-review-inventory.md"): (
+        "e139cdd75646f8070b8e253ff6cc95c1f6bca966"
+    ),
+    Path("docs/cbd-94-acceptance-criteria-traceability.md"): (
+        "113f7e279fabed75e28748eea7362d9e2111675e"
+    ),
+    Path("docs/cbd-94-exhaustive-review-findings.md"): (
+        "c7c02611b7b2c6cfc78ed5467e013b615128b8c6"
+    ),
+    Path("docs/cbd-72-collaboration-permission-model.md"): (
+        "f0fb564aada318b125451b9ec2752fcd5657e7e1"
+    ),
+    Path("docs/cbd-72-authorization-scenario-catalog.md"): (
+        "ecc8bd56cd75042f4918c4f51e2a7e43c1ef1d48"
+    ),
+    Path("docs/cbd-72-acceptance-criteria-traceability.md"): (
+        "ed4a410d0442310ecc733a2e547b14ba881039e0"
+    ),
+}
+
+SOURCE_FAMILIES = {
+    ("DI", 91): (Path("docs/cbd-91-private-mvp-data-inventory.md"), 76),
+    ("DF", 91): (Path("docs/cbd-91-private-mvp-data-inventory.md"), 13),
+    ("EG", 91): (Path("docs/cbd-91-private-mvp-data-inventory.md"), 24),
+    ("TH", 92): (Path("docs/cbd-92-system-flow-technical-threat-model.md"), 45),
+    ("RF", 92): (Path("docs/cbd-92-system-flow-technical-threat-model.md"), 12),
+    ("AB", 93): (Path("docs/cbd-93-privacy-coercion-abuse-analysis.md"), 86),
+    ("SG", 93): (Path("docs/cbd-93-privacy-coercion-abuse-analysis.md"), 97),
+    ("EG", 93): (Path("docs/cbd-93-privacy-coercion-abuse-analysis.md"), 10),
+    ("RI", 93): (Path("docs/cbd-93-privacy-coercion-abuse-analysis.md"), 19),
+    ("RK", 94): (
+        Path("docs/cbd-94-risk-mitigation-requirement-register.md"),
+        21,
+    ),
+    ("SR", 94): (
+        Path("docs/cbd-94-risk-mitigation-requirement-register.md"),
+        147,
+    ),
+    ("RG", 94): (
+        Path("docs/cbd-94-risk-mitigation-requirement-register.md"),
+        16,
+    ),
+    ("VT", 94): (Path("docs/cbd-94-verification-review-inventory.md"), 270),
+    ("ME", 94): (Path("docs/cbd-94-verification-review-inventory.md"), 15),
+    ("SRV", 94): (Path("docs/cbd-94-verification-review-inventory.md"), 15),
+    ("FX", 94): (Path("docs/cbd-94-verification-review-inventory.md"), 10),
+    ("PR", 94): (Path("docs/cbd-94-verification-review-inventory.md"), 5),
+    ("MON", 94): (Path("docs/cbd-94-verification-review-inventory.md"), 10),
+}
+
+REQUIRED_AREAS = (
+    "Permissions",
+    "Resource visibility",
+    "Invitation and consent",
+    "Role changes and ownership transfer",
+    "Revocation, removal, and stale access",
+    "Authentication assurance and sessions",
+    "Alerts and acknowledgements",
+    "Notification channels and previews",
+    "Masking, derived data, search, reports, and inference",
+    "Audit evidence",
+    "Exports and downloaded custody",
+    "Archival, deletion, restoration, and personal-account lifecycle",
+    "Recovery, backups, secrets, and exceptional access",
+    "Cross-budget isolation and correlation",
+)
+
+PERMITTED_OUTCOMES = {
+    "Pass unchanged",
+    "Pass with mitigation",
+    "Blocked pending decision/evidence",
+    "Out of CBD-14 scope",
+}
+
+REQUIRED_HEADINGS = {
+    Path("docs/cbd-95-threat-model-package-manifest.md"): (
+        "## 2. Frozen repository package",
+        "## 3. Stable identifier inventory",
+        "## 5. Package-wide invariants",
+        "## 7. Evidence and limitation statement",
+        "## 8. Change control and supersession",
+    ),
+    Path("docs/cbd-95-cbd-12-reconciliation-matrix.md"): (
+        "## 2. Required-area coverage",
+        "## 3. CBD-12 acceptance-criterion reconciliation",
+        "## 4. Product Owner decision register",
+        "## 5. Material conflicts and synchronization blockers",
+        "## 7. Readiness recommendation",
+    ),
+    Path("docs/cbd-95-architecture-roadmap-follow-up-register.md"): (
+        "## 3. Follow-up register",
+        "## 4. Architecture workstreams and security boundaries",
+        "## 5. Sequencing and dependency roadmap",
+        "## 6. Product decisions requiring attention",
+        "## 7. Release and completion rules",
+    ),
+    Path("docs/cbd-95-acceptance-criteria-traceability.md"): (
+        "## 3. Deliverable traceability",
+        "## 4. CBD-95 acceptance-criteria traceability",
+        "## 5. CBD-14 acceptance-criteria traceability",
+        "## 6. Bidirectional identifier and audit contract",
+        "## 8. Review findings",
+        "## 9. Evidence limitations",
+        "## 10. Readiness recommendation",
+        "## 11. Final approval evidence",
+        "## 12. Change control",
+    ),
+}
+
+
+@dataclass
+class Audit:
+    checks: int = 0
+    failures: list[str] | None = None
+    warnings: list[str] | None = None
+
+    def __post_init__(self) -> None:
+        self.failures = []
+        self.warnings = []
+
+    def check(self, condition: bool, message: str) -> None:
+        self.checks += 1
+        if not condition:
+            assert self.failures is not None
+            self.failures.append(message)
+
+    def warn(self, condition: bool, message: str) -> None:
+        if not condition:
+            assert self.warnings is not None
+            self.warnings.append(message)
+
+
+def read(path: Path) -> str:
+    return (ROOT / path).read_text(encoding="utf-8")
+
+
+def git(*args: str) -> str:
+    completed = subprocess.run(
+        ["git", *args],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or completed.stdout.strip()
+        raise RuntimeError(f"git {' '.join(args)} failed: {detail}")
+    return completed.stdout.strip()
+
+
+def expand_ids(text: str, prefix: str, issue: int) -> set[int]:
+    """Expand individual, shortened range, and shortened slash ID syntax."""
+
+    base = rf"{re.escape(prefix)}-{issue}-"
+    values = {int(value) for value in re.findall(base + r"(\d{3})", text)}
+
+    range_pattern = re.compile(
+        base
+        + r"(\d{3})\s*(?:\u2013|\u2014|\bthrough\b|\bto\b)\s*"
+        + rf"(?:{re.escape(prefix)}-{issue}-)?(\d{{3}})",
+        flags=re.IGNORECASE,
+    )
+    for start_text, end_text in range_pattern.findall(text):
+        start, end = int(start_text), int(end_text)
+        if start <= end:
+            values.update(range(start, end + 1))
+
+    slash_pattern = re.compile(base + r"(\d{3}(?:/\d{3})+)")
+    for group in slash_pattern.findall(text):
+        values.update(int(value) for value in group.split("/"))
+
+    return values
+
+
+def table_id_rows(text: str, prefix: str) -> list[tuple[int, list[str], int]]:
+    rows: list[tuple[int, list[str], int]] = []
+    pattern = re.compile(rf"^\|\s*(?:\*\*)?`?{re.escape(prefix)}-(\d{{3}})`?(?:\*\*)?\s*\|")
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        match = pattern.match(line)
+        if not match:
+            continue
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        rows.append((int(match.group(1)), cells, line_number))
+    return rows
+
+
+def check_exact_numbers(
+    audit: Audit, label: str, actual: set[int], expected: set[int]
+) -> None:
+    missing = sorted(expected - actual)
+    extra = sorted(actual - expected)
+    audit.check(
+        actual == expected,
+        f"{label}: expected exact set; missing={missing}, extra={extra}",
+    )
+
+
+def check_markdown_tables(audit: Audit, path: Path, text: str) -> None:
+    current_width: int | None = None
+    current_start = 0
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        if line.startswith("|") and line.endswith("|"):
+            width = len(re.findall(r"(?<!\\)\|", line)) - 1
+            if current_width is None:
+                current_width = width
+                current_start = line_number
+            else:
+                audit.check(
+                    width == current_width,
+                    f"{path}:{line_number}: table width {width} differs from "
+                    f"width {current_width} at line {current_start}",
+                )
+        else:
+            current_width = None
+
+
+def check_local_references(audit: Audit, text_by_path: dict[Path, str]) -> None:
+    reference_pattern = re.compile(r"`((?:docs|scripts)/[^`\s]+)`")
+    for source, text in text_by_path.items():
+        for target_text in reference_pattern.findall(text):
+            target_text = target_text.rstrip(".,;:)")
+            target = Path(target_text)
+            audit.check(
+                (ROOT / target).exists(),
+                f"{source}: referenced local path does not exist: {target}",
+            )
+
+
+def check_unsupported_claims(audit: Audit, text_by_path: dict[Path, str]) -> None:
+    claim_patterns = (
+        r"guaranteed (?:secure|safe|private)",
+        r"100% secure",
+        r"completely anonymous",
+        r"fully anonymous",
+        r"(?:product|system|implementation) is proven secure",
+        r"proves? (?:that )?(?:the )?(?:product|system|implementation) is secure",
+        r"all (?:data|copies) (?:is|are|have been) deleted everywhere",
+        r"certified compliant",
+    )
+    negative_markers = (
+        "not ",
+        "never ",
+        "cannot ",
+        "does not ",
+        "do not ",
+        "must not ",
+        "without ",
+        "prohibit",
+    )
+    for path, text in text_by_path.items():
+        if path.suffix != ".md":
+            continue
+        lower = text.lower()
+        for pattern in claim_patterns:
+            for match in re.finditer(pattern, lower):
+                context = lower[max(0, match.start() - 100) : match.start()]
+                audit.check(
+                    any(marker in context for marker in negative_markers),
+                    f"{path}: unsupported assertive claim near {match.group(0)!r}",
+                )
+
+
+def main() -> int:
+    audit = Audit()
+
+    for path in PACKAGE_FILES:
+        audit.check((ROOT / path).is_file(), f"required package file missing: {path}")
+    if audit.failures:
+        for failure in audit.failures:
+            print(f"FAIL {failure}")
+        return 1
+
+    text_by_path = {path: read(path) for path in PACKAGE_FILES}
+
+    # Repository and scope controls.
+    audit.check(Path(git("rev-parse", "--show-toplevel")) == ROOT, "script is not running in the expected repository root")
+    audit.check(
+        git("rev-parse", "origin/main") == FROZEN_BASELINE,
+        "origin/main no longer matches the frozen CBD-95 baseline; rebaseline required",
+    )
+    allowed_changes = {str(path).replace("\\", "/") for path in PACKAGE_FILES}
+    status_lines = git("status", "--porcelain", "--untracked-files=all").splitlines()
+    changed_paths: set[str] = set()
+    for line in status_lines:
+        if not line:
+            continue
+        raw_path = line[3:]
+        if " -> " in raw_path:
+            raw_path = raw_path.split(" -> ", 1)[1]
+        changed_paths.add(raw_path.strip('"').replace("\\", "/"))
+    audit.check(
+        changed_paths <= allowed_changes,
+        f"working tree contains out-of-scope changes: {sorted(changed_paths - allowed_changes)}",
+    )
+
+    # Frozen source hashes.
+    for path, expected_blob in FROZEN_BLOBS.items():
+        audit.check((ROOT / path).is_file(), f"frozen source file missing: {path}")
+        if (ROOT / path).is_file():
+            actual_blob = git("hash-object", str(path))
+            audit.check(
+                actual_blob == expected_blob,
+                f"{path}: blob {actual_blob} does not match {expected_blob}",
+            )
+
+    # Stable upstream identifier sets.
+    for (prefix, issue), (path, maximum) in SOURCE_FAMILIES.items():
+        actual = expand_ids(read(path), prefix, issue)
+        expected = set(range(1, maximum + 1))
+        check_exact_numbers(audit, f"{prefix}-{issue}", actual, expected)
+
+    approved_routes = read(Path("docs/cbd-94-acceptance-criteria-traceability.md"))
+    for prefix, issue, maximum in (
+        ("TH", 92, 45),
+        ("AB", 93, 86),
+        ("RK", 94, 21),
+        ("SR", 94, 147),
+        ("VT", 94, 270),
+    ):
+        check_exact_numbers(
+            audit,
+            f"approved reverse routes for {prefix}-{issue}",
+            expand_ids(approved_routes, prefix, issue),
+            set(range(1, maximum + 1)),
+        )
+
+    cbd93 = read(Path("docs/cbd-93-privacy-coercion-abuse-analysis.md"))
+    retired_context = re.search(
+        r"(?:SG-93-020.{0,180}retir|retir.{0,180}SG-93-020)",
+        cbd93,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    audit.check(retired_context is not None, "SG-93-020 is not visibly marked retired")
+    active_sg = expand_ids(cbd93, "SG", 93) - {20}
+    audit.check(len(active_sg) == 96, f"active SG-93 count is {len(active_sg)}, expected 96")
+
+    # CBD-95 row sets, uniqueness, schema, and outcomes.
+    matrix_path = Path("docs/cbd-95-cbd-12-reconciliation-matrix.md")
+    register_path = Path("docs/cbd-95-architecture-roadmap-follow-up-register.md")
+    trace_path = Path("docs/cbd-95-acceptance-criteria-traceability.md")
+    matrix = text_by_path[matrix_path]
+    register = text_by_path[register_path]
+    trace = text_by_path[trace_path]
+
+    rc_rows = table_id_rows(matrix, "RC-95")
+    fu_rows = table_id_rows(register, "FU-95")
+    rv_rows = table_id_rows(matrix, "RV-95")
+    ri_rows = table_id_rows(matrix, "RI-93")
+
+    for label, rows, maximum in (
+        ("RC-95", rc_rows, 36),
+        ("FU-95", fu_rows, 30),
+        ("RV-95", rv_rows, 5),
+        ("RI-93 decision register", ri_rows, 19),
+    ):
+        numbers = [number for number, _, _ in rows]
+        check_exact_numbers(audit, label, set(numbers), set(range(1, maximum + 1)))
+        audit.check(
+            len(numbers) == len(set(numbers)),
+            f"{label}: duplicate authoritative table row definitions found",
+        )
+
+    rc_ac_numbers: set[int] = set()
+    outcome_counts = {outcome: 0 for outcome in PERMITTED_OUTCOMES}
+    for number, cells, line_number in rc_rows:
+        audit.check(
+            len(cells) == 5,
+            f"{matrix_path}:{line_number}: RC-95 row must have 5 cells, found {len(cells)}",
+        )
+        if len(cells) != 5:
+            continue
+        ac_match = re.search(r"\bAC(\d{2})\b", cells[1])
+        audit.check(ac_match is not None, f"{matrix_path}:{line_number}: missing CBD-12 AC number")
+        if ac_match:
+            ac_number = int(ac_match.group(1))
+            rc_ac_numbers.add(ac_number)
+            audit.check(
+                ac_number == number,
+                f"{matrix_path}:{line_number}: RC-95-{number:03d} maps AC{ac_number:02d}",
+            )
+        normalized_outcome = re.sub(r"[*_`]", "", cells[3]).strip()
+        audit.check(
+            normalized_outcome in PERMITTED_OUTCOMES,
+            f"{matrix_path}:{line_number}: invalid outcome {normalized_outcome!r}",
+        )
+        if normalized_outcome in outcome_counts:
+            outcome_counts[normalized_outcome] += 1
+        audit.check(
+            bool(re.search(r"(?:RK|SR|VT|NT|EM|PA)-\d{2}-", cells[2]))
+            or "All `RK-94" in cells[2],
+            f"{matrix_path}:{line_number}: no upstream evidence route",
+        )
+        audit.check(
+            len(re.sub(r"[*_`]", "", cells[4]).strip()) >= 40,
+            f"{matrix_path}:{line_number}: required action/effect is not substantive",
+        )
+
+    check_exact_numbers(audit, "CBD-12 AC", rc_ac_numbers, set(range(1, 37)))
+    audit.check(outcome_counts["Pass unchanged"] == 2, "RC outcome total for Pass unchanged must be 2")
+    audit.check(outcome_counts["Pass with mitigation"] == 33, "RC outcome total for Pass with mitigation must be 33")
+    audit.check(outcome_counts["Blocked pending decision/evidence"] == 1, "RC blocked outcome total must be 1")
+    audit.check(outcome_counts["Out of CBD-14 scope"] == 0, "RC out-of-scope outcome total must be 0")
+
+    for area in REQUIRED_AREAS:
+        audit.check(
+            re.search(rf"^\| {re.escape(area)} \|", matrix, flags=re.MULTILINE) is not None,
+            f"required CBD-95 area missing from coverage table: {area}",
+        )
+
+    for number, cells, line_number in fu_rows:
+        audit.check(
+            len(cells) == 7,
+            f"{register_path}:{line_number}: FU-95 row must have 7 cells, found {len(cells)}",
+        )
+        if len(cells) == 7:
+            audit.check(cells[1] in {"P0", "P1", "P2", "P3"}, f"{register_path}:{line_number}: invalid priority")
+            audit.check(len(cells[4]) >= 40, f"{register_path}:{line_number}: required work is not substantive")
+            audit.check(len(cells[5]) >= 25, f"{register_path}:{line_number}: closure evidence is not substantive")
+            audit.check(len(cells[6]) >= 20, f"{register_path}:{line_number}: open effect is not substantive")
+
+    decided_ri = {
+        number
+        for number, cells, _ in ri_rows
+        if len(cells) == 4 and re.search(r"\*\*Decided", cells[3])
+    }
+    audit.check(
+        decided_ri == set(range(1, 20)),
+        f"decided RI set is {sorted(decided_ri)}, expected 1 through 19",
+    )
+    decided_ri_010_markers = (
+        "**Decided August 16, 2026 — add three bounded protections.**",
+        "**A — block:**",
+        "**B — decline choice:**",
+        "Create no separate persistent-decline state",
+        "**C — rate limit:**",
+        "create no recipient-wide quota",
+    )
+    for marker in decided_ri_010_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-010 decision marker: {marker}",
+        )
+    decided_ri_011_markers = (
+        "**Decided August 16, 2026 — add a verified notification-only destination.**",
+        "only after successful destination verification and atomic membership acceptance",
+        "The invited channel remains invitation proof only",
+        "the inviter cannot view the destination",
+        "Failed, abandoned, replayed, or stale verification activates nothing",
+    )
+    for marker in decided_ri_011_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-011 decision marker: {marker}",
+        )
+    decided_ri_012_markers = (
+        "**Decided August 16, 2026 — add strict safety-channel routing.**",
+        "mandatory authenticated in-app instance",
+        "do not fall back to ordinary alert channels or other external destinations",
+        "Other members cannot view, select, change, or infer the safety destination",
+        "supersedes CBD-72 §6.3/CBD-91 §7.3",
+    )
+    for marker in decided_ri_012_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-012 decision marker: {marker}",
+        )
+    decided_ri_013_markers = (
+        "**Decided August 16, 2026 — add fail-closed atomic retirement.**",
+        "Immediately quarantine it from new/queued notification and lifecycle delivery",
+        "quarantine that authority immediately",
+        "The compromised channel cannot approve retirement, replacement, reactivation, or recovery",
+        "ordinary support cannot bypass it",
+    )
+    for marker in decided_ri_013_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-013 decision marker: {marker}",
+        )
+    decided_ri_014_markers = (
+        "**Decided August 16, 2026 — retain current eligibility with non-blaming copy.**",
+        "Accountability Partners remain eligible",
+        "Viewers remain categorically ineligible",
+        "never label or imply that an identified person caused, owns, or must correct",
+        "Actor attribution is excluded from the alert",
+        "remains explicit and unaccepted",
+    )
+    for marker in decided_ri_014_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-014 decision marker: {marker}",
+        )
+    decided_ri_015_markers = (
+        "**Decided August 16, 2026 — adopt a tiered transparent semantic contract.**",
+        "plain-language before/after role, profile, or scope class",
+        "what access/state remains",
+        "Actor identity appears only where already allowed",
+        "without a last-activity date, precise inactivity interval, countdown",
+        "all detail stays authenticated in-app",
+    )
+    for marker in decided_ri_015_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-015 decision marker: {marker}",
+        )
+    decided_ri_016_markers = (
+        "**Decided August 16, 2026 — adopt a normative cross-cutting semantic standard.**",
+        "completed reauthentication or recorded consent is not proof of free or voluntary agreement",
+        "control of a channel is not sole control",
+        "delivered notification, downloaded package, screenshot, printout",
+        "must not characterize another person's circumstances",
+        "must not imply authority, accountability, safety, confidentiality",
+        "Irreversible consequences are disclosed before",
+    )
+    for marker in decided_ri_016_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-016 decision marker: {marker}",
+        )
+    decided_ri_017_markers = (
+        "**Decided August 16, 2026 — adopt a bounded honest response for Private MVP.**",
+        "cannot restore or transfer budget membership, role, ownership, connection authority",
+        "escalation cannot override that product rule",
+        "does not confirm a hidden space, membership, owner, or other-member state",
+        "identify, contact, or mediate with another member",
+        "recommend interpersonal contact",
+        "Owner-managed invitation may be described only as a generic product boundary",
+        "This approval is Private-MVP-only",
+    )
+    for marker in decided_ri_017_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-017 decision marker: {marker}",
+        )
+    decided_ri_018_markers = (
+        "**Decided August 16, 2026 — delete private data and pseudonymize retained shared history.**",
+        "After the 30-day restoration window closes",
+        "provider credentials/authorizations",
+        "replace customer-visible attribution with “Former member”",
+        "A restricted internal subject link may remain only where necessary",
+        "Retain a minimal deletion ledger",
+        "does not remove another member's authored content",
+        "recipient-controlled copies",
+    )
+    for marker in decided_ri_018_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-018 decision marker: {marker}",
+        )
+    decided_ri_019_markers = (
+        "**Decided August 16, 2026 — notify without objection, veto, or delay.**",
+        "may dissolve the exact budget-scoped joint projection immediately",
+        "authenticated in-app pre-notice where the approved lifecycle and safety rules permit",
+        "always receives an immediate post-outcome notice",
+        "underlying account-to-space links remain unless separately removed",
+        "Contributors receive no objection, veto, delay, acknowledgement, or approval state",
+        "Re-association still requires materially new approved provider evidence or fresh unanimous confirmation",
+        "notice failure does not preserve an incorrect or stale projection",
+        "does not accept `AB-93-086`",
+        "`RI-93-001–019` are fully decided",
+        "No `RI-93-*` product choice remains open",
+    )
+    for marker in decided_ri_019_markers:
+        audit.check(
+            marker in matrix,
+            f"matrix does not preserve the RI-93-019 decision marker: {marker}",
+        )
+
+    # Acceptance-criteria and finding coverage.
+    for number in range(1, 7):
+        audit.check(
+            f"CBD-95-AC{number:02d}" in trace,
+            f"CBD-95-AC{number:02d} is missing from traceability",
+        )
+    for number in range(1, 11):
+        audit.check(
+            f"CBD-14-AC{number:02d}" in trace,
+            f"CBD-14-AC{number:02d} is missing from traceability",
+        )
+    for number in range(1, 6):
+        audit.check(
+            f"RV-95-{number:03d}" in trace,
+            f"RV-95-{number:03d} is missing from the review record",
+        )
+
+    material_markers = (
+        "content-free push/SMS",
+        "user-created/paused/disabled eligible alerts",
+        "comprehensive, fixed-field",
+        "multiple Co-owners",
+        "CBD-71 v1.0",
+    )
+    combined_review = matrix + "\n" + register + "\n" + trace
+    for marker in material_markers:
+        audit.check(marker in combined_review, f"material conflict marker missing: {marker}")
+
+    limitation_markers = (
+        "not legal",
+        "penetration testing",
+        "certification",
+        "proof of security",
+        "not implementation evidence",
+        "not a release approval",
+    )
+    package_text = "\n".join(text_by_path.values()).lower()
+    for marker in limitation_markers:
+        audit.check(marker in package_text, f"required limitation is missing: {marker}")
+
+    audit.check(
+        "`RG-94-015`" in trace and "public-launch-only" in package_text,
+        "RG-94-015 public-launch-only boundary is missing",
+    )
+    audit.check(
+        "`RG-94-016`" in trace and "implementation" in trace and "launch" in trace,
+        "RG-94-016 is not clearly separated from implementation/launch readiness",
+    )
+
+    # Markdown hygiene and local references.
+    placeholder_pattern = re.compile(r"(?:\bTODO\b|\bTBD\b|\bFIXME\b|\?\?\?|\*\*\* Begin Patch|\*\*\* End Patch)")
+    for path, text in text_by_path.items():
+        audit.check(not text.startswith("\ufeff"), f"{path}: UTF-8 BOM present")
+        for line_number, line in enumerate(text.splitlines(), start=1):
+            audit.check(
+                line == line.rstrip(),
+                f"{path}:{line_number}: trailing whitespace",
+            )
+        if path.suffix == ".md":
+            check_markdown_tables(audit, path, text)
+            headings = [line.strip() for line in text.splitlines() if line.startswith("#")]
+            duplicates = sorted({heading for heading in headings if headings.count(heading) > 1})
+            audit.check(not duplicates, f"{path}: duplicate headings: {duplicates}")
+        audit.check(
+            placeholder_pattern.search(text) is None,
+            f"{path}: placeholder or patch marker remains",
+        )
+
+    for path, headings in REQUIRED_HEADINGS.items():
+        text = text_by_path[path]
+        for heading in headings:
+            audit.check(heading in text, f"{path}: required heading missing: {heading}")
+
+    check_local_references(audit, text_by_path)
+    check_unsupported_claims(audit, text_by_path)
+
+    if audit.warnings:
+        for warning in audit.warnings:
+            print(f"WARN {warning}")
+    if audit.failures:
+        for failure in audit.failures:
+            print(f"FAIL {failure}")
+        print(
+            f"CBD-95 AUDIT FAIL: {audit.checks} checks, "
+            f"{len(audit.failures)} failures, {len(audit.warnings)} warnings"
+        )
+        return 1
+
+    print(
+        "CBD-95 AUDIT PASS: "
+        f"{audit.checks} checks, 0 failures, {len(audit.warnings)} warnings; "
+        "18 upstream families, 11 frozen blobs, 36 RC rows, 30 FU rows, "
+        "5 RV findings, 19 RI decisions, 14 required areas, "
+        "6 CBD-95 ACs, 10 CBD-14 ACs"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
