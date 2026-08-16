@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — review required** |
-| Document version | 0.1.0 |
+| Document version | 0.1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Not yet reviewed. This document has received no independent safety, privacy, legal, accessibility, or survivor-research review. |
 | Jira | [CBD-93](https://cobudget.atlassian.net/browse/CBD-93) |
@@ -119,8 +119,14 @@ or data class, and the resulting safeguards. Status values are:
   be removed without reopening it; the residual is stated and bounded.
 * **Referred** — the case belongs to another ticket's scope and is handed over
   with its evidence.
+* **Closed by decision** — the Product Owner ruled on the underlying approved
+  permission while this analysis was in progress, and the ruling removes the
+  exposure rather than mitigating it. The row is retained with its original
+  exposure and the decision that closed it.
 
-A scenario is never marked resolved here. Resolution is CBD-94's output.
+No scenario is marked *resolved* here. Risk resolution is CBD-94's output, and
+“closed by decision” is a narrower claim: the permission changed, so the case no
+longer arises.
 
 ## 3. Role and lifecycle coverage map
 
@@ -300,7 +306,7 @@ member freeze or destroy what everyone else contributed.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | AB-93-039 | Malicious · Primary Owner | The Primary Owner removes the subject's membership under permission 24, or removes a Co-owner under the §6.1 protected-action contract. Revocation immediately invalidates access and derived artifacts. The subject loses every record of shared household finances they helped build, including their own attributed comments, which remain visible to everyone else under §5.6 item 7 while the former author can no longer read, edit, or remove them. | HC-93-02, HC-93-05, HC-93-07 | Subject, former member | Permissions 24, 27; CBD-72 §5.6 item 7 | SG-93-047, SG-93-051, SG-93-052, SG-93-063 | Modelled |
 | AB-93-040 | Malicious · Primary Owner or Co-owner | A Viewer's profile is narrowed or removed under permission 22. The change is atomic, invalidates open work, and is notified and audited. What the notice **says** is unspecified: `EG-91-015` leaves the notice catalog open, so whether the affected Viewer learns that their scope narrowed, or merely that something changed, is undecided. Silent information starvation is a control technique, and the difference is entirely in the copy. | HC-93-02, HC-93-04 | Subject | Permission 22; `EG-91-015` | SG-93-013, SG-93-049, SG-93-093 | Modelled |
-| AB-93-041 | Malicious · Primary Owner | Archival under §6.5 stops mutation, synchronization, invitations, and alert generation for **every** member, and §6.5 item 10 states that **no export or snapshot may be initiated from an archived space**. A Primary Owner can therefore freeze the space and simultaneously remove every other member's ability to extract the financial records they contributed. Members keep read-only access; they cannot get a copy out. This is the clearest data-hostage vector in the approved model. | HC-93-02, HC-93-05, HC-93-07 | Other members, subject | CBD-72 §6.5 items 3, 10; permission 35; `DI-91-034`–`DI-91-036` | SG-93-053, SG-93-054, SG-93-055 | Modelled |
+| AB-93-041 | Malicious · Primary Owner | Archival under §6.5 stops mutation, synchronization, invitations, and alert generation for **every** member. As originally written, §6.5 item 10 also barred any export or snapshot from an archived space, so a Primary Owner could freeze the space and simultaneously remove every other member's route to a portable copy of the records they contributed — members kept read-only access but could not get a copy out. The sharpest form was the §6.4 restore window, where members are notified twice that everything will be purged, can read all of it, and could export none of it. **Resolved by Product Owner decision, August 15, 2026: export follows read scope, bounded by the frozen `DI-91-075` snapshot.** Pending the CBD-72 §6.5 amendment, this row records the original exposure and its disposition. | HC-93-02, HC-93-05, HC-93-07 | Other members, subject | CBD-72 §6.5 items 3, 10; §6.4 item 2; permission 35; `DI-91-034`–`DI-91-036` | SG-93-053, SG-93-054, SG-93-055 | Closed by decision |
 | AB-93-042 | Malicious · Primary Owner | Deletion under §6.4 purges the financial payload, planning history, reconciliation history, interactions, and imported records irreversibly, leaving only a minimal non-financial tombstone. Every active member is notified when the 30-day restore window opens, is cancelled, and shortly before it closes — but **no member has any objection right**. Compare §6.3, where a member-initiated archival request grants the Primary Owner a 14-day objection window. The asymmetry runs against the people with the least authority. | HC-93-05, HC-93-07 | Other members | CBD-72 §6.4 items 2–4 against §6.3 | SG-93-055, SG-93-056, SG-93-093 | Modelled |
 | AB-93-043 | Malicious · Primary Owner | Ownership is transferred to the subject under §6.2 while the coercer, as outgoing Primary, **always becomes a Co-owner** and keeps full day-to-day administration. Responsibility moves; authority barely does. If the recipient was a Viewer or Accountability Partner, their prior profile and role-specific alert eligibility end, so a subject accepting under pressure also loses the narrow scope they had chosen. | HC-93-02, HC-93-04 | Subject | CBD-72 §6.2 items 6–7 | SG-93-003, SG-93-047, SG-93-048 | Modelled |
 | AB-93-044 | Malicious · Primary Owner | Shared settings under permission 30 include currency, locale, time zone, and budgeting conventions. Changing them alters how every member's financial data is presented and how period boundaries fall, without touching a single financial record. It is a low-visibility way to make the shared budget unusable or misleading for another member. | HC-93-05 | Other members | Permission 30; `DI-91-004` | SG-93-050, SG-93-079 | Modelled |
@@ -559,7 +565,7 @@ residual restated in §9.2. They do not reopen OD-72-01.
 | SG-93-049 | Product | A scope reduction is notified to the affected person in plain before/after terms rather than as an undifferentiated “your access changed”. | AB-93-008, AB-93-018, AB-93-040, AB-93-048 | VIEW/MEM test; `EG-91-015` |
 | SG-93-051 | Product | Before a removal takes effect, the removed member is offered an export bounded by the scope they already held. This widens nothing; it preserves what they could already read. | AB-93-039, AB-93-047 | Input to CBD-12; then EXP test |
 | SG-93-052 | Product | A departing member may take a copy of their own contributed content and is told plainly what remains attributed to them and readable by others after they leave. | AB-93-039, AB-93-052, AB-93-080 | Input to CBD-12; INT/EXP test |
-| SG-93-053 | Product | Archival must not be the mechanism that strips other members of any path to their own records. Either an archived space preserves each member's export of their archival-time scope, or the pre-archival flow offers every active member an export window. CBD-72 §6.5 item 10 currently forbids both. | AB-93-041, AB-93-046, AB-93-075 | Input to CBD-12; conflicts with §6.5 item 10 |
+| SG-93-053 | Product | Archival must not be the mechanism that strips other members of any path to their own records. Export follows read scope: a member may export exactly the scope frozen for them by `DI-91-075`, including throughout the §6.4 restore window. **Product Owner approved August 15, 2026**, superseding the original §6.5 item 10 prohibition; the CBD-72 amendment carrying it is a separate change. | AB-93-041, AB-93-046, AB-93-075 | LIFE/EXP test once the CBD-72 §6.5 amendment merges |
 | SG-93-054 | Technical | The `DI-91-075` archival snapshot can neither widen nor narrow any member's visibility relative to their live scope at the instant of archival. | AB-93-041, AB-93-048, AB-93-082 | LIFE negative test on `DI-91-075` |
 | SG-93-055 | Copy | Notice before an irreversible lifecycle step states exactly what will be destroyed or frozen, and what each member can do before it happens. | AB-93-041, AB-93-042, AB-93-082 | Input to CBD-75; LIFE test |
 | SG-93-056 | Product | Members should hold a defined position in the §6.4 deletion window comparable to the §6.3 objection window. Deletion currently destroys every member's records with notice but no objection right, while an inactive-owner archival request — which erases nothing — grants a 14-day objection window. | AB-93-042, AB-93-046, AB-93-047, AB-93-058 | Input to CBD-12; asymmetry finding |
@@ -785,6 +791,10 @@ approved behavior stands and this residual is real.
 
 ### 9.3 Residual register
 
+Twelve §4 rows carry the **Accepted residual** status and map to the eleven
+entries below; `AB-93-028` and `AB-93-056` are two faces of the same residual
+and share the last row.
+
 | Residual | Scenarios | Approved decision it follows from | Why it cannot be designed away here |
 | --- | --- | --- | --- |
 | Comprehensive Partner visibility includes merchant and payee display names | `AB-93-017` | CBD-72 §5.3 fixed field boundary | Narrowing it defeats the role's stated purpose; a narrower role is `RI-93-001`, not a fix to this one |
@@ -797,7 +807,7 @@ approved behavior stands and this residual is real.
 | Cross-space correlation by a person entitled to both views | `AB-93-063` | PM-72-010 scope | No server-side control prevents a person from remembering |
 | Concentrated administrative history in the Primary Owner | `AB-93-067` | CBD-72 §5.7 item 1 | The package's purpose is relationship history; `RI-93-007` gives the subject their own record rather than narrowing this one |
 | Support-mediated recovery is refused, leaving a shut-out member with no path | `AB-93-047` | CBD-72 §6.3; `EG-91-009` | Any recovery path an abuser could also use is worse than none; the honest disclosure is `SG-93-086` |
-| Inactive-owner archival disclosure | `AB-93-056`–`AB-93-058` | OD-72-01; CBD-91 §7.3 clause 8 | See §9.2 |
+| Mandatory lifecycle notice reaches a monitored channel, and the inactive-owner archival request discloses the Primary Owner's absence | `AB-93-028`, `AB-93-056`; §9.2 also covers the modelled cases `AB-93-057` and `AB-93-058` | OD-72-01; CBD-72 §6.3; CBD-91 §7.3 clause 8 | See §9.2 |
 
 ## 10. Non-escalation check
 
@@ -845,7 +855,7 @@ the scenarios that produced it.
 | RI-93-002 | A member's ability to end a specific observer's access to their own data without leaving the budget space. Today only Primary Owner and Co-owner may remove a member, so a watched Collaborator has no remedy but departure. | SG-93-001, SG-93-020 | `AB-93-018` |
 | RI-93-003 | A reversal window on protected actions that permanently reduce another person's authority or scope, undoable by the acting person alone. | SG-93-004 | `AB-93-002`, `AB-93-003` |
 | RI-93-004 | An export offered to a member at removal, bounded by the scope they already held. | SG-93-051, SG-93-052 | `AB-93-039`, `AB-93-047` |
-| RI-93-005 | A path for members to obtain their own records across archival. CBD-72 §6.5 item 10 currently forbids any export or snapshot from an archived space, so a Primary Owner can freeze the space and simultaneously remove every other member's route to the data they contributed. **This input conflicts with an approved decision and needs an explicit Product Owner ruling.** | SG-93-053 | `AB-93-041`, `AB-93-046` |
+| RI-93-005 | A path for members to obtain their own records across archival. **Decided August 15, 2026: export follows read scope**, bounded by the frozen `DI-91-075` snapshot and available throughout the §6.4 restore window. The original §6.5 item 10 prohibition had no recorded rationale, was absent from the OD-72-05 decision record, was not among the activities §6.5 item 3 enumerates as ended by archival, and ran against RF-72-60's stated intent that members not be left with contributed financial data frozen. Scope is immutable while archived, so the package-invalidation trigger the live rules rely on cannot be needed. Carried by a separate CBD-72 amendment. | SG-93-053 | `AB-93-041`, `AB-93-046` |
 | RI-93-006 | A defined member position in the §6.4 deletion window. Deletion destroys every member's records with notice but no objection right, while a §6.3 archival request — which erases nothing — grants a 14-day objection window. The asymmetry runs against the members with the least authority. | SG-93-055, SG-93-056 | `AB-93-042` |
 | RI-93-007 | Self-service access to the administrative record about oneself, without holding Primary ownership. | SG-93-081 | `AB-93-070` |
 | RI-93-008 | A remedy for a person who is the subject of another author's comment. CBD-72 §5.6 item 4 denies every role the authority to moderate another author's contribution, and §5.6 item 9 routes serious abuse to a platform process that does not yet exist. | SG-93-037, SG-93-050 | `AB-93-034` |
@@ -904,7 +914,7 @@ approved, or that any evidence gap is closed.
 | Scenarios cover both direct disclosure and inference through metadata, aggregates, previews, or timing | §3.3 indexes every scenario by channel across four direct and five inference channels. §4.7 is dedicated to inference and holds `AB-93-055`–`AB-93-062` | Satisfied |
 | Safeguards do not grant money movement, spending approval, transaction blocking, external-account control, or user lockout | §10 checks all 94 safeguards against each prohibition, scrutinizes the four that approach user lockout individually, and confirms that the three audience-widening safeguards return only data the recipient could already read | Satisfied |
 | Unresolved legal, accessibility, privacy, and research questions are labelled without unsupported validation claims | §8 records `EG-93-001`–`EG-93-010` covering advocacy, legal, accessibility, sensitive-content scope, absent user research, read-side monitoring, the deletion-objection standoff, third-party rights, the platform safety process, and channel retirement. §1.1 states plainly that no survivor has reviewed this work | Satisfied. `EG-93-005` is load-bearing: no claim in this document is validated by research |
-| Findings are testable or assigned a concrete review/evidence gate | Every §6 safeguard carries a Verification route — a CBD-72 scenario family for testable behavior, `Input to CBD-12` where it would constrain an approved permission, or a named review gate. Seventeen safeguards route to CBD-12 rather than asserting a decision | Satisfied |
+| Findings are testable or assigned a concrete review/evidence gate | Every §6 safeguard carries a Verification route — a CBD-72 scenario family for testable behavior, `Input to CBD-12` where it would constrain an approved permission, or a named review gate. Sixteen safeguards route to CBD-12 rather than asserting a decision; `SG-93-053` was decided during review and now routes to a test | Satisfied |
 
 | Deliverable | Location |
 | --- | --- |
@@ -917,7 +927,7 @@ approved, or that any evidence gap is closed.
 | --- | --- |
 | Is this catalog approved? | No. It is a draft and has received no review of any kind. |
 | May CBD-94 risk prioritization begin? | Yes, on the understanding that scenarios are unrated by design and that eleven residuals in §9.3 are real rather than mitigated. |
-| Are the safeguards approved product decisions? | No. Seventeen of them would constrain an approved CBD-12/CBD-72 permission and are raised in §11 as inputs. The rest are requirements pending review. |
+| Are the safeguards approved product decisions? | Almost none. `SG-93-053` was decided by the Product Owner during review and is carried by a separate CBD-72 amendment. Sixteen others would constrain an approved CBD-12/CBD-72 permission and are raised in §11 as inputs. The rest are requirements pending review. |
 | Is `EG-91-014` closed? | No. §7.2 produces the handling requirement CBD-91 asked for; closure additionally needs `EG-93-001`–`EG-93-004`. |
 | Is the `DI-91-076` residual resolved? | No. §9.2 bounds it and states what remains. Resolution needs `EG-93-001`. |
 | Does this document validate CoBudget's safety for people experiencing financial abuse? | No, and it must not be cited as though it does. `EG-93-005` records that no research and no lived-experience review exist. |
@@ -951,4 +961,5 @@ Known limitations:
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.1.1 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the Product Owner decision on `RI-93-005`: **export follows read scope from an archived budget space**, bounded by the frozen `DI-91-075` snapshot and available throughout the §6.4 restore window. The original §6.5 item 10 prohibition had no recorded rationale, was absent from the OD-72-05 decision record, was not among the activities §6.5 item 3 enumerates as ended by archival, and ran against RF-72-60's stated intent that members not be left with contributed financial data frozen. `AB-93-041` is retained with its original exposure under a new **Closed by decision** status defined in §2.5; `SG-93-053` now routes to a test rather than to CBD-12. Corrected the §9.3 register to account for `AB-93-028`, which carried the Accepted-residual status without a register entry. The CBD-72 §6.5 amendment carrying this decision is a separate change; `DI-91-034`–`DI-91-036` in CBD-91 v1.0 still state the superseded prohibition and need a follow-up amendment under change control. | Product Owner approved the archived-export decision; document otherwise draft |
 | 0.1.0 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Initial analysis: actor postures, harm classes, role and lifecycle coverage map, 82-scenario abuse/coercion/privacy catalog, harm and affected-user analysis, 94 safeguards across five classes, §7.2 disposition of `EG-91-014`, ten evidence gaps, eleven accepted residuals including the §9.2 `DI-91-076` disposition referred by CBD-91 §7.3 clause 8, non-escalation check, and eighteen CBD-12 reconciliation inputs. | Draft; review required |
