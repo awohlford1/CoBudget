@@ -15,7 +15,9 @@ Setup
     export CONFLUENCE_EMAIL=you@example.com
     export CONFLUENCE_API_TOKEN=...      # id.atlassian.com/manage-profile/security/api-tokens
 
-The token is read from the environment and is never written to disk or logged.
+Values are read from the environment first, then from an untracked `.env.local`
+at the repository root, which is where `docs/development.md` places secrets.
+The token is never written to disk or logged.
 
 Usage
 -----
@@ -412,10 +414,36 @@ TARGETS: tuple[Target, ...] = (
 )
 
 
+def load_env_file() -> dict[str, str]:
+    """Read `.env.local` if present. Values are returned, never logged.
+
+    `docs/development.md` places secrets in an untracked `.env.local`, so an
+    operator who followed that guidance should not also have to export the same
+    values into the shell. Environment variables still win, which keeps CI and
+    one-off overrides working.
+    """
+    path = REPO_ROOT / ".env.local"
+    if not path.is_file():
+        return {}
+    values: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip('"').strip("'")
+    return values
+
+
 def session_from_env() -> tuple[requests.Session, str]:
-    base = os.environ.get("CONFLUENCE_BASE_URL", "").rstrip("/")
-    email = os.environ.get("CONFLUENCE_EMAIL", "")
-    token = os.environ.get("CONFLUENCE_API_TOKEN", "")
+    from_file = load_env_file()
+
+    def credential(name: str) -> str:
+        return os.environ.get(name) or from_file.get(name, "")
+
+    base = credential("CONFLUENCE_BASE_URL").rstrip("/")
+    email = credential("CONFLUENCE_EMAIL")
+    token = credential("CONFLUENCE_API_TOKEN")
     missing = [
         name
         for name, value in (
@@ -426,7 +454,12 @@ def session_from_env() -> tuple[requests.Session, str]:
         if not value
     ]
     if missing:
-        sys.exit("Missing environment variable(s): " + ", ".join(missing))
+        sys.exit(
+            "Missing credential(s): "
+            + ", ".join(missing)
+            + ". Set them in the environment or in an untracked .env.local at the "
+            "repository root."
+        )
 
     session = requests.Session()
     session.auth = (email, token)
@@ -588,11 +621,18 @@ def main() -> int:
             after = fetch_page(session, base, target.page_id)
             published = normalize(after["body"]["storage"]["value"])
             expected = normalize(storage)
+            # Report the version Confluence actually stored, not the one this
+            # run expected. When the converted storage is byte-identical to the
+            # live page Confluence keeps the existing version, so `version + 1`
+            # would claim a revision that does not exist and turn a no-op into
+            # false evidence of a publish.
+            stored = after.get("version", {}).get("number", version + 1)
+            unchanged = " (content already current, no new version)" if stored == version else ""
             if published == expected:
-                print(f"OK   {target.key}: published v{version + 1} and verified")
+                print(f"OK   {target.key}: page v{stored} verified{unchanged}")
             else:
                 print(
-                    f"WARN {target.key}: published v{version + 1} but read-back differs "
+                    f"WARN {target.key}: page v{stored} but read-back differs "
                     f"({len(expected):,} vs {len(published):,} normalized chars). Review the page."
                 )
                 failures += 1
