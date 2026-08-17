@@ -41,7 +41,9 @@ FROZEN_BLOBS = {
         "6938bbb0ca8eafad11b4712f1b3d35da432723af"
     ),
     Path("docs/cbd-93-privacy-coercion-abuse-analysis.md"): (
-        "b84aa6f2aed66c7ffad35a4fc58eead1602bcf65"
+        # Re-frozen at CBD-93 v1.1.1, an editorial header correction that
+        # changed no normative content. See manifest section 6.
+        "c1caf49653802f5c4d1f69f48d61f9aa881591a3"
     ),
     Path("docs/cbd-94-risk-mitigation-requirement-register.md"): (
         "8be224d4ef5779f1743bdd7b4a53f731f31d564e"

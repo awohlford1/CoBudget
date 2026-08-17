@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0 — Product Owner approved August 16, 2026** |
-| Document version | 1.0 |
+| Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1** |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -56,7 +56,7 @@ blob below still resolves. A blob change requires the impact review in §8.
 | `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.1; approved v1.0 plus controlled RF-72-61 amendment | `1e1134415915238752440da4b2e4acaa293d20e6` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
 | `docs/cbd-92-system-flow-technical-threat-model.md` | v1.0; approved | `7c69addb47f843e080827ba8241636cb948ccad5` | Actors, systems, entry points, trust boundaries, 45 technical threats, 12 review findings, nine normative contract families |
 | `docs/cbd-92-acceptance-criteria-traceability.md` | v1.0; approved | `6938bbb0ca8eafad11b4712f1b3d35da432723af` | CBD-92 deliverable/criterion evidence, coverage review, limitations, and public-launch policy |
-| `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1; approved | `b84aa6f2aed66c7ffad35a4fc58eead1602bcf65` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
+| `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1.1; approved at v1.1, editorial header correction only | `c1caf49653802f5c4d1f69f48d61f9aa881591a3` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
 | `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0; approved | `8be224d4ef5779f1743bdd7b4a53f731f31d564e` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
 | `docs/cbd-94-verification-review-inventory.md` | v1.0; approved | `e139cdd75646f8070b8e253ff6cc95c1f6bca966` | 270 verification cases, 15 manual packages, 15 specialist reviews, fixtures, parameters, monitors, and evidence rules |
 | `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.1; approved | `113f7e279fabed75e28748eea7362d9e2111675e` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
@@ -318,10 +318,18 @@ CBD-93 page version 3 was updated on August 16, 2026, but its body exceeds the
 connector's synchronous Markdown conversion limit; the merged repository blob
 therefore remains the mechanically verifiable authority.
 
-One editorial discrepancy remains in the CBD-93 repository header: it still
-labels the linked page a “Published v0.1.2 copy” even though the Confluence page
-has since advanced. CBD-95 does not edit the approved CBD-93 source; the issue is
-recorded as follow-up `FU-95-005`.
+The CBD-93 repository header previously labelled the linked page a “Published
+v0.1.2 copy” even though the Confluence page had since advanced. That was
+corrected at CBD-93 v1.1.1 on a separate focused branch, as `FU-95-005`
+required: the row now states that the page carries repository v1.1 content and
+that the repository blob remains the mechanically verifiable authority.
+
+Because CBD-93 is a frozen authority source, the correction changed its blob.
+The §2 record and the `scripts/audit-cbd-95.py` frozen-blob constant were
+re-frozen in the same change, and the audit reverifies all eleven blobs. The
+edit was editorial: no scenario, safeguard, evidence gap, residual, or
+`RI-93-*` decision changed, so no §8 impact review of the reconciliation
+outcomes was triggered.
 
 No CBD-95 Confluence target exists yet. The merge precondition is now met at
 `5c90a74`, so page registration in `scripts/sync-confluence.py` and the
@@ -437,3 +445,4 @@ Owner approves their exact versions.
 | 0.1.24 | August 16, 2026 | Codex | Rebaselined to current `origin/main` `43e87be`; verified that all eleven frozen CBD-72/CBD-91–94 blobs remain exact and that intervening CBD-102 and repository-tooling commits do not change package authority or scope. | Rebaseline complete; final audit and Product Owner approval pending |
 | 0.1.25 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Post-merge review correction. Recorded the `5c90a74` merge, stated that blob identity rather than commit identity is the integrity control, and released §6 publication from the merge gate while keeping it gated on exact-version approval. All eleven frozen blobs reverify unchanged. No component, authority order, identifier set, invariant, limitation, or supersession trigger changed. | Correction applied; Product Owner approval still pending |
 | 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Approved release. The Product Owner approved the exact package versions on August 16, 2026, closing `RG-94-016`. No component, authority order, frozen blob, identifier set, invariant, limitation, or supersession trigger changed at this revision; all eleven frozen blobs reverify unchanged. The §7 limitations continue to apply in full: approval of this package is not legal review, penetration testing, certification, compliance validation, or proof of production security. | **Approved v1.0** |
+| 1.0.1 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Re-froze CBD-93 at v1.1.1 after the editorial header correction `FU-95-005` required. Updated the §2 version and blob record to `c1caf496…`, updated the `scripts/audit-cbd-95.py` frozen-blob constant, and rewrote §6 to record the correction as applied rather than outstanding. The change was editorial: no scenario, safeguard, evidence gap, residual, or `RI-93-*` decision moved, so no §8 impact review of reconciliation outcomes was triggered and no reconciliation outcome, readiness recommendation, or release effect changed. All eleven frozen blobs reverify. | Correction to approved v1.0; package authority unchanged |
