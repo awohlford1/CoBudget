@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Executed — package audit passed; Product Owner review pending** |
-| Plan version | 0.1.2 |
+| Status | **Executed and approved — package audit passed; Product Owner approved v1.0 on August 16, 2026** |
+| Plan version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
 | Downstream gate | [CBD-76](https://cobudget.atlassian.net/browse/CBD-76) |
-| Repository branch | `codex/cbd-95-plan` |
+| Repository branch | `codex/cbd-95-plan`, merged to `main` as `5c90a74` |
 | Planning baseline | `43e87be` on August 16, 2026 |
 | Last updated | August 16, 2026 |
 
@@ -115,7 +115,7 @@ name the discrepancy and preserve the repository version during active work.
 | `docs/cbd-95-cbd-12-reconciliation-matrix.md` | Reconcile all security-sensitive CBD-12 rules | Gives every required area and every affected rule a stable reconciliation ID, one permitted outcome, evidence routes, mitigation/decision status, release effect, and follow-up route |
 | `docs/cbd-95-architecture-roadmap-follow-up-register.md` | Separate required change work from completed analysis | Lists each proposed architecture, product-plan, roadmap, specialist, provider, operational, and Jira action with source IDs, owner role, phase, closure evidence, MVP effect, and live issue/link disposition |
 | `docs/cbd-95-acceptance-criteria-traceability.md` | Prove CBD-95 and CBD-14 completion | Maps every Jira criterion and deliverable to evidence; records bidirectional-ID audit results, contradictions, limitations, review findings, approval evidence, change control, and the scoped CBD-72/CBD-76 readiness recommendation |
-| `scripts/audit-cbd-95.py` | Make the mechanical completeness claims repeatable | Fails on identifier, range, route, status, terminology, version, link, unsupported-claim, or matrix-completeness defects and prints an auditable summary |
+| `scripts/audit-cbd-95.py` | Make the mechanical completeness claims repeatable | Fails on the §7.1 identifier, range, route, outcome, follow-up, frozen-blob, local-path, table-hygiene, and bounded unsupported-claim defects and prints an auditable summary |
 
 The manifest is an index and authority record, not a new copy of CBD-91 through
 CBD-94. A requirement or decision remains defined in its source artifact and is
@@ -162,6 +162,12 @@ Every reconciliation row will contain:
 - any residual risk and the authority permitted to accept it;
 - the follow-up issue or proposed `FU-95-*` record; and
 - the effect on the CBD-72 and CBD-76 readiness recommendations.
+
+The identifier, criterion, outcome, required action, and follow-up fields are
+delivered as discrete table columns and are mechanically enforced under §7.1.5.
+The affected role, resource, action, lifecycle state, channel, residual risk,
+acceptance authority, and CBD-72/CBD-76 readiness effect are carried in row
+prose and are verified by review under §7.2.
 
 Every matrix claim must resolve in both directions: an upstream ID cited as
 affecting CBD-12 must reach at least one reconciliation row, and every
@@ -289,40 +295,77 @@ applying one also requires explicit authorization for that Jira change.
 
 ## 7. Mechanical audit contract
 
-The CBD-95 audit will fail unless all of the following pass:
+This section states what `scripts/audit-cbd-95.py` actually enforces. A passing
+audit is evidence for exactly these claims and no others; §7.2 lists the
+obligations that only a human reviewer can discharge, so that a green audit is
+never mistaken for a completed review.
+
+### 7.1 Enforced by the audit script
+
+The audit fails unless all of the following pass:
 
 1. upstream expected sets expand exactly as recorded by the approved CBD-94
    traceability baseline: `DI 76`, `DF 13`, `TH 45`, `RF 12`, `AB 86`, active
    `SG 96` excluding retired `SG-93-020`, `EG-91 24`, `EG-93 10`, `RI 19`,
    `RK 21`, `SR 147`, `VT 270`, `ME 15`, `SRV 15`, `FX 10`, `PR 5`, `MON 10`,
    and `RG 16`;
-2. every defined `RC-95-*`, `FU-95-*`, and `RV-95-*` ID is unique, contiguous
-   within its document, and resolves from every citation;
-3. every CBD-14 and CBD-95 deliverable and acceptance criterion has evidence or
-   an explicit blocker;
+2. every defined `RC-95-*`, `FU-95-*`, and `RV-95-*` ID is unique and
+   contiguous within its document, and every citation of one anywhere in the
+   package resolves to a defined row;
+3. every CBD-14 and CBD-95 acceptance-criterion identifier appears in the
+   traceability record, and every `RV-95-*` finding appears in the review
+   record. The audit checks that the criterion is present and routed; whether
+   its evidence is *sufficient* is a §7.2 judgement;
 4. the then-current CBD-12 criterion set is complete (`CBD-12-AC01–36` in the
-   planning snapshot), all fourteen §5.1 areas have at least one row, and every
-   current security-sensitive CBD-12 rule has exactly one reconciliation
-   outcome;
-5. every matrix row contains the required §5.2 fields and one permitted status;
-6. upstream-to-matrix and matrix-to-upstream identifier routes are complete;
-7. every `RI-93-*`, open `EG-*`, `RF-92-*`, and `RG-94-*` relevant to CBD-12 has
-   an explicit route or justified out-of-scope result;
-8. no accepted, deferred, resolved, verified, or gate-closed claim lacks the
-   required authority and evidence;
-9. `RG-94-015` remains public-launch-only and `RG-94-016` is not confused with
-   implementation or launch readiness;
-10. current role and lifecycle terminology is used, with legacy terms allowed
-    only inside an identified discrepancy;
-11. local paths, Jira links, Confluence links, section references, versions,
-    and frozen Git blobs resolve;
-12. tables have consistent widths and no duplicate headings, placeholders,
-    patch markers, or trailing whitespace remain;
-13. unsupported claims such as safe, secure, private, anonymous, erased,
-    deleted everywhere, real-time, guaranteed, or review proves compliance are
-    rejected unless the text explicitly limits or prohibits the claim; and
-14. the branch does not modify unrelated repository documents or represent a
-    pre-merge Confluence copy as authoritative.
+   planning snapshot), all fourteen §5.1 areas appear in the coverage index,
+   and every current security-sensitive CBD-12 rule has exactly one
+   reconciliation outcome in the permitted set;
+5. every matrix row carries six cells, an AC number matching its `RC-95-*`
+   index, one permitted outcome, at least one upstream evidence route, a
+   substantive required-action statement, and at least one resolvable
+   `FU-95-*` follow-up route. The remaining §5.2 fields — affected role,
+   resource, action, lifecycle state, channel, residual risk, acceptance
+   authority, and readiness effect — are carried in row prose and are verified
+   under §7.2, not mechanically;
+6. every reverse route the traceability record depends on is present in the
+   approved CBD-94 baseline for all twelve routed families: `TH-92`, `AB-93`,
+   `SG-93`, `RK-94`, `SR-94`, `VT-94`, `ME-94`, `SRV-94`, `FX-94`, `PR-94`,
+   `MON-94`, and `RG-94`. This makes the transitive route in the traceability
+   record checkable rather than asserted;
+7. every `RI-93-*` input appears in the decision register with an explicit
+   decision, and the exact decision markers for `RI-93-010` through `RI-93-019`
+   are preserved verbatim so a later edit cannot quietly widen them;
+8. `RG-94-015` remains public-launch-only and `RG-94-016` is stated separately
+   from implementation and launch readiness;
+9. the required limitation statements are present, and the recorded material
+   conflict markers for `RV-95-001–005` still appear;
+10. local repository paths and the eleven frozen Git blobs resolve;
+11. tables have consistent widths and no duplicate headings, placeholders,
+    patch markers, byte-order marks, or trailing whitespace remain;
+12. the bounded unsupported-claim pattern set defined by the script's
+    `check_unsupported_claims` — absolute security, absolute anonymity,
+    universal-erasure, and certification assertions — does not appear unless
+    nearby text negates or forbids it. The pattern list is deliberately kept in
+    the script alone so the two cannot drift apart; and
+13. the working tree contains no changes outside the six package files.
+
+### 7.2 Enforced by review, not by the script
+
+The audit cannot decide these, and a passing run must not be cited for them:
+
+1. whether a criterion's recorded evidence is sufficient, or whether an
+   explicit blocker is stated at its true scope;
+2. whether the row prose actually carries the remaining §5.2 fields, and
+   whether the chosen follow-up route is the correct one;
+3. whether an accepted, deferred, resolved, verified, or gate-closed claim has
+   the required authority and evidence;
+4. whether current role and lifecycle terminology is used, with legacy terms
+   confined to an identified discrepancy;
+5. whether Jira links, Confluence links, section references, and document
+   versions resolve against live external state;
+6. whether unsupported claims outside the §7.1.12 pattern set — including
+   bare uses of safe, secure, private, or real-time — have crept in; and
+7. whether a pre-merge Confluence copy is being represented as authoritative.
 
 ## 8. Completion and approval criteria
 
@@ -372,3 +415,5 @@ blocker, owner, scope, and follow-up route.
 | 0.1.0 | August 16, 2026 | Codex with Alexander Wohlford as Product Owner | Created the repository-first execution plan after CBD-94 reached Done. Defined source controls, five planned artifacts, the fourteen-area CBD-12 reconciliation method, status taxonomy, work phases, audit contract, completion gates, and six-hour allocation. | Draft for Product Owner review |
 | 0.1.1 | August 16, 2026 | Codex | Recorded that the plan was executed against the frozen baseline and routed current audit/approval state to the CBD-95 traceability record. | Executed; Product Owner review pending |
 | 0.1.2 | August 16, 2026 | Codex | Rebaselined the approval candidate to current `origin/main` `43e87be`; confirmed the eleven frozen CBD-72/CBD-91–94 source blobs were unchanged by the intervening CBD-102 and repository-tooling commits. | Executed; final audit and Product Owner approval pending |
+| 0.1.3 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Post-merge review correction. Rewrote §7 to separate what the audit script enforces from what only review can decide, because the prior fourteen-point contract claimed coverage the script did not implement; recorded which §5.2 fields are columns and which are prose; corrected the §4 completion contract; recorded the `5c90a74` merge. No plan scope, method, outcome taxonomy, or gate changed. | Correction applied; Product Owner approval pending |
+| 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Approved release. The plan's §8 completion criteria are met and the Product Owner approved the package at v1.0. Per §8, this approval closes `RG-94-016` and does not by itself close `RG-94-002` through `RG-94-015`, execute any `VT`, `ME`, or `SRV` result, accept any residual risk, complete CBD-72's remaining fixture or review work, or approve a production release. | **Approved v1.0** |

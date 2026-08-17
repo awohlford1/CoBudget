@@ -2,12 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Complete draft — Product Owner approval pending** |
-| Document version | 0.1.24 |
+| Status | **Approved v1.0 — Product Owner approved August 16, 2026** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
-| Repository baseline | `43e87be93a37097bf0e91cd4d3b4c2f98aa4aa15` |
+| Frozen source baseline | `43e87be93a37097bf0e91cd4d3b4c2f98aa4aa15` |
+| Merged to `main` | `5c90a74bed2d85dc4f5ed97ca1abb49e7b067515` |
 | Companion reconciliation | `docs/cbd-95-cbd-12-reconciliation-matrix.md` |
 | Companion follow-up register | `docs/cbd-95-architecture-roadmap-follow-up-register.md` |
 | Completion evidence | `docs/cbd-95-acceptance-criteria-traceability.md` |
@@ -45,8 +46,10 @@ permit CBD-95 to invent new behavior.
 
 The following blobs were resolved from the clean `origin/main` baseline at
 `43e87be` on August 16, 2026. The intervening CBD-102 and repository-tooling
-commits changed none of these frozen sources. A blob change requires the impact
-review in §8.
+commits changed none of these frozen sources, and the audit reconfirms each
+blob after the CBD-95 merge at `5c90a74`. Blob identity, not commit identity,
+is the integrity control: `main` may advance with unrelated work provided every
+blob below still resolves. A blob change requires the impact review in §8.
 
 | Component | Version and status | Git blob | Normative use |
 | --- | --- | --- | --- |
@@ -320,10 +323,12 @@ labels the linked page a “Published v0.1.2 copy” even though the Confluence 
 has since advanced. CBD-95 does not edit the approved CBD-93 source; the issue is
 recorded as follow-up `FU-95-005`.
 
-No CBD-95 Confluence target exists at this draft version. CBD-95 pages must not
-be created or updated until the corresponding repository documents merge to
-`main`. Page registration and synchronization are post-merge work under the
-repository's Confluence policy.
+No CBD-95 Confluence target exists yet. The merge precondition is now met at
+`5c90a74`, so page registration in `scripts/sync-confluence.py` and the
+subsequent synchronization are unblocked as post-merge work under the
+repository's Confluence policy. They remain gated on Product Owner approval of
+the exact document versions, because publishing an unapproved revision would
+present a draft as the authoritative copy. This is tracked as `FU-95-029`.
 
 ## 7. Evidence and limitation statement
 
@@ -430,3 +435,5 @@ Owner approves their exact versions.
 | 0.1.22 | August 16, 2026 | Codex | Recorded `RI-93-018`: delete private data after terminal account deletion, pseudonymize necessary retained shared history as “Former member,” restrict and time-bound internal linkage, preserve minimal purpose-bound evidence/deletion records, and make no recipient-copy or immediate-backup erasure claim. | Decision approved; schedules/design/evidence and final choice pending |
 | 0.1.23 | August 16, 2026 | Codex | Recorded `RI-93-019`: retain immediate owner/co-owner joint-projection dissolution with safe pre-notice where feasible and mandatory immediate post-notice, no contributor objection/veto/delay/acknowledgement position, unchanged contributor self-source removal, and explicit unaccepted forced-itemization risk. | All `RI-93-*` decisions complete; copy/implementation/evidence and package approval pending |
 | 0.1.24 | August 16, 2026 | Codex | Rebaselined to current `origin/main` `43e87be`; verified that all eleven frozen CBD-72/CBD-91–94 blobs remain exact and that intervening CBD-102 and repository-tooling commits do not change package authority or scope. | Rebaseline complete; final audit and Product Owner approval pending |
+| 0.1.25 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Post-merge review correction. Recorded the `5c90a74` merge, stated that blob identity rather than commit identity is the integrity control, and released §6 publication from the merge gate while keeping it gated on exact-version approval. All eleven frozen blobs reverify unchanged. No component, authority order, identifier set, invariant, limitation, or supersession trigger changed. | Correction applied; Product Owner approval still pending |
+| 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Approved release. The Product Owner approved the exact package versions on August 16, 2026, closing `RG-94-016`. No component, authority order, frozen blob, identifier set, invariant, limitation, or supersession trigger changed at this revision; all eleven frozen blobs reverify unchanged. The §7 limitations continue to apply in full: approval of this package is not legal review, penetration testing, certification, compliance validation, or proof of production security. | **Approved v1.0** |
