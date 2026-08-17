@@ -26,8 +26,10 @@ PACKAGE_FILES = (
     Path("scripts/audit-cbd-95.py"),
 )
 
-FROZEN_BASELINE = "43e87be93a37097bf0e91cd4d3b4c2f98aa4aa15"
-
+# These blobs were frozen from `origin/main` at 43e87be on August 16, 2026.
+# Blob identity, not commit identity, is the integrity control: it proves the
+# exact authority sources are unchanged while allowing `main` to advance with
+# unrelated work, including the merge of this package itself.
 FROZEN_BLOBS = {
     Path("docs/cbd-91-private-mvp-data-inventory.md"): (
         "1e1134415915238752440da4b2e4acaa293d20e6"
@@ -193,7 +195,10 @@ def git(*args: str) -> str:
     if completed.returncode != 0:
         detail = completed.stderr.strip() or completed.stdout.strip()
         raise RuntimeError(f"git {' '.join(args)} failed: {detail}")
-    return completed.stdout.strip()
+    # Only trailing whitespace: `status --porcelain` encodes worktree-only
+    # changes as a leading space (" M path"), which strip() would consume,
+    # shifting the first line's path by one character.
+    return completed.stdout.rstrip()
 
 
 def expand_ids(text: str, prefix: str, issue: int) -> set[int]:
@@ -274,6 +279,23 @@ def check_local_references(audit: Audit, text_by_path: dict[Path, str]) -> None:
             )
 
 
+def check_cbd95_citations(
+    audit: Audit, text_by_path: dict[Path, str], defined: dict[str, set[int]]
+) -> None:
+    """Every CBD-95 id cited anywhere must resolve to a defined row.
+
+    The set checks prove the defining tables are complete; this proves no
+    document points at a row that was renumbered away or never existed.
+    """
+    for prefix, valid in defined.items():
+        for path, text in text_by_path.items():
+            unknown = sorted(expand_ids(text, prefix, 95) - valid)
+            audit.check(
+                not unknown,
+                f"{path}: cites undefined {prefix}-95 ids: {unknown}",
+            )
+
+
 def check_unsupported_claims(audit: Audit, text_by_path: dict[Path, str]) -> None:
     claim_patterns = (
         r"guaranteed (?:secure|safe|private)",
@@ -322,10 +344,6 @@ def main() -> int:
 
     # Repository and scope controls.
     audit.check(Path(git("rev-parse", "--show-toplevel")) == ROOT, "script is not running in the expected repository root")
-    audit.check(
-        git("rev-parse", "origin/main") == FROZEN_BASELINE,
-        "origin/main no longer matches the frozen CBD-95 baseline; rebaseline required",
-    )
     allowed_changes = {str(path).replace("\\", "/") for path in PACKAGE_FILES}
     status_lines = git("status", "--porcelain", "--untracked-files=all").splitlines()
     changed_paths: set[str] = set()
@@ -358,12 +376,23 @@ def main() -> int:
         check_exact_numbers(audit, f"{prefix}-{issue}", actual, expected)
 
     approved_routes = read(Path("docs/cbd-94-acceptance-criteria-traceability.md"))
+    # The traceability record routes CBD-95 outcomes to these families
+    # transitively through CBD-94. Every family it leans on is checked here, so
+    # a later CBD-94 revision cannot silently drop a leg while CBD-95 stays
+    # green.
     for prefix, issue, maximum in (
         ("TH", 92, 45),
         ("AB", 93, 86),
+        ("SG", 93, 97),
         ("RK", 94, 21),
         ("SR", 94, 147),
         ("VT", 94, 270),
+        ("ME", 94, 15),
+        ("SRV", 94, 15),
+        ("FX", 94, 10),
+        ("PR", 94, 5),
+        ("MON", 94, 10),
+        ("RG", 94, 16),
     ):
         check_exact_numbers(
             audit,
@@ -398,7 +427,7 @@ def main() -> int:
     for label, rows, maximum in (
         ("RC-95", rc_rows, 36),
         ("FU-95", fu_rows, 30),
-        ("RV-95", rv_rows, 5),
+        ("RV-95", rv_rows, 8),
         ("RI-93 decision register", ri_rows, 19),
     ):
         numbers = [number for number, _, _ in rows]
@@ -408,14 +437,16 @@ def main() -> int:
             f"{label}: duplicate authoritative table row definitions found",
         )
 
+    defined_fu = {number for number, _, _ in fu_rows}
+
     rc_ac_numbers: set[int] = set()
     outcome_counts = {outcome: 0 for outcome in PERMITTED_OUTCOMES}
     for number, cells, line_number in rc_rows:
         audit.check(
-            len(cells) == 5,
-            f"{matrix_path}:{line_number}: RC-95 row must have 5 cells, found {len(cells)}",
+            len(cells) == 6,
+            f"{matrix_path}:{line_number}: RC-95 row must have 6 cells, found {len(cells)}",
         )
-        if len(cells) != 5:
+        if len(cells) != 6:
             continue
         ac_match = re.search(r"\bAC(\d{2})\b", cells[1])
         audit.check(ac_match is not None, f"{matrix_path}:{line_number}: missing CBD-12 AC number")
@@ -442,11 +473,19 @@ def main() -> int:
             len(re.sub(r"[*_`]", "", cells[4]).strip()) >= 40,
             f"{matrix_path}:{line_number}: required action/effect is not substantive",
         )
+        # Execution plan section 5.2: every row names the follow-up record
+        # through which its remaining work closes.
+        routed = expand_ids(cells[5], "FU", 95)
+        audit.check(
+            bool(routed) and routed <= defined_fu,
+            f"{matrix_path}:{line_number}: follow-up route is empty or cites "
+            f"undefined ids: {sorted(routed - defined_fu)}",
+        )
 
     check_exact_numbers(audit, "CBD-12 AC", rc_ac_numbers, set(range(1, 37)))
     audit.check(outcome_counts["Pass unchanged"] == 2, "RC outcome total for Pass unchanged must be 2")
-    audit.check(outcome_counts["Pass with mitigation"] == 33, "RC outcome total for Pass with mitigation must be 33")
-    audit.check(outcome_counts["Blocked pending decision/evidence"] == 1, "RC blocked outcome total must be 1")
+    audit.check(outcome_counts["Pass with mitigation"] == 34, "RC outcome total for Pass with mitigation must be 34")
+    audit.check(outcome_counts["Blocked pending decision/evidence"] == 0, "RC blocked outcome total must be 0")
     audit.check(outcome_counts["Out of CBD-14 scope"] == 0, "RC out-of-scope outcome total must be 0")
 
     for area in REQUIRED_AREAS:
@@ -624,7 +663,7 @@ def main() -> int:
             f"CBD-14-AC{number:02d}" in trace,
             f"CBD-14-AC{number:02d} is missing from traceability",
         )
-    for number in range(1, 6):
+    for number in range(1, 9):
         audit.check(
             f"RV-95-{number:03d}" in trace,
             f"RV-95-{number:03d} is missing from the review record",
@@ -687,6 +726,15 @@ def main() -> int:
             audit.check(heading in text, f"{path}: required heading missing: {heading}")
 
     check_local_references(audit, text_by_path)
+    check_cbd95_citations(
+        audit,
+        text_by_path,
+        {
+            "RC": {number for number, _, _ in rc_rows},
+            "FU": defined_fu,
+            "RV": {number for number, _, _ in rv_rows},
+        },
+    )
     check_unsupported_claims(audit, text_by_path)
 
     if audit.warnings:
@@ -705,7 +753,7 @@ def main() -> int:
         "CBD-95 AUDIT PASS: "
         f"{audit.checks} checks, 0 failures, {len(audit.warnings)} warnings; "
         "18 upstream families, 11 frozen blobs, 36 RC rows, 30 FU rows, "
-        "5 RV findings, 19 RI decisions, 14 required areas, "
+        "8 RV findings, 19 RI decisions, 14 required areas, "
         "6 CBD-95 ACs, 10 CBD-14 ACs"
     )
     return 0
