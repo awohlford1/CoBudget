@@ -244,7 +244,7 @@ resolved from `PATH`. The portable command is `python scripts/audit-cbd-95.py`.
 Exit code was 0.
 
 ```text
-CBD-95 AUDIT PASS: 3936 checks, 0 failures, 0 warnings; 18 upstream families, 11 frozen blobs, 36 RC rows, 30 FU rows, 8 RV findings, 19 RI decisions, 14 required areas, 6 CBD-95 ACs, 10 CBD-14 ACs
+CBD-95 AUDIT PASS: 3954 checks, 0 failures, 0 warnings; 18 upstream families, 11 frozen blobs, 36 RC rows, 30 FU rows, 8 RV findings, 19 RI decisions, 14 required areas, 6 CBD-95 ACs, 10 CBD-14 ACs
 ```
 
 The count moved from 3,642 to 3,910 across three revisions, and almost none of
