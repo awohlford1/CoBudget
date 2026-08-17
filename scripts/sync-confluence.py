@@ -295,6 +295,54 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-94 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-94-acceptance-criteria-traceability.md",
     ),
+    # CBD-95 consolidates the frozen CBD-91 through CBD-94 blobs recorded in its
+    # manifest §2, so the whole set publishes after them. Within the set the
+    # order follows the header citations: the matrix names the manifest as its
+    # "Governing package"; the register names both the manifest and the matrix;
+    # the traceability record cites all three as deliverable evidence. The
+    # traceability record therefore publishes last and is not a baseline, since
+    # nothing cites it. This mirrors the CBD-92 and CBD-94 arrangements.
+    #
+    # The execution plan is deliberately not a target. It is working material
+    # rather than a CBD-95 deliverable: the plan's own §4 lists the manifest,
+    # matrix, register, traceability record, and audit script as the artifacts,
+    # and CBD-94 likewise published no plan.
+    #
+    # These four pages were created as placeholders on August 16, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged approved content. Until then the repository files on
+    # `main` are authoritative.
+    Target(
+        key="cbd-95-manifest",
+        doc_set="cbd-95",
+        page_id="9797633",
+        expected_title="CBD-95 — Threat-Model and Data-Inventory Package Manifest",
+        path="docs/cbd-95-threat-model-package-manifest.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-95-reconciliation-matrix",
+        doc_set="cbd-95",
+        page_id="9830401",
+        expected_title="CBD-95 — CBD-12 Security and Privacy Reconciliation Matrix",
+        path="docs/cbd-95-cbd-12-reconciliation-matrix.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-95-follow-up-register",
+        doc_set="cbd-95",
+        page_id="9863169",
+        expected_title="CBD-95 — Architecture, Roadmap, and Follow-up Register",
+        path="docs/cbd-95-architecture-roadmap-follow-up-register.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-95-traceability",
+        doc_set="cbd-95",
+        page_id="9895937",
+        expected_title="CBD-95 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-95-acceptance-criteria-traceability.md",
+    ),
     # CBD-102 derives its gates from the approved CBD-72 permission model, the
     # CBD-91 inventory, the CBD-92 contract registers, and the architecture
     # security baseline, so the whole set publishes after those.
