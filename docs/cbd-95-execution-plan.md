@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Executed and approved — package audit passed; Product Owner approved v1.0 on August 16, 2026** |
-| Plan version | 1.0 |
+| Plan version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
 | Downstream gate | [CBD-76](https://cobudget.atlassian.net/browse/CBD-76) |
 | Repository branch | `codex/cbd-95-plan`, merged to `main` as `5c90a74` |
 | Planning baseline | `43e87be` on August 16, 2026 |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose and intended outcome
 
@@ -347,7 +347,14 @@ The audit fails unless all of the following pass:
     universal-erasure, and certification assertions — does not appear unless
     nearby text negates or forbids it. The pattern list is deliberately kept in
     the script alone so the two cannot drift apart; and
-13. the working tree contains no changes outside the six package files.
+13. the working tree contains no changes outside the six package files;
+14. the reconciliation tally the traceability record states in prose equals
+    the outcome totals actually counted from the matrix rows; and
+15. the three places the traceability record restates the audit check total
+    each match exactly once and agree with each other and with the current
+    run. Restating a total by hand is how the record previously drifted from
+    the artifacts it summarizes, so both statements are now derived rather
+    than asserted.
 
 ### 7.2 Enforced by review, not by the script
 
@@ -417,3 +424,4 @@ blocker, owner, scope, and follow-up route.
 | 0.1.2 | August 16, 2026 | Codex | Rebaselined the approval candidate to current `origin/main` `43e87be`; confirmed the eleven frozen CBD-72/CBD-91–94 source blobs were unchanged by the intervening CBD-102 and repository-tooling commits. | Executed; final audit and Product Owner approval pending |
 | 0.1.3 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Post-merge review correction. Rewrote §7 to separate what the audit script enforces from what only review can decide, because the prior fourteen-point contract claimed coverage the script did not implement; recorded which §5.2 fields are columns and which are prose; corrected the §4 completion contract; recorded the `5c90a74` merge. No plan scope, method, outcome taxonomy, or gate changed. | Correction applied; Product Owner approval pending |
 | 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Approved release. The plan's §8 completion criteria are met and the Product Owner approved the package at v1.0. Per §8, this approval closes `RG-94-016` and does not by itself close `RG-94-002` through `RG-94-015`, execute any `VT`, `ME`, or `SRV` result, accept any residual risk, complete CBD-72's remaining fixture or review work, or approve a production release. | **Approved v1.0** |
+| 1.0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded as part of the CBD-14 close-out audit. Recorded two new script-enforced checks as §7.1 items 14 and 15: the prose reconciliation tally must equal the outcome totals counted from the matrix, and the three restatements of the audit check total must agree with each other and with the current run. Both defects had reached an approved revision. Contract documentation only: no plan step, deliverable, or gate changed. | Correction to approved v1.0; outcomes unchanged |

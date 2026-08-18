@@ -336,6 +336,72 @@ def check_unsupported_claims(audit: Audit, text_by_path: dict[Path, str]) -> Non
                 )
 
 
+# Statements the traceability record makes *about* the package, which earlier
+# revisions restated by hand and let drift away from the artifacts they
+# summarize. Each pattern must match exactly once so a reworded section fails
+# loudly instead of silently dropping out of the guard.
+STATED_TOTAL_PATTERNS = (
+    ("audit result block", r"CBD-95 AUDIT PASS: (\d[\d,]*) checks"),
+    ("CBD-95-AC02", r"rather than asserted: (\d[\d,]*) checks"),
+    ("final approval evidence", r"Python 3\.\d+\.\d+: (\d[\d,]*) checks"),
+)
+
+
+def check_documented_tally(
+    audit: Audit, trace: str, outcome_counts: dict[str, int]
+) -> None:
+    """The record's prose must agree with the matrix it summarizes."""
+    match = re.search(
+        r"(\d+) Pass unchanged, (\d+) Pass with mitigation, "
+        r"(\d+) Blocked, (\d+) Out of scope",
+        trace,
+    )
+    audit.check(
+        match is not None,
+        "traceability record states no CBD-12 reconciliation tally",
+    )
+    if match is None:
+        return
+    stated = tuple(int(value) for value in match.groups())
+    actual = (
+        outcome_counts["Pass unchanged"],
+        outcome_counts["Pass with mitigation"],
+        outcome_counts["Blocked pending decision/evidence"],
+        outcome_counts["Out of CBD-14 scope"],
+    )
+    audit.check(
+        stated == actual,
+        f"traceability tally {stated} disagrees with the matrix outcome "
+        f"totals {actual} (unchanged/mitigation/blocked/out-of-scope)",
+    )
+
+
+def check_documented_totals(audit: Audit, trace: str) -> int | None:
+    """Every stated check total must be the same number.
+
+    The totals are restated in three places. Comparing them to each other is
+    stable regardless of what the current run counts, and it is the exact
+    defect that reached an approved revision: three statements, three numbers.
+    """
+    totals: dict[str, int] = {}
+    for label, pattern in STATED_TOTAL_PATTERNS:
+        found = re.findall(pattern, trace)
+        audit.check(
+            len(found) == 1,
+            f"expected exactly one stated check total for {label}, found {len(found)}",
+        )
+        if len(found) == 1:
+            totals[label] = int(found[0].replace(",", ""))
+    if len(totals) != len(STATED_TOTAL_PATTERNS):
+        return None
+    distinct = set(totals.values())
+    audit.check(
+        len(distinct) == 1,
+        f"stated check totals disagree: {totals}",
+    )
+    return next(iter(distinct)) if len(distinct) == 1 else None
+
+
 def main() -> int:
     audit = Audit()
 
@@ -493,6 +559,7 @@ def main() -> int:
     audit.check(outcome_counts["Pass with mitigation"] == 34, "RC outcome total for Pass with mitigation must be 34")
     audit.check(outcome_counts["Blocked pending decision/evidence"] == 0, "RC blocked outcome total must be 0")
     audit.check(outcome_counts["Out of CBD-14 scope"] == 0, "RC out-of-scope outcome total must be 0")
+    check_documented_tally(audit, trace, outcome_counts)
 
     for area in REQUIRED_AREAS:
         audit.check(
@@ -742,6 +809,15 @@ def main() -> int:
         },
     )
     check_unsupported_claims(audit, text_by_path)
+
+    documented_total = check_documented_totals(audit, trace)
+    # Must remain the last check performed: the documented total counts every
+    # check this run makes, including this one.
+    audit.check(
+        documented_total is not None and documented_total == audit.checks + 1,
+        f"documented check total {documented_total} does not match this run's "
+        f"{audit.checks + 1}; rerun and restate it in all three places",
+    )
 
     if audit.warnings:
         for warning in audit.warnings:
