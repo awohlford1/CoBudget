@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Matrix decisions, per-criterion mapping, and all open decisions complete — fixture completion and the CBD-14 security gate remain** |
-| Document version | 0.1.12 |
+| Status | **Ready for final package approval — every review gate dispositioned August 18, 2026; exact-version approval and publication remain** |
+| Document version | 0.1.13 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-72](https://cobudget.atlassian.net/browse/CBD-72) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
 | Permission model | `docs/cbd-72-collaboration-permission-model.md` |
 | Scenario catalog | `docs/cbd-72-authorization-scenario-catalog.md` |
-| Last updated | August 15, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Completion rule
 
@@ -19,11 +19,11 @@ CBD-72 is complete only when the permission model covers every required role, ac
 
 | Jira deliverable | Specification evidence | Scenario evidence | Status |
 | --- | --- | --- | --- |
-| Versioned permission matrix | Specification §§2–4, 11 | ROLE, COLL, PART | Drafted |
-| Resource-scope rules | Specification §5 | VIEW, PART | Drafted; fixtures pending |
+| Versioned permission matrix | Specification §§2–4, 11 | ROLE, COLL, PART | **Complete.** Permissions 1–35 approved; independent audit passed August 18, 2026 |
+| Resource-scope rules | Specification §5 | VIEW, PART | **Complete at rule level.** Deterministic fixtures are test-design scope under `VT-94-*` |
 | Ownership and recovery decision record | Specification §6 and OD-72-01–06 | OWN, CONN, LIFE | **Complete.** Sole-owner exit, lost-owner recovery, archival and deletion lifecycle, and orphaned-connection disposition all decided |
-| Cross-budget isolation requirements | Specification §7 and PM-72-010 | XSP | Drafted; fixtures pending |
-| Authorization-test inventory | Specification §§8–9; scenario catalog | All families | Initial inventory drafted |
+| Cross-budget isolation requirements | Specification §7 and PM-72-010 | XSP | **Complete at rule level.** Deterministic fixtures are test-design scope under `VT-94-*` |
+| Authorization-test inventory | Specification §§8–9; scenario catalog | All families | **Complete.** 78 rule-level scenarios across 21 families; AC37's six case types all covered |
 
 ## 2A. Per-criterion acceptance-criteria mapping
 
@@ -87,15 +87,15 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 
 | Gate | Required evidence | Current result |
 | --- | --- | --- |
-| Matrix completeness | Every action category and role has an explicit cell; no blank or implied allow. | Initial pass; independent review pending |
-| Role/resource consistency | Viewer profiles never elevate role authority; Partner is not treated as broad Viewer. | Draft pass |
+| Matrix completeness | Every action category and role has an explicit cell; no blank or implied allow. | **Pass.** Independent re-audit August 18, 2026: mechanical cross-document audit clean — 78 scenarios with no duplicates or placeholders, all 38 criteria mapped bidirectionally, every permission citation 1–35 and scenario reference resolves, RF-72-01–61 contiguous — on top of the cell-by-cell reviews recorded in RF-72-55–61 and the CBD-94/95 exhaustive review |
+| Role/resource consistency | Viewer profiles never elevate role authority; Partner is not treated as broad Viewer. | **Pass.** Held through RF-72-55–61 and the CBD-95 reconciliation, which corrected downstream tickets to this model rather than the reverse |
 | Ownership safety | Exactly one Primary, multiple Co-owners permitted, protected actions fail atomically, a sole Primary Owner always has a supported exit, and a permanently unavailable owner cannot strand the other members. | **Pass.** All six open decisions closed |
-| Cross-space isolation | All synchronous and asynchronous data paths bind membership and target to one space. | Requirements drafted; detailed fixtures pending |
-| Server-side enforcement | Inputs, decision timing, default deny, stale work, and concurrency are explicit. | Draft pass; architecture review pending |
-| Security and privacy | CBD-14 findings reconciled; credentials and restricted derived data cannot leak. | Pending CBD-14 review |
-| Accessibility | Hidden/disabled/denied states and reauthentication/confirmation flows have accessible behavior. | Detailed review pending |
-| Test readiness | Every material rule maps to deterministic positive and negative scenarios. | Initial inventory only |
-| Product Owner approval | Approval names the exact version and resolves blocking decisions. | Pending |
+| Cross-space isolation | All synchronous and asynchronous data paths bind membership and target to one space. | **Pass at rule level.** XSP-01–03 and the §7/§8 requirements are approved; deterministic fixtures are test-design scope under `VT-94-*` |
+| Server-side enforcement | Inputs, decision timing, default deny, stale work, and concurrency are explicit. | **Pass.** CBD-92 modeled every flow and trust boundary over this permission model, and the approved CBD-95 package records the architecture alignment |
+| Security and privacy | CBD-14 findings reconciled; credentials and restricted derived data cannot leak. | **Pass.** The approved CBD-95 package v1.0 (August 16, 2026) records the CBD-72 CBD-14 security reconciliation gate as Satisfied; CBD-14 and CBD-95 are Done |
+| Accessibility | Hidden/disabled/denied states and reauthentication/confirmation flows have accessible behavior. | **Satisfied for specification** via the inherited SD-071-048 accessibility requirements this model carries; detailed accessibility verification remains an explicit implementation-phase gate |
+| Test readiness | Every material rule maps to deterministic positive and negative scenarios. | **Rule-level inventory accepted** by Product Owner decision, August 18, 2026; deterministic fixtures are test-design scope under the CBD-94 verification inventory |
+| Product Owner approval | Approval names the exact version and resolves blocking decisions. | Pending exact-version approval of model 0.1.53, catalog 0.1.14, traceability 0.1.13 |
 | Publication | Confluence pages and repository mirrors match the approved version. | Pending |
 
 ## 5. Open-decision and follow-up register
@@ -174,14 +174,16 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 | RF-72-59 | In-depth package review, August 15, 2026 | The scenario family table documented ten prefixes while the inventory used twenty-one; `ROLE-04`, `VIEW-07`, `PART-06`, and `CONN-06` had been renumbered by RF-72-53 but left as one-line `To detail` placeholders; and the documented `AUD` family had no scenarios at all. RF-72-53 assigned identifiers without content. | Complete the family table, give the four renumbered scenarios real content, sort the inventory to match the table, and record the empty `AUD` family and absent revoked-consent coverage as explicit gaps against CBD-72-AC13. | Product Owner approved August 15, 2026; scenario catalog v0.1.9 aligned |
 | RF-72-60 | Open-decision closure, August 15, 2026 | The package carried four open decisions that between them left a permanently unavailable sole Primary Owner able to freeze every other member's contributed financial data indefinitely, no defined budget-space retention or restoration behaviour, and no disposition for a permanently orphaned bank connection. | Close all four. Recover a lost sole owner by archival rather than takeover, so the remedy grants no new authority and cannot be used to seize a budget space. Route deletion through archival with a 30-day restore window and an irreversible purge to a minimal non-financial tombstone, reusing the §5.5 contract rather than inventing a second lifecycle. Retain archived spaces indefinitely with members read-only at their archival-time scope. Leave a permanently orphaned connection read-only forever and resume coverage only through a newly authorized connection. | Product Owner approved August 15, 2026; specification §§6.3–6.5 and §10, `CONN-07`, `LIFE-06`, `LIFE-07` aligned |
 | RF-72-61 | CBD-93 abuse-case analysis, August 15, 2026 | §6.5 item 10 ended with a blanket bar on any export or snapshot from an archived budget space. Raised by CBD-93 as `AB-93-041`. Because archival is a Primary-only action, a Primary Owner could freeze the space and simultaneously remove every other member's route to a portable copy of records they contributed; members kept read-only access but could not take a copy out. The sharpest form was the §6.4 restore window, where members are notified twice that the payload will be permanently purged, can read all of it, and could export none of it. Three things weighed against the prohibition. It carried no recorded rationale anywhere in the package. It was absent from the OD-72-05 decision record, which states only that members keep read-only access at their archival-time scope. It was not among the activities §6.5 item 3 enumerates as ended by archival, appearing instead appended to a clause otherwise about read scope. It also ran against this review's own RF-72-60 finding, which identified members being left with contributed financial data frozen as the problem archival was meant to solve. The supporting technical argument was weaker than expected: `DI-91-075` freezes scope for the archived life of the space, so the invalidate-on-change trigger that §5.7 and §5.8 rely on cannot fire — and cannot be needed, because there is no scope drift to catch. | Amend OD-72-05: export follows read scope. A member retains the export or snapshot authority they held at archival, evaluated against the frozen archival-time scope, with the full live control set — allowlist, fresh reauthentication, generation and download authorization, recipient binding, encryption, rate limits, 24-hour expiry, and audit. Nobody gains authority they did not hold at archival, and a Viewer still cannot self-serve; an owner-created §5.8 snapshot bounded by the Viewer's frozen profile remains their only path to a copy. Keep the path open throughout the §6.4 restore window. Split the rule into §6.5 item 11 and renumber the prior item 11 to 12. | Product Owner approved August 15, 2026; specification §6.4 item 2, §6.5 items 10–12, and §10 aligned. `DI-91-034`–`DI-91-036` in the approved CBD-91 v1.0 inventory still state the superseded prohibition and need a follow-up amendment under change control. `LIFE` and `EXP` fixtures pending |
+| RF-72-62 | RI-93-012 synchronization, August 18, 2026 | Specification §6.3 still routed inactive-owner notices “through every channel on record”, which RI-93-012 (approved August 16, 2026) superseded for external routing of notices about the subject. FU-95-020 required a separately authorized focused amendment. | Amend §6.3 only for safety routing: mandatory authenticated in-app notice, external copies only to the subject's verified private safety channel, no fallback. | Product Owner authorized and applied August 18, 2026; model v0.1.53 |
+| RF-72-63 | Close-out review, August 18, 2026 | Three review gates and two stale texts stood between the reconciled package and approval: fixtures were “pending” without a disposition, the accessibility/architecture/privacy/quality gates had no recorded route, and the security gate row plus §7 still described CBD-14 as pending with a September 9 due date after CBD-14 closed. | Record the Product Owner dispositions: rule-level inventory accepted with fixtures routed to test design under `VT-94-*`; security/privacy discharged by approved CBD-95 v1.0; architecture by CBD-92; accessibility satisfied for specification via SD-071-048 with detailed verification an implementation gate; correct the stale gate rows. | Product Owner approved August 18, 2026; gates table and §7 aligned |
 
 ## 7. Work remaining before approval
 
 1. **Done.** All 38 rewritten criteria map to specification and scenario evidence in §2A, verified in both directions: no criterion lacks evidence and no scenario family is orphaned.
-2. Expand the scenario inventory into concrete fixtures with actor, scope, versions, result, state delta, audit, and notification assertions. The empty `AUD` family and absent revoked-consent coverage are now closed — `AUD-01` through `AUD-04` and `LIFE-05` exist, and no scenario remains a placeholder — but every scenario is still at rule level rather than fixture level.
-3. Perform independent matrix-cell and cross-document consistency audits, now that permission numbers 1–35 resolve.
-4. **Done for the open-decision half.** All six open decisions are closed as of August 15, 2026. Reconciling CBD-14 security findings against them remains, and CBD-14 may still require a scoped mitigation to any of these outcomes without reopening the product decision.
-5. Complete accessibility, architecture, privacy, and quality reviews. Note that CBD-14 is due September 9, 2026, after CBD-72's own due date, so either the security gate or the due date must move.
+2. **Dispositioned August 18, 2026.** The rule-level inventory is accepted as the CBD-72 deliverable; deterministic fixture elaboration is test-design scope under `VT-94-*`. No scenario is a placeholder and every AC37 case type has coverage.
+3. **Done August 18, 2026.** Mechanical cross-document audit passed in full, and the repository blobs were verified byte-identical to the hashes frozen in the approved CBD-95 manifest before the close-out amendments.
+4. **Done.** All six open decisions closed August 15, 2026; the CBD-95 reconciliation then confirmed them, amending OD-72-05 by RF-72-61 and superseding one §6.3 routing sentence by RI-93-012, both now merged.
+5. **Dispositioned August 18, 2026.** Security and privacy review is discharged by the approved CBD-95 package; architecture review by CBD-92's threat model over this permission model; accessibility is satisfied for specification via inherited SD-071-048, with detailed verification an explicit implementation gate. CBD-14 closed August 18, 2026 after its dates were pulled in to August 19.
 6. Record Product Owner approval for the exact version.
 7. Publish all three artifacts to Confluence, synchronize repository mirrors, and link the evidence from Jira. A synchronization claim is satisfied only when description, acceptance criteria, and traceability summary all match (RF-72-57).
 
@@ -189,6 +191,7 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.1.13 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-72-62 (RI-93-012 §6.3 safety-routing amendment) and RF-72-63 (close-out dispositions for fixtures, specialist reviews, and the stale CBD-14 gate texts). Every review gate is now dispositioned; exact-version approval and publication remain. | Product Owner approved dispositions August 18, 2026 |
 | 0.1.12 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-72-61 from the CBD-93 abuse-case analysis and amended OD-72-05 so that export follows read scope from an archived budget space. The prior blanket bar in §6.5 item 10 had no recorded rationale, was absent from the OD-72-05 decision record, was not among the activities §6.5 item 3 ends, and ran against RF-72-60's own finding. Flagged that `DI-91-034`–`DI-91-036` in the approved CBD-91 v1.0 inventory still state the superseded prohibition and need a follow-up amendment under change control. | Product Owner approved August 15, 2026; `LIFE`/`EXP` fixture completion and the CBD-14 gate remain |
 | 0.1.11 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-72-60 closing OD-72-01, OD-72-02, OD-72-04, and OD-72-05. All six open decisions are now closed. Updated the ownership-safety review gate to Pass and extended the per-criterion mapping with the new lifecycle scenarios. | Product Owner approved; fixture completion and the CBD-14 gate remain |
 | 0.1.10 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Added §2A mapping all 38 rewritten criteria to specification and scenario evidence, with the reverse direction recorded so no scenario family is orphaned. This closes the per-criterion half of the bidirectional check that RF-72-57 left open. Recorded that the mapping asserts rule-level evidence rather than completed fixtures. | Product Owner approved; fixture completion remains |
