@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1** |
-| Document version | 1.0.1 |
+| Document version | 1.0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -12,7 +12,7 @@
 | Companion reconciliation | `docs/cbd-95-cbd-12-reconciliation-matrix.md` |
 | Companion follow-up register | `docs/cbd-95-architecture-roadmap-follow-up-register.md` |
 | Completion evidence | `docs/cbd-95-acceptance-criteria-traceability.md` |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose and authority
 
@@ -59,7 +59,7 @@ blob below still resolves. A blob change requires the impact review in §8.
 | `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1.1; approved at v1.1, editorial header correction only | `c1caf49653802f5c4d1f69f48d61f9aa881591a3` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
 | `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0; approved | `8be224d4ef5779f1743bdd7b4a53f731f31d564e` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
 | `docs/cbd-94-verification-review-inventory.md` | v1.0; approved | `e139cdd75646f8070b8e253ff6cc95c1f6bca966` | 270 verification cases, 15 manual packages, 15 specialist reviews, fixtures, parameters, monitors, and evidence rules |
-| `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.1; approved | `113f7e279fabed75e28748eea7362d9e2111675e` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
+| `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.2; approved at v1.0.1, missing-criterion correction only | `ff70668fbeb3ddea2a843a3c11fb0024e8bf3957` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
 | `docs/cbd-94-exhaustive-review-findings.md` | v1.0; accepted, all findings closed | `c7c02611b7b2c6cfc78ed5467e013b615128b8c6` | Independent re-execution evidence and closed `RV-94-011–017` findings |
 
 The then-current CBD-12/CBD-72 target package is deliberately not called an
@@ -331,12 +331,16 @@ edit was editorial: no scenario, safeguard, evidence gap, residual, or
 `RI-93-*` decision changed, so no §8 impact review of the reconciliation
 outcomes was triggered.
 
-No CBD-95 Confluence target exists yet. The merge precondition is now met at
-`5c90a74`, so page registration in `scripts/sync-confluence.py` and the
-subsequent synchronization are unblocked as post-merge work under the
-repository's Confluence policy. They remain gated on Product Owner approval of
-the exact document versions, because publishing an unapproved revision would
-present a draft as the authoritative copy. This is tracked as `FU-95-029`.
+The four CBD-95 pages are registered in `scripts/sync-confluence.py` and
+published: the manifest as `9797633`, the reconciliation matrix as `9830401`,
+the follow-up register as `9863169`, and the traceability record as `9895937`.
+A readback on August 18, 2026 confirmed that all twelve CBD-91 through CBD-95
+pages carry the same document version as their repository source.
+
+That readback covers the version set published before this revision. Each
+revision supersedes its published copy, so `FU-95-029` stays open until this
+change merges and the affected pages are re-synchronized under the repository's
+merge-first Confluence policy.
 
 ## 7. Evidence and limitation statement
 
@@ -446,3 +450,4 @@ Owner approves their exact versions.
 | 0.1.25 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Post-merge review correction. Recorded the `5c90a74` merge, stated that blob identity rather than commit identity is the integrity control, and released §6 publication from the merge gate while keeping it gated on exact-version approval. All eleven frozen blobs reverify unchanged. No component, authority order, identifier set, invariant, limitation, or supersession trigger changed. | Correction applied; Product Owner approval still pending |
 | 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Approved release. The Product Owner approved the exact package versions on August 16, 2026, closing `RG-94-016`. No component, authority order, frozen blob, identifier set, invariant, limitation, or supersession trigger changed at this revision; all eleven frozen blobs reverify unchanged. The §7 limitations continue to apply in full: approval of this package is not legal review, penetration testing, certification, compliance validation, or proof of production security. | **Approved v1.0** |
 | 1.0.1 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Re-froze CBD-93 at v1.1.1 after the editorial header correction `FU-95-005` required. Updated the §2 version and blob record to `c1caf496…`, updated the `scripts/audit-cbd-95.py` frozen-blob constant, and rewrote §6 to record the correction as applied rather than outstanding. The change was editorial: no scenario, safeguard, evidence gap, residual, or `RI-93-*` decision moved, so no §8 impact review of reconciliation outcomes was triggered and no reconciliation outcome, readiness recommendation, or release effect changed. All eleven frozen blobs reverify. | Correction to approved v1.0; package authority unchanged |
+| 1.0.2 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded as part of the CBD-14 close-out audit. Replaced the §6 statement that no CBD-95 Confluence target exists: all four pages are registered and published, and an August 18, 2026 readback confirmed all twelve CBD-91–95 pages match their repository document versions. Re-froze the `docs/cbd-94-acceptance-criteria-traceability.md` blob at CBD-94 v1.0.2, which added the missing `OP-92-004`/`OP-92-006` acceptance criterion. Publication and blob evidence only: no component, stable set, authority, invariant, limitation, or supersession trigger changed. | Correction to approved v1.0.1; outcomes unchanged |
