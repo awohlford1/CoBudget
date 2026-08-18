@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Repeatable structural and traceability audit for the CBD-73 package.
 
-The audit fixes the exact Draft v0.2 identifier sets, source baseline, declared
+The audit fixes the exact Draft v0.2.1 identifier sets, source baseline, declared
 totals, cross-document references, open-gate namespace, and repository wiring.
 It proves documentation integrity only.  Product approval, implementation,
 specialist review, and runtime evidence remain governed by OI-73-001..012.
@@ -46,8 +46,8 @@ EXPECTED_DEFINITIONS: dict[str, set[str]] = {
 }
 
 SCENARIO_COUNTS = {
-    "INV": 17,
-    "VER": 10,
+    "INV": 18,
+    "VER": 11,
     "CNS": 8,
     "DCL": 13,
     "DST": 8,
@@ -57,7 +57,7 @@ SCENARIO_COUNTS = {
 }
 
 EXPECTED_OPEN_ISSUES = {f"OI-73-{number:03d}" for number in range(1, 13)}
-EXPECTED_REVIEW_FINDINGS = {f"RV-73-{number:03d}" for number in range(1, 28)}
+EXPECTED_REVIEW_FINDINGS = {f"RV-73-{number:03d}" for number in range(1, 30)}
 EXPECTED_AC = {f"CBD-73-AC{number:02d}" for number in range(1, 18)}
 
 # These manifests deliberately freeze every direct stable-ID reference in each
@@ -344,12 +344,12 @@ def check_markdown_structure(audit: Audit, path: Path, text: str) -> None:
         f"{path}: trailing whitespace on lines {', '.join(map(str, trailing))}",
     )
     audit.check(
-        "| Status | **Draft v0.2" in text,
-        f"{path}: package status is not Draft v0.2",
+        "| Status | **Draft v0.2.1" in text,
+        f"{path}: package status is not Draft v0.2.1",
     )
     audit.check(
-        "| Document version | 0.2 |" in text,
-        f"{path}: document version is not 0.2",
+        "| Document version | 0.2.1 |" in text,
+        f"{path}: document version is not 0.2.1",
     )
 
     headings = re.findall(r"^#{2,6}\s+(.+)$", text, flags=re.MULTILINE)
@@ -500,8 +500,8 @@ def main() -> int:
             EXPECTED_REVIEW_FINDINGS,
         )
         audit.check(
-            "| Document version | 0.2 |" in review_text,
-            f"{REVIEW}: remediation review is not version 0.2",
+            "| Document version | 0.2.1 |" in review_text,
+            f"{REVIEW}: remediation review is not version 0.2.1",
         )
 
     trace_review_rows = table_ids(texts[TRACE], r"RV-73-\d{3}")
@@ -738,11 +738,11 @@ def main() -> int:
         "declared 44-message total is missing or inconsistent",
     )
     scenario_total = sum(SCENARIO_COUNTS.values())
-    audit.check(scenario_total == 95, "internal audit configuration error: scenario total")
+    audit.check(scenario_total == 97, "internal audit configuration error: scenario total")
     audit.check(
-        "95 globally namespaced scenarios" in texts[TRACE]
-        and "95 scenarios in 8 families" in texts[TESTS],
-        "declared 95-scenario/eight-family total is missing or inconsistent",
+        "97 globally namespaced scenarios" in texts[TRACE]
+        and "97 scenarios in 8 families" in texts[TESTS],
+        "declared 97-scenario/eight-family total is missing or inconsistent",
     )
 
     for path in (SPEC, MESSAGES, TESTS):

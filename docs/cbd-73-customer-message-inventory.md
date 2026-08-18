@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.2 — hardened lifecycle alignment; Product Owner review required** |
-| Document version | 0.2 |
+| Status | **Draft v0.2.1 — hardened lifecycle alignment; Product Owner review required** |
+| Document version | 0.2.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -136,5 +136,6 @@ This v0.2 inventory contains **44 stable message rows**. The compatibility alias
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment with the v0.2.1 completeness review. No message row, semantic rule, prohibition, or evidence gate changed; `MSG-73-001`, `MSG-73-004`, and `MSG-73-021` now also carry the `INV-73-18`/`VER-73-11` scenario evidence recorded in the test inventory. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Hardened the semantic contract for active restricted provider-failure metadata without a code oracle, private-cause projection normalization, neutral successor copy, canonical ceremony and no-account gating, prospective and active destination retirement, mandatory membership-independent lifecycle notice and `RI-93-012` no-fallback routing, block-removal and membership-end recovery, conditional recipient transfer readiness, distinct mutating transfer invalidation versus denial/no-op recovery, distinct ordinary-member and Co-owner confirmations, complete change/transfer outcomes, and exact denial/audit edges. Added 16 stable rows for 44 total. | Draft; Product Owner review required |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft with 28 semantic message definitions and open exact-copy evidence gates. | Superseded by v0.2 draft |
