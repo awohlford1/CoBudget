@@ -59,7 +59,7 @@ blob below still resolves. A blob change requires the impact review in §8.
 | `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1.1; approved at v1.1, editorial header correction only | `c1caf49653802f5c4d1f69f48d61f9aa881591a3` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
 | `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0; approved | `8be224d4ef5779f1743bdd7b4a53f731f31d564e` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
 | `docs/cbd-94-verification-review-inventory.md` | v1.0; approved | `e139cdd75646f8070b8e253ff6cc95c1f6bca966` | 270 verification cases, 15 manual packages, 15 specialist reviews, fixtures, parameters, monitors, and evidence rules |
-| `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.1; approved | `113f7e279fabed75e28748eea7362d9e2111675e` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
+| `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.2; approved at v1.0.1, missing-criterion correction only | `ff70668fbeb3ddea2a843a3c11fb0024e8bf3957` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
 | `docs/cbd-94-exhaustive-review-findings.md` | v1.0; accepted, all findings closed | `c7c02611b7b2c6cfc78ed5467e013b615128b8c6` | Independent re-execution evidence and closed `RV-94-011–017` findings |
 
 The then-current CBD-12/CBD-72 target package is deliberately not called an

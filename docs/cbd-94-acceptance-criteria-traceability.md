@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved v1.0 — provider-independent CBD-94 baseline.** All seven independent-review findings are closed. Approval accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
-| Document version | 1.0.1 |
+| Document version | 1.0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-94](https://cobudget.atlassian.net/browse/CBD-94) |
 | Primary evidence | `docs/cbd-94-risk-mitigation-requirement-register.md` v1.0 |
 | Verification evidence | `docs/cbd-94-verification-review-inventory.md` v1.0 |
 | Independent review | `docs/cbd-94-exhaustive-review-findings.md` v1.0 |
 | Repository baseline | `be20177` on `main` |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose and completion rule
 
@@ -44,7 +44,7 @@ mutable issue state.
 
 ## 3. Acceptance-criteria traceability
 
-Jira lists six criteria in the order below. The identifiers here are local
+Jira lists seven criteria in the order below. The identifiers here are local
 traceability labels; they do not create Jira fields.
 
 | Criterion | Authoritative criterion | Evidence | Draft assessment |
@@ -54,7 +54,8 @@ traceability labels; they do not create Jira fields.
 | CBD-94-AC03 | Every required mitigation has an owner, phase, and verification method. | Risk register §§3.7, 4, 6; verification inventory §§3–11 | Met for the provider-independent baseline: every family has exactly one accountable function, contributors are separate, the first cited risk controls multi-risk requirements, and each requirement maps to implementation/manual/specialist evidence and monitoring where applicable. Jira implementation assignees remain follow-up state, not ambiguous document ownership. |
 | CBD-94-AC04 | Requirements preserve authoritative CBD-11 outcomes and identify any genuine material conflict for Product Owner review. | Risk register §§1, 6.4, 6.10–6.12, §8; this record §9 | Met: schedule/reconciliation and alert semantics are preserved; no money-control escalation is permitted; candidate product behavior remains guarded and transferred to its exact CBD-12/73/74/75 route. Material product-plan/architecture inconsistencies are isolated as update targets. |
 | CBD-94-AC05 | No risk is marked resolved solely because UI controls hide the affected action or data. | Risk register §§3.5, 6.2; verification `VT-94-018/025–035` | Met by rule: `Resolved` requires causal elimination and verification; direct API, object substitution, differential field/shape/count/timing, stale/race, queue, provider, and operational bypass tests are mandatory. No draft risk is `Resolved`. |
-| CBD-94-AC06 | Private-MVP release gates are explicit. | Risk register §7; verification inventory §§7–11 | Met: 16 gates state exact evidence and blocked scope. Feature/provider/channel, process, jurisdiction, Private-MVP, and public-launch effects are distinct; `RG-94-015` preserves the approved public-launch-only independent-security policy and creates no Private-MVP penetration-test requirement. |
+| CBD-94-AC06 | The `OP-92-004`/`OP-92-006` separation-of-duties conflict has an explicit Product Owner disposition: a named independent approver, an approved compensating control, or a recorded and accepted residual risk. “Not applicable at current scale” is acceptable only if it states the condition that reopens it. | `SR-94-069`; `RK-94-009/010/020`; `RG-94-006/009/010`; Product Owner decision of August 16, 2026 recorded at `FU-95-013` and CBD-95 traceability §§9, 13 | **Met by a disposition recorded outside this document.** The Product Owner did not relax either contract: a genuinely independent second human must approve before any exceptional customer-content access, key recovery, privileged recovery, or return-to-service action. The disposition is therefore a denial, not a compensating control — those operations remain unavailable while CoBudget has a single operator, and the reopening condition is the existence of a second independent approver. No residual risk was accepted. This criterion was added to the Jira issue on August 16, 2026 after CBD-94 v1.0 was approved; the row was added at v1.0.2 and the disposition itself lives in the CBD-95 package. Implementation, denial testing, recovery exercise, and evidence remain open at `FU-95-013` under `RG-94-006/009/010`. |
+| CBD-94-AC07 | Private-MVP release gates are explicit. | Risk register §7; verification inventory §§7–11 | Met: 16 gates state exact evidence and blocked scope. Feature/provider/channel, process, jurisdiction, Private-MVP, and public-launch effects are distinct; `RG-94-015` preserves the approved public-launch-only independent-security policy and creates no Private-MVP penetration-test requirement. |
 
 ## 4. CBD-92 technical-finding coverage
 
@@ -605,6 +606,7 @@ implied.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.2 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Added the missing seventh acceptance criterion. The `OP-92-004`/`OP-92-006` separation-of-duties criterion was added to the Jira issue on August 16, 2026 after v1.0 was approved, and this record still described six criteria, so its local `AC06` label had silently come to mean Jira's seventh. Corrected the count to seven, added the separation-of-duties row as `CBD-94-AC06` citing the Product Owner decision recorded at `FU-95-013`, and renumbered release gates to `CBD-94-AC07`. No external identifier cited `CBD-94-AC06`. Evidence and labelling only: no risk, rating, requirement, verification obligation, disposition, gate, or release effect changed. | Correction to approved v1.0.1; outcomes unchanged |
 | 1.0.1 | August 16, 2026 | Claude | Publication-status revision only, recorded after the approved v1.0 set merged to `main` at `c84e491`. Created the four CBD-94 Confluence placeholder pages, registered them as targets in `scripts/sync-confluence.py` in dependency order, promoted `cbd-93-abuse-analysis` to a baseline, and updated `RV-94-019` and the §14 publication gates to match. No approved content changed: no risk, rating, override, requirement, verification case, disposition, gate, route, or release effect was touched, and the approval recorded at v1.0 stands unaltered. | Approved v1.0 content unchanged; publication status only |
 | 1.0 | August 16, 2026 | Alexander Wohlford as Product Owner, Claude assisting | **Approved as CBD-94 v1.0.** Promoted the v0.1.4 content unchanged; the only edits were status, version, cross-references, the §1 and §10.1/§14 self-descriptive “draft” wording, the approval checkbox, and the new `RV-94-018` approval record and `RV-94-019` publication follow-up. No source routing, rating, override, requirement, verification case, disposition, gate, or release effect was altered by approval. Confluence publication follows the merge to `main` and remains open under `RV-94-019`. | **Product Owner approved** |
 | 0.1.4 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner dispositions closing the three remaining review findings. Recorded the `RV-94-011` scoped Critical override, the `RV-94-012` fixture binding, and the `RV-94-015` §3.7 dependency/ownership rule in §13. Added `FX-94` to the §12.1 tracked sets and corrected the `RV-94-005` identifier count to 325. Added §12.2 audit obligations 11 (one gate per scope class) and 12 (bidirectional fixture binding), and strengthened obligation 10 to require a per-trigger override check, since the existing wording already covered overrides yet did not surface `RV-94-011`. Updated the audit result to Pass and closed the approval-checklist gate. No source routing, requirement text, disposition, owner, or release effect was changed. | Product Owner rating and method decisions incorporated; complete record remains draft |

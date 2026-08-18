@@ -52,7 +52,11 @@ FROZEN_BLOBS = {
         "e139cdd75646f8070b8e253ff6cc95c1f6bca966"
     ),
     Path("docs/cbd-94-acceptance-criteria-traceability.md"): (
-        "113f7e279fabed75e28748eea7362d9e2111675e"
+        # Re-frozen at CBD-94 v1.0.2, which added the missing
+        # OP-92-004/OP-92-006 separation-of-duties acceptance criterion and
+        # renumbered release gates. Evidence and labelling only; no route,
+        # requirement, or gate changed. See manifest section 6.
+        "ff70668fbeb3ddea2a843a3c11fb0024e8bf3957"
     ),
     Path("docs/cbd-94-exhaustive-review-findings.md"): (
         "c7c02611b7b2c6cfc78ed5467e013b615128b8c6"
