@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0 — semantic contracts approved August 18, 2026; exact strings remain gated by `OI-73-004` — hardened lifecycle alignment; Product Owner review required** |
-| Document version | 1.0 |
+| Status | **Approved v1.0.1 — semantic contracts approved August 18, 2026. Exact strings, templates, localization, and accessibility evidence remain gated by `OI-73-004`** |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -140,6 +140,7 @@ This v0.2 inventory contains **48 stable message rows**. The compatibility alias
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Corrected the v1.0 status line, which kept a stale trailing clause contradicting the approval. No rule, decision, or gate changed. | Correction to approved v1.0 |
 | 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Added `MSG-73-050`–`MSG-73-052` for the approved intended-recipient confirmation and `MSG-73-053` for the cause-neutral resend prompt, for 48 rows. Exact strings, templates, localization, and accessibility evidence remain gated. | **Approved v1.0** |
 | 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment with the v0.2.1 completeness review. No message row, semantic rule, prohibition, or evidence gate changed; `MSG-73-001`, `MSG-73-004`, and `MSG-73-021` now also carry the `INV-73-18`/`VER-73-11` scenario evidence recorded in the test inventory. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Hardened the semantic contract for active restricted provider-failure metadata without a code oracle, private-cause projection normalization, neutral successor copy, canonical ceremony and no-account gating, prospective and active destination retirement, mandatory membership-independent lifecycle notice and `RI-93-012` no-fallback routing, block-removal and membership-end recovery, conditional recipient transfer readiness, distinct mutating transfer invalidation versus denial/no-op recovery, distinct ordinary-member and Co-owner confirmations, complete change/transfer outcomes, and exact denial/audit edges. Added 16 stable rows for 44 total. | Draft; Product Owner review required |

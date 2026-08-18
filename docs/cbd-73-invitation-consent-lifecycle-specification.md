@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0 — Product Owner approved this exact specification on August 18, 2026; §15 gates remain binding — hardened audit-remediation source; Product Owner and blocking-issue review required** |
-| Document version | 1.0 |
+| Status | **Approved v1.0.1 — Product Owner approved this exact specification on August 18, 2026. The §15 open issues remain binding; approval is of the specification, not of any implementation or evidence** |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -549,6 +549,7 @@ Audit-placement rules:
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Corrected the v1.0 status line, which kept a stale trailing clause and so read as approved and awaiting review at the same time. No rule, decision, or gate changed. | Correction to approved v1.0 |
 | 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Closed `OI-73-001` with the §5.1 intended-recipient confirmation (TR-73-38, TR-73-39, `DR-73-13`, AE-73-32, `MSG-73-050`–`MSG-73-052`, `AwaitingConfirmation` state) so no membership commits until the current permission holder confirms the specific accepting account. Settled the `OI-73-008` Failed-state semantics as active restricted delivery metadata and added the cause-neutral `MSG-73-053` prompt so typo recovery does not leak a block. Approval covers the specification only. | **Approved v1.0** |
 | 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Independent completeness review (`RV-73-028`, `RV-73-029`). Recorded the scenario evidence for the §4.4 additional rule 6 recipient-side checks in `INV-73-18`/`VER-73-11`. No invariant, transition, message, audit, data, or open-issue rule changed. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Hardened audit-remediation source including bounded encrypted dispatch custody; dispatched-only/single-current ceremonies; blocking intended-recipient gate; non-oracular active Failed interim with Jira semantic gate; deterministic private projections; exact prospective retirement and cancellation cardinality; unambiguous change/transfer denial versus invalidation; conditional transfer ordering; membership-independent notices; audit-as-evidence boundary; provisional CBD-91 mappings; and canonical `OI-73-001`–`OI-73-012`. | Draft; Product Owner/source/security/privacy/evidence review required; no open issue closed by this draft |

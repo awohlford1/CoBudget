@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Remediation verified v1.0 — 24 of 29 findings fixed in the draft package; 5 findings remain open; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval** |
-| Document version | 1.0 |
+| Status | **Remediation verified v1.0.1 — 27 of 29 findings closed; `RV-73-021` and `RV-73-025` retain source-alignment and audit-rebaseline gates. `RV-73-006` and `RV-73-013` closed with the August 18, 2026 Product Owner decisions; `RV-73-026` closed on publication** |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Reviewed repository baseline | `c096928a903dd5446b26ba21eaf7eaa2d84ce936` on `main` (PR #64 merge) |
@@ -31,10 +31,14 @@ Product Owner approval or implementation handoff**. The v0.2 remediation now
 defines deterministic rules and evidence for 22 of the 27 findings raised
 against v0.1. A later independent completeness review of the merged package
 raised `RV-73-028` and `RV-73-029`, both remediated in v0.2.1, bringing the
-package to 24 fixed of 29 findings. It remains unapproved: `RV-73-006`/`OI-73-001` and the AC01/AC05 interpretation in
-`RV-73-013`/`OI-73-008` block package approval, while `RV-73-021`,
-`RV-73-025`, and `RV-73-026` retain narrower source, repository-integrity, and
-publication gates. All twelve `OI-73-*` items remain binding at the exact stage
+package to 24 fixed of 29 findings. The Product Owner then closed the two
+blocking questions on August 18, 2026: `RV-73-006`/`OI-73-001` by requiring the
+inviter to confirm the specific accepting account, and `RV-73-013`/`OI-73-008`
+by settling `Failed` as active restricted delivery metadata. `RV-73-026` closed
+when the package published to Confluence. Twenty-seven of 29 findings are now
+closed; `RV-73-021` and `RV-73-025` retain narrower source-alignment and
+audit-rebaseline gates. The specification is approved. It is not implemented,
+fixture-backed, specialist-reviewed, or released. All twelve `OI-73-*` items remain binding at the exact stage
 stated in the canonical traceability register.
 
 Severity means:
@@ -88,14 +92,14 @@ implementation evidence, runtime delivery evidence, or specialist sign-off.
 | RV-73-003 | **P1** | An older pending invitation can restore a removed member's access without the required post-removal fresh invitation. | **Fixed in v0.2 draft** |
 | RV-73-004 | **P1** | Acceptance can race a delayed expiry-state transition because commit does not explicitly compare the authoritative expiry timestamp. | **Fixed in v0.2 draft** |
 | RV-73-005 | **P1** | Revocation queue suppression can suppress the required removal notice, and the approved safety-channel/no-fallback routing is claimed but not carried. | **Fixed rule; source/mechanism gates remain `OI-73-003`/`OI-73-009`** |
-| RV-73-006 | **P1** | Wrong-recipient coverage ends after disclosure even though the mistyped-channel controller can apparently accept and gain membership. | **Open — `OI-73-001`; blocks package approval** |
+| RV-73-006 | **P1** | Wrong-recipient coverage ends after disclosure even though the mistyped-channel controller can apparently accept and gain membership. | **Closed August 18, 2026.** The Product Owner required inviter confirmation of the specific accepting account (TR-73-38, TR-73-39, `DR-73-13`), so a mistyped channel cannot yield membership. Security/privacy review and `VT-94-009`–`VT-94-017` remain implementation gates |
 | RV-73-007 | **P1** | Post-acceptance change and transfer flows do not support the package's AC12 completeness claim. | **Fixed in v0.2 draft** |
 | RV-73-008 | **P1** | Approved CBD-94 invitation requirements are missing from governing inheritance and partly weakened. | **Fixed at requirement level; implementation gated** |
 | RV-73-009 | **P1** | Notification-only destination data is not bound to a membership, budget space, invitation, or ceremony. | **Fixed rule/shape; source alignment remains `OI-73-003`** |
 | RV-73-010 | **P1** | Decline audit events can bypass the safe non-attributing inviter presentation through administrative history/export. | **Fixed safe projection; exact copy remains `OI-73-004`** |
 | RV-73-011 | **P1** | Immediate Viewer profile activation conflicts with the approved CBD-72 no-profile starting state. | **Fixed in favor of governing CBD-72** |
 | RV-73-012 | **P2** | Invalid-code presentation is double-defined under AE-73-08 and AE-73-14, and unknown codes cannot populate the universal space-scoped audit schema. | **Fixed rule/cardinality; storage remains `OI-73-011`** |
-| RV-73-013 | **P2** | `Failed` is called terminal but can transition again, and failed-code invalidity/recovery is omitted from the holder-facing rules and tests. | **Open semantic interpretation — safe draft rule defined; `OI-73-008` blocks AC01/AC05 and package approval** |
+| RV-73-013 | **P2** | `Failed` is called terminal but can transition again, and failed-code invalidity/recovery is omitted from the holder-facing rules and tests. | **Closed August 18, 2026.** The Product Owner settled `Failed` as active restricted delivery metadata that never invalidates a code or reaches a customer surface, with cause-neutral `MSG-73-053` prompting for typo recovery. CBD-73-AC01 and AC05 were corrected in Jira to match |
 | RV-73-014 | **P2** | Ceremony-bound verification and destination proofs are not representable by DR-73-03/DR-73-07. | **Fixed shape; concrete design remains `OI-73-008`/`OI-73-012`** |
 | RV-73-015 | **P2** | “Same intended recipient,” sibling invitations, and block/limiter composition are undefined across channels and aliases. | **Fixed rule; block-matching and limiter design remain `OI-73-010`** |
 | RV-73-016 | **P2** | Creating-authority loss is checked as a coarse owner state rather than the exact permission and role version required by the invitation. | **Fixed by resolved v0.2 rule** |
@@ -108,7 +112,7 @@ implementation evidence, runtime delivery evidence, or specialist sign-off.
 | RV-73-023 | **P3** | Late and duplicate delivery-provider callbacks have no deterministic no-op/recovery rule. | **Fixed in v0.2 draft** |
 | RV-73-024 | **P2** | The merged package had no retained mechanical audit or CI enforcement despite claiming parser-based validation. | **Fixed — manifest-based audit plus Mermaid validation in CI** |
 | RV-73-025 | **P2** | The current CBD-95 audit evidence is stale against the approved CBD-72 package consumed here. | **Open external integrity gate — `OI-73-005`** |
-| RV-73-026 | **P3** | CBD-73 has no Confluence synchronization targets or discoverable published pages. | **Open publication gate — `OI-73-007`** |
+| RV-73-026 | **P3** | CBD-73 has no Confluence synchronization targets or discoverable published pages. | **Closed August 18, 2026.** Five pages created in the CBD space, registered in `scripts/sync-confluence.py`, and published from merged `main`; read-back confirms all five carry the approved content |
 | RV-73-027 | **P3** | Governing-source provenance is incomplete, and CBD-72's own header contains conflicting approval metadata. | **Fixed provenance; external cleanup remains `OI-73-006`** |
 | RV-73-028 | **P2** | The §4.4 rule 6 recipient-side checks — already-active-member suppression and terminalization of an invitation predating the account's latest membership end — had no scenario, and the `RV-73-003` disposition cited a scenario proving a different rule. | **Fixed in v0.2.1 draft** |
 | RV-73-029 | **P3** | Test inventory §5 dropped the literal `CBD-73-AC14` required-case names for revoked consent and queued alerts, so the criterion could not be verified against its own wording. | **Fixed in v0.2.1 draft** |
@@ -543,6 +547,7 @@ by repository policy.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Corrected the status line and the §1 verdict, and closed `RV-73-006`, `RV-73-013`, and `RV-73-026`, which still read as open after the August 18 decisions and the publication. Twenty-seven of 29 findings are closed. No rule, decision, or gate changed. | Correction to approved v1.0 |
 | 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Recorded the August 18, 2026 Product Owner decisions closing `RV-73-006`/`OI-73-001` and the `RV-73-013`/`OI-73-008` Failed-state question. 26 of 29 findings are now fixed; `RV-73-021`, `RV-73-025`, and `RV-73-026` retain source, integrity, and publication gates. | **Approved v1.0** |
 | 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Independent completeness review of the merged v0.2 package: added `RV-73-028` (missing §4.4 rule 6 recipient-side scenario coverage plus an overclaiming `RV-73-003` disposition) and `RV-73-029` (dropped literal `CBD-73-AC14` case names), both remediated in the same pass. No open issue closed and no product rule changed. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Verified the coordinated v0.2 remediation through repeated adversarial passes: 22 findings fixed in the draft package, five left under exact open gates, 12 canonical open issues, frozen governing blobs, 44 messages, 95 namespaced scenarios, a direct-reference/expected-outcome audit, and repository-wide Mermaid validation. No Product decision, Jira field, Confluence page, or upstream source was changed. | Review record only; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval; narrower gates remain |
