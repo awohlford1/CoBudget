@@ -368,10 +368,11 @@ TARGETS: tuple[Target, ...] = (
     # actually matters for a mutually-referential set. The evidence register is
     # not a baseline only because nothing publishes after it.
     #
-    # These five pages were created as placeholders on August 16, 2026 to
-    # reserve the targets; the first successful run replaces that placeholder
-    # text with the merged v0.1.0 content. Until then the repository files are
-    # authoritative and the pages must not be cited.
+    # These five pages were created as placeholders on August 16, 2026 and were
+    # first published from the repository later that day, so they hold real
+    # content rather than placeholder text. The Product Owner approved the set
+    # at v1.0 on August 18, 2026 after a full audit; this run republishes that
+    # approved content.
     Target(
         key="cbd-102-gate-catalog",
         doc_set="cbd-102",

@@ -85,6 +85,20 @@ VOCABULARIES: tuple[Vocabulary, ...] = (
         canonical="docs/cbd-102-evidence-register-and-exception-rules.md §3.3",
         applies_to="cbd-102-*.md",
     ),
+    # Single-letter members look noisy and are not, because of the pipe rule in
+    # `paragraph_blocks`. Every place these letters appear *individually* is a
+    # table cell -- the category map, the gate tables' Cat column, the rubric
+    # weight header, the per-category billable units -- and a pipe is not list
+    # glue, so no run forms across them. The only construction that produces a
+    # run is a prose list of the categories, which is exactly the thing that
+    # must name all six. Category N was added on August 16, 2026 and two such
+    # lists kept naming five.
+    Vocabulary(
+        name="provider-category",
+        members=("H", "I", "D", "E", "F", "N"),
+        canonical="docs/cbd-102-provider-requirements-hard-gate-catalog.md §3",
+        applies_to="cbd-102-*.md",
+    ),
 )
 
 # Glue that makes a sequence of members a list rather than prose. A comma or a

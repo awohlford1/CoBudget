@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. |
-| Document version | 0.1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Pending Product Owner review |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the evidence record and its required fields, the six evidence classes and their confidence mapping, the `UNPROVEN` outcome and the four eligibility verdicts, the staleness and re-verification rules, `EX-102-001`–`007`, the §5.2 non-exceptable gates, and the residual-risk record. It grants no exception and does not close the open items in §8. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Hard-Gate Catalog v0.1.0; Evaluation Rubric v0.1.0; Demand Model v0.1.0; Cost Template v0.1.0 |
+| Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Cost Template v1.0 |
 | Confluence page | [CBD-102 — Evidence Register and Exception Rules](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9601048) |
 | Repository baseline | `52d764a` |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose
 
@@ -37,7 +37,7 @@ One record per claim per provider. Registered under a stable `EV-102-*` key.
 | --- | --- | --- |
 | Evidence ID | `EV-102-NNN`, stable, never reused | Yes |
 | Claim | The exact `HG-102-*`, `WR-102-*`, or `CT-102-*` item this supports | Yes |
-| Provider and category | Name, and one of H / I / D / E / F | Yes |
+| Provider and category | Name, and one of H / I / D / E / F / N | Yes |
 | **Source** | Precise enough to re-retrieve: URL plus page title, document title with version, contract clause number, the test performed and its result, or the named person and channel for a direct answer | Yes |
 | **Retrieval date** | The date the evidence was obtained, not the date it was written | Yes |
 | Evidence class | Per §3 | Yes |
