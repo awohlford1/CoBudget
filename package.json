@@ -11,10 +11,11 @@
     "dev": "npm run dev --workspace=@cobudget/web",
     "build": "npm run build --workspace=@cobudget/web",
     "start": "npm run start --workspace=@cobudget/web",
+    "check:docs": "node scripts/check-mermaid.mjs",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
-    "check": "npm run lint && npm run typecheck && npm run test && npm run build"
+    "check": "npm run check:docs && npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "engines": {
     "node": ">=24 <25"

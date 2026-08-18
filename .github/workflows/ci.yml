@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   checks:
-    name: Lint, type-check, test, and build
+    name: Documentation, lint, type-check, test, and build
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -23,6 +23,9 @@ jobs:
       # needs no pip install on the runner.
       - name: Check document vocabulary consistency
         run: python3 scripts/check-doc-vocabulary.py
+
+      - name: Check CBD-73 documentation package
+        run: python3 scripts/audit-cbd-73.py
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
