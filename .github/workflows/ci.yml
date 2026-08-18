@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   checks:
-    name: Lint, type-check, test, and build
+    name: Documentation, lint, type-check, test, and build
     runs-on: ubuntu-latest
     timeout-minutes: 15
 

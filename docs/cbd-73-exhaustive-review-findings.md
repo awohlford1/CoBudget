@@ -2,22 +2,23 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Review complete v0.1 — 26 open or acknowledged findings (11 P1, 12 P2, 3 P3); one tooling finding closed on this branch** |
-| Document version | 0.1 |
+| Status | **Remediation verified v0.2 — 22 findings fixed in the draft package; 5 findings remain open; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval** |
+| Document version | 0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Reviewed repository baseline | `c096928a903dd5446b26ba21eaf7eaa2d84ce936` on `main` (PR #64 merge) |
-| Reviewed package commit | `8f1636d957534b09549f7c5e44d1b4147174f30c` |
-| Reviewed package blobs | Traceability `b70cf485`; messages `a467064e`; lifecycle specification `9a1ff4cd`; tests `86282881` |
+| v0.1 finding-baseline commit | `8f1636d957534b09549f7c5e44d1b4147174f30c` |
+| v0.1 finding-baseline blobs | Traceability `b70cf485`; messages `a467064e`; lifecycle specification `9a1ff4cd`; tests `86282881` |
+| v0.2 remediation parent | `9a7a3fe1f8202d0aa8a25aaa6738c7015044af91`; the candidate is the exact remediation commit/tree produced from this branch, which approval/PR evidence must capture externally because a Git object cannot self-pin |
 | Audit branch | `codex/cbd-73-audit` |
 | Live Jira snapshot | August 18, 2026: `Ready`; 17 acceptance criteria; due August 24; blocked by CBD-72 (Done); blocks CBD-74 (Ready) |
-| Method | Independent lifecycle/security, cross-source/traceability, and validation/tooling reviews; live Jira and Confluence read; repeatable 99-check mechanical audit |
+| Method | Independent lifecycle/security, cross-source/traceability, validation/tooling, and repeated v0.2 adversarial reviews; live Jira and Confluence read; repeatable manifest-based documentation audit plus Mermaid rendering |
 | Last updated | August 18, 2026 |
 
 ## 1. Scope, method, and verdict
 
-This review re-executed the CBD-73 package claims against all four merged
-documents, the live Jira issue, the approved CBD-72 permission model, the
+This review re-executed the CBD-73 package claims against all four v0.1
+finding-baseline documents and the coordinated v0.2 branch candidate, the live Jira issue, the approved CBD-72 permission model, the
 CBD-91 data inventory, the CBD-93 decisions as dispositioned in CBD-95, and the
 CBD-94 security/privacy requirements. It checked the invitation and code state
 model, ceremony ordering, consent evidence, role/scope changes, revocation and
@@ -25,12 +26,14 @@ removal, notification routing, audit placement, data classes, negative tests,
 stable identifiers, source versions, dependency direction, and publication
 state.
 
-The package is mechanically well formed but is **not ready for Product Owner
-approval or implementation handoff**. The mechanical audit passes 99 checks
-with no failures and one notation warning, but semantic review found eleven P1
-issues. Several can permit unintended access, expose a recipient's private
-decline/block/limit state, or make the required cutoff and notification
-outcomes impossible to implement deterministically.
+The original v0.1 package was mechanically well formed but was **not ready for
+Product Owner approval or implementation handoff**. The v0.2 remediation now
+defines deterministic rules and evidence for 22 of the 27 findings. It remains
+unapproved: `RV-73-006`/`OI-73-001` and the AC01/AC05 interpretation in
+`RV-73-013`/`OI-73-008` block package approval, while `RV-73-021`,
+`RV-73-025`, and `RV-73-026` retain narrower source, repository-integrity, and
+publication gates. All twelve `OI-73-*` items remain binding at the exact stage
+stated in the canonical traceability register.
 
 Severity means:
 
@@ -49,12 +52,12 @@ that any implementation is secure. No Jira or Confluence content was changed.
 | Check | Result |
 | --- | --- |
 | Package files, headings, metadata, Markdown fences | Pass |
-| Stable definitions | 14 `IC`, 14 `TR`, 14 `RC`, 9 `DR`, 26 `AE`, 28 `MSG`; no internal duplicates |
-| Scenarios | 57 total: INV 9, VER 6, CNS 5, DCL 9, DST 5, CHG 7, RVK 12, TRF 4 |
+| Stable definitions | 21 `IC`, 45 `TR`, 14 `RC`, 12 `DR`, 31 `AE`, 44 `MSG`, and 12 canonical `OI`; no internal duplicates or orphan `TR`/`AE`/`MSG` definitions |
+| Scenarios | 95 total: INV 17, VER 10, CNS 8, DCL 13, DST 8, CHG 13, RVK 16, TRF 10; all use repository-unique `FAMILY-73-NN` identifiers |
 | CBD-73 acceptance-criterion rows | AC01–AC17 exactly once |
 | Direct local identifier references | No dangling full identifiers |
 | Local package paths | All resolve |
-| Mermaid | Parses/renders; diagram uses abbreviated `TR-01`-style labels rather than stable `TR-73-*` IDs |
+| Mermaid | Both repository Mermaid documents parse/render through `npm run check:docs`; the CBD-73 diagram uses full `TR-73-*` IDs |
 | Live Jira | Current issue fields and linked issue directions match the snapshot above; planning-note due date still says August 21 while the live field says August 24 |
 | Confluence | No current page with `CBD-73` in its title was discoverable; no CBD-73 targets exist in `scripts/sync-confluence.py` |
 | Existing CBD-95 audit | 4,125 checks, 3 failures: all three frozen CBD-72 blobs differ from the now-approved CBD-72 package consumed by CBD-73 |
@@ -65,43 +68,102 @@ Run the repeatable package check with:
 python3 scripts/audit-cbd-73.py
 ```
 
-CI now runs that command before Node installation. The check deliberately
-proves structure and direct traceability only; it does not downgrade any
-semantic finding below.
+CI runs that command before Node installation, and the normal Node check now
+renders every Mermaid block under `docs/`. The audit fixes exact v0.2 IDs,
+counts, source blobs, open issues, finding rows, local paths, table structure,
+and CI wiring. Its reviewed manifests freeze every transition row's direct
+message/audit references, require all emitting IDs in actual scenario rows,
+and require transition-specific scenario coverage. It remains structural
+documentation-integrity evidence, not product approval, semantic proof,
+implementation evidence, runtime delivery evidence, or specialist sign-off.
 
 ## 3. Finding summary
 
 | ID | Severity | Finding | Status |
 | --- | --- | --- | --- |
-| RV-73-001 | **P1** | Blocked/rate-limited creation has two incompatible visible lifecycles and can leak the private cause through status, audit, or export. | Open |
-| RV-73-002 | **P1** | Ceremony authentication order conflicts across documents; decline-and-block cannot create its required account-level record for an unauthenticated/no-account recipient. | Open |
-| RV-73-003 | **P1** | An older pending invitation can restore a removed member's access without the required post-removal fresh invitation. | Open |
-| RV-73-004 | **P1** | Acceptance can race a delayed expiry-state transition because commit does not explicitly compare the authoritative expiry timestamp. | Open |
-| RV-73-005 | **P1** | Revocation queue suppression can suppress the required removal notice, and the approved safety-channel/no-fallback routing is claimed but not carried. | Open |
-| RV-73-006 | **P1** | Wrong-recipient coverage ends after disclosure even though the mistyped-channel controller can apparently accept and gain membership. | Open decision/residual |
-| RV-73-007 | **P1** | Post-acceptance change and transfer flows do not support the package's AC12 completeness claim. | Open |
-| RV-73-008 | **P1** | Approved CBD-94 invitation requirements are missing from governing inheritance and partly weakened. | Open |
-| RV-73-009 | **P1** | Notification-only destination data is not bound to a membership, budget space, invitation, or ceremony. | Open |
-| RV-73-010 | **P1** | Decline audit events can bypass the safe non-attributing inviter presentation through administrative history/export. | Open |
-| RV-73-011 | **P1** | Immediate Viewer profile activation conflicts with the approved CBD-72 no-profile starting state. | Known Product Owner blocker |
-| RV-73-012 | **P2** | Invalid-code presentation is double-defined under AE-73-08 and AE-73-14, and unknown codes cannot populate the universal space-scoped audit schema. | Open |
-| RV-73-013 | **P2** | `Failed` is called terminal but can transition again, and failed-code invalidity/recovery is omitted from the holder-facing rules and tests. | Open |
-| RV-73-014 | **P2** | Ceremony-bound verification and destination proofs are not representable by DR-73-03/07. | Open |
-| RV-73-015 | **P2** | “Same intended recipient,” sibling invitations, and block/limiter composition are undefined across channels and aliases. | Open |
-| RV-73-016 | **P2** | Creating-authority loss is checked as a coarse owner state rather than the exact permission and role version required by the invitation. | Open decision refinement |
-| RV-73-017 | **P2** | Mixed change handling may delay the reduction component despite AC07's unqualified immediacy requirement. | Product Owner interpretation required |
-| RV-73-018 | **P2** | Two consent disclosures misstate Co-owner removal and the supported sole-Primary exits. | Open |
-| RV-73-019 | **P2** | Several audit events are orphaned from exact transitions/scenarios, including acceptance denial. | Open |
-| RV-73-020 | **P2** | Scenario identifiers collide repository-wide and the diagram uses non-stable transition labels. | Open |
-| RV-73-021 | **P2** | CBD-91 class mappings do not fit the new block, limiter, and destination records. | Open source-impact decision |
-| RV-73-022 | **P2** | “Revoked consent” is claimed as covered without defining historical consent versus current authority or testing stale-consent replay. | Open |
-| RV-73-023 | **P3** | Late and duplicate delivery-provider callbacks have no deterministic no-op/recovery rule. | Open |
-| RV-73-024 | **P2** | The merged package had no retained mechanical audit or CI enforcement despite claiming parser-based validation. | **Closed on this branch** by `scripts/audit-cbd-73.py` and CI |
-| RV-73-025 | **P2** | The current CBD-95 audit evidence is stale against the approved CBD-72 package consumed here. | External impact/rebaseline review required |
-| RV-73-026 | **P3** | CBD-73 has no Confluence synchronization targets or discoverable published pages. | Expected pending approval; publication work remains |
-| RV-73-027 | **P3** | Governing-source provenance is incomplete, and CBD-72's own header contains conflicting approval metadata. | Record only; out-of-scope source correction |
+| RV-73-001 | **P1** | Blocked/rate-limited creation has two incompatible visible lifecycles and can leak the private cause through status, audit, or export. | **Fixed in v0.2 draft; implementation/evidence gated by `OI-73-010`/`OI-73-011`** |
+| RV-73-002 | **P1** | Ceremony authentication order conflicts across documents; decline-and-block cannot create its required account-level record for an unauthenticated/no-account recipient. | **Fixed by safe v0.2 rule; optional alternative/mechanics remain `OI-73-002`/`OI-73-012`** |
+| RV-73-003 | **P1** | An older pending invitation can restore a removed member's access without the required post-removal fresh invitation. | **Fixed in v0.2 draft** |
+| RV-73-004 | **P1** | Acceptance can race a delayed expiry-state transition because commit does not explicitly compare the authoritative expiry timestamp. | **Fixed in v0.2 draft** |
+| RV-73-005 | **P1** | Revocation queue suppression can suppress the required removal notice, and the approved safety-channel/no-fallback routing is claimed but not carried. | **Fixed rule; source/mechanism gates remain `OI-73-003`/`OI-73-009`** |
+| RV-73-006 | **P1** | Wrong-recipient coverage ends after disclosure even though the mistyped-channel controller can apparently accept and gain membership. | **Open — `OI-73-001`; blocks package approval** |
+| RV-73-007 | **P1** | Post-acceptance change and transfer flows do not support the package's AC12 completeness claim. | **Fixed in v0.2 draft** |
+| RV-73-008 | **P1** | Approved CBD-94 invitation requirements are missing from governing inheritance and partly weakened. | **Fixed at requirement level; implementation gated** |
+| RV-73-009 | **P1** | Notification-only destination data is not bound to a membership, budget space, invitation, or ceremony. | **Fixed rule/shape; source alignment remains `OI-73-003`** |
+| RV-73-010 | **P1** | Decline audit events can bypass the safe non-attributing inviter presentation through administrative history/export. | **Fixed safe projection; exact copy remains `OI-73-004`** |
+| RV-73-011 | **P1** | Immediate Viewer profile activation conflicts with the approved CBD-72 no-profile starting state. | **Fixed in favor of governing CBD-72** |
+| RV-73-012 | **P2** | Invalid-code presentation is double-defined under AE-73-08 and AE-73-14, and unknown codes cannot populate the universal space-scoped audit schema. | **Fixed rule/cardinality; storage remains `OI-73-011`** |
+| RV-73-013 | **P2** | `Failed` is called terminal but can transition again, and failed-code invalidity/recovery is omitted from the holder-facing rules and tests. | **Open semantic interpretation — safe draft rule defined; `OI-73-008` blocks AC01/AC05 and package approval** |
+| RV-73-014 | **P2** | Ceremony-bound verification and destination proofs are not representable by DR-73-03/DR-73-07. | **Fixed shape; concrete design remains `OI-73-008`/`OI-73-012`** |
+| RV-73-015 | **P2** | “Same intended recipient,” sibling invitations, and block/limiter composition are undefined across channels and aliases. | **Fixed rule; block-matching and limiter design remain `OI-73-010`** |
+| RV-73-016 | **P2** | Creating-authority loss is checked as a coarse owner state rather than the exact permission and role version required by the invitation. | **Fixed by resolved v0.2 rule** |
+| RV-73-017 | **P2** | Mixed change handling may delay the reduction component despite AC07's unqualified immediacy requirement. | **Fixed by resolved no-op/separate-pure-reduction rule** |
+| RV-73-018 | **P2** | Two consent disclosures misstate Co-owner removal and the supported sole-Primary exits. | **Fixed semantics; exact copy remains `OI-73-004`** |
+| RV-73-019 | **P2** | Several audit events are orphaned from exact transitions/scenarios, including acceptance denial. | **Fixed exact edges/cardinality; storage remains `OI-73-011`** |
+| RV-73-020 | **P2** | Scenario identifiers collide repository-wide and the diagram uses non-stable transition labels. | **Fixed in v0.2 draft and enforced by audit** |
+| RV-73-021 | **P2** | CBD-91 class mappings do not fit the new block, limiter, and destination records. | **Open source alignment — `OI-73-003`** |
+| RV-73-022 | **P2** | “Revoked consent” is claimed as covered without defining historical consent versus current authority or testing stale-consent replay. | **Fixed in v0.2 draft** |
+| RV-73-023 | **P3** | Late and duplicate delivery-provider callbacks have no deterministic no-op/recovery rule. | **Fixed in v0.2 draft** |
+| RV-73-024 | **P2** | The merged package had no retained mechanical audit or CI enforcement despite claiming parser-based validation. | **Fixed — manifest-based audit plus Mermaid validation in CI** |
+| RV-73-025 | **P2** | The current CBD-95 audit evidence is stale against the approved CBD-72 package consumed here. | **Open external integrity gate — `OI-73-005`** |
+| RV-73-026 | **P3** | CBD-73 has no Confluence synchronization targets or discoverable published pages. | **Open publication gate — `OI-73-007`** |
+| RV-73-027 | **P3** | Governing-source provenance is incomplete, and CBD-72's own header contains conflicting approval metadata. | **Fixed provenance; external cleanup remains `OI-73-006`** |
 
-## 4. P1 findings
+## 4. v0.2 remediation verification and remaining gates
+
+The v0.2 disposition ledger in the traceability document is authoritative for
+current status. It records 22 findings as fixed in the draft rule/scenario
+package and five as open. “Fixed” does not mean approved, implemented, tested
+at runtime, or released.
+
+The remediation added one deterministic real-or-synthetic invitation model,
+authoritative timestamp and prior-membership checks, disjoint valid/invalid
+code auditing, a canonical verification/authentication/choice ceremony,
+membership-independent lifecycle notices, full change/removal/transfer
+transition contracts, no-profile Viewer acceptance, immutable non-authorizing
+consent history, scoped destination/proof records, exact audit cardinality,
+late-callback idempotency, globally namespaced scenarios, and frozen governing
+source blobs. The 44 message contracts and 95 scenarios include explicit atomicity, denial, replay,
+cross-space, privacy-projection, and failure-recovery cases.
+
+A second adversarial pass then reopened the provider-failure and private-cause
+projection rules because a holder or inviter could still infer internal state.
+The final draft keeps provider failure as active restricted metadata, preserves
+the code and ceremony, and holds every private terminal cause behind one fixed
+customer projection boundary. It also adds exact per-invitation cancellation,
+prospective-destination retirement, denial/no-op audit edges, cross-space block
+rechecks, and transition-specific scenario evidence. These closures remain
+draft rules subject to the open gates below; they are not runtime findings.
+
+The remaining findings are intentionally narrow and visible:
+
+- `RV-73-006` / `OI-73-001` — the wrong-recipient acceptance rule needs a
+  Product Owner decision and blocks package approval.
+- `RV-73-013` / `OI-73-008` — Product Owner/Jira must confirm whether the
+  literal Failed-link wording permits the safer active-restricted provider
+  metadata rule; the semantic decision blocks AC01/AC05 and package approval.
+- `RV-73-021` / `OI-73-003` — focused CBD-72/CBD-91 source alignment and
+  approved new/split data classes block affected persistence and routing.
+- `RV-73-025` / `OI-73-005` — the stale CBD-95 audit needs an intentional
+  impact/rebaseline decision before an integrated clean-evidence claim.
+- `RV-73-026` / `OI-73-007` — Confluence target registration and read-back
+  parity remain a post-approval, post-merge publication step.
+
+Eight additional open issues retain narrower safe gates without reopening the
+v0.2 semantics: `OI-73-002` preserves invitation-scoped plain decline but
+withholds a pre-authentication persistent block; `OI-73-004` blocks unapproved
+customer copy; `OI-73-006` tracks non-blocking CBD-72 metadata cleanup; and
+`OI-73-008`–`OI-73-012` block the applicable code, invalidation, limiter,
+audit-storage, and identity implementations until their designs and evidence
+exist. The canonical register names an owner, safe interim behavior, closure
+evidence, and release effect for every issue.
+
+## 5. Original P1 findings against v0.1 (historical evidence)
+
+The sections below preserve the evidence that produced the original findings
+against commit `8f1636d`. Their line references and imperative remediation text
+are historical. Use §3–§4 above and the v0.2 traceability ledger for current
+status.
 
 ### RV-73-001 — suppressed invitation lifecycle is non-deterministic and observable
 
@@ -124,7 +186,7 @@ observable surface stays equivalent. Add end-to-end block and limit fixtures.
 The message inventory exposes protected disclosure and the unselected choice
 only to a verified, authenticated recipient (`message-inventory:48-49`), while
 the specification says full disclosure follows channel verification
-(`specification:178`) and TR-73-11/12 require only verification
+(`specification:178`) and TR-73-11/TR-73-12 require only verification
 (`specification:140-141`). The chosen block is account-level
 (`specification:211`), and DR-73-05 requires a blocking recipient account
 (`specification:308`), so an unauthenticated or no-account recipient cannot
@@ -141,7 +203,7 @@ TR-73-01 does not prohibit inviting an already-active member
 (`specification:130`). If that person attempts acceptance, item 5 merely denies
 the commit and leaves the invitation active (`specification:151`). RC-73-08
 says removal invalidates codes associated with the membership
-(`specification:271`), but DR-73-01/02 contain no recipient-account or
+(`specification:271`), but DR-73-01/DR-73-02 contain no recipient-account or
 membership association (`specification:304-305`). An unopened invitation to an
 alternate channel is therefore not enumerable at removal. After removal, the
 person can attach that old invitation to the same account and apparently pass
@@ -238,7 +300,7 @@ revocation, and removal.
 
 The inviter presentation intentionally defaults to making Declined
 indistinguishable from expiry pending a Product Owner decision
-(`specification:366`; `message-inventory:41`). AE-73-11/12 nevertheless record
+(`specification:366`; `message-inventory:41`). AE-73-11/AE-73-12 nevertheless record
 distinct decline events (`specification:330-331`), and audit rule 1 sends
 invitation status transitions into customer administrative history/export
 (`specification:349`). Rule 2 hides ceremony mechanics but does not clearly
@@ -261,7 +323,7 @@ with different meaning (`traceability:105`).
 Keep approval blocked until change control either amends CBD-72 or removes the
 initial-profile behavior, then correct the overclaim.
 
-## 5. P2 findings
+## 6. Original P2 findings against v0.1 (historical evidence)
 
 ### RV-73-012 — invalid-code auditing is double-defined
 
@@ -279,7 +341,7 @@ codes.
 ### RV-73-013 — Failed state and code semantics disagree
 
 Failed is inactive and labeled terminal-recoverable (`specification:78`), yet
-the diagram and TR-73-05/06 allow it to move to Superseded or Cancelled. The
+the diagram and TR-73-05/TR-73-06 allow it to move to Superseded or Cancelled. The
 permanent invalidation list, TR-73-14, and MSG-73-020 omit Failed even though
 AC05 requires safe failed-code recovery (`traceability:40`). INV-05 tests only
 the inviter view.
@@ -348,7 +410,7 @@ accurately.
 ### RV-73-019 — audit events lack exact transition edges
 
 TR-73-13 names only AE-73-13 even for commit-time denial
-(`specification:142`), leaving AE-73-15 definition-only. AE-73-16/17/19/20/22
+(`specification:142`), leaving AE-73-15 definition-only. AE-73-16/AE-73-17/AE-73-19/AE-73-20/AE-73-22
 also lack exact transition/scenario edges (`specification:334-341`). That
 weakens the audit assertion for every denied/committed scenario claimed at
 `traceability:27`.
@@ -389,11 +451,11 @@ table maps “revoked consent” partly to CHG-07, where consent never existed
 Define immutable historical evidence versus current authorization, link every
 end/reduction to the superseded consent grant, and test stale-consent replay.
 
-## 6. P3, tooling, and publication findings
+## 7. Original P3, tooling, and publication findings against v0.1 (historical evidence)
 
 ### RV-73-023 — provider callbacks lack deterministic late-event rules
 
-TR-73-03/04 define only Pending-state delivery callbacks
+TR-73-03/TR-73-04 define only Pending-state delivery callbacks
 (`specification:132-133`). State the idempotent no-op/audit behavior for
 duplicate or late confirmation/failure after acceptance, cancellation,
 supersession, expiry, or decline, and add out-of-order callback tests.
@@ -432,43 +494,50 @@ and “Final package approval remains pending,” with a stale Last updated fiel
 sources. Correcting CBD-72 is outside CBD-73 audit scope and requires separate
 user consent and a focused branch.
 
-## 7. Previously registered Jira/package discrepancies
+## 8. Jira/package discrepancies after v0.2 reconciliation
 
-The review confirmed the package's existing discrepancy register rather than
-silently resolving it:
+The v0.2 traceability record preserves these discrepancies without treating
+this branch as authorization to edit Jira:
 
 1. CBD-73-AC08 in Jira omits the sole-Primary exception carried by current
    CBD-12-AC17 and CBD-72.
 2. AC01 omits the required Declined state.
-3. Creating-authority cancellation is still a Product Owner proposal, refined
-   by RV-73-016.
-4. Inviter-visible decline presentation is undecided and is sharpened by
-   RV-73-010.
-5. Viewer initial-profile composition is not merely a composition detail; it
-   is the controlling-source conflict in RV-73-011.
+3. Creating-authority cancellation is resolved inside the draft rule: the
+   exact required permission and versions control, and lost authority never
+   reactivates an invitation. Any Jira alignment still needs authorization.
+4. Customer/admin decline presentation uses a safe non-attributing interim;
+   exact copy and final presentation remain `OI-73-004`.
+5. Viewer acceptance is resolved in favor of CBD-72: every new Viewer starts
+   with no profile and no visibility; later assignment is a separate expansion.
 6. Jira Notes say due August 21 while the live Due date is August 24.
 
 No Jira update is authorized by this record. Immediately before any later Jira
 change, refetch the issue, links, status, fields, dates, and comments as required
 by repository policy.
 
-## 8. Required disposition sequence
+## 9. Required disposition sequence
 
-1. Resolve RV-73-001–011 at Product Owner/security/privacy decision level.
-2. Amend the lifecycle, message, test, and traceability documents together;
-   do not patch one artifact in isolation.
-3. Resolve or explicitly disposition RV-73-012–023 and add deterministic
-   scenarios for every accepted rule.
-4. Re-run `scripts/audit-cbd-73.py`, the vocabulary check, the relevant CBD-95
-   impact audit, and Mermaid rendering.
-5. Record approval of the exact document versions and source baseline.
-6. With explicit authorization and a fresh Jira read, synchronize the Jira
+1. Obtain and record the Product decision for `OI-73-001`, then reconcile the
+   affected rule, messages, scenarios, audit projection, and traceability as
+   one change.
+2. Route `OI-73-003`, `OI-73-005`, and `OI-73-006` through their owning source
+   artifacts under separately authorized change control.
+3. Produce the applicable implementation and specialist evidence for
+   `OI-73-004` and `OI-73-008`–`OI-73-012`; retain every safe interim rule until
+   its replacement is explicitly approved.
+4. Re-run `scripts/audit-cbd-73.py`, the vocabulary check, Mermaid rendering,
+   the relevant CBD-95 impact audit, and eventual executable fixtures at the
+   exact candidate commit.
+5. Record Product Owner approval of the exact document versions and frozen
+   source baseline only after the applicable review gates close.
+6. With explicit authorization and a fresh Jira read, reconcile the Jira
    description, acceptance criteria, notes, links, and due-date discrepancy.
 7. Merge the approved repository change to `main`; only then register and
    synchronize the four Confluence pages and verify read-back parity.
 
-## 9. Revision history
+## 10. Revision history
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Verified the coordinated v0.2 remediation through repeated adversarial passes: 22 findings fixed in the draft package, five left under exact open gates, 12 canonical open issues, frozen governing blobs, 44 messages, 95 namespaced scenarios, a direct-reference/expected-outcome audit, and repository-wide Mermaid validation. No Product decision, Jira field, Confluence page, or upstream source was changed. | Review record only; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval; narrower gates remain |
 | 0.1 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Independent full review of the merged CBD-73 v0.1 package; 27 findings recorded, one tooling finding closed on the audit branch; no product decision, Jira field, or Confluence page changed. | Review record only; Product Owner disposition required |
