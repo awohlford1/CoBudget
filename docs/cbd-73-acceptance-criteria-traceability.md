@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.2.1 — audit-hardened; Product Owner approval blocked by `OI-73-001` and the `OI-73-008` Failed-semantics decision** |
-| Document version | 0.2.1 |
+| Status | **Approved v1.0 — Product Owner approved the exact package on August 18, 2026 after closing `OI-73-001` and the `OI-73-008` Failed-state semantics. Approval covers the specification only; every gate named in §7 stays open** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -33,10 +33,11 @@ CBD-73 package approval requires all of the following:
    scenario evidence that claims to satisfy it;
 2. every `RV-73-001`–`RV-73-029` finding has the evidence-backed disposition in
    §10, with each open issue governed by the stable §7 register;
-3. `OI-73-001` is closed by the named decision authorities; the safe
-   exclusion rule for `OI-73-002` remains binding unless that issue is closed;
-   and every other open issue is either closed or remains an explicit gate at
-   the impact stated in §7;
+3. `OI-73-001` is closed — the Product Owner decided the §5.1 inviter
+   confirmation on August 18, 2026 — and the `OI-73-008` Failed-state semantics
+   are settled in the same decision. The safe exclusion rule for `OI-73-002`
+   remains binding unless that issue is closed, and every other open issue
+   remains an explicit gate at the impact stated in §7;
 4. after commit, the Product Owner approves the exact v0.2 commit/tree and
    document versions against the frozen §2 source baseline; and
 5. only after that approval, a fresh Jira read precedes any authorized Jira
@@ -50,6 +51,25 @@ additionally requires `OI-73-004`. Repository integrity and publication remain
 separately gated by `OI-73-005` and `OI-73-007`. `OI-73-006` is a focused
 source-metadata correction and does not override the substantively clear
 CBD-72 v0.1.53 rules.
+
+### 1.1 What the v1.0 approval covers
+
+Approval is of the exact specification, message semantics, data requirements,
+audit inventory, and scenario set at this version. Following the CBD-91 and
+CBD-102 convention, it records its own limits:
+
+- It **does** settle the product rules, including the §5.1 intended-recipient
+  confirmation and the active-restricted Failed-state model.
+- It **does not** mean the rules are implemented, that fixtures exist, or that
+  any control has been shown to work. `VT-94-009`–`VT-94-017` remain unbuilt.
+- It **does not** substitute for the security/privacy, accessibility,
+  localization, or safety review legs routed under `FU-95-017`, `FU-95-027`,
+  and `OI-73-004`, and it is not an independent security review.
+- It **does not** close any remaining `OI-73-*` row, authorize implementation
+  of a gated path, or constitute a release decision.
+- It **does not** by itself update Jira or Confluence. The CBD-73-AC01/AC05
+  correction required by the Failed-state decision is authorized and pending,
+  and publication follows the merge-first rule.
 
 ## 2. Reproducible governing-source baseline
 
@@ -95,12 +115,12 @@ source unambiguous for CBD-73. Correcting that external metadata is
 
 | Jira deliverable | Draft evidence | Namespaced scenario evidence | Audit result |
 | --- | --- | --- | --- |
-| State diagram and transition table | Specification §4.1–§4.4 and post-acceptance transition contracts; 45 exact transitions in `TR-73-01`–`TR-73-37` and `TR-73-40`–`TR-73-47` | `INV-73-01`–`INV-73-18`; `VER-73-01`–`VER-73-11`; applicable change/revocation/transfer ranges below | **Mapped, not approved.** The v0.2 rule set addresses `RV-73-001`–`RV-73-004`, `RV-73-012`–`RV-73-016`, and `RV-73-023`; `OI-73-001` blocks approval while `OI-73-002` keeps only the optional pre-authentication block composition unavailable |
-| Invitation and consent data requirements | Specification §13 (`DR-73-01`–`DR-73-12`), §§5–10 | All eight exact scenario ranges recorded below | **Mapped, source/persistence gated.** `OI-73-003` blocks affected implementation |
-| Customer-facing message inventory | Message inventory §4 and §2 semantic rules | 44 exact semantic contracts: `MSG-73-001`–`MSG-73-006`, `MSG-73-010`–`MSG-73-027`, `MSG-73-029`–`MSG-73-047`, and `MSG-73-049` | **Semantic draft only.** Exact copy and evidence remain `OI-73-004` |
+| State diagram and transition table | Specification §4.1–§4.4 and post-acceptance transition contracts; 47 exact transitions in `TR-73-01`–`TR-73-39` and `TR-73-40`–`TR-73-47` | `INV-73-01`–`INV-73-18`; `VER-73-01`–`VER-73-11`; applicable change/revocation/transfer ranges below | **Mapped, not approved.** The v0.2 rule set addresses `RV-73-001`–`RV-73-004`, `RV-73-012`–`RV-73-016`, and `RV-73-023`; `OI-73-001` blocks approval while `OI-73-002` keeps only the optional pre-authentication block composition unavailable |
+| Invitation and consent data requirements | Specification §13 (`DR-73-01`–`DR-73-13`), §§5–10 | All eight exact scenario ranges recorded below | **Mapped, source/persistence gated.** `OI-73-003` blocks affected implementation |
+| Customer-facing message inventory | Message inventory §4 and §2 semantic rules | 48 exact semantic contracts: `MSG-73-001`–`MSG-73-006`, `MSG-73-010`–`MSG-73-027`, `MSG-73-029`–`MSG-73-047`, `MSG-73-049`, and `MSG-73-050`–`MSG-73-053` | **Semantic draft only.** Exact copy and evidence remain `OI-73-004` |
 | Revocation/removal checklist | Specification §11.3 (`RC-73-01`–`RC-73-14`) | `RVK-73-01`–`RVK-73-16` | **Mapped, not implemented.** Mandatory notice routing follows the settled `RI-93-012` rule; mechanics/evidence remain `OI-73-009` |
-| Audit-event inventory | Specification §14 (`AE-73-01`–`AE-73-31`) and placement/cardinality rules | Every scenario's exact audit assertion; test inventory §5 hardening matrix; the audit script's transition direct-reference manifests | **Mapped at draft-rule level.** Storage/integrity/retention remain `OI-73-011` |
-| Negative and recovery test inventory | Test inventory §§4–6 | 97 globally namespaced scenarios: `INV-73-01`–`INV-73-18`, `VER-73-01`–`VER-73-11`, `CNS-73-01`–`CNS-73-08`, `DCL-73-01`–`DCL-73-13`, `DST-73-01`–`DST-73-08`, `CHG-73-01`–`CHG-73-13`, `RVK-73-01`–`RVK-73-16`, and `TRF-73-01`–`TRF-73-10` | **Draft scenarios, not executable fixtures.** The `VT-94` family selector is not a stable identifier; applicable implementation fixtures and open-issue evidence remain |
+| Audit-event inventory | Specification §14 (`AE-73-01`–`AE-73-32`) and placement/cardinality rules | Every scenario's exact audit assertion; test inventory §5 hardening matrix; the audit script's transition direct-reference manifests | **Mapped at draft-rule level.** Storage/integrity/retention remain `OI-73-011` |
+| Negative and recovery test inventory | Test inventory §§4–6 | 101 globally namespaced scenarios: `INV-73-01`–`INV-73-19`, `VER-73-01`–`VER-73-11`, `CNS-73-01`–`CNS-73-11`, `DCL-73-01`–`DCL-73-13`, `DST-73-01`–`DST-73-08`, `CHG-73-01`–`CHG-73-13`, `RVK-73-01`–`RVK-73-16`, and `TRF-73-01`–`TRF-73-10` | **Draft scenarios, not executable fixtures.** The `VT-94` family selector is not a stable identifier; applicable implementation fixtures and open-issue evidence remain |
 
 ## 4. CBD-73 acceptance-criteria mapping
 
@@ -123,7 +143,7 @@ being mistaken for sufficiency.
 | CBD-73-AC09 | Immediate authorization/alert cutoff, queued-notification suppression, scoped session invalidation without global sign-out, cache/job/active-request execution requirements. | §10 `TR-73-26`; §11.2 `TR-73-30`–`TR-73-35`; §11.3 `RC-73-01`–`RC-73-13`; §9 `TR-73-36`–`TR-73-37`; `AE-73-16`; `IC-73-008` | `CHG-73-02`, `CHG-73-12`, `DST-73-05`–`DST-73-06`, `DST-73-08`, `RVK-73-01`–`RVK-73-02`, `RVK-73-04`, `RVK-73-08`–`RVK-73-09`, `RVK-73-13`–`RVK-73-15` | Mapped; reduction, prospective/active destination-retirement, and membership-end implementation evidence remains `OI-73-009` |
 | CBD-73-AC10 | No effect on sign-in, other memberships, or roles elsewhere; prior codes cannot restore; restoration needs a new invitation. | `RC-73-08`/`RC-73-10`; `IC-73-006`/`IC-73-008` | `DCL-73-03`, `DCL-73-09`, `RVK-73-03`–`RVK-73-04`, `RVK-73-10`–`RVK-73-11`, `INV-73-08`, `INV-73-18`, `VER-73-11`, `INV-73-11`–`INV-73-12` | Mapped, not executed; cross-space block enforcement suppresses future invitations and closes a stale matching path without changing any existing membership |
 | CBD-73-AC11 | Lifecycle events notify affected users where appropriate and are budget-space scoped and auditable; contributed work remains attributed. | §7.3; §14; `RC-73-09`/`RC-73-12`; `IC-73-009` | `INV-73-16`, `DCL-73-08`, `DCL-73-12`, `DST-73-03`, `DST-73-08`, `RVK-73-05`, `RVK-73-08`–`RVK-73-09`, `RVK-73-13`–`RVK-73-15`, `TRF-73-03`, `TRF-73-09` | Mapped; `OI-73-001`, `OI-73-004`, and `OI-73-011` apply where stated |
-| CBD-73-AC12 | Each lifecycle state defines actor, preconditions, resulting state, message, notifications, audit event, and failure/recovery. | Invitation, change, revocation/removal, and transfer transition contracts in §§4, 10–12 | All 97 scenarios: `INV-73-01`–`INV-73-18`, `VER-73-01`–`VER-73-10`, `CNS-73-01`–`CNS-73-08`, `DCL-73-01`–`DCL-73-13`, `DST-73-01`–`DST-73-08`, `CHG-73-01`–`CHG-73-13`, `RVK-73-01`–`RVK-73-16`, `TRF-73-01`–`TRF-73-10` | Mapped at draft-rule level; `OI-73-008`–`OI-73-012` retain implementation gates |
+| CBD-73-AC12 | Each lifecycle state defines actor, preconditions, resulting state, message, notifications, audit event, and failure/recovery. | Invitation, change, revocation/removal, and transfer transition contracts in §§4, 10–12 | All 101 scenarios: `INV-73-01`–`INV-73-19`, `VER-73-01`–`VER-73-10`, `CNS-73-01`–`CNS-73-11`, `DCL-73-01`–`DCL-73-13`, `DST-73-01`–`DST-73-08`, `CHG-73-01`–`CHG-73-13`, `RVK-73-01`–`RVK-73-16`, `TRF-73-01`–`TRF-73-10` | Mapped at draft-rule level; `OI-73-008`–`OI-73-012` retain implementation gates |
 | CBD-73-AC13 | Consent and revocation copy is voluntary, accessible, nonjudgmental, with a safe path to decline or leave. | §6; message inventory §2; `MSG-73-013`, `MSG-73-017`, `MSG-73-033`, `MSG-73-036`, `MSG-73-047`, `MSG-73-049` | `DCL-73-01`–`DCL-73-05`, `DCL-73-12`–`DCL-73-13`, `RVK-73-06`–`RVK-73-08`, `RVK-73-13`–`RVK-73-14`, `RVK-73-16` | Semantic mapping only; `OI-73-004` blocks release |
 | CBD-73-AC14 | Test inventory covers wrong recipient/channel, wrong space, invalid/expired/reused code, revoked consent, stale session, queued alert, unauthorized role change, cross-space isolation. | Test inventory §5 | Exact §5 required-case/hardening matrix, including the literal revoked-consent, queued-alert, and already-member/stale-invitation rows restored in v0.2.1; notably `VER-73-01`–`VER-73-02`, `VER-73-08`, `DCL-73-09`, `RVK-73-11`, `INV-73-02`, `INV-73-04`, `INV-73-09`–`INV-73-10`, `INV-73-15`–`INV-73-16`, `CNS-73-08`, `CHG-73-13`, `TRF-73-10`, `RVK-73-01`–`RVK-73-02`, `RVK-73-15`, `CHG-73-05`–`CHG-73-06`, `DST-73-07`–`DST-73-08` | Mapped; `OI-73-001` blocks wrong-recipient policy approval |
 | CBD-73-AC15 | Recipient must verify control of the exact invited channel; a forwarded link is insufficient. | §5; `IC-73-003` | `VER-73-01`, `VER-73-03`, `VER-73-05`–`VER-73-06`, `VER-73-09`–`VER-73-10` | Mapped; concrete design/evidence `OI-73-008`/`OI-73-012` |
@@ -132,12 +152,12 @@ being mistaken for sufficiency.
 
 Reverse coverage is family-scoped and explicit:
 
-- `INV-73-01`–`INV-73-18` map to `CBD-73-AC01`, `CBD-73-AC02`,
+- `INV-73-01`–`INV-73-19` map to `CBD-73-AC01`, `CBD-73-AC02`,
   `CBD-73-AC05`, `CBD-73-AC10`, `CBD-73-AC12`, `CBD-73-AC14`, and
   `CBD-73-AC16`.
 - `VER-73-01`–`VER-73-11` map to `CBD-73-AC03`, `CBD-73-AC04`,
   `CBD-73-AC12`, and `CBD-73-AC14`–`CBD-73-AC17`.
-- `CNS-73-01`–`CNS-73-08` map to `CBD-73-AC03`, `CBD-73-AC04`,
+- `CNS-73-01`–`CNS-73-11` map to `CBD-73-AC03`, `CBD-73-AC04`,
   `CBD-73-AC12`, `CBD-73-AC14`, and `CBD-73-AC16`.
 - `DCL-73-01`–`DCL-73-13` map to `CBD-73-AC01`, `CBD-73-AC05`,
   `CBD-73-AC10`–`CBD-73-AC14`, and `RI-93-010`.
@@ -166,7 +186,7 @@ CBD-73 maps the same supported CBD-12 coverage as the reviewed Jira package:
 | CBD-12 AC | Package evidence | Qualification |
 | --- | --- | --- |
 | `CBD-12-AC12` — invitation behavior for creation/delivery, acceptance, expiration, resend, replacement, cancellation, failure | Specification §4; `INV-73-01`–`INV-73-17` | Draft rule and scenarios; provider failure is restricted delivery metadata and does not itself invalidate the invitation/code; no runtime claim |
-| `CBD-12-AC13` — pre-acceptance identification of space, inviter, role, resources, actions, restrictions, alert behavior, revocation method | Specification §7.2; `MSG-73-016`; `CNS-73-01`–`CNS-73-08` | `OI-73-001`/`OI-73-004` |
+| `CBD-12-AC13` — pre-acceptance identification of space, inviter, role, resources, actions, restrictions, alert behavior, revocation method | Specification §7.2; `MSG-73-016`; `CNS-73-01`–`CNS-73-11` | `OI-73-001`/`OI-73-004` |
 | `CBD-12-AC14` — explicit affirmative consent with recorded person, space, role, scope, timestamp, copy version, source | Specification §6; `DR-73-04`; `CNS-73-03` | Historical evidence is never current authority |
 | `CBD-12-AC15` — duplicate, superseded, expired, failed, and used links have defined safe recovery | Specification §4.3–§4.4; `MSG-73-003`; `INV-73-01`–`INV-73-17`; `VER-73-01`–`VER-73-10` | Draft recovery rules. A failed/unusable link means a terminal or invalid verifier outcome, not provider-delivery failure alone; deprecated `MSG-73-020` is compatibility history and never emitting evidence only |
 | `CBD-12-AC16` — expansion re-consent; immediate notified reductions; explicit revocation/removal authorization, messaging, resulting state | Specification §§10–11; `MSG-73-026`, `MSG-73-030`–`MSG-73-035`, `MSG-73-047`, `MSG-73-049`; `CHG-73-01`–`CHG-73-13`; `RVK-73-01`–`RVK-73-16` | Exact copy `OI-73-004` |
@@ -201,7 +221,7 @@ ship an otherwise gated path.
 
 | ID | Issue and controlling conflict/unknown | Safe interim behavior | Owner / decision authority | Closure evidence | Release impact |
 | --- | --- | --- | --- | --- | --- |
-| `OI-73-001` | **Misdirected invitation / intended-recipient binding policy.** Exact invited-channel control and primary-contact equality do not prove that the controller is the human the inviter intended; a mistyped destination may be the stranger's verified primary contact. Product must approve an exact binding rule or explicitly accept the residual and its complete detection/removal consequences. | Exact-channel verification, bounded disclosure, and deliberate account attachment may complete but grant nothing. With no approved intended-recipient binding rule today, every acceptance attempt denies mutation-free; primary-contact equality cannot bypass the gate. | Product Owner, with Privacy and Security review | Recorded Product decision; exact approved binding/residual rule; finalized `VER-73-02`, `VER-73-04`, and `VER-73-08` allow-or-deny evidence; notice, cutoff, audit/export, removal, and retained-attribution evidence | **CBD-73 package-approval blocker; blocks all acceptance implementation/release until resolved.** |
+| `OI-73-001` | **Closed August 18, 2026 by Product Owner decision.** Intended-recipient binding is the §5.1 inviter confirmation of the specific accepting account; a mistyped channel that is a stranger's verified primary contact can no longer yield membership. | Normative and in force: TR-73-38 opens the confirmation, TR-73-39 decides it, TR-73-13 commits only against a current versioned binding (`DR-73-13`), and primary-contact equality never substitutes. | Product Owner — **decided August 18, 2026**; security/privacy review still named | Recorded decision plus, before implementation, security/privacy review and `VT-94-009`–`VT-94-017` fixtures | Product decision closed; package approval unblocked. Acceptance implementation and release remain blocked on the verification evidence, not on the decision. |
 | `OI-73-002` | **Unauthenticated/no-account decline-and-block and account attachment.** The account-level block cannot be created before an authenticated account exists, and the optional no-account/block composition is not approved. | Plain decline remains invitation-scoped and may be offered after invited-channel verification. Hide and server-deny decline-and-block until an authenticated account is deliberately attached; never synthesize a block, and no ambiguity, interruption, timeout, or abandonment may create one. | Product Owner, with Identity, Privacy, and Security review | Approved alternative, if any, to the safe rule; finalized `VER-73-07`/`DCL-73-13`; authenticated block persistence/privacy evidence; account-provider mechanics under `OI-73-012` | **Blocks offering, implementing, or releasing decline-and-block before authenticated account attachment, not package review under this safe exclusion rule.** Plain invitation-scoped decline may proceed subject to other gates. |
 | `OI-73-003` | **Dependent-source alignment.** The settled `RI-93-012` lifecycle-notice routing contradicts older every-channel wording in CBD-72/CBD-91, and CBD-91 lacks approved classes/splits for block, limiter, ceremony-bound destination, and membership-independent notice data. | Apply the normative `RI-93-012` rule in CBD-73: mandatory authenticated in-app notice, optional verified private safety-channel copy only, and no fallback. Do not implement affected routing or persistence by forcing the new records into ill-fitting classes. | CBD-72/CBD-91 document owners and Privacy/Data Governance; Product Owner confirms the focused amendments | Approved focused CBD-72/CBD-91 source amendments; CBD-91 class identifiers, fields, audience/lifecycle/storage boundaries, retention/deletion and trace links; CBD-73 mappings updated to the approved source versions | **Blocks affected persistence and lifecycle-notice routing implementation, not review of the settled CBD-73 lifecycle rule.** |
 | `OI-73-004` | **Customer copy, accessibility, localization, and comprehension evidence.** Semantic intents exist, but exact strings/template versions and approval evidence do not. Declined-versus-expired presentation is also not approved. | Use no customer-facing draft templates. Any pre-approval administrative projection must be non-attributing and make decline indistinguishable from expiry/other non-acceptance; security-only records may preserve the exact reason under least privilege. | Product Owner and Content Design, with Accessibility, Localization, Privacy, and safety-specialist approval as applicable | Approved exact strings and template/version hashes for all 44 message rows; locale matrix; accessibility/comprehension evidence; specialist/privacy review; `DCL-73-12` and `RVK-73-16` projection/copy evidence, including `MSG-73-024`–`MSG-73-027`, `MSG-73-047`, and `MSG-73-049` | **Blocks customer-facing release, not lifecycle-rule review.** |
@@ -263,7 +283,7 @@ stable controlling gate. `External` work is intentionally not edited here.
 | `RV-73-003` | **Fixed in v0.2 draft; scenario coverage completed in v0.2.1** | `IC-73-017` and §4.4 additional rule 6 terminalize any invitation issued at or before the end of the candidate account's prior membership. `INV-73-11` proves the neighbouring creating-permission-loss path for opened and unopened alternate-channel cases; `VER-73-11`, added under `RV-73-028`, proves the recipient-side attachment check this finding actually raised |
 | `RV-73-004` | **Fixed in v0.2 draft** | Code resolution and acceptance commit compare the authoritative expiry timestamp independent of expiry materialization; delayed-worker race scenario added |
 | `RV-73-005` | **Fixed in v0.2 draft; implementation gated** | `RI-93-012` is normative in §6; membership-independent mandatory in-app notice is exempt from ordinary-alert cutoff; missing/failed/stale/compromised safety-channel cases remain in the inventory; source alignment is `OI-73-003`, mechanics `OI-73-009` |
-| `RV-73-006` | **Open — `OI-73-001`** | Attachment remains non-authorizing. Because even a matching primary contact may be a mistyped stranger's address, the safe interim denies every acceptance until Product approves an exact intended-recipient binding or explicitly accepts the residual plus complete correction/cutoff evidence |
+| `RV-73-006` | **Closed August 18, 2026** | Attachment remains non-authorizing. Because even a matching primary contact may be a mistyped stranger's address, the safe interim denies every acceptance until Product approves an exact intended-recipient binding or explicitly accepts the residual plus complete correction/cutoff evidence |
 | `RV-73-007` | **Fixed in v0.2 draft** | Specification adds complete role/scope-change and transfer transition contracts; test inventory covers decline, withdrawal, expiry, authorization loss, concurrency, failure, and recovery |
 | `RV-73-008` | **Fixed at requirement level; implementation gated** | §§2 and 9 inherit CBD-94 `SR-94-007`–`SR-94-011` without weakening; code/rate/atomicity/recovery evidence remains `OI-73-008`–`OI-73-011` |
 | `RV-73-009` | **Fixed in v0.2 draft; source gated** | Destination data is bound to the account, budget space, membership/invitation or ceremony, purpose, verification, and version; cross-space cases added; CBD-91 class approval is `OI-73-003` |
@@ -293,7 +313,7 @@ stable controlling gate. `External` work is intentionally not edited here.
 | Stage | Required closure/evidence |
 | --- | --- |
 | CBD-73 lifecycle-rule review | v0.2 four-document semantic consistency; `RV-73-001`–`RV-73-027` ledger reviewed; `OI-73-001` denies every acceptance until an approved intended-recipient binding passes, while attachment remains non-authorizing. `OI-73-008` preserves active restricted provider-failure metadata pending the Product/Jira meaning. The `OI-73-002` safe exclusion rule is sufficient for review; `OI-73-003` does not reopen settled `RI-93-012` |
-| Product Owner package approval | Recorded dispositions for `OI-73-001` and the `OI-73-008` AC01/AC05 Failed-semantics question; `OI-73-002` is either closed or retained under its safe exclusion rule; the committed v0.2 commit/tree and four document versions/blobs are captured in PR/approval evidence; no unresolved contradiction among the four artifacts; approved Jira reconciliation plan based on a fresh read |
+| Product Owner package approval | **Complete August 18, 2026** for the exact v1.0 documents; `OI-73-002` is either closed or retained under its safe exclusion rule; the committed v0.2 commit/tree and four document versions/blobs are captured in PR/approval evidence; no unresolved contradiction among the four artifacts; approved Jira reconciliation plan based on a fresh read |
 | Affected implementation handoff | Product approval plus `OI-73-003` for affected persistence/routing and the applicable concrete designs/evidence in `OI-73-008`–`OI-73-012`, including provider-metadata/code-validity separation, `OI-73-009` pure-reduction/prospective-and-active-destination/membership-end invalidation, `OI-73-010` cross-space account-block matching/pair limiting, and exact audit-edge cardinality; test inventory converted into owned executable fixtures |
 | Customer-facing release | Applicable implementation gates closed; `OI-73-004` exact copy/accessibility/localization evidence closed for all 44 message rows including `MSG-73-024`–`MSG-73-027`, `MSG-73-047`, and `MSG-73-049`; security/privacy review and all negative/recovery tests pass; `OI-73-005` explicitly dispositioned for integrated repository evidence |
 | Repository integrity sign-off | After commit, capture the exact v0.2 commit/tree and four document blobs, then run `scripts/audit-cbd-73.py` with its transition direct-reference manifests, Mermaid rendering, vocabulary checks, link/anchor checks, relevant implementation tests, and the dispositioned CBD-95 impact audit against that same identity. A branch name or mutable worktree is never pinned candidate evidence |
@@ -335,6 +355,7 @@ earlier clean run against different blobs.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Recorded the Product Owner decisions closing `OI-73-001` and the `OI-73-008` Failed-state semantics, added §1.1 stating exactly what the approval does and does not cover, closed `RV-73-006`, and updated every range and total for 47 transitions, 48 messages, 32 audit events, 13 data records, and 101 scenarios. | **Approved v1.0** |
 | 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Independent completeness review of merged v0.2. Recorded `RV-73-028` and `RV-73-029`, corrected the overclaiming `RV-73-003` disposition, added `INV-73-18`/`VER-73-11` coverage for the §4.4 rule 6 recipient-side checks, restored the literal `CBD-73-AC14` case names, and updated every scenario range and total to 97. No product rule, open issue, or gate changed. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Audit hardening against `RV-73-001`–`RV-73-027`: reproducible governing and v0.1 finding baselines; 44 messages, 45 transitions, 31 audit events, and 95 globally namespaced scenarios; safe provider-metadata/code-validity separation; bounded encrypted dispatch custody; prospective-destination and cross-space block enforcement; direct-reference-manifest plus expected-outcome checking; canonical `OI-73-001`–`OI-73-012` register; complete finding dispositions; and explicit stage gates. No Jira or Confluence write. | Draft; exact v0.2 commit/tree and document blobs require external post-commit capture because this document cannot self-pin. `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval; narrower implementation/release gates remain |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: completion rule, deliverable and per-criterion traceability in both directions, supported CBD-12 criteria mapping, routed `FU-95` follow-up-family coverage, discrepancy register (six items), governing inheritance, review gates, and remaining work. | Draft; Product Owner review required |

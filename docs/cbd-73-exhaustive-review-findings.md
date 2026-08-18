@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Remediation verified v0.2.1 — 24 of 29 findings fixed in the draft package; 5 findings remain open; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval** |
-| Document version | 0.2.1 |
+| Status | **Remediation verified v1.0 — 24 of 29 findings fixed in the draft package; 5 findings remain open; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Reviewed repository baseline | `c096928a903dd5446b26ba21eaf7eaa2d84ce936` on `main` (PR #64 merge) |
@@ -543,6 +543,7 @@ by repository policy.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Recorded the August 18, 2026 Product Owner decisions closing `RV-73-006`/`OI-73-001` and the `RV-73-013`/`OI-73-008` Failed-state question. 26 of 29 findings are now fixed; `RV-73-021`, `RV-73-025`, and `RV-73-026` retain source, integrity, and publication gates. | **Approved v1.0** |
 | 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Independent completeness review of the merged v0.2 package: added `RV-73-028` (missing §4.4 rule 6 recipient-side scenario coverage plus an overclaiming `RV-73-003` disposition) and `RV-73-029` (dropped literal `CBD-73-AC14` case names), both remediated in the same pass. No open issue closed and no product rule changed. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Verified the coordinated v0.2 remediation through repeated adversarial passes: 22 findings fixed in the draft package, five left under exact open gates, 12 canonical open issues, frozen governing blobs, 44 messages, 95 namespaced scenarios, a direct-reference/expected-outcome audit, and repository-wide Mermaid validation. No Product decision, Jira field, Confluence page, or upstream source was changed. | Review record only; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval; narrower gates remain |
 | 0.1 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Independent full review of the merged CBD-73 v0.1 package; 27 findings recorded, one tooling finding closed on the audit branch; no product decision, Jira field, or Confluence page changed. | Review record only; Product Owner disposition required |
