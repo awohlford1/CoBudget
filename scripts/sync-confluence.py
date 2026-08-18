@@ -345,6 +345,59 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-95 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-95-acceptance-criteria-traceability.md",
     ),
+    # CBD-73 consumes the approved CBD-72 permission model, the CBD-71 v1.1
+    # schedule decisions, the CBD-91 data classes, and the CBD-94
+    # SR-94-007–SR-94-011 requirements, so it publishes after those sets.
+    # Within the set the order follows the header citations: the lifecycle
+    # specification is cited by every other document's "Governing
+    # specification" field, the message and test inventories are cited by the
+    # traceability record's deliverable table, and the findings record is cited
+    # by its "Independent review" field. The traceability record therefore
+    # publishes last and is not a baseline, since nothing cites it.
+    #
+    # These five pages were created as placeholders on August 18, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged approved v1.0 content. Until then the repository
+    # files on `main` are authoritative, per OI-73-007.
+    Target(
+        key="cbd-73-specification",
+        doc_set="cbd-73",
+        page_id="11370497",
+        expected_title="CBD-73 — Invitation, Consent, and Revocation Lifecycle Specification",
+        path="docs/cbd-73-invitation-consent-lifecycle-specification.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-73-message-inventory",
+        doc_set="cbd-73",
+        page_id="11403265",
+        expected_title="CBD-73 — Customer-Facing Message Inventory",
+        path="docs/cbd-73-customer-message-inventory.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-73-test-inventory",
+        doc_set="cbd-73",
+        page_id="11436033",
+        expected_title="CBD-73 — Negative and Recovery Test Inventory",
+        path="docs/cbd-73-negative-recovery-test-inventory.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-73-review-findings",
+        doc_set="cbd-73",
+        page_id="11468801",
+        expected_title="CBD-73 — Exhaustive Review Findings",
+        path="docs/cbd-73-exhaustive-review-findings.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-73-traceability",
+        doc_set="cbd-73",
+        page_id="11403286",
+        expected_title="CBD-73 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-73-acceptance-criteria-traceability.md",
+    ),
     # CBD-102 derives its gates from the approved CBD-72 permission model, the
     # CBD-91 inventory, the CBD-92 contract registers, and the architecture
     # security baseline, so the whole set publishes after those.
