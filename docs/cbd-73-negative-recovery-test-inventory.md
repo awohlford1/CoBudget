@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0 — scenario rules approved August 18, 2026; deterministic fixtures remain test-design scope — hardened lifecycle alignment; Product Owner rule review required** |
-| Document version | 1.0 |
+| Status | **Approved v1.0.1 — scenario rules approved August 18, 2026. Deterministic fixtures remain test-design scope under `VT-94-*`** |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -251,6 +251,7 @@ This v0.2 inventory contains **101 scenarios in 8 families**: 19 `INV-73-*`, 11 
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Corrected the v1.0 status line, which kept a stale trailing clause contradicting the approval. No rule, decision, or gate changed. | Correction to approved v1.0 |
 | 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Added `CNS-73-09`–`CNS-73-11` for the confirmation commit, rejection/expiry indistinguishability, and the mistyped-channel stranger, and `INV-73-19` for cause-neutral prompt equivalence across all five request classes, for 101 scenarios. | **Approved v1.0** |
 | 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Independent completeness review of the merged v0.2 package (`RV-73-028`, `RV-73-029`). Added `INV-73-18` and `VER-73-11` to cover the §4.4 additional rule 6 recipient-side checks — private suppression when the target is already an active member, and terminalization when an invitation predates the account's latest membership end (`IC-73-017`) — which no v0.2 scenario exercised. Restored the literal `CBD-73-AC14` required-case names for revoked consent and queued alerts so the criterion is verifiable by lookup. No product rule changed. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Namespaced all 95 scenario IDs globally and hardened coverage for dispatched-only code ceremonies and encrypted raw-bearer custody, active provider-failure parity, authoritative expiry/callback precedence, private-cause normalization, conservative intended-recipient gating, concurrent-ceremony destination retirement, exact AE-73-06/AE-73-31 manifests, synthetic active-projection cancellation, acceptance reconciliation, distinct mutating transfer invalidation/no-op denial copy, Primary-first transfer readiness, stale proposal controls, and full stable-ID edges. | Draft; Product Owner review required |
