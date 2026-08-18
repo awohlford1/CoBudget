@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Derived from approved CBD-72/CBD-91/CBD-92 material and the `docs/architecture.md` security baseline. Product Owner approval is required before CBD-103–107 may score a vendor against it. |
-| Document version | 0.1.0 |
+| Document version | 0.1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Pending Product Owner review |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Evaluation Rubric v0.1.0; Demand Model v0.1.0; Cost Template v0.1.0; Evidence Register and Exception Rules v0.1.0 |
+| Companions | Evaluation Rubric v0.1.1; Demand Model v0.1.1; Cost Template v0.1.1; Evidence Register and Exception Rules v0.1.1 |
 | Confluence page | [CBD-102 — Provider Requirements and Hard-Gate Catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9371654) |
 | Repository baseline | `2e372f6` |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose and authority
 
@@ -228,7 +228,7 @@ these fails in every category it is proposed for.
 | --- | --- | --- | --- | --- | --- |
 | HG-102-016 | H | A background job can carry structured authority context on the job itself: authority mode, named `SA-92-*` purpose or user-delegated subject/recipient binding, service-policy version, tenant/resource identity, authorization version, and idempotency key. | A job payload and its metadata are inspected for arbitrary structured fields that survive enqueue, retry, and dead-letter. A runtime that cannot carry that context on a job fails. | `SA-92-001`–`SA-92-008`; `DI-91-039`; `EP-92-007`; `TB-92-008`; `TB-92-009` | Vendor |
 | HG-102-017 | H | Missing, ambiguous, unlisted, or stale job authority fails closed rather than executing with a default. | The consumer contract permits rejecting a job on schema or authority validation without the platform silently retrying it into success or dropping it unlogged. | `SA-92-*` preamble, CBD-92 §2.4; CBD-91 §4 rule 9 | Config |
-| HG-102-018 | H | Queue, scheduler, retry, dead-letter, synchronization, and delivery paths support maximum attempt counts, backoff, per-tenant and per-connection concurrency caps, and a terminal state. | Each control is configured on a live account. A queue or delivery service without a maximum attempt count, backoff, dead-letter handling, or terminal state fails. Note the per-tenant and per-connection **concurrency caps**, which the CBD-102 ticket's paraphrase of `RL-92-006` omits. | `RL-92-006`; `EP-92-007` | Vendor |
+| HG-102-018 | H | Queue, scheduler, retry, dead-letter, synchronization, and delivery paths support maximum attempt counts, backoff, per-tenant and per-connection concurrency caps, and a terminal state. | Each control is configured on a live account, including the per-tenant and per-connection **concurrency caps**. A queue or delivery service without a maximum attempt count, backoff, concurrency cap, dead-letter handling, or terminal state fails. | `RL-92-006`; `EP-92-007` | Vendor |
 | HG-102-019 | H | No background path retries indefinitely, and shedding under pressure preserves ordered progress and lifecycle obligations rather than silently dropping them. Provider quota exhaustion is a bounded, observable failure, not an unlogged stall. | Exhaustion behaviour is observed under test: the failure surfaces as a terminal, logged state. | `RL-92-006` | Vendor |
 | HG-102-020 | H | The edge or gateway can emit throttled and unthrottled responses that are uniform in status, body, error class, header set, `Retry-After` value, and observable timing. | Responses are captured for existing, non-existent, ineligible, and unauthorized subjects and compared field by field. A gateway that emits state-varying quota or remaining-attempt headers and cannot suppress them fails. | `RL-92-003`; `TB-92-002`; CBD-72 `XSP-02` | Vendor |
 | HG-102-021 | H | Ceilings can be applied per surface rather than as one global limit, covering each `RL-92-001` bounded surface. | Independent policies can be attached to the distinct entry points `EP-92-001`, `EP-92-002`, `EP-92-004`, `EP-92-005`, `EP-92-006`, `EP-92-008`, `EP-92-009`, `EP-92-010`, `EP-92-011`, `EP-92-014`, and `EP-92-015`. A platform offering only one account-wide limit fails. | `RL-92-001`; `RL-92-002` | Vendor |
@@ -342,7 +342,7 @@ Weighted Provider Evaluation Rubric.
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-102-001 | **Resolved August 16, 2026.** `SR-94-069`'s organizationally separated duties were in tension with a single-operator project. Product Owner disposition: `SR-94-069` stands unamended and CoBudget staffs a named second principal holding key-recovery custody and restore approval with no customer-data path. Recorded in §2.5.1. | Closed. `HG-102-006` becomes a genuine vendor-capability test and gains a second edge — key custody or restore approval must not imply customer-data read. The remaining work is operational rather than documentary and is tracked as `OI-102-022`. |
-| OI-102-002 | The CBD-102 ticket states CBD-94 sets a pending threshold for the custody gates via a solo-operator disposition that does not exist, and its `RL-92-006` paraphrase omits per-tenant and per-connection concurrency caps. | Ticket text should be corrected. No effect on this catalog, which follows the approved documents. |
+| OI-102-002 | **Resolved August 16, 2026, recorded August 18, 2026.** The ticket stated that CBD-94 set a pending threshold for the custody gates through a solo-operator disposition that does not exist, and its `RL-92-006` paraphrase omitted the per-tenant and per-connection concurrency caps. Both were corrected in the ticket on August 16, 2026; this row was not closed at the time. | Closed. The catalog never depended on the ticket text, having followed the approved documents throughout. `HG-102-005` and `HG-102-006` stand firm per §2.5, and `HG-102-018` tests the concurrency caps. |
 | OI-102-003 | Rate, quota, and resource **values** remain unselected under `RL-92-007` and `ME-94-010`. The gates here test provider *capability* to enforce a ceiling, not the ceiling itself. | Capability gates are decidable now; values remain a CBD-94/architecture obligation before any `RL-92-001` surface is released. |
 | OI-102-004 | **Resolved August 16, 2026.** Push and SMS had an approved `NT-92-*` ceiling but no evaluating category. Product Owner disposition: add category **N** with a new Jira sibling to CBD-103–107. Gates `HG-102-068`–`075` are in §10, and the subtask is [CBD-130](https://cobudget.atlassian.net/browse/CBD-130). | Fully closed. The category **N** rubric weights were approved the same day, so CBD-130 has a complete gate set, weight profile, demand figures, and cost lines. |
 | OI-102-005 | `HG-102-004`, `HG-102-007`, `HG-102-008`, and `HG-102-043` may only be answerable from vendor assertion rather than observation for some providers. | The evidence register must record confidence and limitation per §2.2. Assertion alone cannot produce a pass at all — it produces `UNPROVEN` — so these gates are the most likely source of an `ELIGIBLE-PENDING-EVIDENCE` verdict. |
@@ -379,9 +379,9 @@ Weighted Provider Evaluation Rubric.
 | CBD-72 `PM-72-001/002/003/009/010/011` | HG-102-031, 045, 057, 061 |
 | CBD-72 permissions 20a/20b/27/29/31/32/33/34/35 | HG-102-030, 057, 063, 066 |
 | CBD-72 §8, §9, `XSP-02` | HG-102-015, 020, 045 |
-| CBD-91 §2.1 tiers, §4 rules, §5.1 surfaces | HG-102-011, 012, 013, 014, 035, 046, 052, 053, 065 |
-| `DI-91-*` classes | HG-102-001, 003, 009–012, 014, 024–031, 033, 035, 037–044, 046, 049–053, 055–067, 071, 074, 075 |
-| Architecture § Security baseline | HG-102-010, 012, 015, 029, 038, 039, 040, 056, 058, 059 |
+| CBD-91 §2.1 tiers, §4 rules, §5.1 surfaces | HG-102-011–014, 017, 035, 042, 046, 052, 053, 065 |
+| `DI-91-*` classes | HG-102-001, 003, 007, 011, 012, 014–016, 024–028, 030, 031, 033–035, 037–040, 042, 044, 046, 050–053, 055, 056, 058–061, 063–067, 071, 073–075 |
+| Architecture § Security baseline | HG-102-010, 012, 014, 015, 025, 029, 039, 040, 056, 058, 059 |
 | Architecture § Synchronization flow | HG-102-038, 060 |
 
 Every gate in §4–§10 appears at least once above. A gate that cannot be placed

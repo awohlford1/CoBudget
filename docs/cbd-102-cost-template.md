@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The structure a CBD-103–107 cost comparison must be recorded in. It contains no prices; providers are not selected here. |
-| Document version | 0.1.0 |
+| Document version | 0.1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Pending Product Owner review |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Hard-Gate Catalog v0.1.0; Evaluation Rubric v0.1.0; Demand Model v0.1.0 |
+| Companions | Hard-Gate Catalog v0.1.1; Evaluation Rubric v0.1.1; Demand Model v0.1.1; Evidence Register and Exception Rules v0.1.1 |
 | Confluence page | [CBD-102 — Provider Cost Template](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9469982) |
 | Repository baseline | `52d764a` |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose
 
@@ -67,7 +67,7 @@ One record per provider per category. Line items are stable citation keys.
 
 | Field | Content |
 | --- | --- |
-| Provider and category | Name, and one of H / I / D / E / F |
+| Provider and category | Name, and one of H / I / D / E / F / N |
 | **Tier priced** | The exact plan, and **the gates that forced it** under CR0 |
 | Eligibility verdict | Carried from the gate evaluation: `ELIGIBLE`, `ELIGIBLE-PENDING-EVIDENCE`, `CONDITIONAL`, or `INELIGIBLE` |
 | Currency and billing region | As quoted |

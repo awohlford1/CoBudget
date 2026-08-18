@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Planning assumptions for provider sizing and cost comparison. Not a forecast, a commitment, or a capacity guarantee. |
-| Document version | 0.1.0 |
+| Document version | 0.1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Pending Product Owner review |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Hard-Gate Catalog v0.1.0; Evaluation Rubric v0.1.0 |
+| Companions | Hard-Gate Catalog v0.1.1; Evaluation Rubric v0.1.1; Cost Template v0.1.1; Evidence Register and Exception Rules v0.1.1 |
 | Confluence page | [CBD-102 — Private MVP Demand Model](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9273396) |
 | Repository baseline | `c061a5b` |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose
 

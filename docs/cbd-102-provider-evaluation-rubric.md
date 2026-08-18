@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Scores the non-gating qualities of a provider that has already been measured against the CBD-102 hard-gate catalog. Product Owner approval of the weights is required before CBD-103–107 score a vendor. |
-| Document version | 0.1.0 |
+| Status | **Draft — not approved.** Scores the non-gating qualities of a provider that has already been measured against the CBD-102 hard-gate catalog. The §4 weight profiles were approved by the Product Owner on August 16, 2026 and are fixed for CBD-103–107 and CBD-130; the document as a whole remains pending Product Owner review. |
+| Document version | 0.1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Pending Product Owner review |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Hard-Gate Catalog v0.1.0; Demand Model v0.1.0; Cost Template v0.1.0; Evidence Register and Exception Rules v0.1.0 |
+| Companions | Hard-Gate Catalog v0.1.1; Demand Model v0.1.1; Cost Template v0.1.1; Evidence Register and Exception Rules v0.1.1 |
 | Confluence page | [CBD-102 — Weighted Provider Evaluation Rubric](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9142327) |
 | Repository baseline | `c88a7c8` |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose and relationship to the gates
 
