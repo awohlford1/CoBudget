@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved rule inventory — deterministic fixtures routed to test design by Product Owner decision, August 18, 2026** |
+| Status | **Approved v0.1.14 — final package approved by the Product Owner, August 18, 2026; deterministic fixtures are test-design scope under VT-94-*** |
 | Version | 0.1.14 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-72](https://cobudget.atlassian.net/browse/CBD-72) |
@@ -152,6 +152,7 @@ Per-feature-group completeness against that matrix is the remaining check, not t
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.1.14 | August 18, 2026 | Alexander Wohlford — Product Owner | **Approved.** Final package approval of this exact version; the 78 rule-level scenarios are the binding acceptance evidence that test design implements under `VT-94-*`. | **Approved v0.1.14** |
 | 0.1.14 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the Product Owner fixture disposition: the rule-level inventory is accepted as the CBD-72 deliverable and deterministic fixture elaboration is routed to test design under the CBD-94 verification inventory (`VT-94-*`). All 78 draft-status cells now point to that route instead of reading “fixture pending”. No scenario rule changed. | Product Owner approved August 18, 2026 |
 | 0.1.13 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Corrected `LIFE-03` and `LIFE-04`, which still described OD-72-02 and OD-72-05 as open. RF-72-60 closed both on August 15, 2026 but aligned only `LIFE-06` and `LIFE-07`, leaving these two asserting the opposite of the specification: `LIFE-03` claimed permanent deletion does not execute, and `LIFE-04` claimed restoration and retention behaviour remain blocked. `LIFE-03` now tests that deletion is never offered from the live state because §6.4 routes it through archival, with `LIFE-07` covering the supported path. `LIFE-04` now states the closed archival behaviour — indefinite retention, no countdown, Primary-only restoration to archival-time roles and profiles — and points to `LIFE-08` for export. Both draft statuses drop the "blocked by" wording. No rule changed; the catalog was describing superseded rules. | Editorial correction; no new decision |
 | 0.1.12 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Added `LIFE-08` for the archived-space export path established by RF-72-61: export follows read scope against the frozen archival-time scope, Viewer self-service and Partner bulk export stay denied, an owner-created snapshot remains the Viewer's only route to a copy, and every outcome holds inside the §6.4 restore window. | Product Owner rule approved; deterministic fixture routed to test design (VT-94-*) |

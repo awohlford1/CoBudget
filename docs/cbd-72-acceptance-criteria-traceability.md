@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Ready for final package approval — every review gate dispositioned August 18, 2026; exact-version approval and publication remain** |
+| Status | **Approved v0.1.13 — final package approved by the Product Owner, August 18, 2026; publication is the last completion-rule step** |
 | Document version | 0.1.13 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-72](https://cobudget.atlassian.net/browse/CBD-72) |
@@ -191,6 +191,7 @@ Each rewritten CBD-72 criterion maps to its controlling specification evidence a
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.1.13 | August 18, 2026 | Alexander Wohlford — Product Owner | **Approved.** Final package approval of model 0.1.53, catalog 0.1.14, and this record at 0.1.13. The Product Owner approval review gate is Pass; publication follows the merge under the repository working rules. | **Approved v0.1.13** |
 | 0.1.13 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-72-62 (RI-93-012 §6.3 safety-routing amendment) and RF-72-63 (close-out dispositions for fixtures, specialist reviews, and the stale CBD-14 gate texts). Every review gate is now dispositioned; exact-version approval and publication remain. | Product Owner approved dispositions August 18, 2026 |
 | 0.1.12 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-72-61 from the CBD-93 abuse-case analysis and amended OD-72-05 so that export follows read scope from an archived budget space. The prior blanket bar in §6.5 item 10 had no recorded rationale, was absent from the OD-72-05 decision record, was not among the activities §6.5 item 3 ends, and ran against RF-72-60's own finding. Flagged that `DI-91-034`–`DI-91-036` in the approved CBD-91 v1.0 inventory still state the superseded prohibition and need a follow-up amendment under change control. | Product Owner approved August 15, 2026; `LIFE`/`EXP` fixture completion and the CBD-14 gate remain |
 | 0.1.11 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-72-60 closing OD-72-01, OD-72-02, OD-72-04, and OD-72-05. All six open decisions are now closed. Updated the ownership-safety review gate to Pass and extended the per-criterion mapping with the new lifecycle scenarios. | Product Owner approved; fixture completion and the CBD-14 gate remain |
