@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Repeatable structural and traceability audit for the CBD-73 package.
 
-The audit fixes the exact Draft v0.2 identifier sets, source baseline, declared
+The audit fixes the exact Approved v1.0 identifier sets, source baseline, declared
 totals, cross-document references, open-gate namespace, and repository wiring.
 It proves documentation integrity only.  Product approval, implementation,
 specialist review, and runtime evidence remain governed by OI-73-001..012.
@@ -30,25 +30,26 @@ PACKAGE_FILES = (SPEC, MESSAGES, TESTS, TRACE)
 EXPECTED_DEFINITIONS: dict[str, set[str]] = {
     "IC": {f"IC-73-{number:03d}" for number in range(1, 22)},
     "TR": {
-        *(f"TR-73-{number:02d}" for number in range(1, 38)),
+        *(f"TR-73-{number:02d}" for number in range(1, 40)),
         *(f"TR-73-{number:02d}" for number in range(40, 48)),
     },
     "RC": {f"RC-73-{number:02d}" for number in range(1, 15)},
-    "DR": {f"DR-73-{number:02d}" for number in range(1, 13)},
-    "AE": {f"AE-73-{number:02d}" for number in range(1, 32)},
+    "DR": {f"DR-73-{number:02d}" for number in range(1, 14)},
+    "AE": {f"AE-73-{number:02d}" for number in range(1, 33)},
     "MSG": {
         *(f"MSG-73-{number:03d}" for number in range(1, 7)),
         *(f"MSG-73-{number:03d}" for number in range(10, 27)),
         "MSG-73-027",
         *(f"MSG-73-{number:03d}" for number in range(29, 48)),
         "MSG-73-049",
+        *(f"MSG-73-{number:03d}" for number in range(50, 54)),
     },
 }
 
 SCENARIO_COUNTS = {
-    "INV": 17,
-    "VER": 10,
-    "CNS": 8,
+    "INV": 19,
+    "VER": 11,
+    "CNS": 11,
     "DCL": 13,
     "DST": 8,
     "CHG": 13,
@@ -57,7 +58,7 @@ SCENARIO_COUNTS = {
 }
 
 EXPECTED_OPEN_ISSUES = {f"OI-73-{number:03d}" for number in range(1, 13)}
-EXPECTED_REVIEW_FINDINGS = {f"RV-73-{number:03d}" for number in range(1, 28)}
+EXPECTED_REVIEW_FINDINGS = {f"RV-73-{number:03d}" for number in range(1, 30)}
 EXPECTED_AC = {f"CBD-73-AC{number:02d}" for number in range(1, 18)}
 
 # These manifests deliberately freeze every direct stable-ID reference in each
@@ -84,6 +85,8 @@ TRANSITION_AUDIT_REFERENCE_MANIFEST: dict[str, set[str]] = {
     "TR-73-17": {"AE-73-07"},
     "TR-73-18": {"AE-73-06", "AE-73-31"},
     "TR-73-19": {"AE-73-07", "AE-73-28"},
+    "TR-73-38": {"AE-73-30", "AE-73-32"},
+    "TR-73-39": {"AE-73-06", "AE-73-30", "AE-73-31", "AE-73-32"},
     "TR-73-20": {"AE-73-17", "AE-73-30"},
     "TR-73-21": {"AE-73-18", "AE-73-19", "AE-73-20", "AE-73-30"},
     "TR-73-22": {"AE-73-18"},
@@ -129,7 +132,6 @@ TRANSITION_MESSAGE_REFERENCE_MANIFEST: dict[str, set[str]] = {
         "MSG-73-003",
         "MSG-73-015",
         "MSG-73-016",
-        "MSG-73-017",
         "MSG-73-019",
         "MSG-73-021",
         "MSG-73-023",
@@ -140,6 +142,14 @@ TRANSITION_MESSAGE_REFERENCE_MANIFEST: dict[str, set[str]] = {
     "TR-73-17": {"MSG-73-003", "MSG-73-006"},
     "TR-73-18": {"MSG-73-005"},
     "TR-73-19": set(),
+    "TR-73-38": {
+        "MSG-73-003",
+        "MSG-73-016",
+        "MSG-73-017",
+        "MSG-73-050",
+        "MSG-73-051",
+    },
+    "TR-73-39": {"MSG-73-052"},
     "TR-73-20": {"MSG-73-030"},
     "TR-73-21": {"MSG-73-029", "MSG-73-031"},
     "TR-73-22": {"MSG-73-037"},
@@ -344,12 +354,12 @@ def check_markdown_structure(audit: Audit, path: Path, text: str) -> None:
         f"{path}: trailing whitespace on lines {', '.join(map(str, trailing))}",
     )
     audit.check(
-        "| Status | **Draft v0.2" in text,
-        f"{path}: package status is not Draft v0.2",
+        "| Status | **Approved v1.0" in text,
+        f"{path}: package status is not Approved v1.0",
     )
     audit.check(
-        "| Document version | 0.2 |" in text,
-        f"{path}: document version is not 0.2",
+        "| Document version | 1.0 |" in text,
+        f"{path}: document version is not 1.0",
     )
 
     headings = re.findall(r"^#{2,6}\s+(.+)$", text, flags=re.MULTILINE)
@@ -500,8 +510,8 @@ def main() -> int:
             EXPECTED_REVIEW_FINDINGS,
         )
         audit.check(
-            "| Document version | 0.2 |" in review_text,
-            f"{REVIEW}: remediation review is not version 0.2",
+            "| Document version | 1.0 |" in review_text,
+            f"{REVIEW}: remediation review is not version 1.0",
         )
 
     trace_review_rows = table_ids(texts[TRACE], r"RV-73-\d{3}")
@@ -729,20 +739,20 @@ def main() -> int:
     )
 
     audit.check(
-        len(EXPECTED_DEFINITIONS["MSG"]) == 44,
-        "internal audit configuration error: expected message total is not 44",
+        len(EXPECTED_DEFINITIONS["MSG"]) == 48,
+        "internal audit configuration error: expected message total is not 48",
     )
     audit.check(
-        "44 exact semantic contracts" in texts[TRACE]
-        and "all 44 rows" in texts[MESSAGES],
-        "declared 44-message total is missing or inconsistent",
+        "48 exact semantic contracts" in texts[TRACE]
+        and "all 48 rows" in texts[MESSAGES],
+        "declared 48-message total is missing or inconsistent",
     )
     scenario_total = sum(SCENARIO_COUNTS.values())
-    audit.check(scenario_total == 95, "internal audit configuration error: scenario total")
+    audit.check(scenario_total == 101, "internal audit configuration error: scenario total")
     audit.check(
-        "95 globally namespaced scenarios" in texts[TRACE]
-        and "95 scenarios in 8 families" in texts[TESTS],
-        "declared 95-scenario/eight-family total is missing or inconsistent",
+        "101 globally namespaced scenarios" in texts[TRACE]
+        and "101 scenarios in 8 families" in texts[TESTS],
+        "declared 101-scenario/eight-family total is missing or inconsistent",
     )
 
     for path in (SPEC, MESSAGES, TESTS):

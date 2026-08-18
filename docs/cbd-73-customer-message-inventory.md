@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.2 — hardened lifecycle alignment; Product Owner review required** |
-| Document version | 0.2 |
+| Status | **Approved v1.0 — semantic contracts approved August 18, 2026; exact strings remain gated by `OI-73-004` — hardened lifecycle alignment; Product Owner review required** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -110,6 +110,10 @@ Every message in §4 obeys all of the following, stated once here and not repeat
 | MSG-73-046 | Authenticated in-app; requesting party | TR-73-47 transfer denial/no-op without workflow mutation | Safe bounded refusal/current-state result: no role, ownership, workflow, alert, connection, or existing evidence state changed; any request-scoped evidence closed by the denial remains non-authorizing; a fresh authorized action is required where still eligible. | A claim that an existing workflow was invalidated or expired; which hidden eligibility, assurance, support, or actor state caused denial; another party's private state; or partial-success framing. |
 | MSG-73-047 | Prominent in-app confirmation; current Primary or Co-owner | TR-73-31 ordinary-member removal before commit | Name the specific Collaborator, Viewer, or Accountability Partner and current role; explain immediate membership/access and membership-scoped destination cutoff, retained shared-work attribution, unaffected sign-in/other spaces, mandatory in-app lifecycle notice with verified-private-safety-channel-only/no-fallback routing, and no automatic connection-authority transfer; require an explicit exact-target confirmation. | Calling removal a demotion; implying the person remains a member; hiding consequences; suggesting ordinary external fallback; bundling another action; Co-owner-removal language or assurance. |
 | MSG-73-049 | Protected confirmation; current Primary | TR-73-32 Co-owner removal before commit | Name the specific Co-owner, immediate membership/access and membership-scoped destination cutoff, retained shared-work attribution, notification/no-fallback rule, unchanged other Co-owners, and no automatic connection-authority transfer; require fresh action-bound reauthentication and exact-target confirmation. | Calling removal a demotion, implying the person remains a member, hiding consequences, or bundling another action. |
+| MSG-73-050 | In-app; actor currently holding the exact creating permission | TR-73-38 opened a confirmation request | That a person completed verification and accepted, shown with their safe display identity, the proposed role, and the invited channel already masked as in every other inviter surface. States plainly that confirming shares the budget space's financial data with this specific account, that rejecting shares nothing, and that the request expires on its own. | The acceptor's private contact profile, other memberships, account existence beyond the shared display identity, or any suggestion that verification proves this is the intended person. |
+| MSG-73-051 | Ceremony surface; acceptor | TR-73-38 committed | That the acceptance was recorded and nothing is shared yet, that the person who invited them will see their display identity and must confirm before they are added, and that the request expires on its own. Restates the `RI-93-009` two-way disclosure already shown at `MSG-73-016`. | Any implication that access already exists, a countdown that pressures either party, or the identity of the confirming actor. |
+| MSG-73-052 | In-app; acceptor | TR-73-39 rejection, or confirmation expiry through TR-73-07 | One uniform outcome for both: the invitation is no longer active, nothing was shared, and a new invitation is required to join. Presented without blame and without implying the person did anything wrong. | Which of rejection or expiry occurred; who decided; any reason, characterization, or judgement about the acceptor; any contact route to the inviter. |
+| MSG-73-053 | In-app; inviting owner | The normalized schedule in §4.5 item 5 reaches a still-unaccepted request | A cause-neutral prompt that the request has not been accepted yet, inviting the inviter to check the destination or resend. Identical wording, timing, and controls for ordinary Pending, internally Delivered, restricted Failed, privately terminal, and synthetic requests. | Any delivery, bounce, block, limit, or account-existence signal; any variant conditioned on provider evidence, which would make the prompt an oracle. |
 
 ## 5. Coverage rule
 
@@ -117,13 +121,13 @@ Every lifecycle transition, checklist item, proposal terminal outcome, transfer 
 
 Personal-control and recovery edges are explicit: TR-73-29 uses recipient-only `MSG-73-024`; TR-73-41 uses conditional non-authorizing `MSG-73-025`; TR-73-34 uses membership-end denial/no-op `MSG-73-026`; mutating TR-73-46 invalidation uses both-party `MSG-73-027`, while mutation-free TR-73-47 denial/no-op exclusively uses `MSG-73-046`; and TR-73-25, TR-73-27, and TR-73-28 use `MSG-73-029` without implying a mixed command was split.
 
-This v0.2 inventory contains **44 stable message rows**. The compatibility alias is counted as a reserved stable ID but never as a separate customer-visible message or template.
+This v0.2 inventory contains **48 stable message rows**. The compatibility alias is counted as a reserved stable ID but never as a separate customer-visible message or template.
 
 ## 6. Evidence gates
 
 | Gate | Required evidence | Status |
 | --- | --- | --- |
-| Exact strings | Product Owner approval for all 44 rows: exact copy for every emitting row and explicit approval of the non-emitting alias rule, versioned, with external-channel template hashes | **OPEN — `OI-73-004` / `FU-95-017`** |
+| Exact strings | Product Owner approval for all 48 rows: exact copy for every emitting row and explicit approval of the non-emitting alias rule, versioned, with external-channel template hashes | **OPEN — `OI-73-004` / `FU-95-017`** |
 | Accessibility and comprehension | Assistive-technology and comprehension evidence for ceremony, consent, suppression-equivalent status, change, removal, safety routing, and transfer surfaces | **OPEN — `OI-73-004` / SD-071-048** |
 | Localization | Equivalent meaning across supported locales/channels, including uniform invalid/suppressed outcomes | **OPEN — `OI-73-004`** |
 | Data classes and retention copy | Approved CBD-91 mapping for new lifecycle records before any custody/retention promise | **OPEN — `OI-73-003`** |
@@ -136,5 +140,7 @@ This v0.2 inventory contains **44 stable message rows**. The compatibility alias
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Added `MSG-73-050`–`MSG-73-052` for the approved intended-recipient confirmation and `MSG-73-053` for the cause-neutral resend prompt, for 48 rows. Exact strings, templates, localization, and accessibility evidence remain gated. | **Approved v1.0** |
+| 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment with the v0.2.1 completeness review. No message row, semantic rule, prohibition, or evidence gate changed; `MSG-73-001`, `MSG-73-004`, and `MSG-73-021` now also carry the `INV-73-18`/`VER-73-11` scenario evidence recorded in the test inventory. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Hardened the semantic contract for active restricted provider-failure metadata without a code oracle, private-cause projection normalization, neutral successor copy, canonical ceremony and no-account gating, prospective and active destination retirement, mandatory membership-independent lifecycle notice and `RI-93-012` no-fallback routing, block-removal and membership-end recovery, conditional recipient transfer readiness, distinct mutating transfer invalidation versus denial/no-op recovery, distinct ordinary-member and Co-owner confirmations, complete change/transfer outcomes, and exact denial/audit edges. Added 16 stable rows for 44 total. | Draft; Product Owner review required |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft with 28 semantic message definitions and open exact-copy evidence gates. | Superseded by v0.2 draft |

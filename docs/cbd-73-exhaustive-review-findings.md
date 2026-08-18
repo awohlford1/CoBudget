@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Remediation verified v0.2 — 22 findings fixed in the draft package; 5 findings remain open; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval** |
-| Document version | 0.2 |
+| Status | **Remediation verified v1.0 — 24 of 29 findings fixed in the draft package; 5 findings remain open; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Reviewed repository baseline | `c096928a903dd5446b26ba21eaf7eaa2d84ce936` on `main` (PR #64 merge) |
@@ -28,8 +28,10 @@ state.
 
 The original v0.1 package was mechanically well formed but was **not ready for
 Product Owner approval or implementation handoff**. The v0.2 remediation now
-defines deterministic rules and evidence for 22 of the 27 findings. It remains
-unapproved: `RV-73-006`/`OI-73-001` and the AC01/AC05 interpretation in
+defines deterministic rules and evidence for 22 of the 27 findings raised
+against v0.1. A later independent completeness review of the merged package
+raised `RV-73-028` and `RV-73-029`, both remediated in v0.2.1, bringing the
+package to 24 fixed of 29 findings. It remains unapproved: `RV-73-006`/`OI-73-001` and the AC01/AC05 interpretation in
 `RV-73-013`/`OI-73-008` block package approval, while `RV-73-021`,
 `RV-73-025`, and `RV-73-026` retain narrower source, repository-integrity, and
 publication gates. All twelve `OI-73-*` items remain binding at the exact stage
@@ -53,7 +55,7 @@ that any implementation is secure. No Jira or Confluence content was changed.
 | --- | --- |
 | Package files, headings, metadata, Markdown fences | Pass |
 | Stable definitions | 21 `IC`, 45 `TR`, 14 `RC`, 12 `DR`, 31 `AE`, 44 `MSG`, and 12 canonical `OI`; no internal duplicates or orphan `TR`/`AE`/`MSG` definitions |
-| Scenarios | 95 total: INV 17, VER 10, CNS 8, DCL 13, DST 8, CHG 13, RVK 16, TRF 10; all use repository-unique `FAMILY-73-NN` identifiers |
+| Scenarios | 97 total after the v0.2.1 review: INV 18, VER 11, CNS 8, DCL 13, DST 8, CHG 13, RVK 16, TRF 10; all use repository-unique `FAMILY-73-NN` identifiers |
 | CBD-73 acceptance-criterion rows | AC01–AC17 exactly once |
 | Direct local identifier references | No dangling full identifiers |
 | Local package paths | All resolve |
@@ -108,6 +110,8 @@ implementation evidence, runtime delivery evidence, or specialist sign-off.
 | RV-73-025 | **P2** | The current CBD-95 audit evidence is stale against the approved CBD-72 package consumed here. | **Open external integrity gate — `OI-73-005`** |
 | RV-73-026 | **P3** | CBD-73 has no Confluence synchronization targets or discoverable published pages. | **Open publication gate — `OI-73-007`** |
 | RV-73-027 | **P3** | Governing-source provenance is incomplete, and CBD-72's own header contains conflicting approval metadata. | **Fixed provenance; external cleanup remains `OI-73-006`** |
+| RV-73-028 | **P2** | The §4.4 rule 6 recipient-side checks — already-active-member suppression and terminalization of an invitation predating the account's latest membership end — had no scenario, and the `RV-73-003` disposition cited a scenario proving a different rule. | **Fixed in v0.2.1 draft** |
+| RV-73-029 | **P3** | Test inventory §5 dropped the literal `CBD-73-AC14` required-case names for revoked consent and queued alerts, so the criterion could not be verified against its own wording. | **Fixed in v0.2.1 draft** |
 
 ## 4. v0.2 remediation verification and remaining gates
 
@@ -539,5 +543,7 @@ by repository policy.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Recorded the August 18, 2026 Product Owner decisions closing `RV-73-006`/`OI-73-001` and the `RV-73-013`/`OI-73-008` Failed-state question. 26 of 29 findings are now fixed; `RV-73-021`, `RV-73-025`, and `RV-73-026` retain source, integrity, and publication gates. | **Approved v1.0** |
+| 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Independent completeness review of the merged v0.2 package: added `RV-73-028` (missing §4.4 rule 6 recipient-side scenario coverage plus an overclaiming `RV-73-003` disposition) and `RV-73-029` (dropped literal `CBD-73-AC14` case names), both remediated in the same pass. No open issue closed and no product rule changed. | Draft; Product Owner review required |
 | 0.2 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Verified the coordinated v0.2 remediation through repeated adversarial passes: 22 findings fixed in the draft package, five left under exact open gates, 12 canonical open issues, frozen governing blobs, 44 messages, 95 namespaced scenarios, a direct-reference/expected-outcome audit, and repository-wide Mermaid validation. No Product decision, Jira field, Confluence page, or upstream source was changed. | Review record only; `OI-73-001` and the `OI-73-008` Failed-semantics decision block package approval; narrower gates remain |
 | 0.1 | August 18, 2026 | Codex with Alexander Wohlford as Product Owner | Independent full review of the merged CBD-73 v0.1 package; 27 findings recorded, one tooling finding closed on the audit branch; no product decision, Jira field, or Confluence page changed. | Review record only; Product Owner disposition required |
