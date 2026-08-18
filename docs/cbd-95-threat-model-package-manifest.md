@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1** |
-| Document version | 1.0.2 |
+| Document version | 1.0.3 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -337,10 +337,19 @@ the follow-up register as `9863169`, and the traceability record as `9895937`.
 A readback on August 18, 2026 confirmed that all twelve CBD-91 through CBD-95
 pages carry the same document version as their repository source.
 
-That readback covers the version set published before this revision. Each
-revision supersedes its published copy, so `FU-95-029` stays open until this
-change merges and the affected pages are re-synchronized under the repository's
-merge-first Confluence policy.
+That readback covers the version set published at the time. Keeping a copy
+current after each later revision is the standing merge-first Confluence policy
+in `AGENTS.md`; `FU-95-029` closed on August 18, 2026 once the mechanism was
+established and parity verified.
+
+`docs/cbd-95-execution-plan.md` is deliberately not published and has no
+Confluence target. It is working material rather than a CBD-95 deliverable: §4
+of the plan itself names the manifest, reconciliation matrix, follow-up
+register, traceability record, and audit script as the artifacts, and CBD-94
+likewise published no plan. The rationale is recorded here as well as in
+`scripts/sync-confluence.py` because a reader auditing the package against this
+section would otherwise read the plan's absence as an omission. Five documents
+therefore exist for CBD-95 and four are published.
 
 ## 7. Evidence and limitation statement
 
@@ -451,3 +460,4 @@ Owner approves their exact versions.
 | 1.0 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Approved release. The Product Owner approved the exact package versions on August 16, 2026, closing `RG-94-016`. No component, authority order, frozen blob, identifier set, invariant, limitation, or supersession trigger changed at this revision; all eleven frozen blobs reverify unchanged. The §7 limitations continue to apply in full: approval of this package is not legal review, penetration testing, certification, compliance validation, or proof of production security. | **Approved v1.0** |
 | 1.0.1 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Re-froze CBD-93 at v1.1.1 after the editorial header correction `FU-95-005` required. Updated the §2 version and blob record to `c1caf496…`, updated the `scripts/audit-cbd-95.py` frozen-blob constant, and rewrote §6 to record the correction as applied rather than outstanding. The change was editorial: no scenario, safeguard, evidence gap, residual, or `RI-93-*` decision moved, so no §8 impact review of reconciliation outcomes was triggered and no reconciliation outcome, readiness recommendation, or release effect changed. All eleven frozen blobs reverify. | Correction to approved v1.0; package authority unchanged |
 | 1.0.2 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded as part of the CBD-14 close-out audit. Replaced the §6 statement that no CBD-95 Confluence target exists: all four pages are registered and published, and an August 18, 2026 readback confirmed all twelve CBD-91–95 pages match their repository document versions. Re-froze the `docs/cbd-94-acceptance-criteria-traceability.md` blob at CBD-94 v1.0.2, which added the missing `OP-92-004`/`OP-92-006` acceptance criterion. Publication and blob evidence only: no component, stable set, authority, invariant, limitation, or supersession trigger changed. | Correction to approved v1.0.1; outcomes unchanged |
+| 1.0.3 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded in §6 that `docs/cbd-95-execution-plan.md` is deliberately unpublished and why, citing plan §4 and the CBD-94 precedent. The rationale already existed in `scripts/sync-confluence.py`, but not in the section a reader auditing publication state would consult, so the plan's absence read as an omission during the CBD-14 close-out audit and was raised as one. Also refreshed the `FU-95-029` sentence, which described it as open. Documentation of an existing decision: no component, stable set, authority, invariant, limitation, supersession trigger, or publication target changed. | Correction to approved v1.0.2; outcomes unchanged |
