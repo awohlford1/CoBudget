@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. |
-| Document version | 0.1.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Pending Product Owner review |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the evidence record and its required fields, the six evidence classes and their confidence mapping, the `UNPROVEN` outcome and the four eligibility verdicts, the staleness and re-verification rules, `EX-102-001`–`007`, the §5.2 non-exceptable gates, and the residual-risk record. It grants no exception and does not close the open items in §8. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Hard-Gate Catalog v0.1.1; Evaluation Rubric v0.1.1; Demand Model v0.1.1; Cost Template v0.1.1 |
+| Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Cost Template v1.0 |
 | Confluence page | [CBD-102 — Evidence Register and Exception Rules](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9601048) |
 | Repository baseline | `52d764a` |
 | Last updated | August 18, 2026 |

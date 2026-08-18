@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** The structure a CBD-103–107 cost comparison must be recorded in. It contains no prices; providers are not selected here. |
-| Document version | 0.1.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. The structure a CBD-103–107 and CBD-130 cost comparison must be recorded in. It contains no prices; providers are not selected here. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Pending Product Owner review |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 21 line items, the CR0–CR7 rules, the cost record structure, and the per-category billable units. It fixes no price, approves no tier, and does not close the open items in §8 — including the recorded consequence of `OI-102-017`, that no budget ceiling exists. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Hard-Gate Catalog v0.1.1; Evaluation Rubric v0.1.1; Demand Model v0.1.1; Evidence Register and Exception Rules v0.1.1 |
+| Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Evidence Register and Exception Rules v1.0 |
 | Confluence page | [CBD-102 — Provider Cost Template](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9469982) |
 | Repository baseline | `52d764a` |
 | Last updated | August 18, 2026 |

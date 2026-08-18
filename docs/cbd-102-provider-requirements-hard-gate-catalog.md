@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Derived from approved CBD-72/CBD-91/CBD-92 material and the `docs/architecture.md` security baseline. Product Owner approval is required before CBD-103–107 may score a vendor against it. |
-| Document version | 0.1.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Derived from approved CBD-72/CBD-91/CBD-92 material and the `docs/architecture.md` security baseline. CBD-103–107 and CBD-130 may now measure a vendor against it. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Pending Product Owner review |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 75 hard gates, their cited sources, the Vendor/Config satisfaction types, the §2.5.1 second-principal disposition, and the §11 candidates deliberately not made gates. It does not close the open items in §12, does not select or rank any provider, and does not substitute for the independent security review that CBD-92 §1 and the architecture baseline require before public launch. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Evaluation Rubric v0.1.1; Demand Model v0.1.1; Cost Template v0.1.1; Evidence Register and Exception Rules v0.1.1 |
+| Companions | Evaluation Rubric v1.0; Demand Model v1.0; Cost Template v1.0; Evidence Register and Exception Rules v1.0 |
 | Confluence page | [CBD-102 — Provider Requirements and Hard-Gate Catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9371654) |
 | Repository baseline | `2e372f6` |
 | Last updated | August 18, 2026 |

@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Planning assumptions for provider sizing and cost comparison. Not a forecast, a commitment, or a capacity guarantee. |
-| Document version | 0.1.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Planning assumptions for provider sizing and cost comparison. Not a forecast, a commitment, or a capacity guarantee. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Pending Product Owner review |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 47 assumptions, their stated bases and recorded confidence, and the §9 category sizing summary as the quantity basis for CBD-103–107 and CBD-130. It does not make any figure a capacity commitment, an SLO, or a rate ceiling, and it does not close the open items in §11. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Hard-Gate Catalog v0.1.1; Evaluation Rubric v0.1.1; Cost Template v0.1.1; Evidence Register and Exception Rules v0.1.1 |
+| Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Cost Template v1.0; Evidence Register and Exception Rules v1.0 |
 | Confluence page | [CBD-102 — Private MVP Demand Model](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9273396) |
 | Repository baseline | `c061a5b` |
 | Last updated | August 18, 2026 |
