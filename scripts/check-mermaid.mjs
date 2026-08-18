@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { spawnSync } from "node:child_process";
-import { mkdtemp, mkdir, readFile, readdir, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -48,6 +48,18 @@ if (sources.length === 0) {
 }
 
 const workingDirectory = await mkdtemp(join(tmpdir(), "cobudget-mermaid-"));
+
+// Hosted CI images restrict unprivileged user namespaces, so Chromium cannot
+// start its own sandbox and mermaid-cli exits before rendering anything. The
+// renderer only ever loads diagram sources from this repository, so dropping
+// the sandbox costs nothing here and is what keeps the check runnable on CI.
+const puppeteerConfig = join(workingDirectory, "puppeteer-config.json");
+await writeFile(
+  puppeteerConfig,
+  JSON.stringify({ args: ["--no-sandbox", "--disable-setuid-sandbox"] }),
+  "utf8",
+);
+
 let failed = false;
 
 try {
@@ -58,7 +70,19 @@ try {
 
     const result = spawnSync(
       process.execPath,
-      [cli, "--input", source, "--output", output, "--artefacts", artefacts, "--jobs", "1"],
+      [
+        cli,
+        "--input",
+        source,
+        "--output",
+        output,
+        "--artefacts",
+        artefacts,
+        "--jobs",
+        "1",
+        "--puppeteerConfigFile",
+        puppeteerConfig,
+      ],
       {
         cwd: repositoryRoot,
         encoding: "utf8",
