@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved v1.0.1 — Product Owner approved v1.0 and confirmed the v1.0.1 correction on August 16, 2026; source corrections applied; all 19 `RI-93-*` inputs decided** |
-| Document version | 1.0.3 |
+| Document version | 1.0.4 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Reconciliation target | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12), 36 acceptance criteria as read August 16, 2026 |
@@ -11,7 +11,7 @@
 | Follow-up register | `docs/cbd-95-architecture-roadmap-follow-up-register.md` |
 | Frozen source baseline | `43e87be93a37097bf0e91cd4d3b4c2f98aa4aa15` |
 | Merged to `main` | `5c90a74bed2d85dc4f5ed97ca1abb49e7b067515` |
-| Last updated | August 16, 2026 |
+| Last updated | August 18, 2026 |
 
 ## 1. Purpose and decision rule
 
@@ -200,8 +200,8 @@ CBD-94 §3.6. Document approval does not constitute residual-risk acceptance.
 | --- | --- | --- |
 | CBD-72 CBD-14 security reconciliation gate | **Satisfied** | The AC21/channel conflict is resolved in favour of the CBD-92 content-free ceiling, the stale Jira fields were corrected, and the Product Owner approved the CBD-95 package at v1.0 on August 16, 2026. This closes only the CBD-14 security-sensitive reconciliation. CBD-72's deterministic fixtures, independent matrix and cross-document audits, accessibility/architecture/privacy/quality reviews, exact-version approval, and publication are separate gates and remain open. |
 | CBD-72 final package approval | **Not ready** | In addition to CBD-95, CBD-72 still requires deterministic fixtures, independent matrix/cross-document audits, accessibility/architecture/privacy/quality review, exact-version approval, and publication. |
-| CBD-76 start | **Permitted from the CBD-95 side** | AC06 was corrected and the CBD-95 package is approved at v1.0, so CBD-95 no longer withholds CBD-76. The CBD-95 → CBD-76 Blocks link remains and should be cleared only when CBD-95 itself reaches Done. CBD-76 remains subject to its own readiness and to completed CBD-72–75 outputs. |
-| CBD-14 completion | **Documentation criteria satisfied** | Source coverage is complete, all ten CBD-14 criteria resolve to evidence, and the CBD-95 consolidation is approved at v1.0 with its blockers acknowledged. Transitioning the CBD-14 issue is a separate workflow action. Open implementation and specialist gates remain explicit after CBD-14 closes. |
+| CBD-76 start | **Permitted from the CBD-95 side** | AC06 was corrected and the CBD-95 package is approved at v1.0, so CBD-95 no longer withholds CBD-76. CBD-95 reached Done on August 18, 2026. CBD-76 remains subject to its own readiness and to completed CBD-72–75 outputs. |
+| CBD-14 completion | **Documentation criteria satisfied** | Source coverage is complete, all ten CBD-14 criteria resolve to evidence, and the CBD-95 consolidation is approved at v1.0 with its blockers acknowledged. CBD-14 was transitioned to Done on August 18, 2026. Open implementation and specialist gates remain explicit after that closure. |
 | Private-MVP implementation/launch | **Not ready** | Foundational identity, authorization, topology/secrets, provider, worker/rate, channel, export, audit/operations, lifecycle/recovery, comments, copy, legal/privacy, safety, and parameter/evidence gates remain open by scope. |
 | Public product launch | **Not ready** | All applicable Private-MVP gates plus `RG-94-015` independent security review remain open. Penetration testing is not made mandatory by the current approved package. |
 
@@ -253,3 +253,4 @@ stable ID, or Product Owner decision requires:
 | 1.0.1 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Factual correction to `RV-95-006`. The v1.0 text stated that link `10013` survived and that `10014`, `10015`, and `10016` had been deleted; live Jira showed the inverse. The error came from a JQL response that returned five of seven requested issues with `hasNextPage` true, so CBD-80 and CBD-81 were paginated off and their links were never read. All twelve identified inverted links are now removed and the corrected state is verified against CBD-77 and CBD-80 directly. No reconciliation outcome, product decision, residual, readiness recommendation, or release effect changed; this revision corrects a recorded observation only. The Product Owner reviewed and confirmed the corrected record on August 16, 2026. | **Approved v1.0.1** — corrected record confirmed by Product Owner |
 | 1.0.2 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Closed the `RV-95-006` link work after a complete project-wide enumeration of all 130 CBD issues and all 50 links. The inverted batch was fourteen links, not the nine or twelve previously recorded: `10004` (CBD-92 blocks CBD-91) and `10005` (CBD-93 blocks CBD-91) were found only once the enumeration reached CBD-91's own links, having been missed by every earlier sweep scoped to issues already in CBD-95's view. Both were removed and replaced with CBD-91 → CBD-92 and CBD-91 → CBD-93, matching the citation chain recorded in `scripts/sync-confluence.py` and the manifest §1 authority order. The `10017`–`10033` range proved benign. No reconciliation outcome, product decision, residual, readiness recommendation, or release effect changed. | Correction to approved v1.0.1; outcomes unchanged |
 | 1.0.3 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Closed the remaining `RV-95-006` link work. The CBD-77 → CBD-81 cluster, previously left empty because no document established its order, was rebuilt as CBD-77/78/79 → CBD-80 → CBD-81 after CBD-13's "Required decisions and deliverables" list was found to state the sequence: metrics, then the analytics event catalog, then targets and review cadence. CBD-81's purpose of turning metric definitions into an operating process and CBD-80's requirement that every event name an owning metric both corroborate it. The Product Owner also reviewed and confirmed the four heuristic-flagged links as correct. Every Blocks link in the project is now enumerated and accounted for. No reconciliation outcome, product decision, residual, readiness recommendation, or release effect changed. | Correction to approved v1.0.2; outcomes unchanged |
+| 1.0.4 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded as part of the CBD-14 close-out audit. Refreshed the two readiness rows that still described CBD-95 and CBD-14 as untransitioned. Both reached Done on August 18, 2026. No reconciliation outcome, criterion mapping, required action, follow-up route, or residual changed. | Correction to approved v1.0.3; outcomes unchanged |
