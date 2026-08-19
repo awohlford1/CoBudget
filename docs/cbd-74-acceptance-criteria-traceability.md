@@ -1,0 +1,136 @@
+# CBD-74 — Acceptance Criteria Traceability and Review Record
+
+| Field | Value |
+| --- | --- |
+| Status | **Draft v0.1 — Product Owner review required** |
+| Document version | 0.1 |
+| Owner | Alexander Wohlford |
+| Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
+| Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
+| Specification | `docs/cbd-74-accountability-alert-boundary-specification.md` |
+| Test inventory | `docs/cbd-74-negative-recovery-test-inventory.md` |
+| Reviewed repository baseline | `d95988c` on `main` |
+| Mechanical audit | `python scripts/audit-cbd-74.py`; structural evidence only, never open-issue closure |
+| Last updated | August 18, 2026 |
+
+## 1. Completion and evidence boundary
+
+A row marked **Mapped** means the requirement and its scenario evidence exist at draft-rule level. It does not mean the rule is approved, implemented, fixture-backed, accessible, specialist-reviewed, or safe to release.
+
+CBD-74 package approval requires all of the following:
+
+1. every CBD-74 criterion and supported CBD-12 criterion maps in both directions to exact specification and scenario evidence;
+2. the §4 discrepancies are dispositioned by the Product Owner, including the two that contradict approved sources;
+3. `OI-74-001` is confirmed, since one category's firm classification is derived rather than quoted, and every other open issue is either closed or remains an explicit gate at the stated impact;
+4. the Product Owner approves the exact version; and
+5. only after approval, an authorized Jira synchronization covers description, acceptance criteria, and traceability summary together, and only a merged repository version is published to Confluence.
+
+## 2. Governing sources
+
+Values are the exact versions this draft was written against. A later source change requires an impact review.
+
+| Source | Version used | What CBD-74 takes from it |
+| --- | --- | --- |
+| CBD-71 MVP Schedule Decisions | v1.1, approved August 15, 2026 | `SD-071-016`, `SD-071-043` firm/informational classes, `SD-071-044` three-record model and income-variance trigger, `SD-071-046`–`SD-071-048` |
+| CBD-72 Collaboration Permission Model | v0.1.53, approved August 18, 2026 | Roles, permissions 11a–11d/12/13, §5.1 Viewer hierarchy, §5.3 Partner boundary, §5.4 personal-settings boundary, §5.4.1 three-record model, §9 audit envelope |
+| CBD-73 Invitation, Consent, and Revocation Lifecycle | v1.0.1, approved August 18, 2026 | `IC-73-019` mandatory notice independence, `RC-73-02` alert-eligibility end, `RC-73-03` queued suppression, `RC-73-12` subject notice |
+| CBD-92 System Flow and Technical Threat Model | v1.0.1 | `NT-92-001`–`NT-92-006` push/SMS ceiling, `EM-92-001`–`EM-92-007` email tiers |
+| CBD-94 Risk and Security/Privacy Requirement Register | v1.0 | `SR-94-044`–`SR-94-054` |
+| CBD-68 Paycheck and Custom Cadence | approved | `PD-68-16` confirmed actual-income variance trigger and deduplication |
+| CBD-95 Follow-up Register | v1.0.9 | `RI-93-012`–`RI-93-015` dispositions; `FU-95-001`, `FU-95-002`, `FU-95-020` routing |
+
+## 3. Jira deliverable traceability
+
+| Jira deliverable | Specification evidence | Scenario evidence | Result |
+| --- | --- | --- | --- |
+| Alert category and recipient matrix | §4.1 closed six-category set, §4.2 mandatory-notice separation, §4.3 role eligibility with six rules | `CAT-74-T01`–`CAT-74-T08` | **Mapped.** `OI-74-001` gates one category's class |
+| Configuration and delivery rules | §5.1 closed recipient-owned set, §5.2 suggestion rule, §5.3 seven-step delivery sequence | `CFG-74-T01`–`CFG-74-T06`, `DLV-74-T01`–`DLV-74-T06` | **Mapped.** Values gated by `OI-74-004` |
+| Notification-preview and detail-view data rules | §6.1 per-transport ceiling, §6.2 exhaustive prohibition, §6.3 in-app detail, §6.4 custody honesty | `PRV-74-T01`–`PRV-74-T06`, `DLV-74-T06` | **Mapped.** Templates gated by `OI-74-005` |
+| Acknowledgement/comment behavior | §7 items 1–7 | `ACK-74-T01`–`ACK-74-T06` | **Mapped** |
+| Cooldown, deduplication, quiet-hour, pause, dismissal, revocation rules | §8.1–§8.4, §9 `RV-74-01`–`RV-74-07` | `SUP-74-T01`–`SUP-74-T05`, `RVK-74-T01`–`RVK-74-T06` | **Mapped.** Windows gated by `OI-74-004` |
+| Alert audit-event and test inventory | §14 `AE-74-01`–`AE-74-22` with placement rules; test inventory §§1–5 | All 44 scenarios | **Mapped.** Fixtures gated by `OI-74-007` |
+
+## 4. Discrepancy register
+
+Approved documents outrank ticket text. Where the ticket contradicts an approved source, the approved source governs and the ticket needs an authorized correction.
+
+| # | Discrepancy | Disposition |
+| --- | --- | --- |
+| 1 | **The CBD-74 traceability summary contradicts its own corrected acceptance criteria.** The planning notes still say the approved preview boundary identifies the "applicable budget space" and allows "per-user opt-in for more detail within current scope". `CBD-74-AC04`/`AC05`, `NT-92-001`, and `EM-92-001` all forbid both. | The corrected criteria and the CBD-92 ceilings govern; §6 follows them. The planning notes are stale text left behind when `FU-95-001` corrected the description and criteria but not this field. Requires an authorized Jira correction. |
+| 2 | **CBD-12-AC11 and CBD-12-AC21 conflict.** AC11 requires every notification to identify the budget space; AC21 forbids that in push, SMS, and routine email. | Reconciled in §6.3 item 3: the in-app instance identifies the space, external transports identify nothing. Recorded as `OI-74-008` for a CBD-12 wording correction. This draft does not edit CBD-12. |
+| 3 | **"Configurable alert" and "invalid rules" language in `CBD-74-AC03` and `CBD-74-AC10` predates `FU-95-002`.** Read literally it implies member-authored rules, which `AB-74-001` and `CBD-74-AC02` prohibit. | Read throughout as the recipient's own delivery configuration for a built-in category. §5.1 states the closed set so the reading is unambiguous. Recommended AC wording correction recorded here. |
+| 4 | **`CAT-74-06` firm classification is derived.** `SD-071-043` lists only settled overspending and late-adjustment overage as firm; `PD-68-16` gives confirmed income variance settled-fact behavior. | Treated as firm with the derivation stated in §4.1 and gated by `OI-74-001`. Not asserted as quoted. |
+| 5 | **Planning-note scheduling text is stale.** It says due August 25, 2026; the live due date is August 26, 2026. | Informational; no package impact. Correct with the next authorized Jira update. |
+| 6 | **`RI-93-014` residual is unaccepted.** Partner informational eligibility permits observation of a provisional condition before the household can correct it. | Retained per the August 16, 2026 decision, recorded in §4.3 rule 6 and `OI-74-006`. Not treated as mitigated by `AB-74-008`. |
+
+## 5. Per-criterion mapping
+
+| AC | Requirement | Specification evidence | Scenario evidence |
+| --- | --- | --- | --- |
+| CBD-74-AC01 | Categories enumerated with eligible roles, prerequisites, and configurable-versus-mandatory classification. | §4.1, §4.2, §4.3 | `CAT-74-T01`–`CAT-74-T06`, `RVK-74-T06` |
+| CBD-74-AC02 | Settings belong to one membership in one space and cover only recipient-owned choices; category, trigger, threshold, cooldown, deduplication are fixed. | §5.1, `AB-74-001`, `AB-74-012` | `CFG-74-T01`, `CFG-74-T04`, `CFG-74-T06`, `SUP-74-T01` |
+| CBD-74-AC03 | Created and delivered only while membership, consent, role permission, and resource visibility remain valid; invalid configurations disable automatically. | `AB-74-003`, `AB-74-013`, §5.3 item 5, §9 | `DLV-74-T02`, `RVK-74-T01`, `RVK-74-T05`, `CAT-74-T06` |
+| CBD-74-AC04 | Every external attempt is scoped to one recipient and one purpose and discloses no space, person, category, or resource; space context is in-app only. | `AB-74-004`, §6.1, §6.2, §6.3 item 3 | `PRV-74-T01`, `PRV-74-T05`, `DLV-74-T06` |
+| CBD-74-AC05 | Previews carry only the fixed content-free body; no preference adds customer-specific detail. | §6.2, `PB-74-09` | `PRV-74-T01`, `PRV-74-T02` |
+| CBD-74-AC06 | Opening protected detail requires current authorization and fails safely; reduced access limits or stops future previews. | `AB-74-005`, §6.3, §9 | `PRV-74-T03`, `PRV-74-T04`, `RVK-74-T02`, `RVK-74-T03` |
+| CBD-74-AC07 | Acknowledgements and comments communicate support only and control no financial state. | `AB-74-007`, §7 items 2 and 5 | `ACK-74-T01`, `ACK-74-T03`, `ACK-74-T06` |
+| CBD-74-AC08 | Cooldown and deduplication prevent repeats for the same unresolved event; quiet hours define deferment and exceptions. | §8.1, §8.2, §8.3 | `SUP-74-T01`–`SUP-74-T05`, `DLV-74-T05` |
+| CBD-74-AC09 | Every permitted member controls their own delivery and instance state without punitive escalation; nobody edits built-ins or another person's state; mandatory in-app instances cannot be suppressed. | `AB-74-002`, `AB-74-014`, §5.1, §8.4, `PB-74-06`, `PB-74-07` | `CFG-74-T01`, `CFG-74-T02`, `CFG-74-T04`, `ACK-74-T04`, `ACK-74-T05` |
+| CBD-74-AC10 | Revocation, removal, role reduction, consent loss, or visibility reduction disables affected configuration, stops future alerts, and defines queued-delivery handling without touching other spaces. | §9 `RV-74-01`–`RV-74-07`, `AB-74-013` | `RVK-74-T01`–`RVK-74-T06`, `XSP-74-T02` |
+| CBD-74-AC11 | Configuration, generation, delivery, suppression, acknowledgement, comment, pause, dismissal, failure, and revocation effects produce scoped audit events. | §14 `AE-74-01`–`AE-74-22` with placement rules | Every scenario's audit assertion |
+| CBD-74-AC12 | Copy is supportive, factual, voluntary, nonjudgmental, with an accessible route to manage or revoke sharing. | §11 `CP-74-01`–`CP-74-08` | `CAT-74-T08`, `PRV-74-T06`, `ACK-74-T04` |
+| CBD-74-AC13 | Test inventory covers the eight named cases. | Test inventory §4 | Test inventory §4 table |
+| CBD-74-AC14 | Explicit prohibition of purchase approval, transaction blocking, account control, ownership authority, and lockout. | §10 `PB-74-01`–`PB-74-12` | `ACK-74-T03`, `ACK-74-T04`, `CFG-74-T01`, `CFG-74-T02` |
+
+**Reverse direction.** Every family resolves to at least one criterion: `CAT-74-T*` to AC01/AC03/AC12; `CFG-74-T*` to AC02/AC09/AC14; `DLV-74-T*` to AC03/AC04/AC08; `PRV-74-T*` to AC04/AC05/AC06/AC12; `ACK-74-T*` to AC07/AC09/AC14; `SUP-74-T*` to AC08/AC09; `RVK-74-T*` to AC03/AC06/AC10; `XSP-74-T*` to AC10. No scenario is orphaned and no criterion lacks evidence.
+
+## 6. Supported CBD-12 criteria
+
+| CBD-12 AC | Evidence |
+| --- | --- |
+| AC09 — Partner comprehensive, financially read-only, cannot move money, block transactions, edit data, administer ownership, or lock out | §4.3 rule 3; §10 `PB-74-01`–`PB-74-05`; `ACK-74-T03` |
+| AC11 — Changes in one space do not affect memberships or alert preferences in another; every relevant screen and notification identifies the space | `AB-74-011`; §13; §6.3 item 3 with the `OI-74-008` reconciliation; `CFG-74-T06`, `XSP-74-T01` |
+| AC17 — Revocation effects, immediate cutoff, queued suppression, other spaces unaffected | §9; `RVK-74-T01`, `RVK-74-T04` |
+| AC18 — Lifecycle events notify affected users and produce space-scoped audit events | §14; §4.2; `RVK-74-T06` |
+| AC19 — Preferences belong to one membership; permitted members configure their own; cooldown and deduplication system-owned; suggestion without silent activation | §5.1, §5.2, §8.1, §8.2; `CFG-74-T03`, `SUP-74-T01` |
+| AC20 — Acknowledgements and comments cannot modify finances, ownership, permission scope, or external accounts | `AB-74-007`; §7 item 5; `ACK-74-T03` |
+| AC21 — External content fixed by purpose tier and not widenable by preference | §6.1, §6.2; `PRV-74-T01`, `PRV-74-T02` |
+| AC22 — Safety: coercion, pausing, revocation, non-retaliatory messaging | `AB-74-014`; §8.4; §10 `PB-74-06`; §11 `CP-74-06`/`CP-74-07`; `ACK-74-T04` |
+| AC24 — Copy accessible, supportive, nonjudgmental; implies no authority, punishment, or surveillance entitlement | §11; `CAT-74-T08`, `PRV-74-T06` |
+| AC27 — Precision separating requirements from execution-level decisions and test classes | §15 open-issue register; test inventory families; this record |
+
+## 7. Routed follow-up coverage
+
+Nothing here closes a register row; each row closes on the evidence it names.
+
+| Row | What this package supplies | What remains |
+| --- | --- | --- |
+| `FU-95-001` (P0, external preview conflict) | §6 applies the content-free ceiling to every alert transport and states the exhaustive prohibition. The stale CBD-74 planning-note text is recorded in §4 item 1 rather than followed. | Product Owner acceptance of the applied corrections, plus the CBD-12-AC11 correction in `OI-74-008`. |
+| `FU-95-002` (P0, alert authority conflict) | `AB-74-001` and §5.1 state the closed built-in set and the closed recipient-owned set, so no member owns trigger, threshold, cooldown, or deduplication logic. Residual "rule" wording is dispositioned in §4 item 3. | Negative fixtures under `OI-74-007`. |
+| `FU-95-020` (P1, `RI-93-012`–`RI-93-015`) | `RI-93-014` eligibility retained in §4.3 with actor attribution removed and the residual recorded; `RI-93-015` tiered semantics carried into §11 and the in-app detail rules; `RI-93-012` safety-channel routing consumed as the §4.2 boundary that alerts must not touch. | `RI-93-013` compromised-channel retirement mechanics, exact copy, and the CBD-91 source alignment remain with the register and `OI-74-002`/`OI-74-003`. |
+
+## 8. Review gates
+
+| Gate | Required evidence | Current result |
+| --- | --- | --- |
+| Package completeness | Six deliverables mapped in both directions | **Draft complete** — §3, §5 |
+| Source consistency | No rule contradicts CBD-71, CBD-72, CBD-73, CBD-92, or CBD-94 | **Draft verified** by construction; §4 records the two contradictions found in ticket text rather than sources |
+| Product Owner review | Row-level approval, including the §4 dispositions and `OI-74-001` | **Pending** |
+| Copy and specialist evidence | Exact strings, accessibility, localization, safety review | **Open** under `OI-74-003`; named and routed |
+| Fixtures | Deterministic fixtures for 44 scenarios | **Routed** to `VT-94-*` under `OI-74-007` |
+| Jira synchronization | Description, acceptance criteria, and traceability summary all match | **Pending**; requires authorization and the §4 corrections |
+| Publication | Confluence pages match the approved merged version | **Pending**; post-merge |
+
+## 9. Remaining work
+
+1. Product Owner review of the specification, matrix, and scenarios.
+2. Disposition of `OI-74-001` and the §4 discrepancies, including whether to correct `CBD-74-AC03`/`AC10` wording and `CBD-12-AC11`.
+3. Record Product Owner approval of the exact version.
+4. With authorization and a live refetch, synchronize CBD-74 in Jira across all three fields.
+5. After merge, register Confluence targets and publish, then verify read-back parity.
+
+## 10. Revision history
+
+| Version | Date | Author | Change | Approval |
+| --- | --- | --- | --- | --- |
+| 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: governing-source baseline, deliverable and per-criterion traceability in both directions, supported CBD-12 mapping, six-item discrepancy register, routed follow-up coverage, review gates, and remaining work. | Draft; Product Owner review required |

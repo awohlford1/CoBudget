@@ -27,6 +27,9 @@ jobs:
       - name: Check CBD-73 documentation package
         run: python3 scripts/audit-cbd-73.py
 
+      - name: Check CBD-74 documentation package
+        run: python3 scripts/audit-cbd-74.py
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
