@@ -62,8 +62,8 @@ class Vocabulary:
     members: tuple[str, ...]
     canonical: str
     """The document section that owns this definition and must be updated first."""
-    applies_to: str
-    """Filename glob this vocabulary governs.
+    applies_to: tuple[str, ...]
+    """Filename globs this vocabulary governs.
 
     Scoping is not optional. CBD-94's verification inventory records results as
     Pass/Fail/Blocked/Not applicable — its own closed set, unrelated to the
@@ -77,13 +77,13 @@ VOCABULARIES: tuple[Vocabulary, ...] = (
         name="eligibility-verdict",
         members=("ELIGIBLE", "ELIGIBLE-PENDING-EVIDENCE", "CONDITIONAL", "INELIGIBLE"),
         canonical="docs/cbd-102-evidence-register-and-exception-rules.md §3.3",
-        applies_to="cbd-102-*.md",
+        applies_to=("cbd-102-*.md", "cbd-103-*.md"),
     ),
     Vocabulary(
         name="gate-outcome",
         members=("PASS", "UNPROVEN", "FAIL"),
         canonical="docs/cbd-102-evidence-register-and-exception-rules.md §3.3",
-        applies_to="cbd-102-*.md",
+        applies_to=("cbd-102-*.md", "cbd-103-*.md"),
     ),
     # Single-letter members look noisy and are not, because of the pipe rule in
     # `paragraph_blocks`. Every place these letters appear *individually* is a
@@ -97,7 +97,7 @@ VOCABULARIES: tuple[Vocabulary, ...] = (
         name="provider-category",
         members=("H", "I", "D", "E", "F", "N"),
         canonical="docs/cbd-102-provider-requirements-hard-gate-catalog.md §3",
-        applies_to="cbd-102-*.md",
+        applies_to=("cbd-102-*.md", "cbd-103-*.md"),
     ),
 )
 
@@ -195,7 +195,7 @@ def main() -> int:
     for file in sorted(root.rglob("*.md")):
         blocks = paragraph_blocks(file.read_text(encoding="utf-8"))
         for vocab in VOCABULARIES:
-            if not fnmatch(file.name, vocab.applies_to):
+            if not any(fnmatch(file.name, glob) for glob in vocab.applies_to):
                 continue
             for number, line in blocks:
                 for run in enumerations(line, vocab):
