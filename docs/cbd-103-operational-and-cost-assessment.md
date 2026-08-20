@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Records the operational and cost half of CBD-103 against the approved CBD-102 cost template. **It contains no prices**; §6 explains why every price line is recorded as unknown under cost rule `CR4` rather than estimated. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Records the operational and cost half of CBD-103 against the approved CBD-102 cost template. **It contains no prices**; §6 explains why every price line is recorded as unknown under cost rule `CR4` rather than estimated. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Runtime Topology Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Acceptance Criteria Traceability v0.1 |
+| Companions | Runtime Topology Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Acceptance Criteria Traceability v1.0 |
 | Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
 | Repository baseline | `5745587` |
-| Last updated | August 18, 2026 |
+| Last updated | August 20, 2026 |
 
 ## 1. Purpose
 

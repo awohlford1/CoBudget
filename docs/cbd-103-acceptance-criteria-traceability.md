@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Maps each CBD-103 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record rather than a verified property. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Maps each CBD-103 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record rather than a verified property. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 30 topology decisions, the screening and 27-gate evaluation with its verdicts and evidence register, the operational and cost assessment with its `CR4` unknowns, this traceability record, and the `OI-103-008` disposition. It approves no provider, publishes no rubric score, gathers no evidence, and leaves `OI-103-009`, `OI-102-022`, and every `OQ-103` question open. |
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Runtime Topology Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Operational and Cost Assessment v0.1 |
+| Companions | Runtime Topology Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0 |
 | Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
 | Repository baseline | `5745587` |
-| Last updated | August 18, 2026 |
+| Last updated | August 20, 2026 |
 
 ## 1. Package contents
 
@@ -231,10 +231,11 @@ protected-data processing are blocked"* — is unchanged.
 Stated plainly, because a traceability record that only lists what was achieved
 is the easiest place for a package to overstate itself.
 
-* **No provider is selected, and none can be.** Evaluation §3 establishes that
-  ten of 27 pass tests require a live-account observation CBD-15's scope
-  excludes, so every candidate terminates at `ELIGIBLE-PENDING-EVIDENCE`.
-  `OI-103-008` puts the resulting decision to the Product Owner.
+* **No provider is selected.** Evaluation §3 establishes that ten of 27 pass
+  tests require a live-account observation, so every candidate terminates at
+  `ELIGIBLE-PENDING-EVIDENCE` until those observations are performed.
+  `OI-103-008` was resolved on August 20, 2026 by authorizing them; the
+  verdicts stand until the evidence is actually gathered.
 * **The evidence pass was not symmetric.** `OI-103-009`. It changes no verdict,
   because all three candidates share one, but it must be completed before
   CBD-108 ranks anything.
@@ -281,7 +282,7 @@ resolves it by locating ordering in the database rather than the broker, and
 
 | Property | Value |
 | --- | --- |
-| Reviewed by | Alexander Wohlford — Product Owner. **Not yet performed.** |
+| Reviewed by | Alexander Wohlford — Product Owner. Package approved at v1.0 on August 20, 2026, together with the `OI-103-008` disposition. |
 | Independent review | None. No second person has read any document in this package. |
 | Provider contact | None. All evidence is desk research retrieved August 18, 2026. |
 | Mechanical verification | `scripts/audit-cbd-103.py`; `scripts/check-doc-vocabulary.py` |
