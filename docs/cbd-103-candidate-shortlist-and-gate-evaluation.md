@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Applies the approved CBD-102 method to hosting/runtime candidates. It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE`, and §3 explains why that is a structural result rather than a finding about any provider.** |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Runtime Topology Specification v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
+| Companions | Runtime Topology Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
 | Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
 | Repository baseline | `5745587` |
-| Last updated | August 18, 2026 |
+| Last updated | August 20, 2026 |
 
 ## 1. Purpose
 
@@ -108,6 +108,18 @@ rule `EX-102-003` cannot help here, because an exception converts a `FAIL`, and
 these gates are `UNPROVEN`. `UNPROVEN` has one remedy — better evidence.
 
 `OI-103-008` records this for the Product Owner.
+
+**Resolved August 20, 2026.** The Product Owner chose route A: non-production
+evaluation accounts holding only synthetic data are authorized solely to
+execute the ten observation pass tests, under five recorded guardrails — one
+account per candidate, created by the operator; synthetic data only; free-tier
+spend with a nominal $25 cap before separate approval and no contract beyond
+click-through terms; results registered as `EV-102-*` Observed evidence with
+credentials kept out of the repository; and the §3.4 symmetric documentary pass
+completing first, so observations run only on candidates without a documentary
+`FAIL`. The decision is recorded on the CBD-15 ticket, whose OUT OF SCOPE
+bullet is amended by it. The verdicts in §6.3 stand unchanged until the
+observations are actually performed — authorization gathers no evidence.
 
 ### 3.4 Evidence-pass asymmetry, stated plainly
 
@@ -438,7 +450,7 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-103-008 | §3 establishes that no candidate can reach `ELIGIBLE` inside CBD-15's stated scope, because ten pass tests require a live-account observation that CBD-15 excludes. Three routes are available; route A is recommended. | **Product Owner decision required before CBD-108 can select.** This is a scope question, not an exception question — `EX-102-003` cannot convert an `UNPROVEN`. |
+| OI-103-008 | §3 established that no candidate could reach `ELIGIBLE` inside CBD-15's stated scope, because ten pass tests require a live-account observation the scope excluded. It was a scope question, not an exception question — `EX-102-003` cannot convert an `UNPROVEN`. | **Resolved August 20, 2026 by Product Owner decision** — route A, recorded in §3.3 and on the CBD-15 ticket. Observation evidence is now obtainable; the §6.3 verdicts stand until it is actually gathered. |
 | OI-103-009 | The documentary evidence pass was not symmetric across candidates. | Harmless now, because all three hold the same verdict and no ranking is produced. Must be completed symmetrically before CBD-108 ranks anything. |
 | OI-103-010 | The C3 Azure composition uses three primitives absent from the Customer Lockbox supported-services list, two of which have no listed first-party substitute. | Does not disqualify C3. It does mean C3's `HG-102-009` position is weaker than C1's on the evidence retrieved so far, and it should be settled with Microsoft rather than inferred. |
 | OI-103-011 | This evaluation covers category **H** only. Cross-category coherence — that the selected set shares no contradictory identity, networking, secret, regional, retention, deletion, incident, or support assumption — is a CBD-108 acceptance criterion and is not addressed here. | CBD-108 must perform it. The X gates were evaluated against the hosting candidate; the same X gates apply independently to every other category's provider. |

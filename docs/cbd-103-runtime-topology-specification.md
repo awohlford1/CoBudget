@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Defines the managed execution and operational boundary CBD-103 evaluates providers against. It selects no provider; the candidate evaluation does that separately, and CBD-108 makes the selection. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Defines the managed execution and operational boundary CBD-103 evaluates providers against. It selects no provider; the candidate evaluation does that separately, and CBD-108 makes the selection. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Candidate Shortlist and Gate Evaluation v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
+| Companions | Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
 | Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
 | Repository baseline | `5745587` |
-| Last updated | August 18, 2026 |
+| Last updated | August 20, 2026 |
 
 ## 1. Purpose and authority
 
