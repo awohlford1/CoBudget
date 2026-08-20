@@ -440,10 +440,16 @@ def main() -> int:
             "Confluence page" in text,
             f"{path}: header does not record Confluence publication status",
         )
-        audit.warn(
-            "Not yet registered" in text,
-            f"{path}: Confluence page appears registered; confirm the sync target "
-            "exists in scripts/sync-confluence.py",
+
+    # Every package document must be a registered sync-confluence target, so a
+    # header claiming a Confluence page cannot outrun the mechanism that
+    # publishes it. Registered here means the exact repo path appears in a
+    # Target row; the sync script's own title comparison guards the rest.
+    sync_source = read(Path("scripts/sync-confluence.py"))
+    for path in PACKAGE_FILES:
+        audit.check(
+            f'path="{path.as_posix()}"' in sync_source,
+            f"{path} is not registered as a sync-confluence target",
         )
 
     # No candidate may be reported as selectable while the evidence ceiling

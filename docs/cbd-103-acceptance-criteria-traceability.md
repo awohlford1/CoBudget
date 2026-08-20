@@ -9,7 +9,7 @@
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Runtime Topology Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Confluence page | [CBD-103 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12386305) |
 | Repository baseline | `5745587` |
 | Last updated | August 20, 2026 |
 

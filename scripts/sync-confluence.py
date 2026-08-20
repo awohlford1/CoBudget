@@ -418,8 +418,9 @@ TARGETS: tuple[Target, ...] = (
     # structure those quantities feed, and the evidence rules that govern all
     # four. The first four carry baseline=True so that any failure or skip halts
     # the run and the set cannot publish half-way, which is the property that
-    # actually matters for a mutually-referential set. The evidence register is
-    # not a baseline only because nothing publishes after it.
+    # actually matters for a mutually-referential set. The evidence register was
+    # not a baseline while nothing published after it; the CBD-103 set now
+    # does and cites it, so it carries baseline=True like the other four.
     #
     # These five pages were created as placeholders on August 16, 2026 and were
     # first published from the repository later that day, so they hold real
@@ -464,6 +465,53 @@ TARGETS: tuple[Target, ...] = (
         page_id="9601048",
         expected_title="CBD-102 — Evidence Register and Exception Rules",
         path="docs/cbd-102-evidence-register-and-exception-rules.md",
+        baseline=True,
+    ),
+    # CBD-103 consumes the approved CBD-102 method — its §6 matrix measures
+    # against the catalog's gates, its verdicts follow the evidence register
+    # §3.3, and its cost record follows the template — so the set publishes
+    # after cbd-102, whose evidence register becomes a baseline now that a
+    # later set cites it. Within the set the order is the citation order: the
+    # topology's TD-103-* decisions are cited by all three others, the
+    # evaluation's verdicts and EV-102-* register rows are cited by the
+    # operational assessment and the traceability record, and the operational
+    # assessment is cited by the traceability record's AC4 and deliverable
+    # rows. The traceability record publishes last and is not a baseline,
+    # since nothing cites it.
+    #
+    # These four pages were created as placeholders on August 20, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged approved v1.0 content.
+    Target(
+        key="cbd-103-topology",
+        doc_set="cbd-103",
+        page_id="12320769",
+        expected_title="CBD-103 — Hosting and Runtime Topology Specification",
+        path="docs/cbd-103-runtime-topology-specification.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-103-evaluation",
+        doc_set="cbd-103",
+        page_id="12353537",
+        expected_title="CBD-103 — Hosting Candidate Shortlist and Gate Evaluation",
+        path="docs/cbd-103-candidate-shortlist-and-gate-evaluation.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-103-operational",
+        doc_set="cbd-103",
+        page_id="12320790",
+        expected_title="CBD-103 — Deployment, Outage, Support, Cost, and Exit Assessment",
+        path="docs/cbd-103-operational-and-cost-assessment.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-103-traceability",
+        doc_set="cbd-103",
+        page_id="12386305",
+        expected_title="CBD-103 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-103-acceptance-criteria-traceability.md",
     ),
 )
 
