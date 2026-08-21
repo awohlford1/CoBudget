@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Maps each CBD-103 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record rather than a verified property. |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Maps each CBD-103 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record rather than a verified property. v1.1 records the cross-category documentary pass run on August 21, 2026 — see §9.1. No acceptance criterion changes status, and no verdict moves. |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 30 topology decisions, the screening and 27-gate evaluation with its verdicts and evidence register, the operational and cost assessment with its `CR4` unknowns, this traceability record, and the `OI-103-008` disposition. It approves no provider, publishes no rubric score, gathers no evidence, and leaves `OI-103-009`, `OI-102-022`, and every `OQ-103` question open. |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 30 topology decisions, the screening and 27-gate evaluation with its verdicts and evidence register, the operational and cost assessment with its `CR4` unknowns, this traceability record, and the `OI-103-008` disposition. It approves no provider, publishes no rubric score, gathers no evidence, and leaves `OI-103-009`, `OI-102-022`, and every `OQ-103` question open. **v1.1 approval additionally covers eleven new evidence records and four moved documentary gate outcomes; it settles none of `OI-103-017`, `OI-103-018`, or `OI-103-019`, each of which reserves a reading to the Product Owner.** |
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Runtime Topology Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0 |
+| Companions | Runtime Topology Specification v1.0; Candidate Shortlist and Gate Evaluation v1.1; Operational and Cost Assessment v1.0 |
 | Confluence page | [CBD-103 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12386305) |
-| Repository baseline | `5745587` |
-| Last updated | August 20, 2026 |
+| Repository baseline | `d0d5bb1` |
+| Last updated | August 21, 2026 |
 
 ## 1. Package contents
 
@@ -284,6 +284,27 @@ resolves it by locating ordering in the database rather than the broker, and
 | --- | --- |
 | Reviewed by | Alexander Wohlford — Product Owner. Package approved at v1.0 on August 20, 2026, together with the `OI-103-008` disposition. |
 | Independent review | None. No second person has read any document in this package. |
-| Provider contact | None. All evidence is desk research retrieved August 18, 2026. |
+| Provider contact | None. All evidence is desk research retrieved August 18, 2026, and August 21, 2026 for the v1.1 records. |
 | Mechanical verification | `scripts/audit-cbd-103.py`; `scripts/check-doc-vocabulary.py` |
-| Limitations | Evaluation §3 (evidence ceiling), §3.4 (asymmetric pass); Operational §6.1 (no prices); §7 above |
+| Limitations | Evaluation §3 (evidence ceiling), §3.4 (asymmetric pass), §3.5 (what the v1.1 pass did not cover); Operational §6.1 (no prices); §7 above |
+
+### 9.1 Revision record
+
+| Version | Date | Change |
+| --- | --- | --- |
+| 1.0 | August 20, 2026 | Initial approved package. |
+| 1.1 | August 21, 2026 | Runs the cross-category documentary pass that `OI-103-009` required and that route-A guardrail five makes a precondition of the observation pass. Registers eleven provider-level records — `EV-102-007`–`012` in the block v1.0 reserved for this purpose, and `EV-102-162`–`167` in a new block above the CBD-15 range, with `168`–`181` reserved. Moves four documentary gate outcomes: C1 gains `HG-102-010`; C2 gains `HG-102-011`; C3 gains `HG-102-005` and `HG-102-010`. Adds findings §7.4 (Customer Lockbox service coverage across all five Azure candidacies) and §7.5 (`HG-102-005` inverts the `HG-102-009` ordering), §3.5 (what the pass did and did not do), seven open questions `OQ-103-018`–`024`, and three open items `OI-103-017`–`019`. **No verdict, no observation, no price, no `TD-103-*` decision, and no acceptance-criterion status changes.** `OI-103-009` is partially discharged and stays open. |
+
+The v1.1 change adds evidence and moves four gate outcomes. It does not move
+any candidate off `ELIGIBLE-PENDING-EVIDENCE`, because §3's ceiling is set by
+the ten observation gates and this pass performed none of them. §2's criterion
+statuses are unaffected: every criterion that was **Partially met** at v1.0 is
+partially met for the same reason at v1.1.
+
+Three of the v1.1 records are worth flagging to a reviewer because they cut
+against the grain of a comfortable reading. `EV-102-010` narrows an AWS claim a
+search summary had overstated. `EV-102-166` is registered at Low confidence and
+explicitly not relied on, because AWS marks the page "for historical reference
+only". `EV-102-167` files Microsoft's trust page as `Asserted` rather than
+`Documented`, matching `EV-102-001`, which denies C3 two gate outcomes it would
+otherwise have collected on a classification decision.

@@ -53,6 +53,17 @@ TRACE = Path("docs/cbd-103-acceptance-criteria-traceability.md")
 PACKAGE_FILES = (TOPOLOGY, EVALUATION, OPERATIONAL, TRACE)
 CBD_102_FILES = (CATALOG, RUBRIC, DEMAND, COST, EVIDENCE)
 
+# The commit each document was written against. Two documents were amended by
+# the v1.1 cross-category documentary pass and two were not, so a single shared
+# constant would either pass a stale baseline or fail a correct one. Keyed per
+# document so an amended file cannot quietly keep its predecessor's baseline.
+REPOSITORY_BASELINE: dict[Path, str] = {
+    TOPOLOGY: "5745587",
+    EVALUATION: "d0d5bb1",
+    OPERATIONAL: "5745587",
+    TRACE: "d0d5bb1",
+}
+
 # The categories CBD-103 evaluates: cross-category plus hosting. A gate in any
 # other category belongs to a sibling subtask and must not appear in the matrix.
 EVALUATED_CATEGORIES = ("X", "H")
@@ -202,6 +213,61 @@ def defined_ids(text: str, prefix: str) -> set[str]:
 
 def referenced_ids(text: str, prefix: str) -> set[str]:
     return set(re.findall(rf"\b{prefix}-\d+\b", text))
+
+
+def _row_cells(line: str) -> list[str]:
+    stripped = line.strip()
+    if not stripped.startswith("|"):
+        return []
+    return [cell.strip() for cell in stripped.strip("|").split("|")]
+
+
+def ev_registered(text: str) -> set[str]:
+    """EV-102 numbers carrying a real record: a full eight-column register row.
+
+    Read independently of ev_reserved rather than derived by subtracting it.
+    Deriving one set from the other is what made an overlap undetectable in a
+    sibling package, where a reservation and a registered record claimed the
+    same numbers on main and no audit noticed.
+    """
+    found: set[str] = set()
+    for line in text.splitlines():
+        cells = _row_cells(line)
+        if len(cells) < 8:
+            continue
+        match = re.fullmatch(r"(EV-102-\d+)", cells[0])
+        if match:
+            found.add(match.group(1))
+    return found
+
+
+def _is_reservation_row(line: str) -> bool:
+    cells = _row_cells(line)
+    return (
+        len(cells) == 2
+        and re.fullmatch(r"EV-102-\d+", cells[0]) is not None
+        and "Reserved" in cells[1]
+    )
+
+
+def ev_reserved(text: str) -> set[str]:
+    """EV-102 numbers held as reservations: a two-column row saying Reserved."""
+    found: set[str] = set()
+    for line in text.splitlines():
+        if _is_reservation_row(line):
+            found.add(_row_cells(line)[0])
+    return found
+
+
+def without_reservation_rows(text: str) -> str:
+    """The text minus its reservation rows.
+
+    A reservation row names its own number, so counting it as a citation would
+    make every reserved number look like it was being used.
+    """
+    return "\n".join(
+        line for line in text.splitlines() if not _is_reservation_row(line)
+    )
 
 
 def main() -> int:
@@ -420,6 +486,71 @@ def main() -> int:
         f"EV-102 references with no register row: {sorted(ev_cited - ev_defined)}",
     )
 
+    # ---- The evidence register's two blocks ---------------------------------
+    # This package is the CBD-15 home for provider-level cross-category records,
+    # so its register carries both the original 001-016 block and a second block
+    # above the range the six category evaluations claimed. Both are guarded by
+    # reading the register rows and the reservation rows independently.
+    registered = ev_registered(package[EVALUATION])
+    reserved = ev_reserved(package[EVALUATION])
+
+    audit.check(
+        not (registered & reserved),
+        "EV-102 numbers both registered and reserved: "
+        f"{sorted(registered & reserved)}",
+    )
+    ev_used = referenced_ids(without_reservation_rows(joined), "EV-102")
+    audit.check(
+        not (ev_used & reserved),
+        "EV-102 references pointing at a reserved number: "
+        f"{sorted(ev_used & reserved)}",
+    )
+
+    # The block statement wraps across lines in the source, so match against a
+    # whitespace-normalized copy rather than assuming where the line breaks fall.
+    stated = re.search(
+        r"allocates `EV-102-(\d+)`–`(\d+)`\*\*, using `(\d+)`–`(\d+)` now "
+        r"and reserving `(\d+)`–`(\d+)`",
+        re.sub(r"\s+", " ", package[EVALUATION]),
+    )
+    audit.check(
+        stated is not None,
+        "evaluation section 9.2 does not state its EV-102 block allocation",
+    )
+    if stated:
+        block_lo, block_hi, use_lo, use_hi, res_lo, res_hi = (
+            int(group) for group in stated.groups()
+        )
+        block = {f"EV-102-{n:03d}" for n in range(block_lo, block_hi + 1)}
+        used = {f"EV-102-{n:03d}" for n in range(use_lo, use_hi + 1)}
+        held = {f"EV-102-{n:03d}" for n in range(res_lo, res_hi + 1)}
+
+        audit.check(
+            used | held == block,
+            "the stated second block does not partition into its used and "
+            f"reserved halves: {sorted(block ^ (used | held))}",
+        )
+        audit.check(
+            not (used & held),
+            "the stated used and reserved halves overlap: "
+            f"{sorted(used & held)}",
+        )
+        audit.check(
+            used <= registered,
+            f"stated as used but carrying no register row: {sorted(used - registered)}",
+        )
+        audit.check(
+            held <= reserved,
+            f"stated as reserved but carrying no reservation row: {sorted(held - reserved)}",
+        )
+        # Nothing in the second block may collide with the six category
+        # evaluations, which claimed 001-161 between them.
+        audit.check(
+            block_lo > 161,
+            f"the second block starts at {block_lo}, inside the range the six "
+            "category evaluations claimed (001-161)",
+        )
+
     for prefix in ("OI-103", "OQ-103"):
         defined: set[str] = set()
         for text in package.values():
@@ -433,8 +564,9 @@ def main() -> int:
     # ---- Claims the package must keep making --------------------------------
     for path, text in package.items():
         audit.check(
-            "`5745587`" in text,
-            f"{path}: repository baseline is not recorded",
+            f"`{REPOSITORY_BASELINE[path]}`" in text,
+            f"{path}: repository baseline is not "
+            f"`{REPOSITORY_BASELINE[path]}`",
         )
         audit.check(
             "Confluence page" in text,

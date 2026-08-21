@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering eleven provider-level records for reuse by every sibling category (§3.5, §9). It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Runtime Topology Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Companions | Runtime Topology Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.1 |
 | Confluence page | [CBD-103 — Hosting Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12353537) |
-| Repository baseline | `5745587` |
-| Last updated | August 20, 2026 |
+| Repository baseline | `d0d5bb1` |
+| Last updated | August 21, 2026 |
 
 ## 1. Purpose
 
@@ -139,6 +139,47 @@ Before CBD-108 ranks anything, the evidence pass must be completed
 symmetrically — the same question put to every candidate. `OI-103-009` records
 this.
 
+### 3.5 The v1.1 cross-category documentary pass — what it did and did not do
+
+`OI-103-009` is **partially discharged, not closed.** On August 21, 2026 a
+documentary pass was run across the ten `DOC` cross-category gates, symmetrically
+by construction: each question was put to all three candidates and each answer
+was recorded whether or not it favoured the candidate. Eleven records were
+registered — `EV-102-007`–`012` in the block v1.0 reserved for exactly this, and
+`EV-102-162`–`167` in a new block above the CBD-15 range.
+
+Four gate outcomes moved and no verdict did. Three gates are now settled for at
+least two candidates (`HG-102-005`, `HG-102-010`, `HG-102-011`), and four are
+better documented but still `UNPROVEN` (`HG-102-006`, `007`, `008`, `009`).
+Three were not advanced at all: `HG-102-002` correlation-identifier lifetime,
+`HG-102-003` purpose separation, and `HG-102-013` contractual backup behaviour.
+Those three, plus the six category `DOC` gates, are what remains of
+`OI-103-009`.
+
+Three properties of this pass are worth stating plainly, because they constrain
+how its results may be read.
+
+**It was run at provider level, and provider level is not service level.** The
+records establish claims about AWS, Azure and Google Cloud. They do not
+establish those claims for Cloud Run, Container Apps, or App Runner. Where a
+vendor scopes a capability per service, this pass found the scoping and recorded
+it rather than generalizing over it — §7.4 is the clearest instance, and it is
+the reason CBD-104 was right to decline reuse of `EV-102-005`.
+
+**An `UNPROVEN` produced by this pass still never means "the provider lacks
+this."** Three of the remaining gaps are CoBudget's retrieval failures and say
+nothing about the vendor: Google's subprocessor page defeated the fetch tool
+three times, Microsoft's subprocessor list sits behind a separate retrieval
+path, and AWS's transport-encryption statement was found only in a whitepaper
+the vendor marks *"for historical reference only."* Each is named in §10 so it
+is not mistaken for a finding.
+
+**A trust page is `Asserted` whoever publishes it.** `EV-102-167` records
+Microsoft's data-access page at the same class `EV-102-001` gives AWS's operator
+page, because they are the same form of source. Filing one as `Documented` and
+the other as `Asserted` would have handed C3 two gate outcomes on nothing but a
+classification decision.
+
 ## 4. Screening
 
 ### 4.1 The screen
@@ -225,15 +266,15 @@ Config gate.
 | HG-102-002 correlation identifiers | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-103-001` |
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-103-002` |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Screenshot explicitly insufficient. |
-| HG-102-005 no standing credential | DOC | `PASS` | `UNPROVEN` | `UNPROVEN` | `EV-102-006` for C1. C2/C3 equivalents not retrieved — see §3.4. |
-| HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Also gated in practice by `OI-102-022`. |
-| HG-102-007 no routine staff path | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `EV-102-001` is Asserted for C2, which cannot produce a `PASS`. |
-| HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `EV-102-001` Asserted for C2. C1/C3 not retrieved. |
-| HG-102-009 staff-access evidence | DOC | **`PASS`** | `UNPROVEN` | `UNPROVEN` | `EV-102-002`–`004` for C1; `EV-102-001` for C2; `EV-102-005` for C3. See §7.1. |
-| HG-102-010 encryption in transit and at rest | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Expected straightforward; `OQ-103-003` |
-| HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. All three publish lists; must be obtained **and dated**. `OQ-103-004` |
+| HG-102-005 no standing credential | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled at v1.1 and now a differentiator — see §7.5.** C1 `EV-102-006` (Privileged Access Manager, native). C3 `EV-102-011` (Privileged Identity Management, native, time-bound with start and end dates, approval, justification, downloadable audit history). C2 stays `UNPROVEN`: `EV-102-008` establishes that AWS ships no native capability and validates four third-party partner products instead. That is not a `FAIL` — AWS does not meet the fail condition — but whether a partner integration satisfies a `Vendor`-type gate is `OI-103-017`. |
+| HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Partial material at v1.1, none of it sufficient. The gate needs four separable permissions — backup read, key use or recovery, restore execution, restore approval — held by different principals. C2 `EV-102-009` establishes the opposite for the default case: under AWS owned keys the customer *"cannot change their policies"* and key activity is *"Not viewable by the customer"*, which is a custody question rather than a separability answer. C3 `EV-102-163` establishes Managed HSM as *"a customer-owned security domain where Microsoft has no access to your key material"*, which addresses custody but not the four-way split. **Firm** under catalog §2.5; also gated in practice by `OI-102-022`. |
+| HG-102-007 no routine staff path | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Both vendor positions are now on the record and both are `Asserted`, which §3.2 cannot convert to a `PASS`. C2 `EV-102-001`, `EV-102-010`: *"AWS support personnel who assist customers with their support requests do not have access to customer data."* C3 `EV-102-167`: *"Microsoft engineers don't have default access to cloud customer data"*, qualified by *"minimizing standing access to production data"* rather than eliminating it. C1 not retrieved. |
+| HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Unchanged at v1.1, and the reason is now specific rather than general: **the two trust pages retrieved for `HG-102-007` were each checked for this gate and neither addresses it.** `EV-102-010` does not mention impersonation, break-glass, or unrestricted log or database browsing; `EV-102-167` does not either. Silence on a break-glass capability is not evidence that none exists, which is what this gate asks about. `OQ-103-023`. |
+| HG-102-009 staff-access evidence | DOC | **`PASS`** | `UNPROVEN` | `UNPROVEN` | `EV-102-002`–`004` for C1. **Both non-passing positions are now documented rather than merely unretrieved.** C2 `EV-102-001`, `EV-102-010`: customer visibility is scoped to *"on behalf of"* service operations, which raises a `FAIL` question — `OI-103-018`. C3 `EV-102-005`, `EV-102-012`: **Azure Container Apps is absent from the Customer Lockbox supported-services list**, so the C3 runtime this evaluation carries has no Lockbox coverage — §7.4. Neither flips: absence from a list is not evidence of absence from the product. See §7.1. |
+| HG-102-010 encryption in transit and at rest | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled at v1.1 for two of three.** The pass test needs both halves with algorithm and key custody stated. C1 `EV-102-164` (AES-256, AES-GCM, DEK→KEK→Keystore, *"We own and manage the keys"*) and `EV-102-165` (ALTS, PSP). C3 `EV-102-162` (AES-256 DEK, KEK never leaves Key Vault) and `EV-102-163` (MACsec, AES-256, SHA-384). C2's at-rest half is fully established by `EV-102-009`, but its transport half rests only on `EV-102-166`, which AWS marks *"for historical reference only"* — **a retrieval gap, not an AWS deficiency**. `OQ-103-022` names the re-source. |
+| HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **The first gate in the CBD-15 set where C2 leads.** C2 `EV-102-007`: an enumerated list, dated "Last Updated: July 28, 2026" on the page itself, with a 30-day advance-notice commitment and region scoping — the pass test asks that the list be *"obtained and dated"*, and it was. C1 and C3 stay `UNPROVEN` because neither list was **obtained**: Google's page defeated retrieval on three attempts, and Microsoft's list sits on the Service Trust Portal behind a separate retrieval path (`EV-102-167` names it and its six-month notice commitment). Both are retrieval gaps on CoBudget's side, not vendor silence — `OQ-103-018`. |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Request must be exercised. |
-| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Contractual class; not obtained. Silence fails, so this must be asked explicitly. |
+| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Contractual class; still not obtained for any candidate. **The v1.1 pass sharpened why this stays `UNPROVEN` rather than becoming a `FAIL`.** The pass test says *"Silence fails"*, but that means the **provider's** silence once its contract has been read — not CoBudget's failure to read it. No DPA was obtained here, so the gate is unretrieved, not failed. This is the one gate in the set where completing the documentary pass could produce `FAIL`s across every candidate at once, and CBD-108 should not be surprised by that. `OQ-103-024`. |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `TD-103-017`, `TD-103-018`, `TD-103-022`. Non-exceptable under §5.2. |
 | HG-102-015 append-only evidence | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Retention-lock must be demonstrated. |
 
@@ -262,15 +303,22 @@ The 27 applicable gates divide by evidence kind into 10 `OBS`, 13 `DOC`, and 4
 
 | | C1 | C2 | C3 |
 | --- | --- | --- | --- |
-| `PASS` | 2 | 0 | 0 |
+| `PASS` | 3 | 1 | 2 |
 | `PASS (design)` | 4 | 4 | 4 |
-| `UNPROVEN` | 21 | 23 | 23 |
+| `UNPROVEN` | 20 | 22 | 21 |
 | `FAIL` | 0 | 0 | 0 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
 
 No candidate carries a `FAIL`, so no compensating control, exception, or
 residual-risk record is required, and no `CONDITIONAL` verdict arises. Nothing
 in §5 of the exception rules is engaged.
+
+**The v1.1 pass moved four documentary outcomes and no verdict.** C1 gained
+`HG-102-010`; C2 gained `HG-102-011`; C3 gained `HG-102-005` and `HG-102-010`.
+Every candidate still terminates at `ELIGIBLE-PENDING-EVIDENCE`, because §3
+caps them on the ten observation gates and this pass performed no observation.
+The movement matters anyway: at v1.0 two of the three candidates had no `PASS`
+of any kind, which made the comparison entirely empty. It is now merely thin.
 
 ## 7. Findings that survive the evidence ceiling
 
@@ -369,6 +417,70 @@ because it is the evidence that decision rests on, and because it constrains
 CoBudget's implementation rather than the provider's: `OI-103-004` carries the
 obligation that no background effect may be order-dependent or accumulative.
 
+### 7.4 Azure Customer Lockbox covers almost none of the Azure services CBD-15 evaluates — added at v1.1
+
+`EV-102-005` established that Container Apps, Service Bus and Key Vault are
+absent from the Customer Lockbox supported-services list, and noted that absence
+from the list is not proof that no staff-access record exists by another route.
+That caution stands. What v1.1 adds is the **full** list, and the full list is
+worse than the sample suggested.
+
+Across the six CBD-15 categories, the Azure candidate is a different Azure
+service each time. Lockbox covers one of them, and even that one is uncertain:
+
+| Category | C3 service | In the Lockbox list? |
+| --- | --- | --- |
+| CBD-103 hosting | Azure Container Apps | **No** |
+| CBD-104 identity | Microsoft Entra External ID | **No** — only "Microsoft Entra Diagnostics Data" appears |
+| CBD-105 PostgreSQL | Azure Database for PostgreSQL Flexible Server | **Unclear** — see below |
+| CBD-106 email | Azure Communication Services Email | **No** |
+| CBD-130 push and SMS | Azure Communication Services SMS | **No** |
+
+The PostgreSQL row is the interesting one. The list contains "Azure Database for
+PostgreSQL", which might read as covering Flexible Server as a deployment model
+of it. But the same list separately names **both** "Azure Database for MySQL"
+**and** "Azure Database for MySQL Flexible Server". A list that distinguishes
+Flexible Server for one engine and not the other is not using the shorter name
+as an umbrella. The absence reads as deliberate, and CBD-105 should not assume
+coverage — `OI-103-019`.
+
+Two consequences. First, this is the evidence CBD-104 was missing when it
+declined to reuse `EV-102-005` for Entra; that refusal is now positively
+supported rather than merely cautious. Second, `HG-102-009` remains `UNPROVEN`
+for C3 in every category rather than becoming a `FAIL`, because the `EV-102-005`
+limitation still holds — but a Product Owner reading this table should
+understand that C3's position on the category's sharpest differentiator is
+weaker than a bare `UNPROVEN` conveys.
+
+### 7.5 `HG-102-005` inverts the `HG-102-009` ordering — added at v1.1
+
+§7.1 records `HG-102-009` as the sharpest differentiator in the category, with
+C1 the only candidate to pass it. `HG-102-005` now runs the other way, and the
+two together are more informative than either alone.
+
+| | C1 Google Cloud | C2 AWS | C3 Azure |
+| --- | --- | --- | --- |
+| `HG-102-009` staff-access evidence | `PASS` — Access Transparency | `UNPROVEN` — scoped to "on behalf of" | `UNPROVEN` — service not covered |
+| `HG-102-005` no standing credential | `PASS` — Privileged Access Manager | `UNPROVEN` — no native product | `PASS` — Privileged Identity Management |
+| `HG-102-011` region and subprocessors | `UNPROVEN` — not obtained | **`PASS`** — obtained and dated | `UNPROVEN` — not obtained |
+
+Read across, no candidate leads on all three, and the one gate C2 wins it wins
+outright: AWS is the only candidate whose subprocessor list was published in a
+form that could simply be read and dated. C1 is the only candidate passing both
+access gates.
+
+The C2 `HG-102-005` position deserves care, because it is easy to overstate.
+AWS does **not** fail this gate. Its access model has federated identity,
+permission sets and session durations, so the fail condition — *"a platform
+whose only administrative path is a permanent console login held by a named
+person"* — is plainly not met. What `EV-102-008` establishes is narrower: AWS
+ships no native temporary-elevated-access product and instead validates four
+partner products, so the pass test's *"bound to a named change or incident
+record"* is reachable on AWS only by buying a third party. Whether that
+satisfies a gate the catalog types `Vendor` is a reading question the evaluator
+should not settle — `OI-103-017` — and it carries a `CR0` cost consequence that
+no price has yet been put to.
+
 ## 8. Why no weighted rubric total is published
 
 Rubric rule `R4` requires that per-dimension subscores always accompany a total,
@@ -395,8 +507,17 @@ information is being withheld.
 ## 9. Evidence register
 
 Records are append-only. Each carries the fields the evidence register §2
-requires. All retrievals were performed on **August 18, 2026** by desk research;
-none involved a provider account.
+requires. `EV-102-001`–`006` and `013`–`016` were retrieved on **August 18,
+2026**; `EV-102-007`–`012` and `EV-102-162`–`167` were retrieved on **August 21,
+2026** for the v1.1 cross-category documentary pass described in §3.4. All were
+desk research; none involved a provider account.
+
+**This register is the CBD-15 home for provider-level cross-category records.**
+`EV-102-001`–`006` were already reused by the PostgreSQL evaluation rather than
+re-retrieved, and the v1.1 records below are written to be reused the same way
+by every sibling category. A provider-level record establishes a claim about a
+provider; it does not establish that claim for a particular service, and each
+record's limitations state which services it was and was not shown to cover.
 
 | ID | Claim | Provider | Source | Class | Conf. | Limitations | Re-verify by |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -411,21 +532,58 @@ none involved a provider account.
 | EV-102-015 | `HG-102-018` | Google Cloud (H) | "Dead-letter topics", `https://docs.cloud.google.com/pubsub/docs/dead-letter-topics` | Documented | Medium | Establishes a maximum-delivery-attempts range of 5–100 with a default of 5, and best-effort forwarding. Contains no statement about the ordering interaction; that is `EV-102-014`. | February 18, 2027 |
 | EV-102-016 | Screening, `HG-102-024` | Render (H) | "Environment Variables and Secrets", `https://render.com/docs/configure-environment-variables` | Documented | Low | Operational documentation only. Explicitly does **not** disclose backend storage, dashboard visibility to a logged-in user, KMS or HSM use, key rotation, or workload identity. Confidence lowered below class under §3.1 because the page does not address the claim. **No conclusion about Render's secret handling is drawn from this record in either direction.** | February 18, 2027 |
 
-Six numbers are reserved rather than left as gaps, because the register is
+### 9.1 Cross-category records — the v1.1 documentary pass
+
+The six numbers reserved at v1.0 are now filled, and they are filled with what
+the reservation was made for: AWS and Azure counterparts to `EV-102-001`–`006`,
+adjacent to the records they answer, with nothing already cited renumbered. A
+`(X)` in the Provider column marks a provider-level cross-category record rather
+than a hosting-specific one.
+
+| ID | Claim | Provider | Source | Class | Conf. | Limitations | Re-verify by |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| EV-102-007 | `HG-102-011` | AWS (X) | "AWS Sub-processors", `https://aws.amazon.com/compliance/sub-processors/`, page states "Last Updated: July 28, 2026" | Documented | Medium | Establishes the enumerated, dated subprocessor list the pass test requires, engaged "in accordance with the AWS Data Processing Addendum". Establishes the change commitment: *"AWS will update this page at least 30 days before engaging a new sub-processor, and if you subscribe for updates, AWS will notify you by email of changes to this page."* Establishes region scoping — *"Sub-processors relevant to an individual customer will depend on the AWS Region the customer selects and the particular AWS services that the customer uses."* Establishes that **Twilio, Inc. is an AWS subprocessor for A2P messaging**, alongside Cequens, Infobip, Vonage/Nexmo, Route Mobile, Sinch, Tanla and TeleSign; and that "250ok Inc. / Email Data Source, Inc." provide "Email deliverability metrics". Does **not** map subprocessors to individual services beyond the activity descriptions, so which of the A2P pool carries a given message is not established. | February 21, 2027 |
+| EV-102-008 | `HG-102-005` | AWS (X) | "Temporary elevated access for AWS accounts", `https://docs.aws.amazon.com/singlesignon/latest/userguide/temporary-elevated-access.html` | Documented | Medium | Establishes that AWS ships **no native** temporary-elevated-access capability: *"AWS IAM Identity Center integrates with the solutions from AWS Security Competency partners. AWS validates that these solutions address a common set of temporary elevated access requirements."* Names the validated partners — Apono, CyberArk Secure Cloud Access, Okta Access Requests, and Tenable (previously Ermetic). Establishes the definition AWS works to: *"a way to request, approve, and track the use of a permission to perform a specific task during a specified time."* Does **not** establish that AWS's own access model fails the gate — permission sets carry session durations and access is federated, so the pass test's fail condition (a permanent console login as the only administrative path) is not met. Whether a validated partner integration satisfies a `Vendor`-type gate is a reading question, not a retrieval gap — `OI-103-017`. No partner product was priced; that is a `CR0` fact and is not in this record. | February 21, 2027 |
+| EV-102-009 | `HG-102-010`, `HG-102-006` | AWS (X) | "AWS KMS concepts — AWS KMS keys", `https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html` | Documented | Medium | Establishes the at-rest algorithm and key custody the pass test names. Key hierarchy states exact ciphers: the domain key is *"A 256-bit AES-GCM key only in memory of an HSM"* rotated daily; the derived encryption key is *"A 256-bit AES-GCM key only in memory of an HSM used to encrypt customer data and keys"*; the HSM backing key is *"A 256-bit symmetric key or RSA or elliptic curve private key"* rotated yearly. Establishes non-export: the HBK *"is generated on an HSM in the domain and is designed never to be exported from the HSM in plaintext."* Establishes three custody models — customer managed, AWS managed, AWS owned — and that **AWS owned keys are the default for new services**: *"AWS managed keys are a legacy key type that is no longer being created for new AWS services as of 2021. Instead, new (and legacy) AWS services are using what's known as an AWS owned key to encrypt customer data by default."* For AWS owned keys the customer *"cannot change their policies, you cannot audit activities on these keys, and you cannot delete them"*, with logging *"Not viewable by the customer."* That last property bears on `HG-102-006` separability and on `HG-102-009`, and it is the general form of the service-level limitation already recorded for AWS End User Messaging. Covers at-rest only; the transport half of `HG-102-010` is `EV-102-166`. | February 21, 2027 |
+| EV-102-010 | `HG-102-009`, `HG-102-007` | AWS (X) | AWS Trust Center, "Security Controls — Operator Access", `https://aws.amazon.com/trust-center/operator-access/`, re-read at the primary page August 21, 2026 | Asserted | Low | Second retrieval of the `EV-102-001` source, registered separately because it establishes content that record did not capture. Establishes that customer visibility is **scoped**: *"In addition, these actions, known as 'on behalf of' service operations, are logged and made visible to customers in AWS CloudTrail."* The qualifier is the whole question — a search summary rendered this sentence without it, and the unqualified version would have flipped the gate. Establishes that internal logging is not customer-obtainable: *"Any access to systems that store or process customer data or metadata is logged, monitored for anomalies, and audited."* Establishes a support-model claim relevant to `HG-102-007`: *"AWS support personnel who assist customers with their support requests do not have access to customer data"*, with support permissions reached through dedicated roles *"that can be disabled by each AWS customer"*. The page does **not** address break-glass, unrestricted log or database browsing, standing versus just-in-time access, or impersonation. Asserted class under §3.2 cannot produce a `PASS`. Separately checked and found unusable for this gate: `https://aws.amazon.com/trust-center/data-center/our-controls/` concerns **physical** data-centre access only. | November 21, 2026 |
+| EV-102-011 | `HG-102-005` | Azure (X) | "What is Privileged Identity Management?", `https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure`, page dated April 23, 2026 | Documented | Medium | Establishes a **native** Microsoft capability with no third-party dependency, in the vendor's own words: *"Provide just-in-time privileged access to Microsoft Entra ID and Azure resources"*; *"Assign time-bound access to resources using start and end dates"*; *"Require approval to activate privileged roles"*; *"Use justification to understand why users activate"*; *"Download audit history for internal or external audit."* Establishes the "time-bound eligible" assignment — *"A role assignment where a user is eligible to activate the role only within start and end dates"* — and that activation requires selecting a duration within an administrator-set maximum plus a reason. Graph APIs exist for both Entra roles and groups. Does **not** name the licence tier: the page states only *"Using Privileged Identity Management requires licenses"* and links out. The tier is a `CR0` cost fact and was not retrieved — `OQ-103-019`. Justification is free text and approval is by a named approver, so the pass test's *"bound to a named change or incident record"* is met by convention rather than enforced by the product; the same gap applies to `EV-102-006`. | February 21, 2027 |
+| EV-102-012 | `HG-102-009` | Azure (X) | "Customer Lockbox for Microsoft Azure", `https://learn.microsoft.com/en-us/azure/security/fundamentals/customer-lockbox-overview`, page dated July 21, 2026 | Documented | Medium | Extends `EV-102-005` with the **complete** supported-services list, retrieved in full. Establishes the presences that matter to CBD-15 — "Azure Database for PostgreSQL", "Microsoft Entra Diagnostics Data", "Azure App Service", "Azure Functions", "Azure Kubernetes Service", "Azure Monitor (Log Analytics)", "Azure Storage" — and the absences: **Azure Container Apps, Azure Communication Services, Azure Key Vault, Microsoft Entra External ID as a service, and "Azure Database for PostgreSQL Flexible Server" are all absent.** The list names both "Azure Database for MySQL" and "Azure Database for MySQL Flexible Server" as separate entries while naming only "Azure Database for PostgreSQL", so the Flexible Server absence is conspicuous rather than shorthand — see §7.4. Establishes customer-obtainable evidence where Lockbox does apply: auditing logs *"are written to the activity logs for subscription-scoped requests and to the Microsoft Entra audit log for tenant-scoped requests"*, with named operations Create, Approve, Deny and Expiry. Establishes a Developer support-plan floor and a four-day default-deny expiry. Confirms the three `EV-102-005` exclusions verbatim and adds that *"Role assignments scoped to management groups aren't supported."* **Absence from this list is not evidence that no staff-access record exists by another route** — the `EV-102-005` limitation is carried forward unchanged. | February 21, 2027 |
+
+### 9.2 A second block, above the CBD-15 range
+
+`EV-102-001`–`161` are fully claimed by the six category evaluations, and
+`EV-102-132`–`161` were the last block allocated. **This pass allocates
+`EV-102-162`–`181`**, using `162`–`167` now and reserving `168`–`181` for its
+completion. A future block starts above `181`.
+
+| ID | Claim | Provider | Source | Class | Conf. | Limitations | Re-verify by |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| EV-102-162 | `HG-102-010` | Azure (X) | "Azure data encryption at rest", `https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest`, page dated July 8, 2026 | Documented | Medium | Establishes the at-rest algorithm — the data encryption key is *"A symmetric AES-256 key that encrypts a partition or block of data"* — and the envelope model in which a KEK *"never leaves Key Vault"*. Establishes key custody in both directions: platform-managed keys are the default and *"Azure encrypts data at rest by default by using platform-managed keys"*, while customer-managed keys are available through Azure Key Vault or Managed HSM, and Managed HSM external key management (preview) *"keeps the key encryption key (KEK) in a customer-operated hardware security module (HSM) entirely outside Azure."* Does **not** establish coverage for any specific service: the page routes per-service detail to a separate data-encryption-models table that was not retrieved, and states that *"Microsoft is also working toward encrypting all customer data at rest by default"*, which implies incomplete coverage. Container Apps, Communication Services and PostgreSQL Flexible Server were not individually confirmed — `OQ-103-020`. | February 21, 2027 |
+| EV-102-163 | `HG-102-010` | Azure (X) | "Azure encryption overview", `https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview`, page dated July 8, 2026 | Documented | Medium | Establishes the transport half. Link-layer: *"Whenever Azure customer traffic moves between datacenters over links outside physical boundaries that Microsoft controls, Azure applies a data-link layer encryption method by using the IEEE 802.1AE MAC Security Standards, also known as MACsec"*, and *"MACsec encryption is on by default for all Azure traffic traveling within a region or between regions."* Transport-layer algorithms are named: connections *"support RSA-based 2,048-bit key lengths, ECC 256-bit key lengths, SHA-384 message authentication, and AES-256 data encryption."* Establishes the TLS floor as a transition rather than a completed state: *"Azure is transitioning to require TLS 1.2 or later for all connections to Azure services. Most Azure services completed this transition by August 31, 2025."* — "most", not all. Also establishes a custody boundary worth carrying to `HG-102-006`: Managed HSM *"provides a customer-owned security domain where Microsoft has no access to your key material."* | February 21, 2027 |
+| EV-102-164 | `HG-102-010` | Google Cloud (X) | "Default encryption at rest", `https://docs.cloud.google.com/docs/security/encryption/default-encryption` | Documented | Medium | Establishes algorithm and custody together, which is what the pass test asks for. Algorithm: *"All data at the storage level is encrypted by DEKs, which use AES-256 by default"*, with *"AES-GCM (256 bits)"* the preferred symmetric protocol. Establishes chunking — *"Data is broken into logical chunks... Each chunk is encrypted at the storage level with an individual data encryption key (DEK)"* — and the full hierarchy DEK → KEK → Keystore → Keystore master key → Root Keystore. Establishes default custody in Google's own words: *"We own and manage the keys used in default encryption at rest"*, with Cloud KMS available for customer-managed keys. Covers at-rest only; transit is `EV-102-165`. Per-service coverage is not enumerated. | February 21, 2027 |
+| EV-102-165 | `HG-102-010` | Google Cloud (X) | "Encryption in transit", `https://docs.cloud.google.com/docs/security/encryption-in-transit` | Documented | Medium | Establishes the transport half by named mechanism: *"Google's infrastructure uses ALTS for the authentication, integrity, and encryption of connections from the GFE to a Google Cloud service, and from one Google Cloud service to another Google Cloud service"*, and *"Google infrastructure uses PSP to encrypt traffic within and between our data centers."* Establishes the scope claim *"Google Cloud encrypts customer data in transit within Google's networks, unless described otherwise in this section"* — note the carve-out — and that *"VM-to-VM connections within VPC networks and peered VPC networks inside of Google's production network are integrity-protected and encrypted."* Client-facing traffic is *"secured with TLS"* over HTTPS, HTTP/2 or HTTP/3, terminated at the GFE. **No TLS version floor was stated on the retrieved content**, so the minimum version is not established — `OQ-103-021`. | February 21, 2027 |
+| EV-102-166 | `HG-102-010` | AWS (X) | "Encrypting Data-at-Rest and Data-in-Transit", Logical Separation on AWS whitepaper, `https://docs.aws.amazon.com/whitepapers/latest/logical-separation/encrypting-data-at-rest-and--in-transit.html` | Documented | **Low** | **Confidence lowered below class because the vendor disclaims the source**: the page opens *"This whitepaper is for historical reference only. Some content might be outdated and some links might not be available."* Subject to that, it states *"All network traffic between AWS data centers is transparently encrypted at the physical layer"*, that *"All traffic within a VPC and between peered VPCs across regions is transparently encrypted at the network layer when using supported Amazon EC2 instance types"* — conditional on instance type, which CoBudget's runtime choice may not satisfy — and that *"All AWS service endpoints support TLS."* No minimum TLS version is stated. Also establishes FIPS 140-2 validated HSMs where *"plaintext keys cannot be used outside the HSM by anyone, including AWS employees"*, that *"Customer keys can only be used within the AWS region in which they were created"*, and that *"Every request made of AWS KMS is logged to AWS CloudTrail."* **This record is not relied on for any gate outcome.** A current AWS source for the transport half was not retrieved — `OQ-103-022`. | November 21, 2026 |
+| EV-102-167 | `HG-102-007`, `HG-102-008`, `HG-102-011` | Microsoft (X) | "Microsoft Data Access", Microsoft Trust Center, `https://www.microsoft.com/en-us/trust-center/privacy/data-access` | Asserted | Low | Classified **Asserted** for the same reason `EV-102-001` is: a vendor statement about its own internal controls, on a trust page rather than product documentation, with no independent support and no version. Classifying it as Documented while AWS's counterpart is Asserted would advantage Azure by a filing decision. Subject to that, it states *"Microsoft engineers don't have default access to cloud customer data. Instead, they are granted access, under management oversight, only when necessary"* and that virtual access is restricted by *"role-based access control, multifactor authentication, minimizing standing access to production data, and other controls"* — **minimizing** standing access, not eliminating it. Establishes the subprocessor notice commitment: *"Microsoft publishes the names of any new subprocessors for its online services at least six months in advance"*, against AWS's 30 days. Does **not** address break-glass, impersonation, or unrestricted query. The Microsoft Online Services Subprocessor List itself was **not obtained** — see `OQ-103-018`. Asserted cannot produce a `PASS`. | November 21, 2026 |
+
+Fourteen numbers are reserved rather than left as gaps, because the register is
 append-only and a gap is indistinguishable from a deleted record:
 
 | ID | Status |
 | --- | --- |
-| EV-102-007 | **Reserved** for the symmetric evidence pass required by §3.4 |
-| EV-102-008 | **Reserved** for the symmetric evidence pass required by §3.4 |
-| EV-102-009 | **Reserved** for the symmetric evidence pass required by §3.4 |
-| EV-102-010 | **Reserved** for the symmetric evidence pass required by §3.4 |
-| EV-102-011 | **Reserved** for the symmetric evidence pass required by §3.4 |
-| EV-102-012 | **Reserved** for the symmetric evidence pass required by §3.4 |
-
-Reserving them lets the completing pass record AWS and Azure counterparts to
-`EV-102-001`–`006` adjacent to the records they answer, without renumbering
-anything already cited.
+| EV-102-168 | **Reserved** for the cross-category documentary pass |
+| EV-102-169 | **Reserved** for the cross-category documentary pass |
+| EV-102-170 | **Reserved** for the cross-category documentary pass |
+| EV-102-171 | **Reserved** for the cross-category documentary pass |
+| EV-102-172 | **Reserved** for the cross-category documentary pass |
+| EV-102-173 | **Reserved** for the cross-category documentary pass |
+| EV-102-174 | **Reserved** for the cross-category documentary pass |
+| EV-102-175 | **Reserved** for the cross-category documentary pass |
+| EV-102-176 | **Reserved** for the cross-category documentary pass |
+| EV-102-177 | **Reserved** for the cross-category documentary pass |
+| EV-102-178 | **Reserved** for the cross-category documentary pass |
+| EV-102-179 | **Reserved** for the cross-category documentary pass |
+| EV-102-180 | **Reserved** for the cross-category documentary pass |
+| EV-102-181 | **Reserved** for the cross-category documentary pass |
 
 ## 10. Open questions carried forward
 
@@ -436,22 +594,32 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | --- | --- | --- | --- |
 | OQ-103-001 | Correlation-identifier lifetime and scope; does the provider default to a persistent end-user identifier? | `HG-102-002` | Retrieve observability documentation for all three |
 | OQ-103-002 | Is there a shared identity graph across the provider's telemetry, support, and analytics surfaces? | `HG-102-003` | Inspect each provider's own data model |
-| OQ-103-003 | At-rest and in-transit encryption with algorithm and key custody stated | `HG-102-010` | Retrieve; expected straightforward |
-| OQ-103-004 | Region list and subprocessor list, **obtained and dated** | `HG-102-011` | Retrieve all three; a stale list does not satisfy the pass test |
+| OQ-103-003 | At-rest and in-transit encryption with algorithm and key custody stated | `HG-102-010` | **Largely resolved at v1.1.** Answered for C1 (`EV-102-164`, `EV-102-165`) and C3 (`EV-102-162`, `EV-102-163`), and for C2's at-rest half (`EV-102-009`). Only C2's transport half remains — `OQ-103-022`. The v1.0 note that this was "expected straightforward" proved right for five of six halves. |
+| OQ-103-004 | Region list and subprocessor list, **obtained and dated** | `HG-102-011` | **Partially resolved at v1.1.** C2 obtained and dated (`EV-102-007`). C1 and C3 still outstanding, and the reason is retrieval rather than vendor silence — `OQ-103-018`. |
 | OQ-103-005 | Do the six screened-out candidates in §4.2 actually lack the primitives attributed to them? | Screening | Confirm from each published catalogue before the screen is relied on |
 | OQ-103-006 | Does Azure provide customer-obtainable staff-access evidence for Service Bus and Key Vault by any route other than Customer Lockbox? | `HG-102-009` | Put directly to Microsoft |
 | OQ-103-007 | Does Access Transparency require a paid support level? Vendor page and secondary source disagree. | `HG-102-009`, `CR0` | Resolve before pricing C1 |
 | OQ-103-008 | Per-surface ceiling policies on all eleven `EP-92-*` entry points named in the pass test | `HG-102-021` | Retrieve gateway documentation for all three |
 | OQ-103-009 | Two telemetry destinations with genuinely **distinct access roles** | `HG-102-026` | Retrieve for all three |
 | OQ-103-010 | A dead-letter access boundary distinct from ordinary queue operation | `HG-102-027` | Retrieve for all three |
-| OQ-103-011 | Contractual statement of provider backup retention, region, and expiry. Silence fails this gate. | `HG-102-013` | Must be asked explicitly; will not be found in public documentation |
+| OQ-103-011 | Contractual statement of provider backup retention, region, and expiry. Silence fails this gate. | `HG-102-013` | Must be asked explicitly; will not be found in public documentation. **Unchanged at v1.1, and now the highest-consequence documentary question in the set** — see `OQ-103-024`. |
+| OQ-103-018 | Google Cloud and Microsoft subprocessor lists, obtained and dated | `HG-102-011` | Google's page defeated retrieval three times; Microsoft's list is on the Service Trust Portal, named by `EV-102-167` but not obtained. Both are CoBudget-side retrieval gaps, not vendor silence, and neither is evidence about the provider. |
+| OQ-103-019 | Which Microsoft Entra licence tier does Privileged Identity Management require? | `HG-102-005`, `CR0` | `EV-102-011` states only that it "requires licenses". The tier is a `CR0` tier-forcing fact and could change C3's cost position. Do not assume P2. |
+| OQ-103-020 | Does Azure at-rest encryption cover Container Apps, Communication Services, and PostgreSQL Flexible Server specifically? | `HG-102-010` | `EV-102-162` is provider-level and routes per-service detail to a data-encryption-models table not retrieved. The page's own "working toward encrypting all customer data at rest by default" implies coverage is incomplete somewhere. |
+| OQ-103-021 | What minimum TLS version does Google Cloud enforce on service endpoints? | `HG-102-010` | `EV-102-165` names ALTS and PSP but states no TLS floor. Azure's floor is documented as a transition still completing; AWS's was not found on a current page. |
+| OQ-103-022 | A **current** AWS source for transport encryption between data centres and within a VPC | `HG-102-010` | The only source found is `EV-102-166`, which AWS marks "for historical reference only" and which conditions VPC-level encryption on "supported Amazon EC2 instance types". Blocks the one gate half separating C2 from a third `PASS`. |
+| OQ-103-023 | Does any candidate document a break-glass, impersonation, or unrestricted-query capability for its own staff? | `HG-102-008` | Both trust pages retrieved at v1.1 are silent on all three. Silence is not absence, and this gate asks precisely about a capability a vendor has no incentive to describe. |
+| OQ-103-024 | Do the AWS, Google and Microsoft DPAs state provider backup retention, region, and expiry? | `HG-102-013` | **Read the DPAs before CBD-108 ranks anything.** The pass test says "Silence fails", so if the contracts are silent this gate fails for every candidate simultaneously — the only gate in the set with that property. It is currently `UNPROVEN` only because the contracts have not been read, which is not the same thing. |
 
 ## 11. Open items
 
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-103-008 | §3 established that no candidate could reach `ELIGIBLE` inside CBD-15's stated scope, because ten pass tests require a live-account observation the scope excluded. It was a scope question, not an exception question — `EX-102-003` cannot convert an `UNPROVEN`. | **Resolved August 20, 2026 by Product Owner decision** — route A, recorded in §3.3 and on the CBD-15 ticket. Observation evidence is now obtainable; the §6.3 verdicts stand until it is actually gathered. |
-| OI-103-009 | The documentary evidence pass was not symmetric across candidates. | Harmless now, because all three hold the same verdict and no ranking is produced. Must be completed symmetrically before CBD-108 ranks anything. |
+| OI-103-009 | The documentary evidence pass was not symmetric across candidates. | Harmless now, because all three hold the same verdict and no ranking is produced. Must be completed symmetrically before CBD-108 ranks anything. **Partially discharged at v1.1 — see §3.5.** The ten `DOC` cross-category gates were passed symmetrically and eleven records registered; `HG-102-002`, `HG-102-003`, `HG-102-013` and the six category `DOC` gates remain. The item stays open. |
 | OI-103-010 | The C3 Azure composition uses three primitives absent from the Customer Lockbox supported-services list, two of which have no listed first-party substitute. | Does not disqualify C3. It does mean C3's `HG-102-009` position is weaker than C1's on the evidence retrieved so far, and it should be settled with Microsoft rather than inferred. |
 | OI-103-011 | This evaluation covers category **H** only. Cross-category coherence — that the selected set shares no contradictory identity, networking, secret, regional, retention, deletion, incident, or support assumption — is a CBD-108 acceptance criterion and is not addressed here. | CBD-108 must perform it. The X gates were evaluated against the hosting candidate; the same X gates apply independently to every other category's provider. |
-| OI-103-012 | No part of this evaluation has been reviewed by anyone other than its author, and no provider was contacted. | It is a desk evaluation. The independent security review that CBD-92 §1 and the architecture baseline require before public launch remains outstanding and is not substituted for by anything here. |
+| OI-103-012 | No part of this evaluation has been reviewed by anyone other than its author, and no provider was contacted. | It is a desk evaluation. The independent security review that CBD-92 §1 and the architecture baseline require before public launch remains outstanding and is not substituted for by anything here. Unchanged at v1.1. |
+| OI-103-017 | **Does a validated third-party integration satisfy a gate the catalog types `Vendor`?** `EV-102-008` establishes that AWS ships no native temporary-elevated-access capability and instead validates four partner products. | **Product Owner decision on the gate's reading.** Read as satisfied, C2 gains `HG-102-005` and the gate stops differentiating. Read as unsatisfied, C2's only route to it is a paid third party, which is a `CR0` fact no price has been put to. The evaluator declined to settle this by drafting, as `HG-102-005` is **firm** under catalog §2.5 and firm gates should not be widened silently. |
+| OI-103-018 | **`HG-102-009` may be a `FAIL` for C2 rather than an `UNPROVEN`.** The pass test fails a provider that "logs only CoBudget's own API calls and not its own staff's access", and `EV-102-010` establishes that AWS's customer-visible record is scoped to *"on behalf of"* service operations. | **Product Owner decision.** No AWS equivalent of Access Transparency or Customer Lockbox was found, but this rests on two pages, and absence from two pages is not proof of absence from the product. Recorded as `UNPROVEN` with the question raised rather than declared a `FAIL` on thin retrieval. If it is a `FAIL`, C2 becomes `INELIGIBLE` in **every** category, which is why it should be settled deliberately. |
+| OI-103-019 | **Does "Azure Database for PostgreSQL" in the Customer Lockbox list cover Flexible Server?** The same list names "Azure Database for MySQL" and "Azure Database for MySQL Flexible Server" separately — §7.4. | **Affects CBD-105, not CBD-103.** Raised here because this evaluation owns `EV-102-012`. If Flexible Server is not covered, C3 has no Lockbox coverage in any of the five categories it is a candidate in. Raised rather than resolved unilaterally, and CBD-105 is not amended on this evaluator's reading of another category's candidate. |
