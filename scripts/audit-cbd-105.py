@@ -1,32 +1,26 @@
 #!/usr/bin/env python3
-"""Repeatable structural and traceability audit for the CBD-103 package.
+"""Repeatable structural and traceability audit for the CBD-105 package.
 
-What this audit exists to catch
--------------------------------
-The CBD-95 close-out found six statements in an approved record that contradicted
-the artifacts they summarized -- a reconciliation tally stated as 2/33/1/0
-against a matrix counting 2/34/0/0, and a check total stated three different
-ways. Every one of them was a hand-written restatement of something a parser
-could derive.
+Same rationale as scripts/audit-cbd-103.py, which this adapts: the CBD-95
+close-out found hand-restated figures contradicting the artifacts they
+summarized, so everything the CBD-105 documents restate is derived here from
+the matrix rather than frozen as constants.
 
-CBD-103 restates two things the same way and both are guarded here by
-derivation rather than by a frozen constant:
+Category-D specifics this audit adds over the CBD-103 shape:
 
-* the per-candidate gate tally in the evaluation's section 6.3, derived from the
-  section 6.1 and 6.2 matrix rows; and
-* the evidence-kind split (OBS / DOC / CFG), derived from the same rows.
+* the applicable gate set is X plus D (24 gates), with two Config gates
+  (HG-102-014, HG-102-045);
+* the EV-102 evidence register now spans two documents -- the hosting
+  evaluation defines 001-016 and the PostgreSQL evaluation defines its block
+  from 030 -- so citation resolution checks the union, and a citation into the
+  unallocated gap (017-029, reserved for CBD-104) fails;
+* the package borrows identifiers from the approved CBD-103 topology
+  (TD-103-*, OI-103-*, OQ-103-*), which must resolve against the merged
+  CBD-103 documents.
 
-The audit additionally proves that the matrix is *complete* against the approved
-CBD-102 catalog -- every gate in categories X and H appears exactly once -- and
-that the Config rows agree with the catalog's own satisfaction-type column. A
-matrix that silently dropped a gate would otherwise read as a clean evaluation.
-
-What it does not prove
-----------------------
-Documentation integrity only. It does not verify a gate result, retrieve
-evidence, price anything, or establish that any TD-103 design is implemented.
-The evidence ceiling in evaluation section 3 and the open items in every
-document remain binding regardless of this audit passing.
+Documentation integrity only. It verifies no gate result, retrieves no
+evidence, prices nothing, and does not establish that any DP-105 design is
+implemented. The evidence ceiling in evaluation section 3 remains binding.
 """
 
 from __future__ import annotations
@@ -45,51 +39,48 @@ DEMAND = Path("docs/cbd-102-demand-model.md")
 COST = Path("docs/cbd-102-cost-template.md")
 EVIDENCE = Path("docs/cbd-102-evidence-register-and-exception-rules.md")
 
-TOPOLOGY = Path("docs/cbd-103-runtime-topology-specification.md")
-EVALUATION = Path("docs/cbd-103-candidate-shortlist-and-gate-evaluation.md")
-OPERATIONAL = Path("docs/cbd-103-operational-and-cost-assessment.md")
-TRACE = Path("docs/cbd-103-acceptance-criteria-traceability.md")
+SPEC = Path("docs/cbd-105-data-protection-and-recovery-specification.md")
+EVALUATION = Path("docs/cbd-105-candidate-shortlist-and-gate-evaluation.md")
+OPERATIONAL = Path("docs/cbd-105-operational-and-cost-assessment.md")
+TRACE = Path("docs/cbd-105-acceptance-criteria-traceability.md")
 
-PACKAGE_FILES = (TOPOLOGY, EVALUATION, OPERATIONAL, TRACE)
+H_EVALUATION = Path("docs/cbd-103-candidate-shortlist-and-gate-evaluation.md")
+H_TOPOLOGY = Path("docs/cbd-103-runtime-topology-specification.md")
+H_OPERATIONAL = Path("docs/cbd-103-operational-and-cost-assessment.md")
+H_TRACE = Path("docs/cbd-103-acceptance-criteria-traceability.md")
+
+PACKAGE_FILES = (SPEC, EVALUATION, OPERATIONAL, TRACE)
 CBD_102_FILES = (CATALOG, RUBRIC, DEMAND, COST, EVIDENCE)
+CBD_103_FILES = (H_TOPOLOGY, H_EVALUATION, H_OPERATIONAL, H_TRACE)
 
-# The categories CBD-103 evaluates: cross-category plus hosting. A gate in any
-# other category belongs to a sibling subtask and must not appear in the matrix.
-EVALUATED_CATEGORIES = ("X", "H")
-
+EVALUATED_CATEGORIES = ("X", "D")
 CANDIDATES = ("C1", "C2", "C3")
-
-# Outcomes the matrix may record, per evidence register section 3.3 plus the
-# "PASS (design)" form the evaluation defines in its section 5 for Config gates.
 MATRIX_OUTCOMES = ("PASS (design)", "PASS", "UNPROVEN", "FAIL")
-
 EVIDENCE_KINDS = ("OBS", "DOC", "CFG")
 
-# Identifier namespaces CBD-103 borrows from approved upstream packages, mapped
-# to the document that owns each definition.
+# EV-102 numbers this package may define. 001-016 belong to the hosting
+# evaluation; 017-029 are left for CBD-104; this package's stated block is
+# 030-049 (using 030-039 now, reserving the rest for its observation records).
+EV_BLOCK = range(30, 50)
+
 BORROWED_IDENTIFIERS: dict[str, tuple[str, ...]] = {
     "DI-91": ("cbd-91-private-mvp-data-inventory.md",),
+    "EG-91": ("cbd-91-private-mvp-data-inventory.md",),
     "SA-92": ("cbd-92-system-flow-technical-threat-model.md",),
-    "RL-92": ("cbd-92-system-flow-technical-threat-model.md",),
     "OP-92": ("cbd-92-system-flow-technical-threat-model.md",),
     "AN-92": ("cbd-92-system-flow-technical-threat-model.md",),
-    "EP-92": ("cbd-92-system-flow-technical-threat-model.md",),
     "TB-92": ("cbd-92-system-flow-technical-threat-model.md",),
-    "CA-92": ("cbd-92-system-flow-technical-threat-model.md",),
+    "PA-92": ("cbd-92-system-flow-technical-threat-model.md",),
+    "SYS-92": ("cbd-92-system-flow-technical-threat-model.md",),
     "CL-92": ("cbd-92-system-flow-technical-threat-model.md",),
+    "RL-92": ("cbd-92-system-flow-technical-threat-model.md",),
     "SR-94": ("cbd-94-risk-mitigation-requirement-register.md",),
-    "PR-94": (
+    "ME-94": (
         "cbd-94-risk-mitigation-requirement-register.md",
         "cbd-94-verification-review-inventory.md",
     ),
     "FU-95": ("cbd-95-architecture-roadmap-follow-up-register.md",),
     "PM-72": ("cbd-72-collaboration-permission-model.md",),
-    "SD-071": ("cbd-71-mvp-schedule-decision-register.md",),
-    "EC-69": (
-        "cbd-69-period-edge-case-scenario-catalog.md",
-        "cbd-69-period-edge-cases-validation-rule-specification.md",
-    ),
-    "INV-69": ("cbd-69-period-edge-cases-validation-rule-specification.md",),
 }
 
 
@@ -118,7 +109,6 @@ def cells(line: str) -> list[str]:
 
 
 def catalog_gates() -> dict[str, dict[str, str]]:
-    """Every HG-102-* gate in the approved catalog, with category and type."""
     gates: dict[str, dict[str, str]] = {}
     for line in read(CATALOG).splitlines():
         if not line.startswith("| HG-102-"):
@@ -131,12 +121,6 @@ def catalog_gates() -> dict[str, dict[str, str]]:
 
 
 def matrix_rows(text: str) -> dict[str, dict[str, str]]:
-    """Gate rows from the evaluation's comparison matrix.
-
-    A matrix row is a table line whose first cell names a gate and whose second
-    cell is an evidence kind. This shape distinguishes it from the prose tables
-    elsewhere in the package that also mention gate identifiers.
-    """
     rows: dict[str, dict[str, str]] = {}
     for line in text.splitlines():
         if not line.startswith("| HG-102-"):
@@ -145,26 +129,16 @@ def matrix_rows(text: str) -> dict[str, dict[str, str]]:
         if len(cell) < 6 or cell[1] not in EVIDENCE_KINDS:
             continue
         gate = cell[0].split()[0]
-        rows[gate] = {
-            "kind": cell[1],
-            "C1": cell[2],
-            "C2": cell[3],
-            "C3": cell[4],
-        }
+        rows[gate] = {"kind": cell[1], "C1": cell[2], "C2": cell[3], "C3": cell[4]}
     return rows
 
 
 def normalise_outcome(cell: str) -> str | None:
-    """Reduce a matrix cell to the outcome it records, or None if malformed."""
     bare = cell.replace("`", "").replace("**", "").strip()
-    for outcome in MATRIX_OUTCOMES:
-        if bare == outcome:
-            return outcome
-    return None
+    return bare if bare in MATRIX_OUTCOMES else None
 
 
 def declared_tally(text: str) -> dict[str, dict[str, int]]:
-    """The tally the evaluation restates in section 6.3, as written."""
     declared: dict[str, dict[str, int]] = {}
     for line in text.splitlines():
         cell = cells(line)
@@ -183,12 +157,6 @@ def declared_tally(text: str) -> dict[str, dict[str, int]]:
 
 
 def defined_ids(text: str, prefix: str) -> set[str]:
-    """Identifiers this package defines, as opposed to merely mentions.
-
-    A TD-103 or EV-102 identifier is defined where it opens a decision paragraph
-    or a register row; an OI-103 or OQ-103 identifier is defined in the first
-    cell of an open-item or open-question table row.
-    """
     found: set[str] = set()
     pattern = re.compile(rf"^\|\s*({prefix}-\d+)\s*\|")
     for line in text.splitlines():
@@ -207,7 +175,7 @@ def referenced_ids(text: str, prefix: str) -> set[str]:
 def main() -> int:
     audit = Audit()
 
-    for path in PACKAGE_FILES + CBD_102_FILES:
+    for path in PACKAGE_FILES + CBD_102_FILES + CBD_103_FILES:
         audit.check((ROOT / path).is_file(), f"missing {path}")
     if audit.failures:
         return finish(audit)
@@ -225,26 +193,24 @@ def main() -> int:
         gate for gate, meta in gates.items() if meta["category"] in EVALUATED_CATEGORIES
     }
     audit.check(
-        len(applicable) == 27,
-        f"applicable X+H gate count changed: expected 27, found {len(applicable)}",
+        len(applicable) == 24,
+        f"applicable X+D gate count changed: expected 24, found {len(applicable)}",
     )
 
     # ---- Matrix completeness -------------------------------------------------
     rows = matrix_rows(package[EVALUATION])
     audit.check(
         set(rows) == applicable,
-        "comparison matrix does not cover exactly the applicable X+H gates; "
+        "comparison matrix does not cover exactly the applicable X+D gates; "
         f"missing {sorted(applicable - set(rows))}, "
         f"unexpected {sorted(set(rows) - applicable)}",
     )
 
     for gate, row in sorted(rows.items()):
         for candidate in CANDIDATES:
-            outcome = normalise_outcome(row[candidate])
             audit.check(
-                outcome is not None,
-                f"{gate} {candidate}: unrecognised outcome {row[candidate]!r}; "
-                f"expected one of {MATRIX_OUTCOMES}",
+                normalise_outcome(row[candidate]) is not None,
+                f"{gate} {candidate}: unrecognised outcome {row[candidate]!r}",
             )
 
     # ---- Config rows agree with the catalog ---------------------------------
@@ -257,7 +223,6 @@ def main() -> int:
         "matrix CFG rows disagree with the catalog Config gates; "
         f"catalog {sorted(catalog_config)}, matrix {sorted(matrix_config)}",
     )
-
     for gate in sorted(matrix_config):
         for candidate in CANDIDATES:
             audit.check(
@@ -265,8 +230,6 @@ def main() -> int:
                 f"{gate} is a Config gate but {candidate} does not record "
                 "PASS (design)",
             )
-
-    # A gate the catalog marks Vendor can never be satisfied by CoBudget design.
     for gate, row in sorted(rows.items()):
         if gate in catalog_config:
             continue
@@ -276,7 +239,7 @@ def main() -> int:
                 f"{gate} is a Vendor gate but {candidate} records PASS (design)",
             )
 
-    # ---- Derived tally must equal the restated one --------------------------
+    # ---- Derived tally equals the restated one ------------------------------
     derived = {
         outcome: {
             candidate: sum(
@@ -290,17 +253,13 @@ def main() -> int:
     }
     declared = declared_tally(package[EVALUATION])
     for outcome in MATRIX_OUTCOMES:
-        audit.check(
-            outcome in declared,
-            f"section 6.3 does not restate a {outcome} row",
-        )
+        audit.check(outcome in declared, f"section 6.3 does not restate a {outcome} row")
         if outcome in declared:
             audit.check(
                 declared[outcome] == derived[outcome],
                 f"section 6.3 {outcome} row is stated as {declared[outcome]} "
                 f"but the matrix counts {derived[outcome]}",
             )
-
     for candidate in CANDIDATES:
         total = sum(derived[outcome][candidate] for outcome in MATRIX_OUTCOMES)
         audit.check(
@@ -308,7 +267,7 @@ def main() -> int:
             f"{candidate} outcomes total {total}, not {len(applicable)}",
         )
 
-    # ---- Evidence-kind split must match the prose ---------------------------
+    # ---- Evidence-kind split matches the prose ------------------------------
     kind_counts = {
         kind: sum(1 for row in rows.values() if row["kind"] == kind)
         for kind in EVIDENCE_KINDS
@@ -322,28 +281,27 @@ def main() -> int:
         audit.check(
             [int(value) for value in stated.groups()]
             == [kind_counts[kind] for kind in EVIDENCE_KINDS],
-            "stated evidence-kind split "
-            f"{[int(v) for v in stated.groups()]} does not match the matrix "
-            f"{[kind_counts[k] for k in EVIDENCE_KINDS]}",
+            f"stated evidence-kind split {[int(v) for v in stated.groups()]} "
+            f"does not match the matrix {[kind_counts[k] for k in EVIDENCE_KINDS]}",
         )
 
-    # The evidence ceiling in section 3 lists the observation-blocked gates.
-    # That list and the matrix's OBS rows are the same claim stated twice.
-    ceiling_section = package[EVALUATION].split("### 3.2")[0]
+    # The evidence-ceiling section lists the observation-bound gates; that list
+    # and the matrix OBS rows are one claim stated twice.
+    ceiling_section = package[EVALUATION].split("### 3.1")[0]
     ceiling_gates = referenced_ids(ceiling_section, "HG-102")
     obs_gates = {gate for gate, row in rows.items() if row["kind"] == "OBS"}
     audit.check(
         ceiling_gates >= obs_gates,
-        "section 3.1 does not list every gate the matrix marks OBS; "
+        "section 3 does not name every gate the matrix marks OBS; "
         f"missing {sorted(obs_gates - ceiling_gates)}",
     )
     audit.check(
         ceiling_gates <= applicable,
-        "section 3.1 lists a gate outside the applicable X+H set; "
+        "section 3 names a gate outside the applicable X+D set; "
         f"unexpected {sorted(ceiling_gates - applicable)}",
     )
 
-    # ---- Every cited identifier resolves ------------------------------------
+    # ---- Cited identifiers resolve ------------------------------------------
     for prefix, source in (
         ("HG-102", CATALOG),
         ("WR-102", RUBRIC),
@@ -359,20 +317,17 @@ def main() -> int:
             f"{sorted(cited - known)}",
         )
 
-    # OI-102-* items are spread across all five CBD-102 documents.
-    known_oi_102 = referenced_ids("\n".join(read(path) for path in CBD_102_FILES), "OI-102")
+    known_oi_102 = referenced_ids(
+        "\n".join(read(path) for path in CBD_102_FILES), "OI-102"
+    )
     cited_oi_102 = referenced_ids(joined, "OI-102")
     audit.check(
         cited_oi_102 <= known_oi_102,
         f"OI-102 references that do not resolve: {sorted(cited_oi_102 - known_oi_102)}",
     )
 
-    # CBD-103 argues almost entirely by citing approved CBD-11, CBD-12, and
-    # CBD-14 material. A citation that does not resolve is the failure mode that
-    # makes a derived document look authoritative while resting on nothing, so
-    # every prefix it borrows is checked against the document that owns it.
     for prefix, owners in BORROWED_IDENTIFIERS.items():
-        known: set[str] = set()
+        known = set()
         for owner in owners:
             known |= referenced_ids(read(Path(f"docs/{owner}")), prefix)
         cited = referenced_ids(joined, prefix)
@@ -382,45 +337,54 @@ def main() -> int:
             f"{sorted(cited - known)}",
         )
 
-    # CBD-67 invariants and CBD-71 governance clauses are cited in backticked
-    # form and defined only as table rows, so they need their own shapes.
-    for prefix, owner in (
-        ("INV", "cbd-67-weekly-monthly-cadence-workflow-specification.md"),
-        ("GC", "cbd-71-mvp-schedule-decision-register.md"),
-    ):
-        owner_text = read(Path(f"docs/{owner}"))
-        known = set(re.findall(rf"\|\s*({prefix}-\d+)\s*\|", owner_text))
-        cited = set(re.findall(rf"`({prefix}-\d+)`", joined))
+    # Identifiers borrowed from the approved CBD-103 package.
+    cbd_103_joined = "\n".join(read(path) for path in CBD_103_FILES)
+    for prefix in ("TD-103", "OI-103", "OQ-103"):
+        known = referenced_ids(cbd_103_joined, prefix)
+        cited = referenced_ids(joined, prefix)
         audit.check(
             cited <= known,
-            f"{prefix} references that do not resolve in {owner}: "
+            f"{prefix} references that do not resolve in the CBD-103 package: "
             f"{sorted(cited - known)}",
         )
 
-    # ---- The package's own identifiers ---------------------------------------
-    td_defined = defined_ids(package[TOPOLOGY], "TD-103")
-    td_cited = referenced_ids(joined, "TD-103")
+    # ---- The package's own identifiers --------------------------------------
+    dp_defined = defined_ids(package[SPEC], "DP-105")
+    dp_cited = referenced_ids(joined, "DP-105")
     audit.check(
-        td_cited <= td_defined,
-        f"TD-103 references with no decision: {sorted(td_cited - td_defined)}",
+        dp_cited <= dp_defined,
+        f"DP-105 references with no decision: {sorted(dp_cited - dp_defined)}",
     )
     audit.check(
-        len(td_defined) == 30,
-        f"topology defines {len(td_defined)} TD-103 decisions, expected 30",
-    )
-    audit.check(
-        td_defined == {f"TD-103-{number:03d}" for number in range(1, 31)},
-        "TD-103 numbering is not a contiguous 001..030 range",
+        dp_defined == {f"DP-105-{number:03d}" for number in range(1, 13)},
+        f"DP-105 numbering is not a contiguous 001..012 range: {sorted(dp_defined)}",
     )
 
-    ev_defined = defined_ids(package[EVALUATION], "EV-102")
+    # EV-102 records: the union of both evaluations' registers, and this
+    # package may only define numbers inside its stated block. A register row
+    # is a table row -- a backticked citation at line start is prose, which is
+    # why this uses the table-row pattern alone rather than defined_ids.
+    def register_rows(text: str) -> set[str]:
+        return set(re.findall(r"^\|\s*(EV-102-\d+)\s*\|", text, re.M))
+
+    ev_h = register_rows(read(H_EVALUATION))
+    ev_d = register_rows(package[EVALUATION])
+    for record in sorted(ev_d):
+        number = int(record.rsplit("-", 1)[1])
+        audit.check(
+            number in EV_BLOCK,
+            f"{record} is defined by the CBD-105 evaluation outside its stated "
+            "EV-102-030..049 block",
+        )
+    ev_known = ev_h | ev_d
     ev_cited = referenced_ids(joined, "EV-102")
     audit.check(
-        ev_cited <= ev_defined,
-        f"EV-102 references with no register row: {sorted(ev_cited - ev_defined)}",
+        ev_cited <= ev_known,
+        f"EV-102 references with no register row in either evaluation: "
+        f"{sorted(ev_cited - ev_known)}",
     )
 
-    for prefix in ("OI-103", "OQ-103"):
+    for prefix in ("OI-105", "OQ-105"):
         defined: set[str] = set()
         for text in package.values():
             defined |= defined_ids(text, prefix)
@@ -431,71 +395,53 @@ def main() -> int:
         )
 
     # ---- Claims the package must keep making --------------------------------
+    sync_source = read(Path("scripts/sync-confluence.py"))
     for path, text in package.items():
         audit.check(
-            "`5745587`" in text,
+            "`6b1ac8e`" in text,
             f"{path}: repository baseline is not recorded",
         )
         audit.check(
             "Confluence page" in text,
             f"{path}: header does not record Confluence publication status",
         )
+        if "Not yet registered" not in text:
+            audit.check(
+                f'path="{path.as_posix()}"' in sync_source,
+                f"{path}: header claims a Confluence page but the path is not a "
+                "registered sync-confluence target",
+            )
 
-    # Every package document must be a registered sync-confluence target, so a
-    # header claiming a Confluence page cannot outrun the mechanism that
-    # publishes it. Registered here means the exact repo path appears in a
-    # Target row; the sync script's own title comparison guards the rest.
-    sync_source = read(Path("scripts/sync-confluence.py"))
-    for path in PACKAGE_FILES:
-        audit.check(
-            f'path="{path.as_posix()}"' in sync_source,
-            f"{path} is not registered as a sync-confluence target",
-        )
-
-    # No candidate may be reported as selectable while the evidence ceiling
-    # stands. This is the single claim most likely to drift if a later edit
-    # resolves some gates without resolving the ten observation-blocked ones.
     for candidate in CANDIDATES:
-        selectable = derived["FAIL"][candidate] == 0 and derived["UNPROVEN"][candidate] == 0
         audit.check(
-            not selectable or "ELIGIBLE-PENDING-EVIDENCE" not in package[EVALUATION],
-            f"{candidate} has no UNPROVEN gates left but the evaluation still "
-            "records ELIGIBLE-PENDING-EVIDENCE; the verdict needs revisiting",
-        )
-        audit.check(
-            derived["UNPROVEN"][candidate] == 0 or "ELIGIBLE-PENDING-EVIDENCE" in package[EVALUATION],
+            derived["UNPROVEN"][candidate] == 0
+            or "ELIGIBLE-PENDING-EVIDENCE" in package[EVALUATION],
             f"{candidate} carries UNPROVEN gates but the evaluation does not "
             "record the ELIGIBLE-PENDING-EVIDENCE verdict",
         )
 
     audit.check(
-        "no price is stated" in package[TRACE].lower()
-        or "UNKNOWN" in package[OPERATIONAL],
+        "UNKNOWN" in package[OPERATIONAL],
         "cost record does not mark unobtained figures UNKNOWN under CR4",
     )
 
     # ---- Repository wiring ---------------------------------------------------
     workflow = read(Path(".github/workflows/ci.yml"))
     audit.check(
-        "python3 scripts/audit-cbd-103.py" in workflow,
-        "CI does not run the CBD-103 structural audit",
+        "python3 scripts/audit-cbd-105.py" in workflow,
+        "CI does not run the CBD-105 structural audit",
     )
     vocabulary = read(Path("scripts/check-doc-vocabulary.py"))
     audit.check(
-        "cbd-103" in vocabulary or "cbd-10?-*" in vocabulary,
-        "scripts/check-doc-vocabulary.py does not cover the CBD-103 documents, "
-        "which use the eligibility-verdict and gate-outcome vocabularies",
-    )
-    audit.check(
-        "```mermaid" in package[TOPOLOGY],
-        "topology does not carry the trust-boundary diagram FU-95-008 requires",
+        "cbd-105" in vocabulary or "cbd-10?-*" in vocabulary,
+        "scripts/check-doc-vocabulary.py does not cover the CBD-105 documents",
     )
 
     return finish(audit)
 
 
 def finish(audit: Audit) -> int:
-    print(f"CBD-103 documentation audit: {audit.checks} checks")
+    print(f"CBD-105 documentation audit: {audit.checks} checks")
     print(f"Failures: {len(audit.failures)}")
     for failure in audit.failures:
         print(f"  FAIL: {failure}")
@@ -503,8 +449,10 @@ def finish(audit: Audit) -> int:
     for warning in audit.warnings:
         print(f"  WARN: {warning}")
     if not audit.failures:
-        print("Result: PASS (documentation integrity only; the evidence ceiling "
-              "in evaluation section 3 remains binding)")
+        print(
+            "Result: PASS (documentation integrity only; the evidence ceiling "
+            "in evaluation section 3 remains binding)"
+        )
     return 1 if audit.failures else 0
 
 

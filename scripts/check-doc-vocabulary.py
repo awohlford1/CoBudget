@@ -77,13 +77,13 @@ VOCABULARIES: tuple[Vocabulary, ...] = (
         name="eligibility-verdict",
         members=("ELIGIBLE", "ELIGIBLE-PENDING-EVIDENCE", "CONDITIONAL", "INELIGIBLE"),
         canonical="docs/cbd-102-evidence-register-and-exception-rules.md §3.3",
-        applies_to=("cbd-102-*.md", "cbd-103-*.md"),
+        applies_to=("cbd-10?-*.md", "cbd-130-*.md"),
     ),
     Vocabulary(
         name="gate-outcome",
         members=("PASS", "UNPROVEN", "FAIL"),
         canonical="docs/cbd-102-evidence-register-and-exception-rules.md §3.3",
-        applies_to=("cbd-102-*.md", "cbd-103-*.md"),
+        applies_to=("cbd-10?-*.md", "cbd-130-*.md"),
     ),
     # Single-letter members look noisy and are not, because of the pipe rule in
     # `paragraph_blocks`. Every place these letters appear *individually* is a
@@ -97,7 +97,7 @@ VOCABULARIES: tuple[Vocabulary, ...] = (
         name="provider-category",
         members=("H", "I", "D", "E", "F", "N"),
         canonical="docs/cbd-102-provider-requirements-hard-gate-catalog.md §3",
-        applies_to=("cbd-102-*.md", "cbd-103-*.md"),
+        applies_to=("cbd-10?-*.md", "cbd-130-*.md"),
     ),
 )
 

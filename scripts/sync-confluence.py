@@ -513,6 +513,53 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-103 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-103-acceptance-criteria-traceability.md",
     ),
+    # CBD-105 publishes after CBD-103, which it cites as a frozen source
+    # baseline: the recovery posture is built on the TD-103 topology decisions
+    # (private networking, KMS custody, environment separation, forward-only
+    # migrations, transactional audit), and the evaluation reuses the CBD-103
+    # evidence records and inherits its evidence ceiling. It also consumes the
+    # approved CBD-102 method and the CBD-91 classification, both already above.
+    #
+    # Within the set the order follows the header citations. The specification
+    # is cited by every other document; the evaluation is cited by the
+    # operational assessment and the traceability record; the operational
+    # assessment is cited by the traceability record, which nothing cites and
+    # which therefore publishes last and is not a baseline.
+    #
+    # These four pages were created as placeholders on August 20, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged approved v1.0 content.
+    Target(
+        key="cbd-105-specification",
+        doc_set="cbd-105",
+        page_id="12812289",
+        expected_title="CBD-105 — Data Protection and Recovery Specification",
+        path="docs/cbd-105-data-protection-and-recovery-specification.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-105-evaluation",
+        doc_set="cbd-105",
+        page_id="12845057",
+        expected_title="CBD-105 — PostgreSQL Candidate Shortlist and Gate Evaluation",
+        path="docs/cbd-105-candidate-shortlist-and-gate-evaluation.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-105-operational",
+        doc_set="cbd-105",
+        page_id="12877825",
+        expected_title="CBD-105 — Capacity, Maintenance, Monitoring, Cost, and Exit Assessment",
+        path="docs/cbd-105-operational-and-cost-assessment.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-105-traceability",
+        doc_set="cbd-105",
+        page_id="12910593",
+        expected_title="CBD-105 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-105-acceptance-criteria-traceability.md",
+    ),
 )
 
 
