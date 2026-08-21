@@ -606,6 +606,54 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-104 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-104-acceptance-criteria-traceability.md",
     ),
+    # CBD-106 publishes after CBD-103 and CBD-104, both of which it cites as
+    # frozen source baselines: the send path is a job on the TD-103 outbox
+    # behind the TD-103 edge, and ED-106-004 takes a position on the ceremony
+    # email ID-104-018 left open. It cites no CBD-105 document, so its position
+    # relative to that set carries no dependency.
+    #
+    # Within the set the order follows the header citations. The boundary
+    # specification is cited by every other document; the evaluation is cited
+    # by the assessment and the traceability record; the assessment is cited by
+    # the traceability record, which nothing cites and which therefore
+    # publishes last and is not a baseline.
+    #
+    # These four pages were created as placeholders on August 21, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged approved v1.0 content.
+    Target(
+        key="cbd-106-specification",
+        doc_set="cbd-106",
+        page_id="13205505",
+        expected_title="CBD-106 — Email Delivery and Content Boundary Specification",
+        path="docs/cbd-106-email-delivery-and-content-boundary-specification.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-106-evaluation",
+        doc_set="cbd-106",
+        page_id="12845090",
+        expected_title=(
+            "CBD-106 — Transactional Email Candidate Shortlist and Gate Evaluation"
+        ),
+        path="docs/cbd-106-candidate-shortlist-and-gate-evaluation.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-106-operational",
+        doc_set="cbd-106",
+        page_id="13238273",
+        expected_title="CBD-106 — Deliverability, Operations, Cost, and Exit Assessment",
+        path="docs/cbd-106-operational-and-cost-assessment.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-106-traceability",
+        doc_set="cbd-106",
+        page_id="12877869",
+        expected_title="CBD-106 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-106-acceptance-criteria-traceability.md",
+    ),
 )
 
 

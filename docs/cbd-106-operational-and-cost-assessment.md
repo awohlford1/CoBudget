@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Records the operational and cost half of CBD-106 against the approved CBD-102 cost template. **It contains no prices**; §5 records every price line as unknown under cost rule `CR4`, with the tier and add-on interactions already known named so they are not discovered at pricing time. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Records the operational and cost half of CBD-106 against the approved CBD-102 cost template. **It contains no prices**; §5 records every price line as unknown under cost rule `CR4`, with the tier and add-on interactions already known named so they are not discovered at pricing time. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-106](https://cobudget.atlassian.net/browse/CBD-106) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Email Delivery and Content Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Email Delivery and Content Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-106 — Deliverability, Operations, Cost, and Exit Assessment](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13238273) |
 | Repository baseline | `d98defd` |
 | Last updated | August 21, 2026 |
 

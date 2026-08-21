@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Applies the approved CBD-102 method to transactional email candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to transactional email candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-106](https://cobudget.atlassian.net/browse/CBD-106) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Email Delivery and Content Boundary Specification v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Email Delivery and Content Boundary Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-106 — Transactional Email Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12845090) |
 | Repository baseline | `d98defd` |
 | Last updated | August 21, 2026 |
 

@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Maps each CBD-106 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-106 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 16 `ED-106-*` decisions including the `ED-106-002`–`ED-106-004` routing recommendation, the screening and 24-gate evaluation with its verdicts and `EV-102-052`–`070` records, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, sends no message, and writes no copy. It leaves `OI-106-001`–`017`, `OI-102-022`, `FU-95-017`, `EG-91-006`, and every `OQ-106` question open — including `OI-106-017`, the support-centre-article classification that would move C5's `HG-102-052` outcome, which this approval deliberately does **not** settle. |
 | Jira | [CBD-106](https://cobudget.atlassian.net/browse/CBD-106) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Email Delivery and Content Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Operational and Cost Assessment v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Email Delivery and Content Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0 |
+| Confluence page | [CBD-106 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12877869) |
 | Repository baseline | `d98defd` |
 | Last updated | August 21, 2026 |
 
@@ -216,7 +216,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 
 | Property | Value |
 | --- | --- |
-| Reviewed by | Pending Product Owner review. |
+| Reviewed by | Alexander Wohlford — Product Owner, August 21, 2026. |
 | Independent review | None. |
 | Provider contact | None. All evidence is desk research retrieved August 21, 2026. No account was created and no message was sent. |
 | Mechanical verification | `scripts/audit-cbd-106.py`; `scripts/check-doc-vocabulary.py` |
