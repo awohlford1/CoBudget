@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Maps each CBD-105 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Maps each CBD-105 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. **A v1.1 correction is awaiting Product Owner review**: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 12 `DP-105-*` decisions, the screening and 24-gate evaluation with its verdicts and `EV-102-030`–`039` records, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, and leaves `OI-105-001`–`013`, `OI-102-022`, and every `OQ-105` question open. |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 12 `DP-105-*` decisions, the screening and 24-gate evaluation with its verdicts and `EV-102-030`–`039` records, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, and leaves `OI-105-001`–`013`, `OI-102-022`, and every `OQ-105` question open. The pending v1.1 revision re-resolves `OI-105-008` and moves the evidence-register reservation; it changes nothing else in this approval's scope. |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Data Protection and Recovery Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0 |
+| Companions | Data Protection and Recovery Specification v1.1; Candidate Shortlist and Gate Evaluation v1.1; Operational and Cost Assessment v1.1 |
 | Confluence page | [CBD-105 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12910593) |
 | Repository baseline | `6b1ac8e` |
-| Last updated | August 20, 2026 |
+| Last updated | August 21, 2026 |
 
 ## 1. Package contents
 
@@ -169,3 +169,14 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | Provider contact | None. All evidence is desk research retrieved August 20, 2026. |
 | Mechanical verification | `scripts/audit-cbd-105.py`; `scripts/check-doc-vocabulary.py` |
 | Limitations | Evaluation §3 (evidence ceiling, remedy authorized), §3.1 (symmetry statement); Operational §5.1 (no prices); §7 above |
+
+### 8.1 Revision record
+
+| Version | Date | Change |
+| --- | --- | --- |
+| 1.0 | August 20, 2026 | Initial approved package. |
+| 1.1 | August 21, 2026 | Moves this package's evidence-register **reservation** out of the `040`–`049` range and into `082`–`091`. A sibling evaluation drafted concurrently registered real records inside the v1.0 reservation and reserved the remainder, and both merged, so `040`–`047` stood claimed twice. Defined records are append-only and are never renumbered, so the reservation is what gives way. `scripts/audit-cbd-105.py` gains a guard that parses the evaluation §8 block statement and fails if the stated ranges drift from the constants it enforces, overlap each other, or fail to contain every registered record. **No record, gate outcome, verdict, tally, price, or `DP-105-*` decision changes.** Recorded at evaluation `OI-105-008`. |
+
+The v1.1 change corrects a numbering claim, not an evidence position. Every
+`EV-102-030`–`039` record stands exactly as approved at v1.0, and §2's criterion
+statuses are unaffected.
