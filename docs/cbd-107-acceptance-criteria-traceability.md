@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-107 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. §4 records a dependency the ticket states backwards. |
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the 18 `FC-107-*` decisions, the screening and 27-gate evaluation with its verdicts and `EV-102-092`–`109` records, the lifecycle and coverage map with its `PS-107-*` register, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, connects to no institution, and selects no institution-quality scoring algorithm. It leaves `OI-107-001`–`021`, `OI-102-022`, `FU-95-012`, `EG-91-005`, `EG-91-012`, `EG-91-021`, and every `OQ-107` question open — including `OI-107-008`, the `HG-102-060` reading that would move three verdicts, which this approval deliberately does **not** settle. |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0 |
+| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.1; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0 |
 | Confluence page | [CBD-107 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13598721) |
-| Repository baseline | `c15b526` |
+| Repository baseline | `d0d5bb1` |
 | Last updated | August 21, 2026 |
 
 ## 1. Package contents
@@ -242,3 +242,15 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-107-021 | The CBD-107 ticket lists *"completed CBD-14 provider-specific findings"* as a dependency. CBD-92's traceability states the opposite direction — *"vendor-specific risks/tests wait for CBD-106/107 and CBD-15"* — and `EG-91-005` names CBD-15/CBD-107 as the target that produces them. | **The ticket needs correcting**, not this package. Waiting for CBD-14 to supply what CBD-107 exists to create would deadlock both. This package followed the approved documents and proceeded, per §4. The correction is a Jira edit, applied directly when authorized; it requires no repository change and no Confluence synchronization. |
+
+## 10. Revision record
+
+| Version | Date | Change |
+| --- | --- | --- |
+| 1.0 | August 21, 2026 | Initial approved package. |
+| 1.1 | August 21, 2026 | Records that the CBD-103 cross-category documentary pass of the same date **moved nothing in this category, and could not have** — it was run at provider level against AWS, Azure and Google Cloud, and no category **F** candidate is one of them. Evaluation §3.1 now states the consequence: this package holds the largest block of open cross-category cells in the CBD-15 set, forty against twenty-six or fewer elsewhere, which is a retrieval-priority fact for CBD-108. Adds `OQ-107-023`, carrying the one result of that pass which does reach this category — that `HG-102-013`'s *"Silence fails"* concerns the **provider's** silence once its contract has been read, so the gate is `UNPROVEN` here rather than `FAIL` and reading the four aggregator DPAs is the only thing that can move it. **No record, gate outcome, verdict, tally, price, or `FC-107-*` decision changes.** |
+
+The v1.1 change adds no evidence and moves no outcome. It exists so that a
+reader comparing the six categories does not mistake this package's lack of a
+documentary-pass revision for an oversight: the pass was deliberately scoped to
+the three hyperscalers, and this category shares no candidate with them.
