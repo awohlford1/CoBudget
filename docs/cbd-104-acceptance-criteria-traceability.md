@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Maps each CBD-104 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record rather than a verified property. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-104 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record rather than a verified property. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 19 identity-boundary decisions, the screening and 25-gate evaluation with its verdicts and evidence register, the integration and cost assessment with its stated prices and `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, gathers no observation evidence, closes no `FU-95-007` work, and leaves `OI-104-007`–`OI-104-014`, `OI-102-022`, and every `OQ-104` question open. |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Identity Integration Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Integration, Outage, Support, Cost, and Exit Assessment v0.1 |
+| Companions | Identity Integration Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Integration, Outage, Support, Cost, and Exit Assessment v1.0 |
 | Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
 | Repository baseline | `6b1ac8e` |
-| Last updated | August 20, 2026 |
+| Last updated | August 21, 2026 |
 
 ## 1. Package contents
 
@@ -280,7 +280,7 @@ rather than what is measured.
 
 | Property | Value |
 | --- | --- |
-| Reviewed by | Not yet reviewed. Submitted for Product Owner review at v0.1. |
+| Reviewed by | Alexander Wohlford — Product Owner. Package approved at v1.0 on August 21, 2026. |
 | Independent review | None. No second person has read any document in this package. |
 | Provider contact | None. All evidence is desk research retrieved August 20, 2026. |
 | Mechanical verification | `scripts/audit-cbd-104.py`; `scripts/check-doc-vocabulary.py` |

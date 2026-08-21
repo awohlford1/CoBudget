@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Defines the managed-identity boundary CBD-104 evaluates providers against. It selects no provider; the candidate evaluation measures against this boundary, and CBD-108 makes the selection. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Defines the managed-identity boundary CBD-104 evaluates providers against. It selects no provider; the candidate evaluation measures against this boundary, and CBD-108 makes the selection. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Candidate Shortlist and Gate Evaluation v0.1; Integration, Outage, Support, Cost, and Exit Assessment v0.1; Acceptance Criteria Traceability v0.1 |
+| Companions | Candidate Shortlist and Gate Evaluation v1.0; Integration, Outage, Support, Cost, and Exit Assessment v1.0; Acceptance Criteria Traceability v1.0 |
 | Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
 | Repository baseline | `6b1ac8e` |
-| Last updated | August 20, 2026 |
+| Last updated | August 21, 2026 |
 
 ## 1. Purpose and authority
 

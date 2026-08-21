@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Records the integration and cost half of CBD-104 against the approved CBD-102 cost template. Unlike its CBD-103 sibling, it **does** carry prices: identity list pricing is published at the billable unit, so §6 states figures with their evidence and marks only the genuinely unobtained lines `UNKNOWN` under `CR4`. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Records the integration and cost half of CBD-104 against the approved CBD-102 cost template. Unlike its CBD-103 sibling, it **does** carry prices: identity list pricing is published at the billable unit, so §6 states figures with their evidence and marks only the genuinely unobtained lines `UNKNOWN` under `CR4`. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Identity Integration Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Acceptance Criteria Traceability v0.1 |
+| Companions | Identity Integration Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Acceptance Criteria Traceability v1.0 |
 | Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
 | Repository baseline | `6b1ac8e` |
-| Last updated | August 20, 2026 |
+| Last updated | August 21, 2026 |
 
 ## 1. Purpose
 
