@@ -9,7 +9,7 @@
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Identity Integration Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Integration, Outage, Support, Cost, and Exit Assessment v1.0 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Confluence page | [CBD-104 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13172737) |
 | Repository baseline | `6b1ac8e` |
 | Last updated | August 21, 2026 |
 
