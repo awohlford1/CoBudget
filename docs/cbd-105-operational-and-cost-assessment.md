@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Records the operational and cost half of CBD-105 against the approved CBD-102 cost template. **It contains no prices**; §5 records every price line as unknown under cost rule `CR4`, with the tier interactions already known named so they are not discovered at pricing time. **A v1.1 correction is awaiting Product Owner review**: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Records the operational and cost half of CBD-105 against the approved CBD-102 cost template. **It contains no prices**; §5 records every price line as unknown under cost rule `CR4`, with the tier interactions already known named so they are not discovered at pricing time. Product Owner approved v1.1 on August 21, 2026: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. |
 | Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
