@@ -58,10 +58,16 @@ CANDIDATES = ("C1", "C2", "C3")
 MATRIX_OUTCOMES = ("PASS (design)", "PASS", "UNPROVEN", "FAIL")
 EVIDENCE_KINDS = ("OBS", "DOC", "CFG")
 
-# EV-102 numbers this package may define. 001-016 belong to the hosting
-# evaluation; 017-029 are left for CBD-104; this package's stated block is
-# 030-049 (using 030-039 now, reserving the rest for its observation records).
-EV_BLOCK = range(30, 50)
+# EV-102 numbers this package may define, and the numbers it reserves for its
+# own later observation pass. 001-016 belong to the hosting evaluation.
+#
+# The v1.0 reservation was 040-049 and collided with a concurrently drafted
+# sibling that registered real records there; the reservation moved to 082-091
+# at v1.1 because defined records are append-only and a reservation is not.
+# Both ranges are asserted against the section 8 block statement below, so the
+# prose and the constants cannot drift apart again.
+EV_RECORDS = range(30, 40)
+EV_RESERVED = range(82, 92)
 
 BORROWED_IDENTIFIERS: dict[str, tuple[str, ...]] = {
     "DI-91": ("cbd-91-private-mvp-data-inventory.md",),
@@ -372,9 +378,43 @@ def main() -> int:
     for record in sorted(ev_d):
         number = int(record.rsplit("-", 1)[1])
         audit.check(
-            number in EV_BLOCK,
+            number in EV_RECORDS,
             f"{record} is defined by the CBD-105 evaluation outside its stated "
-            "EV-102-030..049 block",
+            f"EV-102-{EV_RECORDS[0]:03d}..{EV_RECORDS[-1]:03d} record range",
+        )
+
+    # The section 8 block statement is the prose form of the two constants
+    # above. Reading it back is what stops the sentence and the register from
+    # describing different blocks -- the drift that produced the OI-105-008
+    # collision in the first place.
+    stated_block = re.search(
+        r"allocates `EV-102-(\d+)`–`(\d+)` for its records and reserves "
+        r"`(\d+)`–`(\d+)`",
+        package[EVALUATION],
+    )
+    audit.check(
+        stated_block is not None,
+        "section 8 does not state its record range and its reservation in the "
+        "form the audit can read back",
+    )
+    if stated_block:
+        first, last, held_first, held_last = (
+            int(value) for value in stated_block.groups()
+        )
+        audit.check(
+            (first, last) == (EV_RECORDS[0], EV_RECORDS[-1]),
+            f"section 8 states a record range of {first:03d}..{last:03d} but the "
+            f"audit enforces {EV_RECORDS[0]:03d}..{EV_RECORDS[-1]:03d}",
+        )
+        audit.check(
+            (held_first, held_last) == (EV_RESERVED[0], EV_RESERVED[-1]),
+            f"section 8 reserves {held_first:03d}..{held_last:03d} but the audit "
+            f"enforces {EV_RESERVED[0]:03d}..{EV_RESERVED[-1]:03d}",
+        )
+        audit.check(
+            not (set(EV_RECORDS) & set(EV_RESERVED)),
+            "the stated record range and reservation overlap, which is the "
+            "append-only collision OI-105-008 records",
         )
     ev_known = ev_h | ev_d
     ev_cited = referenced_ids(joined, "EV-102")

@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Applies the approved CBD-102 method to managed PostgreSQL candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Applies the approved CBD-102 method to managed PostgreSQL candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. Product Owner approved v1.1 on August 21, 2026: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Data Protection and Recovery Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Companions | Data Protection and Recovery Specification v1.1; Operational and Cost Assessment v1.1; Acceptance Criteria Traceability v1.1 |
 | Confluence page | [CBD-105 — PostgreSQL Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12845057) |
 | Repository baseline | `6b1ac8e` |
-| Last updated | August 20, 2026 |
+| Last updated | August 21, 2026 |
 
 ## 1. Purpose
 
@@ -293,12 +293,22 @@ involved a provider account.
 
 **Number-block allocation.** `EV-102-001`–`016` belong to the hosting
 evaluation, with `007`–`012` reserved there for its symmetric pass. **This
-evaluation allocates `EV-102-030`–`049`**, using `030`–`039` now and reserving
-`040`–`049` for this category's observation records, so the identity
-evaluation running in parallel (CBD-104) can take `017`–`029` without
-collision. A register whose numbers are claimed by two documents at once would
-break append-only integrity, which is why the blocks are stated here rather
-than assumed.
+evaluation allocates `EV-102-030`–`039` for its records and reserves `082`–`091`**
+for this category's observation records. A register whose numbers are claimed by
+two documents at once would break append-only integrity, which is why the blocks
+are stated here rather than assumed.
+
+**Corrected at v1.1.** The v1.0 allocation claimed `EV-102-030`–`049` and
+reserved `040`–`049`. A sibling evaluation drafted concurrently registered real
+records inside that reserved range and reserved the remainder of it, so the two
+documents claimed the same numbers once both merged. Defined records are
+append-only and are never renumbered, so the sibling's records stand and this
+document's **reservation** moves — a reservation is an intention, not a record.
+The new reservation is placed above every block a sibling held on August 21,
+2026. Which sibling holds which block is deliberately not restated here: naming
+another package's identifiers in this prose would make this document fail its
+own audit on any branch where that package is absent, which is the same class of
+mistake that produced the collision. `OI-105-008` carries the disposition.
 
 | ID | Claim | Provider | Source | Class | Conf. | Limitations | Re-verify by |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -341,7 +351,7 @@ cross-referenced there rather than duplicated.
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-105-007 | Eight pass tests are observation-bound; the authorized guardrails cover them, and the D observations can share the H evaluation accounts. | Verdicts stay `ELIGIBLE-PENDING-EVIDENCE` until the observations run. No new Product Owner decision is needed. |
-| OI-105-008 | The `EV-102-030`–`049` block allocation in §8 binds this document only; the parallel CBD-104 session must claim `017`–`029` or state its own block. | Prevents append-only register collision between concurrently drafted evaluations. |
+| OI-105-008 | **Reopened and re-resolved August 21, 2026.** The v1.0 allocation reserved `040`–`049` for this category's observation records. A concurrently drafted sibling registered records inside that range and reserved the rest of it, and both merged, so `040`–`047` stood claimed twice. Resolved at v1.1 by moving **this document's reservation** to `082`–`091`: defined records are append-only and are never renumbered, so a reservation is what gives way. No record in this document changed, and no gate outcome, verdict, tally, or price is affected. | Closed as a conflict; the underlying hazard stays open. The block allocation in §8 binds this document only, and a sibling reading it cannot see a block claimed on an unmerged branch. The durable fix is mechanical: `scripts/audit-cbd-105.py` now parses the §8 block statement itself, checks that both stated ranges match the constants the audit enforces, that they do not overlap, and that every registered record falls inside the record range — so a block statement can no longer drift from the register it describes. |
 | OI-105-009 | C3's two custody questions — cross-subscription restore and post-restore key revocation — are unanswered by retrieved documentation. | Neither is a `FAIL`; both are exactly the kind of question that must be answered before CBD-108 could select C3 for this category. |
 | OI-105-010 | This evaluation covers category **D** only; cross-category coherence is CBD-108's acceptance criterion. | The X gates were evaluated against the database candidates; the same gates apply independently in every category. |
 | OI-105-011 | Desk evaluation by one author; no provider contacted, nothing built. | The independent security review required before public launch remains outstanding. |
