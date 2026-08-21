@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering twenty provider-level records for reuse by every sibling category (§3.5, §9). It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering twenty-three provider-level records for reuse by every sibling category (§3.5, §9). It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. |
 | Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
@@ -144,26 +144,28 @@ this.
 `OI-103-009` is **partially discharged, not closed.** On August 21, 2026 a
 documentary pass was run across the ten `DOC` cross-category gates, symmetrically
 by construction: each question was put to all three candidates and each answer
-was recorded whether or not it favoured the candidate. Twenty records were
-registered — `EV-102-007`–`012` in the block v1.0 reserved for exactly this, and
-`EV-102-162`–`176` in a new block above the CBD-15 range.
+was recorded whether or not it favoured the candidate. Twenty-three records
+were registered — `EV-102-007`–`012` in the block v1.0 reserved for exactly
+this, and `EV-102-162`–`179` in a new block above the CBD-15 range.
 
-Five gate outcomes moved and no verdict did:
+Seven gate outcomes moved and no verdict did:
 
 * **Settled for every candidate** — `HG-102-010`, the only cross-category gate
   the pass carried to all three.
-* **Settled for two of three** — `HG-102-005` and `HG-102-011`.
+* **Settled for two of three** — `HG-102-002`, `HG-102-005` and `HG-102-011`.
 * **Better evidenced but still `UNPROVEN`** — `HG-102-006`, `007`, `008`,
   `009`, `013`. Two of these produced findings rather than outcomes: §7.6 shows
   that no candidate documents a restore-approval permission, and §7.4 that
   Customer Lockbox covers **none** of the Azure services CBD-15 evaluates —
   which closed `OI-103-019` by retrieval rather than by Product Owner decision.
-* **Not advanced at all** — `HG-102-002` correlation-identifier lifetime and
-  `HG-102-003` purpose separation. Both ask about a provider's internal data
-  model rather than a published capability, and neither was attempted here.
+* **Not advanced** — `HG-102-003` purpose separation, the last of the ten. Its
+  pass test asks that *"the provider's own data model is inspected for a shared
+  identity graph"* across telemetry, support and analytics surfaces, which is
+  closer to an observation than to a retrieval. One fragment surfaced
+  incidentally at `EV-102-178` and is recorded there rather than used.
 
-`HG-102-002`, `HG-102-003`, and the six category `DOC` gates are what remains of
-`OI-103-009` for this category.
+`HG-102-003` and the six category `DOC` gates are what remains of `OI-103-009`
+for this category. **Nine of the ten shared gates are now answered.**
 
 Three properties of this pass are worth stating plainly, because they constrain
 how its results may be read.
@@ -280,7 +282,7 @@ Config gate.
 | Gate | Kind | C1 Google Cloud | C2 AWS | C3 Azure | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | HG-102-001 telemetry allowlist | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Captured payload required. |
-| HG-102-002 correlation identifiers | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-103-001` |
+| HG-102-002 correlation identifiers | DOC | `PASS` | `PASS` | `UNPROVEN` | **Asked of all three at v1.1 and it separates them — see §7.7.** C1 `EV-102-179`: W3C `traceparent`, a 128-bit trace ID scoped to *"the overall end-to-end request"*, and no end-user identifier mentioned anywhere. C2 `EV-102-177`: a 96-bit random trace ID plus timestamp scoped to *"a single client request"*, with `user` an **optional** field the customer populates. C3 `EV-102-178` is the exception: `operation_Id` is per-operation and clean, but the same data model defines an anonymous `user_Id` that the JavaScript SDK *"typically persists... in a user cookie"* and that feeds *"sampling score generation"*, plus a `user_AuthenticatedId` identifying a user *"persistently across browsers and devices"*. Not required, and engaged by the browser SDK rather than server-side telemetry — so `UNPROVEN` pending `OI-103-021`, not a `FAIL`. `OQ-103-001` |
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-103-002` |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Screenshot explicitly insufficient. |
 | HG-102-005 no standing credential | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled at v1.1 and now a differentiator — see §7.5.** C1 `EV-102-006` (Privileged Access Manager, native). C3 `EV-102-011` (Privileged Identity Management, native, time-bound with start and end dates, approval, justification, downloadable audit history). C2 stays `UNPROVEN`: `EV-102-008` establishes that AWS ships no native capability and validates four third-party partner products instead. That is not a `FAIL` — AWS does not meet the fail condition — but whether a partner integration satisfies a `Vendor`-type gate is `OI-103-017`. |
@@ -320,9 +322,9 @@ The 27 applicable gates divide by evidence kind into 10 `OBS`, 13 `DOC`, and 4
 
 | | C1 | C2 | C3 |
 | --- | --- | --- | --- |
-| `PASS` | 3 | 2 | 2 |
+| `PASS` | 4 | 3 | 2 |
 | `PASS (design)` | 4 | 4 | 4 |
-| `UNPROVEN` | 20 | 21 | 21 |
+| `UNPROVEN` | 19 | 20 | 21 |
 | `FAIL` | 0 | 0 | 0 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
 
@@ -330,9 +332,9 @@ No candidate carries a `FAIL`, so no compensating control, exception, or
 residual-risk record is required, and no `CONDITIONAL` verdict arises. Nothing
 in §5 of the exception rules is engaged.
 
-**The v1.1 pass moved five documentary outcomes and no verdict.** C1 gained
-`HG-102-010`; C2 gained `HG-102-011` and `HG-102-010`; C3 gained `HG-102-005`
-and `HG-102-010`.
+**The v1.1 pass moved seven documentary outcomes and no verdict.** C1 gained
+`HG-102-010` and `HG-102-002`; C2 gained `HG-102-011`, `HG-102-010` and
+`HG-102-002`; C3 gained `HG-102-005` and `HG-102-010`.
 Every candidate still terminates at `ELIGIBLE-PENDING-EVIDENCE`, because §3
 caps them on the ten observation gates and this pass performed no observation.
 The movement matters anyway: at v1.0 two of the three candidates had no `PASS`
@@ -569,6 +571,56 @@ observation, not a document. And C1's predefined roles collapse restore into
 separation there depends on building a custom role rather than on using what
 ships.
 
+### 7.7 `HG-102-002` is the only gate where a vendor's own data model argues against it — added at v1.1
+
+Nine of the ten documentary cross-category gates resolved on what a vendor
+publishes about a capability. This one resolved on what a vendor publishes about
+its own schema, and that turned out to be the sharper instrument.
+
+The pass test has two halves: correlation identifier lifetime and scope must be
+documented, and the provider must not *"require or default to a persistent
+end-user identifier for correlation."* All three candidates satisfy the first
+half. They diverge on the second, and the divergence is visible only because
+each vendor documents its telemetry fields.
+
+| | C1 Google Cloud | C2 AWS | C3 Azure |
+| --- | --- | --- | --- |
+| Correlation identifier | W3C `traceparent`, 128-bit | 96-bit random plus timestamp | `operation_Id` per operation |
+| Scope | *"overall end-to-end request"* | *"a single client request"* | root operation |
+| End-user identifier in the model | **none mentioned** | `user`, **optional** | `user_Id`, `user_AuthenticatedId`, `session_Id` |
+| Persisted by default | — | no mechanism | **cookie, via the JavaScript SDK** |
+
+C2's position is the cleanest of the three: the field exists, it is opt-in, and
+AWS frames it as a search convenience the customer switches on. C1's is clean by
+silence — Cloud Trace's context documentation never raises the subject, though it
+also never states how its trace IDs are generated, which `OQ-103-026` records as
+the one place C1's evidence is thinner than C2's.
+
+C3 is the exception, and it is worth being precise about **why it is `UNPROVEN`
+and not a `FAIL`**. Application Insights does not require a user identifier.
+What its data model documents is that one exists as a first-class context field,
+that the JavaScript SDK *"typically persists this value in a user cookie"*, and
+that it participates in *"sampling score generation"* — the platform's own
+machinery consuming a user identifier. Whether that counts as the provider
+*defaulting* to one depends entirely on whether the browser SDK is inside
+CoBudget's boundary, and nothing in the topology plans browser telemetry.
+
+That is a scope question about CoBudget, not a capability question about
+Microsoft, so `OI-103-021` puts it to the Product Owner and this evaluation
+records the unfavourable-but-honest `UNPROVEN` rather than assuming the reading
+that would hand C3 the gate.
+
+Two facts surfaced while reading that model are worth carrying even though they
+belong to other gates. `client_IP` is **masked by default** — Application
+Insights *"uses the IP address to derive geolocation and then stores `0.0.0.0`
+in this field"* — which is a point in C3's favour on `HG-102-001`, while the
+derived `client_City`, `client_StateOrProvince` and `client_CountryOrRegion` are
+retained and are not. And Azure Monitor supports per-table access restriction,
+with generative-AI content routed to a dedicated table that can be *"set as
+protected"* — evidence against the `HG-102-003` fail condition, though it was
+found incidentally and the equivalent question was not put to C1 or C2, so it
+moves nothing.
+
 ## 8. Why no weighted rubric total is published
 
 Rubric rule `R4` requires that per-dimension subscores always accompany a total,
@@ -641,7 +693,7 @@ than a hosting-specific one.
 
 `EV-102-001`–`161` are fully claimed by the six category evaluations, and
 `EV-102-132`–`161` were the last block allocated. **This pass allocates
-`EV-102-162`–`181`**, using `162`–`176` now and reserving `177`–`181` for its
+`EV-102-162`–`181`**, using `162`–`179` now and reserving `180`–`181` for its
 completion. A future block starts above `181`.
 
 | ID | Claim | Provider | Source | Class | Conf. | Limitations | Re-verify by |
@@ -661,15 +713,15 @@ completion. A future block starts above `181`.
 | EV-102-174 | `HG-102-010`, `HG-102-007` | AWS (X) | "Data protection in Amazon EC2", `https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html` | Documented | Medium | **Closes `OQ-103-022` and replaces the historical whitepaper as the transport source.** Establishes the physical-layer claim on a current page: *"All data flowing across AWS Regions over the AWS global network is automatically encrypted at the physical layer before it leaves AWS secured facilities. All traffic between AZs is encrypted."* Establishes the TLS floor `EV-102-166` could not: *"We require TLS 1.2 and recommend TLS 1.3."* Establishes instance-to-instance encryption using *"Authenticated Encryption with Associated Data (AEAD) algorithms, with 256-bit encryption"*, **conditional on instance type**, same-Region, and same or peered VPC without an intervening load balancer or transit gateway — an enumerated list, not a universal property. Also establishes an at-rest cipher for NVMe instance store — *"encrypted using an XTS-AES-256 cipher"* with keys *"generated by, and only reside within, the hardware module, which is inaccessible to AWS personnel"* — which bears on `HG-102-007` for the compute plane. Concerns EC2 and the AWS global network; it does not enumerate per-service at-rest behaviour, which `EV-102-009` covers through KMS. | February 21, 2027 |
 | EV-102-175 | `HG-102-009` | Azure (X) | "Azure security baseline for Azure Database for PostgreSQL - Flexible Server", `https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-database-for-postgresql-flexible-server-security-baseline`, page dated February 25, 2025 | Documented | **Low** | **Answers `OI-103-019` directly.** Under control **PA-8, Determine access process for cloud provider support**, the feature table for **Customer Lockbox** reads Supported **False**, Enabled By Default *Not Applicable*, with the guidance *"This feature is not supported to secure this service."* **Confidence is lowered below class because this source is demonstrably stale on another row**: the same baseline marks Azure Private Link *"not supported"* for Flexible Server, while the current security overview (`EV-102-176`, July 2026) directs the reader to use Private Link. The page carries its own supersession banner — *"This security baseline is based on a previous version of Microsoft Cloud Security Benchmark (v1.0)"*. It is therefore **corroboration, not proof**; the load-bearing evidence for the Lockbox position is `EV-102-012`, the current supported-services list, which omits Flexible Server. Also records, subject to the same staleness caveat, that **Azure RBAC for Data Plane** is marked Supported False for this service. | November 21, 2026 |
 | EV-102-176 | `HG-102-009`, `HG-102-010` | Azure (X) | "Secure Your Azure Database for PostgreSQL Flexible Server", `https://learn.microsoft.com/en-us/azure/postgresql/security/security-overview`, page dated July 14, 2026 | Documented | Medium | The current replacement for the superseded baseline, retrieved to test `EV-102-175` rather than to rely on it. **Contains no mention of Customer Lockbox at all** — it neither confirms nor contradicts the PA-8 row, so the Lockbox position rests on `EV-102-012` and this record removes a possible contradiction rather than adding support. Establishes that the baseline is stale on network isolation: this page directs the reader to *"Azure Database for PostgreSQL networking with Private Link"*, which the baseline marks unsupported. For `HG-102-010` it adds service-level confirmation that the provider-level records could not give: *"Azure Database for PostgreSQL automatically encrypts data at rest by using service-managed keys (SMK)... It covers the primary server, replicas, point-in-time-recovery (PITR), and backups"*, with CMK available in Key Vault or Managed HSM, and in transit *"Azure PostgreSQL always uses SSL or TLS to encrypt data in transit"* with TLS 1.3 configurable as a requirement. | February 21, 2027 |
+| EV-102-177 | `HG-102-002` | AWS (X) | "AWS X-Ray segment documents", `https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html` | Documented | Medium | Establishes both halves of the pass test. **Lifetime and scope**: `trace_id` is *"A unique identifier that connects all segments and subsegments originating from a single client request"*, formatted as a version, an 8-hex-digit epoch timestamp, and *"A globally unique 96-bit identifier for the trace in 24 hexadecimal digits"*, with W3C Trace Context accepted. Randomness is addressed directly — *"Generate trace IDs with a secure random algorithm to ensure that attackers cannot calculate future trace IDs"* — and the page notes trace IDs are visible in response headers. **No persistent end-user identifier is required or defaulted**: `user` appears under **Optional Segment Fields** as *"A string that identifies the user who sent the request"*, populated only if the customer chooses, and the page frames it as an opt-in search convenience — *"if you set the `user` field on a segment to a unique identifier, you can search for segments associated with specific users."* Separately relevant to `HG-102-001`: the SDK's default `http` block carries `client_ip` and `user_agent`, which is telemetry content rather than a correlation identifier and does not bear on this gate. | February 21, 2027 |
+| EV-102-178 | `HG-102-002`, `HG-102-003` | Azure (X) | "Application Insights telemetry data model", `https://learn.microsoft.com/en-us/azure/azure-monitor/app/data-model-complete`, page dated July 13, 2026 | Documented | Medium | **The one candidate whose data model documents a persistent end-user identifier as a platform mechanism.** Correlation itself is per-operation and clean: `operation_Id` is *"The unique identifier of the root operation"* and *"Either a request or a page view creates the operation ID."* But the same context table defines `user_Id` as *"The anonymous user ID"* and states that *"In browser apps, the JavaScript SDK typically persists this value in a user cookie"*, and that *"An anonymous user ID is used for sampling score generation"* — so a user identifier participates in the platform's own sampling. `user_AuthenticatedId` is described as initialized *"with a value that identifies the user persistently across browsers and devices. In this way, all telemetry items are attributed to that unique ID."* `session_Id` is *"the instance of the user's interaction with the app."* None of these is required, and all three are engaged by the JavaScript SDK rather than by server-side telemetry — which is why this is recorded as a reading question at `OI-103-021` rather than as a failure. Two findings incidental to this gate: `client_IP` is masked by default — *"Application Insights uses the IP address to derive geolocation and then stores `0.0.0.0` in this field"* — while `client_City`, `client_StateOrProvince` and `client_CountryOrRegion` are derived and retained; and for `HG-102-003`, Azure Monitor supports per-table access restriction, with generative-AI content routed to a dedicated table that can be *"set as protected"*, which is evidence against the gate's one-access-role fail condition but was not sought symmetrically. | February 21, 2027 |
+| EV-102-179 | `HG-102-002` | Google Cloud (X) | "Trace context", `https://docs.cloud.google.com/trace/docs/trace-context` | Documented | Medium | Establishes scope and format: Cloud Trace propagates W3C `traceparent`, whose `TRACE_ID` is *"a 32-character hexadecimal value representing a 128-bit number"* and is *"the unique identifier of the overall end-to-end request, provided by the parent"*, with a legacy `X-Cloud-Trace-Context` form retained for compatibility. **The page contains no mention of any end-user identifier**, persistent or otherwise, so nothing requires or defaults to one. Weaker than `EV-102-177` in one respect and the difference is recorded rather than smoothed: the page does **not** state how trace IDs are generated or what entropy they carry, where AWS states the requirement explicitly. Scope is documented, generation is not — `OQ-103-026`. | February 21, 2027 |
 
-Five numbers are reserved rather than left as gaps, because the register is
+Two numbers are reserved rather than left as gaps, because the register is
 append-only and a gap is indistinguishable from a deleted record:
 
 | ID | Status |
 | --- | --- |
-| EV-102-177 | **Reserved** for the cross-category documentary pass |
-| EV-102-178 | **Reserved** for the cross-category documentary pass |
-| EV-102-179 | **Reserved** for the cross-category documentary pass |
 | EV-102-180 | **Reserved** for the cross-category documentary pass |
 | EV-102-181 | **Reserved** for the cross-category documentary pass |
 
@@ -699,6 +751,7 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | OQ-103-023 | Does any candidate document a break-glass, impersonation, or unrestricted-query capability for its own staff? | `HG-102-008` | Both trust pages retrieved at v1.1 are silent on all three. Silence is not absence, and this gate asks precisely about a capability a vendor has no incentive to describe. |
 | OQ-103-024 | Do the AWS, Google and Microsoft DPAs state provider backup retention, region, and expiry? | `HG-102-013` | **Read the DPAs before CBD-108 ranks anything.** The pass test says "Silence fails", so if the contracts are silent this gate fails for every candidate simultaneously — the only gate in the set with that property. It is currently `UNPROVEN` only because the contracts have not been read, which is not the same thing. |
 | OQ-103-025 | The three specific documents that would settle `HG-102-013`: Google's **Service Specific Terms** and CDPA Appendix 3, an extractable copy of the **AWS DPA**, and an **Azure**-scoped retention statement | `HG-102-013` | Narrows `OQ-103-024` from "read the DPAs" to three named retrievals. `EV-102-168` shows Google's contract states two of the three elements and defers the third; `EV-102-170` shows the AWS DPA could not be parsed; `EV-102-169` shows the Microsoft page that looks like the answer is Microsoft 365 only. None of the three is evidence of provider silence yet. |
+| OQ-103-026 | How does Google Cloud generate trace IDs, and with what entropy? | `HG-102-002` | `EV-102-179` documents the 128-bit W3C format and the request scope but not the generation algorithm, where `EV-102-177` states AWS's requirement outright. It does not block C1's `PASS` — the gate asks about lifetime, scope and the absence of a persistent user identifier, and all three are established — but it is the remaining asymmetry in this gate's evidence. |
 
 ## 11. Open items
 
@@ -713,3 +766,4 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | OI-103-018 | **`HG-102-009` may be a `FAIL` for C2 rather than an `UNPROVEN`.** The pass test fails a provider that "logs only CoBudget's own API calls and not its own staff's access", and `EV-102-010` establishes that AWS's customer-visible record is scoped to *"on behalf of"* service operations. | **Product Owner decision.** No AWS equivalent of Access Transparency or Customer Lockbox was found, but this rests on two pages, and absence from two pages is not proof of absence from the product. Recorded as `UNPROVEN` with the question raised rather than declared a `FAIL` on thin retrieval. If it is a `FAIL`, C2 becomes `INELIGIBLE` in **every** category, which is why it should be settled deliberately. |
 | OI-103-019 | ~~**Does "Azure Database for PostgreSQL" in the Customer Lockbox list cover Flexible Server?**~~ **Resolved August 21, 2026: it does not.** | **Closed by retrieval rather than by decision.** `EV-102-175` records that the Microsoft cloud security benchmark baseline for Flexible Server marks Customer Lockbox Supported **False** under control PA-8, with the guidance *"This feature is not supported to secure this service."* That source is stale on another row, so the load-bearing evidence remains `EV-102-012`, the current supported-services list, which omits Flexible Server while naming MySQL Flexible Server separately; `EV-102-176` confirms the current security overview raises no contradiction. **Consequence: C3 has no Customer Lockbox coverage in any of the five categories it is a candidate in.** No Product Owner decision is needed. |
 | OI-103-020 | **No hyperscaler documents a restore-approval permission, so `HG-102-006` may be unsatisfiable as written** — §7.6. Three of its four legs are separable on all three candidates; the fourth exists nowhere. | **Product Owner decision on the gate's reading**, and the same shape as `OI-130-010`. Read strictly, no hyperscaler can ever pass a **firm** gate, which cannot be the intent. Read as satisfied by an approval bound to the *activation* of the restoring role, Azure's Privileged Identity Management (`EV-102-011`) supplies it natively and the other two need a third party or a CoBudget-side control — which would make a `Vendor` gate turn on a `Config` mechanism. The evaluator declines to choose, because widening a firm gate by drafting is precisely what catalog §2.5 forbids. |
+| OI-103-021 | **Is Application Insights' cookie-persisted anonymous `user_Id` a provider default for the purposes of `HG-102-002`?** `EV-102-178` establishes that the JavaScript SDK persists it in a cookie and that it feeds the platform's sampling. | **Product Owner decision on scope, not on the vendor.** The mechanism belongs to the browser SDK. If the JavaScript SDK is outside CoBudget's boundary — which `TD-103-021` and `AN-92-003` would suggest, since nothing here plans browser telemetry — C3 passes on the same terms as C1 and C2. If it is inside, the gate asks precisely about a persistent end-user identifier and the answer is on the record. The evaluator declines to decide the boundary on the vendor's behalf, and records `UNPROVEN` rather than assuming the favourable reading. |

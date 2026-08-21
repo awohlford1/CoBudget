@@ -140,7 +140,7 @@ documentation or a contract can settle. `CFG` marks a Config gate.
 | Gate | Kind | C1 Cloud SQL | C2 RDS | C3 Azure Flexible | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | HG-102-001 telemetry allowlist | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. |
-| HG-102-002 correlation identifiers | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Shared with `OQ-103-001`. |
+| HG-102-002 correlation identifiers | DOC | `PASS` | `PASS` | `UNPROVEN` | Not retrieved. Shared with `OQ-103-001`. **Asked of the hyperscalers at v1.1 and it separates them.** C2 `EV-102-177`: a 96-bit random trace ID plus timestamp scoped to *"a single client request"*, with `user` an **optional** field the customer populates — no default persistence mechanism exists. C1 `EV-102-179`: W3C `traceparent`, 128-bit, and no end-user identifier mentioned anywhere. C3 `EV-102-178` is the exception and stays `UNPROVEN`: `operation_Id` is per-operation and clean, but the same data model defines an anonymous `user_Id` that the JavaScript SDK *"typically persists... in a user cookie"* and that feeds *"sampling score generation"*. Not required, and engaged by the browser SDK rather than server-side telemetry, so the reading is `OI-103-021` and not a `FAIL`. |
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Shared with `OQ-103-002`. |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. |
 | HG-102-005 no standing credential | DOC | `PASS` | `UNPROVEN` | `PASS` | **C3 settled at v1.2 by the same provider-level reuse this row already used for C1.** C1 `EV-102-006` (Privileged Access Manager). C3 `EV-102-011` (Privileged Identity Management — native, just-in-time, time-bound with start and end dates, approval, justification, downloadable audit history). C2 `EV-102-008`: AWS ships no native equivalent and validates four partner products instead — not a `FAIL`, but reachable only by buying a third party (`OI-103-017`). |
@@ -178,9 +178,9 @@ summarizes.
 
 | | C1 | C2 | C3 |
 | --- | --- | --- | --- |
-| `PASS` | 4 | 3 | 5 |
+| `PASS` | 5 | 4 | 5 |
 | `PASS (design)` | 2 | 2 | 2 |
-| `UNPROVEN` | 18 | 19 | 17 |
+| `UNPROVEN` | 17 | 18 | 17 |
 | `FAIL` | 0 | 0 | 0 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
 

@@ -151,7 +151,7 @@ documentation can settle. `CFG` marks a Config gate.
 | Gate | Kind | C2 AWS | C3 Azure | C10 Twilio | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | HG-102-001 telemetry allowlist | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3.1. |
-| HG-102-002 correlation identifiers | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-130-006` |
+| HG-102-002 correlation identifiers | DOC | `PASS` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-130-006` **Asked of the hyperscalers at v1.1 and it separates them.** C2 `EV-102-177`: a 96-bit random trace ID plus timestamp scoped to *"a single client request"*, with `user` an **optional** field the customer populates — no default persistence mechanism exists. C1 `EV-102-179`: W3C `traceparent`, 128-bit, and no end-user identifier mentioned anywhere. C3 `EV-102-178` is the exception and stays `UNPROVEN`: `operation_Id` is per-operation and clean, but the same data model defines an anonymous `user_Id` that the JavaScript SDK *"typically persists... in a user cookie"* and that feeds *"sampling score generation"*. Not required, and engaged by the browser SDK rather than server-side telemetry, so the reading is `OI-103-021` and not a `FAIL`. |
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-130-006` |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3.1. |
 | HG-102-005 no standing credential | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **Settled for C3 at v1.1** from the CBD-103 cross-category pass, reused rather than re-retrieved. The administrative access model for ACS is the Azure and Entra model, not an ACS-specific one. C3 `EV-102-011`: Privileged Identity Management — native, just-in-time, time-bound with start and end dates, approval, justification, downloadable audit history. C2 `EV-102-008`: AWS ships no native equivalent and validates four partner products — not a `FAIL`, but reachable only by buying a third party (`OI-103-017`). C10 not retrieved. |
@@ -207,9 +207,9 @@ The 23 applicable gates divide by evidence kind into 10 `OBS`, 11 `DOC`, and 2
 
 | | C2 | C3 | C10 |
 | --- | --- | --- | --- |
-| `PASS` | 2 | 2 | 0 |
+| `PASS` | 3 | 2 | 0 |
 | `PASS (design)` | 2 | 2 | 2 |
-| `UNPROVEN` | 19 | 19 | 20 |
+| `UNPROVEN` | 18 | 19 | 20 |
 | `FAIL` | 0 | 0 | 1 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `INELIGIBLE` |
 
