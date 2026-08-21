@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-104 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record rather than a verified property. |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026 and v1.1 on August 21, 2026. Maps each CBD-104 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record rather than a verified property. |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 19 identity-boundary decisions, the screening and 25-gate evaluation with its verdicts and evidence register, the integration and cost assessment with its stated prices and `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, gathers no observation evidence, closes no `FU-95-007` work, and leaves `OI-104-007`–`OI-104-014`, `OI-102-022`, and every `OQ-104` question open. |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 19 identity-boundary decisions, the screening and 25-gate evaluation with its verdicts and evidence register, the integration and cost assessment with its stated prices and `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, gathers no observation evidence, closes no `FU-95-007` work, and leaves `OI-104-007`–`OI-104-014`, `OI-102-022`, and every `OQ-104` question open. The v1.1 re-approval covers the corrected C2 step-up finding, the four records supporting it, and the narrowed `OQ-104-007`; it changes no gate outcome, verdict, tally, or price. |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Identity Integration Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Integration, Outage, Support, Cost, and Exit Assessment v1.0 |
+| Companions | Identity Integration Boundary Specification v1.1; Candidate Shortlist and Gate Evaluation v1.1; Integration, Outage, Support, Cost, and Exit Assessment v1.1 |
 | Confluence page | [CBD-104 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13172737) |
 | Repository baseline | `6b1ac8e` |
 | Last updated | August 21, 2026 |
@@ -51,7 +51,7 @@ record behind it.
 | Passkey direction | `HG-102-029`; `ID-104-008`; `ID-104-019` | `PASS` on all three carried candidates, and the **screen that removed Google Cloud Identity Platform** from the category (`EV-102-029`). The direction is settled: passkeys are a first-class factor, and the RP ID is a CoBudget domain |
 | Secure recovery | `ID-104-009`; `HG-102-032`; `SR-94-006` | Boundary settled — recovery is an IdP ceremony, separated from notification destinations, non-resurrecting, and enumeration-resistant. The provider-behaviour half is `HG-102-032`, an observation gate |
 | Session revocation | `HG-102-031` matrix row; evaluation §7.2; `ID-104-004`–`006` | `UNPROVEN` on all three, with materially different documented positions recorded per candidate. The finding that survives: no candidate's provider-side session surface can substitute for the application-session boundary |
-| Fresh reauthentication | `HG-102-030`, `HG-102-037`; evaluation §7.1; `ID-104-007` | `UNPROVEN` on all three, and **the sharpest differentiator in the category**. C4 documents a per-action primitive with no stated validity window; C2's own AWS reference builds step-up customer-side; C3 documents Conditional Access authentication context |
+| Fresh reauthentication | `HG-102-030`, `HG-102-037`; evaluation §7.1; `ID-104-007` | `UNPROVEN` on all three, and **the sharpest differentiator in the category**. C4 documents a per-action primitive with no stated validity window; C3 documents Conditional Access authentication context; **C2 was revised at v1.1** — `prompt=login` plus an `auth_time` claim is a native primitive needing no customer-built orchestration, which retires the documentary `FAIL` risk v1.0 recorded. No candidate documents an assurance-level claim |
 
 "Evaluated" is met in full. Four of the five sub-criteria terminate in an
 `UNPROVEN` gate rather than a `PASS`, which is the correct outcome of
@@ -158,11 +158,11 @@ CBD-12/CBD-14 requirements."*
 
 | Consumed | How |
 | --- | --- |
-| Hard-Gate Catalog v1.0 | All 15 **X** and 10 **I** gates evaluated per candidate |
-| Evaluation Rubric v1.0 | `R1` verdicts applied; `R4` and `R5` are why no total is published (evaluation §8) |
-| Demand Model v1.0 | Identity MAU Base 30 / High 120 priced throughout; `DM-102-022` used in the outage assessment |
-| Cost Template v1.0 | `CT-102-001`–`021` filled per candidate with `CR0`–`CR7` applied |
-| Evidence Register and Exception Rules v1.0 | Fifteen `EV-102-*` records opened; §3.2 classes and §3.3 verdicts applied; §7 open-question carry-forward followed; §4 re-verification dates set per class |
+| Hard-Gate Catalog v1.1 | All 15 **X** and 10 **I** gates evaluated per candidate |
+| Evaluation Rubric v1.1 | `R1` verdicts applied; `R4` and `R5` are why no total is published (evaluation §8) |
+| Demand Model v1.1 | Identity MAU Base 30 / High 120 priced throughout; `DM-102-022` used in the outage assessment |
+| Cost Template v1.1 | `CT-102-001`–`021` filled per candidate with `CR0`–`CR7` applied |
+| Evidence Register and Exception Rules v1.1 | Fifteen `EV-102-*` records opened; §3.2 classes and §3.3 verdicts applied; §7 open-question carry-forward followed; §4 re-verification dates set per class |
 | CBD-12 / CBD-72 | Permissions 20a, 20b, 27, 29, 34, 35 and §6.1 drive `ID-104-007`; `PM-72-001`–`003` and `PM-72-010` drive `ID-104-002`–`004` |
 | CBD-14 (`SR-94-001`–`011`) | Each identity requirement mapped in §8 below |
 | CBD-103 package | `TD-103-*` decisions consumed as the runtime this boundary plugs into; `EV-102-001`–`016` and the `OI-103-008` route-A authorization inherited |
@@ -280,8 +280,21 @@ rather than what is measured.
 
 | Property | Value |
 | --- | --- |
-| Reviewed by | Alexander Wohlford — Product Owner. Package approved at v1.0 on August 21, 2026. |
+| Reviewed by | Alexander Wohlford — Product Owner. Package approved at v1.0 on August 21, 2026, and re-approved at v1.1 on August 21, 2026. |
 | Independent review | None. No second person has read any document in this package. |
-| Provider contact | None. All evidence is desk research retrieved August 20, 2026. |
+| Provider contact | None. All evidence is desk research retrieved August 20 and August 21, 2026. `OQ-104-007` is drafted for AWS but has not been sent. |
 | Mechanical verification | `scripts/audit-cbd-104.py`; `scripts/check-doc-vocabulary.py` |
 | Limitations | Evaluation §3 (no observation performed), §3.1 (partial asymmetry); assessment §6.6 (list prices with unknowns); §7 above |
+
+### 9.1 Revision record
+
+| Version | Date | Change |
+| --- | --- | --- |
+| 1.0 | August 21, 2026 | Initial approved package. |
+| 1.1 | August 21, 2026 | Corrects the C2 step-up finding. Four records (`EV-102-048`–`EV-102-051`) establish from current AWS documentation that Cognito offers `prompt=login` forced reauthentication and an `auth_time` claim, needing no customer-built orchestration. `EV-102-025`, the 2022 reference architecture the v1.0 finding rested on, is marked superseded and retained unedited. Evaluation §7.1 is rewritten, the `HG-102-030` and `HG-102-037` matrix evidence is revised, `OQ-104-007` is narrowed to three residuals, and the assessment records that `HG-102-030` forces C2's `CR0` tier a second time. **No gate outcome, verdict, tally, or price changes.** |
+
+The v1.1 change is a correction of an evidence position, not a new
+evaluation. It was found by re-reading primary vendor documentation rather
+than by any provider contact, and it is exactly the failure mode
+`EV-102-025`'s own limitations field predicted: strong evidence about 2022,
+weak evidence about the platform generation actually under evaluation.

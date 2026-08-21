@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Records the integration and cost half of CBD-104 against the approved CBD-102 cost template. Unlike its CBD-103 sibling, it **does** carry prices: identity list pricing is published at the billable unit, so §6 states figures with their evidence and marks only the genuinely unobtained lines `UNKNOWN` under `CR4`. |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026 and v1.1 on August 21, 2026. Records the integration and cost half of CBD-104 against the approved CBD-102 cost template. Unlike its CBD-103 sibling, it **does** carry prices: identity list pricing is published at the billable unit, so §6 states figures with their evidence and marks only the genuinely unobtained lines `UNKNOWN` under `CR4`. |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Identity Integration Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Acceptance Criteria Traceability v1.0 |
+| Companions | Identity Integration Boundary Specification v1.1; Candidate Shortlist and Gate Evaluation v1.1; Acceptance Criteria Traceability v1.1 |
 | Confluence page | [CBD-104 — Integration, Outage, Support, Cost, and Exit Assessment](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12877849) |
 | Repository baseline | `6b1ac8e` |
 | Last updated | August 21, 2026 |
@@ -234,7 +234,7 @@ are forced above their cheapest tier by an already-established gate:
 
 | Candidate | Cheapest tier | Tier priced under `CR0` | Gate that forces it |
 | --- | --- | --- | --- |
-| C2 Cognito | Lite ($0.0055/MAU) | **Essentials ($0.015/MAU)** | `HG-102-029`. Passkeys and choice-based authentication require the Essentials feature plan or higher (`EV-102-022`, `EV-102-018`). |
+| C2 Cognito | Lite ($0.0055/MAU) | **Essentials ($0.015/MAU)** | `HG-102-029` **and, at v1.1, `HG-102-030`.** Passkeys and choice-based authentication require the Essentials feature plan or higher (`EV-102-022`, `EV-102-018`), and the `prompt=login` step-up primitive requires managed login, which the Lite plan does not offer (`EV-102-048`, `EV-102-051`). The tier is forced twice over, at no change in cost. |
 | C3 Entra External ID | External ID core | **External ID core, pending `OQ-104-016`** | None established. But MFA enforcement and step-up both run through Conditional Access (`EV-102-023`), and whether Conditional Access sits inside the free "core features" (`EV-102-020`) is unresolved. If it does not, `HG-102-029` and `HG-102-030` force a paid tier and this row changes. |
 | C4 Auth0 | Free (25,000 MAU) | **Essentials B2C, $35/month** | `HG-102-029`. The free plan does not carry MFA (`EV-102-017`); MFA begins at Essentials. A plan that cannot enforce MFA is not a cheaper option, it is not an option. |
 
@@ -401,6 +401,7 @@ the specific thresholds, not a general instruction to watch cost.
 | Cliff | Why it is a cliff here | Trigger |
 | --- | --- | --- |
 | C2 Plus plan | Plus has **no free tier**, so adopting it makes every MAU billable from the first one | Any gate or control that requires adaptive or threat-detection features |
+| C2 Lite plan is not an option | Recorded so it is not mistaken for a cheaper route: Lite forecloses passkeys (`HG-102-029`) and managed login, and therefore `prompt=login` (`HG-102-030`) | Gate-forced; applies at Low demand |
 | C2 / C3 free-allowance exit | 10,000 MAU (C2) and 50,000 MAU (C3) | Far beyond High (120); a post-Private-MVP concern |
 | C3 core-feature scope | If Conditional Access is not a free core feature, the whole zero figure moves | `OQ-104-016` |
 | C4 MFA tier floor | `HG-102-029` is unsatisfiable on Free, so the $35 applies from the first user | Gate-forced; applies at Low demand |
