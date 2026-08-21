@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Records the operational and cost half of CBD-105 against the approved CBD-102 cost template. **It contains no prices**; §5 records every price line as unknown under cost rule `CR4`, with the tier interactions already known named so they are not discovered at pricing time. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Records the operational and cost half of CBD-105 against the approved CBD-102 cost template. **It contains no prices**; §5 records every price line as unknown under cost rule `CR4`, with the tier interactions already known named so they are not discovered at pricing time. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Data Protection and Recovery Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Data Protection and Recovery Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-105 — Capacity, Maintenance, Monitoring, Cost, and Exit Assessment](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12877825) |
 | Repository baseline | `6b1ac8e` |
 | Last updated | August 20, 2026 |
 

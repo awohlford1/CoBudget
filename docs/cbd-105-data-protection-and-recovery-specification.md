@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Defines the recovery posture and data-protection boundary CBD-105 evaluates managed PostgreSQL providers against. It selects no provider; the candidate evaluation measures against it, and CBD-108 makes the selection. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Defines the recovery posture and data-protection boundary CBD-105 evaluates managed PostgreSQL providers against. It selects no provider; the candidate evaluation measures against it, and CBD-108 makes the selection. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Candidate Shortlist and Gate Evaluation v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-105 — Data Protection and Recovery Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12812289) |
 | Repository baseline | `6b1ac8e` |
 | Last updated | August 20, 2026 |
 

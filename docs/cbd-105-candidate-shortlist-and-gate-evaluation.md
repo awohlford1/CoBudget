@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Applies the approved CBD-102 method to managed PostgreSQL candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Applies the approved CBD-102 method to managed PostgreSQL candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Data Protection and Recovery Specification v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Data Protection and Recovery Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-105 — PostgreSQL Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12845057) |
 | Repository baseline | `6b1ac8e` |
 | Last updated | August 20, 2026 |
 
