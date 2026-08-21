@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Applies the approved CBD-102 method to managed PostgreSQL candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. Product Owner approved v1.1 on August 21, 2026: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. |
-| Document version | 1.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Applies the approved CBD-102 method to managed PostgreSQL candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. Product Owner approved v1.1 on August 21, 2026: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. v1.2 reuses the CBD-103 cross-category documentary pass: four documentary gate outcomes move, **no verdict does**, and §7.6 records that Customer Lockbox may not cover Flexible Server at all. |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Data Protection and Recovery Specification v1.1; Operational and Cost Assessment v1.1; Acceptance Criteria Traceability v1.1 |
+| Companions | Data Protection and Recovery Specification v1.1; Operational and Cost Assessment v1.1; Acceptance Criteria Traceability v1.2 |
 | Confluence page | [CBD-105 — PostgreSQL Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12845057) |
-| Repository baseline | `6b1ac8e` |
+| Repository baseline | `d0d5bb1` |
 | Last updated | August 21, 2026 |
 
 ## 1. Purpose
@@ -143,13 +143,13 @@ documentation or a contract can settle. `CFG` marks a Config gate.
 | HG-102-002 correlation identifiers | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Shared with `OQ-103-001`. |
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Shared with `OQ-103-002`. |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. |
-| HG-102-005 no standing credential | DOC | `PASS` | `UNPROVEN` | `UNPROVEN` | `EV-102-006` reused, provider-level. C2/C3 equivalents still unretrieved. |
-| HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved; `OI-102-022` still gates practice. `HG-102-039` below covers the category-D key half. |
-| HG-102-007 no routine staff path | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `EV-102-001` Asserted for C2. |
-| HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Same position as the hosting evaluation. |
-| HG-102-009 staff-access evidence | DOC | **`PASS`** | `UNPROVEN` | `UNPROVEN` | `EV-102-002`–`004` + `EV-102-030`: Cloud SQL is Access Transparency-covered at GA. See §7.1 for C3's materially improved but unfinished position. |
-| HG-102-010 encryption in transit and at rest | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Encryption facts retrieved (`EV-102-034`–`036`) but algorithm-and-custody statements per the pass test not compiled; `OQ-103-003` shared. |
-| HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Dated lists not obtained; shared with `OQ-103-004`. |
+| HG-102-005 no standing credential | DOC | `PASS` | `UNPROVEN` | `PASS` | **C3 settled at v1.2 by the same provider-level reuse this row already used for C1.** C1 `EV-102-006` (Privileged Access Manager). C3 `EV-102-011` (Privileged Identity Management — native, just-in-time, time-bound with start and end dates, approval, justification, downloadable audit history). C2 `EV-102-008`: AWS ships no native equivalent and validates four partner products instead — not a `FAIL`, but reachable only by buying a third party (`OI-103-017`). |
+| HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Partial material at v1.2, none of it sufficient for the four-way split. C2 `EV-102-009`: under AWS owned keys — the default for new services since 2021 — key policies cannot be changed and key activity is *"Not viewable by the customer"*, which compounds the broad-admin observation already recorded at `EV-102-035`. C3 `EV-102-163`: Managed HSM is *"a customer-owned security domain where Microsoft has no access to your key material"*, alongside the explicit separation-of-duties statement at `EV-102-036`. **Firm** under catalog §2.5; `OI-102-022` still gates practice. `HG-102-039` below covers the category-D key half. |
+| HG-102-007 no routine staff path | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Both hyperscaler positions now on the record, both `Asserted`, which §3.2 cannot convert to a `PASS`. C2 `EV-102-001`, `EV-102-010`. C3 `EV-102-167`: *"Microsoft engineers don't have default access to cloud customer data"*, qualified by *"minimizing standing access to production data"*. C1 not retrieved. |
+| HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Same position as the hosting evaluation, and now specific rather than general: both trust pages retrieved for `HG-102-007` were checked for this gate and **neither addresses impersonation, break-glass, or unrestricted query** — `OQ-103-023`. |
+| HG-102-009 staff-access evidence | DOC | **`PASS`** | `UNPROVEN` | `UNPROVEN` | `EV-102-002`–`004` + `EV-102-030`: Cloud SQL is Access Transparency-covered at GA. **C3's position is now precisely characterizable and it is not good — see §7.6.** `EV-102-012` retrieves the complete Customer Lockbox supported-services list: it names "Azure Database for PostgreSQL" but **not** "Azure Database for PostgreSQL Flexible Server", while naming "Azure Database for MySQL" and "Azure Database for MySQL Flexible Server" separately. Whether the shorter name covers this candidate is `OI-103-019`, and it is not a question this evaluation may answer in its own favour. C2 `EV-102-010`: visibility scoped to *"on behalf of"* operations — `OI-103-018`. See §7.1. |
+| HG-102-010 encryption in transit and at rest | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled for two of three at v1.2.** v1.0 had the service-level key facts (`EV-102-034`–`036`) but not the algorithm-and-custody statements the pass test demands, because those records were retrieved against `HG-102-039`. The provider-level pass supplies the missing half. C1 `EV-102-164` (*"AES-256 by default"*, AES-GCM, *"We own and manage the keys"*) with `EV-102-165` (ALTS, PSP) and CMEK at `EV-102-034`. C3 `EV-102-162` (AES-256 DEK, KEK never leaving Key Vault) with `EV-102-163` (MACsec, AES-256, SHA-384) and CMK at `EV-102-036`. C2 has the at-rest half (`EV-102-009` names 256-bit AES-GCM; `EV-102-035` covers RDS) but **no current AWS transport source was found** — `OQ-103-022`, a retrieval gap rather than an AWS deficiency. |
+| HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **Settled for C2 at v1.2.** `EV-102-007`: an enumerated AWS-wide list dated "Last Updated: July 28, 2026" on the page, with a 30-day advance-notice commitment and region scoping. C1 and C3 remain `UNPROVEN` because neither list was **obtained** — Google's page defeated retrieval three times and Microsoft's sits on the Service Trust Portal (`OQ-103-018`). Both are CoBudget-side retrieval gaps, not vendor silence. |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. |
 | HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | **`PASS`** | `EV-102-033` states retention range, redundancy options, and expiry-on-deletion in writing, dated. C1/C2 equivalent pages not yet retrieved — `OQ-105-002`. |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `TD-103-017`, `TD-103-018`, `TD-103-022`; `DP-105-001`. Non-exceptable. |
@@ -178,11 +178,15 @@ summarizes.
 
 | | C1 | C2 | C3 |
 | --- | --- | --- | --- |
-| `PASS` | 3 | 1 | 3 |
+| `PASS` | 4 | 2 | 5 |
 | `PASS (design)` | 2 | 2 | 2 |
-| `UNPROVEN` | 19 | 21 | 19 |
+| `UNPROVEN` | 18 | 20 | 17 |
 | `FAIL` | 0 | 0 | 0 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
+
+**v1.2 moved four documentary outcomes and no verdict.** C1 gained
+`HG-102-010`; C2 gained `HG-102-011`; C3 gained `HG-102-005` and
+`HG-102-010`. All three remain capped by the eight observation gates in §3.
 
 No candidate carries a `FAIL`, so no compensating control, exception, or
 residual-risk record is required, and nothing in exception rules §5 is engaged.
@@ -285,6 +289,34 @@ retention window, which the §3 observations cover. The matrix keeps the gate
 because the catalog marks it Vendor and this evaluation does not re-type
 approved gates.
 
+### 7.6 Customer Lockbox may not cover Flexible Server, and the list's own shape is the evidence — added at v1.2
+
+§7.1 recorded C3's `HG-102-009` position as materially improved but unfinished.
+`EV-102-012` finishes characterizing it, and the answer is worse than
+"unfinished" implied.
+
+The complete Customer Lockbox supported-services list contains **"Azure Database
+for PostgreSQL"**. It does not contain "Azure Database for PostgreSQL Flexible
+Server", which is the candidate this evaluation actually carries. On its own that
+would be weak evidence — a shorter product name often stands for its deployment
+models.
+
+The list's own shape is what makes it more than weak. The same list names **both**
+"Azure Database for MySQL" **and** "Azure Database for MySQL Flexible Server", as
+two separate entries. A list that distinguishes Flexible Server for one engine is
+not using the shorter name as an umbrella for the other.
+
+This evaluation does not resolve it. Resolving it in C3's favour would hand the
+candidate a gate outcome on an inference, and resolving it against C3 would take
+one away on the same inference. `OI-103-019` puts it to the Product Owner, and
+`OQ-105-011` names the retrieval that would settle it outright — the Microsoft
+cloud security benchmark control `PA-8` that `EV-102-012` says exists precisely to
+let a reader "review Customer Lockbox applicability for a service."
+
+If Flexible Server is not covered, C3 has no Customer Lockbox coverage in **any**
+of the five categories it is a candidate in, which is a cross-category fact
+CBD-108 should hold rather than a PostgreSQL one.
+
 ## 8. Evidence register
 
 Records are append-only under the CBD-102 evidence register rules. All
@@ -345,6 +377,7 @@ cross-referenced there rather than duplicated.
 | OQ-105-005 | Cross-account (C2) and cross-subscription (C3) isolated-restore routes, and Azure's post-restore key-revocation limitation | `HG-102-041`, `DP-105-007` | Retrieve the RDS snapshot-sharing page; put the Azure questions to Microsoft with `OQ-103-006` |
 | OQ-105-006 | pgaudit or equivalent extension availability and its log destination | AC2 | Retrieve ×3; interacts with `DP-105-010` routing |
 | OQ-105-007 | Maximum-connection limits by instance size ×3 | AC4 | Retrieve; the operational assessment's connection math currently rests on topology-side figures only |
+| OQ-105-011 | Does the Microsoft cloud security benchmark control `PA-8` list Customer Lockbox applicability for **Azure Database for PostgreSQL Flexible Server** specifically? | `HG-102-009` | `EV-102-012` names `PA-8` as the control that exists to "review Customer Lockbox applicability for a service". Retrieving it would settle `OI-103-019` outright and remove the need for a Product Owner reading. Cheap, and it should be done before CBD-108 ranks anything. |
 
 ## 10. Open items
 

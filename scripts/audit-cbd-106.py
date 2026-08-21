@@ -73,6 +73,16 @@ D_TRACE = Path("docs/cbd-105-acceptance-criteria-traceability.md")
 ALERT_BOUNDARY = Path("docs/cbd-74-accountability-alert-boundary-specification.md")
 
 PACKAGE_FILES = (SPEC, EVALUATION, OPERATIONAL, TRACE)
+
+# The commit each document was written against. The v1.1 cross-category pass
+# amended two of the four, so a single shared constant would either pass a
+# stale baseline or fail a correct one.
+REPOSITORY_BASELINE = {
+    SPEC: "`d98defd`",
+    EVALUATION: "`d0d5bb1`",
+    OPERATIONAL: "`d98defd`",
+    TRACE: "`d0d5bb1`",
+}
 CBD_102_FILES = (CATALOG, RUBRIC, DEMAND, COST, EVIDENCE)
 CBD_103_FILES = (H_TOPOLOGY, H_EVALUATION, H_OPERATIONAL, H_TRACE)
 CBD_104_FILES = (I_BOUNDARY, I_EVALUATION, I_OPERATIONAL, I_TRACE)
@@ -541,7 +551,7 @@ def main() -> int:
     sync_source = read(Path("scripts/sync-confluence.py"))
     for path, text in package.items():
         audit.check(
-            "`d98defd`" in text,
+            REPOSITORY_BASELINE[path] in text,
             f"{path}: repository baseline is not recorded",
         )
         audit.check(

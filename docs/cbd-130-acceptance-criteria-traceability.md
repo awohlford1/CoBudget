@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-130 acceptance criterion and deliverable to the exact evidence that answers it. §7 records that this is the last CBD-15 category evaluation, and what CBD-108 inherits from all six. |
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the 16 `PN-130-*` decisions, the screening and 23-gate evaluation with its verdicts and `EV-102-132`–`140` records, the published rubric scores with their R5 profile, the operational and cost assessment with its verified segment conversion and `CR4` unknowns, and this traceability record. It approves no provider, performs no observation, sends no message, and registers no origination identity. **It expressly does not approve the `HG-102-073` exception**: `EX-102-001` reserves that decision, `OI-130-009` requests it, and C10 stands `INELIGIBLE` until it is granted. It leaves `OI-130-001`–`021`, `OI-130-010`'s gate-reading question, `OI-102-022`, `EG-91-006`, `EG-91-024`, and every `OQ-130` question open. |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Push and SMS Delivery Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0 |
+| Companions | Push and SMS Delivery Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.1; Operational and Cost Assessment v1.0 |
 | Confluence page | [CBD-130 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13860865) |
-| Repository baseline | `d7c3b29` |
+| Repository baseline | `d0d5bb1` |
 | Last updated | August 21, 2026 |
 
 ## 1. Package contents
@@ -244,3 +244,21 @@ synchronization, and `OI-130-010` on carrier retention.
 | Provider contact | None. All evidence is desk research retrieved August 21, 2026. No account was created, no message was sent, and no origination identity was registered. |
 | Mechanical verification | `scripts/audit-cbd-130.py`; `scripts/check-doc-vocabulary.py` |
 | Limitations | Evaluation §3.1 (evidence ceiling), §3.2 (two recorded retrieval asymmetries), §8.4 (what the scores measure); operational §5.1 (no prices); §7 above |
+
+### 9.1 Revision record
+
+| Version | Date | Change |
+| --- | --- | --- |
+| 1.0 | August 21, 2026 | Initial approved package. |
+| 1.1 | August 21, 2026 | Reuses the CBD-103 cross-category documentary pass of the same date. Three documentary gate outcomes move — C2 gains `HG-102-011` (`EV-102-007`), C3 gains `HG-102-005` (`EV-102-011`) and `HG-102-010` (`EV-102-162`, `EV-102-163`) — and **no verdict does**: C2 and C3 stay `ELIGIBLE-PENDING-EVIDENCE`, C10 stays `INELIGIBLE` on the `HG-102-073` `FAIL`, which this pass neither touches nor mitigates. **Repairs a v1.0 overclaim**: `HG-102-010` passed for C2 on `EV-102-135`, whose own limitation said the at-rest cipher was not named, against a pass test requiring *"the algorithm and key custody stated"*; `EV-102-009` now names it. Adds finding §7.7 (`F7`) and `OI-130-022`: `EV-102-007` names **Twilio as an AWS subprocessor for A2P messaging**, so C2 and C10 are not the independent candidates this evaluation scored them as — though C10's `FAIL` does not transfer to C2, which operates its own opt-out layer. Rubric subscores are recomputed rather than left stale: `WR-102-003` C3 `0`→`1`, `WR-102-006` C2 `1`→`2`, giving totals `0.40`, `0.28`, `0.09` and a C3 evidence profile of 13% Documented. Half-closes the `OQ-130-004` asymmetry and adds `OQ-130-017`. **No observation, no price, no `PN-130-*` decision, and no acceptance-criterion status changes.** |
+
+Two things in the v1.1 change are worth a reviewer's attention because they cut
+against a comfortable reading. C3's `WR-102-006` was **left at `0`** even though
+`EV-102-167` records a six-month subprocessor notice commitment — longer than
+AWS's 30 days — because the list itself was not obtained and rubric rule `R3`
+scores an assertion whose evidence attempt failed as `0` rather than giving it
+the benefit of the doubt. And C2's new `HG-102-011` `PASS` and `WR-102-006` score
+of `2` reflect **disclosure that was retrievable**, not a demonstrated gap
+between vendors: C2 is the only candidate in this category whose subprocessor
+list was obtained at all, which `OQ-130-017` records so the asymmetry is not read
+as a provider difference.

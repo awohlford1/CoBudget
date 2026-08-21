@@ -50,6 +50,16 @@ H_OPERATIONAL = Path("docs/cbd-103-operational-and-cost-assessment.md")
 H_TRACE = Path("docs/cbd-103-acceptance-criteria-traceability.md")
 
 PACKAGE_FILES = (SPEC, EVALUATION, OPERATIONAL, TRACE)
+
+# The commit each document was written against. The v1.2 cross-category pass
+# amended two of the four, so a single shared constant would either pass a
+# stale baseline or fail a correct one.
+REPOSITORY_BASELINE = {
+    SPEC: "`6b1ac8e`",
+    EVALUATION: "`d0d5bb1`",
+    OPERATIONAL: "`6b1ac8e`",
+    TRACE: "`d0d5bb1`",
+}
 CBD_102_FILES = (CATALOG, RUBRIC, DEMAND, COST, EVIDENCE)
 CBD_103_FILES = (H_TOPOLOGY, H_EVALUATION, H_OPERATIONAL, H_TRACE)
 
@@ -438,8 +448,8 @@ def main() -> int:
     sync_source = read(Path("scripts/sync-confluence.py"))
     for path, text in package.items():
         audit.check(
-            "`6b1ac8e`" in text,
-            f"{path}: repository baseline is not recorded",
+            REPOSITORY_BASELINE[path] in text,
+            f"{path}: repository baseline is not {REPOSITORY_BASELINE[path]}",
         )
         audit.check(
             "Confluence page" in text,

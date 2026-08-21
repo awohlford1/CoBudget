@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to U.S. financial-data aggregators. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why. |
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.1 |
 | Confluence page | [CBD-107 — Financial-Data Connectivity Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13533185) |
-| Repository baseline | `c15b526` |
+| Repository baseline | `d0d5bb1` |
 | Last updated | August 21, 2026 |
 
 ## 1. Purpose
@@ -82,6 +82,24 @@ limitation stating that the same question was not put to the others.
 **No provider-level records are reused.** C6, C7, C8 and C9 are provider
 identities that appear in no other CBD-15 category, so every cross-category **X**
 gate starts from nothing. §6.1 shows the consequence.
+
+**Confirmed at v1.1, and it now sets this category apart.** The CBD-103
+cross-category documentary pass of August 21, 2026 registered eleven
+provider-level records and moved documentary gate outcomes in four sibling
+categories. It moved **none here**, and could not have: it was run against AWS,
+Azure and Google Cloud, and no candidate in category **F** is one of them. That
+leaves this evaluation with the largest block of open cross-category cells in
+the CBD-15 set — forty, against twenty-six or fewer everywhere else — and the
+gap is now a retrieval-priority fact for CBD-108 rather than a shared condition.
+
+One result of that pass does reach this category, because it is about the gate
+rather than the provider. `HG-102-013`'s pass test says *"Silence fails"*, and
+the pass established that this means the **provider's** silence once its
+contract has been read, not the evaluator's failure to read it. No aggregator
+DPA has been obtained here either, so this category's `HG-102-013` row is
+`UNPROVEN` for the same reason and carries the same risk: if the contracts turn
+out to be silent, the gate fails for every candidate at once. `OQ-107-023`
+records it alongside the sibling question.
 
 ## 4. Screening
 
@@ -463,6 +481,7 @@ A concurrently drafted CBD-130 evaluation must claim a block above `131`.
 | OQ-107-009 | C9's pending-to-posted transition behaviour and whether `transactionId` survives it | `HG-102-061` | Retrieve. C6, C7 and C8 are settled; this is the one asymmetric cell in finding F3 |
 | OQ-107-010 | Webhook payload authentication mechanism for C7 and C9 | `HG-102-059` | Retrieve, then put to each provider. Absence from the retrieved pages is not proof of absence from the product |
 | OQ-107-011 | Whether C8's TxPUSH notifications carry transaction changes reliably enough to substitute for the 15-day poll | `HG-102-060` | Retrieve. It is the closest thing to a change stream outside C6 |
+| OQ-107-023 | Do the C6, C7, C8 and C9 data processing agreements state provider backup retention, region, and expiry? | `HG-102-013` | Shared with `OQ-103-024`. The pass test's *"Silence fails"* is a statement about the provider's contract, not about whether CoBudget has read it, so this gate is currently `UNPROVEN` rather than `FAIL` — and reading the four DPAs is the only thing that can move it in either direction. It is the one gate that could fail every candidate in every category simultaneously. |
 
 ## 10. Open items
 

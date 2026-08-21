@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026 and v1.1 on August 21, 2026. Applies the approved CBD-102 method to managed-identity candidates against the companion boundary specification. It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE`, because the authorized observation pass has not been performed — §3 explains the position this evaluation inherits from CBD-103.** |
-| Document version | 1.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026 and v1.1 on August 21, 2026. Applies the approved CBD-102 method to managed-identity candidates against the companion boundary specification. It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE`, because the authorized observation pass has not been performed — §3 explains the position this evaluation inherits from CBD-103.** v1.2 reuses the CBD-103 cross-category documentary pass (§3.1): three documentary gate outcomes move, **no verdict does**, and `EV-102-012` positively establishes what v1.0 could only decline to assume — Microsoft Entra External ID is absent from the Customer Lockbox supported-services list. |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Identity Integration Boundary Specification v1.1; Integration, Outage, Support, Cost, and Exit Assessment v1.1; Acceptance Criteria Traceability v1.1 |
+| Companions | Identity Integration Boundary Specification v1.1; Integration, Outage, Support, Cost, and Exit Assessment v1.1; Acceptance Criteria Traceability v1.2 |
 | Confluence page | [CBD-104 — Identity Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13139969) |
-| Repository baseline | `6b1ac8e` |
+| Repository baseline | `d0d5bb1` |
 | Last updated | August 21, 2026 |
 
 ## 1. Purpose
@@ -91,6 +91,21 @@ comparison, because all three candidates hold the same verdict and no ranking
 is produced. Every `UNPROVEN` below means "not yet asked or not yet
 answered," never "the provider lacks this." `OI-104-007` records the
 obligation to complete the pass symmetrically before CBD-108 ranks anything.
+
+**Advanced at v1.1.** The CBD-103 cross-category documentary pass of August 21,
+2026 was run at provider level against AWS, Azure and Google Cloud, and its
+records are reused here rather than re-retrieved — the same reuse CBD-105 makes
+of `EV-102-001`–`006`. Three documentary outcomes move (§6.3) and no verdict
+does.
+
+Two limits on what that reuse can carry. **C4 Auth0 gains nothing**, because it
+is not one of the three providers the pass covered; that is a gap in the pass
+rather than a finding about Auth0, and `OQ-104-021` records it, so the pass has
+left this category *less* symmetric than it found it on the gates it touched.
+**A provider-level record is not a service-level record**, and this evaluation
+already knew that — v1.0 declined to reuse `EV-102-005` for Entra. `EV-102-012`
+now shows that refusal was right for a stronger reason than caution: Entra
+External ID is not on the Customer Lockbox list at all.
 
 ## 4. Screening
 
@@ -200,15 +215,15 @@ marks one documentation or a contract can settle. `CFG` marks a Config gate.
 | HG-102-002 correlation identifiers | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-104-001` |
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Acute for identity vendors, whose parent platforms operate large shared identity surfaces. `OQ-104-002` |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Observation required; screenshot explicitly insufficient. |
-| HG-102-005 no standing credential | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved for any identity console. `OQ-104-012` |
-| HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Also gated in practice by `OI-102-022`. |
-| HG-102-007 no routine staff path | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | For C2, `EV-102-001` (CBD-103) is Asserted for AWS generally, which cannot produce a `PASS`. `OQ-104-006` |
+| HG-102-005 no standing credential | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **Settled for C3 at v1.1 from the CBD-103 cross-category pass.** C3 `EV-102-011`: Privileged Identity Management is native, governs Microsoft Entra roles directly, and provides just-in-time activation, time-bound assignment with start and end dates, approval, justification, and downloadable audit history. C2 `EV-102-008`: AWS ships no native equivalent and validates four partner products instead — not a `FAIL`, but reachable only by buying a third party (`OI-103-017`). C4 not retrieved. `OQ-104-012` |
+| HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Partial material at v1.1, none of it sufficient for the four-way split the gate requires. C2 `EV-102-009`: under AWS owned keys — the default for new services since 2021 — key policies cannot be changed and key activity is *"Not viewable by the customer"*. C3 `EV-102-163`: Managed HSM offers *"a customer-owned security domain where Microsoft has no access to your key material"*. Both speak to custody, neither to separability. **Firm** under catalog §2.5; also gated in practice by `OI-102-022`. |
+| HG-102-007 no routine staff path | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Both hyperscaler positions are now on the record and both are `Asserted`, which §3.2 cannot convert to a `PASS`. C2 `EV-102-001`, `EV-102-010`: *"AWS support personnel who assist customers with their support requests do not have access to customer data."* C3 `EV-102-167`: *"Microsoft engineers don't have default access to cloud customer data"*, qualified by *"minimizing standing access to production data"* rather than eliminating it. Neither statement is identity-specific. C4 not retrieved. `OQ-104-006` |
 | HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-104-006` |
-| HG-102-009 staff-access evidence | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved for identity surfaces. CBD-103's `EV-102-005` Customer Lockbox list did not establish Entra coverage. `OQ-104-006` |
-| HG-102-010 encryption in transit and at rest | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Expected straightforward. `OQ-104-003` |
-| HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved and must be obtained **and dated**. C3 note: the only published residency add-on covers Australia and Japan (`EV-102-019`), so the United States external-tenant residency position needs explicit confirmation. `OQ-104-004` |
+| HG-102-009 staff-access evidence | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **This evaluation's v1.0 caution is now positively supported.** v1.0 recorded that `EV-102-005` *did not establish* Entra coverage. `EV-102-012` retrieves the complete Customer Lockbox supported-services list and establishes the stronger fact: **Microsoft Entra External ID does not appear on it.** The only Entra entry is "Microsoft Entra Diagnostics Data", which is diagnostics data rather than the identity service. Declining the reuse was correct. C2 `EV-102-010`: customer visibility is scoped to *"on behalf of"* service operations, raising the `OI-103-018` `FAIL` question. Neither flips — absence from a list is not evidence of absence from the product — but C3's position on this gate is weaker than a bare `UNPROVEN` conveys. `OQ-104-006` |
+| HG-102-010 encryption in transit and at rest | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **Settled for C3 at v1.1.** C3 `EV-102-162` (at rest: *"A symmetric AES-256 key"*, KEK never leaving Key Vault, platform-managed by default with customer-managed available) and `EV-102-163` (in transit: MACsec on by default within and between regions, *"RSA-based 2,048-bit key lengths, ECC 256-bit key lengths, SHA-384 message authentication, and AES-256 data encryption"*). Both halves carry algorithm and key custody. C2's at-rest half is established by `EV-102-009` but no current AWS transport source was found (`OQ-103-022`), so C2 stays `UNPROVEN` on a **retrieval gap, not an AWS deficiency**. C4 not retrieved. Per-service confirmation for Entra External ID specifically is `OQ-103-020`. `OQ-104-003` |
+| HG-102-011 region and subprocessors | DOC | `PASS` | `UNPROVEN` | `UNPROVEN` | **Settled for C2 at v1.1.** C2 `EV-102-007`: an enumerated list dated "Last Updated: July 28, 2026" on the page itself, with a 30-day advance-notice commitment and explicit region scoping — the pass test asks the list be *"obtained and dated"*, and it was. The list is AWS-wide and so covers Cognito. C3 stays `UNPROVEN` on two independent grounds: the Microsoft Online Services Subprocessor List was **not obtained** (`EV-102-167` names it and its six-month notice commitment; `OQ-103-018`), and the v1.0 residency concern is unchanged — the only published residency add-on covers Australia and Japan (`EV-102-019`), so the United States external-tenant position still needs explicit confirmation. C4 not retrieved. `OQ-104-004` |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Request must be exercised. |
-| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Contractual class; not obtained. Silence fails, so it must be asked explicitly. `OQ-104-005` |
+| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Contractual class; still not obtained for any candidate. The v1.1 pass sharpened why this is `UNPROVEN` rather than `FAIL`: the pass test's *"Silence fails"* means the **provider's** silence once its contract has been read, not CoBudget's failure to read it. No DPA was obtained. This is the one gate that could fail every candidate in every category at once — `OQ-103-024`. `OQ-104-005` |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `ID-104-001`, `ID-104-016`, `TD-103-022`. Non-exceptable under evidence register §5.2. |
 | HG-102-015 append-only evidence | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Retention-lock must be demonstrated. |
 
@@ -236,11 +251,18 @@ summarizes.
 
 |  | C2 | C3 | C4 |
 | --- | --- | --- | --- |
-| `PASS` | 3 | 3 | 3 |
+| `PASS` | 4 | 5 | 3 |
 | `PASS (design)` | 1 | 1 | 1 |
-| `UNPROVEN` | 21 | 21 | 21 |
+| `UNPROVEN` | 20 | 19 | 21 |
 | `FAIL` | 0 | 0 | 0 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
+
+**v1.1 moved three documentary outcomes and no verdict.** C2 gained
+`HG-102-011`; C3 gained `HG-102-005` and `HG-102-010`. C4 gained nothing,
+because the cross-category pass was run at provider level against the three
+hyperscalers and Auth0 is not one of them — that is a gap in the pass, not a
+finding about Auth0, and `OQ-104-021` records it. All three candidates remain
+capped by the nine observation gates.
 
 No candidate carries a `FAIL`, so no compensating control, exception, or
 residual-risk record is required, no `CONDITIONAL` verdict arises, and — per
@@ -468,12 +490,13 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | OQ-104-012 | Just-in-time, expiring administrative access for each identity console, and standing-credential defaults | `HG-102-005`, `HG-102-036` | Retrieve for all three |
 | OQ-104-013 | Confirm the two screening judgments from primary catalogs: Google Cloud Identity Platform's passkey absence, and each screened-but-not-carried standalone's actual capability set | Screening | Re-confirm before CBD-108 relies on §7.3 |
 | OQ-104-014 | Should a second standalone identity vendor be evaluated before selection? The standalone slot carries one candidate by the §4.2 rule. | Screening | CBD-108 decision |
+| OQ-104-021 | The ten documentary cross-category gates, put to **C4 Auth0** on the same terms as the three hyperscalers | `HG-102-002`, `003`, `005`–`011`, `013` | The v1.1 cross-category pass covered AWS, Azure and Google Cloud only. Until C4 is put through the same questions, the three gates that moved at v1.1 differentiate on retrieval coverage rather than on provider capability, and `OI-104-007`'s symmetry obligation is **less** satisfied than before the pass, not more. |
 
 ## 11. Open items
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-104-007 | The documentary evidence pass was symmetric on five priority claims and asymmetric elsewhere (§3.1). | Harmless now — all three candidates hold one verdict and no ranking is produced. Must be completed symmetrically before CBD-108 ranks anything, and before observations run on a candidate whose documentary position could still produce a `FAIL`. Mirrors `OI-103-009`. |
+| OI-104-007 | The documentary evidence pass was symmetric on five priority claims and asymmetric elsewhere (§3.1). **Partially advanced at v1.1, and in one respect set back — see `OQ-104-021`.** | Harmless now — all three candidates hold one verdict and no ranking is produced. Must be completed symmetrically before CBD-108 ranks anything, and before observations run on a candidate whose documentary position could still produce a `FAIL`. Mirrors `OI-103-009`. |
 | OI-104-008 | The route-A observation authorization (CBD-15 amendment, August 20, 2026) covers this category's nine observation gates, but no observation account exists and no observation has been performed. | The §6.3 verdicts stand until the observations are actually gathered. Authorization gathers no evidence. |
 | OI-104-009 | The standalone slot carries a single candidate, selected on stated grounds in §4.2 rather than by exhaustive comparison of standalone vendors. | A defensible but narrow representation of the standalone field. `OQ-104-014` puts the widening decision to CBD-108 rather than closing it by silence. |
 | OI-104-010 | §7.3's cross-category consequence — a C1 hosting selection forces a standalone identity vendor — rests on one screening record (`EV-102-029`). | CBD-108's coherence review (`OI-103-011`) should re-confirm it from primary catalogs (`OQ-104-013`) before weighing hosting and identity selections together. |

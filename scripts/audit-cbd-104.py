@@ -89,7 +89,15 @@ MATRIX_OUTCOMES = ("PASS (design)", "PASS", "UNPROVEN", "FAIL")
 
 EVIDENCE_KINDS = ("OBS", "DOC", "CFG")
 
-BASELINE = "`6b1ac8e`"
+# The commit each document was written against. The v1.2 cross-category pass
+# amended two of the four, so a single shared constant would either pass a
+# stale baseline or fail a correct one.
+BASELINE = {
+    BOUNDARY: "`6b1ac8e`",
+    EVALUATION: "`d0d5bb1`",
+    ASSESSMENT: "`6b1ac8e`",
+    TRACE: "`d0d5bb1`",
+}
 
 # EV-102-007..012 are reserved by CBD-103 section 9 for its own completion
 # pass. CBD-104 continues the shared append-only register and must not reuse
@@ -544,8 +552,8 @@ def main() -> int:
     # ---- Claims the package must keep making --------------------------------
     for path, text in package.items():
         audit.check(
-            BASELINE in text,
-            f"{path}: repository baseline is not recorded",
+            BASELINE[path] in text,
+            f"{path}: repository baseline is not {BASELINE[path]}",
         )
         audit.check(
             "Confluence page" in text,
