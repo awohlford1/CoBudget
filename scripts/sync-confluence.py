@@ -560,6 +560,52 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-105 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-105-acceptance-criteria-traceability.md",
     ),
+    # CBD-104 publishes after CBD-103, which it cites as a frozen source
+    # baseline: the identity boundary plugs into the TD-103 topology, reuses its
+    # evidence records, and inherits the route-A observation authorization
+    # recorded against OI-103-008. It cites no CBD-105 document, so its position
+    # relative to that set carries no dependency.
+    #
+    # Within the set the order follows the header citations. The boundary
+    # specification is cited by every other document; the evaluation is cited by
+    # the assessment and the traceability record; the assessment is cited by the
+    # traceability record, which nothing cites and which therefore publishes
+    # last and is not a baseline.
+    #
+    # These four pages were created as placeholders on August 21, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged approved v1.0 content.
+    Target(
+        key="cbd-104-specification",
+        doc_set="cbd-104",
+        page_id="13107201",
+        expected_title="CBD-104 — Identity Integration Boundary Specification",
+        path="docs/cbd-104-identity-integration-boundary-specification.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-104-evaluation",
+        doc_set="cbd-104",
+        page_id="13139969",
+        expected_title="CBD-104 — Identity Candidate Shortlist and Gate Evaluation",
+        path="docs/cbd-104-candidate-shortlist-and-gate-evaluation.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-104-operational",
+        doc_set="cbd-104",
+        page_id="12877849",
+        expected_title="CBD-104 — Integration, Outage, Support, Cost, and Exit Assessment",
+        path="docs/cbd-104-operational-and-cost-assessment.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-104-traceability",
+        doc_set="cbd-104",
+        page_id="13172737",
+        expected_title="CBD-104 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-104-acceptance-criteria-traceability.md",
+    ),
 )
 
 
