@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to managed-identity candidates against the companion boundary specification. It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE`, because the authorized observation pass has not been performed — §3 explains the position this evaluation inherits from CBD-103.** |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026 and v1.1 on August 21, 2026. Applies the approved CBD-102 method to managed-identity candidates against the companion boundary specification. It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE`, because the authorized observation pass has not been performed — §3 explains the position this evaluation inherits from CBD-103.** |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Identity Integration Boundary Specification v1.0; Integration, Outage, Support, Cost, and Exit Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Companions | Identity Integration Boundary Specification v1.1; Integration, Outage, Support, Cost, and Exit Assessment v1.1; Acceptance Criteria Traceability v1.1 |
 | Confluence page | [CBD-104 — Identity Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13139969) |
 | Repository baseline | `6b1ac8e` |
 | Last updated | August 21, 2026 |
@@ -80,7 +80,8 @@ the three carried candidates on five priority claims**: pricing at the actual
 billable unit, passkey and MFA availability on the evaluated tier, the
 step-up reauthentication primitive, session-revocation capability, and
 enumeration-resistance configuration. Fifteen evidence records were
-registered on August 20, 2026 (§9).
+registered on August 20, 2026, and four more on August 21, 2026 in the v1.1
+revision described in §7.1 (§9).
 
 Beyond those five claims the pass is asymmetric, in the same sense CBD-103
 §3.4 disclosed: several gates were not researched for any candidate, and a
@@ -217,14 +218,14 @@ marks one documentation or a contract can settle. `CFG` marks a Config gate.
 | --- | --- | --- | --- | --- | --- |
 | HG-102-028 IdP credential boundary | DOC | `PASS` | `PASS` | `PASS` | Hosted-ceremony integration models: `EV-102-018` (C2 Managed Login), `EV-102-023` (C3 Microsoft-hosted sign-in page), `EV-102-021` (C4 Universal Login). Under `ID-104-001` no embedded variant is used; each record's limitations note the excluded modes. |
 | HG-102-029 MFA and passkeys first-class | DOC | `PASS` | `PASS` | `PASS` | C2: passkeys and MFA factor configuration on Essentials (`EV-102-018`, `EV-102-022` — low confidence, fetch directly). C3: passkeys (FIDO2) and email OTP with Conditional Access enforcement; passkey registration requires a custom URL domain (`EV-102-023`). C4: passkeys on all tiers, MFA from the Essentials tier — the free tier fails this gate, which is a `CR0` tier-forcing fact (`EV-102-017`, `EV-102-021`). Policy-enforcement mechanics for C2 and C4 not separately retrieved: `OQ-104-010`. |
-| HG-102-030 action-bound step-up | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Observation required. The documentary positions differ sharply — see §7.1. `OQ-104-007` |
+| HG-102-030 action-bound step-up | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Observation required. **Revised at v1.1:** C2 documents `prompt=login` forced reauthentication plus an `auth_time` claim (`EV-102-048`–`EV-102-050`), so the documentary `FAIL` risk recorded at v1.0 is retired — see §7.1. C3 documents Conditional Access authentication context (`EV-102-023`); C4 documents per-action step-up through scopes or ID-token claims (`EV-102-024`). No candidate documents an assurance-level claim. `OQ-104-007` |
 | HG-102-031 individual session revocation | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Observation required. Documented capability differs materially — see §7.2. `OQ-104-008`, `OQ-104-009` |
 | HG-102-032 enumeration resistance | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Observation required on hosted screens. C2's API-level configuration is thoroughly documented, including its residual sign-up disclosure — see §7.4. `OQ-104-011` |
 | HG-102-033 auth evidence not analytics | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Data-flow documentation not retrieved. C4's bounded log product (`EV-102-028`) is adjacent but does not answer the analytics-reuse question. `OQ-104-002` |
 | HG-102-034 SMS never the only factor | DOC | `PASS` | `PASS` | `PASS` | C2: passkey and email OTP factors (`EV-102-018`, `EV-102-022`). C3: email OTP and passkeys; SMS is an optional paid add-on and not a first factor (`EV-102-023`). C4: passkey and OTP factors beyond SMS (`EV-102-017`, `EV-102-021`). Phone-as-identity is optional configuration on every candidate and unused under `ID-104-008`. |
 | HG-102-035 identity deletion and retention | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Deletion must be exercised and residual retention captured. `OQ-104-013` |
 | HG-102-036 no durable identity-console credential | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-104-012` |
-| HG-102-037 assurance validity and replay | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Verification required. C4's step-up documentation states no validity window (`EV-102-024`), which sharpens the observation. `OQ-104-009` |
+| HG-102-037 assurance validity and replay | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Verification required. C4's step-up documentation states no validity window (`EV-102-024`). **Added at v1.1:** C2 carries `auth_time` in both tokens and a `nonce` replay guard, but no `max_age` and no `acr`/`amr` (`EV-102-048`–`EV-102-050`), so a window is enforceable by CoBudget rather than stated by the IdP. `OQ-104-009` |
 
 ### 6.3 Tally
 
@@ -265,21 +266,58 @@ retrieved page does not state is a validity window for the elevated result —
 the half of the `HG-102-030` pass test that inspects expiry — so the
 observation must establish it, and `HG-102-037` shares the same question.
 
-**C2 Amazon Cognito — no native primitive; AWS's own reference builds it
-customer-side.** AWS's step-up reference architecture states that the
-solution requires a customer-deployed Lambda authorizer, two DynamoDB tables,
-a purpose-built SDK, and custom endpoints, with Cognito providing only the
-OAuth token issuance underneath (`EV-102-025`, published September 2022).
-Under catalog §2.3, a **Vendor** gate fails where the product does not have
-the property, and CoBudget-side construction cannot create it. What keeps
-this `UNPROVEN` rather than `FAIL` is the age of that evidence relative to
-the platform: Cognito's authentication surface was rebuilt in the Essentials
-generation (`EV-102-018`, `EV-102-022`), and whether its current choice-based
-re-authentication can yield an assertion bound to an action with a stated
-validity window is exactly the question `OQ-104-007` puts to AWS before the
-observation pass. If the answer is no, this becomes the category's first
-documentary `FAIL`, and under the route-A guardrail C2 would drop out of the
-observation pass.
+**C2 Amazon Cognito — a native primitive, established at v1.1.** Cognito's
+authorization endpoint accepts `prompt=login`, documented as *"Amazon Cognito
+requires users to re-authenticate even if they have an existing session. Send
+this value when you want to verify the user's identity again"* (`EV-102-048`).
+Both the ID and the access token carry an `auth_time` claim — *"the
+authentication time, in Unix time format, that your user completed
+authentication"* (`EV-102-049`, `EV-102-050`) — and the `nonce` parameter
+returns a `nonce` claim the relying party can check *"to guard against replay
+attacks"* (`EV-102-048`). None of that requires customer-built orchestration.
+
+This supersedes the position CBD-104 v1.0 took from `EV-102-025`, and the
+correction matters. That 2022 reference architecture builds a step-up
+*authorization workflow engine* — a Lambda authorizer, two DynamoDB tables, a
+purpose-built SDK — which is a larger thing than this boundary needs, because
+`ID-104-004` already places session authority, action binding, and window
+enforcement on CoBudget's side. The record's own limitation anticipated this:
+it was strong evidence about 2022 and weak evidence about the Essentials
+generation.
+
+**The consequence is that C2 no longer faces a documentary `FAIL`.**
+`HG-102-030`'s fail test disqualifies *"an IdP offering only session-level
+authentication with no action-bound step-up"*, and `prompt=login` is a
+reauthentication the relying party triggers per action, whose result carries a
+freshness value and a replay guard. Binding that result to the action and
+budget space, and enforcing the short window, remain CoBudget's under
+`ID-104-007` — which is the same division of labour `ID-104-004` already
+establishes for sessions.
+
+Three limits are documented and remain open, and they are why `OQ-104-007`
+survives at v1.1 rather than closing:
+
+* **No `max_age`.** The parameter list does not include the OIDC-standard way
+  to demand authentication within a stated age (`EV-102-048`), so freshness is
+  enforced by CoBudget against `auth_time`, not by the IdP.
+* **No stated assurance level.** Neither token's documented payload carries an
+  `acr` or `amr` claim (`EV-102-049`, `EV-102-050`), which is the half of the
+  `HG-102-030` text reading *"at a stated assurance level"* that Cognito does
+  not currently answer.
+* **The one-hour managed-login cookie.** Cognito sets a session cookie letting
+  users *"sign in again with the same authentication method for one hour"*,
+  and records that *"changes to user attributes or authentication factors have
+  no effect on their ability to sign in again with their browser cookie"*
+  (`EV-102-051`). Whether `prompt=login` re-presents the full factor set
+  against that cookie, and whether `auth_time` advances each time, is the
+  question the observation must settle.
+
+One tier consequence follows and strengthens an existing decision: `prompt` is
+*"available in the managed login branding version only, not in the classic
+hosted UI"* (`EV-102-048`), and managed login branding requires the Essentials
+or Plus feature plan (`EV-102-051`). The `CR0` tier the assessment already
+prices for C2 is therefore forced twice over — by passkeys under
+`HG-102-029` and by step-up under `HG-102-030` — at no change in cost.
 
 **C3 Entra External ID — a documented primitive at a coarser grain.**
 External tenants support "step-up MFA with Conditional Access authentication
@@ -367,8 +405,9 @@ CBD-105 evaluation. CBD-104 therefore fills the unused `EV-102-017`–`029`
 block and continues at `EV-102-040`. Numbers are never reused or renumbered,
 so the resulting gap is a record of who registered what, not an error.
 
-All retrievals below were performed on **August 20, 2026** by desk research;
-none involved a provider account.
+Retrievals `EV-102-017`–`EV-102-041` were performed on **August 20, 2026** and
+`EV-102-048`–`EV-102-051` on **August 21, 2026** for the v1.1 revision, all by
+desk research; none involved a provider account.
 
 | ID | Claim | Provider | Source | Class | Conf. | Limitations | Re-verify by |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -380,17 +419,24 @@ none involved a provider account.
 | EV-102-022 | `HG-102-029`, `HG-102-034` | Amazon Cognito (I) | "Authentication flows", `https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html`, retrieved via search index | Documented | Low | Establishes that choice-based authentication (passkey, email OTP, SMS OTP, password) requires the Essentials feature plan or higher, and that passkey authentication can satisfy MFA when `FactorConfiguration` is `MULTI_FACTOR_WITH_USER_VERIFICATION`. Confidence held at Low because the page content was obtained through a search index rather than a direct fetch; fetch directly before selection, per the `EV-102-006` precedent. | February 20, 2027 |
 | EV-102-023 | `HG-102-028`, `HG-102-029`, `HG-102-030`, `HG-102-034`, `ID-104-019` | Microsoft Entra External ID (I) | "MFA in external tenants", `https://learn.microsoft.com/en-us/entra/external-id/customers/concept-multifactor-authentication-customers`, page dated May 21, 2026 | Documented | Medium | Establishes second factors (email OTP; SMS as a paid add-on, not a first factor; passkey/FIDO2), Conditional Access MFA enforcement, step-up via Conditional Access authentication context, the Microsoft-hosted sign-in page model, and passkey prerequisites — custom URL domain required, MFA before registration, local accounts only (unavailable behind external IdPs or email-OTP first factor). Does not state assertion lifetimes or per-action validity windows. | February 20, 2027 |
 | EV-102-024 | `HG-102-030`, `HG-102-037` | Auth0 (I) | "Step-up Authentication", `https://auth0.com/docs/secure/multi-factor-authentication/step-up-authentication` | Documented | Medium | Establishes per-action step-up requested through scopes (APIs) or ID-token claim checks (web apps), validated from token claims. States **no validity window** for the elevated result and no replay-protection detail; both halves of the `HG-102-037` question remain open. | February 20, 2027 |
-| EV-102-025 | `HG-102-030` | Amazon Cognito (I) | AWS Security Blog, "Implement step-up authentication with Amazon Cognito, Part 1", `https://aws.amazon.com/blogs/security/implement-step-up-authentication-with-amazon-cognito-part-1-solution-overview/`, published September 7, 2022 | Asserted | Low | AWS's own reference architecture: step-up requires a customer-deployed Lambda authorizer, two DynamoDB tables, a purpose-built SDK, and custom endpoints, with Cognito supplying only OAuth token issuance. Strong evidence the primitive was not native in 2022; weak evidence about the post-2024 Essentials platform. A blog, not versioned product documentation. Used only to sharpen `OQ-104-007`, never for a `PASS`. | November 20, 2026 |
+| EV-102-025 | `HG-102-030` | Amazon Cognito (I) | AWS Security Blog, "Implement step-up authentication with Amazon Cognito, Part 1", `https://aws.amazon.com/blogs/security/implement-step-up-authentication-with-amazon-cognito-part-1-solution-overview/`, published September 7, 2022 | Asserted | Low | AWS's own reference architecture: step-up requires a customer-deployed Lambda authorizer, two DynamoDB tables, a purpose-built SDK, and custom endpoints, with Cognito supplying only OAuth token issuance. Strong evidence the primitive was not native in 2022; weak evidence about the post-2024 Essentials platform. A blog, not versioned product documentation. Used only to sharpen `OQ-104-007`, never for a `PASS`. **Superseded at v1.1 by `EV-102-048`–`EV-102-051`**, which establish a native reauthentication primitive in current documentation. Retained unedited so the v1.0 position remains legible. | November 20, 2026 |
 | EV-102-026 | `HG-102-032` | Amazon Cognito (I) | "Managing user existence error responses", `https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-managing-errors.html` | Documented | Medium | Establishes `PreventUserExistenceErrors` uniform-response behaviour across authentication, recovery, and confirmation, simulated challenges and delivery responses, and the documented residuals: `SignUp` discloses taken usernames absent alias-attribute configuration, and SRP with alias attributes may not fully suppress existence. API-level behaviour; the `HG-102-032` pass test additionally requires hosted-screen observation. | February 20, 2027 |
 | EV-102-027 | `HG-102-031` | Auth0 (I) | "Manage User Sessions with Auth0 Management API", `https://auth0.com/docs/manage-users/sessions/manage-user-sessions-with-auth0-management-api` | Documented | Medium | Establishes per-user session listing, per-session and all-session revocation endpoints, their restriction to Enterprise plans, asynchronous eventually-consistent deletion, back-channel logout on deletion, and that refresh tokens can remain active after session deletion. Does not establish the revocation surface available on non-Enterprise tiers; `OQ-104-008`. | February 20, 2027 |
 | EV-102-028 | `HG-102-033`, `ID-104-012`, `CT-102-007` | Auth0 (I) | "Log Data Retention", `https://auth0.com/docs/deploy-monitor/logs/log-data-retention` | Documented | Medium | Establishes tenant log retention by plan — 1 day (Starter/Free), 5 days (Essentials), 10 days (Professional), 30 days (Enterprise) — and log streaming as the externalization path. Does not answer the `HG-102-033` analytics-reuse question; it bounds how long provider-side evidence exists, which is why `ID-104-012` keeps the store of record on CoBudget's side. | February 20, 2027 |
 | EV-102-029 | Screening class 3 | Google Cloud Identity Platform (I) | "Authentication concepts", `https://docs.cloud.google.com/identity-platform/docs/concepts-authentication` | Documented | Medium | Enumerates password, email, phone/SMS, federated (Google, Facebook, Twitter, GitHub), custom, and anonymous methods, with SMS and TOTP MFA guides, and names no passkey, WebAuthn, or FIDO2 method. Absence from this page is not proof of absence from the entire catalog; used for screening only, and `OQ-104-013` carries confirmation. No gate outcome rests on this record. | February 20, 2027 |
 | EV-102-040 | `HG-102-031` | Amazon Cognito (I) | "Ending user sessions with token revocation", `https://docs.aws.amazon.com/cognito/latest/developerguide/token-revocation.html` | Documented | Medium | Establishes per-refresh-token revocation (`RevokeToken`, the `/oauth2/revoke` endpoint) that leaves other refresh tokens untouched, self-service and administrative global sign-out, revocation enabled by default on new app clients, and the caveat that revoked JWTs remain valid to any verifier that checks only signature and expiry. Establishes capability, not the exercised pass test. | February 20, 2027 |
 | EV-102-041 | `HG-102-031` | Microsoft Entra External ID (I) | Microsoft Graph v1.0 reference, "user: revokeSignInSessions", `https://learn.microsoft.com/en-us/graph/api/user-revokesigninsessions`, content updated July 23, 2025 | Documented | Medium | Establishes per-user revocation of all refresh tokens and browser session cookies via `signInSessionsValidFromDateTime` reset, a stated propagation delay of up to a few minutes, and least-privilege permissions. Per-user only — no per-session granularity — and the note that it does not cover external users signing in through a home tenant concerns B2B guests; external-tenant consumer accounts are local. Access-token behaviour until expiry is not stated here; `OQ-104-009`. | February 20, 2027 |
+| EV-102-048 | `HG-102-030`, `HG-102-037` | Amazon Cognito (I) | "The redirect and authorization endpoint", `https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html` | Documented | Medium | Establishes the complete `/oauth2/authorize` parameter set, including `prompt=login` ("requires users to re-authenticate even if they have an existing session"), `prompt=none`, `nonce` ("to guard against replay attacks"), `state`, and `resource` binding under RFC 8707. Records that `prompt` is available in the managed login branding version only, not the classic hosted UI. **`max_age` and `acr_values` are absent from the documented parameter list**; absence from this page is not proof the endpoint rejects them, which is part of `OQ-104-007`. Establishes capability, not the exercised pass test. | February 21, 2027 |
+| EV-102-049 | `HG-102-030`, `HG-102-037` | Amazon Cognito (I) | "Understanding the identity (ID) token", `https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-the-id-token.html` | Documented | Medium | Establishes the ID token claim set including `auth_time` ("the authentication time, in Unix time format, that your user completed authentication"), `nonce`, `origin_jti`, and `jti`, and a configurable lifetime between 5 minutes and 1 day per app client. **No `acr` or `amr` claim is documented in the payload or described.** The page notes a pre token generation Lambda trigger can add custom claims; whether such a trigger can carry the factors used is `OQ-104-007`. | February 21, 2027 |
+| EV-102-050 | `HG-102-030`, `HG-102-037` | Amazon Cognito (I) | "Understanding the access token", `https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-the-access-token.html` | Documented | Medium | Establishes that the access token also carries `auth_time`, plus `origin_jti` revocation linkage and `aud` resource binding when requested. **No `acr` or `amr` claim is documented.** Confirms the 5-minute-to-1-day lifetime and warns that a sub-hour token lifetime does not shorten the one-hour managed login cookie. Pre token generation triggers require the Essentials or Plus feature plan. | February 21, 2027 |
+| EV-102-051 | `HG-102-030`, `CT-102-001` | Amazon Cognito (I) | "User pool managed login", `https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html` | Documented | Medium | Establishes the one-hour `cognito` session cookie — users "can sign in again with the same authentication method for one hour", "changes to user attributes or authentication factors have no effect on their ability to sign in again with their browser cookie", and cookie authentication does not extend the hour. Establishes that the classic hosted UI is the only domain option on the Lite feature plan and does not support passkey sign-in, so managed login — and therefore `prompt` — requires Essentials or Plus. Does **not** state how `prompt=login` interacts with the cookie, which is `OQ-104-007`(a). | February 21, 2027 |
 
 Six further numbers are reserved, following CBD-103 §9's practice, so the
 completing symmetric pass can register its records adjacent to the questions
-they answer without renumbering:
+they answer without renumbering. The v1.1 revision deliberately did **not**
+draw on this block: it deepened one candidate rather than completing the pass
+symmetrically, so it continued at `EV-102-048` and left the reservation intact
+for the work `OI-104-007` actually names.
 
 | ID | Status |
 | --- | --- |
@@ -414,7 +460,7 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | OQ-104-004 | Region list and subprocessor list, obtained **and dated**, including the C3 United States external-tenant residency position and the C4 tenant-region options | `HG-102-011` | Retrieve for all three |
 | OQ-104-005 | Contractual statement of provider backup retention, region, and expiry for identity data. Silence fails this gate. | `HG-102-013` | Ask each vendor explicitly |
 | OQ-104-006 | Customer-obtainable evidence of vendor staff access to identity data — including whether Customer Lockbox covers Entra External ID surfaces, and what Auth0 support access to a tenant produces as evidence | `HG-102-007`–`009` | Retrieve; put to vendors where undocumented |
-| OQ-104-007 | Does current Cognito (Essentials generation) offer an action-bindable reauthentication assertion with a stated validity window, without customer-built orchestration? | `HG-102-030` | Put directly to AWS before the observation pass; a "no" is a documentary `FAIL` under §7.1 |
+| OQ-104-007 | **Narrowed at v1.1**, the native primitive having been established (§7.1). Three residuals for AWS: (a) does `prompt=login` re-present the full configured factor set against the one-hour managed-login cookie, and does `auth_time` advance each time; (b) is any assurance-level indication obtainable — `acr`, `amr`, or a pre-token-generation trigger carrying the factors used; (c) is `max_age` supported but undocumented, planned, or absent by design? | `HG-102-030`, `HG-102-037` | Put directly to AWS. No longer a documentary `FAIL` risk; (a) additionally shapes the observation |
 | OQ-104-008 | Which provider-held artifacts can be revoked on Auth0's non-Enterprise tiers, and does that surface cover every `ID-104-005` artifact? | `HG-102-031` | Retrieve; affects the `CR0` tier in assessment §6 |
 | OQ-104-009 | C3 per-session revocation granularity, continuous-access token re-evaluation in external tenants, and assertion lifetime configuration; C4 step-up validity window | `HG-102-031`, `HG-102-037` | Retrieve for C3 and C4 |
 | OQ-104-010 | MFA policy-enforcement mechanics on the evaluated tier for C4 and C2 (enforce-for-all-users configuration) | `HG-102-029` | Fetch the MFA policy documentation directly, including a direct fetch replacing `EV-102-022` |
