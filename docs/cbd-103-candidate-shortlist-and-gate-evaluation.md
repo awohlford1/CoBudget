@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering eleven provider-level records for reuse by every sibling category (§3.5, §9). It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering seventeen provider-level records for reuse by every sibling category (§3.5, §9). It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. |
 | Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
@@ -144,17 +144,24 @@ this.
 `OI-103-009` is **partially discharged, not closed.** On August 21, 2026 a
 documentary pass was run across the ten `DOC` cross-category gates, symmetrically
 by construction: each question was put to all three candidates and each answer
-was recorded whether or not it favoured the candidate. Eleven records were
+was recorded whether or not it favoured the candidate. Seventeen records were
 registered — `EV-102-007`–`012` in the block v1.0 reserved for exactly this, and
-`EV-102-162`–`167` in a new block above the CBD-15 range.
+`EV-102-162`–`173` in a new block above the CBD-15 range.
 
-Four gate outcomes moved and no verdict did. Three gates are now settled for at
-least two candidates (`HG-102-005`, `HG-102-010`, `HG-102-011`), and four are
-better documented but still `UNPROVEN` (`HG-102-006`, `007`, `008`, `009`).
-Three were not advanced at all: `HG-102-002` correlation-identifier lifetime,
-`HG-102-003` purpose separation, and `HG-102-013` contractual backup behaviour.
-Those three, plus the six category `DOC` gates, are what remains of
-`OI-103-009`.
+Four gate outcomes moved and no verdict did:
+
+* **Settled for at least two candidates** — `HG-102-005`, `HG-102-010`,
+  `HG-102-011`.
+* **Better evidenced but still `UNPROVEN`** — `HG-102-006`, `007`, `008`,
+  `009`, `013`. Two of these produced findings rather than outcomes: §7.6 shows
+  that no candidate documents a restore-approval permission, and §7.4 that
+  Customer Lockbox covers almost no Azure service CBD-15 evaluates.
+* **Not advanced at all** — `HG-102-002` correlation-identifier lifetime and
+  `HG-102-003` purpose separation. Both ask about a provider's internal data
+  model rather than a published capability, and neither was attempted here.
+
+`HG-102-002`, `HG-102-003`, and the six category `DOC` gates are what remains of
+`OI-103-009` for this category.
 
 Three properties of this pass are worth stating plainly, because they constrain
 how its results may be read.
@@ -179,6 +186,14 @@ Microsoft's data-access page at the same class `EV-102-001` gives AWS's operator
 page, because they are the same form of source. Filing one as `Documented` and
 the other as `Asserted` would have handed C3 two gate outcomes on nothing but a
 classification decision.
+
+**Two records are registered for what they rule out rather than what they
+establish.** `EV-102-169` records that the Microsoft retention page which
+appears to answer `HG-102-013` is scoped to Microsoft 365 and not to Azure, and
+`EV-102-170` records that the AWS DPA could not be parsed at all. Neither
+supports a gate outcome. They exist so the next evaluator does not spend the
+same retrieval twice, and so that a gap caused by CoBudget's tooling is never
+mistaken for a gap in a vendor's contract.
 
 ## 4. Screening
 
@@ -267,14 +282,14 @@ Config gate.
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-103-002` |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Screenshot explicitly insufficient. |
 | HG-102-005 no standing credential | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled at v1.1 and now a differentiator — see §7.5.** C1 `EV-102-006` (Privileged Access Manager, native). C3 `EV-102-011` (Privileged Identity Management, native, time-bound with start and end dates, approval, justification, downloadable audit history). C2 stays `UNPROVEN`: `EV-102-008` establishes that AWS ships no native capability and validates four third-party partner products instead. That is not a `FAIL` — AWS does not meet the fail condition — but whether a partner integration satisfies a `Vendor`-type gate is `OI-103-017`. |
-| HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Partial material at v1.1, none of it sufficient. The gate needs four separable permissions — backup read, key use or recovery, restore execution, restore approval — held by different principals. C2 `EV-102-009` establishes the opposite for the default case: under AWS owned keys the customer *"cannot change their policies"* and key activity is *"Not viewable by the customer"*, which is a custody question rather than a separability answer. C3 `EV-102-163` establishes Managed HSM as *"a customer-owned security domain where Microsoft has no access to your key material"*, which addresses custody but not the four-way split. **Firm** under catalog §2.5; also gated in practice by `OI-102-022`. |
+| HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **Asked symmetrically of all three at v1.1 and the answer is the same for all three — see §7.6.** The gate needs four separable permissions: backup read, key use or recovery, restore execution, and restore approval. Three of the four are separable everywhere — C1 `EV-102-173` (`cloudsql.backupRuns.get` versus `cloudsql.instances.restoreBackup`, with `roles/cloudsql.editor` carrying *"No ability to import data or restore from a backup"*), C2 `EV-102-172` (`AWSBackupServiceRolePolicyForBackup` and `AWSBackupServiceRolePolicyForRestores` as distinct policies), C3 `EV-102-171` (Backup Reader, Backup Operator, Backup Contributor). **No candidate documents a restore-approval permission at all.** Custody material at `EV-102-009` and `EV-102-163` addresses the key leg without addressing the split. Not a `FAIL` — the fail condition is one role implying all four, which no candidate meets — but not passable as written either. **Firm** under catalog §2.5; `OI-103-020`; also gated in practice by `OI-102-022`. |
 | HG-102-007 no routine staff path | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Both vendor positions are now on the record and both are `Asserted`, which §3.2 cannot convert to a `PASS`. C2 `EV-102-001`, `EV-102-010`: *"AWS support personnel who assist customers with their support requests do not have access to customer data."* C3 `EV-102-167`: *"Microsoft engineers don't have default access to cloud customer data"*, qualified by *"minimizing standing access to production data"* rather than eliminating it. C1 not retrieved. |
 | HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Unchanged at v1.1, and the reason is now specific rather than general: **the two trust pages retrieved for `HG-102-007` were each checked for this gate and neither addresses it.** `EV-102-010` does not mention impersonation, break-glass, or unrestricted log or database browsing; `EV-102-167` does not either. Silence on a break-glass capability is not evidence that none exists, which is what this gate asks about. `OQ-103-023`. |
 | HG-102-009 staff-access evidence | DOC | **`PASS`** | `UNPROVEN` | `UNPROVEN` | `EV-102-002`–`004` for C1. **Both non-passing positions are now documented rather than merely unretrieved.** C2 `EV-102-001`, `EV-102-010`: customer visibility is scoped to *"on behalf of"* service operations, which raises a `FAIL` question — `OI-103-018`. C3 `EV-102-005`, `EV-102-012`: **Azure Container Apps is absent from the Customer Lockbox supported-services list**, so the C3 runtime this evaluation carries has no Lockbox coverage — §7.4. Neither flips: absence from a list is not evidence of absence from the product. See §7.1. |
 | HG-102-010 encryption in transit and at rest | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled at v1.1 for two of three.** The pass test needs both halves with algorithm and key custody stated. C1 `EV-102-164` (AES-256, AES-GCM, DEK→KEK→Keystore, *"We own and manage the keys"*) and `EV-102-165` (ALTS, PSP). C3 `EV-102-162` (AES-256 DEK, KEK never leaves Key Vault) and `EV-102-163` (MACsec, AES-256, SHA-384). C2's at-rest half is fully established by `EV-102-009`, but its transport half rests only on `EV-102-166`, which AWS marks *"for historical reference only"* — **a retrieval gap, not an AWS deficiency**. `OQ-103-022` names the re-source. |
 | HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **The first gate in the CBD-15 set where C2 leads.** C2 `EV-102-007`: an enumerated list, dated "Last Updated: July 28, 2026" on the page itself, with a 30-day advance-notice commitment and region scoping — the pass test asks that the list be *"obtained and dated"*, and it was. C1 and C3 stay `UNPROVEN` because neither list was **obtained**: Google's page defeated retrieval on three attempts, and Microsoft's list sits on the Service Trust Portal behind a separate retrieval path (`EV-102-167` names it and its six-month notice commitment). Both are retrieval gaps on CoBudget's side, not vendor silence — `OQ-103-018`. |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Request must be exercised. |
-| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Contractual class; still not obtained for any candidate. **The v1.1 pass sharpened why this stays `UNPROVEN` rather than becoming a `FAIL`.** The pass test says *"Silence fails"*, but that means the **provider's** silence once its contract has been read — not CoBudget's failure to read it. No DPA was obtained here, so the gate is unretrieved, not failed. This is the one gate in the set where completing the documentary pass could produce `FAIL`s across every candidate at once, and CBD-108 should not be surprised by that. `OQ-103-024`. |
+| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Contractual class; still not obtained for any candidate. **The v1.1 pass read the contracts, and the position is now precise rather than blank.** The pass test says *"Silence fails"*, but that means the **provider's** silence once its contract has been read — not CoBudget's failure to read it. One of three was read. C1 `EV-102-168`: the Cloud Data Processing Addendum states a recovery window and a 180-day expiry covering *"existing copies"*, but defers region to Service Specific Terms not retrieved — two of the three elements, so still not a `PASS`. C2 `EV-102-170`: the DPA PDF is compressed and no clause text could be extracted. C3 `EV-102-169`: the retention page that appears to answer this is scoped to **Microsoft 365, not Azure**, and is registered as a negative record so it is not re-found and misread. This is the one gate in the set where completing the documentary pass could produce `FAIL`s across every candidate at once, and CBD-108 should not be surprised by that. `OQ-103-024`. |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `TD-103-017`, `TD-103-018`, `TD-103-022`. Non-exceptable under §5.2. |
 | HG-102-015 append-only evidence | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Retention-lock must be demonstrated. |
 
@@ -481,6 +496,61 @@ satisfies a gate the catalog types `Vendor` is a reading question the evaluator
 should not settle — `OI-103-017` — and it carries a `CR0` cost consequence that
 no price has yet been put to.
 
+### 7.6 Every candidate separates three of the four custody duties, and none separates the fourth — added at v1.1
+
+`HG-102-006` is one of the two **firm** gates, and `SR-94-069` states the
+requirement it serves without qualification: *"Data, key, approval, evidence,
+and return-to-service duties MUST remain organizationally and technically
+separated; one person MUST NOT combine customer data and keys or approve their
+own access."*
+
+The pass test breaks that into four permissions that must be separable — backup
+read, key use or recovery, restore execution, and restore approval. Asked of all
+three candidates on the same terms, the result is uniform:
+
+| Leg | C1 Google Cloud | C2 AWS | C3 Azure |
+| --- | --- | --- | --- |
+| Backup read | `cloudsql.backupRuns.get`/`.list` | `AWSBackupAuditAccess` | Backup Reader |
+| Restore execution | `cloudsql.instances.restoreBackup` | `AWSBackupServiceRolePolicyForRestores` | Backup Operator + Contributor on target |
+| Key use or recovery | Cloud KMS IAM (recorded by the PostgreSQL evaluation) | KMS key policy (`EV-102-009`) | Key Vault / Managed HSM (`EV-102-163`) |
+| **Restore approval** | **not documented** | **not documented** | **not documented** |
+
+Three legs are genuinely separable everywhere. Google states the separation in
+its role descriptions — `roles/cloudsql.editor` carries *"No ability to import
+data or restore from a backup"*. AWS ships backup and restore as distinct
+managed policies. Azure ships three built-in roles and frames them as duty
+segregation in its own words.
+
+**The fourth leg does not exist as a permission on any of the three.** No
+approval step for a restore appears in any of the three sources, and none was
+found elsewhere.
+
+Two observations follow, and neither is a finding against a vendor.
+
+**This is a gate-design question, not a provider gap.** A cloud IAM system
+grants or denies; it does not natively model "a second person must approve this
+specific restore". Read strictly, `HG-102-006` is unsatisfiable by any
+hyperscaler, which mirrors `OI-130-010` in the push and SMS category and cannot
+be the catalog's intent. `OI-103-020` puts it to the Product Owner.
+
+**One candidate has the nearest mechanism, and it is the one this evaluation
+already credited elsewhere.** Azure's Privileged Identity Management
+(`EV-102-011`) requires approval to *activate* a privileged role, so approval
+can be bound to the act of becoming able to restore even though it cannot be
+bound to the restore call. That is a real difference from C1 and C2, which would
+need a third-party product or a CoBudget-side control. It is **not** scored here,
+because reading it as satisfying the gate would convert a `Vendor` gate into a
+`Config` one, and §2.5 forbids widening a firm gate by drafting. The point is
+recorded so `OI-103-020` can be decided with it in view.
+
+Note also what this does **not** establish. That distinct permissions exist says
+nothing about whether they are *held* by different principals in CoBudget's
+account — that is `§2.5.1`'s named-second-principal disposition and an
+observation, not a document. And C1's predefined roles collapse restore into
+`roles/cloudsql.admin`, *"Full control for all Cloud SQL resources"*, so the
+separation there depends on building a custom role rather than on using what
+ships.
+
 ## 8. Why no weighted rubric total is published
 
 Rubric rule `R4` requires that per-dimension subscores always accompany a total,
@@ -553,7 +623,7 @@ than a hosting-specific one.
 
 `EV-102-001`–`161` are fully claimed by the six category evaluations, and
 `EV-102-132`–`161` were the last block allocated. **This pass allocates
-`EV-102-162`–`181`**, using `162`–`167` now and reserving `168`–`181` for its
+`EV-102-162`–`181`**, using `162`–`173` now and reserving `174`–`181` for its
 completion. A future block starts above `181`.
 
 | ID | Claim | Provider | Source | Class | Conf. | Limitations | Re-verify by |
@@ -564,18 +634,18 @@ completion. A future block starts above `181`.
 | EV-102-165 | `HG-102-010` | Google Cloud (X) | "Encryption in transit", `https://docs.cloud.google.com/docs/security/encryption-in-transit` | Documented | Medium | Establishes the transport half by named mechanism: *"Google's infrastructure uses ALTS for the authentication, integrity, and encryption of connections from the GFE to a Google Cloud service, and from one Google Cloud service to another Google Cloud service"*, and *"Google infrastructure uses PSP to encrypt traffic within and between our data centers."* Establishes the scope claim *"Google Cloud encrypts customer data in transit within Google's networks, unless described otherwise in this section"* — note the carve-out — and that *"VM-to-VM connections within VPC networks and peered VPC networks inside of Google's production network are integrity-protected and encrypted."* Client-facing traffic is *"secured with TLS"* over HTTPS, HTTP/2 or HTTP/3, terminated at the GFE. **No TLS version floor was stated on the retrieved content**, so the minimum version is not established — `OQ-103-021`. | February 21, 2027 |
 | EV-102-166 | `HG-102-010` | AWS (X) | "Encrypting Data-at-Rest and Data-in-Transit", Logical Separation on AWS whitepaper, `https://docs.aws.amazon.com/whitepapers/latest/logical-separation/encrypting-data-at-rest-and--in-transit.html` | Documented | **Low** | **Confidence lowered below class because the vendor disclaims the source**: the page opens *"This whitepaper is for historical reference only. Some content might be outdated and some links might not be available."* Subject to that, it states *"All network traffic between AWS data centers is transparently encrypted at the physical layer"*, that *"All traffic within a VPC and between peered VPCs across regions is transparently encrypted at the network layer when using supported Amazon EC2 instance types"* — conditional on instance type, which CoBudget's runtime choice may not satisfy — and that *"All AWS service endpoints support TLS."* No minimum TLS version is stated. Also establishes FIPS 140-2 validated HSMs where *"plaintext keys cannot be used outside the HSM by anyone, including AWS employees"*, that *"Customer keys can only be used within the AWS region in which they were created"*, and that *"Every request made of AWS KMS is logged to AWS CloudTrail."* **This record is not relied on for any gate outcome.** A current AWS source for the transport half was not retrieved — `OQ-103-022`. | November 21, 2026 |
 | EV-102-167 | `HG-102-007`, `HG-102-008`, `HG-102-011` | Microsoft (X) | "Microsoft Data Access", Microsoft Trust Center, `https://www.microsoft.com/en-us/trust-center/privacy/data-access` | Asserted | Low | Classified **Asserted** for the same reason `EV-102-001` is: a vendor statement about its own internal controls, on a trust page rather than product documentation, with no independent support and no version. Classifying it as Documented while AWS's counterpart is Asserted would advantage Azure by a filing decision. Subject to that, it states *"Microsoft engineers don't have default access to cloud customer data. Instead, they are granted access, under management oversight, only when necessary"* and that virtual access is restricted by *"role-based access control, multifactor authentication, minimizing standing access to production data, and other controls"* — **minimizing** standing access, not eliminating it. Establishes the subprocessor notice commitment: *"Microsoft publishes the names of any new subprocessors for its online services at least six months in advance"*, against AWS's 30 days. Does **not** address break-glass, impersonation, or unrestricted query. The Microsoft Online Services Subprocessor List itself was **not obtained** — see `OQ-103-018`. Asserted cannot produce a `PASS`. | November 21, 2026 |
+| EV-102-168 | `HG-102-013` | Google Cloud (X) | "Cloud Data Processing Addendum", `https://cloud.google.com/terms/data-processing-addendum` | Documented | Medium | The only one of the three DPAs whose text was successfully retrieved. Establishes an **expiry** covering copies, §6.2 verbatim: *"Customer instructs Google to delete all remaining Customer Data (including existing copies) from Google's systems at the end of the Term. After a recovery period of up to 30 days from that date, Google will comply with this Instruction as soon as reasonably practicable and within a maximum period of 180 days."* Two of the pass test's three elements are therefore present — a retention window of up to 30 days recovery, and an expiry of 180 days maximum. The third is **not**: §10.1 defers data location to the Service Specific Terms and Appendix 3, neither retrieved, so region is stated by reference rather than stated. The contract does not use the word backup or separately describe provider-held backup copies; *"including existing copies"* is the nearest language. **Not sufficient for a `PASS`, and not evidence of silence either** — the deferred documents exist and were not read. `OQ-103-025`. | February 21, 2027 |
+| EV-102-169 | `HG-102-013` | Microsoft (X) | "Data retention, deletion, and destruction in Microsoft 365", `https://learn.microsoft.com/en-us/compliance/assurance/assurance-data-retention-deletion-and-destruction-overview`, page dated June 24, 2024 | Documented | Medium | **Registered as a negative record: this page does not apply to the candidate.** It is scoped to Microsoft 365 in its title, in its description — *"An overview of Microsoft policies for Microsoft 365"* — and in every provision, and CoBudget's C3 candidacies are Azure services. A search summary presented its contents as general Microsoft policy; they are not. Recorded so the next evaluator does not re-find it and mistake it for the answer. For completeness, what it states for M365: *"If a paid subscription ends or is terminated, Microsoft retains customer data stored in Microsoft 365 in a limited-function account for 90 days"*, then *"No more than 180 days after expiration or termination... Microsoft disables the account and deletes all customer data"*, and *"Once the maximum retention period for any data elapses, the data is rendered commercially unrecoverable."* **No conclusion about Azure is drawn from this record in either direction.** `OQ-103-025`. | February 21, 2027 |
+| EV-102-170 | `HG-102-013` | AWS (X) | "AWS Data Processing Addendum (DPA)", `https://docs.aws.amazon.com/whitepapers/latest/navigating-gdpr-compliance/aws-data-processing-addendum-dpa.html`, and the DPA itself at `https://d1.awsstatic.com/legal/aws-dpa/aws-dpa.pdf` | Documented | **Low** | **Confidence lowered below class because the operative document could not be read.** The DPA PDF was retrieved but its content streams are compressed and no clause text could be extracted, so nothing in it is quoted or relied on here. The summary page establishes only that the DPA exists, that it *"is incorporated into the AWS Service Terms and applies automatically to all customers globally"*, and that a Supplementary Addendum adds commitments about **governmental requests** — redirecting them to customers, notifying, challenging overly broad requests, and minimizing disclosure. Those concern compulsory disclosure, not backup behaviour. The page **does not address AWS's own backup retention, an expiry for AWS-held copies, or a region commitment for backups**. This is a retrieval limitation on CoBudget's side, not evidence that AWS's contract is silent. `OQ-103-025`. | November 21, 2026 |
+| EV-102-171 | `HG-102-006` | Azure (X) | "Manage Backups with Azure role-based access control", `https://learn.microsoft.com/en-us/azure/backup/backup-rbac-rs-vault`, page dated April 30, 2026 | Documented | Medium | Establishes three distinct built-in roles and the vendor's own separation-of-duties framing: *"Azure RBAC enables fine-grained access management for Azure. Using Azure RBAC, you can segregate duties within your team."* **Backup Reader** — *"permissions to view all backup management operations"*; **Backup Operator** — *"everything a contributor does except removing backup and managing backup policies... can't perform destructive operations"*; **Backup Contributor** — *"all permissions to create and manage backup except deleting Recovery Services vault and giving access to others."* Establishes that restoring a PostgreSQL server needs **two roles at two scopes** — Backup Operator on the vault plus Contributor on the target server — so restore execution is not implied by backup management alone. **Establishes no restore-approval permission**; no approval step appears anywhere on the page. Custom roles are available. | February 21, 2027 |
+| EV-102-172 | `HG-102-006` | AWS (X) | "Managed policies for AWS Backup", `https://docs.aws.amazon.com/aws-backup/latest/devguide/security-iam-awsmanpol.html` | Documented | Medium | Establishes that backup and restore are separable at the policy level by their existence as distinct managed policies: `AWSBackupServiceRolePolicyForBackup` and `AWSBackupServiceRolePolicyForRestores` are separate, alongside `AWSBackupOperatorAccess`, `AWSBackupFullAccess`, `AWSBackupAuditAccess`, `AWSBackupSearchOperatorAccess` and `AWSBackupServiceRolePolicyForItemRestores`. Audit is separable from operation: `AWSBackupAuditAccess` *"grants permissions for users to create controls and frameworks... and to audit AWS Backup resources and activities against their defined controls"*. Establishes that customer managed policies *"give you fine-grained controls to set access to backups"*, with the vendor's own example of scoping a backup administrator to RDS but not EFS. **Establishes no restore-approval policy or approval workflow**; none is named. The page exceeded the retrieval limit and was parsed for policy names and descriptions rather than read end to end. | February 21, 2027 |
+| EV-102-173 | `HG-102-006` | Google Cloud (X) | "Cloud SQL IAM roles and permissions", `https://docs.cloud.google.com/sql/docs/postgres/iam-roles` | Documented | Medium | Establishes distinct permission strings, which is what the gate asks for: `cloudsql.backupRuns.list` and `.get` are held by `roles/cloudsql.admin`, `editor` and `viewer`; `cloudsql.backupRuns.create` by admin and editor; `cloudsql.backupRuns.delete` and **`cloudsql.instances.restoreBackup` by `roles/cloudsql.admin` alone**. Establishes the separation explicitly in the role descriptions: `roles/cloudsql.viewer` is *"Read-only access to all Cloud SQL resources"* and `roles/cloudsql.editor` carries *"No ability to import data or restore from a backup"*, while `roles/cloudsql.admin` is *"Full control for all Cloud SQL resources."* **The only predefined role holding restore is full control**, so predefined roles alone collapse restore into everything else; the permission is nonetheless distinct and grantable through a custom role. **Establishes no restore-approval permission**; none is documented. | February 21, 2027 |
 
-Fourteen numbers are reserved rather than left as gaps, because the register is
+Eight numbers are reserved rather than left as gaps, because the register is
 append-only and a gap is indistinguishable from a deleted record:
 
 | ID | Status |
 | --- | --- |
-| EV-102-168 | **Reserved** for the cross-category documentary pass |
-| EV-102-169 | **Reserved** for the cross-category documentary pass |
-| EV-102-170 | **Reserved** for the cross-category documentary pass |
-| EV-102-171 | **Reserved** for the cross-category documentary pass |
-| EV-102-172 | **Reserved** for the cross-category documentary pass |
-| EV-102-173 | **Reserved** for the cross-category documentary pass |
 | EV-102-174 | **Reserved** for the cross-category documentary pass |
 | EV-102-175 | **Reserved** for the cross-category documentary pass |
 | EV-102-176 | **Reserved** for the cross-category documentary pass |
@@ -610,6 +680,7 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | OQ-103-022 | A **current** AWS source for transport encryption between data centres and within a VPC | `HG-102-010` | The only source found is `EV-102-166`, which AWS marks "for historical reference only" and which conditions VPC-level encryption on "supported Amazon EC2 instance types". Blocks the one gate half separating C2 from a third `PASS`. |
 | OQ-103-023 | Does any candidate document a break-glass, impersonation, or unrestricted-query capability for its own staff? | `HG-102-008` | Both trust pages retrieved at v1.1 are silent on all three. Silence is not absence, and this gate asks precisely about a capability a vendor has no incentive to describe. |
 | OQ-103-024 | Do the AWS, Google and Microsoft DPAs state provider backup retention, region, and expiry? | `HG-102-013` | **Read the DPAs before CBD-108 ranks anything.** The pass test says "Silence fails", so if the contracts are silent this gate fails for every candidate simultaneously — the only gate in the set with that property. It is currently `UNPROVEN` only because the contracts have not been read, which is not the same thing. |
+| OQ-103-025 | The three specific documents that would settle `HG-102-013`: Google's **Service Specific Terms** and CDPA Appendix 3, an extractable copy of the **AWS DPA**, and an **Azure**-scoped retention statement | `HG-102-013` | Narrows `OQ-103-024` from "read the DPAs" to three named retrievals. `EV-102-168` shows Google's contract states two of the three elements and defers the third; `EV-102-170` shows the AWS DPA could not be parsed; `EV-102-169` shows the Microsoft page that looks like the answer is Microsoft 365 only. None of the three is evidence of provider silence yet. |
 
 ## 11. Open items
 
@@ -623,3 +694,4 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | OI-103-017 | **Does a validated third-party integration satisfy a gate the catalog types `Vendor`?** `EV-102-008` establishes that AWS ships no native temporary-elevated-access capability and instead validates four partner products. | **Product Owner decision on the gate's reading.** Read as satisfied, C2 gains `HG-102-005` and the gate stops differentiating. Read as unsatisfied, C2's only route to it is a paid third party, which is a `CR0` fact no price has been put to. The evaluator declined to settle this by drafting, as `HG-102-005` is **firm** under catalog §2.5 and firm gates should not be widened silently. |
 | OI-103-018 | **`HG-102-009` may be a `FAIL` for C2 rather than an `UNPROVEN`.** The pass test fails a provider that "logs only CoBudget's own API calls and not its own staff's access", and `EV-102-010` establishes that AWS's customer-visible record is scoped to *"on behalf of"* service operations. | **Product Owner decision.** No AWS equivalent of Access Transparency or Customer Lockbox was found, but this rests on two pages, and absence from two pages is not proof of absence from the product. Recorded as `UNPROVEN` with the question raised rather than declared a `FAIL` on thin retrieval. If it is a `FAIL`, C2 becomes `INELIGIBLE` in **every** category, which is why it should be settled deliberately. |
 | OI-103-019 | **Does "Azure Database for PostgreSQL" in the Customer Lockbox list cover Flexible Server?** The same list names "Azure Database for MySQL" and "Azure Database for MySQL Flexible Server" separately — §7.4. | **Affects CBD-105, not CBD-103.** Raised here because this evaluation owns `EV-102-012`. If Flexible Server is not covered, C3 has no Lockbox coverage in any of the five categories it is a candidate in. Raised rather than resolved unilaterally, and CBD-105 is not amended on this evaluator's reading of another category's candidate. |
+| OI-103-020 | **No hyperscaler documents a restore-approval permission, so `HG-102-006` may be unsatisfiable as written** — §7.6. Three of its four legs are separable on all three candidates; the fourth exists nowhere. | **Product Owner decision on the gate's reading**, and the same shape as `OI-130-010`. Read strictly, no hyperscaler can ever pass a **firm** gate, which cannot be the intent. Read as satisfied by an approval bound to the *activation* of the restoring role, Azure's Privileged Identity Management (`EV-102-011`) supplies it natively and the other two need a third party or a CoBudget-side control — which would make a `Vendor` gate turn on a `Config` mechanism. The evaluator declines to choose, because widening a firm gate by drafting is precisely what catalog §2.5 forbids. |
