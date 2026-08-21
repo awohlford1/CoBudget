@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Maps each CBD-130 acceptance criterion and deliverable to the exact evidence that answers it. §7 records that this is the last CBD-15 category evaluation, and what CBD-108 inherits from all six. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-130 acceptance criterion and deliverable to the exact evidence that answers it. §7 records that this is the last CBD-15 category evaluation, and what CBD-108 inherits from all six. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 16 `PN-130-*` decisions, the screening and 23-gate evaluation with its verdicts and `EV-102-132`–`140` records, the published rubric scores with their R5 profile, the operational and cost assessment with its verified segment conversion and `CR4` unknowns, and this traceability record. It approves no provider, performs no observation, sends no message, and registers no origination identity. **It expressly does not approve the `HG-102-073` exception**: `EX-102-001` reserves that decision, `OI-130-009` requests it, and C10 stands `INELIGIBLE` until it is granted. It leaves `OI-130-001`–`021`, `OI-130-010`'s gate-reading question, `OI-102-022`, `EG-91-006`, `EG-91-024`, and every `OQ-130` question open. |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Push and SMS Delivery Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Operational and Cost Assessment v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Push and SMS Delivery Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0 |
+| Confluence page | [CBD-130 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13860865) |
 | Repository baseline | `d7c3b29` |
 | Last updated | August 21, 2026 |
 
@@ -239,7 +239,7 @@ synchronization, and `OI-130-010` on carrier retention.
 
 | Property | Value |
 | --- | --- |
-| Reviewed by | Pending Product Owner review. |
+| Reviewed by | Alexander Wohlford — Product Owner, August 21, 2026. |
 | Independent review | None. |
 | Provider contact | None. All evidence is desk research retrieved August 21, 2026. No account was created, no message was sent, and no origination identity was registered. |
 | Mechanical verification | `scripts/audit-cbd-130.py`; `scripts/check-doc-vocabulary.py` |

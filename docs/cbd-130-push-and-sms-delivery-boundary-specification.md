@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Defines the push and SMS posture CBD-130 evaluates providers against. It records that Private MVP has no push provider to select, and that SMS does. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Defines the push and SMS posture CBD-130 evaluates providers against. It records that Private MVP has no push provider to select, and that SMS does. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Candidate Shortlist and Gate Evaluation v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-130 — Push and SMS Delivery Boundary Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13434891) |
 | Repository baseline | `d7c3b29` |
 | Last updated | August 21, 2026 |
 

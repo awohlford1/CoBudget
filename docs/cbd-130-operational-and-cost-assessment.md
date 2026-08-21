@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Records the operational and cost half of CBD-130 against the approved CBD-102 cost template. **It contains no prices**; §5 records every line as unknown under cost rule `CR4`. §2.2 carries the message-to-segment conversion CBD-130's acceptance criteria require, computed rather than assumed. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Records the operational and cost half of CBD-130 against the approved CBD-102 cost template. **It contains no prices**; §5 records every line as unknown under cost rule `CR4`. §2.2 carries the message-to-segment conversion CBD-130's acceptance criteria require, computed rather than assumed. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Push and SMS Delivery Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Push and SMS Delivery Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-130 — Channel Operations, Registration, Cost, and Exit Assessment](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13828097) |
 | Repository baseline | `d7c3b29` |
 | Last updated | August 21, 2026 |
 

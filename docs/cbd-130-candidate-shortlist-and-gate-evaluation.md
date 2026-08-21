@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Applies the approved CBD-102 method to the push transports and to SMS candidates. It records the CBD-15 set's **first `FAIL` and first `INELIGIBLE` verdict**, and publishes rubric scores as CBD-130's deliverables require — with §8.4 stating plainly what those numbers do and do not measure. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to the push transports and to SMS candidates. It records the CBD-15 set's **first `FAIL` and first `INELIGIBLE` verdict**, and publishes rubric scores as CBD-130's deliverables require — with §8.4 stating plainly what those numbers do and do not measure. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Push and SMS Delivery Boundary Specification v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Push and SMS Delivery Boundary Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-130 — Push and SMS Candidate Shortlist, Gate Evaluation, and Rubric Scores](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13795329) |
 | Repository baseline | `d7c3b29` |
 | Last updated | August 21, 2026 |
 
