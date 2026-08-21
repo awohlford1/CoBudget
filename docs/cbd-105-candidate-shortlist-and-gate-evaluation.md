@@ -147,8 +147,8 @@ documentation or a contract can settle. `CFG` marks a Config gate.
 | HG-102-006 separable custody | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Partial material at v1.2, none of it sufficient for the four-way split. C2 `EV-102-009`: under AWS owned keys — the default for new services since 2021 — key policies cannot be changed and key activity is *"Not viewable by the customer"*, which compounds the broad-admin observation already recorded at `EV-102-035`. C3 `EV-102-163`: Managed HSM is *"a customer-owned security domain where Microsoft has no access to your key material"*, alongside the explicit separation-of-duties statement at `EV-102-036`. **Firm** under catalog §2.5; `OI-102-022` still gates practice. `HG-102-039` below covers the category-D key half. **Asked symmetrically of all three hyperscalers at v1.1 and the answer is uniform**: backup read, restore execution and key use are separable on every one of them, and **none documents a restore-approval permission at all**. The hosting evaluation records the comparison and the reading question it raises at `OI-103-020` — read strictly, this firm gate is unsatisfiable by any hyperscaler, which mirrors the carrier half of `HG-102-074`. |
 | HG-102-007 no routine staff path | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Both hyperscaler positions now on the record, both `Asserted`, which §3.2 cannot convert to a `PASS`. C2 `EV-102-001`, `EV-102-010`. C3 `EV-102-167`: *"Microsoft engineers don't have default access to cloud customer data"*, qualified by *"minimizing standing access to production data"*. C1 not retrieved. |
 | HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Same position as the hosting evaluation, and now specific rather than general: both trust pages retrieved for `HG-102-007` were checked for this gate and **neither addresses impersonation, break-glass, or unrestricted query** — `OQ-103-023`. |
-| HG-102-009 staff-access evidence | DOC | **`PASS`** | `UNPROVEN` | `UNPROVEN` | `EV-102-002`–`004` + `EV-102-030`: Cloud SQL is Access Transparency-covered at GA. **C3's position is now precisely characterizable and it is not good — see §7.6.** `EV-102-012` retrieves the complete Customer Lockbox supported-services list: it names "Azure Database for PostgreSQL" but **not** "Azure Database for PostgreSQL Flexible Server", while naming "Azure Database for MySQL" and "Azure Database for MySQL Flexible Server" separately. Whether the shorter name covers this candidate is `OI-103-019`, and it is not a question this evaluation may answer in its own favour. C2 `EV-102-010`: visibility scoped to *"on behalf of"* operations — `OI-103-018`. See §7.1. |
-| HG-102-010 encryption in transit and at rest | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled for two of three at v1.2.** v1.0 had the service-level key facts (`EV-102-034`–`036`) but not the algorithm-and-custody statements the pass test demands, because those records were retrieved against `HG-102-039`. The provider-level pass supplies the missing half. C1 `EV-102-164` (*"AES-256 by default"*, AES-GCM, *"We own and manage the keys"*) with `EV-102-165` (ALTS, PSP) and CMEK at `EV-102-034`. C3 `EV-102-162` (AES-256 DEK, KEK never leaving Key Vault) with `EV-102-163` (MACsec, AES-256, SHA-384) and CMK at `EV-102-036`. C2 has the at-rest half (`EV-102-009` names 256-bit AES-GCM; `EV-102-035` covers RDS) but **no current AWS transport source was found** — `OQ-103-022`, a retrieval gap rather than an AWS deficiency. |
+| HG-102-009 staff-access evidence | DOC | **`PASS`** | `UNPROVEN` | `UNPROVEN` | `EV-102-002`–`004` + `EV-102-030`: Cloud SQL is Access Transparency-covered at GA. **C3's position is now precisely characterizable and it is not good — see §7.6.** `EV-102-012` retrieves the complete Customer Lockbox supported-services list: it names "Azure Database for PostgreSQL" but **not** "Azure Database for PostgreSQL Flexible Server", while naming "Azure Database for MySQL" and "Azure Database for MySQL Flexible Server" separately. **Resolved at v1.2 and the answer is no**: the Microsoft cloud security benchmark baseline for this exact service marks Customer Lockbox Supported **False** under control PA-8 — *"This feature is not supported to secure this service"* (`EV-102-175`). `OI-103-019` is closed by retrieval rather than by decision. **C3 has no Customer Lockbox coverage for this candidate.** C2 `EV-102-010`: visibility scoped to *"on behalf of"* operations — `OI-103-018`. See §7.1. |
+| HG-102-010 encryption in transit and at rest | DOC | `PASS` | `PASS` | `PASS` | **Settled for two of three at v1.2.** v1.0 had the service-level key facts (`EV-102-034`–`036`) but not the algorithm-and-custody statements the pass test demands, because those records were retrieved against `HG-102-039`. The provider-level pass supplies the missing half. C1 `EV-102-164` (*"AES-256 by default"*, AES-GCM, *"We own and manage the keys"*) with `EV-102-165` (ALTS, PSP) and CMEK at `EV-102-034`. C3 `EV-102-162` (AES-256 DEK, KEK never leaving Key Vault) with `EV-102-163` (MACsec, AES-256, SHA-384) and CMK at `EV-102-036`. C2 `EV-102-009` names 256-bit AES-GCM and `EV-102-035` covers RDS. **C2 settled at v1.1 by a later retrieval in the same pass**: `EV-102-174`, the current EC2 data-protection page, states *"All data flowing across AWS Regions over the AWS global network is automatically encrypted at the physical layer before it leaves AWS secured facilities"*, *"All traffic between AZs is encrypted"*, and the TLS floor *"We require TLS 1.2"*. It supersedes the historical whitepaper, which is no longer relied on for anything. C3 additionally gains service-level confirmation at `EV-102-176`: encryption at rest with service-managed keys *"covers the primary server, replicas, point-in-time-recovery (PITR), and backups"*, which is the per-service assurance the provider-level records could not give. |
 | HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **Settled for C2 at v1.2.** `EV-102-007`: an enumerated AWS-wide list dated "Last Updated: July 28, 2026" on the page, with a 30-day advance-notice commitment and region scoping. C1 and C3 remain `UNPROVEN` because neither list was **obtained** — Google's page defeated retrieval three times and Microsoft's sits on the Service Trust Portal (`OQ-103-018`). Both are CoBudget-side retrieval gaps, not vendor silence. |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. |
 | HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | **`PASS`** | `EV-102-033` states retention range, redundancy options, and expiry-on-deletion in writing, dated. C1/C2 equivalent pages not yet retrieved — `OQ-105-002`. |
@@ -178,15 +178,15 @@ summarizes.
 
 | | C1 | C2 | C3 |
 | --- | --- | --- | --- |
-| `PASS` | 4 | 2 | 5 |
+| `PASS` | 4 | 3 | 5 |
 | `PASS (design)` | 2 | 2 | 2 |
-| `UNPROVEN` | 18 | 20 | 17 |
+| `UNPROVEN` | 18 | 19 | 17 |
 | `FAIL` | 0 | 0 | 0 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
 
-**v1.2 moved four documentary outcomes and no verdict.** C1 gained
-`HG-102-010`; C2 gained `HG-102-011`; C3 gained `HG-102-005` and
-`HG-102-010`. All three remain capped by the eight observation gates in §3.
+**v1.2 moved five documentary outcomes and no verdict.** C1 gained
+`HG-102-010`; C2 gained `HG-102-011` and `HG-102-010`; C3 gained `HG-102-005`
+and `HG-102-010`. All three remain capped by the eight observation gates in §3.
 
 No candidate carries a `FAIL`, so no compensating control, exception, or
 residual-risk record is required, and nothing in exception rules §5 is engaged.
@@ -289,7 +289,7 @@ retention window, which the §3 observations cover. The matrix keeps the gate
 because the catalog marks it Vendor and this evaluation does not re-type
 approved gates.
 
-### 7.6 Customer Lockbox may not cover Flexible Server, and the list's own shape is the evidence — added at v1.2
+### 7.6 Customer Lockbox does not cover Flexible Server — added at v1.2
 
 §7.1 recorded C3's `HG-102-009` position as materially improved but unfinished.
 `EV-102-012` finishes characterizing it, and the answer is worse than
@@ -306,16 +306,31 @@ The list's own shape is what makes it more than weak. The same list names **both
 two separate entries. A list that distinguishes Flexible Server for one engine is
 not using the shorter name as an umbrella for the other.
 
-This evaluation does not resolve it. Resolving it in C3's favour would hand the
-candidate a gate outcome on an inference, and resolving it against C3 would take
-one away on the same inference. `OI-103-019` puts it to the Product Owner, and
-`OQ-105-011` names the retrieval that would settle it outright — the Microsoft
-cloud security benchmark control `PA-8` that `EV-102-012` says exists precisely to
-let a reader "review Customer Lockbox applicability for a service."
+**The inference was not relied on. The retrieval was made, and it agrees.**
+`EV-102-012` names the `PA-8` control as existing precisely to let a reader
+*"review Customer Lockbox applicability for a service"*, and the `PA-8` feature
+table in the Flexible Server security baseline reads Customer Lockbox Supported
+**False**, with the guidance *"This feature is not supported to secure this
+service"* (`EV-102-175`).
 
-If Flexible Server is not covered, C3 has no Customer Lockbox coverage in **any**
-of the five categories it is a candidate in, which is a cross-category fact
-CBD-108 should hold rather than a PostgreSQL one.
+One caution travels with that source and is the reason it is registered at Low
+confidence. **The baseline is demonstrably stale on a different row**: it marks
+Azure Private Link unsupported for Flexible Server, while the current security
+overview directs the reader to use Private Link (`EV-102-176`). A source wrong
+about one feature is not authority about another. So the load-bearing evidence
+stays `EV-102-012` — the current, dated supported-services list that omits this
+service — with the baseline as corroboration, and `EV-102-176` retrieved
+specifically to check whether current documentation contradicts the `PA-8` row.
+It does not; it does not mention Customer Lockbox at all.
+
+`OI-103-019` is therefore closed by retrieval rather than by Product Owner
+decision, and `OQ-105-011` closed with it. **C3 has no Customer Lockbox coverage
+in any of the five categories it is a candidate in**, which is a cross-category
+fact CBD-108 should hold rather than a PostgreSQL one.
+
+This does not make `HG-102-009` a `FAIL` for C3. The `EV-102-005` limitation
+still holds: absence from the Lockbox list is not evidence that no staff-access
+record exists by another route, and no such route has been looked for.
 
 ## 8. Evidence register
 
@@ -377,7 +392,7 @@ cross-referenced there rather than duplicated.
 | OQ-105-005 | Cross-account (C2) and cross-subscription (C3) isolated-restore routes, and Azure's post-restore key-revocation limitation | `HG-102-041`, `DP-105-007` | Retrieve the RDS snapshot-sharing page; put the Azure questions to Microsoft with `OQ-103-006` |
 | OQ-105-006 | pgaudit or equivalent extension availability and its log destination | AC2 | Retrieve ×3; interacts with `DP-105-010` routing |
 | OQ-105-007 | Maximum-connection limits by instance size ×3 | AC4 | Retrieve; the operational assessment's connection math currently rests on topology-side figures only |
-| OQ-105-011 | Does the Microsoft cloud security benchmark control `PA-8` list Customer Lockbox applicability for **Azure Database for PostgreSQL Flexible Server** specifically? | `HG-102-009` | `EV-102-012` names `PA-8` as the control that exists to "review Customer Lockbox applicability for a service". Retrieving it would settle `OI-103-019` outright and remove the need for a Product Owner reading. Cheap, and it should be done before CBD-108 ranks anything. |
+| OQ-105-011 | ~~Does `PA-8` list Customer Lockbox applicability for **Flexible Server**?~~ **Closed August 21, 2026 — it does, and the answer is not supported.** | `HG-102-009` | `EV-102-175` records the `PA-8` feature table reading Supported **False**. Raised and closed within v1.2; retained as a row because the register is append-only and because the retrieval carries a caveat worth keeping — the baseline is stale on its Private Link row, so `EV-102-012` remains the load-bearing source. |
 
 ## 10. Open items
 
