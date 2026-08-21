@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Carries CBD-107's second, third, and fifth deliverables: the account-type coverage assessment, the transaction lifecycle and data-field capability map, and the provider-signal record for future `FF-007` research. It selects no provider and no scoring algorithm. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Carries CBD-107's second, third, and fifth deliverables: the account-type coverage assessment, the transaction lifecycle and data-field capability map, and the provider-signal record for future `FF-007` research. It selects no provider and no scoring algorithm. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-107 — Transaction Lifecycle, Coverage, and Provider-Signal Map](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13565953) |
 | Repository baseline | `c15b526` |
 | Last updated | August 21, 2026 |
 

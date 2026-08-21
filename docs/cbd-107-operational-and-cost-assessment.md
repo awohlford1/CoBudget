@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Records the operational and cost half of CBD-107 against the approved CBD-102 cost template. **It contains no prices**; §5 records every line as unknown under cost rule `CR4`, and §5.1 records why that is structural in this category rather than a research gap. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Records the operational and cost half of CBD-107 against the approved CBD-102 cost template. **It contains no prices**; §5 records every line as unknown under cost rule `CR4`, and §5.1 records why that is structural in this category rather than a research gap. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Transaction Lifecycle and Coverage Map v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Transaction Lifecycle and Coverage Map v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-107 — Connection Operations, Support, Cost, and Exit Assessment](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13303816) |
 | Repository baseline | `c15b526` |
 | Last updated | August 21, 2026 |
 

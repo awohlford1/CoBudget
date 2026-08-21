@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Maps each CBD-107 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. §4 records a dependency the ticket states backwards. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-107 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. §4 records a dependency the ticket states backwards. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 18 `FC-107-*` decisions, the screening and 27-gate evaluation with its verdicts and `EV-102-092`–`109` records, the lifecycle and coverage map with its `PS-107-*` register, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, connects to no institution, and selects no institution-quality scoring algorithm. It leaves `OI-107-001`–`021`, `OI-102-022`, `FU-95-012`, `EG-91-005`, `EG-91-012`, `EG-91-021`, and every `OQ-107` question open — including `OI-107-008`, the `HG-102-060` reading that would move three verdicts, which this approval deliberately does **not** settle. |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v0.1; Candidate Shortlist and Gate Evaluation v0.1; Transaction Lifecycle and Coverage Map v0.1; Operational and Cost Assessment v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0 |
+| Confluence page | [CBD-107 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13598721) |
 | Repository baseline | `c15b526` |
 | Last updated | August 21, 2026 |
 
@@ -231,7 +231,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 
 | Property | Value |
 | --- | --- |
-| Reviewed by | Pending Product Owner review. |
+| Reviewed by | Alexander Wohlford — Product Owner, August 21, 2026. |
 | Independent review | None. |
 | Provider contact | None. All evidence is desk research retrieved August 21, 2026. No account was created, no institution was connected, and no sandbox was exercised. |
 | Mechanical verification | `scripts/audit-cbd-107.py`; `scripts/check-doc-vocabulary.py` |

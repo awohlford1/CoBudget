@@ -654,6 +654,64 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-106 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-106-acceptance-criteria-traceability.md",
     ),
+    # CBD-107 publishes after CBD-103, which it cites as a frozen source
+    # baseline: the send path, the edge, the diagnostic boundary and the
+    # secret boundary are all TD-103 decisions. It cites no CBD-104, CBD-105
+    # or CBD-106 document, so its position relative to those sets carries no
+    # dependency.
+    #
+    # Within the set the order follows the header citations. The boundary
+    # specification is cited by every other document; the evaluation is cited
+    # by the lifecycle map, the assessment and the traceability record; the
+    # lifecycle map is cited by the assessment and the traceability record;
+    # the assessment is cited by the traceability record, which nothing cites
+    # and which therefore publishes last and is not a baseline.
+    #
+    # These five pages were created as placeholders on August 21, 2026 to
+    # reserve the targets; the first successful run replaces that placeholder
+    # text with the merged approved v1.0 content.
+    Target(
+        key="cbd-107-specification",
+        doc_set="cbd-107",
+        page_id="13500417",
+        expected_title="CBD-107 — Connection and Provenance Boundary Specification",
+        path="docs/cbd-107-connection-and-provenance-boundary-specification.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-107-evaluation",
+        doc_set="cbd-107",
+        page_id="13533185",
+        expected_title=(
+            "CBD-107 — Financial-Data Connectivity Candidate Shortlist "
+            "and Gate Evaluation"
+        ),
+        path="docs/cbd-107-candidate-shortlist-and-gate-evaluation.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-107-lifecycle",
+        doc_set="cbd-107",
+        page_id="13565953",
+        expected_title="CBD-107 — Transaction Lifecycle, Coverage, and Provider-Signal Map",
+        path="docs/cbd-107-transaction-lifecycle-and-coverage-map.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-107-operational",
+        doc_set="cbd-107",
+        page_id="13303816",
+        expected_title="CBD-107 — Connection Operations, Support, Cost, and Exit Assessment",
+        path="docs/cbd-107-operational-and-cost-assessment.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-107-traceability",
+        doc_set="cbd-107",
+        page_id="13598721",
+        expected_title="CBD-107 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-107-acceptance-criteria-traceability.md",
+    ),
 )
 
 

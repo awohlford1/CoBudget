@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft** — awaiting Product Owner review. Defines the financial-connectivity posture CBD-107 evaluates aggregators against. It selects no provider; the candidate evaluation measures against it, and CBD-108 makes the selection. |
-| Document version | 0.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Defines the financial-connectivity posture CBD-107 evaluates aggregators against. It selects no provider; the candidate evaluation measures against it, and CBD-108 makes the selection. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Candidate Shortlist and Gate Evaluation v0.1; Transaction Lifecycle and Coverage Map v0.1; Operational and Cost Assessment v0.1; Acceptance Criteria Traceability v0.1 |
-| Confluence page | Not yet registered. Publication follows merge to `main`, per AGENTS.md. |
+| Companions | Candidate Shortlist and Gate Evaluation v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
+| Confluence page | [CBD-107 — Connection and Provenance Boundary Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13500417) |
 | Repository baseline | `c15b526` |
 | Last updated | August 21, 2026 |
 
