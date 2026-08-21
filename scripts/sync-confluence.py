@@ -526,7 +526,7 @@ TARGETS: tuple[Target, ...] = (
     # assessment is cited by the traceability record, which nothing cites and
     # which therefore publishes last and is not a baseline.
     #
-    # These four pages were created as placeholders on August 20, 2026 to
+    # These four pages were created as placeholders on August 21, 2026 to
     # reserve the targets; the first successful run replaces that placeholder
     # text with the merged approved v1.0 content.
     Target(
