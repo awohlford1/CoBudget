@@ -78,7 +78,7 @@ PACKAGE_FILES = (SPEC, EVALUATION, OPERATIONAL, TRACE)
 # amended two of the four, so a single shared constant would either pass a
 # stale baseline or fail a correct one.
 REPOSITORY_BASELINE = {
-    SPEC: "`d98defd`",
+    SPEC: "`c689192`",
     EVALUATION: "`c689192`",
     OPERATIONAL: "`d98defd`",
     TRACE: "`c689192`",

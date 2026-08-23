@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. |
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the evidence record and its required fields, the six evidence classes and their confidence mapping, the `UNPROVEN` outcome and the four eligibility verdicts, the staleness and re-verification rules, `EX-102-001`–`007`, the §5.2 non-exceptable gates, and the residual-risk record. It grants no exception and does not close the open items in §8. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Cost Template v1.0 |
 | Confluence page | [CBD-102 — Evidence Register and Exception Rules](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9601048) |
-| Repository baseline | `52d764a` |
+| Repository baseline | `c689192` |
 | Last updated | August 18, 2026 |
 
 ## 1. Purpose
@@ -72,6 +72,29 @@ than a new one.
 | **Documented** | The vendor's own versioned technical documentation | Medium | Published API reference establishing per-surface rate policies for `HG-102-021` |
 | **Asserted** | Vendor statement without independent support | Low | A sales answer, a marketing page, a support-ticket reply, an unaudited self-attestation |
 | **Absent** | Sought and not obtained | None | — |
+
+### 3.0.1 Where a source is hosted does not decide its class — Product Owner decision, August 22, 2026
+
+`OI-106-017` asked how to classify a vendor **support-centre article**, a form
+§3 did not place. The answer is that **class follows what the statement is
+about, not where it is published**:
+
+* A statement about **how the product behaves** — an API's semantics, a
+  feature's configuration surface, a documented limitation — is **Documented**
+  wherever the vendor publishes it, including a help centre.
+* A statement about the vendor's **own internal practice** — staff vetting,
+  operator conduct, internal approval processes — is **Asserted**, including
+  when it appears on a formal documentation site.
+
+The "support-ticket reply" example under Asserted stands, and is not the same
+thing: a reply written to one customer is not published documentation. The
+distinction that matters is verifiability by another reader, not the URL.
+
+This is the line `EV-102-001` already drew in practice. That record was
+classified Asserted because it described AWS's internal controls, not because it
+sat on a trust page. Applying the same rule, a support-centre article describing
+how suppression works is Documented, and a trust page describing how engineers
+are supervised is Asserted.
 
 ### 3.1 Confidence may be lowered but never raised
 
