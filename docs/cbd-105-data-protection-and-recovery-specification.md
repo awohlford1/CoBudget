@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Defines the recovery posture and data-protection boundary CBD-105 evaluates managed PostgreSQL providers against. It selects no provider; the candidate evaluation measures against it, and CBD-108 makes the selection. Product Owner approved v1.1 on August 21, 2026: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. |
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Candidate Shortlist and Gate Evaluation v1.1; Operational and Cost Assessment v1.1; Acceptance Criteria Traceability v1.1 |
 | Confluence page | [CBD-105 — Data Protection and Recovery Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12812289) |
-| Repository baseline | `6b1ac8e` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Purpose and authority
 
@@ -209,6 +209,25 @@ Architecture § Security baseline; `HG-102-040`, `HG-102-041`.
 
 `DP-105-008` — **Recovery objectives are explicit as questions, because no
 approved source supplies values.**
+
+**One of those questions is now answered. Product Owner decision, August 22,
+2026, resolving `OI-105-002`: the point-in-time-recovery retention window is
+**14 days**.**
+
+All three candidates support 7 to 35 days, so the value forces no tier and no
+candidate is advantaged. Fourteen was chosen against two competing pressures
+rather than as a midpoint. Seven days is a short time for a single operator to
+notice silent corruption or a bad migration — there is no margin if the operator
+is away for a week — and once the window closes the data is unrecoverable. Thirty-five
+days would mean any deletion commitment has to honestly disclose a five-week
+backup tail, which is hard to reconcile with what CBD-91 leads a customer to
+expect.
+
+Fourteen days is therefore also a **deletion constraint, not only a recovery
+one**: a deletion request cannot complete faster than the backup tail, so
+`DP-105-006`'s backup-horizon claims must state fourteen days plainly rather
+than imply immediate erasure. `EG-91-001` is closed for this value; the RTO and
+RPO figures it also covers remain open.
 
 CBD-105's acceptance criteria require recovery objectives to be *explicit*.
 Honestly stated:

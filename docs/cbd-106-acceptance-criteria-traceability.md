@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-106 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. |
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the 16 `ED-106-*` decisions including the `ED-106-002`–`ED-106-004` routing recommendation, the screening and 24-gate evaluation with its verdicts and `EV-102-052`–`070` records, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, sends no message, and writes no copy. It leaves `OI-106-001`–`017`, `OI-102-022`, `FU-95-017`, `EG-91-006`, and every `OQ-106` question open — including `OI-106-017`, the support-centre-article classification that would move C5's `HG-102-052` outcome, which this approval deliberately does **not** settle. |
 | Jira | [CBD-106](https://cobudget.atlassian.net/browse/CBD-106) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Email Delivery and Content Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.1; Operational and Cost Assessment v1.0 |
+| Companions | Email Delivery and Content Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.2; Operational and Cost Assessment v1.0 |
 | Confluence page | [CBD-106 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12877869) |
-| Repository baseline | `d0d5bb1` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Package contents
 
@@ -228,6 +228,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | --- | --- | --- |
 | 1.0 | August 21, 2026 | Initial approved package. |
 | 1.1 | August 21, 2026 | Reuses the CBD-103 cross-category documentary pass of the same date. Three documentary gate outcomes move: C2 gains `HG-102-011` (`EV-102-007`), C3 gains `HG-102-005` (`EV-102-011`) and `HG-102-010` (`EV-102-162`, `EV-102-163`). This **reverses v1.0's stance on provider-level reuse** for two gates, and the reversal is deliberate: `HG-102-005` and `HG-102-010` ask about an administrative access model and a platform encryption posture that ACS inherits from Azure rather than implements itself, which is not true of the category **E** gates v1.0 was guarding against. Half-answers `OQ-106-004`: `EV-102-012` establishes that **Azure Communication Services is absent from the Customer Lockbox supported-services list**. Adds `OI-106-018`, recording that `EV-102-007` names a subprocessor processing email deliverability metrics. Also carries two gates the same pass advanced without moving an outcome: `HG-102-006`, where all three hyperscalers separate backup read, restore execution and key use but none documents a restore-approval permission (`OI-103-020`), and `HG-102-013`, where the contracts were read and the remaining gap is named at `OQ-103-025`. A later retrieval in the same pass added `HG-102-010` for C2: `EV-102-174`, the current EC2 data-protection page, supplies the transport half and supersedes the historical whitepaper, closing `OQ-103-022`. A further retrieval in the same pass added `HG-102-002` for C2 (`EV-102-177`): X-Ray's trace ID is per-request and its `user` field is optional, where Application Insights documents a cookie-persisted anonymous `user_Id` that feeds sampling (`EV-102-178`), which is why C3 stays `UNPROVEN` on that gate pending `OI-103-021`. **No verdict, no observation, no price, no `ED-106-*` decision, and no acceptance-criterion status changes.** |
+| 1.2 | August 22, 2026 | C5 Postmark's subprocessor list was obtained (`EV-102-181`) and **misses `HG-102-011` on one word**: it enumerates Deft, AWS and Zendesk and states its region, but carries no date, and the pass test requires the list be *"obtained and dated"*. That is a property of the page, not a retrieval gap, and it is not a `FAIL` — C5 both enumerates and commits to a region. Adds `OQ-106-013`. Records that C5 runs on AWS, so selecting it does not diversify away from C2. **No gate outcome, verdict or tally moves.** |
 
 The v1.1 change adds no evidence of its own. Every record it relies on was
 registered by the CBD-103 evaluation and is reused here rather than

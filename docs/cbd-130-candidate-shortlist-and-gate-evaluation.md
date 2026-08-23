@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to the push transports and to SMS candidates. It records the CBD-15 set's **first `FAIL` and first `INELIGIBLE` verdict**, and publishes rubric scores as CBD-130's deliverables require — with §8.4 stating plainly what those numbers do and do not measure. |
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Push and SMS Delivery Boundary Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.1 |
+| Companions | Push and SMS Delivery Boundary Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.2 |
 | Confluence page | [CBD-130 — Push and SMS Candidate Shortlist, Gate Evaluation, and Rubric Scores](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13795329) |
-| Repository baseline | `d0d5bb1` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Purpose
 
@@ -151,7 +151,7 @@ documentation can settle. `CFG` marks a Config gate.
 | Gate | Kind | C2 AWS | C3 Azure | C10 Twilio | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | HG-102-001 telemetry allowlist | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3.1. |
-| HG-102-002 correlation identifiers | DOC | `PASS` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-130-006` **Asked of the hyperscalers at v1.1 and it separates them.** C2 `EV-102-177`: a 96-bit random trace ID plus timestamp scoped to *"a single client request"*, with `user` an **optional** field the customer populates — no default persistence mechanism exists. C1 `EV-102-179`: W3C `traceparent`, 128-bit, and no end-user identifier mentioned anywhere. C3 `EV-102-178` is the exception and stays `UNPROVEN`: `operation_Id` is per-operation and clean, but the same data model defines an anonymous `user_Id` that the JavaScript SDK *"typically persists... in a user cookie"* and that feeds *"sampling score generation"*. Not required, and engaged by the browser SDK rather than server-side telemetry, so the reading is `OI-103-021` and not a `FAIL`. |
+| HG-102-002 correlation identifiers | DOC | `PASS` | `PASS` | `UNPROVEN` | Not retrieved. `OQ-130-006` **Asked of the hyperscalers at v1.1 and it separates them.** C2 `EV-102-177`: a 96-bit random trace ID plus timestamp scoped to *"a single client request"*, with `user` an **optional** field the customer populates — no default persistence mechanism exists. C1 `EV-102-179`: W3C `traceparent`, 128-bit, and no end-user identifier mentioned anywhere. C3 `EV-102-178` is the exception and stays `UNPROVEN`: `operation_Id` is per-operation and clean, but the same data model defines an anonymous `user_Id` that the JavaScript SDK *"typically persists... in a user cookie"* and that feeds *"sampling score generation"*. Not required, and engaged by the browser SDK rather than server-side telemetry, so the reading is `OI-103-021` and not a `FAIL`. |
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-130-006` |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3.1. |
 | HG-102-005 no standing credential | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **Settled for C3 at v1.1** from the CBD-103 cross-category pass, reused rather than re-retrieved. The administrative access model for ACS is the Azure and Entra model, not an ACS-specific one. C3 `EV-102-011`: Privileged Identity Management — native, just-in-time, time-bound with start and end dates, approval, justification, downloadable audit history. C2 `EV-102-008`: AWS ships no native equivalent and validates four partner products — not a `FAIL`, but reachable only by buying a third party (`OI-103-017`). C10 not retrieved. |
@@ -160,7 +160,7 @@ documentation can settle. `CFG` marks a Config gate.
 | HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Unchanged at v1.1, and now specific rather than general for the two hyperscalers: both trust pages retrieved by the cross-category pass were checked for this gate and **neither addresses impersonation, break-glass, or unrestricted query** — `OQ-103-023`. C10 not retrieved. |
 | HG-102-009 staff-access evidence | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **Characterized at v1.1 for the two hyperscalers, and neither position is good.** `EV-102-012` retrieves the complete Customer Lockbox supported-services list: **Azure Communication Services does not appear on it**, so C3 has no Lockbox coverage for this candidate. C2 `EV-102-010`: AWS's customer-visible record is scoped to *"on behalf of"* service operations — the `OI-103-018` `FAIL` question. Neither flips, because absence from a list is not evidence of absence from the product. No aggregator equivalent of a cloud access-transparency log is known for C10; `OQ-130-007`. |
 | HG-102-010 encryption in transit and at rest | DOC | **`PASS`** | `PASS` | `UNPROVEN` | **The `OQ-130-004` asymmetry is closed for C3 at v1.1, and C2's own pass is repaired.** C2 `EV-102-135` (TLS 1.2 in transit, at rest under service-owned KMS keys, custody stated explicitly including that no customer-managed key is possible) **plus `EV-102-009`, which supplies the algorithm `EV-102-135` did not name** — the derived encryption key is *"A 256-bit AES-GCM key only in memory of an HSM"*. At v1.0 this row passed a gate requiring *"the algorithm and key custody stated"* on a record whose own limitation said the at-rest cipher was not named; that gap is now filled rather than left standing. C3 `EV-102-162` (*"A symmetric AES-256 key"*, KEK never leaving Key Vault) and `EV-102-163` (MACsec on by default within and between regions, AES-256, SHA-384). C10 not retrieved — the asymmetry `OQ-130-004` records is now C10's alone. |
-| HG-102-011 region and subprocessors | DOC | `PASS` | `UNPROVEN` | `UNPROVEN` | **Settled for C2 at v1.1, and it changes how this category's candidate set should be read — see §7.7.** `EV-102-007` is the dated, enumerated AWS-wide list the gate asks for: "Last Updated: July 28, 2026" on the page, 30-day advance-notice commitment, region scoping. Combined with `EV-102-135`'s region selection and its carrier disclosure, C2's obligations under this gate are met. **The list names Twilio, Inc. as an AWS subprocessor for "A2P messaging"**, alongside Cequens, Infobip, Vonage/Nexmo, Route Mobile, Sinch, Tanla and TeleSign. C3 keeps `EV-102-140`'s geography list but the Microsoft Online Services Subprocessor List was **not obtained** (`OQ-103-018`). C10's own list was not retrieved. `OQ-130-008` |
+| HG-102-011 region and subprocessors | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled for C2 at v1.1, and it changes how this category's candidate set should be read — see §7.7.** `EV-102-007` is the dated, enumerated AWS-wide list the gate asks for: "Last Updated: July 28, 2026" on the page, 30-day advance-notice commitment, region scoping. Combined with `EV-102-135`'s region selection and its carrier disclosure, C2's obligations under this gate are met. **The list names Twilio, Inc. as an AWS subprocessor for "A2P messaging"**, alongside Cequens, Infobip, Vonage/Nexmo, Route Mobile, Sinch, Tanla and TeleSign. C3 keeps `EV-102-140`'s geography list but the Microsoft Online Services Subprocessor List was **not obtained** (`OQ-103-018`). **C10 settled at v1.1**: `EV-102-186` is an enumerated list dated *"Last Updated: April 2026"* with locations per entry, which is what the pass test asks for. Change notice is by subscription with **no period stated**, weaker than C2's thirty days — a `WR-102-006` matter, not a gate one. The list names **AWS as Twilio's own infrastructure provider**, so the C2/C10 dependency runs in both directions (`OI-130-022`). `OQ-130-008` |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3.1. |
 | HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. The v1.1 pass sharpened why this is `UNPROVEN` rather than `FAIL`: the pass test's *"Silence fails"* means the **provider's** silence once its contract has been read, not CoBudget's failure to read it. This is the one gate that could fail every candidate in every category at once — `OQ-103-024`. **The contracts were read at v1.1 and the position is precise rather than blank.** Google's addendum states a recovery window and a 180-day expiry covering existing copies but defers region to terms not retrieved; the AWS addendum could not be parsed; and the Microsoft retention page that appears to answer this is scoped to Microsoft 365, not Azure. `OQ-103-025` names the three retrievals that would settle it. None of the three is provider silence yet, which is why this is `UNPROVEN` and not `FAIL`. |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | Boundary specification §9; `TD-103-017`, `TD-103-022`. Non-exceptable. |
@@ -176,7 +176,7 @@ documentation can settle. `CFG` marks a Config gate.
 | HG-102-071 token results reported and deletable | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **The gate's subject does not exist on this channel** — SMS has no registration token. The substantive answer is in §6.3, where Web Push reports invalid subscriptions by HTTP status. Recorded `UNPROVEN` rather than invented, and finding F5 carries the scoping problem. |
 | HG-102-072 authenticated, replay-safe callbacks | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3.1. `EV-102-133`: C10 signs with HMAC-SHA1 over the URL and sorted parameters keyed by the account auth token, and **documents no replay protection**. C2 and C3 mechanisms not retrieved — `OQ-130-003`. |
 | HG-102-073 programmatic opt-out and suppression | OBS | `UNPROVEN` | `UNPROVEN` | **`FAIL`** | `EV-102-136`: C2 documents full read and write — automatic `STOP` handling, `PutOptedOutNumber`, `DeleteOptedOutNumber`, list and search, plus self-managed mode. `EV-102-139`: C3 documents an API for *"adding, removing, or checking opt-out entries"*, **in preview without an SLA**. `EV-102-132`: **C10 documents that it offers neither** — see §7.3. |
-| HG-102-074 carrier and platform retention disclosed | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | The platform half differs sharply — `EV-102-140` gives C3 an explicit non-retention statement, `EV-102-134` gives C10 the most detailed disclosure, `EV-102-135` leaves C2's period unstated. **The carrier half is unmet by all three and may be unmeetable** — finding F4. |
+| HG-102-074 carrier and platform retention disclosed | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **Re-measured at v1.3 against the amended pass test** (catalog §12.1, resolving `OI-130-010`): the carrier segment is now satisfied by **disclosure rather than control**. That changes the character of this gate entirely — F4's claim that the carrier half may be unmeetable is **retired**. C2 now satisfies the carrier half outright: `EV-102-135` states that final delivery stages *"operate on international mobile networks beyond AWS control"*. All three nonetheless stay `UNPROVEN`, and now for ordinary per-candidate reasons rather than a structural one — C2's platform retention period is unstated, C3 has the platform half (`EV-102-140`) but no downstream-control statement, and C10 has the most detailed platform disclosure (`EV-102-134`) but no carrier statement and no default retention period at source. `OQ-130-018`. |
 | HG-102-075 not an authority channel | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `PN-130-002`. |
 
 ### 6.3 The push transports, measured as subprocessors
@@ -207,9 +207,9 @@ The 23 applicable gates divide by evidence kind into 10 `OBS`, 11 `DOC`, and 2
 
 | | C2 | C3 | C10 |
 | --- | --- | --- | --- |
-| `PASS` | 3 | 2 | 0 |
+| `PASS` | 3 | 3 | 1 |
 | `PASS (design)` | 2 | 2 | 2 |
-| `UNPROVEN` | 18 | 19 | 20 |
+| `UNPROVEN` | 18 | 18 | 19 |
 | `FAIL` | 0 | 0 | 1 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `INELIGIBLE` |
 
@@ -425,13 +425,13 @@ criteria remain.
 | Dimension | Weight | C2 AWS | C3 Azure | C10 Twilio |
 | --- | --- | --- | --- | --- |
 | Security | 16 | 0.60 | 0.20 | 0.00 |
-| Privacy | **26** | 1.00 | 0.80 | 0.20 |
+| Privacy | **26** | 1.00 | 0.80 | 0.40 |
 | Reliability | 18 | 0.00 | 0.00 | 0.00 |
 | Portability | 14 | 0.00 | 0.00 | 0.00 |
 | Solo-operator ongoing effort | 10 | 0.00 | 0.00 | 0.00 |
 | Support | 8 | 0.50 | 0.50 | 0.50 |
 | Accessibility | 8 | 0.00 | 0.00 | 0.00 |
-| **Weighted total** | **100** | **0.40 / 4.00** | **0.28 / 4.00** | **0.09 / 4.00** |
+| **Weighted total** | **100** | **0.40 / 4.00** | **0.28 / 4.00** | **0.14 / 4.00** |
 
 Verdicts travel with the scores per R1: C2 `ELIGIBLE-PENDING-EVIDENCE`, C3
 `ELIGIBLE-PENDING-EVIDENCE`, C10 **`INELIGIBLE`**. C10's total is lowest and that
@@ -447,7 +447,7 @@ evidence and are therefore capped at `2`.
 | --- | --- | --- | --- | --- |
 | WR-102-003 key-management depth | 1 | 1 | 0 | C2 `EV-102-135`: service-owned KMS keys rotated regularly, but *"You can't provision and use your own AWS KMS or other keys"* — a documented ceiling, not depth. `EV-102-009` corroborates the rotation detail (domain keys daily, backing keys yearly, HSM non-export) without lifting the ceiling. **C3 raised from 0 at v1.1**: `EV-102-162` and `EV-102-163` document customer-managed keys in Key Vault or Managed HSM, a KEK that *"never leaves Key Vault"*, and Managed HSM as *"a customer-owned security domain where Microsoft has no access to your key material"* — band-4 material on the descriptor, held to `1` because the records are **provider-level and ACS-specific key support was not established** (`OQ-103-020`). |
 | WR-102-005 network isolation | 2 | 0 | 0 | `EV-102-135`: PrivateLink interface VPC endpoint documented |
-| WR-102-006 subprocessor stability and notice | 2 | 0 | 0 | **C2 raised from 1 at v1.1.** The descriptor for `2` is *"Published list with advance-change notice"*, and `EV-102-007` is exactly that: an enumerated list dated on the page with *"at least 30 days"* advance notice. v1.0 scored `1` because `EV-102-135` disclosed that downstream providers exist *"without naming them or committing to notice"*; the list names them and commits. Capped at `2` by R2. **C3 stays 0 under R3**: `EV-102-167` asserts Microsoft publishes a list with six-month notice, but the list itself was **not obtained**, and R3 scores an assertion whose evidence attempt failed as `0` rather than giving it the benefit of the doubt. |
+| WR-102-006 subprocessor stability and notice | 2 | 0 | 1 | **C2 raised from 1 at v1.1.** The descriptor for `2` is *"Published list with advance-change notice"*, and `EV-102-007` is exactly that: an enumerated list dated on the page with *"at least 30 days"* advance notice. v1.0 scored `1` because `EV-102-135` disclosed that downstream providers exist *"without naming them or committing to notice"*; the list names them and commits. Capped at `2` by R2. **C3 stays 0 under R3**: `EV-102-167` asserts Microsoft publishes a list with six-month notice, but the list itself was **not obtained**, and R3 scores an assertion whose evidence attempt failed as `0` rather than giving it the benefit of the doubt. **C10 raised from 0 to 1 at v1.1**: `EV-102-186` is a published, dated list, which clears band 0's *"Undisclosed or changeable without notice"*, but change notice is by subscription with no period stated, which does not reach band 2's *"Published list with advance-change notice"*. |
 | WR-102-007 residency granularity | 2 | 2 | 0 | `EV-102-135` region selection; `EV-102-140` enumerated geographies |
 | WR-102-008 retention minimization defaults | 1 | 2 | 1 | C3's explicit non-retention is the best default available; C2 stores with no stated period; C10's default is 13 months with an excellent but **opt-in** control — the criterion measures defaults |
 | WR-102-021 documentation quality | 2 | 2 | 2 | Each vendor's relevant material was retrievable, structured and internally consistent, which is the criterion's own subject |
@@ -461,7 +461,8 @@ For **all three candidates**: `WR-102-001`, `WR-102-002`, `WR-102-004`,
 `WR-102-026`, `WR-102-027`, `WR-102-028`, `WR-102-029`, `WR-102-030`,
 `WR-102-031` — twenty-four of thirty.
 
-Additionally zero for **C3 and C10**: `WR-102-005`, `WR-102-006`.
+Additionally zero for **C3 and C10**: `WR-102-005`.
+Additionally zero for **C3**: `WR-102-006`.
 Additionally zero for **C10**: `WR-102-003`, `WR-102-007`.
 
 Every one is `0` because evidence is **Absent** — the question was not asked, or
@@ -501,7 +502,7 @@ Share of the thirty scoring criteria at each confidence level.
 | --- | --- | --- |
 | C2 AWS | 6 criteria — 20% | 24 criteria — 80% |
 | C3 Azure | 4 criteria — 13% | 26 criteria — 87% |
-| C10 Twilio | 2 criteria — 7% | 28 criteria — 93% |
+| C10 Twilio | 3 criteria — 10% | 27 criteria — 90% |
 
 **No criterion on any candidate rests on Observed, Contractual or Attested
 evidence**, which is why no criterion scores above `2` anywhere in §8.2. This
@@ -581,14 +582,15 @@ evaluation under CBD-15; a future block should start above `161`.
 | OQ-130-010 | Whether any push service publishes a retention or TTL policy for undelivered encrypted payloads | `HG-102-074` | Retrieve per transport. The payload is ciphertext, so the answer bounds exposure rather than describing it |
 | OQ-130-011 | Whether C3's Opt-Out Management API has reached general availability | `HG-102-073` | Re-verify by November 21, 2026. Preview status is the only thing holding this record at Low confidence |
 | OQ-130-017 | The C3 and C10 subprocessor lists, obtained and dated | `HG-102-011`, `WR-102-006` | C2's list was obtained (`EV-102-007`) and C3's and C10's were not, so §7.7's subprocessor question can currently only be asked of the candidate that answered it. Until the other two are obtained, C2's `HG-102-011` `PASS` and its `WR-102-006` score of `2` reflect **disclosure that was retrievable**, not a gap between vendors. Microsoft's list is named at `EV-102-167` with a six-month notice commitment but sits on the Service Trust Portal; `OQ-103-018` shares this. |
+| OQ-130-018 | The three per-candidate gaps that now stand between each candidate and `HG-102-074`: C2's platform retention period, C3's downstream-control statement, and C10's carrier statement and default retention period at source | `HG-102-074` | `OI-130-010` amended the pass test so the carrier segment is satisfied by disclosure rather than control, which retired F4's unmeetability claim. What remains is ordinary retrieval: each candidate is missing a different one of the two halves, and C2 is closest. |
 
 ## 11. Open items
 
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-130-008 | Ten pass tests are observation-bound, and one of them — a carrier opt-out keyword registering — **cannot be observed in a simulator**. | The `OI-103-008` authorization covers the accounts; this category additionally needs a real handset the evaluator controls. No customer number appears in any test. |
-| OI-130-009 | **`HG-102-073` fails on C10, producing the CBD-15 set's first `FAIL` and first `INELIGIBLE` verdict.** §7.3 records the compensating control and the full residual. | **Product Owner decision.** `EX-102-001` reserves exception approval. Approved, C10 becomes `CONDITIONAL` and carries that label in every report of it per `EX-102-003`; unapproved, it stays `INELIGIBLE`. The residual is recipient-facing and perceivable, which `EX-102-002` requires be recorded before any approval. |
-| OI-130-010 | **`HG-102-074`'s carrier half appears unsatisfiable by any provider in this market**, and the one candidate that addresses carriers does so by disclosing that they are beyond its control. | **Product Owner decision on the gate's reading.** Either the platform half plus a written uncontrollability statement satisfies it, or the gate stands permanently unmet for every candidate — in which case no category-N provider can ever be `ELIGIBLE`, which cannot be the intent. |
+| OI-130-009 | ~~**`HG-102-073` fails on C10.**~~ **Resolved by Product Owner decision, August 22, 2026: the exception is NOT approved.** The residual is recipient-facing and perceivable — someone who texts STOP and later re-enables SMS inside CoBudget stays blocked, with no in-product remedy, until they text START — and `EX-102-002` requires that be recorded before any approval. C10 is not recommended for selection, and no other candidate needs the exception, so approving it would attach a carried `CONDITIONAL` label to a candidate unlikely to be chosen. **C10 remains `INELIGIBLE`** and, under the route-A guardrail that observations run only on candidates without a documentary `FAIL`, drops out of the observation pass. Original text: §7.3 records the compensating control and the full residual. | **Product Owner decision.** `EX-102-001` reserves exception approval. Approved, C10 becomes `CONDITIONAL` and carries that label in every report of it per `EX-102-003`; unapproved, it stays `INELIGIBLE`. The residual is recipient-facing and perceivable, which `EX-102-002` requires be recorded before any approval. |
+| OI-130-010 | ~~**`HG-102-074`'s carrier half appears unsatisfiable by any provider in this market**~~ **Resolved by Product Owner decision, August 22, 2026: the pass test is amended in CBD-102, recorded at catalog §12.1.** The carrier segment is satisfied by disclosure rather than by control — a provider that states plainly which parts of delivery lie outside its control satisfies that half, and a provider silent about it does not. Amendment was chosen over reinterpretation so the change is visible and dated. §6.3 is re-measured; C2 now satisfies the carrier half and F4's unmeetability claim is retired. Original text:, and the one candidate that addresses carriers does so by disclosing that they are beyond its control. | **Product Owner decision on the gate's reading.** Either the platform half plus a written uncontrollability statement satisfies it, or the gate stands permanently unmet for every candidate — in which case no category-N provider can ever be `ELIGIBLE`, which cannot be the intent. |
 | OI-130-011 | Three category-N gates are channel-specific and the catalog cannot scope a gate to one channel — finding F5. | The tally understates all three candidates by one `UNPROVEN` each. A catalog observation for CBD-108, not a defect in any candidate, and this evaluation did not extend the approved outcome vocabulary to work around it. |
 | OI-130-012 | Every cross-category **X** gate is `UNPROVEN` for every candidate except C2's `HG-102-010`, and no provider-level record was reused. | Matches CBD-106 and CBD-107. `OQ-130-004`, `OQ-130-006`, `OQ-130-007` and `OQ-130-008` are the remaining documentary work. |
 | OI-130-013 | The rubric totals are published as the ticket requires, and §8.4 records that they rank retrieval depth rather than providers. | CBD-108 should read §8.5's profile before §8.1's totals. A reader who sees only the numbers will draw a conclusion the evidence does not support. |

@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering twenty-three provider-level records for reuse by every sibling category (§3.5, §9). It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. |
-| Document version | 1.1 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering thirty provider-level records for reuse by every sibling category (§3.5, §9). v1.2 extends it past the three hyperscalers to all ten provider identities for `HG-102-011`, and records at §7.9 that category F's documentary evidence is not obtainable by desk research at all. It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Runtime Topology Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.1 |
+| Companions | Runtime Topology Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.2 |
 | Confluence page | [CBD-103 — Hosting Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12353537) |
-| Repository baseline | `d0d5bb1` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Purpose
 
@@ -144,9 +144,15 @@ this.
 `OI-103-009` is **partially discharged, not closed.** On August 21, 2026 a
 documentary pass was run across the ten `DOC` cross-category gates, symmetrically
 by construction: each question was put to all three candidates and each answer
-was recorded whether or not it favoured the candidate. Twenty-three records
-were registered — `EV-102-007`–`012` in the block v1.0 reserved for exactly
-this, and `EV-102-162`–`179` in a new block above the CBD-15 range.
+was recorded whether or not it favoured the candidate. **Thirty records** were
+registered — `EV-102-007`–`012` in the block v1.0 reserved for exactly this, and
+`EV-102-162`–`186` in a new block above the CBD-15 range.
+
+The pass ran in two legs. The first put all ten `DOC` gates to the three
+hyperscalers. The second, at v1.2, extended `HG-102-011` to the seven remaining
+provider identities — C4 Auth0, C5 Postmark, C6 Plaid, C7 MX, C8 Mastercard,
+C9 Akoya and C10 Twilio — which is the first time any shared gate has been
+asked of the whole candidate set. §7.8 and §7.9 are what that leg produced.
 
 Seven gate outcomes moved and no verdict did:
 
@@ -282,7 +288,7 @@ Config gate.
 | Gate | Kind | C1 Google Cloud | C2 AWS | C3 Azure | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | HG-102-001 telemetry allowlist | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Captured payload required. |
-| HG-102-002 correlation identifiers | DOC | `PASS` | `PASS` | `UNPROVEN` | **Asked of all three at v1.1 and it separates them — see §7.7.** C1 `EV-102-179`: W3C `traceparent`, a 128-bit trace ID scoped to *"the overall end-to-end request"*, and no end-user identifier mentioned anywhere. C2 `EV-102-177`: a 96-bit random trace ID plus timestamp scoped to *"a single client request"*, with `user` an **optional** field the customer populates. C3 `EV-102-178` is the exception: `operation_Id` is per-operation and clean, but the same data model defines an anonymous `user_Id` that the JavaScript SDK *"typically persists... in a user cookie"* and that feeds *"sampling score generation"*, plus a `user_AuthenticatedId` identifying a user *"persistently across browsers and devices"*. Not required, and engaged by the browser SDK rather than server-side telemetry — so `UNPROVEN` pending `OI-103-021`, not a `FAIL`. `OQ-103-001` |
+| HG-102-002 correlation identifiers | DOC | `PASS` | `PASS` | `PASS` | **Asked of all three at v1.1 and it separates them — see §7.7.** C1 `EV-102-179`: W3C `traceparent`, a 128-bit trace ID scoped to *"the overall end-to-end request"*, and no end-user identifier mentioned anywhere. C2 `EV-102-177`: a 96-bit random trace ID plus timestamp scoped to *"a single client request"*, with `user` an **optional** field the customer populates. C3 `EV-102-178` is the exception: `operation_Id` is per-operation and clean, but the same data model defines an anonymous `user_Id` that the JavaScript SDK *"typically persists... in a user cookie"* and that feeds *"sampling score generation"*, plus a `user_AuthenticatedId` identifying a user *"persistently across browsers and devices"*. Not required, and engaged by the browser SDK rather than server-side telemetry. **`OI-103-021` resolved that the JavaScript SDK is outside CoBudget's boundary, so C3 passes on the same terms as C1 and C2**, under the standing constraint at `OQ-103-029` that adopting the browser SDK reopens the gate. `OQ-103-001` |
 | HG-102-003 purpose separation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-103-002` |
 | HG-102-004 behavioural capture off | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Screenshot explicitly insufficient. |
 | HG-102-005 no standing credential | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled at v1.1 and now a differentiator — see §7.5.** C1 `EV-102-006` (Privileged Access Manager, native). C3 `EV-102-011` (Privileged Identity Management, native, time-bound with start and end dates, approval, justification, downloadable audit history). C2 stays `UNPROVEN`: `EV-102-008` establishes that AWS ships no native capability and validates four third-party partner products instead. That is not a `FAIL` — AWS does not meet the fail condition — but whether a partner integration satisfies a `Vendor`-type gate is `OI-103-017`. |
@@ -322,9 +328,9 @@ The 27 applicable gates divide by evidence kind into 10 `OBS`, 13 `DOC`, and 4
 
 | | C1 | C2 | C3 |
 | --- | --- | --- | --- |
-| `PASS` | 4 | 3 | 2 |
+| `PASS` | 4 | 3 | 3 |
 | `PASS (design)` | 4 | 4 | 4 |
-| `UNPROVEN` | 19 | 20 | 21 |
+| `UNPROVEN` | 19 | 20 | 20 |
 | `FAIL` | 0 | 0 | 0 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
 
@@ -621,6 +627,89 @@ protected"* — evidence against the `HG-102-003` fail condition, though it was
 found incidentally and the equivalent question was not put to C1 or C2, so it
 moves nothing.
 
+### 7.8 The candidate set is less independent than it looks — added at v1.1
+
+`HG-102-011` was answered for all ten provider identities, and the answers do
+more than settle a gate. Read together, the seven lists that could be obtained
+describe a supply chain in which several nominally separate candidates rest on
+the same infrastructure, and in which one candidate appears three times in three
+different roles.
+
+| Candidate | Named in its own list |
+| --- | --- |
+| C4 Auth0 | **AWS** and **Microsoft** for hosting; **Twilio** for the SMS authenticator; SendGrid for email; Cloudflare, DataDog, Snowflake, MongoDB, Aiven, Salesforce |
+| C5 Postmark | **AWS** and Deft for infrastructure; Zendesk |
+| C10 Twilio | **AWS** for hosting and storage; Google; Deepgram |
+| C2 AWS | **Twilio** and seven other aggregators for A2P messaging; 250ok for email deliverability metrics |
+
+Three observations, none of which is a finding against any vendor. Disclosure is
+what this gate asks for, and every provider above is being penalised by nothing
+except its own transparency.
+
+**AWS is underneath at least three other candidates.** Selecting Auth0, Postmark
+or Twilio does not diversify away from AWS; it adds a layer above it. A
+provider-set decision that treats those as independent of the hosting choice is
+reasoning about brands rather than about infrastructure. `HG-102-011` is
+satisfied in each case — the point is what the satisfied gate reveals.
+
+**Twilio occupies three positions at once**: a candidate in category N, a
+subprocessor of AWS for A2P messaging, and a subprocessor of Auth0 for the SMS
+authenticator. `OI-130-022` records the first two; the third means that
+selecting C4 for identity also introduces Twilio, in a category where C10
+currently carries the set's only `FAIL`. That `FAIL` concerns Twilio's own
+opt-out API surface and does not transfer, but a reader tracking which
+processors touch customer data should know Twilio arrives by three separate
+routes.
+
+**Concentration is not automatically a fault.** A single well-understood
+infrastructure provider under several vendors may be preferable to four
+different ones. What it is, is a fact CBD-108 must hold deliberately rather than
+discover after selecting, and it bears directly on the acceptance criterion
+requiring that the combined set have *"no contradictory identity, networking,
+secret, regional, retention, deletion, incident, or support assumptions."*
+
+Nothing here is complete. Three of the ten lists could not be obtained at all
+and a fourth is undated, so the map above is what disclosure permits rather than
+what exists — §7.9 records why that limit falls almost entirely on one category.
+
+### 7.9 Category F's documentary evidence is not obtainable by desk research — added at v1.1
+
+The `HG-102-011` sweep produced a split that runs along category lines rather
+than along vendor quality.
+
+| Provider | List obtained? | Why |
+| --- | --- | --- |
+| C2 AWS, C4 Auth0, C10 Twilio | **Yes, dated** | Published openly |
+| C5 Postmark | Yes, **undated** | Published openly; carries no date |
+| C1 Google, C3 Azure | No | Retrieval failure and a portal path |
+| **C6 Plaid, C7 MX, C8 Mastercard, C9 Akoya** | **No** | **Gated behind a request or an NDA** |
+
+All four financial-connectivity candidates withhold the material. Plaid runs a
+Trust Center requiring an access request. MX states that its compliance
+documentation is *"shared securely under NDA"* through a third-party trust
+exchange. Mastercard publishes a privacy contact rather than a list. Akoya
+publishes neither.
+
+This is a category property, and it changes what "complete the documentary pass"
+can mean for CBD-107. That evaluation holds **forty open cross-category cells,
+the largest block in the set**, and §3.1 of it already records that no
+provider-level record could be reused because no category **F** candidate
+appears elsewhere. What this pass adds is that the gap is not a retrieval
+failure anyone can fix by reading more carefully: **the documents are not
+public.** Closing category F's documentary evidence requires a customer
+relationship, a trust-portal request, or a signed NDA — none of which CBD-15's
+scope currently contemplates, and the first of which the OUT OF SCOPE list
+excludes outright.
+
+Two consequences for CBD-108. First, category F cannot reach parity with the
+other five by desk research, so a decision is needed about whether to pursue
+trust-portal access or to select an aggregator on thinner evidence than every
+other category — `OI-103-022`. Second, none of the four is recorded as a `FAIL`.
+The gate fails a provider that *"will not enumerate subprocessors"*, and a list
+held behind an access request has not been shown to be refused. Treating
+gated-but-available as refused would convert a diligence step into a
+disqualification.
+
 ## 8. Why no weighted rubric total is published
 
 Rubric rule `R4` requires that per-dimension subscores always accompany a total,
@@ -693,8 +782,10 @@ than a hosting-specific one.
 
 `EV-102-001`–`161` are fully claimed by the six category evaluations, and
 `EV-102-132`–`161` were the last block allocated. **This pass allocates
-`EV-102-162`–`181`**, using `162`–`179` now and reserving `180`–`181` for its
-completion. A future block starts above `181`.
+`EV-102-162`–`211`**, using `162`–`186` now and reserving `187`–`211` for its
+completion. A future block starts above `211`. The allocation was widened from
+`181` when the pass was extended past the three hyperscalers to the seven
+remaining provider identities; no number already registered or cited moved.
 
 | ID | Claim | Provider | Source | Class | Conf. | Limitations | Re-verify by |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -716,14 +807,44 @@ completion. A future block starts above `181`.
 | EV-102-177 | `HG-102-002` | AWS (X) | "AWS X-Ray segment documents", `https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html` | Documented | Medium | Establishes both halves of the pass test. **Lifetime and scope**: `trace_id` is *"A unique identifier that connects all segments and subsegments originating from a single client request"*, formatted as a version, an 8-hex-digit epoch timestamp, and *"A globally unique 96-bit identifier for the trace in 24 hexadecimal digits"*, with W3C Trace Context accepted. Randomness is addressed directly — *"Generate trace IDs with a secure random algorithm to ensure that attackers cannot calculate future trace IDs"* — and the page notes trace IDs are visible in response headers. **No persistent end-user identifier is required or defaulted**: `user` appears under **Optional Segment Fields** as *"A string that identifies the user who sent the request"*, populated only if the customer chooses, and the page frames it as an opt-in search convenience — *"if you set the `user` field on a segment to a unique identifier, you can search for segments associated with specific users."* Separately relevant to `HG-102-001`: the SDK's default `http` block carries `client_ip` and `user_agent`, which is telemetry content rather than a correlation identifier and does not bear on this gate. | February 21, 2027 |
 | EV-102-178 | `HG-102-002`, `HG-102-003` | Azure (X) | "Application Insights telemetry data model", `https://learn.microsoft.com/en-us/azure/azure-monitor/app/data-model-complete`, page dated July 13, 2026 | Documented | Medium | **The one candidate whose data model documents a persistent end-user identifier as a platform mechanism.** Correlation itself is per-operation and clean: `operation_Id` is *"The unique identifier of the root operation"* and *"Either a request or a page view creates the operation ID."* But the same context table defines `user_Id` as *"The anonymous user ID"* and states that *"In browser apps, the JavaScript SDK typically persists this value in a user cookie"*, and that *"An anonymous user ID is used for sampling score generation"* — so a user identifier participates in the platform's own sampling. `user_AuthenticatedId` is described as initialized *"with a value that identifies the user persistently across browsers and devices. In this way, all telemetry items are attributed to that unique ID."* `session_Id` is *"the instance of the user's interaction with the app."* None of these is required, and all three are engaged by the JavaScript SDK rather than by server-side telemetry — which is why this is recorded as a reading question at `OI-103-021` rather than as a failure. Two findings incidental to this gate: `client_IP` is masked by default — *"Application Insights uses the IP address to derive geolocation and then stores `0.0.0.0` in this field"* — while `client_City`, `client_StateOrProvince` and `client_CountryOrRegion` are derived and retained; and for `HG-102-003`, Azure Monitor supports per-table access restriction, with generative-AI content routed to a dedicated table that can be *"set as protected"*, which is evidence against the gate's one-access-role fail condition but was not sought symmetrically. | February 21, 2027 |
 | EV-102-179 | `HG-102-002` | Google Cloud (X) | "Trace context", `https://docs.cloud.google.com/trace/docs/trace-context` | Documented | Medium | Establishes scope and format: Cloud Trace propagates W3C `traceparent`, whose `TRACE_ID` is *"a 32-character hexadecimal value representing a 128-bit number"* and is *"the unique identifier of the overall end-to-end request, provided by the parent"*, with a legacy `X-Cloud-Trace-Context` form retained for compatibility. **The page contains no mention of any end-user identifier**, persistent or otherwise, so nothing requires or defaults to one. Weaker than `EV-102-177` in one respect and the difference is recorded rather than smoothed: the page does **not** state how trace IDs are generated or what entropy they carry, where AWS states the requirement explicitly. Scope is documented, generation is not — `OQ-103-026`. | February 21, 2027 |
+| EV-102-180 | `HG-102-011` | Auth0 / Okta (X) | "Subprocessors", `https://www.okta.com/legal/trustandcompliance/subprocessors/`, *"Effective Date: May 2026"* and *"Posted Date: May 2026"* | Documented | Medium | **The strongest `HG-102-011` position of any candidate in the CBD-15 set.** Establishes an Auth0-specific enumerated list — *"The following Sub-processors are authorized by Okta to process Personal Data and assist Okta with respect to Auth0 (formerly Customer Identity Cloud) subscriptions"* — dated on the page, with a processing location against every entry. Establishes the only **contractual objection right** found anywhere in this pass: *"you may object to Okta's use of a new Sub-processor by notifying Okta promptly in writing within ten (10) business days after receipt of Okta's notice."* That is the `WR-102-006` band-4 descriptor, though `R2` caps a Documented criterion at `2`. The list names Amazon Web Services and Microsoft for hosting, Cloudflare for CDN and DDoS, DataDog for analytics, Snowflake, MongoDB, Aiven, Salesforce for support ticketing, SendGrid for email notifications, **Twilio for the SMS authenticator**, and Computer Generated Solutions Romania for 24x7 support — see §7.8. Auth0-scoped; the Okta Workforce lists are separate and were not read. | February 22, 2027 |
+| EV-102-181 | `HG-102-011` | Postmark (X) | "EU Privacy", `https://postmarkapp.com/eu-privacy` | Documented | Medium | Establishes an enumerated list and a processing region, and **fails the pass test on the one remaining word**. The list names Deft (formerly ServerCentral) and Amazon Web Services for infrastructure, and Zendesk for help-desk software, with the region stated as *"Postmark's primary data and servers are hosted at Deft's data center (located outside of Chicago), and Amazon Web Services (AWS)."* Change notification is offered by subscription. **The page carries no last-updated or effective date**, and the pass test requires the list be *"obtained and dated"*. This is a property of the page, not a retrieval gap — the list was obtained. It is **not** a `FAIL`: the fail condition is a provider that will not enumerate subprocessors or commit to a region, and Postmark does both. `OQ-106-013`. | February 22, 2027 |
+| EV-102-182 | `HG-102-011` | Plaid (X) | Privacy and security policies, `https://plaid.com/legal/`, and the Plaid Trust Center, `https://security.plaid.com/` | Documented | **Low** | **No public subprocessor list exists to obtain.** The legal page describes categories of recipient — *"Cloud storage services providers"*, *"Fraud prevention services providers"* — and states sharing *"With our data processors and other service providers, partners, agents, or contractors"*, without naming entities, dating a list, or committing to notice. Three searches of the vendor's own domain found no enumerated list. What exists is a Trust Center gating SOC 2 Type 2, ISO 27001 and ISO 27701 material behind an access request. Confidence is Low because this record establishes an **absence across pages searched**, not a vendor statement. **Not recorded as a `FAIL`**: the gate fails a provider that *"will not enumerate subprocessors"*, and a list available to customers under request has not been shown to be refused. `OQ-107-024`. | November 22, 2026 |
+| EV-102-183 | `HG-102-011` | MX (X) | "MX Trust and Safety", `https://www.mx.com/trust/`, and the security whitepaper | Documented | **Low** | Same position as `EV-102-182` and stated by the vendor more explicitly. MX documents a third-party risk programme — each third party gets *"a risk-based assessment... prior to engaging"*, third parties are *"contractually obligated to secure their own networks and systems in a manner consistent with MX requirements"*, and critical ones are reviewed annually — but **names none of them**. Compliance documentation is *"available through the Trust Exchange"*, with access *"to documents shared securely under NDA"*. Establishes a programme, not a list. **Not a `FAIL`** for the same reason as Plaid. `OQ-107-024`. | November 22, 2026 |
+| EV-102-184 | `HG-102-011` | Mastercard / Finicity (X) | "Terms & Privacy", `https://www.finicity.com/terms-privacy/en-US/` | Documented | **Low** | No enumerated subprocessor list found. The privacy material describes categories — service providers including analytics and OS or platform providers — and states that personal information is shared *"with partners such as financial institutions or payment processors, as well as to affiliates within the Mastercard group"*, which is a disclosure of kind rather than of identity, and the affiliate scope is unbounded on the page. A privacy contact is published for enquiries. **Not a `FAIL`**, on the same reasoning. `OQ-107-024`. | November 22, 2026 |
+| EV-102-185 | `HG-102-011`, `HG-102-007` | Akoya (X) | "Security", `https://akoya.com/security`, and the privacy policy | Documented | **Low** | No enumerated subprocessor list found, so the gate position matches the other three aggregators. Establishes something the others do not, which is why this record also cites `HG-102-007`: Akoya describes a **pass-through model** in which it *"does not store any data accessed or shared on its network"*, and states that *"at no point does Akoya know who the consumer is or what data they are sharing."* If sustained, that materially changes what a subprocessor of Akoya could be exposed to and what vendor staff could reach — but it is a vendor claim on a marketing security page, unaccompanied here by an architectural description, and it is **not relied on for any gate outcome**. `OQ-107-025` records it as worth testing rather than accepting. `OQ-107-024`. | November 22, 2026 |
+| EV-102-186 | `HG-102-011` | Twilio (X) | "Sub-processors", `https://www.twilio.com/en-us/legal/sub-processors`, *"Last Updated: April 2026"* | Documented | Medium | Establishes the enumerated, dated list the pass test requires: *"Twilio uses the third party companies below (each, a 'sub-processor') to process personal data (i) on behalf of Twilio customers; (ii) in accordance with customer instructions as communicated by Twilio; and (iii) in strict accordance with the terms of a written contract between Twilio and the sub-processor."* Locations are given per entry. Change notification is by subscription — *"Twilio customers may subscribe to notifications of sub-processor changes"* — with **no notice period in days stated**, weaker than AWS's thirty days and Auth0's ten-business-day objection window, which bears on `WR-102-006` rather than on this gate. Names **Amazon Web Services as its infrastructure provider** for hosting and storage, alongside Google and Deepgram — see §7.8. | February 22, 2027 |
 
-Two numbers are reserved rather than left as gaps, because the register is
-append-only and a gap is indistinguishable from a deleted record:
+Twenty-five numbers are reserved rather than left as gaps, because the register
+is append-only and a gap is indistinguishable from a deleted record:
 
 | ID | Status |
 | --- | --- |
-| EV-102-180 | **Reserved** for the cross-category documentary pass |
-| EV-102-181 | **Reserved** for the cross-category documentary pass |
+| EV-102-187 | **Reserved** for the cross-category documentary pass |
+| EV-102-188 | **Reserved** for the cross-category documentary pass |
+| EV-102-189 | **Reserved** for the cross-category documentary pass |
+| EV-102-190 | **Reserved** for the cross-category documentary pass |
+| EV-102-191 | **Reserved** for the cross-category documentary pass |
+| EV-102-192 | **Reserved** for the cross-category documentary pass |
+| EV-102-193 | **Reserved** for the cross-category documentary pass |
+| EV-102-194 | **Reserved** for the cross-category documentary pass |
+| EV-102-195 | **Reserved** for the cross-category documentary pass |
+| EV-102-196 | **Reserved** for the cross-category documentary pass |
+| EV-102-197 | **Reserved** for the cross-category documentary pass |
+| EV-102-198 | **Reserved** for the cross-category documentary pass |
+| EV-102-199 | **Reserved** for the cross-category documentary pass |
+| EV-102-200 | **Reserved** for the cross-category documentary pass |
+| EV-102-201 | **Reserved** for the cross-category documentary pass |
+| EV-102-202 | **Reserved** for the cross-category documentary pass |
+| EV-102-203 | **Reserved** for the cross-category documentary pass |
+| EV-102-204 | **Reserved** for the cross-category documentary pass |
+| EV-102-205 | **Reserved** for the cross-category documentary pass |
+| EV-102-206 | **Reserved** for the cross-category documentary pass |
+| EV-102-207 | **Reserved** for the cross-category documentary pass |
+| EV-102-208 | **Reserved** for the cross-category documentary pass |
+| EV-102-209 | **Reserved** for the cross-category documentary pass |
+| EV-102-210 | **Reserved** for the cross-category documentary pass |
+| EV-102-211 | **Reserved** for the cross-category documentary pass |
 
 ## 10. Open questions carried forward
 
@@ -751,6 +872,9 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | OQ-103-023 | Does any candidate document a break-glass, impersonation, or unrestricted-query capability for its own staff? | `HG-102-008` | Both trust pages retrieved at v1.1 are silent on all three. Silence is not absence, and this gate asks precisely about a capability a vendor has no incentive to describe. |
 | OQ-103-024 | Do the AWS, Google and Microsoft DPAs state provider backup retention, region, and expiry? | `HG-102-013` | **Read the DPAs before CBD-108 ranks anything.** The pass test says "Silence fails", so if the contracts are silent this gate fails for every candidate simultaneously — the only gate in the set with that property. It is currently `UNPROVEN` only because the contracts have not been read, which is not the same thing. |
 | OQ-103-025 | The three specific documents that would settle `HG-102-013`: Google's **Service Specific Terms** and CDPA Appendix 3, an extractable copy of the **AWS DPA**, and an **Azure**-scoped retention statement | `HG-102-013` | Narrows `OQ-103-024` from "read the DPAs" to three named retrievals. `EV-102-168` shows Google's contract states two of the three elements and defers the third; `EV-102-170` shows the AWS DPA could not be parsed; `EV-102-169` shows the Microsoft page that looks like the answer is Microsoft 365 only. None of the three is evidence of provider silence yet. |
+| OQ-103-027 | Which temporary-elevated-access partner product for C2, and at what price? | `HG-102-005`, `CR0` | `OI-103-017` resolved that a validated partner satisfies the gate **once named and priced**. AWS validates Apono, CyberArk Secure Cloud Access, Okta Access Requests and Tenable. Until one is chosen and costed, C2's `HG-102-005` stays `UNPROVEN` — not because the capability is absent but because the dependency is unbooked. |
+| OQ-103-028 | What does an exercised AWS support interaction actually produce in CloudTrail? | `HG-102-009` | `OI-103-018` converted the `FAIL` question into an observation. The documentary position is settled and thin; only an exercised support case shows whether a customer can obtain a record of AWS personnel access. Belongs to the authorized observation pass. |
+| OQ-103-029 | **Standing constraint**: adopting the Application Insights JavaScript SDK reopens `HG-102-002` for C3 | `HG-102-002` | `OI-103-021` passed the gate on the basis that browser telemetry is outside the boundary. That basis is a fact about CoBudget, not about Microsoft, and it can change. Any decision to add browser instrumentation must revisit this gate before it lands. |
 | OQ-103-026 | How does Google Cloud generate trace IDs, and with what entropy? | `HG-102-002` | `EV-102-179` documents the 128-bit W3C format and the request scope but not the generation algorithm, where `EV-102-177` states AWS's requirement outright. It does not block C1's `PASS` — the gate asks about lifetime, scope and the absence of a persistent user identifier, and all three are established — but it is the remaining asymmetry in this gate's evidence. |
 
 ## 11. Open items
@@ -762,8 +886,9 @@ question that stops being asked becomes `Absent` evidence and scores `0`.
 | OI-103-010 | The C3 Azure composition uses three primitives absent from the Customer Lockbox supported-services list, two of which have no listed first-party substitute. | Does not disqualify C3. It does mean C3's `HG-102-009` position is weaker than C1's on the evidence retrieved so far, and it should be settled with Microsoft rather than inferred. |
 | OI-103-011 | This evaluation covers category **H** only. Cross-category coherence — that the selected set shares no contradictory identity, networking, secret, regional, retention, deletion, incident, or support assumption — is a CBD-108 acceptance criterion and is not addressed here. | CBD-108 must perform it. The X gates were evaluated against the hosting candidate; the same X gates apply independently to every other category's provider. |
 | OI-103-012 | No part of this evaluation has been reviewed by anyone other than its author, and no provider was contacted. | It is a desk evaluation. The independent security review that CBD-92 §1 and the architecture baseline require before public launch remains outstanding and is not substituted for by anything here. Unchanged at v1.1. |
-| OI-103-017 | **Does a validated third-party integration satisfy a gate the catalog types `Vendor`?** `EV-102-008` establishes that AWS ships no native temporary-elevated-access capability and instead validates four partner products. | **Product Owner decision on the gate's reading.** Read as satisfied, C2 gains `HG-102-005` and the gate stops differentiating. Read as unsatisfied, C2's only route to it is a paid third party, which is a `CR0` fact no price has been put to. The evaluator declined to settle this by drafting, as `HG-102-005` is **firm** under catalog §2.5 and firm gates should not be widened silently. |
-| OI-103-018 | **`HG-102-009` may be a `FAIL` for C2 rather than an `UNPROVEN`.** The pass test fails a provider that "logs only CoBudget's own API calls and not its own staff's access", and `EV-102-010` establishes that AWS's customer-visible record is scoped to *"on behalf of"* service operations. | **Product Owner decision.** No AWS equivalent of Access Transparency or Customer Lockbox was found, but this rests on two pages, and absence from two pages is not proof of absence from the product. Recorded as `UNPROVEN` with the question raised rather than declared a `FAIL` on thin retrieval. If it is a `FAIL`, C2 becomes `INELIGIBLE` in **every** category, which is why it should be settled deliberately. |
+| OI-103-017 | ~~**Does a validated third-party integration satisfy a gate the catalog types `Vendor`?**~~ **Resolved by Product Owner decision, August 22, 2026.** **Yes, once a specific partner product is named and priced.** The pass test asks that the access model *supports* the conditions, not that the vendor ships them, and AWS validates that the partner solutions meet a common set of requirements — so the model does support it. But an unnamed, unpriced dependency is not a satisfied gate: C2 gains `HG-102-005` only when a partner product is selected and costed as a `CR0` line, which `OQ-103-027` now carries. Original text: `EV-102-008` establishes that AWS ships no native temporary-elevated-access capability and instead validates four partner products. | **Product Owner decision on the gate's reading.** Read as satisfied, C2 gains `HG-102-005` and the gate stops differentiating. Read as unsatisfied, C2's only route to it is a paid third party, which is a `CR0` fact no price has been put to. The evaluator declined to settle this by drafting, as `HG-102-005` is **firm** under catalog §2.5 and firm gates should not be widened silently. |
+| OI-103-018 | ~~**`HG-102-009` may be a `FAIL` for C2 rather than an `UNPROVEN`.**~~ **Resolved by Product Owner decision, August 22, 2026.** **Not a `FAIL`; `UNPROVEN` stands.** The position rests on two trust pages, and absence from two pages is not proof of absence from the product — making C2 `INELIGIBLE` in five categories at once on that basis is disproportionate to the evidence. The question converts to an observation, not a document: `OQ-103-028` asks what an exercised AWS support interaction actually produces in CloudTrail. Original text: The pass test fails a provider that "logs only CoBudget's own API calls and not its own staff's access", and `EV-102-010` establishes that AWS's customer-visible record is scoped to *"on behalf of"* service operations. | **Product Owner decision.** No AWS equivalent of Access Transparency or Customer Lockbox was found, but this rests on two pages, and absence from two pages is not proof of absence from the product. Recorded as `UNPROVEN` with the question raised rather than declared a `FAIL` on thin retrieval. If it is a `FAIL`, C2 becomes `INELIGIBLE` in **every** category, which is why it should be settled deliberately. |
 | OI-103-019 | ~~**Does "Azure Database for PostgreSQL" in the Customer Lockbox list cover Flexible Server?**~~ **Resolved August 21, 2026: it does not.** | **Closed by retrieval rather than by decision.** `EV-102-175` records that the Microsoft cloud security benchmark baseline for Flexible Server marks Customer Lockbox Supported **False** under control PA-8, with the guidance *"This feature is not supported to secure this service."* That source is stale on another row, so the load-bearing evidence remains `EV-102-012`, the current supported-services list, which omits Flexible Server while naming MySQL Flexible Server separately; `EV-102-176` confirms the current security overview raises no contradiction. **Consequence: C3 has no Customer Lockbox coverage in any of the five categories it is a candidate in.** No Product Owner decision is needed. |
-| OI-103-020 | **No hyperscaler documents a restore-approval permission, so `HG-102-006` may be unsatisfiable as written** — §7.6. Three of its four legs are separable on all three candidates; the fourth exists nowhere. | **Product Owner decision on the gate's reading**, and the same shape as `OI-130-010`. Read strictly, no hyperscaler can ever pass a **firm** gate, which cannot be the intent. Read as satisfied by an approval bound to the *activation* of the restoring role, Azure's Privileged Identity Management (`EV-102-011`) supplies it natively and the other two need a third party or a CoBudget-side control — which would make a `Vendor` gate turn on a `Config` mechanism. The evaluator declines to choose, because widening a firm gate by drafting is precisely what catalog §2.5 forbids. |
-| OI-103-021 | **Is Application Insights' cookie-persisted anonymous `user_Id` a provider default for the purposes of `HG-102-002`?** `EV-102-178` establishes that the JavaScript SDK persists it in a cookie and that it feeds the platform's sampling. | **Product Owner decision on scope, not on the vendor.** The mechanism belongs to the browser SDK. If the JavaScript SDK is outside CoBudget's boundary — which `TD-103-021` and `AN-92-003` would suggest, since nothing here plans browser telemetry — C3 passes on the same terms as C1 and C2. If it is inside, the gate asks precisely about a persistent end-user identifier and the answer is on the record. The evaluator declines to decide the boundary on the vendor's behalf, and records `UNPROVEN` rather than assuming the favourable reading. |
+| OI-103-020 | ~~**No hyperscaler documents a restore-approval permission**~~ **Resolved by Product Owner decision, August 22, 2026.** **The `HG-102-006` pass test is amended in CBD-102 §4, recorded at catalog §12.1.** Restore approval is now satisfied where approval can be required of a distinct principal before the restoring capability is exercised, including approval bound to *activation* of the restoring role. Amendment was chosen over case-by-case reinterpretation because §2.5 forbids widening a firm gate by drafting, and an amendment is visible and dated. The gate is not relaxed in what it protects. **Every candidate must be re-measured against the new text** — §6.1 and the sibling evaluations do so. Original text: — §7.6. Three of its four legs are separable on all three candidates; the fourth exists nowhere. | **Product Owner decision on the gate's reading**, and the same shape as `OI-130-010`. Read strictly, no hyperscaler can ever pass a **firm** gate, which cannot be the intent. Read as satisfied by an approval bound to the *activation* of the restoring role, Azure's Privileged Identity Management (`EV-102-011`) supplies it natively and the other two need a third party or a CoBudget-side control — which would make a `Vendor` gate turn on a `Config` mechanism. The evaluator declines to choose, because widening a firm gate by drafting is precisely what catalog §2.5 forbids. |
+| OI-103-021 | ~~**Is Application Insights' cookie-persisted anonymous `user_Id` a provider default?**~~ **Resolved by Product Owner decision, August 22, 2026.** **The JavaScript SDK is outside CoBudget's boundary.** `TD-103-021` and `AN-92-003` describe server-side telemetry only and no document plans browser instrumentation, so C3 gains `HG-102-002` on the same terms as C1 and C2. A standing constraint travels with it, recorded at `OQ-103-029`: adopting the Application Insights JavaScript SDK reopens this gate, because the cookie-persisted `user_Id` is exactly what `HG-102-002` exists to catch. Original text: `EV-102-178` establishes that the JavaScript SDK persists it in a cookie and that it feeds the platform's sampling. | **Product Owner decision on scope, not on the vendor.** The mechanism belongs to the browser SDK. If the JavaScript SDK is outside CoBudget's boundary — which `TD-103-021` and `AN-92-003` would suggest, since nothing here plans browser telemetry — C3 passes on the same terms as C1 and C2. If it is inside, the gate asks precisely about a persistent end-user identifier and the answer is on the record. The evaluator declines to decide the boundary on the vendor's behalf, and records `UNPROVEN` rather than assuming the favourable reading. |
+| OI-103-022 | ~~**Category F's documentary evidence is gated behind requests and NDAs**~~ **Resolved by Product Owner decision, August 22, 2026.** **CBD-15's scope is amended to permit trust-portal access requests and NDAs for the sole purpose of obtaining evaluation evidence** — no contract, no purchasing, no production data, mirroring the route-A amendment already made for evaluation accounts. Category F carries the most sensitive data in the product and was the category CoBudget knew least about; that is now fixable rather than recorded. `OQ-107-024` becomes actionable. Original text:, so CBD-107 cannot reach documentary parity with the other five categories by desk research** — §7.9. All four aggregators withhold subprocessor and compliance material. | **Product Owner decision on method, not on a vendor.** Either trust-portal access is pursued for one or more aggregators — which is a contact CBD-15's OUT OF SCOPE list does not currently permit — or category F is selected on materially thinner evidence than every other category, and that asymmetry is accepted explicitly rather than absorbed silently. Raised here because this evaluation owns the cross-category register; the consequence lands on CBD-107 and CBD-108. |

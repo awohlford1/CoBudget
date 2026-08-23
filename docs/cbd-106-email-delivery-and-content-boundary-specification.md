@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Defines the email posture CBD-106 evaluates transactional email providers against, including the authentication-versus-product routing recommendation the ticket asks for. It selects no provider; the candidate evaluation measures against it, and CBD-108 makes the selection. |
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-106](https://cobudget.atlassian.net/browse/CBD-106) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
 | Confluence page | [CBD-106 — Email Delivery and Content Boundary Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13205505) |
-| Repository baseline | `d98defd` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Purpose and authority
 
@@ -190,6 +190,25 @@ records.
 
 `ED-106-005` — **The sending domain is CoBudget's, authenticated with SPF, DKIM,
 and DMARC, and no vendor-branded envelope is used in production.**
+
+**Product Owner decision, August 22, 2026, resolving `OI-106-002`: the target
+DMARC policy is `p=reject`, and the advance from `p=none` is bound to a
+condition rather than to a date.**
+
+The condition is clean DMARC aggregate reports across **all three** `ED-106-003`
+subdomains for a defined run of consecutive days, after which the policy
+advances. A calendar date was deliberately not used. `OI-106-002` warned that *a
+`p=none` record that never advances is a monitoring posture recorded as an
+enforcement one*, and a date is exactly how that happens: if deliverability
+looks uncertain as the date approaches, the choice is to enforce anyway or to
+slip, and a slipped date rarely gets reset. A condition cannot lapse quietly —
+it is either met or visibly unmet.
+
+`p=reject` rather than `p=quarantine` because the highest-value mail on these
+domains is authentication mail, where a spoofed message reaching a spam folder
+is still a message reaching the recipient. The monitoring-first method
+`ED-106-005` already fixes is unchanged; this decision supplies the target and
+the trigger it advances on.
 
 * A dedicated subdomain per stream under `ED-106-003`, each with its own DKIM
   key and its own SPF-aligned bounce or MAIL FROM domain, under a DMARC policy

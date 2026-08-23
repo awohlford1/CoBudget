@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Maps each CBD-105 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. Product Owner approved v1.1 on August 21, 2026: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. |
-| Document version | 1.2 |
+| Document version | 1.3 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the 12 `DP-105-*` decisions, the screening and 24-gate evaluation with its verdicts and `EV-102-030`–`039` records, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, and leaves `OI-105-001`–`013`, `OI-102-022`, and every `OQ-105` question open. The v1.1 re-approval covers the re-resolved `OI-105-008`, the moved evidence-register reservation, and the audit guard that enforces it; it changes nothing else in this approval's scope. |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Data Protection and Recovery Specification v1.1; Candidate Shortlist and Gate Evaluation v1.2; Operational and Cost Assessment v1.1 |
+| Companions | Data Protection and Recovery Specification v1.2; Candidate Shortlist and Gate Evaluation v1.3; Operational and Cost Assessment v1.1 |
 | Confluence page | [CBD-105 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12910593) |
-| Repository baseline | `d0d5bb1` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Package contents
 

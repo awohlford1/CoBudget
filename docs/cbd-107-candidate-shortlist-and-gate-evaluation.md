@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to U.S. financial-data aggregators. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why. |
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.1 |
+| Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.2 |
 | Confluence page | [CBD-107 — Financial-Data Connectivity Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13533185) |
-| Repository baseline | `d0d5bb1` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Purpose
 
@@ -91,6 +91,30 @@ Azure and Google Cloud, and no candidate in category **F** is one of them. That
 leaves this evaluation with the largest block of open cross-category cells in
 the CBD-15 set — forty, against twenty-six or fewer everywhere else — and the
 gap is now a retrieval-priority fact for CBD-108 rather than a shared condition.
+
+### 3.2 Why this category's documentary gap cannot be closed by reading — added at v1.1
+
+The `HG-102-011` sweep of August 22, 2026 put the same question to all ten
+CBD-15 provider identities, and the answers split along category lines rather
+than by vendor quality. AWS, Auth0 and Twilio publish enumerated, dated lists.
+Postmark publishes one undated. **All four candidates in this category withhold
+the material**: C6 behind a Trust Center access request, C7 behind an NDA on a
+third-party trust exchange, C8 behind a privacy contact, and C9 not at all.
+
+That is a category property with a consequence for planning. This evaluation
+holds the largest block of open cross-category cells in the set, and §3.1
+already records that no provider-level record could be reused because no
+category **F** candidate appears in another category. What the v1.1 sweep adds
+is that the remaining gap is **not a retrieval failure that more careful reading
+can fix — the documents are not public.** Closing it needs a trust-portal
+request, a customer relationship, or a signed NDA, and CBD-15's OUT OF SCOPE
+list excludes provider contact outright.
+
+`OI-103-022` puts the resulting method question to the Product Owner: pursue
+gated access for one or more aggregators, or select in this category on
+materially thinner evidence than the other five and accept that asymmetry
+explicitly. Recorded here because the consequence lands on this evaluation, and
+raised rather than resolved because it is a scope decision, not an evaluator's.
 
 One result of that pass does reach this category, because it is about the gate
 rather than the provider. `HG-102-013`'s pass test says *"Silence fails"*, and
@@ -196,7 +220,7 @@ or a contract can settle. `CFG` marks a Config gate.
 | HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OI-102-005` |
 | HG-102-009 staff-access evidence | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. No aggregator equivalent of a cloud access-transparency log is known to exist; `OQ-107-006` asks the question rather than assuming the answer. |
 | HG-102-010 encryption in transit and at rest | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not compiled to the pass test's algorithm-and-custody standard. C9's TLS 1.2 floor is incidentally recorded in `EV-102-105`. |
-| HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | No dated subprocessor list obtained for any candidate. `OQ-107-007` |
+| HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **Asked of all four at v1.1, and the reason none passes is now established rather than assumed — see §3.2.** No candidate publishes an enumerated subprocessor list. C6 `EV-102-182`: categories of recipient only, with a Trust Center behind an access request. C7 `EV-102-183`: a documented third-party risk programme naming no third parties, with compliance material *"shared securely under NDA"*. C8 `EV-102-184`: categories, plus sharing *"to affiliates within the Mastercard group"* with the affiliate scope unbounded on the page. C9 `EV-102-185`: neither. **None is a `FAIL`** — the gate fails a provider that *"will not enumerate subprocessors"*, and a list held behind an access request has not been shown to be refused. `OQ-107-007`, `OQ-107-024` |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. `HG-102-065` is this gate's category-F instance. |
 | HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `PASS (design)` | `FC-107-002`; `TD-103-017`, `TD-103-018`. Non-exceptable under exception rules §5.2. |
@@ -210,7 +234,7 @@ or a contract can settle. `CFG` marks a Config gate.
 | HG-102-057 per-authorization independence | DOC | **`PASS`** | **`PASS`** | **`PASS`** | **`PASS`** | The one gate all four pass. `EV-102-094`, `EV-102-098`, `EV-102-102`, `EV-102-106`. See §7.6. |
 | HG-102-058 token in CoBudget's encrypted boundary | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **`PASS`** | `EV-102-106`: C9 instructs that the refresh token *"must be treated as highly confidential"* and be kept in *"encrypted credentials or server-side storage"*. **The same question was not put to C6, C7 or C8** — this is a retrieval asymmetry, not a product finding (§3.1, `OQ-107-004`). |
 | HG-102-059 signed, replay-safe webhooks | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3 — a forged and a replayed webhook must both be rejected in test. Four candidates, four mechanisms, spanning an asymmetric signature with a body hash to no payload signature at all. `EV-102-093`, `EV-102-097`, `EV-102-101`, `EV-102-109`. See §7.4. |
-| HG-102-060 connection-scoped cursor | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3, but the documentary position is decisive and asymmetric: **only C6 has a cursor at all** (`EV-102-092`). C7 uses background aggregation with page-based reads (`EV-102-100`), C8 date ranges with a 15-day lookback (`EV-102-104`), C9 offset and limit (`EV-102-108`). See §7.1 and `OI-107-008` — the gate's reading decides three verdicts. |
+| HG-102-060 connection-scoped cursor | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **`OI-107-008` resolved August 22, 2026 in favour of the failure condition, so C7, C8 and C9 do not fail this gate**; the outcome stays `UNPROVEN` because it is observation-bound, and `FC-107-010`'s pricing consequence carries instead. Blocked by §3, but the documentary position is decisive and asymmetric: **only C6 has a cursor at all** (`EV-102-092`). C7 uses background aggregation with page-based reads (`EV-102-100`), C8 date ranges with a 15-day lookback (`EV-102-104`), C9 offset and limit (`EV-102-108`). See §7.1 and `OI-107-008` — the gate's reading decides three verdicts. |
 | HG-102-061 immutable observations, stable keys | DOC | **`PASS`** | `UNPROVEN` | **`PASS`** | `UNPROVEN` | `EV-102-092`: C6 exposes stable `transaction_id` with explicit `modified` and `removed` streams. `EV-102-104`: C8 exposes `uniqueTransactionId` and a shadow status as its change signal. C7's most common pending-to-posted behaviour re-keys without a documented linkage field (`EV-102-099`); C9's mutation behaviour was not retrieved. See §7.3. |
 | HG-102-062 stable account identifier | DOC | **`PASS`** | `UNPROVEN` | `UNPROVEN` | **`PASS`** | `EV-102-095` with `EV-102-096`: C6's identifier is stable across the in-place repair path `FC-107-005` requires, with two recorded residuals. `EV-102-107`: C9's `sub` claim *"remains consistent between refreshes and re-links"*. C7 and C8 not retrieved — `OQ-107-005`. See §7.2. |
 | HG-102-063 per-connection disconnect | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3 — one of two connections must be disconnected and the other observed to continue. Documented capability on C6 (`EV-102-094`), C8 (`EV-102-102`) and C9 (`EV-102-105`). |
@@ -482,13 +506,15 @@ A concurrently drafted CBD-130 evaluation must claim a block above `131`.
 | OQ-107-010 | Webhook payload authentication mechanism for C7 and C9 | `HG-102-059` | Retrieve, then put to each provider. Absence from the retrieved pages is not proof of absence from the product |
 | OQ-107-011 | Whether C8's TxPUSH notifications carry transaction changes reliably enough to substitute for the 15-day poll | `HG-102-060` | Retrieve. It is the closest thing to a change stream outside C6 |
 | OQ-107-023 | Do the C6, C7, C8 and C9 data processing agreements state provider backup retention, region, and expiry? | `HG-102-013` | Shared with `OQ-103-024`. The pass test's *"Silence fails"* is a statement about the provider's contract, not about whether CoBudget has read it, so this gate is currently `UNPROVEN` rather than `FAIL` — and reading the four DPAs is the only thing that can move it in either direction. It is the one gate that could fail every candidate in every category simultaneously. |
+| OQ-107-024 | Enumerated, dated subprocessor lists for C6, C7, C8 and C9 | `HG-102-011` | **Not obtainable by desk research** — §3.2. Each is behind a trust portal, an NDA, or a privacy contact. Blocked on `OI-103-022` rather than on effort. |
+| OQ-107-025 | Does C9's pass-through claim hold architecturally? `EV-102-185` records Akoya stating it *"does not store any data accessed or shared on its network"* and that *"at no point does Akoya know who the consumer is or what data they are sharing."* | `HG-102-007`, `HG-102-009`, `HG-102-013` | If sustained it changes what vendor staff could reach and what a subprocessor could be exposed to, across several gates at once. It is a vendor claim on a marketing security page with no architectural description attached, and **no gate outcome rests on it**. Worth testing, not accepting. |
 
 ## 10. Open items
 
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-107-007 | Nine pass tests are observation-bound. Every candidate offers a sandbox with fictional institutions, so the `OI-103-008` authorization covers them without a real bank. | Verdicts stay `ELIGIBLE-PENDING-EVIDENCE` until the observations run. The guardrail is that a sandbox institution is the only acceptable target and no evaluator's own credentials are entered anywhere. |
-| OI-107-008 | **`HG-102-060` has two defensible readings and they decide three verdicts.** The gate's requirement sentence says *"Incremental synchronization is cursor-based"*; its failure condition names only *"Cross-connection cursor sharing"*. Read on the requirement, C7, C8 and C9 fail — they have no cursor. Read on the failure condition, they do not fail, because a provider with no cursor shares none. | **Product Owner decision, and the highest-consequence open item in the CBD-15 set.** On the first reading three of four candidates become `INELIGIBLE` absent an exception, which would leave one eligible aggregator and effectively pre-empt CBD-108's selection. This evaluation records `UNPROVEN` for all four and refuses to make that choice by drafting. |
+| OI-107-008 | ~~**`HG-102-060` has two defensible readings and they decide three verdicts.**~~ **Resolved by Product Owner decision, August 22, 2026: the failure condition governs.** A provider with no cursor cannot share one across connections, which is the leak this gate exists to prevent, and catalog §2.2 makes the pass test decisive with the failure condition as its operative half. **C7, C8 and C9 do not fail `HG-102-060`**, and the threatened outcome — three of four candidates `INELIGIBLE`, leaving one eligible aggregator and pre-empting CBD-108's selection by a gate reading — does not occur. The gate outcome stays `UNPROVEN` for all four because it remains observation-bound. What travels instead is the cost consequence already recorded at `FC-107-010`: a poll-and-diff provider's synchronization must be **priced, not assumed**. Original text: The gate's requirement sentence says *"Incremental synchronization is cursor-based"*; its failure condition names only *"Cross-connection cursor sharing"*. Read on the requirement, C7, C8 and C9 fail — they have no cursor. Read on the failure condition, they do not fail, because a provider with no cursor shares none. | **Product Owner decision, and the highest-consequence open item in the CBD-15 set.** On the first reading three of four candidates become `INELIGIBLE` absent an exception, which would leave one eligible aggregator and effectively pre-empt CBD-108's selection. This evaluation records `UNPROVEN` for all four and refuses to make that choice by drafting. |
 | OI-107-009 | Every cross-category **X** gate is `UNPROVEN` for every candidate, with no inherited passes. | Matches CBD-106's position and for the same reason: these are new provider identities. `OQ-107-003`, `OQ-107-006` and `OQ-107-007` are the largest remaining documentary work. |
 | OI-107-010 | `FU-95-012` is P0 and names this issue among four. Its closure evidence is provider sandbox evidence, signed-webhook fixtures, reconciliation and deduplication results, and an exercised disconnect. | This package supplies none of it and does not close the row. Financial connectivity and provider-derived financial state remain blocked. `EV-102-118`–`120` are reserved for that evidence. |
 | OI-107-011 | This evaluation covers category **F** only; cross-category coherence is CBD-108's acceptance criterion. | The one cross-category interaction is subprocessor count: C9 adds the institution's own OAuth surface rather than an aggregator's credential store, which changes the `HG-102-011` disclosure shape rather than merely lengthening the list. |

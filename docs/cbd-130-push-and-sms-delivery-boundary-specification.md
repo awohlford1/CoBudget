@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Defines the push and SMS posture CBD-130 evaluates providers against. It records that Private MVP has no push provider to select, and that SMS does. |
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Candidate Shortlist and Gate Evaluation v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.0 |
 | Confluence page | [CBD-130 — Push and SMS Delivery Boundary Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13434891) |
-| Repository baseline | `d7c3b29` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Purpose and authority
 
@@ -262,6 +262,24 @@ leaving it to implementation.
 
 `PN-130-010` — **Private MVP SMS is United States only, one segment per
 message, and that assumption is now verified rather than assumed.**
+
+**Product Owner decision, August 22, 2026, resolving `OI-130-003`: the
+`NT-92-002` application URL is **excluded** from the SMS body.**
+
+This is what keeps the one-segment property true beyond United States English.
+The `NT-92-001` body is 56 characters of basic GSM-7 and fits one segment with
+104 to spare, but in UCS-2 it uses 56 of 70, and the permitted URL alone is what
+pushes a non-Latin locale to two segments and doubles its per-message cost. The
+decision removes that cliff rather than pricing it.
+
+Two things follow beyond cost. The body stays exactly as generic as `NT-92-001`
+and `NT-92-006` intend — *"Open CoBudget to review"* already tells the recipient
+what to do, and they open the application themselves. And **the message carries
+no destination at all**, which sidesteps `HG-102-070` rather than relying on it
+holding: a provider cannot rewrite a URL for click tracking, or require a
+deep-link parameter identifying the event, in a message that contains no link.
+
+The URL remains available in email, where segment arithmetic does not exist.
 
 The cost template records a Product Owner assumption of August 16, 2026 — one
 segment per message, US destinations only — and requires it be restated in every
