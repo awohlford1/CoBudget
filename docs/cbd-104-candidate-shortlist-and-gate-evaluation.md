@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026 and v1.1 on August 21, 2026. Applies the approved CBD-102 method to managed-identity candidates against the companion boundary specification. It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE`, because the authorized observation pass has not been performed — §3 explains the position this evaluation inherits from CBD-103.** v1.2 reuses the CBD-103 cross-category documentary pass (§3.1): three documentary gate outcomes move, **no verdict does**, and `EV-102-012` positively establishes what v1.0 could only decline to assume — Microsoft Entra External ID is absent from the Customer Lockbox supported-services list. |
-| Document version | 1.2 |
+| Document version | 1.3 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Identity Integration Boundary Specification v1.1; Integration, Outage, Support, Cost, and Exit Assessment v1.1; Acceptance Criteria Traceability v1.2 |
+| Companions | Identity Integration Boundary Specification v1.1; Integration, Outage, Support, Cost, and Exit Assessment v1.1; Acceptance Criteria Traceability v1.3 |
 | Confluence page | [CBD-104 — Identity Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13139969) |
-| Repository baseline | `d0d5bb1` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Purpose
 
@@ -221,7 +221,7 @@ marks one documentation or a contract can settle. `CFG` marks a Config gate.
 | HG-102-008 no impersonation | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. `OQ-104-006` |
 | HG-102-009 staff-access evidence | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **This evaluation's v1.0 caution is now positively supported.** v1.0 recorded that `EV-102-005` *did not establish* Entra coverage. `EV-102-012` retrieves the complete Customer Lockbox supported-services list and establishes the stronger fact: **Microsoft Entra External ID does not appear on it.** The only Entra entry is "Microsoft Entra Diagnostics Data", which is diagnostics data rather than the identity service. Declining the reuse was correct. C2 `EV-102-010`: customer visibility is scoped to *"on behalf of"* service operations, raising the `OI-103-018` `FAIL` question. Neither flips — absence from a list is not evidence of absence from the product — but C3's position on this gate is weaker than a bare `UNPROVEN` conveys. `OQ-104-006` |
 | HG-102-010 encryption in transit and at rest | DOC | `PASS` | `PASS` | `UNPROVEN` | **Settled for C3 at v1.1.** C3 `EV-102-162` (at rest: *"A symmetric AES-256 key"*, KEK never leaving Key Vault, platform-managed by default with customer-managed available) and `EV-102-163` (in transit: MACsec on by default within and between regions, *"RSA-based 2,048-bit key lengths, ECC 256-bit key lengths, SHA-384 message authentication, and AES-256 data encryption"*). Both halves carry algorithm and key custody. C2 `EV-102-009` for at rest with `EV-102-174` for transport. **C2 settled at v1.1 by a later retrieval in the same pass**: `EV-102-174`, the current EC2 data-protection page, states *"All data flowing across AWS Regions over the AWS global network is automatically encrypted at the physical layer before it leaves AWS secured facilities"*, *"All traffic between AZs is encrypted"*, and the TLS floor *"We require TLS 1.2"*. It supersedes the historical whitepaper, which is no longer relied on for anything. C4 not retrieved. Per-service confirmation for Entra External ID specifically is `OQ-103-020`. `OQ-104-003` |
-| HG-102-011 region and subprocessors | DOC | `PASS` | `UNPROVEN` | `UNPROVEN` | **Settled for C2 at v1.1.** C2 `EV-102-007`: an enumerated list dated "Last Updated: July 28, 2026" on the page itself, with a 30-day advance-notice commitment and explicit region scoping — the pass test asks the list be *"obtained and dated"*, and it was. The list is AWS-wide and so covers Cognito. C3 stays `UNPROVEN` on two independent grounds: the Microsoft Online Services Subprocessor List was **not obtained** (`EV-102-167` names it and its six-month notice commitment; `OQ-103-018`), and the v1.0 residency concern is unchanged — the only published residency add-on covers Australia and Japan (`EV-102-019`), so the United States external-tenant position still needs explicit confirmation. C4 not retrieved. `OQ-104-004` |
+| HG-102-011 region and subprocessors | DOC | `PASS` | `UNPROVEN` | `PASS` | **Settled for C2 at v1.1.** C2 `EV-102-007`: an enumerated list dated "Last Updated: July 28, 2026" on the page itself, with a 30-day advance-notice commitment and explicit region scoping — the pass test asks the list be *"obtained and dated"*, and it was. The list is AWS-wide and so covers Cognito. C3 stays `UNPROVEN` on two independent grounds: the Microsoft Online Services Subprocessor List was **not obtained** (`EV-102-167` names it and its six-month notice commitment; `OQ-103-018`), and the v1.0 residency concern is unchanged — the only published residency add-on covers Australia and Japan (`EV-102-019`), so the United States external-tenant position still needs explicit confirmation. **C4 settled at v1.1 and it is the strongest position on this gate anywhere in CBD-15.** `EV-102-180`: an Auth0-specific enumerated list dated *"Effective Date: May 2026"*, a processing location against every entry, and the only **contractual objection right** found in the whole pass — *"you may object to Okta's use of a new Sub-processor by notifying Okta promptly in writing within ten (10) business days after receipt of Okta's notice."* Note what the list discloses: Auth0 runs on **AWS and Microsoft**, and uses **Twilio** for its SMS authenticator, so selecting C4 introduces two other CBD-15 candidates as subprocessors — CBD-103 §7.8. `OQ-104-004` |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Request must be exercised. |
 | HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Contractual class; still not obtained for any candidate. The v1.1 pass sharpened why this is `UNPROVEN` rather than `FAIL`: the pass test's *"Silence fails"* means the **provider's** silence once its contract has been read, not CoBudget's failure to read it. No DPA was obtained. This is the one gate that could fail every candidate in every category at once — `OQ-103-024`. `OQ-104-005` **The contracts were read at v1.1 and the position is precise rather than blank.** Google's addendum states a recovery window and a 180-day expiry covering existing copies but defers region to terms not retrieved; the AWS addendum could not be parsed; and the Microsoft retention page that appears to answer this is scoped to Microsoft 365, not Azure. `OQ-103-025` names the three retrievals that would settle it. None of the three is provider silence yet, which is why this is `UNPROVEN` and not `FAIL`. |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `ID-104-001`, `ID-104-016`, `TD-103-022`. Non-exceptable under evidence register §5.2. |
@@ -251,17 +251,18 @@ summarizes.
 
 |  | C2 | C3 | C4 |
 | --- | --- | --- | --- |
-| `PASS` | 6 | 5 | 3 |
+| `PASS` | 6 | 5 | 4 |
 | `PASS (design)` | 1 | 1 | 1 |
-| `UNPROVEN` | 18 | 19 | 21 |
+| `UNPROVEN` | 18 | 19 | 20 |
 | `FAIL` | 0 | 0 | 0 |
 | **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
 
 **v1.1 moved four documentary outcomes and no verdict.** C2 gained
-`HG-102-011` and `HG-102-010`; C3 gained `HG-102-005` and `HG-102-010`. C4 gained nothing,
-because the cross-category pass was run at provider level against the three
-hyperscalers and Auth0 is not one of them — that is a gap in the pass, not a
-finding about Auth0, and `OQ-104-021` records it. All three candidates remain
+`HG-102-011` and `HG-102-010`; C3 gained `HG-102-005` and `HG-102-010`. C4 gained `HG-102-011` once the pass was
+extended past the three hyperscalers to the remaining provider identities, and
+it is the only candidate in the set to reach that gate with a documented
+objection right. The rest of `OQ-104-021` stands: nine of the ten shared
+documentary gates have still not been put to C4 on the same terms. All three candidates remain
 capped by the nine observation gates.
 
 No candidate carries a `FAIL`, so no compensating control, exception, or

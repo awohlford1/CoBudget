@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-107 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. §4 records a dependency the ticket states backwards. |
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the 18 `FC-107-*` decisions, the screening and 27-gate evaluation with its verdicts and `EV-102-092`–`109` records, the lifecycle and coverage map with its `PS-107-*` register, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, connects to no institution, and selects no institution-quality scoring algorithm. It leaves `OI-107-001`–`021`, `OI-102-022`, `FU-95-012`, `EG-91-005`, `EG-91-012`, `EG-91-021`, and every `OQ-107` question open — including `OI-107-008`, the `HG-102-060` reading that would move three verdicts, which this approval deliberately does **not** settle. |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.1; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0 |
+| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.2; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0 |
 | Confluence page | [CBD-107 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13598721) |
-| Repository baseline | `d0d5bb1` |
-| Last updated | August 21, 2026 |
+| Repository baseline | `c689192` |
+| Last updated | August 22, 2026 |
 
 ## 1. Package contents
 
@@ -249,6 +249,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | --- | --- | --- |
 | 1.0 | August 21, 2026 | Initial approved package. |
 | 1.1 | August 21, 2026 | Records that the CBD-103 cross-category documentary pass of the same date **moved nothing in this category, and could not have** — it was run at provider level against AWS, Azure and Google Cloud, and no category **F** candidate is one of them. Evaluation §3.1 now states the consequence: this package holds the largest block of open cross-category cells in the CBD-15 set, forty against twenty-six or fewer elsewhere, which is a retrieval-priority fact for CBD-108. Adds `OQ-107-023`, carrying the one result of that pass which does reach this category — that `HG-102-013`'s *"Silence fails"* concerns the **provider's** silence once its contract has been read, so the gate is `UNPROVEN` here rather than `FAIL` and reading the four aggregator DPAs is the only thing that can move it. **No record, gate outcome, verdict, tally, price, or `FC-107-*` decision changes.** |
+| 1.2 | August 22, 2026 | Adds §3.2 and `OQ-107-024`: the `HG-102-011` sweep put the same question to all ten CBD-15 provider identities, and **all four candidates in this category withhold the material** — C6 behind a Trust Center request, C7 behind an NDA, C8 behind a privacy contact, C9 not at all (`EV-102-182`–`185`). None is a `FAIL`, because the gate fails a provider that will not enumerate and a gated list has not been shown to be refused. The consequence is a method question rather than an evidence one: **this category's documentary gap is not closable by desk research**, and `OI-103-022` puts that to the Product Owner. Adds `OQ-107-025`, recording C9's pass-through claim as worth testing and relied on for nothing. **No gate outcome, verdict or tally moves.** |
 
 The v1.1 change adds no evidence and moves no outcome. It exists so that a
 reader comparing the six categories does not mistake this package's lack of a
