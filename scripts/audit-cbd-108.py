@@ -56,7 +56,7 @@ RETRIEVAL = Path("docs/cbd-108-evidence-retrieval-pass.md")
 PACKAGE_FILES = (DISPOSITION, COHERENCE, COST, CARRIED, TRACE, RETRIEVAL)
 
 # The commit each document was written against.
-REPOSITORY_BASELINE = {path: "`f8c5cb0`" for path in PACKAGE_FILES}
+REPOSITORY_BASELINE = {path: "`ee5eb99`" for path in PACKAGE_FILES}
 
 SOURCE_PACKAGES = ("103", "104", "105", "106", "107", "130")
 
