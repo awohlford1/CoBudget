@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.3 |
+| Document version | 0.4 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.3; Combined Cost Model v0.3; Carried Item Disposition Register v0.3; Acceptance Criteria Traceability v0.3; Evidence Retrieval Pass v0.3 |
+| Companions | Cross-Category Coherence Review v0.4; Combined Cost Model v0.4; Carried Item Disposition Register v0.4; Acceptance Criteria Traceability v0.4; Evidence Retrieval Pass v0.4 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `ec62d9a` |
+| Repository baseline | `d810579` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -124,7 +124,16 @@ but because every other category's answer depends on it. The companion coherence
 review §2 sets out the constraint chain: a hosting selection materially narrows
 identity, database, email and SMS at once.
 
-**Review trigger.** The route-A observation pass completing for C1, C2 and C3.
+**The `HG-102-013` half of this gap moved on August 29, 2026**, though the gate
+did not. The retrieval pass §4.4 records the position per candidate: **C1 now has
+a contractual statement of all three elements**, blocked only by an unverified
+scope condition (`OQ-108-005`, one retrieval); **C2 has had a second contractual
+instrument read that defers rather than states**; and **C3's named retrieval was
+found and is insufficient**, being documentation where the pass test demands a
+contract. The gate stays `UNPROVEN` for all three.
+
+**Review trigger.** The route-A observation pass completing for C1, C2 and C3,
+and `OQ-108-005` for the `HG-102-013` half.
 
 ### 4.2 I — Identity
 
