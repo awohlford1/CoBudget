@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3 and inverts the picture: only C1's commitment is contractual, and C1 looked worse only because it publishes a list that can be checked.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.12 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.13 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.12; Cross-Category Coherence Review v0.12; Combined Cost Model v0.12; Carried Item Disposition Register v0.12; Acceptance Criteria Traceability v0.12 |
+| Companions | Provider Set Disposition Register v0.13; Cross-Category Coherence Review v0.13; Combined Cost Model v0.13; Carried Item Disposition Register v0.13; Acceptance Criteria Traceability v0.13 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `5e5f491` |
+| Repository baseline | `5a28996` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,7 +22,7 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`236` are
+anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`238` are
 registered below and the remainder are unused.
 
 **This tranche covers two questions**, chosen because each is answerable from
@@ -396,6 +396,34 @@ permits lowering below the class but never raising.
 | Content | *"Microsoft will not store or process customer data outside the customer-specified Geo without your authorization."* Scope is qualified: *"Most Azure services enable you to specify the region where your customer data will be stored and processed."* An exceptions list follows — *"The following services may store or process certain data outside the specified Geo:"* — naming Azure Cloud Services, Azure Data Explorer, Language Understanding, Azure Machine Learning and Azure Databricks among others. Separately: *"Certain Azure services do not enable the customer to specify the region where the service will be deployed"*, referencing non-regional services **including Azure CDN and Microsoft Entra ID**. |
 | **Granularity** | The commitment is to a **Geo**, not a Region. A Geo such as *United States* contains multiple regions, so this is **coarser than the commitment C1 makes** and coarser than the single-region posture `OI-103-001` fixes. |
 | Limitations | **This is a documentation page, not the Product Terms**, so like `EV-102-235` it does not meet `HG-102-013`'s requirement for a contractual statement. The Microsoft Product Terms and DPA were **not retrieved** by this pass and may state the commitment contractually. The page directs the reader to *"Products available by region"* for the complete service list, which was not retrieved. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-237 — Microsoft states the Geo commitment contractually, in the Product Terms
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **region element** for C3, category **X** (`OQ-108-017`) |
+| Provider / category | Microsoft Azure (C3) / X |
+| Source | *"Privacy & Security Terms"*, `https://www.microsoft.com/licensing/terms/product/PrivacyandSecurityTerms/all` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | **Contractual** / Medium |
+| Content | Under the Microsoft Azure Core Services commitment: *"If Customer configures a particular service to be deployed within a Geo then, for that service, Microsoft will store Customer Data at rest within the specified Geo."* The document separately carries an Office 365 commitment enumerating a list of Geos and the data types covered, and an **EU Data Boundary** commitment: *"For EU Data Boundary Services, Microsoft will store and process Customer Data and Personal Data...at rest within the EU Data Boundary."* |
+| **Scope condition** | The commitment is **doubly conditional**: the service must be one of the **"Microsoft Azure Core Services"**, and the Customer must be able to **configure it to a Geo**. `EV-102-236` records that Azure names services which *"do not enable the customer to specify the region"* — **Microsoft Entra ID** among them — and those fall outside this clause by its own construction. |
+| Limitations | **Which services are "Microsoft Azure Core Services" was not retrieved**, so the covered set is not enumerated here — the same shape of scope condition `EV-102-218` carries for C1, and unresolved in the same way. `OQ-108-018`. No effective date appeared on the page. The commitment is to a **Geo**, which contains many regions, and is therefore coarser than the single-region posture `OI-103-001` fixes. It addresses **storage location** and says nothing about backup **retention** or **expiry**, which `HG-102-013` also requires. |
+| Supersedes | **`EV-102-236` in part** — that record placed the commitment in documentation and classed it Documented. The commitment also exists contractually, which is what this record establishes. |
+| Re-verify by | Contract term or amendment |
+
+### EV-102-238 — The AWS DPA sits inside the Service Terms, where no region clause was found
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **region element** for C2, category **X** (`OQ-108-017`) |
+| Provider / category | Amazon Web Services (C2) / X |
+| Source | *"General Data Protection Regulation (GDPR) Center"*, `https://aws.amazon.com/compliance/gdpr-center/` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium — what is documented is where the instrument lives |
+| Content | The DPA is **incorporated into the AWS Service Terms**: *"The AWS Service Terms include the SCCs adopted by the European Commission (EC) in June 2021, and the AWS DPA confirms that the SCCs will apply automatically…"* and *"The UK GDPR Addendum is part of the AWS Service Terms and applies automatically for all customers who require a data processing agreement…"* On data location the page describes **customer choice** rather than an AWS commitment — that customers may *"Determine where their customer data will be stored, including the type of storage and geographic region of that storage."* **No clause stating that AWS will not move customer content outside a selected Region appears.** |
+| Limitations | **This locates the instrument; it does not exhaustively parse it.** The AWS Service Terms are a very long document and both this retrieval and `EV-102-220`'s were necessarily partial. What can be said is that **two independent routes into the contractual instrument have not produced a region clause** — `EV-102-220` reading the Service Terms directly, and this page pointing at them. That is the strongest position short of a full parse, and it is not the same as a full parse. |
 | Re-verify by | February 28, 2027 |
 
 ## 4. What the records establish
@@ -1131,6 +1159,71 @@ work `OQ-108-017` names, and until it is done the honest summary is not that C1
 is best but that **C1 is the only one whose position has been established at
 all**.
 
+### 4.19 `OQ-108-017` settled — and it corrects tranche 10
+
+Tranche 10 concluded that **only C1's region commitment is contractual**. That
+was true of what had been retrieved and is **not true of what exists**. C3's is
+contractual too, in the Product Terms.
+
+| | **C1 Google** | **C2 AWS** | **C3 Azure** |
+| --- | --- | --- | --- |
+| Contractual region commitment | **Yes** — Service Specific Terms §1 | **Not found**, by two routes | **Yes** — Privacy & Security Terms |
+| Granularity | **Region**, backups within the country | — | **Geo** — contains many regions |
+| Scope condition | Service must be on the data-residency list | — | Service must be a **Core Service** *and* configurable to a Geo |
+| Covered set enumerated? | **Yes** — and checkable | — | **No** — "Core Services" not retrieved |
+| Known uncovered component | **Cloud Scheduler**, 1 of 8 | Undeterminable | **Entra ID** named non-regional |
+
+**C1 and C3 have the same shape.** Both make a contractual commitment
+conditional on the service falling in a covered set, and in both cases a
+component of CoBudget's composition sits outside it. The difference is that
+**Google enumerates the set and Microsoft does not** — `EV-102-218`'s condition
+could be checked against the composition in tranche 6, and `EV-102-237`'s
+cannot, because *"Microsoft Azure Core Services"* was not retrieved
+(`OQ-108-018`).
+
+**C2 is the one that has not improved.** The DPA turns out to live **inside the
+Service Terms** — the instrument `EV-102-220` already read and found to carry no
+region clause. So the contractual instrument has now been approached twice, from
+two directions, without producing the region element. The commitment exists only
+on a compliance FAQ, which §3.0.1 classes **Asserted** and §3.2 forbids a hard
+gate from passing on.
+
+**That is the strongest position short of a full parse, and it is not a full
+parse.** The Service Terms are very long and both retrievals were partial. The
+honest statement is that the clause **has not been found**, not that it is
+**not there** — and `HG-102-013`'s *"Silence fails"* turns on the latter.
+
+#### Three corrections this pass has now made to itself
+
+Worth collecting, because the pattern is consistent and it is not flattering.
+
+| Tranche | Claim | Corrected by | Direction |
+| --- | --- | --- | --- |
+| 2 | C1 is *"one retrieval away"* from a `HG-102-013` `PASS` | 3 | Against |
+| 3 | Secret Manager is absent from the data-residency list | 6 | For |
+| 6 | Cloud Scheduler *"plausibly has a like-for-like substitute"* | 9 | Against |
+| 10 | Only C1's commitment is contractual | **11** | **For C3** |
+
+**Every correction came from retrieving one more thing.** None came from
+re-reasoning over evidence already held. That is an argument for continuing the
+pass rather than concluding from it, and it is the strongest available evidence
+for `OI-108-017`'s claim that the `D3` block is the cheapest work in the corpus.
+
+#### What the region dimension now supports
+
+**Not a ranking.** `HG-102-013` remains `UNPROVEN` for all three candidates, and
+this pass moves no gate outcome. What has changed is that the reasons are now
+different and specific:
+
+* **C1** — contractual, enumerated, one composition component outside it.
+* **C2** — no contractual clause found by two routes; only an Asserted
+  statement, which cannot pass the gate.
+* **C3** — contractual, **not** enumerated, coarser granularity, and one
+  composition component named as outside it.
+
+**All three still need their retention and expiry elements**, which this
+dimension does not touch. `EV-102-168` supplies them for C1 alone.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -1147,7 +1240,9 @@ all**.
 | OQ-108-014 | ~~Do Cloud Armor's regional backend policies offer the capability set the CBD-103 gate matrix relied on?~~ **Settled at §4.14: the question does not arise.** No WAF gate exists; Cloud Armor is cited by no gate row; the two capability-dependent edge gates are already `UNPROVEN` for all three candidates; and the one that passes is `PASS (design)` on CoBudget's own record. | Closed. **The swap is clear to execute.** The residual is that `HG-102-020` and `HG-102-021` must later be evaluated against the **regional** product — `EV-102-233` establishes what regional supports, not parity with global |
 | OQ-108-015 | Can **Eventarc** or **Managed Service for Apache Airflow** provide `TD-103-004`'s fifteen-minute tick without Cloud Scheduler? Both are on the data-residency list; neither was retrieved. | The remainder of `OQ-108-012`. Airflow does carry its own scheduler, but deploying it for a fifteen-minute tick at Private MVP scale is a proportionality judgment rather than a retrieval |
 | OQ-108-016 | Does Azure's naming of **Microsoft Entra ID** among services that cannot have a region specified reach **Microsoft Entra External ID**, the C3 identity candidate? They are distinct products. | **If it does, the uncovered component in the C3 set is the identity provider**, holding authentication material, where C1's is a scheduler — §4.18. Second independent finding against this component after `EV-102-012` |
-| OQ-108-017 | Do the **AWS DPA** and the **Microsoft Product Terms** state the region commitment contractually? `EV-102-235` and `EV-102-236` find it only in a compliance page and a documentation page respectively. | **Decides whether C2 and C3 can satisfy `HG-102-013`'s region element at all**, since §3.2 forbids a hard gate passing on Asserted evidence. Neither instrument has been read — the AWS DPA is unparsed, the Product Terms unfetched |
+| OQ-108-017 | ~~Do the AWS DPA and the Microsoft Product Terms state the region commitment contractually?~~ **Settled at §4.19, and it corrects tranche 10.** **C3: yes** — the Privacy & Security Terms carry it (`EV-102-237`). **C2: not found** — the DPA lives inside the Service Terms, which `EV-102-220` read without finding a region clause (`EV-102-238`). | Closed. **C1 and C3 have the same shape**: contractual, conditional on a covered set, with one composition component outside it. C2 has only an Asserted statement, which §3.2 forbids a hard gate from passing on. Raises `OQ-108-018`–`019` |
+| OQ-108-018 | Which services are **"Microsoft Azure Core Services"**? `EV-102-237`'s commitment is conditional on membership of that set, which was not retrieved. | **The C3 equivalent of the data-residency list**, and the reason C3's condition cannot yet be checked against the composition the way C1's was in tranche 6 |
+| OQ-108-019 | Does a **complete** parse of the AWS Service Terms contain a region clause? Two partial retrievals have not produced one. | **`HG-102-013`'s *"Silence fails"* turns on whether the clause is absent, not on whether it has been found.** The honest position today is the latter |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
