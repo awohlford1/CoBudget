@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.15 |
+| Document version | 0.16 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.15; Combined Cost Model v0.15; Carried Item Disposition Register v0.15; Acceptance Criteria Traceability v0.15; Evidence Retrieval Pass v0.15 |
+| Companions | Cross-Category Coherence Review v0.16; Combined Cost Model v0.16; Carried Item Disposition Register v0.16; Acceptance Criteria Traceability v0.16; Evidence Retrieval Pass v0.16 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `4e3c50a` |
+| Repository baseline | `93429d5` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -135,7 +135,7 @@ load balancing is the regional variant the list covers (`OQ-108-011`,
 `OQ-108-012`); **C2's region element is now stated contractually** at DPA §12.1,
 read directly at tranche 12, **but its retention and expiry elements are assigned
 to the customer** by §5.2 and §8, so the gate fails on two elements of
-three rather than for want of an instrument (`EV-102-239`, `EV-102-240`); and
+three rather than for want of an instrument (`EV-102-239`, `EV-102-240`). **Tranche 14 read the Customer Agreement, the last unread general AWS instrument, and it states no retention or expiry term either** (`EV-102-243`, `EV-102-244`) — but Service Terms §1.15 **defers** the term to per-service technical documentation, which the August 29 ruling makes sufficient once retrieved (`OQ-108-025`); and
 **C3's named retrieval was found and is insufficient**, being documentation where
 the pass test demands a contract — though the Privacy & Security Terms do
 carry C3's region element (`EV-102-237`). The gate stays `UNPROVEN` for all three.

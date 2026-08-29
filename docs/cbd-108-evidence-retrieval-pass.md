@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.15 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.16 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.15; Cross-Category Coherence Review v0.15; Combined Cost Model v0.15; Carried Item Disposition Register v0.15; Acceptance Criteria Traceability v0.15 |
+| Companions | Provider Set Disposition Register v0.16; Cross-Category Coherence Review v0.16; Combined Cost Model v0.16; Carried Item Disposition Register v0.16; Acceptance Criteria Traceability v0.16 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `4e3c50a` |
+| Repository baseline | `93429d5` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,8 +22,8 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. **The reservation is widened here from `212`–`241` to `212`–`271`.** `212`–`242` are
-now registered and the original block is exhausted. No number above `242` is
+anywhere in the corpus. **The reservation is widened here from `212`–`241` to `212`–`271`.** `212`–`244` are
+now registered. No number above `244` is
 claimed anywhere in the corpus, and `scripts/audit-cbd-108.py` fails if this package
 registers a number at or below the corpus high-water mark.
 
@@ -469,7 +469,7 @@ permits lowering below the class but never raising.
 | Retrieval date | August 29, 2026 |
 | Class / confidence | **Contractual** / Medium — the list is the set `EV-102-237`'s commitment operates on |
 | Content | The section enumerates the Azure services the Geo commitment covers. Present among them: **Azure Container Apps**, **API Management**, **Application Gateway**, **Service Bus**, **Key Vault**, **Azure Monitor**, **Azure Database for PostgreSQL**, **Azure Communication Services**, **Microsoft Entra ID**, **Azure DNS**, **Load Balancer**, **Traffic Manager**, **Virtual Network**, **Azure Firewall**, **Storage**, **Backup**, **Site Recovery**, **Azure Kubernetes Service**, **Azure Cosmos DB**, **SQL Database**. The section also carries the qualifier: *"Certain services may not enable Customer to configure deployment in a particular Geo or outside the United States and may store backups in other locations."* |
-| Limitations | **The list as retrieved may be incomplete.** It was returned as a long enumeration from a very large page, and this pass cannot confirm it was rendered in full. **Absence of a service from the list as recorded here is therefore not evidence that it is absent from the list itself** — the same care `EV-102-224` required. `OQ-108-020` carries the two services this matters for. |
+| Limitations | **The list as retrieved may be incomplete.** It was returned as a long enumeration from a very large page, and this pass cannot confirm it was rendered in full. **Absence of a service from the list as recorded here is therefore not evidence that it is absent from the list itself** — the same care `EV-102-224` required. `OQ-108-023` carries the two services this matters for. |
 | Re-verify by | Contract term or amendment |
 
 ### EV-102-242 — Microsoft Entra External ID selects a geo-location, at North America granularity, once
@@ -485,6 +485,34 @@ permits lowering below the class but never raising.
 | **Two further data-location facts** | **Multifactor authentication** data is recorded as residing *"North America and/or in geo location"*, and the service *"logs the User Principal Name (UPN), voice-call telephone numbers, and SMS challenges"*. **Managed identities** write issued certificates to *"Azure Cosmos DB in the East US region"*, and *"Database replication puts a read-only copy in each region that Microsoft Entra managed identities runs."* |
 | Limitations | Documentation, not the Product Terms. It establishes that an external tenant **can** select a geo-location — which is the opposite of what a naive reading of `EV-102-236` would suggest — but the selectable unit is a **geo-location such as North America**, not an Azure region and not the United States. The managed-identity replication statement is about the Microsoft Entra managed-identity service generally; whether CoBudget's C3 composition depends on it was not established. |
 | Re-verify by | February 28, 2027 |
+
+### EV-102-243 {D} The AWS Customer Agreement holds content for 30 days after termination, and states no retention or expiry term
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **retention and expiry elements** for C2, category **X** (`OQ-108-022`) |
+| Provider / category | Amazon Web Services (C2) / X |
+| Source | *"AWS Customer Agreement"*, `https://aws.amazon.com/agreement/`, {S}5.3(b). Effective date shown on the page: **August 14, 2026** |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | **Contractual** / Medium |
+| Content | {S}5.3(b) *"Post-Termination"*: *"Unless we terminate your use of the Services pursuant to Section 5.2(b), during the 30 days following the Termination Date: (i) we will not take action to remove from the AWS systems any of Your Content as a result of the termination; and (ii) we will allow you to retrieve Your Content from the Services only if you have paid all amounts due under this Agreement."* |
+| **Why this is not the term the gate asks for** | It is a **floor, not a retention period**. AWS undertakes **not to delete** for 30 days; it does not state how long AWS holds Your Content, how long it holds backups of it, or a maximum period after which copies are gone. The C1 benchmark (`EV-102-168`, Google CDPA {S}6.2) states both a recovery window **and** a 180-day maximum reaching *"existing copies"*. {S}5.3(b) states neither. |
+| Limitations | **This is the third and last general AWS instrument.** The Customer Agreement had not been retrieved anywhere in the corpus before this record. It does not follow that no AWS document states the term {D} {S}1.15 of the Service Terms defers it to per-service technical documentation (`EV-102-220`), and that documentation is unread (`OQ-108-025`). The words *"backup"* and *"archive"* appear in the Customer Agreement only at {S}2.3 (`EV-102-244`). Retrieval passed through a page-to-markdown extraction step rather than a locally parsed file, so provenance is weaker than `EV-102-239`'s; the section numbering and wording were obtained twice on differently framed prompts and were stable. **Published reseller and historical copies use a different numbering** ({S}7.3, {S}7.2(b), *"we will not erase"*); the live agreement is {S}5.3(b), *"we will not take action to remove"*. |
+| Re-verify by | Contract term or amendment |
+
+### EV-102-244 {D} The AWS Customer Agreement assigns backup to the customer, restating the DPA's allocation
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **retention and expiry elements** for C2, category **X** {D} corroborating record (`OQ-108-022`) |
+| Provider / category | Amazon Web Services (C2) / X |
+| Source | *"AWS Customer Agreement"*, `https://aws.amazon.com/agreement/`, {S}2.3 |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | **Contractual** / Medium |
+| Content | {S}2.3 is headed *"Your Security and Backup"*: *"You are responsible for properly configuring and using the Services and otherwise taking appropriate action to secure, protect and backup your accounts and Your Content in a manner that will provide appropriate security and protection, which might include use of encryption to protect Your Content from unauthorized access and routinely archiving Your Content."* |
+| **What it adds** | A **second instrument** making the allocation `EV-102-240` found at DPA {S}5.2 and {S}8. Two AWS contracts now assign backup and archiving to the customer, in a section the Customer Agreement titles *"Your Security and Backup"*. `EV-102-240`'s finding {D} that for C2 the retention and expiry elements fail by **allocation** rather than by silence {D} rests on two independent instruments rather than one. |
+| Limitations | **Corroborates; moves nothing.** Register {S}3.1 is explicit that repetition is not corroboration for *confidence*, and this record does not raise `EV-102-240`'s. What it establishes is that the allocation is the settled position of the AWS contract set rather than a feature of one document. It does not establish that AWS holds no backups, only that no AWS instrument read so far undertakes anything about them. |
+| Re-verify by | Contract term or amendment |
 
 ## 4. What the records establish
 
@@ -1439,7 +1467,7 @@ the exact two places C1's composition fell outside Google's list.
 work.** `EV-102-241` records that the list was returned from a very large page
 and may be incomplete. Tranche 3 made precisely this mistake in the other
 direction — reading a stale snapshot and recording Secret Manager as absent when
-it was present — and the correction cost two tranches. `OQ-108-020` puts the
+it was present — and the correction cost two tranches. `OQ-108-023` puts the
 question rather than banking the finding.
 
 **If it holds, the region dimension stops separating C1 from C3.** Both would
@@ -1507,6 +1535,150 @@ supported-services list — as one of two independent findings converging on the
 same component. **That convergence is now one finding, not two.** The Lockbox
 absence stands; the region-exclusion worry does not.
 
+### 4.23 `OQ-108-022` answered: the last general AWS instrument is read, and it does not carry the term
+
+Tranche 12 asked whether any AWS instrument states provider-controlled backup
+retention and expiry as C1's CDPA does. The **AWS Customer Agreement** — the
+one general AWS instrument the corpus had never retrieved — has now been read.
+**It does not.**
+
+| Instrument | What it does with retention and expiry |
+| --- | --- |
+| **Customer Agreement §5.3(b)** (`EV-102-243`) | A **30-day floor**: AWS will not remove Your Content *as a result of the termination*. States no holding period and no maximum |
+| **Customer Agreement §2.3** (`EV-102-244`) | **Assigns backup and archiving to the customer**, in a section headed *"Your Security and Backup"* |
+| **DPA §5.2, §8** (`EV-102-240`) | The same allocation, in a second instrument |
+| **DPA §14** (`EV-102-240`) | A 90-day customer-initiated return-or-delete right. A deletion right on termination, not a backup expiry |
+| **Service Terms §1.15** (`EV-102-220`) | **Defers** deletion timing to *"the technical documentation applicable to the Services"* |
+
+Against the C1 benchmark — `EV-102-168`, Google CDPA §6.2, a 30-day recovery
+window **and** a 180-day maximum reaching *"existing copies"* — no AWS
+instrument states either element.
+
+#### A correction to tranche 12's framing
+
+`EV-102-240`'s limitations field said *"no AWS equivalent has been identified"*,
+and `OQ-108-022` was raised as though the ground were unexplored. **It was not.**
+`EV-102-220`, registered at tranche 2, already recorded Service Terms §1.15
+deferring deletion timing to per-service technical documentation. Re-retrieving
+§1.15 this tranche returned identical wording at an identical section number,
+which corroborates that record and registers nothing new.
+
+The question was still worth asking — the Customer Agreement was genuinely
+unread, and it is where a retention term would most naturally sit. But the
+framing understated what the pass already held, and a reader could have taken
+§1.15 for a fresh finding. **It is not new evidence.** This is the sixth
+correction in the ledger and the first the pass has made to its own framing
+rather than to a claim.
+
+**What has changed about §1.15 is its standing, not its content.**
+`EV-102-220` recorded it as *"narrowing where the answer could be"* and named the
+DPA as *"the document that decides this gate for C2"*. Tranche 12 read the DPA,
+and it does not decide it. §1.15 is therefore promoted from a narrowing to
+**the operative clause**: C2's expiry term exists, and it lives in per-service
+technical documentation. `OQ-108-025` retrieves it.
+
+#### Stated by reference rather than stated, on both sides
+
+C1's region element is stated by reference — CDPA §10.1 defers it to the
+Service Specific Terms, which `EV-102-168` recorded as *"stated by reference
+rather than stated"*. C2's expiry element is stated by reference in exactly the
+same way, §1.15 deferring to technical documentation.
+
+**Two of three candidates now have an element of this gate delivered by
+deferral.** That reads less like a property of either provider and more like a
+property of `HG-102-013`: it asks for three specific numbers, and hyperscaler
+contracts habitually push operational specifics down into documentation.
+`OI-108-025` records it, because it bears on how the remaining work is
+estimated — deferrals are followable, and a followable deferral is cheaper
+than provider contact.
+
+### 4.24 Product Owner ruling on `HG-102-013`: written evidence is enough
+
+`HG-102-013` states itself two ways in one catalog row. The gate reads
+*"Provider-controlled backup behaviour is **stated contractually**"*; the pass
+test reads *"**A contract or written evidence** states the provider's backup
+retention, region, and expiry for CoBudget data. Silence fails."*
+
+**Product Owner ruling, August 29, 2026: the pass test governs. Written evidence
+is enough.** Recorded here with attribution and date, on the precedent §4.12
+set for direction given mid-pass.
+
+#### The scope of the ruling, checked rather than assumed
+
+* **The tension is unique to `HG-102-013`.** Every row of the hard gate catalog
+  was scanned for a gate statement demanding a contract against a pass test
+  admitting written evidence. `HG-102-013` is the only one. The ruling cascades
+  to no other gate.
+* **Evidence register §3.2 is untouched and still binds.** *"Hard gate `PASS`
+  — Documented or stronger. A gate never passes on Asserted evidence alone."*
+  The ruling is about **instrument type**; §3.2 is about **class**. Both apply.
+
+The operative rule is therefore: **Documented or stronger, contract or not.**
+
+#### What the ruling changes in records already held
+
+| Record | Reason recorded for insufficiency | Position under the ruling |
+| --- | --- | --- |
+| `EV-102-235` — AWS compliance FAQ, **Asserted** | *"a compliance FAQ page, not a contract"* | **Reason void, outcome unchanged.** It fails under §3.2 on class, not for being non-contractual. Moot in any case — `EV-102-239` supersedes it for region |
+| `EV-102-236` — Azure residency page, **Documented** | *"a documentation page, not the Product Terms"* | **Void. Sufficient on its own** for C3's region element. C3's outcome does not change because `EV-102-237` already supersedes it — but **C3's region element was satisfiable at tranche 10** and the pass did not know it |
+| `EV-102-221` — Azure vault retention, **Documented** | *"Two limitations, either of which is fatal"* | **The first is void** — Documented now counts. **The second stands**: it is scoped to Recovery Services vaults, not to the evaluated C3 composition. Still insufficient, now on **scope alone**. `OQ-108-026` |
+| `EV-102-169` — Microsoft retention page | scoped to Microsoft 365, not Azure | **Unaffected.** It failed on scope, not class |
+
+Three sections of this document reason from the superseded reading and are left
+as written: §4.4's *"C1 is one page from a `PASS`, and the page is not a
+contract"*, its C3 paragraph on documentation *"where the pass test demands a
+contractual statement"*, and §4.19's citation of §3.2 against C2. The first is
+already superseded by tranches 3 and 6 on other grounds.
+
+#### No gate moves, and the reason matters
+
+When the ruling was given, this pass flagged that tranche 14 might be the first
+to move a gate outcome. **It is not, and the correction is worth stating
+plainly.** The ruling changes **what kind of evidence would move these gates**,
+not what evidence is held:
+
+* **C1** — blocked by Cloud Scheduler sitting outside the data-residency list.
+  A scope gap. The ruling does not touch it.
+* **C2** — region stated contractually (`EV-102-239`); retention and expiry
+  live in documentation §1.15 defers to, **which has not been retrieved**.
+* **C3** — region stated contractually (`EV-102-237`), conditional on a list
+  with two components unconfirmed (`OQ-108-023`); the nearest retention record
+  fails on **scope**, which the ruling does not cure.
+
+**`HG-102-013` remains `UNPROVEN` for all three candidates.**
+
+What the ruling does change is the **shape and cost** of the remaining work. For
+C2 and C3 the outstanding elements are now a bounded documentation retrieval —
+class `D3`, the cheapest class in the register — where before the ruling they
+were a hunt for a contractual statement that might not exist anywhere. That is a
+materially better position than the one the pass held this morning, and it is
+the second time in this pass that a Product Owner answer has been worth more
+than a retrieval.
+
+#### The catalog row still states the gate both ways
+
+The ruling settles how to read it. It does not fix the text, and the next reader
+re-derives the same contradiction. **CBD-102 is approved and upstream of
+CBD-108**, so this pass records that the amendment is needed rather than making
+it — `OQ-108-027`, on the standing rule that a CBD-108 tranche does not amend
+its source packages mid-pass (`OI-108-020`).
+
+### 4.25 Two misreferences in tranche 13, corrected
+
+Tranche 13 cited `OQ-108-020` twice where `OQ-108-023` was meant: in
+`EV-102-241`'s limitations field, and in §4.21's closing sentence. `OQ-108-020`
+is tranche 12's question about whether the AWS Service Terms conflict with DPA
+§12.1; `OQ-108-023` is tranche 13's own question about whether Front Door and
+Logic Apps appear on the Core Services list. A reader following either citation
+landed on an unrelated question about a different provider. Both are corrected
+in place.
+
+**The audit does not catch this class of error, and cannot readily be made to.**
+`scripts/audit-cbd-108.py` checks that every cited `OQ-108` identifier is defined
+somewhere in the package. A citation of a **real** identifier in the **wrong**
+place satisfies that check exactly as a correct one does. The guard validates
+**existence, not appropriateness** — `OI-108-026`.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -1528,9 +1700,12 @@ absence stands; the region-exclusion worry does not.
 | OQ-108-019 | ~~Does a **complete** parse of the AWS Service Terms contain a region clause? Two partial retrievals have not produced one.~~ **The premise is gone — §4.20.** The region element is carried by the DPA, a separate instrument, so the Service Terms need not carry it and their silence decides nothing. | Closed as posed. What the Service Terms say still matters, but for **conflict** rather than for silence — `OQ-108-020` |
 | OQ-108-020 | Does any provision of the AWS Service Terms **conflict** with DPA §12.1? §16 makes the Service Terms control over the DPA, and `EV-102-220`'s parse was partial. | **Whether C2's region element survives its own subordination clause.** No conflict is known; the parse that would establish none has not been done |
 | OQ-108-021 | Does CoBudget hold data in AWS that is **not Personal Data** under Applicable Data Protection Law? DPA §12.1 commits only as to Personal Data, so any such data sits outside the region commitment by the instrument's own definition. | **A question about CoBudget, not about AWS.** Product Owner judgment against the `DI-91-*` classes — and the reason C2's contractual upgrade is not a clean improvement |
-| OQ-108-022 | Is there an AWS instrument stating **provider-controlled** backup retention and expiry, as C1's CDPA does (`EV-102-168`)? The DPA assigns backup to the customer (`EV-102-240`). | **The remaining two thirds of `HG-102-013` for C2.** Unlike a silence finding, this one cannot be closed by re-reading the DPA |
+| OQ-108-022 | ~~Is there an AWS instrument stating **provider-controlled** backup retention and expiry, as C1's CDPA does (`EV-102-168`)?~~ **Answered at §4.23: no.** The Customer Agreement, the last unread general AWS instrument, states a 30-day post-termination floor (`EV-102-243`) and assigns backup to the customer (`EV-102-244`). | Closed. **The term is not absent, it is deferred** — Service Terms §1.15 points at per-service technical documentation, which `EV-102-220` recorded at tranche 2 and this tranche re-reads. `OQ-108-025` follows the deferral |
 | OQ-108-023 | Are **Azure Front Door** and **Logic Apps** on the Microsoft Azure Core Services list? Neither was seen in `EV-102-241`'s retrieval, which may be incomplete. | **Decides whether C3's composition has the same two uncovered components as C1's** — an edge and a scheduler. Tranche 3 made the mirror-image mistake, so this is recorded as *not seen* rather than banked |
 | OQ-108-024 | Does CoBudget's C3 composition depend on **Microsoft Entra managed identities**, whose issued certificates `EV-102-242` records as written to Cosmos DB *"in the East US region"* with a read-only copy in every region the service runs? | Only material if the composition uses them; this pass establishes the provider behaviour, not CoBudget's dependence on it |
+| OQ-108-025 | What do the **per-service technical documents** that Service Terms §1.15 defers to state, for the components of CoBudget's evaluated C2 composition? | **The whole of `HG-102-013`'s retention and expiry elements for C2.** Class `D3` and bounded — the clause names where to look. Under the August 29 ruling this documentation **can** satisfy the gate, so this retrieval is capable of moving a gate outcome |
+| OQ-108-026 | Is there an Azure retention and expiry statement scoped to the **evaluated C3 composition** rather than to Recovery Services vaults? `EV-102-221` gives 14 days for soft-deleted vault data and fails on scope. | **C3's retention and expiry elements.** The ruling voids `EV-102-221`'s class objection and leaves only its scope objection, so the target is now a narrower retrieval than tranche 2 supposed |
+| OQ-108-027 | Should the `HG-102-013` catalog row be amended so its gate statement and pass test agree? The row demands a contract in one and admits written evidence in the other; the Product Owner has ruled the pass test governs. | **Upstream, in approved CBD-102.** The ruling settles the reading but not the text, so the contradiction survives for the next reader. Recorded here rather than amended, per `OI-108-020` |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
@@ -1543,6 +1718,8 @@ absence stands; the region-exclusion worry does not.
 | OI-108-022 | **The remaining H and D pricing work is a different shape from the tranches that preceded it.** Category H prices a composition of six services across three providers, and neither category has an established instance sizing to price against — which is part of why both were `UNKNOWN` to begin with. | Recorded so the pass's rate of progress is not extrapolated from the single-page retrievals that closed category E. The next useful step in category H may be `OQ-103-016`, which converts to an `HG-102-006` failure and is a gate question wearing a cost question's clothes, rather than the price lines of `OQ-103-015`. |
 | OI-108-023 | ~~Nine tranches have examined C1's region position and C2's and C3's not at all.~~ **Addressed at tranche 10, and the warning proved correct.** The same question put to both inverts the picture: **only C1's commitment is contractual**, C2's blanket statement admits no per-composition check at all, and C3 names Microsoft Entra ID among services that cannot have a region specified. | Closed as a retrieval asymmetry; **the substantive position is now that C1 is the only candidate whose region position has been established**, not that it is the best. `OQ-108-017` carries the two unread contractual instruments that could change it again. |
 | OI-108-024 | **A record that locates an instrument is not a route into its text.** Tranches 10 and 11 both reasoned about the AWS DPA from pages describing it, reached **opposite** conclusions, and both were wrong. `EV-102-238` stated the limit correctly in its own class note — *"what is documented is where the instrument lives"* — and then drew a conclusion about what the instrument says. | Recorded as a rule for the remaining `D3` block, which is largely contractual instruments: **a finding about what a document says requires that document.** It also qualifies §4.19's lesson that corrections come from retrieving one more thing — what mattered was retrieving the **primary** one. |
+| OI-108-025 | **Two of three candidates deliver an element of `HG-102-013` by deferral rather than by statement.** C1's region element is deferred by CDPA §10.1 to the Service Specific Terms; C2's expiry element is deferred by Service Terms §1.15 to per-service technical documentation. | Recorded because it bears on estimating the rest of this gate. `HG-102-013` asks for three specific numbers and hyperscaler contracts habitually push operational specifics into documentation, so **deferral is the expected shape here, not an evasion**. A followable deferral is class `D3` work, far cheaper than the `D4` provider contact the gate's remaining items were assumed to need. |
+| OI-108-026 | **The audit validates identifier existence, not appropriateness.** Tranche 13 cited `OQ-108-020` where `OQ-108-023` was meant, twice, and `scripts/audit-cbd-108.py` passed 84/84 both times — the check is membership of the defined set, which a wrong-but-real identifier satisfies. | Recorded as a known limit of the guard rather than a defect to fix: no mechanical check distinguishes a citation that is wrong from one that is right without understanding the claim. **The mitigation is that corrections are cheap when caught in the next tranche**, which is what happened here — §4.25. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | **`EV-102-214` is the first cost record in the corpus whose own source disclaims it.** Register §3.2 requires Documented-or-stronger for a cost figure, and this is Documented — but the page says its figures *"may not reflect the latest Azure pricing."* | Recorded at Low confidence per §3.1 rather than excluded, because a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces, and the disclaimer is quoted so no reader mistakes it for a firm price. If a firm C3 email rate is needed, `OQ-108-004` is the route. |
