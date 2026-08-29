@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Maps each CBD-107 acceptance criterion and deliverable to the exact evidence that answers it, and states plainly where the answer is a design record, a retrieved document, or an open question. §4 records a dependency the ticket states backwards. |
-| Document version | 1.4 |
+| Document version | 1.5 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the 18 `FC-107-*` decisions, the screening and 27-gate evaluation with its verdicts and `EV-102-092`–`109` records, the lifecycle and coverage map with its `PS-107-*` register, the operational and cost assessment with its `CR4` unknowns, and this traceability record. It approves no provider, publishes no rubric score, performs no observation, connects to no institution, and selects no institution-quality scoring algorithm. It leaves `OI-107-001`–`021`, `OI-102-022`, `FU-95-012`, `EG-91-005`, `EG-91-012`, `EG-91-021`, and every `OQ-107` question open — including `OI-107-008`, the `HG-102-060` reading that would move three verdicts, which this approval deliberately does **not** settle. |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.4; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0 |
+| Companions | Connection and Provenance Boundary Specification v1.0; Candidate Shortlist and Gate Evaluation v1.5; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0 |
 | Confluence page | [CBD-107 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13598721) |
-| Repository baseline | `717f143` |
-| Last updated | August 22, 2026 |
+| Repository baseline | `9aabc13` |
+| Last updated | August 29, 2026 |
 
 ## 1. Package contents
 
@@ -148,9 +148,10 @@ supply what CBD-107 exists to create would deadlock both.
 
 **This package follows the approved documents rather than the ticket text**, and
 proceeds. The discrepancy is recorded here rather than silently worked around,
-and `OI-107-021` carries the ticket correction. No approved document is
-reinterpreted to reach this conclusion — CBD-92's traceability states it
-directly.
+and `OI-107-021` carried the ticket correction, **which was applied in Jira on
+August 21, 2026** — §9 records the closure and the amended dependency text. No
+approved document is reinterpreted to reach this conclusion — CBD-92's
+traceability states it directly.
 
 ## 5. Follow-up register disposition
 
@@ -241,7 +242,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-107-021 | The CBD-107 ticket lists *"completed CBD-14 provider-specific findings"* as a dependency. CBD-92's traceability states the opposite direction — *"vendor-specific risks/tests wait for CBD-106/107 and CBD-15"* — and `EG-91-005` names CBD-15/CBD-107 as the target that produces them. | **The ticket needs correcting**, not this package. Waiting for CBD-14 to supply what CBD-107 exists to create would deadlock both. This package followed the approved documents and proceeded, per §4. The correction is a Jira edit, applied directly when authorized; it requires no repository change and no Confluence synchronization. |
+| OI-107-021 | ~~The CBD-107 ticket lists *"completed CBD-14 provider-specific findings"* as a dependency.~~ **Resolved — the correction was applied in Jira on August 21, 2026.** The ticket's `DEPENDENCIES` line now reads *"Approved rubric and approved CBD-69 through CBD-72 requirements"* and carries a dated note recording that the direction was the reverse: CBD-92's traceability states *"vendor-specific risks/tests wait for CBD-106/107 and CBD-15"*, and `EG-91-005` names CBD-15/CBD-107 as the target that produces them. | Closed. Confirmed against the live issue on August 29, 2026. This package followed the approved documents and proceeded, per §4; the ticket then moved to match. **No repository document changed to achieve it and no gate outcome, verdict, tally or price moved** — this row records the closure only. The equivalent open item for CBD-108's own inverted blocking links is `OI-108-005`, and it remains open. |
 
 ## 10. Revision record
 
@@ -252,6 +253,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | 1.2 | August 22, 2026 | Adds §3.2 and `OQ-107-024`: the `HG-102-011` sweep put the same question to all ten CBD-15 provider identities, and **all four candidates in this category withhold the material** — C6 behind a Trust Center request, C7 behind an NDA, C8 behind a privacy contact, C9 not at all (`EV-102-182`–`185`). None is a `FAIL`, because the gate fails a provider that will not enumerate and a gated list has not been shown to be refused. The consequence is a method question rather than an evidence one: **this category's documentary gap is not closable by desk research**, and `OI-103-022` puts that to the Product Owner. Adds `OQ-107-025`, recording C9's pass-through claim as worth testing and relied on for nothing. **No gate outcome, verdict or tally moves.** |
 | 1.3 | August 22, 2026 | Records the aggregator evidence request programme the `OI-103-022` scope amendment made possible, at `docs/cbd-107-evidence-request-programme.md`. It plans the four request routes, the five items to obtain from each candidate on identical terms, and the recommended order — C6 first, because it is the only self-serve route and the only one not stating an NDA requirement, so it tests whether this material closes the gates before anything is signed. `OQ-107-024` moves from blocked to actionable. **No request has been made and nothing is obtained**; the programme document is explicitly not a governing artifact, is cited by no `EV-102-*` record, and is deliberately excluded from both the Confluence sync and this package's audited file list. Raises `OI-102-023` in the evidence register: NDA'd material cannot be quoted or published, so it has no agreed home in a register whose method is verbatim quotation, and that should be settled before the first such document arrives. **No gate outcome, verdict, tally or price changes.** |
 | 1.4 | August 29, 2026 | Records the Product Owner decision of the same date resolving `OI-102-023`, at evidence register §3.0.2: **material received under a non-disclosure agreement does not enter the register — not quoted, cited, summarized or named — and therefore supports no finding**, leaving a gate it bears on `UNPROVEN`. The deciding fact was one the three options had not been weighed against: **the repository is public**, not merely un-access-controlled, so recording-without-publishing would still have published verbatim NDA'd text through git, and citing-without-quoting would have published a restricted document's issuer, date and scope. The consequence for this category is direct and is why the record belongs here: **an NDA-gated route cannot close a gate whatever it supplies**, so C7 is decided on stronger grounds than the SOC 3 argument, C6 becomes the only confirmed route that can produce a registrable record, and C8's and C9's terms must be established before material is requested rather than after. `OQ-107-024` is amended and the programme document reaches v1.1. **Category F's rubric ceiling of `2` stands** — CBD-108 must weigh it as a limit of what was obtainable on publishable terms, not as a finding about the aggregators. **No gate outcome, verdict, tally, price or `FC-107-*` decision changes.** |
+| 1.5 | August 29, 2026 | Records that `OI-107-021`'s ticket correction **was applied in Jira on August 21, 2026** and closes the item. Confirmed against the live issue: the `DEPENDENCIES` line no longer names CBD-14, and the ticket carries a dated note stating the direction was the reverse. The item had stood open in this record since v1.0 because its own text said the correction *"requires no repository change"*, so nothing prompted the record to be updated when the edit landed — an open item can outlive its own resolution when the resolution happens outside the repository, and this revision exists to close that gap rather than to add evidence. The companion evaluation moves to v1.5 for the companion reference only. **No record, gate outcome, verdict, tally, price or `FC-107-*` decision changes.** |
 
 The v1.1 change adds no evidence and moves no outcome. It exists so that a
 reader comparing the six categories does not mistake this package's lack of a
