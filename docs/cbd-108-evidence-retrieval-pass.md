@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.19 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.20 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.16; Cross-Category Coherence Review v0.16; Combined Cost Model v0.16; Carried Item Disposition Register v0.16; Acceptance Criteria Traceability v0.16 |
+| Companions | Provider Set Disposition Register v0.20; Cross-Category Coherence Review v0.20; Combined Cost Model v0.20; Carried Item Disposition Register v0.20; Acceptance Criteria Traceability v0.20 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `55cd5c0` |
+| Repository baseline | `24702a7` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -34,6 +34,8 @@ the convention CBD-107's evaluation §8.1 set when it recorded that *a
 concurrently drafted CBD-130 evaluation must claim a block above `131`* — the
 same collision `scripts/audit-cbd-105.py` was corrected for. The gap between
 `245` and `256` is deliberate and is not a numbering error.
+
+**Tranche 18 is that concurrent tranche**, and it claims `246`–`249` from the block reserved for it. It is numbered **after** tranche 17 because it was committed after it and stacks on it, while its evidence numbers sit **below** tranche 17's. **That inversion is the reservation working as intended**, not a numbering error either.
 
 **This tranche covers two questions**, chosen because each is answerable from
 published pages alone and each has a consequence larger than its size:
@@ -535,6 +537,65 @@ permits lowering below the class but never raising.
 | Limitations | Establishes membership for **two named services only**. It does not re-verify the rest of `EV-102-241`'s enumeration, and it does not address the qualifier `EV-102-241` records — that a service may be **on** the list and still not configurable to a Geo, which remains true of both. |
 | Refines | **`EV-102-241`**, which recorded both services as *"not seen"*. That record stands as the enumeration; this one corrects what the enumeration implied about Logic Apps. |
 | Re-verify by | Contract term or amendment |
+
+### EV-102-246 — AWS KMS states a provider-enforced deletion waiting period, and excludes cluster backups from it
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **expiry element** for C2, category **X** (`OQ-108-025`) |
+| Provider / category | Amazon Web Services (C2) / X |
+| Source | *"Delete an AWS KMS key"*, `https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"AWS KMS never deletes your KMS keys unless you explicitly schedule them for deletion and the mandatory waiting period expires."* On the period: *"AWS KMS requires you to set a waiting period of 7 — 30 days. The default waiting period is 30 days."* And: *"the actual waiting period might be up to 24 hours longer than the one you scheduled."* On completion: *"After the waiting period ends, AWS KMS deletes the KMS key, its aliases, and all related AWS KMS metadata."* |
+| **Why this one counts** | **The floor and the ceiling are both enforced by AWS**, not chosen by the customer. This is the **first provider-controlled expiry term found for C2** in the whole pass, and under the §4.24 ruling its Documented class is sufficient. |
+| **The backup carve-out** | Scoped to AWS CloudHSM key stores: *"AWS KMS does not delete the key material from cluster backups. Even if you delete the KMS key from AWS KMS and delete its key material from your AWS CloudHSM cluster, clusters created from backups might contain the deleted key material."* **A documented statement that deletion does not reach backups**, which is the element `HG-102-013` is named for. |
+| Limitations | Covers **key material only**, not the data encrypted under it, and the deletion path is customer-initiated throughout. The carve-out is scoped to CloudHSM custom key stores; whether CoBudget's C2 composition uses one is not established here and is not assumed. Retrieval passed through a page-to-markdown extraction step. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-247 — The Secrets Manager recovery window has a stated minimum that the same page documents how to bypass
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **retention element** for C2, category **X** — **negative record** (`OQ-108-025`) |
+| Provider / category | Amazon Web Services (C2) / X |
+| Source | *"Delete an AWS Secrets Manager secret"*, `https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_delete-secret.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"Secrets Manager does not immediately delete secrets. Instead, Secrets Manager immediately makes the secrets inaccessible and scheduled for deletion after a recovery window of a minimum of seven days."* |
+| **Why it is registered as negative** | The same page documents the override: `--force-delete-without-recovery` *"deletes a secret immediately without a recovery window. You can't recover this secret."* **A minimum the customer can elect out of is not a provider-controlled retention term**, which is what `HG-102-013` asks for and what its gate statement says *"cannot be assumed from CoBudget's own backup policy"*. |
+| Limitations | Establishes the default-path minimum and its override, not what Secrets Manager retains internally after either. Says nothing about backups of the secret store. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-248 — Amazon RDS documents provider-side recovery for six days after deletion, and cross-Region backups that survive it
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **retention and region elements** for C2, category **X** (`OQ-108-025`) |
+| Provider / category | Amazon Web Services (C2) / X |
+| Source | *"Deleting a DB instance"*, `https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | **Provider-side recovery after deletion**: *"If you need to restore an unintentionally deleted instance, contact the AWS Support team immediately. Recovery might be possible for up to six days after the deletion request."* **Customer-configured retention**: *"If you retain automated backups, RDS keeps them for the retention period that is in effect for the DB instance at the time when you delete it."* **Cross-Region survival**: *"If your automated backups have been replicated to another AWS Region, RDS keeps them even if you don't choose to retain automated backups."* And: *"When you delete your DB instance, RDS doesn't delete manual DB snapshots."* |
+| **The six days is the finding** | It is a **provider-held copy that outlives the customer's deletion**, disclosed in documentation and configured by no one. It is the closest thing in the AWS set to the *"existing copies"* language Google's CDPA §6.2 uses (`EV-102-168`) — but it is stated as *"might be possible"*, which describes a capability rather than undertaking a period. |
+| **The cross-Region clause bears on region, not only expiry** | Replicated automated backups are kept *"even if you don't choose to retain automated backups"*. That is a documented path by which AWS-held copies survive a deletion **and** sit outside the deployment Region. `OI-103-001` fixes a single United States region and CoBudget replicates nothing, so this does not bite today; it is registered because it is a provider behaviour that customer deletion does not reach. |
+| Limitations | Written about **customer-initiated instance deletion**, not about AWS's own backups of the platform. The six-day statement is about what Support *might* achieve, and no clause undertakes that copies are gone at any point. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-249 — CloudWatch Logs retains indefinitely by default and states an unbounded tail on deletion
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **retention and expiry elements** for C2, category **X** — **negative record** (`OQ-108-025`) |
+| Provider / category | Amazon Web Services (C2) / X |
+| Source | *"Working with log groups and log streams"*, `https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | **Default**: *"By default, log data is stored in CloudWatch Logs indefinitely. However, you can configure how long to store log data in a log group. Any data older than the current retention setting is deleted."* **The tail**: *"CloudWatch Logs doesn't immediately delete log events when they reach their retention setting. It typically takes up to 72 hours after that before log events are deleted, but in rare situations might take longer."* |
+| **Why this is the sharpest negative in the set** | The retention period is customer-configured, and the provider's actual deletion lags it by a period AWS states as typical and then **explicitly declines to bound** — *"might take longer"*. **A retention term with an unbounded tail is not a retention term.** `HG-102-013` asks for the provider's expiry; this page states that the provider's expiry is the customer's setting plus an unspecified amount. |
+| **Second finding** | The **default is indefinite**. Absent deliberate configuration, CoBudget's C2 logs are retained forever, which bears on `HG-102-003`'s distinct-retention requirement as much as on this gate. |
+| Limitations | Concerns log data in CloudWatch Logs, not other C2 components. Does not establish what AWS retains internally beyond the deletion it describes. |
+| Re-verify by | February 28, 2027 |
 
 ### EV-102-256 — Azure PostgreSQL Flexible Server states retention, region and expiry for its own backups
 
@@ -1866,6 +1927,95 @@ limitation `OI-108-026` records about identifier checking — the guard verifies
 consistency, not correctness — and it is worth noting that the two independent
 observations point at the same property of these audits.
 
+### 4.30 `OQ-108-025` settled: the deferral is followable, and it leads to the wrong shape
+
+Service Terms §1.15 defers deletion timing to *"the technical documentation
+applicable to the Services"* (`EV-102-220`). §4.23 recorded that this makes C2's
+remaining work a bounded retrieval rather than a hunt. **The retrieval has been
+made, and it does not close the gate.**
+
+Four kinds of statement came back, and only the first is what `HG-102-013` asks
+for.
+
+| | What the documentation states | Is it what the gate asks? |
+| --- | --- | --- |
+| **KMS** (`EV-102-246`) | Waiting period of **7—30 days**, default 30, floor and ceiling enforced by AWS; key deleted at the end | **Yes.** The first provider-controlled expiry term found for C2 |
+| **Secrets Manager** (`EV-102-247`) | Recovery window, *"a minimum of seven days"* | **No.** The same page documents `--force-delete-without-recovery`, which removes it |
+| **RDS** (`EV-102-248`) | Support recovery *"for up to six days after the deletion request"*; retention otherwise **customer-set** | **Partly.** A provider-held copy outliving deletion, but stated as a capability, not undertaken as a period |
+| **CloudWatch Logs** (`EV-102-249`) | Retention customer-set, **default indefinite**; deletion lags it by *"up to 72 hours… but in rare situations might take longer"* | **No, and it cuts the other way** |
+
+#### Why this does not satisfy the gate
+
+`HG-102-013`'s gate statement is explicit that provider-controlled backup
+behaviour *"cannot be assumed from CoBudget's own backup policy"*. **What
+§1.15's deferral leads to is, in the main, CoBudget's own backup policy** —
+per-service documentation is written for the operator configuring the service,
+and it describes the knobs that operator sets.
+
+Where provider behaviour does appear, it appears as **lag on top of the
+customer's setting**, and in the sharpest case it is unbounded:
+
+* **CloudWatch Logs**: the provider's actual expiry is the customer's retention
+  setting plus a period AWS calls typical and then declines to bound — *"in
+  rare situations might take longer"*. **A retention term with an unbounded tail
+  is not a retention term.**
+* **RDS**: *"Recovery might be possible for up to six days after the deletion
+  request."* A provider-held copy that outlives the customer's deletion, and the
+  nearest thing in the AWS set to the *"including existing copies"* language
+  Google's CDPA §6.2 carries (`EV-102-168`). But *"might be possible"*
+  describes a capability; it undertakes nothing.
+* **KMS on CloudHSM key stores**: *"AWS KMS does not delete the key material
+  from cluster backups."* An explicit statement that deletion does not reach
+  backups.
+
+**`HG-102-013` remains `UNPROVEN` for C2**, now for a reason no further
+retrieval in this direction will change: the documentation the contract points
+at is a different genre from the statement the gate requires.
+
+#### This corrects tranche 14
+
+§4.24 recorded that the ruling put C2 and C3 in *"a materially better
+position"*, the remaining work being *"a bounded documentation retrieval —
+class `D3`, the cheapest class in the register"*. **The cost claim was right and
+the implied optimism was not.** The retrieval was cheap, it was bounded, it was
+made within a day, and the gate did not move.
+
+That is the **seventh correction** in this pass's ledger, and the second in two
+tranches to a claim this document made about its own prospects rather than about
+a provider. `OI-108-027` records the pattern, because a pass that keeps
+overestimating what its next step will achieve is worth calibrating.
+
+| Tranche | Claim | Corrected by | Direction |
+| --- | --- | --- | --- |
+| 2 | C1 is *"one retrieval away"* from a `HG-102-013` `PASS` | 3 | Against |
+| 3 | Secret Manager is absent from the data-residency list | 6 | For |
+| 6 | Cloud Scheduler *"plausibly has a like-for-like substitute"* | 9 | Against |
+| 10 | Only C1's commitment is contractual | 11 | For C3 |
+| 11 | C2's region clause *"has not been found"* by two routes | 12 | For C2, and against it |
+| 12 | *"No AWS equivalent has been identified"*, as though unexplored | 14 | Framing |
+| 14 | The ruling leaves C2 and C3 *"a materially better position"* | **18** | **Against** |
+
+#### What is left, and what it is worth
+
+Four of C2's components are covered. **SQS was not retrieved** — the
+message-lifecycle page carried no retention statement — and ECS, API Gateway,
+CloudFront and EventBridge Scheduler have no equivalent statement retrieved.
+`OQ-108-030` names them.
+
+**But the value of completing that list has fallen.** Before this tranche, the
+remaining components were unknowns that might have carried the gate. After it,
+the genre problem applies to all of them equally: per-service operator
+documentation will state customer-configurable retention, and `HG-102-013` asks
+for something else. Completing `OQ-108-030` is worth doing for `HG-102-003` and
+for the `DI-91-*` picture; **it is not worth doing in the expectation that it
+moves `HG-102-013`**, and this document says so now rather than after the
+retrieval.
+
+The route that could still move the gate for C2 is `OQ-108-031`: whether AWS
+publishes any statement about **its own** backups of the platform, as distinct
+from the resources a customer creates and deletes. Nothing retrieved in eighteen
+tranches suggests it does.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -1890,11 +2040,13 @@ observations point at the same property of these audits.
 | OQ-108-022 | ~~Is there an AWS instrument stating **provider-controlled** backup retention and expiry, as C1's CDPA does (`EV-102-168`)?~~ **Answered at §4.23: no.** The Customer Agreement, the last unread general AWS instrument, states a 30-day post-termination floor (`EV-102-243`) and assigns backup to the customer (`EV-102-244`). | Closed. **The term is not absent, it is deferred** — Service Terms §1.15 points at per-service technical documentation, which `EV-102-220` recorded at tranche 2 and this tranche re-reads. `OQ-108-025` follows the deferral |
 | OQ-108-023 | ~~Are Azure Front Door and Logic Apps on the Microsoft Azure Core Services list?~~ **Settled at §4.26, and it splits.** **Logic Apps: present**, nested inside *"App Service (API Apps, Logic Apps, Mobile Apps, WebJobs, Functions)"* — never missing, only invisible to a flat enumeration. **Front Door: absent**, on a targeted check of a list that rendered in full (`EV-102-245`). | Closed. **C3 has one uncovered component, not two**, and it is the **global edge** — the exact structure C1 had before the tranche 7 swap. `OQ-108-028` |
 | OQ-108-024 | Does CoBudget's C3 composition depend on **Microsoft Entra managed identities**, whose issued certificates `EV-102-242` records as written to Cosmos DB *"in the East US region"* with a read-only copy in every region the service runs? | Only material if the composition uses them; this pass establishes the provider behaviour, not CoBudget's dependence on it |
-| OQ-108-025 | What do the **per-service technical documents** that Service Terms §1.15 defers to state, for the components of CoBudget's evaluated C2 composition? | **The whole of `HG-102-013`'s retention and expiry elements for C2.** Class `D3` and bounded — the clause names where to look. Under the August 29 ruling this documentation **can** satisfy the gate, so this retrieval is capable of moving a gate outcome |
+| OQ-108-025 | ~~What do the per-service technical documents that Service Terms §1.15 defers to state, for the components of CoBudget's evaluated C2 composition?~~ **Settled at §4.30.** Four components retrieved. One provider-enforced expiry (KMS, `EV-102-246`); one bypassable floor (`EV-102-247`); one provider-held copy outliving deletion but stated as a capability (`EV-102-248`); one unbounded deletion tail on a customer-set period (`EV-102-249`). | Closed, and **it does not move the gate**. The documentation §1.15 points at is written for the operator configuring the service, and `HG-102-013` asks for provider behaviour. **Corrects tranche 14** |
 | OQ-108-026 | ~~Is there an Azure retention and expiry statement scoped to the evaluated C3 composition?~~ **Settled at §4.28: yes, for the database component.** `EV-102-256` states retention (7–35 days), expiry (*"automatically deleted after the retention period"*) and region (zone-redundant *"within a country or region"*) for Azure Database for PostgreSQL Flexible Server. It supersedes `EV-102-221` for this purpose, whose scope objection does not apply to it. **It does not move the gate** — `HG-102-013` is a cross-category gate and the hosting components have no equivalent statement (`OQ-108-029`). Original: `EV-102-221` gives 14 days for soft-deleted vault data and fails on scope. | **C3's retention and expiry elements.** The ruling voids `EV-102-221`'s class objection and leaves only its scope objection, so the target is now a narrower retrieval than tranche 2 supposed |
 | OQ-108-027 | Should the `HG-102-013` catalog row be amended so its gate statement and pass test agree? The row demands a contract in one and admits written evidence in the other; the Product Owner has ruled the pass test governs. | **Upstream, in approved CBD-102.** The ruling settles the reading but not the text, so the contradiction survives for the next reader. Recorded here rather than amended, per `OI-108-020` |
 | OQ-108-028 | Can C3's composition stand on **API Management** without **Azure Front Door**? CBD-103 §5 names the edge as *"Front Door / API Management"*; API Management is on the Core Services list and Front Door is not. | **The C3 counterpart of the swap that closed C1's edge gap at tranche 7**, and subject to the same caution — Front Door is a global product and dropping it is a functional change, not a swap. A CBD-103 question |
 | OQ-108-029 | Do the remaining evaluated **C3 hosting** components — Container Apps, Service Bus, Key Vault, Azure Monitor — carry retention and expiry statements of their own? `EV-102-256` covers the database only, and `EV-102-237`'s Product Terms commitment speaks to **location**, not retention or expiry. | **The remainder of `HG-102-013` for C3.** A cross-category gate is not satisfied by one component of a composition — §4.28 |
+| OQ-108-030 | What do the per-service documents state for the **remaining** C2 components — **SQS** (not retrieved; the message-lifecycle page carried no retention statement), ECS on Fargate, API Gateway, CloudFront, and EventBridge Scheduler? | **Worth completing for `HG-102-003` and the `DI-91-*` picture, not for `HG-102-013`.** §4.30 states why: the genre problem applies to all of them equally |
+| OQ-108-031 | Does AWS publish any statement about **its own** backups of the platform, as distinct from the resources a customer creates and deletes? | **The only route left that could move `HG-102-013`'s retention and expiry elements for C2.** Eighteen tranches have found nothing suggesting it exists, which is not the same as establishing that it does not |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
@@ -1909,6 +2061,7 @@ observations point at the same property of these audits.
 | OI-108-024 | **A record that locates an instrument is not a route into its text.** Tranches 10 and 11 both reasoned about the AWS DPA from pages describing it, reached **opposite** conclusions, and both were wrong. `EV-102-238` stated the limit correctly in its own class note — *"what is documented is where the instrument lives"* — and then drew a conclusion about what the instrument says. | Recorded as a rule for the remaining `D3` block, which is largely contractual instruments: **a finding about what a document says requires that document.** It also qualifies §4.19's lesson that corrections come from retrieving one more thing — what mattered was retrieving the **primary** one. |
 | OI-108-025 | **Two of three candidates deliver an element of `HG-102-013` by deferral rather than by statement.** C1's region element is deferred by CDPA §10.1 to the Service Specific Terms; C2's expiry element is deferred by Service Terms §1.15 to per-service technical documentation. | Recorded because it bears on estimating the rest of this gate. `HG-102-013` asks for three specific numbers and hyperscaler contracts habitually push operational specifics into documentation, so **deferral is the expected shape here, not an evasion**. A followable deferral is class `D3` work, far cheaper than the `D4` provider contact the gate's remaining items were assumed to need. |
 | OI-108-026 | **The audit validates identifier existence, not appropriateness.** Tranche 13 cited `OQ-108-020` where `OQ-108-023` was meant, twice, and `scripts/audit-cbd-108.py` passed 84/84 both times — the check is membership of the defined set, which a wrong-but-real identifier satisfies. | Recorded as a known limit of the guard rather than a defect to fix: no mechanical check distinguishes a citation that is wrong from one that is right without understanding the claim. **The mitigation is that corrections are cheap when caught in the next tranche**, which is what happened here — §4.25. |
+| OI-108-027 | **This pass has now twice overestimated what its own next step would achieve.** Tranche 14 called the post-ruling position *"materially better"* and the retrieval that followed moved nothing; tranche 2 called C1 *"one retrieval away"* from a `PASS` and tranche 3 removed the prospective `PASS` instead. Five of the seven ledger entries run **against** the claim they correct. | Recorded as a calibration note rather than a finding. **The pass is reliable about what it has retrieved and unreliable about what retrieval will yield next**, and its forward-looking statements should be read with that asymmetry in mind. It is also an argument for continuing to state expectations explicitly, since that is what makes them checkable. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | **`EV-102-214` is the first cost record in the corpus whose own source disclaims it.** Register §3.2 requires Documented-or-stronger for a cost figure, and this is Documented — but the page says its figures *"may not reflect the latest Azure pricing."* | Recorded at Low confidence per §3.1 rather than excluded, because a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces, and the disclaimer is quoted so no reader mistakes it for a firm price. If a firm C3 email rate is needed, `OQ-108-004` is the route. |
