@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.14 |
+| Document version | 0.15 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.14; Cross-Category Coherence Review v0.14; Combined Cost Model v0.14; Carried Item Disposition Register v0.14; Acceptance Criteria Traceability v0.14 |
+| Companions | Provider Set Disposition Register v0.15; Cross-Category Coherence Review v0.15; Combined Cost Model v0.15; Carried Item Disposition Register v0.15; Acceptance Criteria Traceability v0.15 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `071d430` |
+| Repository baseline | `4e3c50a` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,8 +22,10 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`240` are
-registered below and the remainder are unused.
+anywhere in the corpus. **The reservation is widened here from `212`–`241` to `212`–`271`.** `212`–`242` are
+now registered and the original block is exhausted. No number above `242` is
+claimed anywhere in the corpus, and `scripts/audit-cbd-108.py` fails if this package
+registers a number at or below the corpus high-water mark.
 
 **This tranche covers two questions**, chosen because each is answerable from
 published pages alone and each has a consequence larger than its size:
@@ -456,6 +458,33 @@ permits lowering below the class but never raising.
 | **Why this is not silence** | `HG-102-013`'s pass test ends *"Silence fails"*. **The DPA does not fall silent on backups. It allocates them to the customer** and commits AWS to redundancy instead. The gate asks for *"provider-controlled backup behaviour"*, and this instrument's answer is that under it there is none to state. That is a more specific finding than silence, and unlike silence it is not one a further parse of the same document can overturn. |
 | Limitations | **The DPA is not the only AWS instrument.** C1's retention and expiry elements come from the CDPA (`EV-102-168`), a document separate from the Service Specific Terms that carry its region element; **no AWS equivalent has been identified**, and this record does not establish that none exists — `OQ-108-022`. §14's 90 days is a **deletion right on termination**, not a backup expiry term, and must not be read as one. Service-level backup behaviour — RDS automated backups and their retention range — is a different question, carried at `OQ-108-006`. |
 | Re-verify by | Contract term or amendment |
+
+### EV-102-241 — The Microsoft Azure Core Services list
+
+| Field | Content |
+| --- | --- |
+| Claim | Scope condition on `EV-102-237`, for C3, category **X** (`OQ-108-018`) |
+| Provider / category | Microsoft Azure (C3) / X |
+| Source | *"Privacy & Security Terms"*, `https://www.microsoft.com/licensing/terms/product/PrivacyandSecurityTerms/all`, **Core Online Services → Microsoft Azure Core Services** |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | **Contractual** / Medium — the list is the set `EV-102-237`'s commitment operates on |
+| Content | The section enumerates the Azure services the Geo commitment covers. Present among them: **Azure Container Apps**, **API Management**, **Application Gateway**, **Service Bus**, **Key Vault**, **Azure Monitor**, **Azure Database for PostgreSQL**, **Azure Communication Services**, **Microsoft Entra ID**, **Azure DNS**, **Load Balancer**, **Traffic Manager**, **Virtual Network**, **Azure Firewall**, **Storage**, **Backup**, **Site Recovery**, **Azure Kubernetes Service**, **Azure Cosmos DB**, **SQL Database**. The section also carries the qualifier: *"Certain services may not enable Customer to configure deployment in a particular Geo or outside the United States and may store backups in other locations."* |
+| Limitations | **The list as retrieved may be incomplete.** It was returned as a long enumeration from a very large page, and this pass cannot confirm it was rendered in full. **Absence of a service from the list as recorded here is therefore not evidence that it is absent from the list itself** — the same care `EV-102-224` required. `OQ-108-020` carries the two services this matters for. |
+| Re-verify by | Contract term or amendment |
+
+### EV-102-242 — Microsoft Entra External ID selects a geo-location, at North America granularity, once
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` region element and `HG-102-011` for C3, category **I** (`OQ-108-016`) |
+| Provider / category | Microsoft Entra External ID (C3) / I |
+| Source | *"Microsoft Entra ID and data residency - Microsoft Entra \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/entra/fundamentals/data-residency` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"Microsoft Entra External ID is a customer identity and access management (CIAM) solution with the option and flexibility to store and manage data in a separate tenant created for your customer-facing apps and customer directory data. This tenant is called an external tenant. **When you create an external tenant, you have the option to select the geographic location** (shown as 'Country/Region' in the admin portal) for data storage. **It's important to note that the data locations and region availability may differ from those of Microsoft Entra ID**, as indicated in this article."* The selectable geo-locations are **Australia, Asia/Pacific, EMEA, Japan, North America, Worldwide** — with Australia and Japan *"available for external tenants with the Go-Local add-on"*, a **paid** add-on whose local-residence option currently covers only Australia and Japan. *"Tenant location can't be changed after it's set."* |
+| **Two further data-location facts** | **Multifactor authentication** data is recorded as residing *"North America and/or in geo location"*, and the service *"logs the User Principal Name (UPN), voice-call telephone numbers, and SMS challenges"*. **Managed identities** write issued certificates to *"Azure Cosmos DB in the East US region"*, and *"Database replication puts a read-only copy in each region that Microsoft Entra managed identities runs."* |
+| Limitations | Documentation, not the Product Terms. It establishes that an external tenant **can** select a geo-location — which is the opposite of what a naive reading of `EV-102-236` would suggest — but the selectable unit is a **geo-location such as North America**, not an Azure region and not the United States. The managed-identity replication statement is about the Microsoft Entra managed-identity service generally; whether CoBudget's C3 composition depends on it was not established. |
+| Re-verify by | February 28, 2027 |
 
 ## 4. What the records establish
 
@@ -1361,6 +1390,7 @@ carries what C1's CDPA carries — `OQ-108-022`.
 | 6 | Cloud Scheduler *"plausibly has a like-for-like substitute"* | 9 | Against |
 | 10 | Only C1's commitment is contractual | 11 | For C3 |
 | 11 | C2's region clause *"has not been found"* by two routes | **12** | **For C2, and against it** |
+| 10 | C3's uncovered component may be its **identity provider** | **13** | **For C3** |
 
 Tranche 11 drew the lesson that *"every correction came from retrieving one more
 thing"* and that none came from re-reasoning. **This correction narrows that.**
@@ -1380,6 +1410,103 @@ contractual region element is narrower in scope than C1's and subordinate to an
 instrument that does not restate it, and the three commitments remain different
 enough in shape that no single dimension orders them.
 
+### 4.21 `OQ-108-018` settled: C3's composition can now be checked, and it has the same shape of gap as C1's
+
+`EV-102-241` supplies the set `EV-102-237`'s commitment operates on — the C3
+equivalent of Google's data-residency list. Checked against CBD-103 §5's C3
+hosting composition:
+
+| C3 component | On the Azure Core Services list as retrieved? |
+| --- | --- |
+| Container Apps | **Yes** |
+| API Management | **Yes** |
+| Service Bus | **Yes** |
+| Key Vault | **Yes** |
+| Azure Monitor | **Yes** |
+| **Front Door** | **Not seen** |
+| **Logic Apps** | **Not seen** |
+| Azure Database for PostgreSQL (the database candidate) | **Yes** |
+| Azure Communication Services (email and SMS) | **Yes** |
+| Microsoft Entra ID (the identity candidate) | **Yes** |
+
+**Two components of the C3 hosting composition were not seen on the list**, and
+CBD-103 §5 names both: *"Front Door / API Management"* for the edge, and *"Azure
+Container Apps jobs or Logic Apps scheduling"* for the scheduler. **That is the
+same shape as C1's position** — an edge component and a scheduling component,
+the exact two places C1's composition fell outside Google's list.
+
+**This is stated as "not seen", not "absent", and the distinction is doing
+work.** `EV-102-241` records that the list was returned from a very large page
+and may be incomplete. Tranche 3 made precisely this mistake in the other
+direction — reading a stale snapshot and recording Secret Manager as absent when
+it was present — and the correction cost two tranches. `OQ-108-020` puts the
+question rather than banking the finding.
+
+**If it holds, the region dimension stops separating C1 from C3.** Both would
+have a contractual commitment, conditional on an enumerated set, with an edge
+and a scheduling component outside it. The remaining difference would be
+granularity: C1 commits at region with backups bounded to the country, C3 at
+Geo.
+
+**Note also the qualifier `EV-102-241` carries**, which has no C1 counterpart:
+*"Certain services may not enable Customer to configure deployment in a
+particular Geo or outside the United States and may store backups in other
+locations."* A service can be **on** the list and still not be configurable to a
+Geo. Membership is necessary and not sufficient, which makes the C3 check weaker
+than the C1 one even once the list is confirmed.
+
+### 4.22 `OQ-108-016` settled: the Entra ID naming does **not** transfer, and what replaces it is more precise
+
+Tranche 10 recorded that Azure names **Microsoft Entra ID** among services that
+do not let the customer specify a region, and asked whether that reaches
+**Entra External ID**, the C3 identity candidate. **It does not, and the page
+says so directly.**
+
+*"When you create an external tenant, you have the option to select the
+geographic location… for data storage. It's important to note that the data
+locations and region availability may differ from those of Microsoft Entra ID."*
+
+**So the C3 identity candidate is not in the uncovered class after all.** The
+worry in tranche 10's §4.18 — that C3's uncovered component might be the
+identity provider holding authentication material, where C1's is a scheduler —
+**is retired.** That is the fifth correction this pass has made to itself, and
+the second in C3's favour.
+
+**Three facts replace it, and they are more specific than the worry was.**
+
+**The selectable unit is a geo-location, not a region and not a country.** The
+options are Australia, Asia/Pacific, EMEA, Japan, **North America**, and
+Worldwide. For a United States deployment the selection is **North America** —
+which includes Canada and Mexico. `OI-103-001` fixes a single **United States**
+region. **The identity candidate's data-location granularity is therefore
+coarser than the topology's own assumption**, and coarser again than the Geo
+granularity `EV-102-237` commits to. Australia and Japan can be narrowed through
+the **paid Go-Local add-on**; the United States is not among the countries that
+add-on covers.
+
+**The choice is made once and cannot be revised.** *"Tenant location can't be
+changed after it's set."* This is the **second** create-time-irreversible
+decision found in the C3 set, after `EV-102-230`'s customer-managed-key mode on
+PostgreSQL. Neither is a gate failure; together they are a pattern worth
+carrying into a selection, because they mean C3's data-location posture is fixed
+at provisioning across two categories at once.
+
+**Two component-level data-location facts sit beneath the tenant choice.**
+Multifactor authentication data is recorded as residing *"North America and/or
+in geo location"* while logging *"the User Principal Name (UPN), voice-call
+telephone numbers, and SMS challenges"* — authentication material with a
+location qualifier of its own. And managed identities write issued certificates
+to *"Azure Cosmos DB in the East US region"* with *"a read-only copy in each
+region that Microsoft Entra managed identities runs."* Whether CoBudget's
+composition depends on that service was not established and this pass asserts
+nothing about it — `OQ-108-024`.
+
+**What this does to the coherence review's incident finding.** §4.7 records
+`EV-102-012` — Entra External ID absent from the Customer Lockbox
+supported-services list — as one of two independent findings converging on the
+same component. **That convergence is now one finding, not two.** The Lockbox
+absence stands; the region-exclusion worry does not.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -1395,13 +1522,15 @@ enough in shape that no single dimension orders them.
 | OQ-108-013 | Does the **global external Application Load Balancer** store Customer Data at rest? It is absent both from the configurable list and from the companion list of services that store nothing. | **Decides whether the C1 front door merely sits outside the region commitment or actually contradicts the single-region posture** — §4.13 |
 | OQ-108-014 | ~~Do Cloud Armor's regional backend policies offer the capability set the CBD-103 gate matrix relied on?~~ **Settled at §4.14: the question does not arise.** No WAF gate exists; Cloud Armor is cited by no gate row; the two capability-dependent edge gates are already `UNPROVEN` for all three candidates; and the one that passes is `PASS (design)` on CoBudget's own record. | Closed. **The swap is clear to execute.** The residual is that `HG-102-020` and `HG-102-021` must later be evaluated against the **regional** product — `EV-102-233` establishes what regional supports, not parity with global |
 | OQ-108-015 | Can **Eventarc** or **Managed Service for Apache Airflow** provide `TD-103-004`'s fifteen-minute tick without Cloud Scheduler? Both are on the data-residency list; neither was retrieved. | The remainder of `OQ-108-012`. Airflow does carry its own scheduler, but deploying it for a fifteen-minute tick at Private MVP scale is a proportionality judgment rather than a retrieval |
-| OQ-108-016 | Does Azure's naming of **Microsoft Entra ID** among services that cannot have a region specified reach **Microsoft Entra External ID**, the C3 identity candidate? They are distinct products. | **If it does, the uncovered component in the C3 set is the identity provider**, holding authentication material, where C1's is a scheduler — §4.18. Second independent finding against this component after `EV-102-012` |
+| OQ-108-016 | ~~Does Azure's naming of Microsoft Entra ID reach Entra External ID?~~ **Settled at §4.22: it does not.** An external tenant *"has the option to select the geographic location… for data storage"*, and the page states the locations *"may differ from those of Microsoft Entra ID"*. | Closed, **and the tranche 10 worry is retired** — C3's identity candidate is not in the uncovered class. What replaces it is more precise: the unit is **North America**, coarser than the topology's single-US-region assumption, and the choice **cannot be changed after it is set** |
 | OQ-108-017 | ~~Do the AWS DPA and the Microsoft Product Terms state the region commitment contractually?~~ **Settled at §4.20, after §4.19 settled it wrongly for C2.** **C3: yes**, the Privacy & Security Terms (`EV-102-237`). **C2: yes**, DPA §12.1 (`EV-102-239`) — the DPA was read directly and states the clause `EV-102-238` reported as absent. | Closed. **All three candidates commit contractually.** C2's is narrower than the Asserted statement it replaces (personal data only) and is subordinated by DPA §16. Raises `OQ-108-020`, `OQ-108-021`, `OQ-108-022` |
-| OQ-108-018 | Which services are **"Microsoft Azure Core Services"**? `EV-102-237`'s commitment is conditional on membership of that set, which was not retrieved. | **The C3 equivalent of the data-residency list**, and the reason C3's condition cannot yet be checked against the composition the way C1's was in tranche 6 |
+| OQ-108-018 | ~~Which services are "Microsoft Azure Core Services"?~~ **Settled at §4.21** — `EV-102-241` retrieves the list. | Closed. **C3's composition can now be checked**, and Front Door and Logic Apps were not seen on it. Note the qualifier with no C1 counterpart: a service can be **on** the list and still not be configurable to a Geo, so membership is necessary and not sufficient. `OQ-108-023` |
 | OQ-108-019 | ~~Does a **complete** parse of the AWS Service Terms contain a region clause? Two partial retrievals have not produced one.~~ **The premise is gone — §4.20.** The region element is carried by the DPA, a separate instrument, so the Service Terms need not carry it and their silence decides nothing. | Closed as posed. What the Service Terms say still matters, but for **conflict** rather than for silence — `OQ-108-020` |
 | OQ-108-020 | Does any provision of the AWS Service Terms **conflict** with DPA §12.1? §16 makes the Service Terms control over the DPA, and `EV-102-220`'s parse was partial. | **Whether C2's region element survives its own subordination clause.** No conflict is known; the parse that would establish none has not been done |
 | OQ-108-021 | Does CoBudget hold data in AWS that is **not Personal Data** under Applicable Data Protection Law? DPA §12.1 commits only as to Personal Data, so any such data sits outside the region commitment by the instrument's own definition. | **A question about CoBudget, not about AWS.** Product Owner judgment against the `DI-91-*` classes — and the reason C2's contractual upgrade is not a clean improvement |
 | OQ-108-022 | Is there an AWS instrument stating **provider-controlled** backup retention and expiry, as C1's CDPA does (`EV-102-168`)? The DPA assigns backup to the customer (`EV-102-240`). | **The remaining two thirds of `HG-102-013` for C2.** Unlike a silence finding, this one cannot be closed by re-reading the DPA |
+| OQ-108-023 | Are **Azure Front Door** and **Logic Apps** on the Microsoft Azure Core Services list? Neither was seen in `EV-102-241`'s retrieval, which may be incomplete. | **Decides whether C3's composition has the same two uncovered components as C1's** — an edge and a scheduler. Tranche 3 made the mirror-image mistake, so this is recorded as *not seen* rather than banked |
+| OQ-108-024 | Does CoBudget's C3 composition depend on **Microsoft Entra managed identities**, whose issued certificates `EV-102-242` records as written to Cosmos DB *"in the East US region"* with a read-only copy in every region the service runs? | Only material if the composition uses them; this pass establishes the provider behaviour, not CoBudget's dependence on it |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
