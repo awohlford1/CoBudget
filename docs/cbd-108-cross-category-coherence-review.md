@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.14 |
+| Document version | 0.15 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.14; Combined Cost Model v0.14; Carried Item Disposition Register v0.14; Acceptance Criteria Traceability v0.14; Evidence Retrieval Pass v0.14 |
+| Companions | Provider Set Disposition Register v0.15; Combined Cost Model v0.15; Carried Item Disposition Register v0.15; Acceptance Criteria Traceability v0.15; Evidence Retrieval Pass v0.15 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `071d430` |
+| Repository baseline | `4e3c50a` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
@@ -277,12 +277,13 @@ now an observation rather than a document — `OQ-103-028` asks what an exercise
 AWS support interaction actually produces in CloudTrail — which places it inside
 the route-A pass rather than ahead of it.
 
-**A second finding now points at the same component.** `EV-102-236` names
-**Microsoft Entra ID** among Azure services that do not let the customer specify
-a region. Whether that reaches **Entra External ID**, the C3 identity candidate,
-is `OQ-108-016` and this review does not assume it — but two independent
-retrievals now converge on the same component from different directions, which
-is the pattern a coherence review exists to notice.
+**Amended at v0.15 — the second finding is withdrawn.** This section previously
+recorded `EV-102-236`'s naming of Microsoft Entra ID among non-regional services
+as converging with the Lockbox absence on the same component. `EV-102-242`
+establishes that the naming does **not** reach Entra External ID: an external
+tenant selects its own geographic location, and Microsoft states the locations
+*"may differ from those of Microsoft Entra ID"*. **The Customer Lockbox absence
+stands as a single finding, not a convergence** — retrieval pass §4.22.
 
 The Customer Lockbox family shows the opposite pattern, where a control assumed
 to be ecosystem-wide is not. `EV-102-012` establishes that **Microsoft Entra
