@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** **Tranche 21 answers `OQ-108-034` and discharges the C2 third of the upstream `OQ-103-009`: CloudWatch Logs scopes IAM to an individual log group by ARN and by tag, so two destinations with distinct access roles are configurable and `HG-102-026`'s pass test is met on the evidence. It is the first retrieval in this pass to produce evidence sufficient for a gate to pass rather than evidence that narrows one, and the outcome is CBD-103's to record. It also finds that the provider's redaction mechanism is the one `TD-103-022` rejects, which costs CoBudget nothing because its redaction is structural.** **Tranche 22 completes `OQ-103-009` by putting the same question to C1 and C3, and all three candidates meet `HG-102-026`'s pass test. The gate CBD-103 called the second most likely to eliminate a candidate eliminates none of them, and the evidence block this pass reserved is now exhausted.** **Tranche 23 registers no evidence and answers `OQ-108-027` by synthesis: all three DPAs have now been read, none describes a provider-held backup, and the upstream `OQ-103-024` is answered in the way it feared. Read literally, `HG-102-013` fails every candidate in every category at once. The documentary route on this gate is exhausted and what remains is class `D4`.** **Tranche 24 records the `HG-102-013` amendment the Product Owner made on August 29 (CBD-102 v1.2, §12.1) and re-measures all three candidates against the new pass test from evidence already held. All three still fail, now each on a named component rather than on a definition, and three records change their bearing without changing their content.** **Tranche 25 answers `OQ-108-040`: the substitute exists and it is worse. FireLens can route ECS logs away from CloudWatch, but S3's expiration states only that *"there may be a delay"* with no bound and no typical figure, where CloudWatch at least gives 72 hours. The unbounded tail is a property of asynchronous deletion rather than of one service, which raises a question about the clause this pass drafted.** **Tranche 26 answers `OQ-108-043` and the tranche 25 concern is half allayed and half confirmed: the three logging surfaces say materially different things, so the clause discriminates where the compositions actually are, but all three object stores are unbounded and Google's says so outright. No evaluated composition contains object storage, which makes that a prospective trap rather than a current failure — and the remedy tranche 25 examined would have sprung it.** **Tranche 27 answers `OQ-108-036` from CBD-102 §2.2 rather than by analogy — the pass test is *"the observation that decides"* every gate, so it governs by definition and no amendment is needed. It also corrects this pass's own error: `HG-102-026` is typed **Vendor**, not `Config`, which strengthens tranches 21 and 22 rather than weakening them.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.29 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** **Tranche 21 answers `OQ-108-034` and discharges the C2 third of the upstream `OQ-103-009`: CloudWatch Logs scopes IAM to an individual log group by ARN and by tag, so two destinations with distinct access roles are configurable and `HG-102-026`'s pass test is met on the evidence. It is the first retrieval in this pass to produce evidence sufficient for a gate to pass rather than evidence that narrows one, and the outcome is CBD-103's to record. It also finds that the provider's redaction mechanism is the one `TD-103-022` rejects, which costs CoBudget nothing because its redaction is structural.** **Tranche 22 completes `OQ-103-009` by putting the same question to C1 and C3, and all three candidates meet `HG-102-026`'s pass test. The gate CBD-103 called the second most likely to eliminate a candidate eliminates none of them, and the evidence block this pass reserved is now exhausted.** **Tranche 23 registers no evidence and answers `OQ-108-027` by synthesis: all three DPAs have now been read, none describes a provider-held backup, and the upstream `OQ-103-024` is answered in the way it feared. Read literally, `HG-102-013` fails every candidate in every category at once. The documentary route on this gate is exhausted and what remains is class `D4`.** **Tranche 24 records the `HG-102-013` amendment the Product Owner made on August 29 (CBD-102 v1.2, §12.1) and re-measures all three candidates against the new pass test from evidence already held. All three still fail, now each on a named component rather than on a definition, and three records change their bearing without changing their content.** **Tranche 25 answers `OQ-108-040`: the substitute exists and it is worse. FireLens can route ECS logs away from CloudWatch, but S3's expiration states only that *"there may be a delay"* with no bound and no typical figure, where CloudWatch at least gives 72 hours. The unbounded tail is a property of asynchronous deletion rather than of one service, which raises a question about the clause this pass drafted.** **Tranche 26 answers `OQ-108-043` and the tranche 25 concern is half allayed and half confirmed: the three logging surfaces say materially different things, so the clause discriminates where the compositions actually are, but all three object stores are unbounded and Google's says so outright. No evaluated composition contains object storage, which makes that a prospective trap rather than a current failure — and the remedy tranche 25 examined would have sprung it.** **Tranche 27 answers `OQ-108-036` from CBD-102 §2.2 rather than by analogy — the pass test is *"the observation that decides"* every gate, so it governs by definition and no amendment is needed. It also corrects this pass's own error: `HG-102-026` is typed **Vendor**, not `Config`, which strengthens tranches 21 and 22 rather than weakening them.** **Tranche 28 opens category H at the line CBD-103 §6.2 says decides it — the support plan, a fixed floor rather than a rate. `CT-102-005` is priced for C2 and C3 and not for C1, whose page would not render across four URLs. The first comparable cost line in the category separates the candidates, and Azure's forced plan is described for non-production, exactly as its cheapest database tier was.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.30 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Provider Set Disposition Register v0.20; Cross-Category Coherence Review v0.20; Combined Cost Model v0.20; Carried Item Disposition Register v0.20; Acceptance Criteria Traceability v0.20 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `613d6b3` |
+| Repository baseline | `2d23f3e` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -799,6 +799,50 @@ permits lowering below the class but never raising.
 | Content | *"Cloud Storage performs an action asynchronously, so there can be a lag between when the conditions are satisfied and when the action is taken."* And, explicitly: **"Your applications shouldn't rely on lifecycle actions occurring within a certain amount of time after a lifecycle condition is met."** Configuration: *"Changes to a bucket's lifecycle configuration can take up to 24 hours to go into effect, and Object Lifecycle Management might still perform actions based on the old configuration during this time."* Illustration: *"if an object meets the conditions for deletion, the object might not be deleted right away, and you see the object until the lifecycle action is executed on the object."* |
 | **The strongest statement of the three** | S3 says *"There may be a delay"* (`EV-102-261`). Google goes further and **instructs the reader not to rely on any bound at all**. On the amended gate's *"unbounded tail"* clause this is the clearest failure of the three object stores, and it is Google's. |
 | Limitations | **Object storage is in no evaluated composition** — CBD-103 §5 names none for C1, C2 or C3 — so this record bears on the gate **prospectively** and not today. `OI-108-034`. Azure Blob Storage was not retrieved; `OQ-108-045`. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-264 — AWS support: Basic is free and the entry paid tier is Business Support+ at $29 per month
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-005` for C2, category **H** (`OQ-103-015`) |
+| Provider / category | Amazon Web Services (C2) / H |
+| Source | *"AWS Support Plan Pricing"*, `https://aws.amazon.com/premiumsupport/pricing/` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"Basic Support is included for all AWS customers."* **Business Support+**: *"Whichever is greater: $29/month per account - or - 9% of monthly AWS charges up to $10K"*, rising through 7%, 5% and 3% bands. **Enterprise Support**: *"Whichever is greater: $5k/month"* or 10% of charges up to $150K. **Unified Operations**: *"Whichever is greater: $50k/month"*. |
+| **The figure that applies** | Demand model §9.1 puts Private MVP *"below the entry tier of essentially every managed provider"*, so the percentage bands never bind and **the applicable number is the $29/month floor** if a paid plan is taken at all. |
+| **Whether it is forced** | CBD-103 §6.3 records C2's tier-forcing gates as *"Not yet identified"*. **No gate has been shown to force C2 off Basic**, so `CT-102-005` for C2 is **$0.00 unless one is found** — which is a different position from C3's. |
+| Limitations | The page presents **Business Support+** as the entry paid tier; the *"Developer"* plan that older material describes does not appear, and this record does not assert it has been withdrawn. Establishes list price, not which plan clears the `ED-*`/`HG-*` sets. Billing currency and jurisdiction remain unfixed (`OI-102-014`). |
+| Re-verify by | February 28, 2027 (Documented, 6 months) |
+
+### EV-102-265 — Azure support: Developer is $29 per month and is described for non-production
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-005` for C3, category **H** — **the `CR0`-forced line** (`OQ-103-015`) |
+| Provider / category | Microsoft Azure (C3) / H |
+| Source | *"Azure support plans"*, `https://azure.microsoft.com/en-us/support/plans/` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | **Basic**: *"Included for all Azure customers"*, covering *"24/7 self-help resources"* and health notifications. **Developer**: *"$29 per month"*, for *"trial and non-production environments on Azure"*. **Standard**: *"$100 per month"*, for *"production workload environments on Azure"*. **Professional Direct**: *"$1,000 per month"*. |
+| **This is the first `CR0`-forced price in category H** | CBD-103 §6.3 records C3's tier as *"at least Developer support, forced by `HG-102-009`"* via Customer Lockbox. That requirement now has a number: **$29.00 per month**, and it is not optional. |
+| **The tier's own description cuts against it** | Developer is for *"trial and non-production environments"*; production is Standard at **$100 per month**. **This is the same shape as `EV-102-231`**, where Azure's cheapest PostgreSQL tier is *"Not recommended for production workloads"*. Two categories, one provider, the same question: whether CoBudget accepts a tier its vendor scopes away from production. `OQ-108-047`. |
+| Limitations | List price only. Does not establish that Developer satisfies Customer Lockbox's requirement in substance — `EV-102-005` establishes the minimum plan, and this record prices it. Seat counts are not addressed; `CT-102-003` requires two, and `OI-102-015` makes a one-seat cap an `HG-102-006` failure rather than a cost line. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-266 — Google Cloud support pricing could not be retrieved, across four URLs
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-005` for C1, category **H** — **negative record** (`OQ-103-015`, `OQ-103-007`) |
+| Provider / category | Google Cloud (C1) / H |
+| Source | Attempted: `https://cloud.google.com/support`, `https://cloud.google.com/support/plans` (404), `https://cloud.google.com/support/standard`, and a search that returned only third-party summaries |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium — the **failure** is what is documented |
+| Content | No Google Cloud Customer Care tier pricing rendered from any page attempted. `/support/plans` returned a 404; the others returned content truncated before any pricing table. |
+| **Why the third-party figures are not recorded** | A web search returned tier prices attributed to Google, from vendor-partner and blog sources. **They are not registered here.** `OI-108-024` states the rule this pass adopted after tranches 10 and 11: *a finding about what a document says requires that document*. Registering a price for a hard cost line from a reseller's summary would be the same error in a more expensive place, and evidence register §3.2 requires Documented-or-stronger for a cost figure. |
+| Limitations | **This is a failure of retrieval, not a finding about Google.** It establishes nothing about what Google charges, and must not be read as evidence that C1's support is free or unpriced. `OQ-108-048` carries the retry. It also leaves `OQ-103-007` untouched — whether Access Transparency forces a paid support level for C1 is still open, and that question decides whether the price matters. |
 | Re-verify by | February 28, 2027 |
 
 ## 4. What the records establish
@@ -2953,6 +2997,90 @@ Evidence register §5.2 lists the gates that may not be excepted: `HG-102-056`,
 `EX-102` route `OQ-108-039` asks about is genuinely open, and that question rests
 on a premise now checked rather than assumed.
 
+### 4.40 Category H opens at the support line, and it is the line that separates the candidates
+
+`OI-108-022` warned that category H is *"a different shape from the tranches
+that preceded it"* — six services across three providers, with no established
+instance sizing to price against. **CBD-103 §6.2 says where to start instead**,
+and it is not the services:
+
+> *"The comparison will be decided by floors, not usage."*
+
+Demand model §9.1 puts Private MVP below the entry tier of essentially every
+managed provider at every scenario including High. Base is 15,600 API requests,
+29,280 background jobs and 1.0 GB of log ingest per month. **A per-unit rate
+comparison at that scale compares the least significant term.** The floors are
+`CT-102-001` through `CT-102-005`, and of those the support plan is the one a
+gate already forces.
+
+#### `CT-102-005`, priced for two of three
+
+| | Free tier | Entry paid tier | Forced by a gate? |
+| --- | --- | --- | --- |
+| **C1 Google** | Not retrieved | **Not retrieved** (`EV-102-266`) | **Unresolved** — `OQ-103-007` |
+| **C2 AWS** | Basic, *"included for all AWS customers"* | Business Support+, **$29/month** floor | **No gate identified.** CBD-103 §6.3: *"Not yet identified"* |
+| **C3 Azure** | Basic, *"Included for all Azure customers"* | Developer, **$29.00/month** | **Yes** — `HG-102-009` via Customer Lockbox |
+
+**This is the first `CR0`-forced price in category H.** CBD-103 §6.3 recorded
+C3's tier as *"at least Developer support, forced by `HG-102-009`"* with the
+price `UNKNOWN`. It is now **$29.00 per month**, and not optional.
+
+**And the line separates the candidates rather than levelling them.** C3 pays
+$29/month because Customer Lockbox requires a support plan. **C2 has no
+identified gate forcing it off Basic**, so on the evidence in hand C2's
+`CT-102-005` is **$0.00**. That is a real difference produced by a gate rather
+than by a rate card, which is exactly the shape §6.2 predicted the comparison
+would take.
+
+**It is a small number and that is the point.** $29/month is $348/year, against
+a category whose other five line items are still `UNKNOWN`. The finding is not
+the magnitude; it is that the first comparable line in category H is decided by
+which provider's transparency control carries a support prerequisite.
+
+#### Azure's forced plan is scoped away from production, exactly as its database tier was
+
+Developer support is *"for trial and non-production environments on Azure"*.
+Production is **Standard at $100 per month**.
+
+**`EV-102-231` found the same shape in category D**: Azure's cheapest PostgreSQL
+tier is *"Not recommended for production workloads"* and *"does not qualify for
+24/7 support"*, which is why `OQ-108-010` asks whether CoBudget accepts it.
+
+**Two categories, one provider, one question.** If the Product Owner rules that
+CoBudget does not run production on a tier its vendor scopes away from
+production, consistency carries that ruling from the database to the support
+plan, and **C3's support line moves from $29 to $100 per month**. `OQ-108-047`
+puts them together, because deciding them separately would be how an
+inconsistency gets into the cost model.
+
+#### What was not retrieved, and why the available numbers were not used
+
+Google's support pricing did not render from any of four URLs. A search returned
+tier figures attributed to Google from vendor-partner and blog sources, and
+**this pass does not register them**.
+
+`OI-108-024` records the rule adopted after tranches 10 and 11 reached opposite
+wrong conclusions about the AWS DPA from pages describing it: **a finding about
+what a document says requires that document.** A cost figure taken from a
+reseller's summary would be that error in a more consequential place, and
+evidence register §3.2 independently requires Documented-or-stronger for a
+price. `EV-102-266` registers the failure so the attempt is not repeated blindly
+and so no reader mistakes the gap for a zero.
+
+**`OQ-103-007` matters more than the missing price.** Whether Access Transparency
+forces a paid support level on C1 decides whether C1's support line is a floor
+at all. Until it is answered, C1's `CT-102-005` is unknown in **two** ways: the
+price, and whether any gate compels paying it.
+
+#### Where this leaves the cost model
+
+`CT-102-005` moves from `UNKNOWN` in three of three to a figure in two of three,
+with one of those two conditional on a Product Owner ruling. **Five of seven
+category H line items remain `UNKNOWN`**, and the cost model's acceptance
+criterion is unchanged — no combined total can be produced. What has changed
+is that the category now has one line where the candidates differ for a reason
+the evaluation can state.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -2999,6 +3127,8 @@ on a premise now checked rather than assumed.
 | OQ-108-044 | Does the amended test reach **routine retention expiry**, or only **instructed deletion**? CDPA §6.2 is triggered *"at the end of the Term"*, and `EV-102-262` shows Cloud Logging silent on ordinary expiry timing. | **Decides whether C1's lifetime element is met.** §4.36 recorded it met through the contract-level route; if the test reaches routine expiry, Cloud Logging's silence matters. Third wording question about the amended text, and CBD-102's |
 | OQ-108-045 | Does **Azure Blob Storage** disclaim a bound on lifecycle deletion timing, as S3 and Google Cloud Storage do? | Completes the object-storage trio. **Prospective only** while no evaluated composition contains a bucket, but decisive if one ever does |
 | OQ-108-046 | Does anything check `HG-102-026`'s **provider-side** redaction and case-linkage properties, which its pass test does not? | **Smaller than it looks.** §4.39 finds deliberate case-linked capture and structural redaction are `TD-103-021` and `TD-103-022` CoBudget obligations verified by `SR-94-043`, not provider properties. The residue is whether any provider-side element remains |
+| OQ-108-047 | Does CoBudget accept **Azure Developer support**, described for *"trial and non-production environments"*, as the plan `HG-102-009` forces? If not, C3's `CT-102-005` is **Standard at $100/month** rather than Developer at $29. | **Decide with `OQ-108-010`, not separately.** `EV-102-231` poses the identical question about Azure's cheapest database tier, and answering them apart is how an inconsistency enters the cost model |
+| OQ-108-048 | **Google Cloud Customer Care tier pricing.** `EV-102-266` records that it did not render from four URLs, and that third-party figures were deliberately not registered. | `CT-102-005` for C1. **Subordinate to `OQ-103-007`** — whether Access Transparency forces a paid support level decides whether the price is a floor at all |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
@@ -3022,6 +3152,7 @@ on a premise now checked rather than assumed.
 | OI-108-033 | **AWS states deletion bounds where deletion is scheduled and not where it is bulk and asynchronous.** KMS (7—30 days) and SQS (14 days) both state provider-enforced bounds; CloudWatch Logs gives a typical figure and no bound, and S3 gives *"There may be a delay"* and nothing else. | Recorded because it reframes C2's failure. **This is a coherent engineering position rather than an oversight** — a queue drained at scale has no per-object deadline to promise — which means the gap is structural for the storage tier and not a defect one provider could be asked to fix. It also predicts that C1 and C3 will say something similar, which `OQ-108-043` tests. |
 | OI-108-034 | **Object storage is in no evaluated composition, and that is the only reason the unbounded-deletion finding does not bite.** CBD-103 §5 names no bucket for C1, C2 or C3. All three object stores disclaim a bound on lifecycle deletion, Google's most explicitly. | Recorded as a **prospective** constraint on composition change rather than a current failure. **The remedy §4.37 examined would have sprung it**: routing C2's logs off CloudWatch via FireLens leads naturally to S3, which would have introduced object storage into the composition and with it the one surface where every provider declines to bound deletion. Any future proposal to move customer data into a bucket should be measured against this before it is adopted. |
 | OI-108-035 | **This pass misread a satisfaction type, and the misreading ran for two tranches.** `HG-102-026` was recorded as `Config` in `EV-102-252` and at §4.33; it is typed `Vendor`. Under §2.3 that is the difference between a property CoBudget can create by configuration and one that fails the vendor outright. | Corrected at §4.39, and **the correction strengthens the finding it touches** — on a `Vendor` gate, showing the product has the capability is what the gate asks. Recorded because the pass reads satisfaction types often and had not, until now, verified one against the catalog before citing it. **The evidentiary caution it was attached to was sound; only its grounding was wrong**, which is the harder kind of error to notice. |
+| OI-108-036 | **The first comparable line in category H is decided by a gate, not by a rate card.** C3 pays $29/month for support because Customer Lockbox requires a plan; **C2 has no identified gate forcing it off free Basic**, so its line is $0.00 on the evidence in hand. | Recorded because it confirms CBD-103 §6.2's prediction that *"the comparison will be decided by floors, not usage"* and shows what that means concretely. **It also sets the method for the rest of category H**: the productive question is which gates force which tiers, not what the per-unit rates are, and `CR0` prices the cheapest **gate-clearing** configuration. The magnitude is small; the mechanism is the finding. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | **`EV-102-214` is the first cost record in the corpus whose own source disclaims it.** Register §3.2 requires Documented-or-stronger for a cost figure, and this is Documented — but the page says its figures *"may not reflect the latest Azure pricing."* | Recorded at Low confidence per §3.1 rather than excluded, because a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces, and the disclaimer is quoted so no reader mistakes it for a firm price. If a firm C3 email rate is needed, `OQ-108-004` is the route. |
