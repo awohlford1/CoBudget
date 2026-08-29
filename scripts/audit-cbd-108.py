@@ -55,7 +55,7 @@ TRACE = Path("docs/cbd-108-acceptance-criteria-traceability.md")
 PACKAGE_FILES = (DISPOSITION, COHERENCE, COST, CARRIED, TRACE)
 
 # The commit each document was written against.
-REPOSITORY_BASELINE = {path: "`020bf0c`" for path in PACKAGE_FILES}
+REPOSITORY_BASELINE = {path: "`a969942`" for path in PACKAGE_FILES}
 
 SOURCE_PACKAGES = ("103", "104", "105", "106", "107", "130")
 
