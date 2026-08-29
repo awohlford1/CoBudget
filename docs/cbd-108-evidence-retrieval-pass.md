@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.4 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.5 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.4; Cross-Category Coherence Review v0.4; Combined Cost Model v0.4; Carried Item Disposition Register v0.4; Acceptance Criteria Traceability v0.4 |
+| Companions | Provider Set Disposition Register v0.5; Cross-Category Coherence Review v0.5; Combined Cost Model v0.5; Carried Item Disposition Register v0.5; Acceptance Criteria Traceability v0.5 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `d810579` |
+| Repository baseline | `b52d569` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,7 +22,7 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`223` are
+anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`226` are
 registered below and the remainder are unused.
 
 **This tranche covers two questions**, chosen because each is answerable from
@@ -223,6 +223,45 @@ permits lowering below the class but never raising.
 | Limitations | **The numeric retention-period range was not in the retrieved section**, so `OQ-105-002`'s first element is unanswered for C2, and the transaction-log window is likewise unstated. The region statement is Documented, not Contractual, so it does not bear on `HG-102-013`. **This page also carried text addressed to AI coding assistants suggesting a CLI command be run. It was treated as page content, was not acted on, and forms no part of this record.** |
 | Re-verify by | February 28, 2027 |
 
+### EV-102-224 — The Google data-residency service list, April 9, 2024 snapshot
+
+| Field | Content |
+| --- | --- |
+| Claim | Scope condition on `EV-102-218`, for C1, category **X** (`OQ-108-005`) |
+| Provider / category | Google Cloud (C1) / X |
+| Source | *"Google Cloud Platform Services with Data Residency"*, `https://cloud.google.com/terms/data-residency/index-20240409`, **Last modified: April 09, 2024** |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / **Low — lowered per §3.1** on the two-year-old snapshot date |
+| Content | Introductory sentence: *"The following Services may be configured for data location pursuant to the 'Data Location' Section of the General Terms at https://cloud.google.com/terms/service-terms:"* **Named on the list:** Cloud Run (Fully Managed), Pub/Sub, Cloud Logging, Cloud Key Management Service, Cloud SQL. **Not named on the list:** Cloud Scheduler, Secret Manager. |
+| Limitations | **This is a dated snapshot from April 9, 2024, retrieved because the live page could not be read** (`EV-102-219`). It does not establish the current list. It also says nothing about **Cloud Armor / HTTPS Load Balancing**, which was not asked and is part of the evaluated composition. Absence from *this* list does not establish absence from the companion list at `EV-102-226`. |
+| Re-verify by | Immediately — a two-year-old snapshot standing in for a live page is a stopgap, not a settled source |
+
+### EV-102-225 — Cloud SQL's own documentation asserts the region commitment
+
+| Field | Content |
+| --- | --- |
+| Claim | Supports `EV-102-218` for C1, category **D** (`OQ-108-005`) |
+| Provider / category | Cloud SQL for PostgreSQL (C1) / D |
+| Source | *"Data residency overview"*, `https://docs.cloud.google.com/sql/docs/postgres/data-residency-overview` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"Google stores your data at rest only in these regions, according to our Service Specific Terms."* The page directs the reader to the Service Specific Terms for Google Cloud's data-location commitments. |
+| Limitations | Product documentation pointing at the contract, not the contract itself. It corroborates that **Cloud SQL** is within the `EV-102-218` commitment; it says nothing about the other services in the category **H** composition. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-226 — The companion "without location configuration" list could not be read
+
+| Field | Content |
+| --- | --- |
+| Claim | Scope condition on `EV-102-218` — **retrieval-failure record** |
+| Provider / category | Google Cloud (C1) / X |
+| Source | *"Additional Google Cloud Platform Services Supporting Data Residency (without location configuration)"*, `https://cloud.google.com/terms/data-residency/no-location-config` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Absent / None |
+| Content | The page returned **truncated**. Its introductory sentence could not be read, and the presence or absence of **Cloud Scheduler** and **Secret Manager** on it is **not established**. |
+| Limitations | **This record establishes nothing about the list's contents.** In particular it must not be read as evidence that Cloud Scheduler and Secret Manager are absent from it — only that the question is unanswered. `OQ-108-007` carries the retry. |
+| Re-verify by | Immediately — an unfinished retrieval, not evidence |
+
 ## 4. What the records establish
 
 ### 4.1 `OQ-106-010` is closed, and CBD-106 §5.1's hypothesis is falsified
@@ -363,12 +402,67 @@ contractual. The distinction between "the product behaves this way" and "the
 provider is bound to this" is the whole content of that gate, and this tranche
 found examples of the first for two candidates and of the second for one.
 
+### 4.6 `OQ-108-005`: the retrieval was worth making, and it removed a `PASS` rather than producing one
+
+Tranche 2 recorded C1 as **one retrieval away** from the corpus's first
+`HG-102-013` `PASS`, on the reasoning that the Service Specific Terms supply the
+region element and only the scope condition was unverified. **That
+characterisation was wrong, and this tranche is what shows it.**
+
+`EV-102-218`'s commitment is expressly conditional: it applies *"For any Service
+listed at"* the data-residency page. The list, read at its April 2024 snapshot,
+does not cover the whole evaluated composition.
+
+| C1 component (CBD-103 §5) | On the data-residency list? |
+| --- | --- |
+| Cloud Run | **Yes** |
+| Pub/Sub | **Yes** |
+| Cloud Logging | **Yes** |
+| Cloud KMS | **Yes** |
+| **Cloud Scheduler** | **No** |
+| **Secret Manager** | **No** |
+| Cloud Armor / HTTPS Load Balancing | **Not checked** |
+
+`Cloud SQL`, the category **D** candidate, is on the list and is separately
+corroborated by its own documentation (`EV-102-225`).
+
+**The consequence is that `HG-102-013` cannot pass for C1 on this evidence, and
+the reason has changed.** It is no longer "the scope condition is unverified".
+It is that **the condition is verified for most of the composition and fails for
+at least two of its components** — the scheduler and the secret store, which
+between them hold the `TD-103-004` scheduling surface and the `HG-102-014` S4
+material.
+
+Three qualifications keep this from being a finding against Google.
+
+**The snapshot is two years old.** `EV-102-224` is the April 9, 2024 version,
+retrieved only because the live page cannot be fetched (`EV-102-219`). The
+current list may well name both services. Confidence is Low for exactly this
+reason, and `OQ-108-007` carries the live check.
+
+**There is a companion list this pass could not read.** `EV-102-226` records
+that the *"without location configuration"* page returned truncated, so the two
+services' status on it is **unestablished**. A service can support data
+residency without being configurable for it, and that is precisely what the
+companion list is for.
+
+**Absence from a list is not absence of a commitment.** It establishes that the
+`EV-102-218` clause does not reach these two services, not that Google makes no
+region commitment about them by another route.
+
+**What this changes in practice.** The gate stays `UNPROVEN` for C1, as it was.
+What moved is the shape of the remaining work: it is no longer one retrieval but
+two, and the second one — the companion list — is the one that decides. Recorded
+plainly because tranche 2 stated the opposite, and a reader comparing the two
+tranches should see the correction rather than infer it.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
 | --- | --- | --- |
-| OQ-108-005 | Which Google Cloud services appear on the data-residency list at `cloud.google.com/terms/data-residency`, and does CoBudget's evaluated C1 composition appear on it? `EV-102-219` records that the page could not be read. | **The single retrieval standing between C1 and a `PASS` on `HG-102-013`** — the highest-value open question this pass produced |
+| OQ-108-005 | ~~Which Google Cloud services appear on the data-residency list at `cloud.google.com/terms/data-residency`, and does CoBudget's evaluated C1 composition appear on it? `EV-102-219` records that the page could not be read.~~ **Substantially answered at tranche 3 — §4.6.** The April 2024 snapshot covers Cloud Run, Pub/Sub, Cloud Logging and Cloud KMS, and **omits Cloud Scheduler and Secret Manager**. | **The answer removed a prospective `PASS` rather than producing one.** The remaining work is `OQ-108-007`, not this. |
 | OQ-108-006 | The transaction-log retention window for Cloud SQL and RDS, and the numeric automated-backup retention range for RDS. | `OQ-105-002`'s remainder; `HG-102-042` |
+| OQ-108-007 | Do **Cloud Scheduler** and **Secret Manager** appear on the current Google data-residency list, or on the companion *"without location configuration"* list? `EV-102-224` is an April 2024 snapshot that omits both; `EV-102-226` records that the companion list could not be read. | **The retrieval that now decides `HG-102-013` for C1**, replacing `OQ-108-005` in that role |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
