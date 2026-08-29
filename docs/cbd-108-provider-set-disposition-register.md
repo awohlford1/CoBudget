@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.7 |
+| Document version | 0.8 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.7; Combined Cost Model v0.7; Carried Item Disposition Register v0.7; Acceptance Criteria Traceability v0.7; Evidence Retrieval Pass v0.7 |
+| Companions | Cross-Category Coherence Review v0.8; Combined Cost Model v0.8; Carried Item Disposition Register v0.8; Acceptance Criteria Traceability v0.8; Evidence Retrieval Pass v0.8 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `d5bc165` |
+| Repository baseline | `f8c5cb0` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -127,10 +127,12 @@ identity, database, email and SMS at once.
 **The `HG-102-013` half of this gap moved on August 29, 2026**, though the gate
 did not. The retrieval pass §4.4 records the position per candidate: **C1 now has
 a contractual statement of all three elements**, blocked by a scope condition that
-tranche 3 then **verified and found wanting** — the commitment's service list
-omits **Cloud Scheduler** and **Secret Manager**, two components of the evaluated
-composition, so the remaining work is `OQ-108-007` rather than the single retrieval
-tranche 2 predicted; **C2 has had a second contractual
+tranches 3 and 6 progressively resolved. On the **current** list, seven of the eight
+named C1 components are covered — **Secret Manager included, correcting a
+tranche 3 finding taken from a stale snapshot**. The gate now turns on **Cloud
+Scheduler**, absent from all four lists, and on whether the composition's HTTPS
+load balancing is the regional variant the list covers (`OQ-108-011`,
+`OQ-108-012`); **C2 has had a second contractual
 instrument read that defers rather than states**; and **C3's named retrieval was
 found and is insufficient**, being documentation where the pass test demands a
 contract. The gate stays `UNPROVEN` for all three.

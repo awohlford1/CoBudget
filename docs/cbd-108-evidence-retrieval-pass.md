@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.7 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to a single uncovered service.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.8 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.7; Cross-Category Coherence Review v0.7; Combined Cost Model v0.7; Carried Item Disposition Register v0.7; Acceptance Criteria Traceability v0.7 |
+| Companions | Provider Set Disposition Register v0.8; Cross-Category Coherence Review v0.8; Combined Cost Model v0.8; Carried Item Disposition Register v0.8; Acceptance Criteria Traceability v0.8 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `d5bc165` |
+| Repository baseline | `f8c5cb0` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,7 +22,7 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`231` are
+anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`232` are
 registered below and the remainder are unused.
 
 **This tranche covers two questions**, chosen because each is answerable from
@@ -328,6 +328,22 @@ permits lowering below the class but never raising.
 | Content | Three tiers are offered: **Burstable, General Purpose, Memory Optimized**. Of Burstable: *"Best suited for web servers, proof-of-concept environments, small databases, and development builds. **Not recommended for production workloads.**"* And: *"This tier is primarily designed for nonproduction scenarios such as development, staging, or testing, **does not qualify for 24/7 support**, and root cause analysis (RCA) may not be provided."* The smallest General Purpose server type is **D2s_v3 at 2 vCores and 8 GiB**. Automated backup retention is **7 to 35 days** on all three tiers, with long-term retention *"up to 10 years"*. |
 | Limitations | The vendor's recommendation is not a technical restriction — nothing here says Burstable cannot run a production database, only that it is not recommended and carries no 24/7 support. Whether CoBudget treats that as disqualifying is a Product Owner judgment, recorded at `OQ-108-010`. No price is attached to any tier on this page. |
 | Re-verify by | February 28, 2027 |
+
+### EV-102-232 — The current Google data-residency service list, supplied by the Product Owner
+
+| Field | Content |
+| --- | --- |
+| Claim | Scope condition on `EV-102-218`, for C1, categories **X** and **D** (`OQ-108-005`, `OQ-108-007`) |
+| Provider / category | Google Cloud (C1) / X |
+| Source | *"Google Cloud Platform Services Data Residency"*, `https://cloud.google.com/terms/data-residency`, **live page as at August 29, 2026** |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | **Contractual** / Medium — see provenance below |
+| **Provenance** | **The list content was supplied by the Product Owner from the live page, not retrieved by this pass.** `EV-102-219` and `EV-102-226` record that the page and its companion truncate when fetched by the tooling available here. The URL is public and the content is re-retrievable by a second reader; the transcription step is why confidence is Medium rather than High, and it is stated so the record is not read as a direct retrieval. |
+| Content | Four lists. **General** — *"The following Services may be configured for data location pursuant to the 'Data Location' Section of the General Terms"* — includes **Cloud Run**, **Pub/Sub**, **Cloud Logging**, **Cloud Key Management Service (Cloud KMS)**, **Cloud SQL**, **Google Cloud Armor**, **Secret Manager**, **Cloud Load Balancing - Regional Load Balancers (Application, Proxy Network)**, **Workflows**, **Eventarc**, **Cloud Storage**, **Compute Engine**, **Firestore**, **Cloud Run functions**. **AI/ML Data Location** and **Assured Workloads** carry separate lists. A fourth list, *"Additional Google Cloud Platform Services Supporting Data Residency (without location configuration)"*, introduces itself as *"Customers with data residency requirements may consider using the following Services, which do not store Customer Data at-rest or process Customer Data in use"* and includes Access Approval, Access Transparency, Cloud DNS, IAM, VPC and VPC Service Controls. |
+| **Cloud Scheduler** | **Absent from all four lists.** |
+| Limitations | Classed Contractual because `EV-102-218` attaches its commitment to *"any Service listed at"* this page, so inclusion is what the contract operates on. The page carries **no effective date** in the content supplied, so it cannot be compared by version against `EV-102-224`. Coverage of a service by this list establishes only that the Data Location commitment reaches it — not any retention or expiry term, which come from the CDPA at `EV-102-168`. |
+| Supersedes | **`EV-102-224`**, the April 9, 2024 snapshot, which is now known to be stale in at least one respect |
+| Re-verify by | Contract term or amendment |
 
 ## 4. What the records establish
 
@@ -679,6 +695,78 @@ category has an established instance sizing to price against. That is a
 different shape of work from the single-page retrievals that closed category E
 and answered `OQ-103-019`, and `OI-108-022` records it.
 
+### 4.11 The current list resolves `OQ-108-007`, corrects tranche 3, and leaves `HG-102-013` for C1 turning on one service
+
+`EV-102-232` supplies what `EV-102-219` and `EV-102-226` could not fetch. Read
+against the C1 composition CBD-103 §5 records:
+
+| C1 component | On the current list? | Change from `EV-102-224` |
+| --- | --- | --- |
+| Cloud Run | **Yes** | — |
+| Pub/Sub | **Yes** | — |
+| Cloud Logging | **Yes** | — |
+| Cloud KMS | **Yes** | — |
+| **Secret Manager** | **Yes** | **Now present — the April 2024 snapshot omitted it** |
+| **Google Cloud Armor** | **Yes** | Newly checked; never examined before |
+| **HTTPS load balancing** | **Regional variants only** | Newly checked; see below |
+| **Cloud Scheduler** | **No — absent from all four lists** | Unchanged |
+| Cloud SQL (category **D**) | **Yes** | — |
+
+**Tranche 3's Secret Manager finding was stale, and this corrects it.** That
+tranche read the April 9, 2024 snapshot because the live page could not be
+fetched, and recorded Secret Manager as absent. It is present on the current
+list. The snapshot was doing the job of a live page and got one of two answers
+wrong — which is precisely the risk `EV-102-224` was marked Low confidence for,
+and the reason it is now superseded rather than merely supplemented.
+
+**Cloud Scheduler is absent, and the absence is now much better established.**
+Tranche 3 could say only that it was missing from one two-year-old list.
+`EV-102-232` shows it missing from **all four** — General, AI/ML, Assured
+Workloads, and the companion list for services that hold no customer data at
+all. That last one matters: the companion list is how Google says *"this service
+needs no location configuration because it stores nothing"*, and Cloud Scheduler
+is not on it either. **Google is not asserting that Cloud Scheduler holds no
+customer data; the page simply does not address it.**
+
+**A new gap this pass had never checked.** The General list covers *"Cloud Load
+Balancing - **Regional** Load Balancers (Application, Proxy Network)"*. CBD-103
+§5 names the component as *"Cloud Armor / HTTPS Load Balancing"* without
+specifying regional or global. Google's global external Application Load
+Balancer is a different product from the regional one, and **it is not on the
+list**. Whether the composition is covered therefore depends on a variant
+CBD-103 did not record. `OQ-108-011`.
+
+**Where this leaves the gate.** `HG-102-013` for C1 needs retention, region and
+expiry stated contractually. Retention and expiry come from the CDPA
+(`EV-102-168`); region comes from the Service Specific Terms (`EV-102-218`) for
+listed services. **Seven of the eight named components are covered. The gate now
+turns on Cloud Scheduler, plus the load-balancer variant question.**
+
+That is a materially better position than either tranche 2 or tranche 3
+described, and it is the first time the gate has come down to a specific,
+nameable thing rather than a class of unread documents.
+
+**One design observation, recorded and not acted on.** **Workflows** and
+**Eventarc** are both on the General list. `TD-103-004` requires a managed
+scheduler at fifteen-minute-or-finer granularity; it does not require *Cloud
+Scheduler* specifically. A C1 composition that met the scheduling requirement
+through a listed service would close this gap without any new evidence.
+**That is CBD-103's composition to change, not CBD-108's**, and `OQ-108-012`
+puts the question rather than assuming the answer.
+
+**A second observation, outside the composition.** **Cloud Monitoring** appears
+only in the Assured Workloads list, annotated *"also subject to the 'General'
+Section above if used as part of Assured Workloads"* — and **not** in the
+General list on its own. CBD-103 §5 names Cloud Logging for observability, which
+is covered. If observability later expands to Cloud Monitoring without Assured
+Workloads, that would open a gap of the same kind. Recorded so it is not
+discovered later.
+
+**No gate outcome moves in this document.** `HG-102-013` stays `UNPROVEN` for
+C1, because one component of the evaluated composition is uncovered and a second
+is ambiguous. Moving it is CBD-103's to do, on this evidence, once
+`OQ-108-011` and `OQ-108-012` are settled.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -689,6 +777,8 @@ and answered `OQ-103-019`, and `OI-108-022` records it.
 | OQ-108-008 | The per-segment US SMS send rate and the quantified carrier fees for AWS End User Messaging. `EV-102-227` records that neither is on the pricing page. | `CT-102-006` for C2, category N — the one term missing from the §4.7 comparison |
 | OQ-108-009 | Can `HG-102-005` be satisfied for C3 without Privileged Identity Management, and if not, what does Entra ID P2 or ID Governance cost per administrator seat? | **`CR0` for C3 across categories H and I.** `EV-102-229` establishes what PIM requires, not that PIM is required |
 | OQ-108-010 | Does CoBudget accept a database tier its vendor describes as *"Not recommended for production workloads"* and that *"does not qualify for 24/7 support"*? If not, C3's category D floor is General Purpose rather than Burstable. | **Product Owner decision, and it sets `CR0` for C3 in category D.** `EV-102-231` |
+| OQ-108-011 | Is CoBudget's C1 HTTPS load balancing the **regional** Application Load Balancer or the **global** one? `EV-102-232` covers *"Regional Load Balancers (Application, Proxy Network)"* only, and CBD-103 §5 records the component without specifying the variant. | **One of the two things `HG-102-013` for C1 now turns on** |
+| OQ-108-012 | Must `TD-103-004`'s fifteen-minute scheduling requirement be met by **Cloud Scheduler**, the one composition component absent from all four data-residency lists? **Workflows** and **Eventarc** are both listed. | **The other thing `HG-102-013` for C1 turns on.** A CBD-103 composition question, not a CBD-108 one |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
