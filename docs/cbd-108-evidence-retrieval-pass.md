@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.20 |
+| Document version | 0.21 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Provider Set Disposition Register v0.20; Cross-Category Coherence Review v0.20; Combined Cost Model v0.20; Carried Item Disposition Register v0.20; Acceptance Criteria Traceability v0.20 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `24702a7` |
+| Repository baseline | `d2953eb` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -612,6 +612,50 @@ permits lowering below the class but never raising.
 | **Custody** | *"You can't export these backup files as they're stored in Microsoft-managed storage accounts. You have read-only access to restore these files but can't modify or delete them."* |
 | Limitations | **Scoped to the database component of the C3 set, not to the whole composition.** `HG-102-013` is a cross-category **X** gate, so the hosting components — Container Apps, Service Bus, Key Vault, Azure Monitor — are untouched by this record and have no equivalent statement retrieved. It is **Documented**, not Contractual, which the §4.24 ruling makes sufficient for this gate and which would not have been sufficient before it. |
 | Supersedes | **`EV-102-221` for this purpose.** That record carried a scope objection — it described Azure Backup Recovery Services vaults rather than the evaluated composition. This record is scoped to an evaluated service and the objection does not apply to it. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-257 — Key Vault soft-delete retention is 7–90 days, on by default, and fixed at creation
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013`, `HG-102-014` supporting material for C3, category **H** (`OQ-108-029`) |
+| Provider / category | Azure Key Vault (C3) / H |
+| Source | *"Azure Key Vault soft-delete \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| **Retention** | *"Once a secret, key, certificate, or key vault is deleted, it remains recoverable for a configurable period of 7 to 90 calendar days. If no configuration is specified, the default recovery period is set to 90 days."* |
+| **Expiry** | *"Unless a key vault or key vault object is recovered, at the end of the retention interval the service performs a purge of the soft-deleted key vault or key vault object and its content. Resource deletion can not be rescheduled."* |
+| **Fixed at creation** | *"When creating a new key vault, soft-delete is on by default. Once soft-delete is enabled on a key vault, it can't be disabled."* And: *"The retention policy interval can only be configured during key vault creation and can't be changed afterwards."* |
+| Purge protection | *"Purge protection is an optional Key Vault behavior and is **not enabled by default**."* When on, *"a vault or an object in the deleted state can't be purged until the retention period passes"*. Once its interval is set, *"it can't be changed for that vault"*. |
+| Limitations | **This is a deletion-recovery window, not a provider backup.** Nothing on the page describes Azure taking or holding a backup of vault contents. No region statement appears. The record therefore answers what happens to **deleted** material and does not answer `HG-102-013`'s question about provider-controlled backups. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-258 — Log Analytics retention is 30 days by default, configurable from 4 days to 12 years
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013`, `DI-91-041` supporting material for C3, category **H** (`OQ-108-029`) |
+| Provider / category | Azure Monitor Logs / Log Analytics (C3) / H |
+| Source | *"Manage Data Retention in a Log Analytics Workspace - Azure Monitor \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-retention-configure` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| **Retention** | *"By default, all tables in a Log Analytics workspace retain data for 30 days, except for log tables with 90-day default retention."* Analytics retention extends *"up to two years"*; total retention including long-term *"up to 12 years (4,383 days)"*. Table-level retention *"can be between 4 and 730"* days. |
+| **Expiry** | *"When you shorten a table's total retention, Azure Monitor Logs waits 30 days before removing the data, so you can revert the change and avoid data loss if you made an error in configuration."* An `immediatePurgeDataOn30Days` workspace property is available, described as a *"Flag that indicates whether data is immediately removed after 30 days and is nonrecoverable"*, with the caution that *"Workspaces with 30-day retention might keep data for 31 days."* |
+| Limitations | **Retention of primary telemetry, not of a provider backup.** The page describes no Azure-held backup of workspace data. The 31-day observation matters for a lifecycle commitment stated as 30 days, and `immediatePurgeDataOn30Days` is settable only through the update API. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-259 — Service Bus messages expire by TTL, and no provider backup is described
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` for C3, category **H** (`OQ-108-029`) |
+| Provider / category | Azure Service Bus (C3) / H |
+| Source | *"Azure Service Bus Message Expiration and TTL Explained - Azure Service Bus \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/azure/service-bus-messaging/message-expiration` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | Messages carry a time-to-live; *"expires-at-utc"* is *"enqueued-time-utc + time-to-live"*. Entity-level default expiration is *"the largest possible value for a signed 64-bit integer"* on standard and premium tiers, and *"14 days"* on basic. Expired messages are either dead-lettered or, *"If you leave the option disabled, expired messages are dropped."* The broker *"might choose to lazily expire these messages"*, so removal is not instantaneous. |
+| **Negative finding** | **No provider-side backup of Service Bus messages is described anywhere on the page.** Messages persist until consumed or expired; nothing states that Azure retains a copy beyond that. |
+| Limitations | Establishes the expiry model for messages. It does not address namespace metadata, which geo-disaster-recovery features handle separately and which was not retrieved. |
 | Re-verify by | February 28, 2027 |
 
 ## 4. What the records establish
@@ -2016,6 +2060,80 @@ publishes any statement about **its own** backups of the platform, as distinct
 from the resources a customer creates and deletes. Nothing retrieved in eighteen
 tranches suggests it does.
 
+### 4.31 `OQ-108-029`: the hosting components have retention statements, and none of them is about a backup
+
+The question asked whether the remaining evaluated C3 hosting components carry
+retention and expiry statements of their own. **Three of four do. None of the
+three describes a provider backup**, and that distinction is the finding.
+
+| Component | Retention | Expiry | Is it a **backup**? |
+| --- | --- | --- | --- |
+| **Key Vault** | 7–90 days soft-delete, default 90 | Purged at end of interval; *"Resource deletion can not be rescheduled"* | **No** — a deletion-recovery window |
+| **Azure Monitor Logs** | 30 days default, 4 days to 12 years configurable | Removed at end of total retention, with a 30-day grace on shortening | **No** — retention of primary telemetry |
+| **Service Bus** | Message TTL; entity default max-int64, 14 days on basic | Expired messages dead-lettered or *"dropped"* | **No** — and no provider backup is described at all |
+| **Container Apps** | **Not retrieved** | **Not retrieved** | — |
+
+**`HG-102-013` asks about provider-controlled *backup* behaviour.** Its pass test
+wants *"a contractual statement of provider backup retention, region, and
+expiry"*, with *"Silence fails"*. What these three components have is
+**customer-configured retention of primary data**. That is a different object.
+Azure is not holding a copy of the material against CoBudget's wishes; it is
+holding the material itself, for a period CoBudget sets, and then destroying it.
+
+**So the gate does not cleanly engage here, and this pass will not pretend it
+does either way.** Three readings are available and this document picks none:
+
+1. **The gate is satisfied.** Its purpose is that provider-held copies of
+   customer data have a known lifetime. These statements give exactly that, in
+   more detail than a backup clause usually would.
+2. **The gate fails on silence.** Its pass test names *backup* retention, and
+   none of these describes a backup, so the provider is silent on the thing
+   asked about.
+3. **The gate does not apply to these components.** It is written around a
+   datastore, where provider backups are a real and distinct artifact, and a
+   stateless compute service or a message broker has no equivalent.
+
+**Reading 3 is the one this pass would flag to the catalog**, and it is not
+CBD-108's to settle. `OQ-108-027` already asks whether the `HG-102-013` row
+should be amended so its gate statement and pass test agree; **this is a second
+and independent reason to look at that row** — not that its two halves disagree
+with each other, but that both halves assume a service shape that four of the
+five categories do not have. `OQ-108-032` records it.
+
+#### Key Vault is the fourth create-time-irreversible decision in the C3 set
+
+*"The retention policy interval can only be configured during key vault creation
+and can't be changed afterwards."* And soft-delete itself: *"Once soft-delete is
+enabled on a key vault, it can't be disabled."*
+
+That joins `EV-102-230`'s customer-managed-key mode, `EV-102-242`'s
+external-tenant location, and `EV-102-256`'s backup redundancy. **Four separate
+C3 decisions are fixed at provisioning and cannot be revised, across four
+categories.** Tranche 17 recorded three and called it a property worth holding
+deliberately; a fourth makes it a characteristic of the candidate rather than a
+coincidence of three services.
+
+**It cuts both ways, and the register should say so.** Irreversibility is a
+control as well as a constraint: a soft-delete window that cannot be shortened
+or disabled is a protection against exactly the rogue-operator deletion
+`HG-102-006` is concerned with. What it is not is adjustable, and a provider set
+whose data-protection posture is fixed before the first deployment leaves less
+room to respond to what the observation pass finds.
+
+#### Two smaller things worth recording
+
+**A 30-day retention setting may keep data for 31 days.** *"Workspaces with
+30-day retention might keep data for 31 days."* If a `DI-91-*` lifecycle
+commitment is ever expressed as exactly 30 days, that one-day overhang is a real
+discrepancy, and the fix — `immediatePurgeDataOn30Days` — is settable only
+through the update API, not the portal.
+
+**Service Bus expiry is lazy, not prompt.** *"The broker might choose to lazily
+expire these messages."* Messages past their TTL may still be counted and
+peekable. For a deletion commitment measured against a clock this is a gap
+between the stated policy and the observable state, and it is the kind of thing
+the route-A observation pass could measure and no document will settle.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -2044,9 +2162,11 @@ tranches suggests it does.
 | OQ-108-026 | ~~Is there an Azure retention and expiry statement scoped to the evaluated C3 composition?~~ **Settled at §4.28: yes, for the database component.** `EV-102-256` states retention (7–35 days), expiry (*"automatically deleted after the retention period"*) and region (zone-redundant *"within a country or region"*) for Azure Database for PostgreSQL Flexible Server. It supersedes `EV-102-221` for this purpose, whose scope objection does not apply to it. **It does not move the gate** — `HG-102-013` is a cross-category gate and the hosting components have no equivalent statement (`OQ-108-029`). Original: `EV-102-221` gives 14 days for soft-deleted vault data and fails on scope. | **C3's retention and expiry elements.** The ruling voids `EV-102-221`'s class objection and leaves only its scope objection, so the target is now a narrower retrieval than tranche 2 supposed |
 | OQ-108-027 | Should the `HG-102-013` catalog row be amended so its gate statement and pass test agree? The row demands a contract in one and admits written evidence in the other; the Product Owner has ruled the pass test governs. | **Upstream, in approved CBD-102.** The ruling settles the reading but not the text, so the contradiction survives for the next reader. Recorded here rather than amended, per `OI-108-020` |
 | OQ-108-028 | Can C3's composition stand on **API Management** without **Azure Front Door**? CBD-103 §5 names the edge as *"Front Door / API Management"*; API Management is on the Core Services list and Front Door is not. | **The C3 counterpart of the swap that closed C1's edge gap at tranche 7**, and subject to the same caution — Front Door is a global product and dropping it is a functional change, not a swap. A CBD-103 question |
-| OQ-108-029 | Do the remaining evaluated **C3 hosting** components — Container Apps, Service Bus, Key Vault, Azure Monitor — carry retention and expiry statements of their own? `EV-102-256` covers the database only, and `EV-102-237`'s Product Terms commitment speaks to **location**, not retention or expiry. | **The remainder of `HG-102-013` for C3.** A cross-category gate is not satisfied by one component of a composition — §4.28 |
+| OQ-108-029 | ~~Do the remaining evaluated C3 hosting components carry retention and expiry statements of their own?~~ **Settled at §4.31: three of four do, and none of them is about a backup.** Key Vault (7–90 days soft-delete), Azure Monitor Logs (30 days to 12 years) and Service Bus (message TTL) all state retention and expiry for **primary data**; none describes a provider-held backup, and Container Apps was not retrieved. **`HG-102-013` does not cleanly engage**, and §4.31 sets out the three available readings without picking one — `OQ-108-032`. Original: Do the remaining evaluated **C3 hosting** components — Container Apps, Service Bus, Key Vault, Azure Monitor — carry retention and expiry statements of their own? `EV-102-256` covers the database only, and `EV-102-237`'s Product Terms commitment speaks to **location**, not retention or expiry. | **The remainder of `HG-102-013` for C3.** A cross-category gate is not satisfied by one component of a composition — §4.28 |
 | OQ-108-030 | What do the per-service documents state for the **remaining** C2 components — **SQS** (not retrieved; the message-lifecycle page carried no retention statement), ECS on Fargate, API Gateway, CloudFront, and EventBridge Scheduler? | **Worth completing for `HG-102-003` and the `DI-91-*` picture, not for `HG-102-013`.** §4.30 states why: the genre problem applies to all of them equally |
 | OQ-108-031 | Does AWS publish any statement about **its own** backups of the platform, as distinct from the resources a customer creates and deletes? | **The only route left that could move `HG-102-013`'s retention and expiry elements for C2.** Eighteen tranches have found nothing suggesting it exists, which is not the same as establishing that it does not |
+| OQ-108-032 | Does `HG-102-013` **apply** to services that hold no provider backup? Its pass test asks for backup retention, region and expiry, and Key Vault, Log Analytics and Service Bus have customer-configured retention of **primary data** instead. | **A second and independent reason to look at the row `OQ-108-027` already questions** — not that its halves disagree, but that both assume a datastore shape four of the five categories do not have. A CBD-102 catalog question |
+| OQ-108-033 | Do **Azure Container Apps** state a retention or expiry position for anything they hold? The fourth C3 hosting component was not retrieved. | Completes `OQ-108-029` for the composition |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
