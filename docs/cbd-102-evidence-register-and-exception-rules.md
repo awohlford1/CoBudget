@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. |
-| Document version | 1.2 |
+| Document version | 1.3 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. Approval covers the evidence record and its required fields, the six evidence classes and their confidence mapping, the `UNPROVEN` outcome and the four eligibility verdicts, the staleness and re-verification rules, `EX-102-001`–`007`, the §5.2 non-exceptable gates, and the residual-risk record. It grants no exception and does not close the open items in §8. |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the evidence record and its required fields, the six evidence classes and their confidence mapping, the `UNPROVEN` outcome and the four eligibility verdicts, the staleness and re-verification rules, `EX-102-001`–`007`, the §5.2 non-exceptable gates, and the residual-risk record. It grants no exception and does not close the open items in §8. **v1.3 adds §3.0.2 by Product Owner decision of August 29, 2026, resolving `OI-102-023`: material received under a non-disclosure agreement does not enter this register and therefore supports no finding.** No existing record, class, confidence, gate outcome or exception rule changes. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Cost Template v1.0 |
 | Confluence page | [CBD-102 — Evidence Register and Exception Rules](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9601048) |
-| Repository baseline | `df04231` |
-| Last updated | August 18, 2026 |
+| Repository baseline | `717f143` |
+| Last updated | August 29, 2026 |
 
 ## 1. Purpose
 
@@ -95,6 +95,71 @@ classified Asserted because it described AWS's internal controls, not because it
 sat on a trust page. Applying the same rule, a support-centre article describing
 how suppression works is Documented, and a trust page describing how engineers
 are supervised is Asserted.
+
+### 3.0.2 Material received under a non-disclosure agreement is not evidence — Product Owner decision, August 29, 2026
+
+`OI-102-023` asked where NDA'd material belongs, once the CBD-15 scope
+amendment of August 22, 2026 made it obtainable for the first time. The answer
+is that **it does not enter this register at all.**
+
+* A document received under a non-disclosure agreement, or through a trust
+  portal whose terms restrict onward disclosure, **is not registered as an
+  `EV-102-*` record** — not quoted, not cited, not summarized, and not named.
+* It therefore **supports no finding**. §2 already fixes the consequence: *a
+  claim with no evidence record is not a finding. It is an open question.* A
+  gate the material bears on stays `UNPROVEN` under §3.3, and a criterion it
+  would have supported stays at whatever its registrable evidence earns.
+* This is not a judgment about the material's quality. A SOC 2 Type II report
+  read under NDA may be entirely convincing and still move nothing here,
+  because this register's unit is a record a second reader can check, and that
+  one cannot be made checkable without disclosing it.
+
+**The rule attaches to the document's terms, not to its type or to the fact it
+contains.** A DPA the vendor publishes is registrable exactly as before —
+`EV-102-168` is one. The same DPA handed over under an NDA is not. And if a
+fact first learned from restricted material is *independently* obtainable on
+registrable terms — a published page, a clause in an executed agreement, an
+observation CoBudget performs — that retrieval is registered normally. The
+record must stand on the registrable source alone, and the retrieval must
+actually have been made rather than inferred.
+
+**What restricted material may still legitimately do**, none of which is a
+register entry: decide whether to pursue a candidate at all; design an
+observation, by telling CoBudget what to test and where; and frame a question
+whose *answer* can be obtained on registrable terms.
+
+#### Why this rather than the two alternatives
+
+**The repository is public.** The programme document that raised this recorded
+only that the repository "is not an access-controlled store." It is in fact a
+public GitHub repository, and every clone carries its full history. That
+removes option 3 outright — verbatim NDA'd clause text excluded from the
+Confluence sync would still be published to the world through git — and it
+weakens option 1, because a document's issuer, date, scope and existence are
+themselves commonly restricted by the agreements that supply them. Option 2 is
+the only disposition that does not publish NDA-derived material anywhere.
+
+The cost is real and is accepted knowingly: this register will be silent about
+material CoBudget has read. That is preferred to a register that is either
+inaccurate about what a second reader can check, or accurate and in breach.
+
+#### Consequences recorded rather than discovered later
+
+* **Category F.** `HG-102-011`, `HG-102-013`, `HG-102-007`–`009`, `HG-102-010`,
+  `HG-102-002` and `HG-102-003` cannot be closed for any aggregator by material
+  that arrives under an NDA. Where a route imposes no NDA, material from it is
+  ordinary Documented or Attested evidence and registers normally.
+* **This makes "does the route impose an NDA?" the property that decides
+  whether a route can produce evidence at all**, rather than a matter of
+  convenience. It re-ranks the four routes in
+  `docs/cbd-107-evidence-request-programme.md` §3 on grounds that document did
+  not have when it was written.
+* **The rubric ceiling stands.** Rule `R2` and §3.2 are unchanged: a category F
+  criterion whose only stronger material is NDA-bound stays at `2`. CBD-108
+  inherits that asymmetry and must weigh it as a limit of what was obtainable
+  on publishable terms, not as a finding about the aggregators.
+* **Nothing already registered moves.** No existing `EV-102-*` record was
+  sourced under an NDA.
 
 ### 3.1 Confidence may be lowered but never raised
 
@@ -256,4 +321,5 @@ model repeatedly treats undetectable compromise as the more severe case.
 | OI-102-019 | The shelf lives in §4 are judgment. No approved source sets an evidence-currency period. | Reasonable defaults; adjust if evaluation runs long enough for staleness to bite. |
 | OI-102-020 | **Resolved August 16, 2026.** Product Owner confirmed the three non-exceptable gates in §5.2 as complete and correct: `HG-102-056`, `HG-102-028`, and `HG-102-014`. | Closed. Adding to or removing from the list is now itself a Product Owner decision, and `HG-102-004` remains deliberately outside it because `AN-92-007` supplies an amendment path. |
 | OI-102-021 | `EX-102-006` sets the stacking threshold at more than two exceptions. The number is arbitrary. | Adjust if it proves too tight or too loose in CBD-103–107. |
-| OI-102-023 | **Material received under an NDA cannot be recorded the way this register records everything else.** The method is verbatim quotation with a source URL and a retrieval date, and published records synchronize to Confluence; an NDA'd document can be neither quoted nor published. Raised August 22, 2026 when the CBD-15 scope amendment made NDA'd evidence obtainable for the first time. | **Product Owner decision, and it should be taken before the first such document arrives**, because the disposition changes how the document may be read and stored from the moment it is received. Three options are set out in `docs/cbd-107-evidence-request-programme.md` §5: cite without quoting, which weakens a second reader's check; exclude from the register, which leaves a gate outcome resting on something the register does not contain; or record without publishing, which creates a private tier this register has never had. Until it is settled, an NDA may be signed but the resulting document has no agreed home. |
+| OI-102-023 | ~~**Material received under an NDA cannot be recorded the way this register records everything else.**~~ **Resolved by Product Owner decision, August 29, 2026 — §3.0.2.** NDA'd material does not enter the register, is not quoted, cited, summarized or named, and supports no finding; a gate it bears on stays `UNPROVEN`. The deciding fact was one the options were not weighed against when they were written: **the repository is public**, not merely un-access-controlled, so both alternatives would have published NDA-derived material to the world through git. | Closed. The cost is accepted knowingly: this register is silent about material CoBudget has read, which is preferred to a register that is either inaccurate about what a second reader can check, or accurate and in breach. **The consequence lands on category F**, whose gate set cannot be closed by NDA-bound material and whose rubric ceiling of `2` therefore stands — see `OI-102-024` for the phase this decision does *not* cover. |
+| OI-102-024 | **§3.0.2 is scoped to evaluation, and CoBudget will not stay in the evaluation phase.** Once a provider is selected, CoBudget executes agreements that are ordinarily confidential, and `HG-102-013` together with the Contractual evidence class in §3 expects gate outcomes to rest on exactly those instruments. Under §3.0.2 as written, a confidential executed DPA is not registrable, so the gate it was built to answer could not pass at the moment CoBudget finally holds the document. | **Not a defect in the decision and not for CBD-108 to solve** — the evaluation phase is genuinely different, because nothing is signed and no instrument is held. Raised so the transition is a decision rather than a surprise: a register serving a customer holding executed contracts needs a disposition this one deliberately does not have, and the natural moment to take it is when the first agreement is executed, not before. |

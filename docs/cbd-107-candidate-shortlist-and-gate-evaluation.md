@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to U.S. financial-data aggregators. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why. |
-| Document version | 1.3 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to U.S. financial-data aggregators. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why. **v1.4 records the `OI-102-023` decision of August 29, 2026: material received under an NDA does not enter the evidence register and supports no finding, so an NDA-gated route cannot close a gate in this category whatever it supplies.** `OQ-107-024` is amended accordingly. No gate outcome, verdict, tally, price or `FC-107-*` decision changes. |
+| Document version | 1.4 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.3 |
+| Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.4 |
 | Confluence page | [CBD-107 — Financial-Data Connectivity Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13533185) |
-| Repository baseline | `df04231` |
+| Repository baseline | `717f143` |
 | Last updated | August 22, 2026 |
 
 ## 1. Purpose
@@ -506,7 +506,7 @@ A concurrently drafted CBD-130 evaluation must claim a block above `131`.
 | OQ-107-010 | Webhook payload authentication mechanism for C7 and C9 | `HG-102-059` | Retrieve, then put to each provider. Absence from the retrieved pages is not proof of absence from the product |
 | OQ-107-011 | Whether C8's TxPUSH notifications carry transaction changes reliably enough to substitute for the 15-day poll | `HG-102-060` | Retrieve. It is the closest thing to a change stream outside C6 |
 | OQ-107-023 | Do the C6, C7, C8 and C9 data processing agreements state provider backup retention, region, and expiry? | `HG-102-013` | Shared with `OQ-103-024`. The pass test's *"Silence fails"* is a statement about the provider's contract, not about whether CoBudget has read it, so this gate is currently `UNPROVEN` rather than `FAIL` — and reading the four DPAs is the only thing that can move it in either direction. It is the one gate that could fail every candidate in every category simultaneously. |
-| OQ-107-024 | Enumerated, dated subprocessor lists for C6, C7, C8 and C9 | `HG-102-011` | **Now actionable.** `OI-103-022` was resolved on August 22, 2026 by amending CBD-15's scope to permit trust-portal requests and evaluation NDAs for evidence only. The four routes, the five items to request of each, and the recommended order are planned in `docs/cbd-107-evidence-request-programme.md`. **No request has been made.** Note `OI-102-023`: NDA'd material has no agreed home in the register yet. |
+| OQ-107-024 | Enumerated, dated subprocessor lists for C6, C7, C8 and C9 | `HG-102-011` | **Now actionable.** `OI-103-022` was resolved on August 22, 2026 by amending CBD-15's scope to permit trust-portal requests and evaluation NDAs for evidence only. The four routes, the five items to request of each, and the recommended order are planned in `docs/cbd-107-evidence-request-programme.md`. **No request has been made.** **`OI-102-023` was settled on August 29, 2026 (register §3.0.2): NDA'd material does not enter the register and supports no finding.** That decides the routes rather than merely ordering them — C6 states no NDA and can produce a registrable record; **C7's explicit NDA means its route cannot close this gate whatever it supplies**; C8 and C9 have unknown terms that must be established *before* material is requested, because the disposition binds from the moment of receipt. |
 | OQ-107-025 | Does C9's pass-through claim hold architecturally? `EV-102-185` records Akoya stating it *"does not store any data accessed or shared on its network"* and that *"at no point does Akoya know who the consumer is or what data they are sharing."* | `HG-102-007`, `HG-102-009`, `HG-102-013` | If sustained it changes what vendor staff could reach and what a subprocessor could be exposed to, across several gates at once. It is a vendor claim on a marketing security page with no architectural description attached, and **no gate outcome rests on it**. Worth testing, not accepting. |
 
 ## 10. Open items
