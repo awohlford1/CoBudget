@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.5 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.6 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.5; Cross-Category Coherence Review v0.5; Combined Cost Model v0.5; Carried Item Disposition Register v0.5; Acceptance Criteria Traceability v0.5 |
+| Companions | Provider Set Disposition Register v0.6; Cross-Category Coherence Review v0.6; Combined Cost Model v0.6; Carried Item Disposition Register v0.6; Acceptance Criteria Traceability v0.6 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `b52d569` |
+| Repository baseline | `153312e` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,7 +22,7 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`226` are
+anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`229` are
 registered below and the remainder are unused.
 
 **This tranche covers two questions**, chosen because each is answerable from
@@ -262,6 +262,46 @@ permits lowering below the class but never raising.
 | Limitations | **This record establishes nothing about the list's contents.** In particular it must not be read as evidence that Cloud Scheduler and Secret Manager are absent from it — only that the question is unanswered. `OQ-108-007` carries the retry. |
 | Re-verify by | Immediately — an unfinished retrieval, not evidence |
 
+### EV-102-227 — AWS End User Messaging SMS: origination and registration fees, usage rate not retrieved
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-006`, `CT-102-007` for C2, category **N** |
+| Provider / category | AWS End User Messaging SMS (C2) / N |
+| Source | *"AWS End User Messaging Pricing"*, `https://aws.amazon.com/end-user-messaging/pricing/` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | Origination: *"$1 per 10DLC phone number"* monthly; toll-free *"monthly lease price of $2"*. 10DLC registration: *"$4.50 one-time fee per company"*; *"$12.50 one-time per company"* for company authentication verification; *"$50 one-time campaign activation fee"*; *"$10 per regular 10DLC campaign"* monthly. Carrier fees: *"Carrier fees will vary based on the type of number sending the message."* |
+| Limitations | **The per-segment US send rate was not obtainable from this page** — the retrieval found no consolidated US SMS rate table, and the page refers the reader to a pricing tool. Carrier fees are acknowledged but not quantified. `OQ-108-008` carries both. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-228 — Azure Communication Services SMS: complete US figures for both routes
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-006`, `CT-102-007` for C3, category **N** |
+| Provider / category | Azure Communication Services SMS (C3) / N |
+| Source | *"SMS pricing - An Azure Communication Services concept document \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/azure/communication-services/concepts/sms-pricing` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | **10DLC route.** Brand Registration *"$4"* one-time; Brand Vetting Standard *"$40"* one-time, *"required in most cases"*; Campaign Registration monthly — Low Volume *"$1.50"*, Sole Proprietor *"$2"*, Charity *"$3"*; phone number leasing *"$1"* monthly. Usage, United States: send *"$0.0075"* per segment. Carrier surcharge per outbound segment: AT&T *"$0.0020"*, T-Mobile *"$0.0030"*, Verizon *"$0.0030"*, US Cellular *"$0.0050"*. **Toll-free route.** Leasing *"$2/mo"*; usage United States send *"$0.0075"*; carrier surcharge United States send *"$0.0025"*. |
+| Limitations | Prices are stated *"exclusive of the required communications taxes and fees"*. Carrier surcharge is *"subject to change"* and varies by the recipient's carrier, which CoBudget's demand model does not break down — so the surcharge term is a range, not a figure. Short-code pricing is recorded on the page but is not a candidate route at this volume. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-229 — Privileged Identity Management requires Entra ID P2 or ID Governance
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-005`, `CR0` for C3, in the hosting and identity categories (`OQ-103-019`) |
+| Provider / category | Microsoft Entra (C3) / hosting and identity |
+| Source | *"Microsoft Entra ID Governance licensing fundamentals - Microsoft Entra ID Governance \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/entra/id-governance/licensing-fundamentals` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"You need either Microsoft Entra ID Governance licenses or Microsoft Entra ID P2 licenses to use PIM and all of its settings."* The features table marks **Privileged Identity Management** as present for **Microsoft Entra ID P2**, **Microsoft Entra ID Governance** and **Microsoft Entra Suite**, and **absent for Free and for Microsoft Entra ID P1**. Licences are required for *"Users with eligible and/or time-bound assignments to Microsoft Entra ID or Azure roles managed using PIM"* and for *"Users able to approve or reject activation requests in PIM"*. |
+| Limitations | Establishes the licence requirement, **not** that `HG-102-005` can only be satisfied through PIM. The gate asks whether operator access *"can be made just-in-time"*; PIM is one mechanism and this record does not establish it is the only one. It also does not price P2 or ID Governance per seat. `OQ-108-009` carries both. |
+| Re-verify by | February 28, 2027 |
+| Supersedes | Narrows `EV-102-011`, which stated only that PIM *"requires licensing"* without naming the tier |
+
 ## 4. What the records establish
 
 ### 4.1 `OQ-106-010` is closed, and CBD-106 §5.1's hypothesis is falsified
@@ -456,6 +496,87 @@ two, and the second one — the companion list — is the one that decides. Reco
 plainly because tranche 2 stated the opposite, and a reader comparing the two
 tranches should see the correction rather than infer it.
 
+### 4.7 Category N is partly priced, and `OI-130-021`'s claim is now quantified
+
+`OI-130-021` records category **N** as *"the category least able to be
+constrained by a ceiling — the A2P floor is not negotiable downward by low
+volume."* That was a structural argument. It is now a figure.
+
+At Base, `DM-102-047` gives **60 message segments per month**.
+
+| | C3 Azure, 10DLC | C3 Azure, toll-free | C2 AWS, 10DLC | C2 AWS, toll-free |
+| --- | --- | --- | --- | --- |
+| Number lease | $1.00/mo | $2.00/mo | $1.00/mo | $2.00/mo |
+| Campaign registration | $1.50/mo (Low Volume) | — | **$10.00/mo** | — |
+| **Recurring floor** | **$2.50/mo** | **$2.00/mo** | **$11.00/mo** | **$2.00/mo** |
+| Usage, 60 segments | $0.45 | $0.45 | *rate not retrieved* | *rate not retrieved* |
+| Carrier surcharge, 60 segments | $0.12–$0.30 | $0.15 | *not quantified* | *not quantified* |
+| **One-time registration** | **$44.00** | — | **$67.00** | — |
+
+**The floor is 85–96% of the monthly bill at Base.** For C3 on 10DLC, $2.50 of
+recurring charge sits against roughly $0.60 of traffic. `OI-130-021` is
+correct, and the ratio is the evidence for it: sending ten times fewer messages
+changes the bill by pennies.
+
+**The registration floor is the larger term and it is one-time.** $44 for C3 and
+$67 for C2 to register a brand and a campaign, before a single message. Against
+a category whose Base traffic costs about sixty cents a month, the entry cost is
+roughly six years of usage.
+
+**Two findings worth carrying to a selection.**
+
+**AWS's 10DLC campaign fee is 6.7× Azure's**, $10.00 against $1.50 monthly, and
+it is the dominant recurring term for both. That is the difference between the
+two candidates at this volume — not the per-message rate, which is unretrieved
+for C2 but cannot plausibly matter at 60 segments.
+
+**Toll-free is cheaper than 10DLC on both platforms at this volume**, and avoids
+the registration fees entirely. It is not obviously the right route — toll-free
+verification has its own requirements this pass did not price, and `PN-130-*`
+does not choose between them — but a selection that assumes 10DLC because it is
+the default would be choosing the more expensive option without noticing.
+
+**It selects nothing.** `CR3` again, and C2 and C3 both remain
+`ELIGIBLE-PENDING-EVIDENCE` with C10 `INELIGIBLE` and out of the field.
+
+### 4.8 `OQ-103-019` is answered, and it puts a condition on C3's `$0.00`
+
+`EV-102-011` recorded only that Privileged Identity Management *"requires
+licensing"*. It is now precise: **PIM requires Microsoft Entra ID P2 or
+Microsoft Entra ID Governance, and is available on neither the Free tier nor
+P1** (`EV-102-229`).
+
+`HG-102-005` asks whether *"operator access can be made just-in-time"*. PIM is
+Azure's mechanism for exactly that. **If CoBudget satisfies that gate for C3
+through PIM, then `CR0` — the cheapest gate-clearing tier — includes P2 or ID
+Governance licences, and C3's identity cost is not `$0.00`.**
+
+Three qualifications, and they matter because this is a cost claim about a
+candidate.
+
+**The gate does not name PIM.** It asks whether just-in-time access is possible,
+not whether a particular product provides it. This record establishes what PIM
+costs to enable, not that PIM is required. `OQ-108-009` puts that question
+properly.
+
+**The licences are for CoBudget's own administrators, not for its customers.**
+The 50,000-MAU allowance at `EV-102-216` covers external-tenant users. PIM
+licensing is counted per administrator with an eligible assignment and per
+approver — a single-digit number at Private MVP, against `OI-103-002`'s
+observation that the second principal role is defined and unfilled.
+
+**No per-seat price was retrieved**, so the size of the consequence is unknown.
+It is the difference between `$0.00` and something, not between `$0.00` and a
+known figure.
+
+**What this does to CBD-104 §6.6.** That section rests C3's `$0.00 + unknowns`
+on Conditional Access being free (`OQ-104-016`, narrowed at §4.3 and still
+unproven). This adds a second condition of the same kind from a different
+direction: the hosting category's `HG-102-005` may drag a paid Entra tier into
+the identity category's bill. Neither condition is settled, and **both point the
+same way** — C3's zero is the least robust figure in the one category that has
+figures at all.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -463,6 +584,8 @@ tranches should see the correction rather than infer it.
 | OQ-108-005 | ~~Which Google Cloud services appear on the data-residency list at `cloud.google.com/terms/data-residency`, and does CoBudget's evaluated C1 composition appear on it? `EV-102-219` records that the page could not be read.~~ **Substantially answered at tranche 3 — §4.6.** The April 2024 snapshot covers Cloud Run, Pub/Sub, Cloud Logging and Cloud KMS, and **omits Cloud Scheduler and Secret Manager**. | **The answer removed a prospective `PASS` rather than producing one.** The remaining work is `OQ-108-007`, not this. |
 | OQ-108-006 | The transaction-log retention window for Cloud SQL and RDS, and the numeric automated-backup retention range for RDS. | `OQ-105-002`'s remainder; `HG-102-042` |
 | OQ-108-007 | Do **Cloud Scheduler** and **Secret Manager** appear on the current Google data-residency list, or on the companion *"without location configuration"* list? `EV-102-224` is an April 2024 snapshot that omits both; `EV-102-226` records that the companion list could not be read. | **The retrieval that now decides `HG-102-013` for C1**, replacing `OQ-108-005` in that role |
+| OQ-108-008 | The per-segment US SMS send rate and the quantified carrier fees for AWS End User Messaging. `EV-102-227` records that neither is on the pricing page. | `CT-102-006` for C2, category N — the one term missing from the §4.7 comparison |
+| OQ-108-009 | Can `HG-102-005` be satisfied for C3 without Privileged Identity Management, and if not, what does Entra ID P2 or ID Governance cost per administrator seat? | **`CR0` for C3 across categories H and I.** `EV-102-229` establishes what PIM requires, not that PIM is required |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |

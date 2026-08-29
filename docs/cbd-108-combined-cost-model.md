@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in four of the six categories and cost rule `CR4` forbids recording an unknown price as zero. v0.3 records the first category to move: **category E is now priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.5 |
+| Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
+| Document version | 0.6 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.5; Cross-Category Coherence Review v0.5; Carried Item Disposition Register v0.5; Acceptance Criteria Traceability v0.5; Evidence Retrieval Pass v0.5 |
+| Companions | Provider Set Disposition Register v0.6; Cross-Category Coherence Review v0.6; Carried Item Disposition Register v0.6; Acceptance Criteria Traceability v0.6; Evidence Retrieval Pass v0.6 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `b52d569` |
+| Repository baseline | `153312e` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -25,7 +25,7 @@ than discovered here.**
 A cost model has two sides. The demand side — how much CoBudget will consume —
 is **complete, approved, and stated at all three scenarios** in the CBD-102
 demand model. The price side — what each candidate charges for that consumption
-— is **`UNKNOWN` in four of six categories**.
+— is **`UNKNOWN` in three of six categories**.
 
 Multiplying a complete quantity by an unknown rate does not produce an estimate.
 It produces a number with no evidence record behind it, in a document whose only
@@ -48,7 +48,7 @@ same conclusion: *"Producing estimates would therefore create figures with no
 evidence record behind them, in a document whose purpose is to make cost
 comparable."* This document applies it to all six.
 
-**Two categories are different.** CBD-104 retrieved identity prices, and §6.6 states
+**Three categories are different.** CBD-104 retrieved identity prices, and §6.6 states
 them carefully: at Base demand, **C2 `$0.00 + unknowns`, C3 `$0.00 + unknowns`,
 C4 `≥ $35.00/month`**. Two of those three totals depend on unresolved tier
 questions, and the third carries the sharpest cliff in the set — `OQ-104-008`,
@@ -60,6 +60,13 @@ retrieval pass §4.2, on records `EV-102-212`–`215`. At Base, **C2 `$0.04`, C3
 `$0.06 + data`, C5 `$15.00`** per month. That pass also **falsified** CBD-106
 §5.1's hypothesis that Base volume sits inside every candidate's included
 allowance: it sits inside none of the three.
+
+**Category N was partly priced on the same day** — retrieval pass §4.7, records
+`EV-102-227`–`228`. At Base the **recurring floor is $2.50/month for C3 on
+10DLC and $11.00/month for C2**, against roughly $0.60 of traffic, plus a
+one-time registration cost of $44 and $67 respectively. C2's per-segment rate
+was not obtainable. **`OI-130-021`'s claim that the A2P floor is not negotiable
+downward by low volume is now a measured 85–96% of the bill.**
 
 ## 3. The demand side, which is complete
 
@@ -95,9 +102,9 @@ category where the metering question is as consequential as the rate.
 | **D** — PostgreSQL | **No** | `CT-102-006` recorded as `UNKNOWN × 0.4 GB Base` |
 | **E** — Email | **Yes** — August 29, 2026 | Retrieved by this package: `EV-102-212`–`215`. C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` at Base. C3's rate carries the vendor's own *"illustrative purposes"* disclaimer and is held at Low confidence |
 | **F** — Financial connectivity | **No** | `OQ-107-020` records that this category **requires provider contact** — reading will not close it |
-| **N** — Push and SMS | **No** | `CT-102-006` recorded as `UNKNOWN × 60 segments Base` |
+| **N** — Push and SMS | **Partly** — August 29, 2026 | Floors and registration fees retrieved for both candidates (`EV-102-227`–`228`); **C2's per-segment rate was not obtainable** and carrier fees are unquantified for it (`OQ-108-008`) |
 
-**A combined total therefore has two known-ish terms out of six**, and four
+**A combined total therefore has three known-ish terms out of six**, and three
 `UNKNOWN`. There is still no honest way to present that as a low/base/high
 range — but the position has moved for the first time, and §7's list is one item
 shorter.
@@ -128,7 +135,7 @@ positive form: cost never overrides a gate.
 | Cliff | Category | Consequence |
 | --- | --- | --- |
 | **`OQ-104-008`** — whether `HG-102-031` needs Auth0 Enterprise | I | **Unbounded.** Moves C4 from `$35/month` to contact-sales. The sharpest in the set |
-| **`OQ-103-019`** — Entra licence tier for Privileged Identity Management | H and I | `EV-102-011` states only that it *"requires licensing"*. Bears on `HG-102-005` and `CR0` |
+| ~~**`OQ-103-019`**~~ **Answered** — PIM requires **Entra ID P2 or ID Governance**, and is on neither Free nor P1 (`EV-102-229`) | H and I | **The cliff is real and its size is unknown.** If `HG-102-005` is satisfied for C3 through PIM, `CR0` includes paid Entra seats and C3's `$0.00` identity figure does not hold. `OQ-108-009` settles whether PIM is required and what a seat costs |
 | **`OQ-103-016`** — whether any candidate's cheapest gate-clearing tier caps seats at one | H | Converts to an `HG-102-006` failure if so, per `OI-102-015` — a cost question that becomes a gate question |
 | **Paid support plans** | All | `OI-103-018`'s resolution notes a paid AWS support plan as a possible `CR0` driver; `OQ-107-022` and `OQ-130-016` ask what support tiers cost and what support staff can see |
 | **Minimum commitments** | F | `OI-107-020` records this as the category most likely to carry one, and a contract term with it |
@@ -153,8 +160,9 @@ In the order that produces the most per unit of effort:
 1. **The `CR0` gate-clearing tier and its published price, for each candidate in
    hosting, database, email and SMS.** One pricing page per candidate. This
    is the bulk of the model and it is ordinary desk work.
-2. **`OQ-104-008` and `OQ-103-019`** — the two tier questions whose answers move
-   figures by more than the rates do.
+2. **`OQ-104-008`** — the remaining tier question whose answer moves figures by
+   more than the rates do. ~~`OQ-103-019`~~ was answered on August 29, 2026, and
+   replaced by the narrower `OQ-108-009`.
 3. ~~**`OQ-106-010`** — the included monthly allowance for each email
    candidate.~~ **Done, August 29, 2026.** One page per candidate, exactly as
    CBD-106 §5.1 predicted the effort would be. The hypothesis it tested turned

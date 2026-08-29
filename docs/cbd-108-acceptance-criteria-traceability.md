@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Three of seven acceptance criteria are met, three partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.5 |
+| Document version | 0.6 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.5; Cross-Category Coherence Review v0.5; Combined Cost Model v0.5; Carried Item Disposition Register v0.5; Evidence Retrieval Pass v0.5 |
+| Companions | Provider Set Disposition Register v0.6; Cross-Category Coherence Review v0.6; Combined Cost Model v0.6; Carried Item Disposition Register v0.6; Evidence Retrieval Pass v0.6 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `b52d569` |
+| Repository baseline | `153312e` |
 | Last updated | August 29, 2026 |
 
 ## 1. Package contents
@@ -102,8 +102,9 @@ a single-ecosystem set across five categories while the third does not.
 | Stop threshold | **Cannot be set** |
 
 Two blockers, both recorded upstream: `OI-102-017` (no budget ceiling exists)
-and `UNKNOWN` prices in four of six categories — **down from five**, because the
-retrieval pass priced category E on August 29, 2026. `OI-108-002` and `OI-108-013`
+and `UNKNOWN` prices in three of six categories — **down from five**, because the
+retrieval pass priced category E and partly priced category N on August 29,
+2026. `OI-108-002` and `OI-108-013`
 record it. Cost model §7 lists the retrievals that would close the price side —
 and notes that even a complete price side leaves the thresholds unset without a
 ceiling.
@@ -237,3 +238,4 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | 0.3 | August 29, 2026 | Adds `docs/cbd-108-evidence-retrieval-pass.md`, tranche 1 of the `D3` retrieval work `OI-108-017` records as unowned. Six evidence records in a new block `EV-102-212`–`217`, above CBD-103's reservation. **Closes `OQ-106-010`** and prices category E for the first time — C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` per month at Base — and **falsifies CBD-106 §5.1's hypothesis** that Base volume sits inside every candidate's allowance: it sits inside none of the three. Partially answers `OQ-104-016`, confirming the *"first 50,000 monthly active users"* allowance verbatim while leaving unproven that Conditional Access sits inside *"core features"*, so CBD-104 §6.6's `$0.00` for C3 still rests on an unconfirmed premise. Raises `OQ-108-001`–`004` and `OI-108-019`–`021`. **No gate outcome, verdict, rubric score or disposition changes, and no provider was contacted.** |
 | 0.4 | August 29, 2026 | Tranche 2 of the retrieval pass, working the **DPA block** — `HG-102-013`, the one gate whose outcome could move every candidate in every category at once. Six further records, `EV-102-218`–`223`. **No gate outcome moves**, and the reason now differs per candidate: **C1 Google has a contractual statement of all three elements for the first time** — retention and expiry from the CDPA, region from the Service Specific Terms — blocked only by an unverified scope condition that `OQ-108-005` closes in one retrieval; **C2 AWS has had a second contractual instrument read which defers rather than states**, narrowing toward the pass test's *"Silence fails"* without establishing it; and **C3's named retrieval was found and is insufficient**, being product documentation where the test demands a contract, and scoped to Recovery Services vaults rather than the evaluated composition. `OQ-105-002` is partially answered and explicitly not closed. `OQ-107-023` was **not attempted**, because `OI-102-023` makes NDA-bound aggregator agreements unregistrable. Raises `OQ-108-005`–`006`. **No verdict, rubric score, price or disposition changes.** |
 | 0.5 | August 29, 2026 | Tranche 3 retries the retrieval tranche 2 named as decisive for `HG-102-013`, and **the answer removes a prospective `PASS` rather than producing one**. Three records, `EV-102-224`–`226`. The `EV-102-218` region commitment applies only to services on Google's data-residency list; that list, read at its **April 9, 2024 snapshot** because the live page cannot be fetched, covers Cloud Run, Pub/Sub, Cloud Logging and Cloud KMS but **omits Cloud Scheduler and Secret Manager** — two components of the evaluated C1 composition, holding the `TD-103-004` scheduling surface and `HG-102-014` S4 material between them. The gate stays `UNPROVEN` for C1, now because the condition **fails for part of the composition** rather than because it is unverified. Three qualifications are recorded: the snapshot is two years old, a companion *"without location configuration"* list returned truncated and is unread (`EV-102-226`), and absence from a list is not absence of a commitment. **§4.6 of the retrieval pass states the correction to tranche 2 explicitly** rather than leaving a reader to infer it. Closes `OQ-108-005`, raises `OQ-108-007`. **No verdict, gate outcome, rubric score, price or disposition changes.** |
+| 0.6 | August 29, 2026 | Tranche 4 returns to the pricing block. Three records, `EV-102-227`–`229`. **Category N is partly priced**: at Base the recurring floor is `$2.50`/month for C3 on 10DLC against `$11.00` for C2 — a 6.7× difference driven entirely by the campaign-registration fee — plus one-time registration of `$44` and `$67`, against roughly `$0.60` of monthly traffic. **`OI-130-021`'s claim that the A2P floor is not negotiable downward by low volume is now measured at 85–96% of the bill.** C2's per-segment rate was not obtainable (`OQ-108-008`). **`OQ-103-019` is answered**: Privileged Identity Management requires Microsoft Entra ID P2 or ID Governance and is on neither Free nor P1, which puts a **second** condition on CBD-104 §6.6's `$0.00` for C3 — the first being `OQ-104-016` — both pointing the same way. The record establishes what PIM requires, **not** that `HG-102-005` requires PIM; `OQ-108-009` puts that question properly. **No verdict, gate outcome, rubric score or disposition changes.** |
