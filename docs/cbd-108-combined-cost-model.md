@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.6 |
+| Document version | 0.7 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.6; Cross-Category Coherence Review v0.6; Carried Item Disposition Register v0.6; Acceptance Criteria Traceability v0.6; Evidence Retrieval Pass v0.6 |
+| Companions | Provider Set Disposition Register v0.7; Cross-Category Coherence Review v0.7; Carried Item Disposition Register v0.7; Acceptance Criteria Traceability v0.7; Evidence Retrieval Pass v0.7 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `153312e` |
+| Repository baseline | `d5bc165` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -99,7 +99,7 @@ category where the metering question is as consequential as the rate.
 | --- | --- | --- |
 | **H** — Hosting | **No** | CBD-103 §6.1 — no price retrieved for any of C1, C2, C3. Cost record structure recorded with unknowns marked |
 | **I** — Identity | **Partially** | The only category with figures. Two of three totals carry unresolved tier risk — CBD-104 §6.6 |
-| **D** — PostgreSQL | **No** | `CT-102-006` recorded as `UNKNOWN × 0.4 GB Base` |
+| **D** — PostgreSQL | **No**, but the floor is narrowed | `CT-102-006` still `UNKNOWN × 0.4 GB Base`. **The tier to price is now identified for C3**: `EV-102-231` records that Azure's cheapest tier is excluded from production support, so `CR0` is plausibly General Purpose at 2 vCores / 8 GiB rather than Burstable — pending `OQ-108-010` |
 | **E** — Email | **Yes** — August 29, 2026 | Retrieved by this package: `EV-102-212`–`215`. C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` at Base. C3's rate carries the vendor's own *"illustrative purposes"* disclaimer and is held at Low confidence |
 | **F** — Financial connectivity | **No** | `OQ-107-020` records that this category **requires provider contact** — reading will not close it |
 | **N** — Push and SMS | **Partly** — August 29, 2026 | Floors and registration fees retrieved for both candidates (`EV-102-227`–`228`); **C2's per-segment rate was not obtainable** and carrier fees are unquantified for it (`OQ-108-008`) |
