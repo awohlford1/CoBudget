@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome, and the composition it produces leaves Cloud Scheduler as the single uncovered component.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.10 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.11 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.10; Cross-Category Coherence Review v0.10; Combined Cost Model v0.10; Carried Item Disposition Register v0.10; Acceptance Criteria Traceability v0.10 |
+| Companions | Provider Set Disposition Register v0.11; Cross-Category Coherence Review v0.11; Combined Cost Model v0.11; Carried Item Disposition Register v0.11; Acceptance Criteria Traceability v0.11 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `a24161e` |
+| Repository baseline | `422a569` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,7 +22,7 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`233` are
+anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`234` are
 registered below and the remainder are unused.
 
 **This tranche covers two questions**, chosen because each is answerable from
@@ -356,6 +356,19 @@ permits lowering below the class but never raising.
 | Class / confidence | Documented / Medium |
 | Content | **Globally scoped**: backend security policy, edge security policy, internal service security policy. **Regionally scoped**: regional backend security policy, network edge security policy. **Global backend** policies attach to the global external Application Load Balancer, the classic Application Load Balancer, the global external proxy Network Load Balancer, and the classic proxy Network Load Balancer. **Regional backend** policies attach to the **regional external Application Load Balancer** and the regional internal Application Load Balancer. Regional backend security policies support: **Client IP address, Client geography, Client ASN, Rate limiting, TLS fingerprinting (JA3 and JA4), Bot management, HTTP filtering, WAF, Adaptive Protection, Address Group, and Request logging.** |
 | Limitations | **The page does not state feature parity between global and regional policies in comparative language.** It presents each type's supported features in its own table. This record therefore establishes what regional policies **do** support; it does not establish that nothing is lost relative to global. A capability CoBudget later depends on must be checked against the regional table specifically. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-234 — Workflows has no scheduler of its own; scheduling requires Cloud Scheduler
+
+| Field | Content |
+| --- | --- |
+| Claim | `TD-103-004` substitution question for C1, category **H** (`OQ-108-012`) |
+| Provider / category | Google Cloud Workflows (C1) / H |
+| Source | *"Schedule a workflow using Cloud Scheduler"*, `https://docs.cloud.google.com/workflows/docs/schedule-workflow` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | The page's title is itself the answer. Its opening states: *"This page shows you how to use Cloud Scheduler to run a workflow on a particular schedule, such as every Monday at 9 AM or every 15 minutes."* Google's documented route to running a workflow on a recurring basis is **Cloud Scheduler**. |
+| Limitations | Establishes the documented route, not the exhaustive absence of any other. It says nothing about **Eventarc** or **Managed Service for Apache Airflow**, neither of which was retrieved. |
 | Re-verify by | February 28, 2027 |
 
 ## 4. What the records establish
@@ -946,6 +959,88 @@ uncovered component of the C1 composition**, and `OQ-108-012` — whether
 by the listed Workflows or Eventarc — becomes the last thing between C1 and a
 `HG-102-013` region element that covers the whole composition.
 
+### 4.15 The load-balancer swap is executed
+
+CBD-103 was amended on August 29, 2026 and the change is merged and published:
+§5's C1 composition now reads **"Cloud Armor on the regional external
+Application Load Balancer"**, evaluation and traceability at v1.3, both
+Confluence pages at v5. `HG-102-020` and `HG-102-021` each carry a note that
+their eventual evaluation for C1 must run against **regional** Cloud Armor
+policies.
+
+The runtime topology specification was **not** amended. §7 describes the edge
+as an enforcement point in product-agnostic terms — TLS termination, origin and
+input validation, per-surface ceilings, uniform denial shape, webhook signature
+verification — and names no load-balancer product. That the amendment touched
+one document rather than two is a property of how the topology was written.
+
+### 4.16 `OQ-108-012`: Workflows cannot substitute for Cloud Scheduler, and tranche 6 was wrong to suggest it might
+
+**This corrects tranche 6.** That tranche observed that Workflows and Eventarc
+are both on the data-residency list and suggested a composition meeting
+`TD-103-004` through a listed service *"would close this gap without any new
+evidence."* It framed this as a question rather than a claim, which was right,
+because the answer is **no** for the leading candidate.
+
+**What `TD-103-004` actually requires.** Each budget space has one IANA time
+zone and work runs at local midnight. Time zones exist at **15-minute offset
+granularity**, so *"a scheduler firing on the hour cannot align to every local
+midnight."* The design is **one frequent tick — at most every 15 minutes** —
+selecting spaces whose local date has advanced. That is a cron requirement, not
+an orchestration requirement.
+
+**Workflows does not provide one.** `EV-102-234` records that Google's
+documented route to running a workflow on a recurring basis is Cloud Scheduler —
+the page is titled *"Schedule a workflow using Cloud Scheduler"*. **Substituting
+Workflows would not remove Cloud Scheduler from the composition; it would add
+Workflows on top of it.**
+
+**What this settles and what it does not.** The Workflows half of `OQ-108-012`
+is answered and negative. Two listed services remain unexamined: **Eventarc**,
+and **Managed Service for Apache Airflow (formerly Cloud Composer)**, which is
+on the General list and does carry a scheduler of its own. Neither was
+retrieved, and this pass asserts nothing about them — `OQ-108-015` carries them.
+An Airflow deployment to provide a fifteen-minute tick at Private MVP scale
+would be disproportionate on its face, but "disproportionate" is a judgment, not
+a retrieval, and it is not this document's to make.
+
+### 4.17 Where C1 now stands, and why it is a CBD-108 problem rather than a CBD-103 one
+
+After the swap, the C1 composition is **entirely inside the Data Location
+commitment except for Cloud Scheduler**.
+
+| Component | On the data-residency list? |
+| --- | --- |
+| Cloud Run, Google Cloud Armor, Regional Load Balancers (Application), Pub/Sub, Secret Manager, Cloud KMS, Cloud Logging | **Yes** |
+| **Cloud Scheduler** | **No** |
+
+**The cheap fix is gone.** Tranche 6 held out the possibility that both gaps
+were closable by composition change with no new evidence. One was, and it has
+been. **The other is not**, on the evidence now in hand: the scheduler is
+required, it is not on the list, and the substitute this pass proposed does not
+substitute.
+
+Three routes remain, and none is a retrieval:
+
+1. **Accept and record.** `HG-102-013`'s region element covers seven of eight
+   components; Cloud Scheduler sits outside it. Whether that is acceptable
+   depends on what Cloud Scheduler holds — job definitions, target URLs, and
+   payloads, not customer financial data — and it is a Product Owner judgment
+   against `DI-91-*` classes, not a gate reading.
+2. **Ask Google.** Whether a region commitment covers Cloud Scheduler by another
+   route is a question only the provider can answer. That is class `D4` in the
+   carried-item register, the class no amount of reading closes.
+3. **Weigh it in the hosting selection.** C2 and C3 have their own equivalents of
+   this question, entirely unexamined — this pass has looked at Google's
+   data-residency list and at neither of the others'.
+
+**Route 3 is the one CBD-108 must not skip.** Nine tranches have examined C1's
+region position in detail and the other two candidates' not at all. A selection
+that treated C1 as the risky option because it is the documented one would be
+making exactly the mistake `OI-106-018` warns about in another category:
+mistaking an asymmetry of retrieval for an asymmetry of risk. `OI-108-023`
+records it.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -957,9 +1052,10 @@ by the listed Workflows or Eventarc — becomes the last thing between C1 and a
 | OQ-108-009 | Can `HG-102-005` be satisfied for C3 without Privileged Identity Management, and if not, what does Entra ID P2 or ID Governance cost per administrator seat? | **`CR0` for C3 across categories H and I.** `EV-102-229` establishes what PIM requires, not that PIM is required |
 | OQ-108-010 | Does CoBudget accept a database tier its vendor describes as *"Not recommended for production workloads"* and that *"does not qualify for 24/7 support"*? If not, C3's category D floor is General Purpose rather than Burstable. | **Product Owner decision, and it sets `CR0` for C3 in category D.** `EV-102-231` |
 | OQ-108-011 | ~~Is CoBudget's C1 HTTPS load balancing the regional or the global Application Load Balancer?~~ **Answered by the Product Owner, August 29, 2026: the composition uses both.** The regional half is listed; the **global** external Application Load Balancer is on none of the four lists. | Closed. **Two C1 components remain uncovered, and unlike the scheduler this one has no like-for-like substitute** — §4.12. Raises `OQ-108-013` |
-| OQ-108-012 | Must `TD-103-004`'s fifteen-minute scheduling requirement be met by **Cloud Scheduler**, the one composition component absent from all four data-residency lists? **Workflows** and **Eventarc** are both listed. | **The other thing `HG-102-013` for C1 turns on.** A CBD-103 composition question, not a CBD-108 one |
+| OQ-108-012 | ~~Must `TD-103-004`'s scheduling requirement be met by Cloud Scheduler? Workflows and Eventarc are listed.~~ **Answered for Workflows at §4.16, and the answer is that it cannot substitute** — Google's documented route to a recurring workflow *is* Cloud Scheduler (`EV-102-234`). | **Corrects tranche 6.** Substituting Workflows would add it on top of Cloud Scheduler, not replace it. Eventarc and Managed Service for Apache Airflow remain unexamined — `OQ-108-015` |
 | OQ-108-013 | Does the **global external Application Load Balancer** store Customer Data at rest? It is absent both from the configurable list and from the companion list of services that store nothing. | **Decides whether the C1 front door merely sits outside the region commitment or actually contradicts the single-region posture** — §4.13 |
 | OQ-108-014 | ~~Do Cloud Armor's regional backend policies offer the capability set the CBD-103 gate matrix relied on?~~ **Settled at §4.14: the question does not arise.** No WAF gate exists; Cloud Armor is cited by no gate row; the two capability-dependent edge gates are already `UNPROVEN` for all three candidates; and the one that passes is `PASS (design)` on CoBudget's own record. | Closed. **The swap is clear to execute.** The residual is that `HG-102-020` and `HG-102-021` must later be evaluated against the **regional** product — `EV-102-233` establishes what regional supports, not parity with global |
+| OQ-108-015 | Can **Eventarc** or **Managed Service for Apache Airflow** provide `TD-103-004`'s fifteen-minute tick without Cloud Scheduler? Both are on the data-residency list; neither was retrieved. | The remainder of `OQ-108-012`. Airflow does carry its own scheduler, but deploying it for a fifteen-minute tick at Private MVP scale is a proportionality judgment rather than a retrieval |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
@@ -970,6 +1066,7 @@ by the listed Workflows or Eventarc — becomes the last thing between C1 and a
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-108-022 | **The remaining H and D pricing work is a different shape from the tranches that preceded it.** Category H prices a composition of six services across three providers, and neither category has an established instance sizing to price against — which is part of why both were `UNKNOWN` to begin with. | Recorded so the pass's rate of progress is not extrapolated from the single-page retrievals that closed category E. The next useful step in category H may be `OQ-103-016`, which converts to an `HG-102-006` failure and is a gate question wearing a cost question's clothes, rather than the price lines of `OQ-103-015`. |
+| OI-108-023 | **Nine tranches have examined C1's region position in detail and C2's and C3's not at all.** This pass read Google's data-residency list and neither of the other two providers' equivalents. | **A selection must not treat C1 as the risky option because it is the documented one.** That is the mistake `OI-106-018` warns about in another category — mistaking an asymmetry of retrieval for an asymmetry of risk. Before the region dimension informs a hosting choice, the same question must be put to C2 and C3. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | **`EV-102-214` is the first cost record in the corpus whose own source disclaims it.** Register §3.2 requires Documented-or-stronger for a cost figure, and this is Documented — but the page says its figures *"may not reflect the latest Azure pricing."* | Recorded at Low confidence per §3.1 rather than excluded, because a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces, and the disclaimer is quoted so no reader mistakes it for a firm price. If a firm C3 email rate is needed, `OQ-108-004` is the route. |
