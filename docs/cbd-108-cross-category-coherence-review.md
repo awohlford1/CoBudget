@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.8 |
+| Document version | 0.9 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.8; Combined Cost Model v0.8; Carried Item Disposition Register v0.8; Acceptance Criteria Traceability v0.8; Evidence Retrieval Pass v0.8 |
+| Companions | Provider Set Disposition Register v0.9; Combined Cost Model v0.9; Carried Item Disposition Register v0.9; Acceptance Criteria Traceability v0.9; Evidence Retrieval Pass v0.9 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `f8c5cb0` |
+| Repository baseline | `ee5eb99` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
@@ -167,7 +167,20 @@ between them.
 
 **The topology assumes a single United States deployment region**, confirmed by
 the Product Owner on August 18, 2026 (`OI-103-001`). Every category's candidate
-composition was evaluated on that basis, and no category contradicts it.
+composition was evaluated on that basis, and **no category**
+contradicts it.
+
+**Amended at v0.9.** This section previously asserted the absence of any
+contradiction without having checked the C1 front door. The C1 composition uses
+**both global and regional** load balancing (Product Owner, August 29, 2026). The
+regional half is covered by the Data Location commitment; the **global** external
+Application Load Balancer is a global product by construction and is absent from
+every list that commitment attaches to — and absent, too, from the companion
+list of services that store no customer data. Whether that is an actual
+contradiction turns on a fact nothing retrieved has established: whether the
+global load balancer stores customer data at rest (`OQ-108-013`). **The claim is
+now that no category contradicts the regional posture; whether one component of
+one candidate's composition does is open.** Retrieval pass §4.13.
 
 `OI-103-016` records the honest consequence: single-region means availability
 cannot exceed the provider's single-region availability. In a mixed set that
