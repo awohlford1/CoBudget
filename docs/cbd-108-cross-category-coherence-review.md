@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.15 |
+| Document version | 0.16 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.15; Combined Cost Model v0.15; Carried Item Disposition Register v0.15; Acceptance Criteria Traceability v0.15; Evidence Retrieval Pass v0.15 |
+| Companions | Provider Set Disposition Register v0.16; Combined Cost Model v0.16; Carried Item Disposition Register v0.16; Acceptance Criteria Traceability v0.16; Evidence Retrieval Pass v0.16 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `4e3c50a` |
+| Repository baseline | `93429d5` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
@@ -243,6 +243,10 @@ availability instead. For C2 the retention and expiry elements therefore fail by
 document can overturn, and one that moves the remaining work to whether another
 AWS instrument carries what C1's CDPA carries (`OQ-108-022`). Retrieval pass
 §4.20.
+
+**Amended again at v0.16, and the dimension has changed shape.** Two things happened on August 29. The **AWS Customer Agreement** was read (`EV-102-243`, `EV-102-244`) and states no retention or expiry term either, restating the DPA's allocation of backup to the customer in a section headed *"Your Security and Backup"* — so all three general AWS instruments are now read and none carries the term. And the **Product Owner ruled that `HG-102-013` accepts written evidence**, the pass test governing over the gate statement.
+
+The ruling moves no gate — `HG-102-013` is still `UNPROVEN` for all three — but it changes what would. **For C2 and C3 the outstanding elements are now a bounded documentation retrieval rather than a hunt for a contractual statement.** C2's expiry is deferred by Service Terms §1.15 to per-service technical documentation (`OQ-108-025`); C3's nearest record, `EV-102-221`, loses its class objection and retains only its scope objection, being written about Recovery Services vaults rather than the evaluated composition (`OQ-108-026`). C1 is untouched by the ruling and still blocked by Cloud Scheduler. Retrieval pass §4.23 and §4.24.
 
 **Reading the remaining DPAs is the highest-leverage action available to
 CBD-108**, in the precise sense that it is the one retrieval whose outcome could
