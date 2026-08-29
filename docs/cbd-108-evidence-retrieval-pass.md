@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.17 |
+| Document version | 0.19 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Provider Set Disposition Register v0.16; Cross-Category Coherence Review v0.16; Combined Cost Model v0.16; Carried Item Disposition Register v0.16; Acceptance Criteria Traceability v0.16 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `93429d5` (tranche 15 stacks on the unmerged tranche 14) |
+| Repository baseline | `55cd5c0` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,10 +22,18 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. **The reservation is widened here from `212`–`241` to `212`–`271`.** `212`–`244` are
-now registered. No number above `244` is
-claimed anywhere in the corpus, and `scripts/audit-cbd-108.py` fails if this package
-registers a number at or below the corpus high-water mark.
+anywhere in the corpus. **The reservation is widened here from `212`–`241` to `212`–`271`.**
+`scripts/audit-cbd-108.py` fails if this package registers a number at or below
+the corpus high-water mark.
+
+**Sub-blocks, because two tranches are being drafted concurrently.** Tranche 17
+was written alongside separate `OQ-108-025` work on another branch, and the two
+would otherwise claim the same numbers. **`246`–`255` is reserved for the
+concurrent `OQ-108-025` tranche; tranche 17 claims `256` onward.** This follows
+the convention CBD-107's evaluation §8.1 set when it recorded that *a
+concurrently drafted CBD-130 evaluation must claim a block above `131`* — the
+same collision `scripts/audit-cbd-105.py` was corrected for. The gap between
+`245` and `256` is deliberate and is not a numbering error.
 
 **This tranche covers two questions**, chosen because each is answerable from
 published pages alone and each has a consequence larger than its size:
@@ -527,6 +535,23 @@ permits lowering below the class but never raising.
 | Limitations | Establishes membership for **two named services only**. It does not re-verify the rest of `EV-102-241`'s enumeration, and it does not address the qualifier `EV-102-241` records — that a service may be **on** the list and still not configurable to a Geo, which remains true of both. |
 | Refines | **`EV-102-241`**, which recorded both services as *"not seen"*. That record stands as the enumeration; this one corrects what the enumeration implied about Logic Apps. |
 | Re-verify by | Contract term or amendment |
+
+### EV-102-256 — Azure PostgreSQL Flexible Server states retention, region and expiry for its own backups
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` — all three elements — for C3, category **D** (`OQ-108-026`) |
+| Provider / category | Azure Database for PostgreSQL Flexible Server (C3) / D |
+| Source | *"Backup and Restore in Azure Database for PostgreSQL Flexible Server - Azure Database for PostgreSQL \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-backup-restore` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| **Retention** | *"The default backup retention period is seven days, but you can extend the period to a maximum of 35 days."* And: *"You can select a retention period between 7 (default) and 35 days."* |
+| **Expiry** | *"The backup files are automatically deleted after the retention period."* And, on server deletion: *"If you delete a server, all backups that belong to the server are also deleted and can't be recovered."* |
+| **Region** | Three redundancy options. **Zone-redundant**, the default where availability zones exist, *"restricts replication of data to within a country or region to meet data residency requirements"*. **Locally redundant**, the default elsewhere, *"stores multiple copies of backups in the same datacenter"*. **Geo-redundant** *"replicates the data to a geo-paired region"* and is **opt-in**: *"You can configure geo-redundant storage for backup only during server creation. After a server is provisioned, you can't change the backup storage redundancy option."* |
+| **Custody** | *"You can't export these backup files as they're stored in Microsoft-managed storage accounts. You have read-only access to restore these files but can't modify or delete them."* |
+| Limitations | **Scoped to the database component of the C3 set, not to the whole composition.** `HG-102-013` is a cross-category **X** gate, so the hosting components — Container Apps, Service Bus, Key Vault, Azure Monitor — are untouched by this record and have no equivalent statement retrieved. It is **Documented**, not Contractual, which the §4.24 ruling makes sufficient for this gate and which would not have been sufficient before it. |
+| Supersedes | **`EV-102-221` for this purpose.** That record carried a scope objection — it described Azure Backup Recovery Services vaults rather than the evaluated composition. This record is scoped to an evaluated service and the objection does not apply to it. |
+| Re-verify by | February 28, 2027 |
 
 ## 4. What the records establish
 
@@ -1767,6 +1792,80 @@ Logic Apps in the same row as Front Door, and a reader scanning it would have
 taken two gaps where there was one. The hedge was accurate; the impression it
 left was not.
 
+### 4.28 `OQ-108-026` settled: the statement exists, and it is scoped to an evaluated service
+
+`EV-102-221` answered the wrong question — it described Azure Backup Recovery
+Services vaults, not the composition CBD-103 and CBD-105 evaluate. §4.24's
+ruling removed that record's **class** objection and left its **scope**
+objection standing. `OQ-108-026` asked whether a correctly scoped statement
+exists. **It does.**
+
+| `HG-102-013` element | C3, category **D**, per `EV-102-256` |
+| --- | --- |
+| **Retention** | 7 days by default, configurable to a maximum of 35 |
+| **Expiry** | *"automatically deleted after the retention period"*; on server deletion, *"all backups… are also deleted and can't be recovered"* |
+| **Region** | Zone-redundant by default, which *"restricts replication of data to within a country or region"*; geo-redundant is opt-in and replicates to the paired region |
+
+**All three elements are stated, in Documented class, scoped to an evaluated
+service.** Under the §4.24 ruling that is the standard `HG-102-013` now applies.
+Before that ruling it would not have been, and the ruling is what makes this
+retrieval worth making.
+
+#### What this does not do
+
+**It does not move the gate, and CBD-108 could not move it if it wanted to.**
+`HG-102-013` is a cross-category **X** gate. This record covers the **database**
+component of the C3 set and nothing else — Container Apps, Service Bus, Key
+Vault and Azure Monitor have no equivalent statement retrieved, and the Product
+Terms commitment at `EV-102-237` speaks to **location**, not to retention or
+expiry. **A gate that applies across a composition is not satisfied by one
+component of it.** `OQ-108-029` names the remainder.
+
+**The gate outcome belongs to CBD-105 and CBD-103**, not here. What this pass
+can do is put the evidence in front of them, and it has.
+
+#### Three findings worth carrying beyond this question
+
+**Backup custody is genuinely separated, which bears on `HG-102-039`.** *"You
+have read-only access to restore these files but can't modify or delete them."*
+`HG-102-039` asks whether key custody can be separated from backup-data access;
+this establishes that on C3 the customer cannot reach the backup objects at all.
+Whether that helps or hurts depends on which way the gate reads it, and this
+document does not decide.
+
+**Geo-redundancy is the third create-time-irreversible decision in the C3 set.**
+*"You can configure geo-redundant storage for backup only during server
+creation. After a server is provisioned, you can't change the backup storage
+redundancy option."* That joins `EV-102-230`'s customer-managed-key mode and
+`EV-102-242`'s external-tenant location. **Three separate C3 decisions are fixed
+at provisioning and cannot be revised**, across three different categories. None
+is a gate failure. Together they are a property of the candidate that a
+selection should hold deliberately: **C3's data-protection posture is chosen
+once, before anything is running.**
+
+**Default redundancy sits inside the region; the option that leaves it must be
+chosen.** Zone-redundant storage restricts replication *"to within a country or
+region"*, which is compatible with `OI-103-001`'s single-United-States-region
+posture. Geo-redundant backup replicates to the paired region, which is a second
+region — still inside the Geo `EV-102-237` commits to, but outside the single
+region the topology assumes. **The default is the compatible one**, and the
+incompatible one is opt-in and irreversible, which is a better position than the
+reverse would be.
+
+### 4.29 Housekeeping: the tranche 15 baseline annotation
+
+Tranche 15 recorded its repository baseline as `` `93429d5` (tranche 15 stacks
+on the unmerged tranche 14) ``. That was accurate when written and is stale now
+— tranche 14 merged as `d6d96f0` and tranche 15 as `55cd5c0`. The annotation is
+removed and the baseline moved forward with this tranche.
+
+The pinned constant in `scripts/audit-cbd-108.py` moves with it, which is why
+the stale annotation was never a build failure: **the audit checks that the
+document and the constant agree, not that either is current.** That is the same
+limitation `OI-108-026` records about identifier checking — the guard verifies
+consistency, not correctness — and it is worth noting that the two independent
+observations point at the same property of these audits.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -1792,9 +1891,10 @@ left was not.
 | OQ-108-023 | ~~Are Azure Front Door and Logic Apps on the Microsoft Azure Core Services list?~~ **Settled at §4.26, and it splits.** **Logic Apps: present**, nested inside *"App Service (API Apps, Logic Apps, Mobile Apps, WebJobs, Functions)"* — never missing, only invisible to a flat enumeration. **Front Door: absent**, on a targeted check of a list that rendered in full (`EV-102-245`). | Closed. **C3 has one uncovered component, not two**, and it is the **global edge** — the exact structure C1 had before the tranche 7 swap. `OQ-108-028` |
 | OQ-108-024 | Does CoBudget's C3 composition depend on **Microsoft Entra managed identities**, whose issued certificates `EV-102-242` records as written to Cosmos DB *"in the East US region"* with a read-only copy in every region the service runs? | Only material if the composition uses them; this pass establishes the provider behaviour, not CoBudget's dependence on it |
 | OQ-108-025 | What do the **per-service technical documents** that Service Terms §1.15 defers to state, for the components of CoBudget's evaluated C2 composition? | **The whole of `HG-102-013`'s retention and expiry elements for C2.** Class `D3` and bounded — the clause names where to look. Under the August 29 ruling this documentation **can** satisfy the gate, so this retrieval is capable of moving a gate outcome |
-| OQ-108-026 | Is there an Azure retention and expiry statement scoped to the **evaluated C3 composition** rather than to Recovery Services vaults? `EV-102-221` gives 14 days for soft-deleted vault data and fails on scope. | **C3's retention and expiry elements.** The ruling voids `EV-102-221`'s class objection and leaves only its scope objection, so the target is now a narrower retrieval than tranche 2 supposed |
+| OQ-108-026 | ~~Is there an Azure retention and expiry statement scoped to the evaluated C3 composition?~~ **Settled at §4.28: yes, for the database component.** `EV-102-256` states retention (7–35 days), expiry (*"automatically deleted after the retention period"*) and region (zone-redundant *"within a country or region"*) for Azure Database for PostgreSQL Flexible Server. It supersedes `EV-102-221` for this purpose, whose scope objection does not apply to it. **It does not move the gate** — `HG-102-013` is a cross-category gate and the hosting components have no equivalent statement (`OQ-108-029`). Original: `EV-102-221` gives 14 days for soft-deleted vault data and fails on scope. | **C3's retention and expiry elements.** The ruling voids `EV-102-221`'s class objection and leaves only its scope objection, so the target is now a narrower retrieval than tranche 2 supposed |
 | OQ-108-027 | Should the `HG-102-013` catalog row be amended so its gate statement and pass test agree? The row demands a contract in one and admits written evidence in the other; the Product Owner has ruled the pass test governs. | **Upstream, in approved CBD-102.** The ruling settles the reading but not the text, so the contradiction survives for the next reader. Recorded here rather than amended, per `OI-108-020` |
 | OQ-108-028 | Can C3's composition stand on **API Management** without **Azure Front Door**? CBD-103 §5 names the edge as *"Front Door / API Management"*; API Management is on the Core Services list and Front Door is not. | **The C3 counterpart of the swap that closed C1's edge gap at tranche 7**, and subject to the same caution — Front Door is a global product and dropping it is a functional change, not a swap. A CBD-103 question |
+| OQ-108-029 | Do the remaining evaluated **C3 hosting** components — Container Apps, Service Bus, Key Vault, Azure Monitor — carry retention and expiry statements of their own? `EV-102-256` covers the database only, and `EV-102-237`'s Product Terms commitment speaks to **location**, not retention or expiry. | **The remainder of `HG-102-013` for C3.** A cross-category gate is not satisfied by one component of a composition — §4.28 |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
