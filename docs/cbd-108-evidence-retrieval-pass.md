@@ -921,8 +921,8 @@ permits lowering below the class but never raising.
 
 | Field | Content |
 | --- | --- |
-| Claim | `CT-102-003` for C3, category **H**; and the price half of `OQ-108-009` |
-| Provider / category | Microsoft Azure (C3) / H, I |
+| Claim | `CT-102-003` for C3, category **H**, and the price half of `OQ-108-009`, which also bears on category **I** |
+| Provider / category | Microsoft Azure (C3) / H |
 | Source | *"Microsoft Entra pricing"*, `https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing` |
 | Retrieval date | August 29, 2026 |
 | Class / confidence | Documented / Medium |
