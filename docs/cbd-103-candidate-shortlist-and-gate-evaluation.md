@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering thirty provider-level records for reuse by every sibling category (§3.5, §9). v1.2 extends it past the three hyperscalers to all ten provider identities for `HG-102-011`, and records at §7.9 that category F's documentary evidence is not obtainable by desk research at all. It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. |
-| Document version | 1.2 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026, resolving `OI-103-008` by authorizing the ten gate observations (§3.3). It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 explains why that is a structural result rather than a finding about any provider.** v1.1 runs the cross-category documentary pass `OI-103-009` required, registering thirty provider-level records for reuse by every sibling category (§3.5, §9). v1.2 extends it past the three hyperscalers to all ten provider identities for `HG-102-011`, and records at §7.9 that category F's documentary evidence is not obtainable by desk research at all. It moves four documentary gate outcomes, changes **no verdict**, and performs no observation. **v1.3 narrows the C1 composition at §5 to the *regional* external Application Load Balancer**, by Product Owner direction of August 29, 2026. The composition previously read *"Cloud Armor / HTTPS Load Balancing"* without distinguishing the global product from the regional one. The reason is data location: Google's Data Location commitment attaches only to services on its data-residency list, which names *"Cloud Load Balancing - Regional Load Balancers (Application, Proxy Network)"* and does not name the global external Application Load Balancer. **No gate outcome, verdict or tally moves** — CBD-108's retrieval pass §4.14 establishes why: no gate requires a WAF, no matrix cell cites Cloud Armor, `HG-102-020` and `HG-102-021` are already `UNPROVEN` for every candidate, and `HG-102-025` is `PASS (design)` on `TD-103-016` rather than on a vendor capability. **The consequence is forward-looking**: when `HG-102-020` and `HG-102-021` are evaluated, they must be evaluated against regional Cloud Armor policies, which CBD-108's retrieval pass §4.14 shows support rate limiting, WAF and Adaptive Protection but does **not** establish as at parity with the global type. That record sits in CBD-108's evidence block, not this package's. |
+| Document version | 1.3 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-103](https://cobudget.atlassian.net/browse/CBD-103) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Runtime Topology Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.2 |
+| Companions | Runtime Topology Specification v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.3 |
 | Confluence page | [CBD-103 — Hosting Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12353537) |
-| Repository baseline | `c689192` |
-| Last updated | August 22, 2026 |
+| Repository baseline | `d381bab` |
+| Last updated | August 29, 2026 |
 
 ## 1. Purpose
 
@@ -253,7 +253,7 @@ forward rather than closing it by silence.
 
 | ID | Candidate | Composition evaluated |
 | --- | --- | --- |
-| **C1** | Google Cloud | Cloud Run; Cloud Armor / HTTPS Load Balancing; Pub/Sub with dead-letter topic; Cloud Scheduler; Secret Manager and Cloud KMS; Cloud Logging |
+| **C1** | Google Cloud | Cloud Run; Cloud Armor on the **regional external Application Load Balancer**; Pub/Sub with dead-letter topic; Cloud Scheduler; Secret Manager and Cloud KMS; Cloud Logging |
 | **C2** | Amazon Web Services | ECS on Fargate; API Gateway / CloudFront with WAF; SQS with redrive; EventBridge Scheduler; Secrets Manager and KMS; CloudWatch |
 | **C3** | Microsoft Azure | Container Apps; Front Door / API Management; Service Bus with dead-letter queue; Azure Container Apps jobs or Logic Apps scheduling; Key Vault; Azure Monitor |
 
@@ -311,8 +311,8 @@ Config gate.
 | HG-102-017 authority fails closed | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `TD-103-006`, `TD-103-007` |
 | HG-102-018 bounded queue controls | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. See §7.2 for a component-level finding that applies regardless. |
 | HG-102-019 no indefinite retry | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. |
-| HG-102-020 uniform throttled response | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. The header-suppression requirement in `TD-103-013` makes this a genuine differentiator once observable. |
-| HG-102-021 per-surface ceilings | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Must confirm independent policies on all eleven `EP-92-*` entry points the pass test names. |
+| HG-102-020 uniform throttled response | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. The header-suppression requirement in `TD-103-013` makes this a genuine differentiator once observable. **For C1 the observation must be run against a *regional* Cloud Armor backend security policy from v1.3; parity with the global policy type is not established.** |
+| HG-102-021 per-surface ceilings | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. Must confirm independent policies on all eleven `EP-92-*` entry points the pass test names. **For C1 the retrieval must cover *regional* backend security policies from v1.3.** |
 | HG-102-022 safe counting keys | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. |
 | HG-102-023 exhaustion not weaponizable | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `TD-103-014` |
 | HG-102-024 secret manager or KMS | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. Non-exportability and workload identity must be demonstrated. All three publish a KMS product; that is not the pass test. |
