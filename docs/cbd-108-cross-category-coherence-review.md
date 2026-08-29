@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.24 |
+| Document version | 0.25 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.24; Combined Cost Model v0.24; Carried Item Disposition Register v0.24; Acceptance Criteria Traceability v0.24; Evidence Retrieval Pass v0.24 |
+| Companions | Provider Set Disposition Register v0.25; Combined Cost Model v0.25; Carried Item Disposition Register v0.25; Acceptance Criteria Traceability v0.25; Evidence Retrieval Pass v0.25 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `447d3b7` |
+| Repository baseline | `d66ff0b` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
@@ -253,6 +253,8 @@ The ruling moves no gate — `HG-102-013` is still `UNPROVEN` for all three — 
 **Amended at v0.22 with the per-service picture, which does not aggregate.** Tranche 20 completed the C2 component sweep for SQS and EventBridge Scheduler. **Retention in the C2 set is a property of each service rather than of the composition**: SQS bounds a message at *"14 days"* and the customer cannot raise it (`EV-102-250`); CloudWatch Logs holds *"indefinitely"* by default (`EV-102-249`); KMS enforces both a floor and a ceiling (`EV-102-246`); RDS and EventBridge Scheduler enforce neither, and a recurring schedule without an `EndDate` is never auto-deleted (`EV-102-251`). **A statement about "C2's retention" is not available and should not be attempted**, which is a further reason `HG-102-013` cannot be satisfied by summing per-service answers — it asks a composition-level question. `OI-108-028`. Retrieval pass §4.32.
 
 **Added at v0.24 — a dimension that turns out not to separate the candidates.** Tranches 21 and 22 put `HG-102-026`'s pass test to all three, and **all three meet it**: C1 by log views and `roles/logging.viewAccessor` (`EV-102-254`), C2 by per-log-group IAM by ARN or tag (`EV-102-252`), C3 by per-table RBAC with protected tables and a dedicated Privileged Monitoring Data Reader role (`EV-102-255`). CBD-103's topology called this *"the second gate most likely to eliminate a candidate"*; **it eliminates none of them**, so on the pass test it does no selection work and this review should not weight it as though it did. Any remaining discriminating power lies in the four gate-statement properties the test does not check, which `OQ-108-036` puts to CBD-102. The three are not equivalent even in passing: C3 passes widest but on a **preview** feature with silent denial, and its best mechanism depends on PIM, whose cost `OQ-108-009` leaves open (`OI-108-030`); C1's record is thinnest, because no statement was found about broader roles overriding a log-view restriction (`OQ-108-038`). Retrieval pass §4.34.
+
+**Amended at v0.25 — the DPAs have been read, and the answer is the one this section feared.** All three are now retrieved, and **none describes a provider-held backup with a stated retention, region and expiry**. C1's CDPA comes closest, and `EV-102-168` records that it *"does not use the word backup or separately describe provider-held backup copies"*. C2's contracts **assign** backup to the customer; C3's per-service statements describe customer-configured retention of primary data. Read literally, the pass test's *"Silence fails"* therefore reaches **every candidate in every category at once** — the correlated failure `OQ-103-024` named. CBD-108 does not move the outcome and picks none of the three available readings; `OQ-108-027` specifies what CBD-102 must decide and `OQ-108-039` asks whether the `EX-102` exception route leaves a selectable set, given it yields `CONDITIONAL` rather than `PASS`. **The documentary route here is exhausted and what remains is class `D4`** (`OI-108-031`). Retrieval pass §4.35.
 
 **Reading the remaining DPAs is the highest-leverage action available to
 CBD-108**, in the precise sense that it is the one retrieval whose outcome could

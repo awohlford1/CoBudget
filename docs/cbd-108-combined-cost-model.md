@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.24 |
+| Document version | 0.25 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.24; Cross-Category Coherence Review v0.24; Carried Item Disposition Register v0.24; Acceptance Criteria Traceability v0.24; Evidence Retrieval Pass v0.24 |
+| Companions | Provider Set Disposition Register v0.25; Cross-Category Coherence Review v0.25; Carried Item Disposition Register v0.25; Acceptance Criteria Traceability v0.25; Evidence Retrieval Pass v0.25 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `447d3b7` |
+| Repository baseline | `d66ff0b` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
