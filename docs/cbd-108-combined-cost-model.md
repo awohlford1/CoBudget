@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.31 |
+| Document version | 0.32 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.31; Cross-Category Coherence Review v0.31; Carried Item Disposition Register v0.31; Acceptance Criteria Traceability v0.31; Evidence Retrieval Pass v0.31 |
+| Companions | Provider Set Disposition Register v0.32; Cross-Category Coherence Review v0.32; Carried Item Disposition Register v0.32; Acceptance Criteria Traceability v0.32; Evidence Retrieval Pass v0.32 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `471f0de` |
+| Repository baseline | `816f188` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -114,6 +114,14 @@ shorter.
 Retrieval attempts across tranches 28 and 29 did not fail evenly. **AWS list prices have retrieved on every attempt.** **Google's have failed six times**, across support tiers (four URLs, `EV-102-266`) and Cloud KMS (`EV-102-268`, where the documentation domain redirects to the marketing domain, so the two routes are one). **Azure's render structure but never figures** — Key Vault shows *"$- per key per month"* (`EV-102-267`) exactly as Communication Services showed *"$-/Email sent"* (`EV-102-215`).
 
 **This changes what completing §4 requires.** It is not one more retrieval pass. For C1 and C3 the remaining route is a signed-in pricing calculator or a quote (`OQ-108-050`), which no amount of public reading substitutes for. It also means **a comparison drawn today would favour C2 by legibility rather than by price**, which `OI-108-037` records so the cost model is not read that way. Retrieval pass §4.41.
+
+### 4.2 Two gate-forcing rows complete — added at v0.32
+
+**`HG-102-009` forces a support tier on C3 and none on C1.** Customer Lockbox compels Developer support at **$29.00/month** (`EV-102-265`); Access Transparency is *"a default security control for every Google Cloud organization"* (`EV-102-269`), which answers `OQ-103-007` and **removes** the forcer CBD-103 §6.2 expected to *"move C1's floor"*. C2's answer to this gate is unidentified.
+
+**`HG-102-024` gates a tier on C3 alone.** Azure reserves HSM-protected keys to **Premium** (`EV-102-267`); AWS makes non-exportability the standard property of every KMS key, so the cost is a usage rate in `CT-102-007` rather than a plan fee (`EV-102-270`); Google names no tier, though only as an absence held at Low confidence (`EV-102-271`, `OQ-108-051`).
+
+**Both completed rows favour C1 and C2 on cost, and neither is a ranking** — three rows of the map are unchecked on two candidates each, and the seat check `OQ-108-052` could convert a cost line into an `HG-102-006` failure. Retrieval pass §4.42.
 
 ## 5. What is known without prices
 
