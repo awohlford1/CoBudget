@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.13 |
+| Document version | 0.14 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.13; Combined Cost Model v0.13; Carried Item Disposition Register v0.13; Acceptance Criteria Traceability v0.13; Evidence Retrieval Pass v0.13 |
+| Companions | Cross-Category Coherence Review v0.14; Combined Cost Model v0.14; Carried Item Disposition Register v0.14; Acceptance Criteria Traceability v0.14; Evidence Retrieval Pass v0.14 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `5a28996` |
+| Repository baseline | `071d430` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -132,10 +132,13 @@ named C1 components are covered — **Secret Manager included, correcting a
 tranche 3 finding taken from a stale snapshot**. The gate now turns on **Cloud
 Scheduler**, absent from all four lists, and on whether the composition's HTTPS
 load balancing is the regional variant the list covers (`OQ-108-011`,
-`OQ-108-012`); **C2 has had a second contractual
-instrument read that defers rather than states**; and **C3's named retrieval was
-found and is insufficient**, being documentation where the pass test demands a
-contract. The gate stays `UNPROVEN` for all three.
+`OQ-108-012`); **C2's region element is now stated contractually** at DPA §12.1,
+read directly at tranche 12, **but its retention and expiry elements are assigned
+to the customer** by §5.2 and §8, so the gate fails on two elements of
+three rather than for want of an instrument (`EV-102-239`, `EV-102-240`); and
+**C3's named retrieval was found and is insufficient**, being documentation where
+the pass test demands a contract — though the Privacy & Security Terms do
+carry C3's region element (`EV-102-237`). The gate stays `UNPROVEN` for all three.
 
 **Review trigger.** The route-A observation pass completing for C1, C2 and C3,
 and `OQ-108-005` for the `HG-102-013` half.
