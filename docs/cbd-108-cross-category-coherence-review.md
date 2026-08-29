@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.23 |
+| Document version | 0.24 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.23; Combined Cost Model v0.23; Carried Item Disposition Register v0.23; Acceptance Criteria Traceability v0.23; Evidence Retrieval Pass v0.23 |
+| Companions | Provider Set Disposition Register v0.24; Combined Cost Model v0.24; Carried Item Disposition Register v0.24; Acceptance Criteria Traceability v0.24; Evidence Retrieval Pass v0.24 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `2f5e30a` |
+| Repository baseline | `447d3b7` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
@@ -251,6 +251,8 @@ The ruling moves no gate — `HG-102-013` is still `UNPROVEN` for all three — 
 **Amended at v0.20, and the C2 route is now closed rather than open.** Tranche 18 followed Service Terms §1.15's deferral into the per-service documentation for four C2 components. It found one provider-enforced expiry (KMS, 7—30 days, `EV-102-246`) and otherwise **customer-configured retention with provider lag on top** — CloudWatch Logs deleting *"up to 72 hours"* after the configured period *"but in rare situations might take longer"* (`EV-102-249`), and RDS support recovery *"for up to six days after the deletion request"* (`EV-102-248`). **`HG-102-013` asks for provider behaviour and the documentation states operator configuration**, so the gate does not move and no further retrieval in that direction will move it. This corrects the v0.16 amendment's expectation that the post-ruling path was *"materially better"*. Retrieval pass §4.30.
 
 **Amended at v0.22 with the per-service picture, which does not aggregate.** Tranche 20 completed the C2 component sweep for SQS and EventBridge Scheduler. **Retention in the C2 set is a property of each service rather than of the composition**: SQS bounds a message at *"14 days"* and the customer cannot raise it (`EV-102-250`); CloudWatch Logs holds *"indefinitely"* by default (`EV-102-249`); KMS enforces both a floor and a ceiling (`EV-102-246`); RDS and EventBridge Scheduler enforce neither, and a recurring schedule without an `EndDate` is never auto-deleted (`EV-102-251`). **A statement about "C2's retention" is not available and should not be attempted**, which is a further reason `HG-102-013` cannot be satisfied by summing per-service answers — it asks a composition-level question. `OI-108-028`. Retrieval pass §4.32.
+
+**Added at v0.24 — a dimension that turns out not to separate the candidates.** Tranches 21 and 22 put `HG-102-026`'s pass test to all three, and **all three meet it**: C1 by log views and `roles/logging.viewAccessor` (`EV-102-254`), C2 by per-log-group IAM by ARN or tag (`EV-102-252`), C3 by per-table RBAC with protected tables and a dedicated Privileged Monitoring Data Reader role (`EV-102-255`). CBD-103's topology called this *"the second gate most likely to eliminate a candidate"*; **it eliminates none of them**, so on the pass test it does no selection work and this review should not weight it as though it did. Any remaining discriminating power lies in the four gate-statement properties the test does not check, which `OQ-108-036` puts to CBD-102. The three are not equivalent even in passing: C3 passes widest but on a **preview** feature with silent denial, and its best mechanism depends on PIM, whose cost `OQ-108-009` leaves open (`OI-108-030`); C1's record is thinnest, because no statement was found about broader roles overriding a log-view restriction (`OQ-108-038`). Retrieval pass §4.34.
 
 **Reading the remaining DPAs is the highest-leverage action available to
 CBD-108**, in the precise sense that it is the one retrieval whose outcome could

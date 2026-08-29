@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** **Tranche 21 answers `OQ-108-034` and discharges the C2 third of the upstream `OQ-103-009`: CloudWatch Logs scopes IAM to an individual log group by ARN and by tag, so two destinations with distinct access roles are configurable and `HG-102-026`'s pass test is met on the evidence. It is the first retrieval in this pass to produce evidence sufficient for a gate to pass rather than evidence that narrows one, and the outcome is CBD-103's to record. It also finds that the provider's redaction mechanism is the one `TD-103-022` rejects, which costs CoBudget nothing because its redaction is structural.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.23 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** **Tranche 21 answers `OQ-108-034` and discharges the C2 third of the upstream `OQ-103-009`: CloudWatch Logs scopes IAM to an individual log group by ARN and by tag, so two destinations with distinct access roles are configurable and `HG-102-026`'s pass test is met on the evidence. It is the first retrieval in this pass to produce evidence sufficient for a gate to pass rather than evidence that narrows one, and the outcome is CBD-103's to record. It also finds that the provider's redaction mechanism is the one `TD-103-022` rejects, which costs CoBudget nothing because its redaction is structural.** **Tranche 22 completes `OQ-103-009` by putting the same question to C1 and C3, and all three candidates meet `HG-102-026`'s pass test. The gate CBD-103 called the second most likely to eliminate a candidate eliminates none of them, and the evidence block this pass reserved is now exhausted.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.24 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Provider Set Disposition Register v0.20; Cross-Category Coherence Review v0.20; Combined Cost Model v0.20; Carried Item Disposition Register v0.20; Acceptance Criteria Traceability v0.20 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `2f5e30a` |
+| Repository baseline | `447d3b7` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -651,6 +651,36 @@ permits lowering below the class but never raising.
 | Content | Scope: policies *"let you audit and mask sensitive data that appears in log events ingested by the log groups in your account"*, and can be set *"for all log groups in your account"* or *"for individual log groups"*. Access: *"Only users who have the `logs:Unmask` IAM permission can view unmasked data."* Timing: *"Sensitive data is detected and masked when it is ingested into the log group. When you set a data protection policy, log events ingested to the log group before that time are not masked."* Mechanism: *"CloudWatch Logs data protection allows you to leverage pattern matching and machine learning models to detect sensitive data"*, via **managed data identifiers** for credentials, financial information, PII, PHI and device identifiers, plus custom identifiers. |
 | **Why this is registered as qualifying** | `TD-103-022` states CoBudget's position: *"Redaction is structural, not a filter"*, and it names the rejected alternative as *"a redaction filter that strips known-sensitive patterns on the way out"*, rejected because it *"fails open: it removes what it recognizes and forwards what it does not"*. **CloudWatch Logs data protection is that alternative**, and its own documentation states the fail-open property in two forms: detection is by pattern and model against an enumerated identifier set, and events ingested before the policy exists are never masked. |
 | **What it does not mean** | **This costs CoBudget nothing.** `TD-103-022` puts redaction in the logger's closed typed field set, so the S1 sink cannot carry an unlisted field and the design does not depend on provider masking. The record exists so a later reader does not cite this feature as satisfying `TD-103-022` — it is the mechanism that requirement was written against. `logs:Unmask` is noted because it is a genuinely distinct permission, and would matter if masking were ever relied on. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-254 — Google Cloud Logging restricts access per log view, with a dedicated IAM role
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-026` **pass test** for C1, category **H** (`OQ-108-037`, `OQ-103-009`) |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"Configure log views on a log bucket"*, `https://docs.cloud.google.com/logging/docs/logs-views` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | Purpose: *"Log views let you grant a user access to only a subset of the logs stored in a log bucket."* Role: **`roles/logging.viewAccessor`**. Mechanism: *"To grant a principal access to only a specific log view… Create an IAM policy for the log view, and then add an IAM binding to that policy which grants the principal access to the log view."* Effect: a project owner *"can then grant each user access to one or more log views, and thereby restrict which logs the users can view."* |
+| **What it establishes for the test** | Two log views on a bucket are two distinct destinations, and `roles/logging.viewAccessor` is grantable on one without the other. **The pass test is met for C1.** The three-destination arrangement `TD-103-021` specifies follows the same way. |
+| Limitations | **The retrieval found no statement about broader roles overriding a log-view restriction**, and its absence is registered rather than read as reassurance — a project-level logging role that confers read access regardless of view bindings would defeat the separation, and this page does not say whether one exists. `OQ-108-038`. The page notes only that *"IAM evaluates all applicable policies, with the first evaluation at the resource level."* As with C2 this is a **configuration capability, not an observation**, and `HG-102-026` is typed `Config`. The original URL redirected; the record cites the destination that served the content. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-255 — Azure Monitor separates log access by table, with a deny-by-default mode that is in preview
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-026` **pass test** for C3, category **H** (`OQ-108-037`, `OQ-103-009`) |
+| Provider / category | Microsoft Azure (C3) / H |
+| Source | *"Manage access to Log Analytics workspaces"*, `https://learn.microsoft.com/en-us/azure/azure-monitor/logs/manage-access`. Page `ms.date` 2026-06-22, updated 2026-08-25 |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | **Per-table permission**: *"Access a specific log table - legacy method"* via `Microsoft.OperationalInsights/workspaces/query/<table_name>/read`, with **granular RBAC** described as *"the recommended method for table and row-level access control"*. **Deny by default**: protected tables provide *"a 'deny by default' isolation model for sensitive telemetry"*, with a `protectionLevel` of `General` or `Protected`; *"When you set a table to `Protected`, users who previously had access through workspace-level or resource-level read roles no longer see data from that table unless they receive an explicit grant."* **Dedicated role**: **Privileged Monitoring Data Reader** *"Provides access to protected tables… without providing broader access to the workspace or other data."* **Closing the bypass**: `DataActionsOnly` mode means *"control plane roles such as Reader and Monitoring Reader… no longer grant implicit data access."* |
+| **What it establishes for the test** | Tables are distinct destinations, access is grantable per table, and a named built-in role exists for the restricted tier. **The pass test is met for C3, and by the widest margin of the three.** |
+| **Three qualifications** | **Protected tables is a preview feature**, and the page carries a preview limitations table — evidence register treatment of preview functionality applies. **Denial is silent**: *"Queries against protected tables succeed but return no data when the caller lacks access. The query doesn't return a 400 or 403 error."* **Schema is not hidden**: *"Table metadata, including column names and types, is accessible regardless of the protection level."* |
+| **Inheritance can defeat it** | The page's own Example 4 warns, of blocking a table by `NonAction`: *"If the user inherits the read action from another role that's assigned to this resource or to the subscription or resource group, they could read all log types."* The separation is only as good as the surrounding assignments, which is a CoBudget configuration obligation rather than a provider limitation. |
+| **Cross-link worth carrying** | Privileged Monitoring Data Reader *"works with Microsoft Entra Privileged Identity Management (PIM) for time-bound and just-in-time access"*. **The C3 mechanism that best satisfies this gate is the one whose licensing cost `OQ-108-009` records as unresolved** — `EV-102-229` establishes what PIM requires without establishing that PIM is required. |
 | Re-verify by | February 28, 2027 |
 
 ### EV-102-256 — Azure PostgreSQL Flexible Server states retention, region and expiry for its own backups
@@ -2367,6 +2397,79 @@ since a test is meant to be operable where a statement is meant to be complete.
 Whether the narrower test is sufficient here is a CBD-102 question, and
 `OQ-108-036` puts it rather than assuming the earlier answer transfers.
 
+### 4.34 `OQ-108-037` completes `OQ-103-009`, and the gate discriminates between nobody
+
+C1 and C3 were put to the same question tranche 21 put to C2. **All three meet
+`HG-102-026`'s pass test.**
+
+| | Distinct destination | Grant mechanism | Named role |
+| --- | --- | --- | --- |
+| **C1 Google** | Log view on a log bucket | IAM policy bound to the view | **`roles/logging.viewAccessor`** |
+| **C2 AWS** | Log group | IAM by ARN, or by resource tag | (no dedicated role; scoped policy) |
+| **C3 Azure** | Table in a workspace | Per-table permission, granular RBAC, protected tables | **Privileged Monitoring Data Reader** |
+
+#### The finding is the non-result
+
+CBD-103's topology says of this gate: *"This is the second gate most likely to
+eliminate a candidate, and it eliminates exactly the class of platform that
+markets a single unified observability product as a feature."*
+
+**It eliminates none of the three.** The expectation was reasonable and it is
+not what the documentation says. Every hyperscaler in the set offers
+per-destination access control, because every one of them sells to customers who
+must separate one team's logs from another's.
+
+That is worth stating plainly for two reasons. **A gate that passes for all
+candidates does no selection work**, and CBD-103 should know that before it
+weights this dimension. And the expectation that it *would* discriminate came
+from a reasonable reading of the market rather than from evidence — which is
+the same failure mode `OI-108-027` records about this pass's own forecasts,
+appearing here in a source package.
+
+**Where discriminating power may remain** is in the four properties of the gate
+statement its pass test does not check: deliberate rather than continuous
+capture, redaction, case linkage, and what *"stronger access control"* requires.
+`OQ-108-036` already asks CBD-102 whether the test governs. **That question now
+matters more than it did**, because on the test alone the gate has no
+discriminating power at all.
+
+#### The three are not equivalent, even passing alike
+
+**C3 passes by the widest margin and has the most caveats.** Protected tables
+give *"a 'deny by default' isolation model"* that no other candidate matches,
+plus `DataActionsOnly` mode to close the control-plane bypass. But the feature is
+**preview**, unauthorised queries *"succeed but return no data"* rather than
+erroring, and table metadata stays visible regardless. Its own Example 4 warns
+that an inherited read action defeats a table `NonAction`.
+
+**C1 is the thinnest record of the three.** `roles/logging.viewAccessor` is a
+clean, purpose-built grant, but **the retrieval found no statement about whether
+a broader project-level role overrides a log-view restriction**, and `EV-102-254`
+registers that absence rather than reading it as reassurance. `OQ-108-038`.
+
+**C2 sits between them**, with two grant mechanisms and one precise limitation
+already recorded: `StopQuery` and `StopLiveTail` cannot be resource-scoped.
+
+#### A cost cross-link the selection should not miss
+
+Azure's **Privileged Monitoring Data Reader** *"works with Microsoft Entra
+Privileged Identity Management (PIM) for time-bound and just-in-time access"*.
+
+**So the C3 mechanism that best satisfies this gate is the one whose licensing
+cost is an open question.** `OQ-108-009` asks whether `HG-102-005` can be
+satisfied for C3 without PIM and what Entra ID P2 costs per administrator seat;
+`EV-102-229` establishes what PIM requires without establishing that PIM is
+required. **C3's advantage on this dimension has a price attached that nobody has
+obtained**, and a comparison that credits the advantage without the price would
+be reading half the record. `OI-108-030`.
+
+#### The evidence block is exhausted
+
+`246`—`255` was reserved at tranche 17 for the concurrent `OQ-108-025` line of
+work. `EV-102-254` and `255` close it. The next tranche on this branch takes
+numbers above `259`, which is the corpus high-water mark, and
+`scripts/audit-cbd-108.py` fails if it does not.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -2403,7 +2506,8 @@ Whether the narrower test is sufficient here is a CBD-102 question, and
 | OQ-108-034 | ~~Does C2's observability surface satisfy **`HG-102-026`**?~~ **Answered at §4.33: the pass test is met on the evidence.** CloudWatch Logs scopes IAM to an individual log group by ARN and by tag (`EV-102-252`), so two destinations — or the three `TD-103-021` specifies — with distinct access roles are configurable. | Closed. **The first evidence in this pass sufficient for a gate to pass rather than to narrow.** The outcome is CBD-103's; the gate is typed `Config`, so configuring it is CoBudget's own work. Discharges the C2 third of `OQ-103-009` |
 | OQ-108-035 | What do the per-service documents state for **ECS on Fargate, API Gateway and CloudFront**, the three C2 components not retrieved at tranche 20? | **Inventory value only.** Their data-at-rest story plausibly reduces to CloudWatch Logs (`EV-102-249`), but this pass does not assert what a document says before reading it |
 | OQ-108-036 | Does `HG-102-026`'s **pass test govern its gate statement**, as §4.24 ruled for `HG-102-013`? The statement names a separate boundary, stronger access control, deliberate rather than continuous capture, redaction and case linkage; the test checks two of the five. | **CBD-102 question, deliberately not settled by analogy.** The `HG-102-013` ruling resolved a contradiction unique to that row. A statement broader than its test is a different thing and may be common across the catalog |
-| OQ-108-037 | The same `HG-102-026` retrieval for **C1 and C3**. `OQ-103-009` says *"Retrieve for all three"* and only C2 is done. | Completes the upstream question. Both are `UNPROVEN` on non-retrieval alone, which §4.33 shows is the cheapest kind of `UNPROVEN` to remove |
+| OQ-108-037 | ~~The same `HG-102-026` retrieval for **C1 and C3**.~~ **Done at §4.34, and all three candidates meet the pass test.** C1 by log views and `roles/logging.viewAccessor` (`EV-102-254`); C3 by per-table RBAC, protected tables and Privileged Monitoring Data Reader (`EV-102-255`). | Closed, and **completes the upstream `OQ-103-009`**. The finding is the non-result: the gate CBD-103 called *"the second gate most likely to eliminate a candidate"* **eliminates none of them**, so on its pass test it does no selection work. Raises `OQ-108-038`, `OI-108-030` |
+| OQ-108-038 | Does a **broader project-level Google Cloud logging role override a log-view restriction**? `EV-102-254` found no statement either way, and an absence is not a reassurance. | **Whether C1's separation actually holds.** C2's equivalent limitation is recorded (`StopQuery`, `StopLiveTail`) and C3's is recorded (inherited read actions defeat a table `NonAction`); C1's is simply unknown, which makes it the thinnest of the three records rather than the cleanest |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
@@ -2421,6 +2525,7 @@ Whether the narrower test is sufficient here is a CBD-102 question, and
 | OI-108-027 | **This pass has now twice overestimated what its own next step would achieve.** Tranche 14 called the post-ruling position *"materially better"* and the retrieval that followed moved nothing; tranche 2 called C1 *"one retrieval away"* from a `PASS` and tranche 3 removed the prospective `PASS` instead. Five of the seven ledger entries run **against** the claim they correct. | Recorded as a calibration note rather than a finding. **The pass is reliable about what it has retrieved and unreliable about what retrieval will yield next**, and its forward-looking statements should be read with that asymmetry in mind. It is also an argument for continuing to state expectations explicitly, since that is what makes them checkable. |
 | OI-108-028 | **Retention in the C2 set is a property of each service, not of the composition, and two services sit at opposite extremes.** SQS cannot hold a message beyond **14 days** whatever the customer configures; CloudWatch Logs holds **indefinitely** by default and bounds its deletion lag not at all. KMS enforces both a floor and a ceiling; RDS and EventBridge Scheduler enforce neither. | Recorded for the `DI-91-*` inventory and for CBD-105. **A statement about "C2's retention" is not available and should not be attempted** — the honest unit is the service. It also explains why `HG-102-013`, which asks a composition-level question, cannot be satisfied by summing per-service answers. |
 | OI-108-029 | **The provider's redaction mechanism is the one CoBudget's design rejects, and CoBudget does not depend on it.** CloudWatch Logs data protection masks by *"pattern matching and machine learning models"* against an enumerated identifier set, and does not mask events ingested before the policy existed. `TD-103-022` names that shape as the rejected alternative because it *"fails open"*. | Recorded so the feature is **not later cited as satisfying `TD-103-022`** — it is the mechanism that requirement was written against. It costs nothing here because `TD-103-022` puts redaction in the logger's closed typed field set rather than in a filter. The general lesson is that a provider capability matching a requirement **by name** may be the thing the requirement excludes. |
+| OI-108-030 | **The C3 mechanism that best satisfies `HG-102-026` is the one whose licensing cost is unresolved.** Privileged Monitoring Data Reader *"works with Microsoft Entra Privileged Identity Management (PIM) for time-bound and just-in-time access"*, and `OQ-108-009` records that neither the necessity of PIM nor the per-seat cost of Entra ID P2 has been established. | Recorded so a comparison does not credit C3's advantage on this dimension while leaving its price in a different document. **The same feature appears as a strength in category H and as an unpriced dependency in categories H and I**, and `CR0` prices the cheapest gate-clearing configuration, not the cheapest one. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | **`EV-102-214` is the first cost record in the corpus whose own source disclaims it.** Register §3.2 requires Documented-or-stronger for a cost figure, and this is Documented — but the page says its figures *"may not reflect the latest Azure pricing."* | Recorded at Low confidence per §3.1 rather than excluded, because a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces, and the disclaimer is quoted so no reader mistakes it for a firm price. If a firm C3 email rate is needed, `OQ-108-004` is the route. |
