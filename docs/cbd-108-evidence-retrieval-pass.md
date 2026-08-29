@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.22 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** **Tranche 21 answers `OQ-108-034` and discharges the C2 third of the upstream `OQ-103-009`: CloudWatch Logs scopes IAM to an individual log group by ARN and by tag, so two destinations with distinct access roles are configurable and `HG-102-026`'s pass test is met on the evidence. It is the first retrieval in this pass to produce evidence sufficient for a gate to pass rather than evidence that narrows one, and the outcome is CBD-103's to record. It also finds that the provider's redaction mechanism is the one `TD-103-022` rejects, which costs CoBudget nothing because its redaction is structural.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.23 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Provider Set Disposition Register v0.20; Cross-Category Coherence Review v0.20; Combined Cost Model v0.20; Carried Item Disposition Register v0.20; Acceptance Criteria Traceability v0.20 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `e386dd8` |
+| Repository baseline | `2f5e30a` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -623,6 +623,34 @@ permits lowering below the class but never raising.
 | Content | Automatic deletion is opt-in: *"When you configure automatic deletion for a schedule, EventBridge Scheduler deletes the schedule after its last target invocation."* For recurring schedules the last invocation is the one *"closest to the `EndDate` you specify"*. And the condition that matters: *"If you configure a schedule with automatic deletion but do not specify a value for `EndDate`, EventBridge Scheduler does not automatically delete the schedule."* |
 | **Why it matters for the inventory** | `TD-103-004` specifies a **recurring** fifteen-minute tick, which by its nature carries no end date. **So the schedule definition and its target payload persist until something deletes them**, and nothing on this page undertakes that anything will. This is the C2 analogue of what §4.17 recorded for C1's Cloud Scheduler — job definitions, target URLs and payloads rather than customer financial data — now with a documented default of indefinite persistence. |
 | Limitations | **No retention period is stated anywhere on this page**, and its absence is what is registered. Establishes the deletion behaviour of the schedule resource, not what EventBridge Scheduler retains internally after a schedule is deleted, and not what the invocation history holds. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-252 — CloudWatch Logs scopes IAM to an individual log group, by ARN and by tag
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-026` **pass test** for C2, category **H** (`OQ-108-034`, `OQ-103-009`) |
+| Provider / category | Amazon Web Services (C2) / H |
+| Source | *"Using identity-based policies (IAM policies) for CloudWatch Logs"*, `https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-identity-based-access-control-cwl.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / **High** — the page carries working policy documents, not prose about them |
+| Content | **By ARN.** *"Log group: `arn:aws:logs:{region}:{account}:log-group:{LogGroupName}`"*, with a worked example scoping log-group actions to one group: *"Resource": "arn:aws:logs:us-west-2:123456789012:log-group:SampleLogGroupName"*. A second example scopes log-stream actions with the `:*` suffix. **By tag.** *"You can grant users access to certain log groups while preventing them from accessing other log groups. To do so, tag your log groups and use IAM policies that refer to those tags."* |
+| **What it establishes for the test** | `HG-102-026`'s pass test asks that *"Two distinct destinations with distinct access roles are configurable"*. A log group is a distinct destination, and access to it is grantable independently of any other log group by two separate mechanisms. **The three-destination arrangement `TD-103-021` specifies is reachable the same way** — log groups are ordinary resources, so three cost no more configuration than two. |
+| Limitations | **Two operations cannot be resource-scoped.** The page states that for `StopQuery` and `StopLiveTail` *"you must set the value of the `Resource` field as `*`"*, because they act on a session or query rather than a resource. Neither reads log content, so this does not breach the boundary the gate protects, but a role holding them holds them across all log groups. **This is a configuration capability, not an observation**: it establishes that the separation is configurable, not that CoBudget has configured it. `HG-102-026` is typed **Config** in the catalog, so the remaining work is CoBudget's own. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-253 — CloudWatch Logs redaction is pattern matching at ingestion, the mechanism `TD-103-022` rejects
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-026` **redaction element** for C2, category **H** — **qualifying record** (`OQ-108-034`) |
+| Provider / category | Amazon Web Services (C2) / H |
+| Source | *"Help protect sensitive log data with masking"*, `https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | Scope: policies *"let you audit and mask sensitive data that appears in log events ingested by the log groups in your account"*, and can be set *"for all log groups in your account"* or *"for individual log groups"*. Access: *"Only users who have the `logs:Unmask` IAM permission can view unmasked data."* Timing: *"Sensitive data is detected and masked when it is ingested into the log group. When you set a data protection policy, log events ingested to the log group before that time are not masked."* Mechanism: *"CloudWatch Logs data protection allows you to leverage pattern matching and machine learning models to detect sensitive data"*, via **managed data identifiers** for credentials, financial information, PII, PHI and device identifiers, plus custom identifiers. |
+| **Why this is registered as qualifying** | `TD-103-022` states CoBudget's position: *"Redaction is structural, not a filter"*, and it names the rejected alternative as *"a redaction filter that strips known-sensitive patterns on the way out"*, rejected because it *"fails open: it removes what it recognizes and forwards what it does not"*. **CloudWatch Logs data protection is that alternative**, and its own documentation states the fail-open property in two forms: detection is by pattern and model against an enumerated identifier set, and events ingested before the policy exists are never masked. |
+| **What it does not mean** | **This costs CoBudget nothing.** `TD-103-022` puts redaction in the logger's closed typed field set, so the S1 sink cannot carry an unlisted field and the design does not depend on provider masking. The record exists so a later reader does not cite this feature as satisfying `TD-103-022` — it is the mechanism that requirement was written against. `logs:Unmask` is noted because it is a genuinely distinct permission, and would matter if masking were ever relied on. |
 | Re-verify by | February 28, 2027 |
 
 ### EV-102-256 — Azure PostgreSQL Flexible Server states retention, region and expiry for its own backups
@@ -2261,6 +2289,84 @@ to its place here. The line also carries no sentence for tranches 15, 17 or 19;
 that is for whoever maintains it, and this tranche has not written summaries of
 other tranches' work into it.
 
+### 4.33 `OQ-108-034`: the first retrieval in this pass that could let a gate pass
+
+`HG-102-026` has been `UNPROVEN` for all three candidates since CBD-103's
+evaluation, which recorded *"Not retrieved. Two destinations with **distinct
+access roles** is the test, not two destinations."* That warning was the right
+one to carry, and the retrieval was made against it rather than against the
+easier question.
+
+**The test is met on the evidence for C2.** `EV-102-252` establishes that
+CloudWatch Logs scopes IAM to an individual log group two ways: by ARN
+(*"Resource": "arn:aws:logs:us-west-2:123456789012:log-group:SampleLogGroupName"*)
+and by tag (*"grant users access to certain log groups while preventing them from
+accessing other log groups"*). A log group is a distinct destination; access to
+one is grantable independently of the others.
+
+**`TD-103-021` asks for three destinations, not two**, with three access roles
+and three retention policies — reliability, restricted diagnostics, and audit
+evidence. The mechanism reaches three as easily as two, because log groups are
+ordinary resources and `EV-102-249` already records that each carries *"the same
+retention, monitoring, and access control settings"* as a unit. **So CoBudget's
+own arrangement, which is stricter than the gate, is configurable too.**
+
+#### What this is and is not
+
+**It is the first retrieval in twenty-one tranches to produce evidence
+sufficient for a gate to pass rather than evidence that narrows one.** Every
+prior tranche closed by recording what a gate still lacked. This one records
+what a gate has.
+
+**It is not a gate outcome.** `HG-102-026` belongs to CBD-103, and CBD-108 does
+not move gate outcomes — the same position tranche 17 took at §4.28 for the
+C3 database record. What this pass can do is put the evidence in front of the
+package that owns the gate.
+
+**It is not an observation either, and the gate is typed `Config`.** The
+retrieval establishes that the separation is **configurable**. Whether CoBudget
+has configured three destinations with three roles is CoBudget's own work, not
+the provider's, and no document about AWS can discharge it.
+
+**And it covers one candidate of three.** `OQ-103-009` says *"Retrieve for all
+three"*. C1 and C3 are untouched; `OQ-108-037` carries them.
+
+#### The redaction element, which cuts the other way
+
+`HG-102-026`'s **gate statement** names five properties: a separate boundary,
+stronger access control, deliberate rather than continuous capture, redaction,
+and case linkage. Its **pass test** checks two of them. Only the test has been
+answered here.
+
+On redaction specifically, the provider's mechanism is the one CoBudget's own
+design rejects. `EV-102-253` records that CloudWatch Logs data protection works
+by *"pattern matching and machine learning models"* against an enumerated
+identifier set, and that *"log events ingested to the log group before that time
+are not masked"*. `TD-103-022` names exactly this shape as the rejected
+alternative, *"a redaction filter that strips known-sensitive patterns on the way
+out"*, because it *"fails open"*.
+
+**This costs CoBudget nothing**, and the record says so. `TD-103-022` places
+redaction in the logger's closed typed field set, so the S1 sink cannot emit an
+unlisted field and the design never depended on provider masking. The record
+exists so that a later reader does not cite this feature as satisfying
+`TD-103-022`. `OI-108-029`.
+
+#### A pass-test-versus-gate-statement question, not to be settled by analogy
+
+§4.24 recorded a Product Owner ruling that `HG-102-013`'s **pass test governs**
+over its gate statement. `HG-102-026` presents a structurally similar gap —
+five properties named, two tested — and **this pass does not extend the ruling
+to it.**
+
+The `HG-102-013` ruling resolved a specific contradiction, a gate demanding a
+contract against a test admitting written evidence, and §4.24 recorded that the
+contradiction was unique to that row across the whole catalog. **A gate statement
+being broader than its pass test is a different thing** and may well be common,
+since a test is meant to be operable where a statement is meant to be complete.
+Whether the narrower test is sufficient here is a CBD-102 question, and
+`OQ-108-036` puts it rather than assuming the earlier answer transfers.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -2294,8 +2400,10 @@ other tranches' work into it.
 | OQ-108-031 | Does AWS publish any statement about **its own** backups of the platform, as distinct from the resources a customer creates and deletes? | **The only route left that could move `HG-102-013`'s retention and expiry elements for C2.** Eighteen tranches have found nothing suggesting it exists, which is not the same as establishing that it does not |
 | OQ-108-032 | Does `HG-102-013` **apply** to services that hold no provider backup? Its pass test asks for backup retention, region and expiry, and Key Vault, Log Analytics and Service Bus have customer-configured retention of **primary data** instead. | **A second and independent reason to look at the row `OQ-108-027` already questions** — not that its halves disagree, but that both assume a datastore shape four of the five categories do not have. A CBD-102 catalog question |
 | OQ-108-033 | Do **Azure Container Apps** state a retention or expiry position for anything they hold? The fourth C3 hosting component was not retrieved. | Completes `OQ-108-029` for the composition |
-| OQ-108-034 | Does C2's observability surface satisfy **`HG-102-026`** — *"Two distinct destinations with distinct access roles are configurable"* for restricted diagnostic capture versus ordinary telemetry? | **The question about these components that can actually produce a gate outcome**, where retention cannot. Answerable from documentation, and §4.32 explains why it replaces `OQ-108-030` as the thing worth asking |
+| OQ-108-034 | ~~Does C2's observability surface satisfy **`HG-102-026`**?~~ **Answered at §4.33: the pass test is met on the evidence.** CloudWatch Logs scopes IAM to an individual log group by ARN and by tag (`EV-102-252`), so two destinations — or the three `TD-103-021` specifies — with distinct access roles are configurable. | Closed. **The first evidence in this pass sufficient for a gate to pass rather than to narrow.** The outcome is CBD-103's; the gate is typed `Config`, so configuring it is CoBudget's own work. Discharges the C2 third of `OQ-103-009` |
 | OQ-108-035 | What do the per-service documents state for **ECS on Fargate, API Gateway and CloudFront**, the three C2 components not retrieved at tranche 20? | **Inventory value only.** Their data-at-rest story plausibly reduces to CloudWatch Logs (`EV-102-249`), but this pass does not assert what a document says before reading it |
+| OQ-108-036 | Does `HG-102-026`'s **pass test govern its gate statement**, as §4.24 ruled for `HG-102-013`? The statement names a separate boundary, stronger access control, deliberate rather than continuous capture, redaction and case linkage; the test checks two of the five. | **CBD-102 question, deliberately not settled by analogy.** The `HG-102-013` ruling resolved a contradiction unique to that row. A statement broader than its test is a different thing and may be common across the catalog |
+| OQ-108-037 | The same `HG-102-026` retrieval for **C1 and C3**. `OQ-103-009` says *"Retrieve for all three"* and only C2 is done. | Completes the upstream question. Both are `UNPROVEN` on non-retrieval alone, which §4.33 shows is the cheapest kind of `UNPROVEN` to remove |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
@@ -2312,6 +2420,7 @@ other tranches' work into it.
 | OI-108-026 | **The audit validates identifier existence, not appropriateness.** Tranche 13 cited `OQ-108-020` where `OQ-108-023` was meant, twice, and `scripts/audit-cbd-108.py` passed 84/84 both times — the check is membership of the defined set, which a wrong-but-real identifier satisfies. | Recorded as a known limit of the guard rather than a defect to fix: no mechanical check distinguishes a citation that is wrong from one that is right without understanding the claim. **The mitigation is that corrections are cheap when caught in the next tranche**, which is what happened here — §4.25. |
 | OI-108-027 | **This pass has now twice overestimated what its own next step would achieve.** Tranche 14 called the post-ruling position *"materially better"* and the retrieval that followed moved nothing; tranche 2 called C1 *"one retrieval away"* from a `PASS` and tranche 3 removed the prospective `PASS` instead. Five of the seven ledger entries run **against** the claim they correct. | Recorded as a calibration note rather than a finding. **The pass is reliable about what it has retrieved and unreliable about what retrieval will yield next**, and its forward-looking statements should be read with that asymmetry in mind. It is also an argument for continuing to state expectations explicitly, since that is what makes them checkable. |
 | OI-108-028 | **Retention in the C2 set is a property of each service, not of the composition, and two services sit at opposite extremes.** SQS cannot hold a message beyond **14 days** whatever the customer configures; CloudWatch Logs holds **indefinitely** by default and bounds its deletion lag not at all. KMS enforces both a floor and a ceiling; RDS and EventBridge Scheduler enforce neither. | Recorded for the `DI-91-*` inventory and for CBD-105. **A statement about "C2's retention" is not available and should not be attempted** — the honest unit is the service. It also explains why `HG-102-013`, which asks a composition-level question, cannot be satisfied by summing per-service answers. |
+| OI-108-029 | **The provider's redaction mechanism is the one CoBudget's design rejects, and CoBudget does not depend on it.** CloudWatch Logs data protection masks by *"pattern matching and machine learning models"* against an enumerated identifier set, and does not mask events ingested before the policy existed. `TD-103-022` names that shape as the rejected alternative because it *"fails open"*. | Recorded so the feature is **not later cited as satisfying `TD-103-022`** — it is the mechanism that requirement was written against. It costs nothing here because `TD-103-022` puts redaction in the logger's closed typed field set rather than in a filter. The general lesson is that a provider capability matching a requirement **by name** may be the thing the requirement excludes. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | **`EV-102-214` is the first cost record in the corpus whose own source disclaims it.** Register §3.2 requires Documented-or-stronger for a cost figure, and this is Documented — but the page says its figures *"may not reflect the latest Azure pricing."* | Recorded at Low confidence per §3.1 rather than excluded, because a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces, and the disclaimer is quoted so no reader mistakes it for a firm price. If a firm C3 email rate is needed, `OQ-108-004` is the route. |
