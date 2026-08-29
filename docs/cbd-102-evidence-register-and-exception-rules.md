@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. |
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the evidence record and its required fields, the six evidence classes and their confidence mapping, the `UNPROVEN` outcome and the four eligibility verdicts, the staleness and re-verification rules, `EX-102-001`–`007`, the §5.2 non-exceptable gates, and the residual-risk record. It grants no exception and does not close the open items in §8. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Cost Template v1.0 |
 | Confluence page | [CBD-102 — Evidence Register and Exception Rules](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9601048) |
-| Repository baseline | `c689192` |
+| Repository baseline | `df04231` |
 | Last updated | August 18, 2026 |
 
 ## 1. Purpose
@@ -256,3 +256,4 @@ model repeatedly treats undetectable compromise as the more severe case.
 | OI-102-019 | The shelf lives in §4 are judgment. No approved source sets an evidence-currency period. | Reasonable defaults; adjust if evaluation runs long enough for staleness to bite. |
 | OI-102-020 | **Resolved August 16, 2026.** Product Owner confirmed the three non-exceptable gates in §5.2 as complete and correct: `HG-102-056`, `HG-102-028`, and `HG-102-014`. | Closed. Adding to or removing from the list is now itself a Product Owner decision, and `HG-102-004` remains deliberately outside it because `AN-92-007` supplies an amendment path. |
 | OI-102-021 | `EX-102-006` sets the stacking threshold at more than two exceptions. The number is arbitrary. | Adjust if it proves too tight or too loose in CBD-103–107. |
+| OI-102-023 | **Material received under an NDA cannot be recorded the way this register records everything else.** The method is verbatim quotation with a source URL and a retrieval date, and published records synchronize to Confluence; an NDA'd document can be neither quoted nor published. Raised August 22, 2026 when the CBD-15 scope amendment made NDA'd evidence obtainable for the first time. | **Product Owner decision, and it should be taken before the first such document arrives**, because the disposition changes how the document may be read and stored from the moment it is received. Three options are set out in `docs/cbd-107-evidence-request-programme.md` §5: cite without quoting, which weakens a second reader's check; exclude from the register, which leaves a gate outcome resting on something the register does not contain; or record without publishing, which creates a private tier this register has never had. Until it is settled, an NDA may be signed but the resulting document has no agreed home. |
