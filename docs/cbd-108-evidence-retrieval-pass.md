@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** **Tranche 21 answers `OQ-108-034` and discharges the C2 third of the upstream `OQ-103-009`: CloudWatch Logs scopes IAM to an individual log group by ARN and by tag, so two destinations with distinct access roles are configurable and `HG-102-026`'s pass test is met on the evidence. It is the first retrieval in this pass to produce evidence sufficient for a gate to pass rather than evidence that narrows one, and the outcome is CBD-103's to record. It also finds that the provider's redaction mechanism is the one `TD-103-022` rejects, which costs CoBudget nothing because its redaction is structural.** **Tranche 22 completes `OQ-103-009` by putting the same question to C1 and C3, and all three candidates meet `HG-102-026`'s pass test. The gate CBD-103 called the second most likely to eliminate a candidate eliminates none of them, and the evidence block this pass reserved is now exhausted.** **Tranche 23 registers no evidence and answers `OQ-108-027` by synthesis: all three DPAs have now been read, none describes a provider-held backup, and the upstream `OQ-103-024` is answered in the way it feared. Read literally, `HG-102-013` fails every candidate in every category at once. The documentary route on this gate is exhausted and what remains is class `D4`.** **Tranche 24 records the `HG-102-013` amendment the Product Owner made on August 29 (CBD-102 v1.2, §12.1) and re-measures all three candidates against the new pass test from evidence already held. All three still fail, now each on a named component rather than on a definition, and three records change their bearing without changing their content.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.26 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** **Tranche 21 answers `OQ-108-034` and discharges the C2 third of the upstream `OQ-103-009`: CloudWatch Logs scopes IAM to an individual log group by ARN and by tag, so two destinations with distinct access roles are configurable and `HG-102-026`'s pass test is met on the evidence. It is the first retrieval in this pass to produce evidence sufficient for a gate to pass rather than evidence that narrows one, and the outcome is CBD-103's to record. It also finds that the provider's redaction mechanism is the one `TD-103-022` rejects, which costs CoBudget nothing because its redaction is structural.** **Tranche 22 completes `OQ-103-009` by putting the same question to C1 and C3, and all three candidates meet `HG-102-026`'s pass test. The gate CBD-103 called the second most likely to eliminate a candidate eliminates none of them, and the evidence block this pass reserved is now exhausted.** **Tranche 23 registers no evidence and answers `OQ-108-027` by synthesis: all three DPAs have now been read, none describes a provider-held backup, and the upstream `OQ-103-024` is answered in the way it feared. Read literally, `HG-102-013` fails every candidate in every category at once. The documentary route on this gate is exhausted and what remains is class `D4`.** **Tranche 24 records the `HG-102-013` amendment the Product Owner made on August 29 (CBD-102 v1.2, §12.1) and re-measures all three candidates against the new pass test from evidence already held. All three still fail, now each on a named component rather than on a definition, and three records change their bearing without changing their content.** **Tranche 25 answers `OQ-108-040`: the substitute exists and it is worse. FireLens can route ECS logs away from CloudWatch, but S3's expiration states only that *"there may be a delay"* with no bound and no typical figure, where CloudWatch at least gives 72 hours. The unbounded tail is a property of asynchronous deletion rather than of one service, which raises a question about the clause this pass drafted.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.27 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Provider Set Disposition Register v0.20; Cross-Category Coherence Review v0.20; Combined Cost Model v0.20; Carried Item Disposition Register v0.20; Acceptance Criteria Traceability v0.20 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `cc7c04b` |
+| Repository baseline | `2b358e7` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -742,6 +742,34 @@ permits lowering below the class but never raising.
 | Content | Messages carry a time-to-live; *"expires-at-utc"* is *"enqueued-time-utc + time-to-live"*. Entity-level default expiration is *"the largest possible value for a signed 64-bit integer"* on standard and premium tiers, and *"14 days"* on basic. Expired messages are either dead-lettered or, *"If you leave the option disabled, expired messages are dropped."* The broker *"might choose to lazily expire these messages"*, so removal is not instantaneous. |
 | **Negative finding** | **No provider-side backup of Service Bus messages is described anywhere on the page.** Messages persist until consumed or expired; nothing states that Azure retains a copy beyond that. |
 | Limitations | Establishes the expiry model for messages. It does not address namespace metadata, which geo-disaster-recovery features handle separately and which was not retrieved. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-260 — FireLens routes ECS logs away from CloudWatch Logs, on Fargate
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **lifetime element**, composition question for C2, category **H** (`OQ-108-040`) |
+| Provider / category | Amazon Web Services (C2) / H |
+| Source | *"Send Amazon ECS logs to an AWS service or AWS Partner"*, `https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"You can use FireLens for Amazon ECS to use task definition parameters to route logs to an AWS service or AWS Partner Network (APN) destination for log storage and analytics."* It *"works with Fluentd and Fluent Bit"*. Firehose is named as a destination in the permissions example: *"if a container is routing logs to Firehose, the task requires permission to call the `firehose:PutRecordBatch` API"*. Support: *"FireLens for Amazon ECS is supported for tasks that are hosted on both AWS Fargate on Linux and Amazon EC2 on Linux."* |
+| **What it establishes** | **CloudWatch Logs is avoidable for the ECS on Fargate portion of the C2 composition.** The composition-change remedy that closed C1's edge gap at tranche 15 is therefore **available** here in principle. Whether it helps is `EV-102-261`. |
+| Limitations | Covers **task container logs** routed through the log router. It does not establish that every C2 component can avoid CloudWatch Logs — API Gateway, RDS and others emit to it natively, and this record asserts nothing about them. It also does not establish where the FireLens container's **own** logs go; the page does not say, and the absence is not read as reassurance. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-261 — S3 states an unbounded expiration delay, and states it more weakly than CloudWatch Logs
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **lifetime element** for C2, category **H** — **negative record** (`OQ-108-040`) |
+| Provider / category | Amazon Web Services (C2) / H |
+| Source | *"Expiring objects"*, `https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-expire-general-considerations.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | Mechanism: on a nonversioned bucket, *"Amazon S3 queues the object for removal and removes it asynchronously, permanently removing the object."* Timing: **"There may be a delay between the expiration date and the date at which Amazon S3 removes an object."** Tag-based rules are evaluated *"daily"* and queued *"for asynchronous processing"*. |
+| **Why the substitute is worse** | `EV-102-249` records CloudWatch Logs deleting *"up to 72 hours"* after the retention setting, *"but in rare situations might take longer"* — a typical figure with an unbounded tail. **S3 gives no figure at all.** *"There may be a delay"* states the existence of a lag and bounds it nowhere, so routing logs from CloudWatch to S3 **replaces a partly-bounded statement with an entirely unbounded one**. |
+| Limitations | Concerns lifecycle **expiration**, not an explicit `DeleteObject` call, and says nothing about how long AWS retains an object after an immediate delete. Establishes the documented position, not observed behaviour. |
 | Re-verify by | February 28, 2027 |
 
 ## 4. What the records establish
@@ -2648,6 +2676,84 @@ front of the packages that own the gate, not a verdict. `OQ-108-039` remains
 live, because all three candidates still fail and the `EX-102` route is still
 the only way onward if that stands.
 
+### 4.37 `OQ-108-040`: the substitute exists, and it is worse
+
+The question was whether C2's lifetime failure could be removed by composition
+change, as C1's edge gap was at tranche 15. **It cannot, and the reason is more
+interesting than a simple no.**
+
+**The substitution is available.** `EV-102-260` establishes that FireLens routes
+ECS task logs *"to an AWS service or AWS Partner Network (APN) destination"* on
+Fargate, so CloudWatch Logs is not compulsory for the container tier.
+
+**And the destination is worse.** `EV-102-261` records S3's expiration timing:
+*"There may be a delay between the expiration date and the date at which Amazon
+S3 removes an object."* That is the whole statement — no typical figure, no
+bound. CloudWatch Logs at least says *"up to 72 hours"* before conceding it
+*"might take longer"*.
+
+| | Typical figure | Bound |
+| --- | --- | --- |
+| **CloudWatch Logs** (`EV-102-249`) | *"up to 72 hours"* | None — *"might take longer"* |
+| **S3 lifecycle** (`EV-102-261`) | **None given** | **None** |
+
+**Swapping the sink trades a partly-bounded statement for an entirely unbounded
+one.** The composition remedy that worked for C1's load balancer does not
+transfer.
+
+#### The tail is a property of asynchronous deletion, not of one service
+
+Set the four AWS deletion statements this pass has retrieved side by side:
+
+| Service | Deletion model | Bound stated |
+| --- | --- | --- |
+| **KMS** (`EV-102-246`) | Scheduled, per key, on a waiting period | **Yes** — 7—30 days, provider-enforced |
+| **SQS** (`EV-102-250`) | Per message, on TTL | **Yes** — 14 days maximum |
+| **CloudWatch Logs** (`EV-102-249`) | Bulk, asynchronous | **No** — typical only |
+| **S3** (`EV-102-261`) | Bulk, asynchronous, queued | **No** — not even typical |
+
+**Services that delete on a schedule state bounds; services that delete in bulk
+asynchronously do not.** That is a coherent engineering position rather than an
+oversight — a queue drained at scale has no per-object deadline to promise
+— and it means the gap is structural for the storage tier rather than a
+CloudWatch defect. `OI-108-033`.
+
+#### This raises a question about the clause this pass drafted
+
+The amended `HG-102-013` says **"a stated bound with an unbounded tail fails"**.
+That wording came from this document, on the strength of `EV-102-249`, and the
+Product Owner adopted it.
+
+**It now appears to fail AWS's asynchronous storage deletion generally**, not
+one badly-worded page. And the obvious follow-up has not been retrieved: **do
+Google Cloud Storage and Azure Blob Storage say the same thing?** Bulk
+asynchronous deletion is not an AWS invention, and if all three hyperscalers
+describe it the same way, **the clause recreates the failure mode the amendment
+was made to remove** — a gate that fails every candidate for a reason that is
+about how cloud storage works rather than about any provider's diligence.
+
+`OQ-108-043` puts that retrieval, and it should be made **before** the six
+evaluations re-measure against the amended text, because the answer changes what
+they would be re-measuring against.
+
+**This is the second concern raised about the amended wording in two tranches**,
+after `OQ-108-041`'s twelve-year ceiling. Both come from the pass that proposed
+the wording, and both are recorded rather than quietly worked around. The
+amendment is still a large improvement on a test that failed everyone for asking
+about an artifact providers do not name — but *"unbounded tail fails"* is a
+sharper instrument than it looked when drafted, and it is worth knowing where it
+cuts before the evaluations harden around it.
+
+#### What is left for C2 on this element
+
+Three routes, and none is a retrieval this pass can make:
+
+1. **Accept under `EX-102`**, with the consequences §4.35 records —
+   `CONDITIONAL`, not `PASS`, expiring at 12 months.
+2. **Ask AWS to bound it.** Class `D4`, the class no reading closes, and the
+   same answer `OQ-103-011` reached about this gate before the pass began.
+3. **Revisit the clause**, via `OQ-108-042` and `OQ-108-043`.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -2687,8 +2793,10 @@ the only way onward if that stands.
 | OQ-108-037 | ~~The same `HG-102-026` retrieval for **C1 and C3**.~~ **Done at §4.34, and all three candidates meet the pass test.** C1 by log views and `roles/logging.viewAccessor` (`EV-102-254`); C3 by per-table RBAC, protected tables and Privileged Monitoring Data Reader (`EV-102-255`). | Closed, and **completes the upstream `OQ-103-009`**. The finding is the non-result: the gate CBD-103 called *"the second gate most likely to eliminate a candidate"* **eliminates none of them**, so on its pass test it does no selection work. Raises `OQ-108-038`, `OI-108-030` |
 | OQ-108-038 | Does a **broader project-level Google Cloud logging role override a log-view restriction**? `EV-102-254` found no statement either way, and an absence is not a reassurance. | **Whether C1's separation actually holds.** C2's equivalent limitation is recorded (`StopQuery`, `StopLiveTail`) and C3's is recorded (inherited read actions defeat a table `NonAction`); C1's is simply unknown, which makes it the thinnest of the three records rather than the cleanest |
 | OQ-108-039 | If `HG-102-013` is read literally and fails all three candidates, does the `EX-102-001`—`007` exception route leave CBD-15 with a selectable set? `EX-102-003` keeps every provider **`CONDITIONAL`** and `EX-102-004` expires the exception at 12 months or end of Private MVP. | **The consequential question nobody has asked.** An exception is a way to proceed, not a way to pass, and it would put the whole shortlist on the same conditional footing with a dated reversion to `INELIGIBLE` |
-| OQ-108-040 | Can C2's lifetime failure be removed by **composition change**, as C1's edge gap was at tranche 15? It rests on **CloudWatch Logs**, whose deletion lag is *"up to 72 hours… but in rare situations might take longer"* and whose default retention is indefinite (`EV-102-249`). | **CBD-103's question, not this pass's.** Unlike C1's load balancer, the observability sink may have no substitute inside AWS — and the tail is provider-side, so configuring retention does not reach it |
+| OQ-108-040 | ~~Can C2's lifetime failure be removed by composition change?~~ **Answered at §4.37: no, and the substitute is worse.** FireLens can route ECS logs off CloudWatch (`EV-102-260`), but S3 states only *"There may be a delay between the expiration date and the date at which Amazon S3 removes an object"* — no figure, no bound, where CloudWatch at least gives 72 hours (`EV-102-261`). | Closed. **The tail is a property of asynchronous bulk deletion, not of one service** — `OI-108-033`. Raises `OQ-108-042` and `OQ-108-043` about the amended clause |
 | OQ-108-041 | Does a **twelve-year ceiling** satisfy what `HG-102-013` is for? `EV-102-258` records Log Analytics capping total retention at *"up to 12 years (4,383 days)"*, which is a ceiling the customer cannot raise and therefore passes the amended test **as written**. | **A weakness in wording this pass proposed.** The amended test asks whether a ceiling exists, not whether it is proportionate. CBD-102's to decide whether that is the intent |
+| OQ-108-042 | Does the amended test's **"a stated bound with an unbounded tail fails"** clause fail AWS's asynchronous storage deletion **generally**, and is that the intent? | **A concern about wording this pass proposed and the Product Owner adopted.** Pairs with `OQ-108-041`; both should be settled together, and both are CBD-102's |
+| OQ-108-043 | Do **Google Cloud Storage and Azure Blob Storage** describe bulk deletion the same way AWS does? Neither has been retrieved. | **Decides whether the clause recreates the failure mode the amendment removed.** If all three hyperscalers state an unbounded asynchronous deletion lag, the gate again fails every candidate for a reason about how cloud storage works rather than about any provider. **Retrieve before the six evaluations re-measure** |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
@@ -2709,6 +2817,7 @@ the only way onward if that stands.
 | OI-108-030 | **The C3 mechanism that best satisfies `HG-102-026` is the one whose licensing cost is unresolved.** Privileged Monitoring Data Reader *"works with Microsoft Entra Privileged Identity Management (PIM) for time-bound and just-in-time access"*, and `OQ-108-009` records that neither the necessity of PIM nor the per-seat cost of Entra ID P2 has been established. | Recorded so a comparison does not credit C3's advantage on this dimension while leaving its price in a different document. **The same feature appears as a strength in category H and as an unpriced dependency in categories H and I**, and `CR0` prices the cheapest gate-clearing configuration, not the cheapest one. |
 | OI-108-031 | **The documentary route on `HG-102-013` is exhausted.** Every named document has been retrieved — three DPAs, two sets of service terms, a customer agreement, and the per-service documentation two of them defer to. `OQ-103-011` predicted this before the pass began: *"Must be asked explicitly; will not be found in public documentation."* | Confirmed rather than overturned. **What remains on this gate is class `D4`**, which the carried-item register describes as the class no amount of reading closes. Recorded as a boundary: this pass has been productive because `D3` was cheap and undriven, and on this gate that seam is worked out. It does not generalise — `D3` elsewhere is untouched. |
 | OI-108-032 | **Three records changed their bearing on `HG-102-013` without changing their content**, because the gate was amended under them. `EV-102-250`'s SQS ceiling went from *"`HG-102-013` is not in play"* to positive evidence; `EV-102-249`'s CloudWatch tail went from a curiosity to the clause C2 fails on; `EV-102-247`'s bypassable minimum went largely moot, the amended test asking about ceilings rather than floors. | **Explicitly not a correction, and not in the ledger.** A record whose relevance moves because the standard moved is a different event from a claim that was wrong when made, and collapsing the two would make `OI-108-027`'s calibration meaningless. Recorded because a re-read of tranche 20 against the current catalog would otherwise look like an error. |
+| OI-108-033 | **AWS states deletion bounds where deletion is scheduled and not where it is bulk and asynchronous.** KMS (7—30 days) and SQS (14 days) both state provider-enforced bounds; CloudWatch Logs gives a typical figure and no bound, and S3 gives *"There may be a delay"* and nothing else. | Recorded because it reframes C2's failure. **This is a coherent engineering position rather than an oversight** — a queue drained at scale has no per-object deadline to promise — which means the gap is structural for the storage tier and not a defect one provider could be asked to fix. It also predicts that C1 and C3 will say something similar, which `OQ-108-043` tests. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | **`EV-102-214` is the first cost record in the corpus whose own source disclaims it.** Register §3.2 requires Documented-or-stronger for a cost figure, and this is Documented — but the page says its figures *"may not reflect the latest Azure pricing."* | Recorded at Low confidence per §3.1 rather than excluded, because a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces, and the disclaimer is quoted so no reader mistakes it for a firm price. If a firm C3 email rate is needed, `OQ-108-004` is the route. |
