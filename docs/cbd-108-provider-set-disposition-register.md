@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.9 |
+| Document version | 0.10 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.9; Combined Cost Model v0.9; Carried Item Disposition Register v0.9; Acceptance Criteria Traceability v0.9; Evidence Retrieval Pass v0.9 |
+| Companions | Cross-Category Coherence Review v0.10; Combined Cost Model v0.10; Carried Item Disposition Register v0.10; Acceptance Criteria Traceability v0.10; Evidence Retrieval Pass v0.10 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `ee5eb99` |
+| Repository baseline | `a24161e` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
