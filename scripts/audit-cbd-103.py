@@ -59,9 +59,9 @@ CBD_102_FILES = (CATALOG, RUBRIC, DEMAND, COST, EVIDENCE)
 # document so an amended file cannot quietly keep its predecessor's baseline.
 REPOSITORY_BASELINE: dict[Path, str] = {
     TOPOLOGY: "5745587",
-    EVALUATION: "c689192",
+    EVALUATION: "d381bab",
     OPERATIONAL: "5745587",
-    TRACE: "c689192",
+    TRACE: "d381bab",
 }
 
 # The categories CBD-103 evaluates: cross-category plus hosting. A gate in any
