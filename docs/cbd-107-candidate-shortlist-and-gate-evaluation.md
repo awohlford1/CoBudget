@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to U.S. financial-data aggregators. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why. **v1.4 records the `OI-102-023` decision of August 29, 2026: material received under an NDA does not enter the evidence register and supports no finding, so an NDA-gated route cannot close a gate in this category whatever it supplies.** `OQ-107-024` is amended accordingly. No gate outcome, verdict, tally, price or `FC-107-*` decision changes. |
-| Document version | 1.4 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to U.S. financial-data aggregators. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why. **v1.4 records the `OI-102-023` decision of August 29, 2026: material received under an NDA does not enter the evidence register and supports no finding, so an NDA-gated route cannot close a gate in this category whatever it supplies.** `OQ-107-024` is amended accordingly. **v1.5 moves the companion reference only, after the traceability record closed `OI-107-021`.** No gate outcome, verdict, tally, price or `FC-107-*` decision changes. |
+| Document version | 1.5 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.4 |
+| Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.5 |
 | Confluence page | [CBD-107 — Financial-Data Connectivity Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13533185) |
-| Repository baseline | `717f143` |
-| Last updated | August 22, 2026 |
+| Repository baseline | `9aabc13` |
+| Last updated | August 29, 2026 |
 
 ## 1. Purpose
 
