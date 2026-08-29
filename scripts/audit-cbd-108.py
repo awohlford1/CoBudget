@@ -51,11 +51,12 @@ COHERENCE = Path("docs/cbd-108-cross-category-coherence-review.md")
 COST = Path("docs/cbd-108-combined-cost-model.md")
 CARRIED = Path("docs/cbd-108-carried-item-disposition-register.md")
 TRACE = Path("docs/cbd-108-acceptance-criteria-traceability.md")
+RETRIEVAL = Path("docs/cbd-108-evidence-retrieval-pass.md")
 
-PACKAGE_FILES = (DISPOSITION, COHERENCE, COST, CARRIED, TRACE)
+PACKAGE_FILES = (DISPOSITION, COHERENCE, COST, CARRIED, TRACE, RETRIEVAL)
 
 # The commit each document was written against.
-REPOSITORY_BASELINE = {path: "`a969942`" for path in PACKAGE_FILES}
+REPOSITORY_BASELINE = {path: "`ec62d9a`" for path in PACKAGE_FILES}
 
 SOURCE_PACKAGES = ("103", "104", "105", "106", "107", "130")
 
@@ -340,11 +341,38 @@ def main() -> int:
         ),
         "EV-102",
     )
+    # Records CBD-108 registers itself, defined by a heading in the retrieval
+    # pass. They are legitimate citation targets alongside the inherited ones.
+    own_records = {
+        m.group(1)
+        for m in re.finditer(r"^### (EV-102-\d{3}) ", texts[RETRIEVAL], re.M)
+    }
     cited_ev = referenced_ids(joined, "EV-102")
     audit.check(
-        cited_ev <= evidence_records,
-        f"EV-102 references not registered in any source package: "
-        f"{sorted(cited_ev - evidence_records)}",
+        cited_ev <= evidence_records | own_records,
+        f"EV-102 references neither inherited nor registered here: "
+        f"{sorted(cited_ev - evidence_records - own_records)}",
+    )
+    # The block collision scripts/audit-cbd-105.py was corrected for: every
+    # number this package registers must sit above everything the corpus holds.
+    if own_records:
+        highest_inherited = max(int(r[-3:]) for r in evidence_records)
+        lowest_own = min(int(r[-3:]) for r in own_records)
+        audit.check(
+            lowest_own > highest_inherited,
+            f"CBD-108 registers EV-102-{lowest_own:03d}, at or below the "
+            f"highest number already held, EV-102-{highest_inherited:03d}",
+        )
+
+    own_oq = {
+        m.group(1)
+        for text in texts.values()
+        for m in re.finditer(r"^\|\s*(OQ-108-\d{3})\s*\|", text, re.M)
+    }
+    audit.check(
+        referenced_ids(joined, "OQ-108") <= own_oq,
+        "OQ-108 references cited but never defined: "
+        f"{sorted(referenced_ids(joined, 'OQ-108') - own_oq)}",
     )
 
     # --- this package's own identifiers -----------------------------------
@@ -378,6 +406,10 @@ def main() -> int:
     audit.check(
         "cannot be produced" in texts[COST],
         "cost model: must state that no combined total can be produced",
+    )
+    audit.check(
+        "no gate outcome" in texts[RETRIEVAL],
+        "retrieval pass: must state that it moves no gate outcome",
     )
 
     print(f"CBD-108 documentation audit: {audit.checks} checks")

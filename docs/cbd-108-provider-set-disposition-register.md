@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.2 |
+| Document version | 0.3 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.2; Combined Cost Model v0.2; Carried Item Disposition Register v0.2; Acceptance Criteria Traceability v0.2 |
+| Companions | Cross-Category Coherence Review v0.3; Combined Cost Model v0.3; Carried Item Disposition Register v0.3; Acceptance Criteria Traceability v0.3; Evidence Retrieval Pass v0.3 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `a969942` |
+| Repository baseline | `ec62d9a` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -101,7 +101,7 @@ been shown to have.
 | 1 | **H** — Hosting | **Blocked** | Route-A observation pass unperformed (10 tests); no price retrieved for any candidate; `HG-102-013` `UNPROVEN` for all three |
 | 2 | **I** — Identity | **Blocked** | Route-A observation pass unperformed (9 tests); `OQ-104-008` unresolved, which moves C4's price by an unbounded amount |
 | 3 | **D** — PostgreSQL | **Blocked** | Route-A observation pass unperformed (8 tests); no price retrieved; C3 custody questions at `OI-105-009` unanswered |
-| 4 | **E** — Email | **Blocked** | Route-A observation pass unperformed (11 tests, requiring live sending); no price retrieved; C3 suppression list in preview without an SLA (`OI-106-010`) |
+| 4 | **E** — Email | **Blocked** | Route-A observation pass unperformed (11 tests, requiring live sending); C3 suppression list in preview without an SLA (`OI-106-010`). **The price gap is closed** — see §4.4 |
 | 5 | **F** — Financial connectivity | **Blocked, and doubly** | Route-A observation pass unperformed (9 tests); **and** the documentary gap is now constrained by `OI-102-023` — §4.5 |
 | 6a | **N** — SMS | **Blocked** | Route-A observation pass unperformed; field reduced to two by C10's `INELIGIBLE` verdict |
 | 6b | **N** — Push | **Deferred** | **No selection exists to make** — §4.6 |
@@ -170,6 +170,15 @@ guardrail the route-A authorization imposes: destinations must be mailboxes
 CoBudget controls, and no live customer address appears in an evaluation
 account.
 
+**This category's price gap is closed**, and it is the only one where that is
+true. The retrieval pass of August 29, 2026 registered `EV-102-212`–`215`: at
+Base, **C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00`** per month. It also
+falsified CBD-106 §5.1's hypothesis — Base volume of 250 messages sits inside
+**none** of the three candidates' allowances. The disposition does not change,
+because `CR3` prevents cost from selecting and eleven observation-bound tests
+remain, but the ~250× spread is now a known input rather than an unknown, and it
+prices the standalone option a C1 hosting selection would force.
+
 `OI-106-010` records that C3's suppression list is in public preview without a
 service-level agreement while `ED-106-003` depends on suppression working. Not a
 `FAIL` — the capability is documented — but a preview dependency in a
@@ -236,9 +245,10 @@ Two facts block the numbers, both recorded upstream rather than discovered here:
 
 * **`OI-102-017` — no budget ceiling exists.** No approved source sets one, so
   cost cannot exclude a provider in any category.
-* **Prices are `UNKNOWN` in five of six categories.** Only identity carries
-  retrieved figures, and two of its three totals depend on unresolved tier
-  questions (CBD-104 §6.6).
+* **Prices are `UNKNOWN` in four of six categories.** Identity and email carry
+  retrieved figures; two of identity's three totals depend on unresolved tier
+  questions (CBD-104 §6.6), and email's C3 rate is held at Low confidence on the
+  vendor's own disclaimer.
 
 | Element | Position |
 | --- | --- |

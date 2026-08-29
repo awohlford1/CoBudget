@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Three of seven acceptance criteria are met, three partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.2 |
+| Document version | 0.3 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.2; Cross-Category Coherence Review v0.2; Combined Cost Model v0.2; Carried Item Disposition Register v0.2 |
+| Companions | Provider Set Disposition Register v0.3; Cross-Category Coherence Review v0.3; Combined Cost Model v0.3; Carried Item Disposition Register v0.3; Evidence Retrieval Pass v0.3 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `a969942` |
+| Repository baseline | `ec62d9a` |
 | Last updated | August 29, 2026 |
 
 ## 1. Package contents
@@ -21,8 +21,9 @@
 | `docs/cbd-108-cross-category-coherence-review.md` | The `OI-103-011` review: seven assumption dimensions, the hosting constraint chain, subprocessor concentration, outage, support, lock-in, and six named incoherent combinations |
 | `docs/cbd-108-combined-cost-model.md` | The complete demand side, the empty price side, the cliffs, and the retrieval list that would close it |
 | `docs/cbd-108-carried-item-disposition-register.md` | All 227 carried open questions and items, classified, with none closed by silence |
+| `docs/cbd-108-evidence-retrieval-pass.md` | Evidence obtained against the `D3` carried items, registered in block `EV-102-212`+ |
 | `docs/cbd-108-acceptance-criteria-traceability.md` | This record |
-| `scripts/audit-cbd-108.py` | Mechanical guard over carried-item completeness, class derivation, restated verdicts, and identifier resolution |
+| `scripts/audit-cbd-108.py` | Mechanical guard over carried-item completeness, class derivation, restated verdicts, identifier resolution, and the `EV-102` block this package claims |
 
 The status vocabulary is the one CBD-103's traceability record §2 defined:
 **Met**, **Met (design)**, **Partially met** — with no criterion marked Met on a
@@ -101,7 +102,8 @@ a single-ecosystem set across five categories while the third does not.
 | Stop threshold | **Cannot be set** |
 
 Two blockers, both recorded upstream: `OI-102-017` (no budget ceiling exists)
-and `UNKNOWN` prices in five of six categories. `OI-108-002` and `OI-108-013`
+and `UNKNOWN` prices in four of six categories — **down from five**, because the
+retrieval pass priced category E on August 29, 2026. `OI-108-002` and `OI-108-013`
 record it. Cost model §7 lists the retrievals that would close the price side —
 and notes that even a complete price side leaves the thresholds unset without a
 ceiling.
@@ -232,3 +234,4 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | --- | --- | --- |
 | 0.1 | August 29, 2026 | Initial draft package. Issues the CBD-108 decision package on the evidence that exists: seven dispositions across six categories with **zero selected**, the `OI-103-011` coherence review with one live contradiction and five conditional ones, a cost model with a complete demand side and an empty price side, and a carried-item register holding all **227** open questions and items with completeness enforced by `scripts/audit-cbd-108.py`. **No verdict, gate outcome, rubric score, evidence record or price moves anywhere.** |
 | 0.2 | August 29, 2026 | Closes `OI-108-005`. The three incorrect Jira blocking links from CBD-77, CBD-78 and CBD-79 were removed on August 29, 2026 and the removal was verified against the live issue: eight links remain, all seven inbound blockers are `Done`, and the outbound link to CBD-120 is intact. **CBD-108 is no longer blocked by anything in Jira.** Recorded in §4.2 and in the disposition register's open items. The whole package moves to v0.2 because its documents cite each other by version and it is one unapproved draft; the coherence review, cost model and carried-item register carry no content change at this version. **No disposition, gate outcome, verdict, rubric score, evidence record or price changes, and the route-A observation pass remains unperformed.** |
+| 0.3 | August 29, 2026 | Adds `docs/cbd-108-evidence-retrieval-pass.md`, tranche 1 of the `D3` retrieval work `OI-108-017` records as unowned. Six evidence records in a new block `EV-102-212`–`217`, above CBD-103's reservation. **Closes `OQ-106-010`** and prices category E for the first time — C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` per month at Base — and **falsifies CBD-106 §5.1's hypothesis** that Base volume sits inside every candidate's allowance: it sits inside none of the three. Partially answers `OQ-104-016`, confirming the *"first 50,000 monthly active users"* allowance verbatim while leaving unproven that Conditional Access sits inside *"core features"*, so CBD-104 §6.6's `$0.00` for C3 still rests on an unconfirmed premise. Raises `OQ-108-001`–`004` and `OI-108-019`–`021`. **No gate outcome, verdict, rubric score or disposition changes, and no provider was contacted.** |

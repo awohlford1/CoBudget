@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in five of the six categories and cost rule `CR4` forbids recording an unknown price as zero. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.2 |
+| Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in four of the six categories and cost rule `CR4` forbids recording an unknown price as zero. v0.3 records the first category to move: **category E is now priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
+| Document version | 0.3 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.2; Cross-Category Coherence Review v0.2; Carried Item Disposition Register v0.2; Acceptance Criteria Traceability v0.2 |
+| Companions | Provider Set Disposition Register v0.3; Cross-Category Coherence Review v0.3; Carried Item Disposition Register v0.3; Acceptance Criteria Traceability v0.3; Evidence Retrieval Pass v0.3 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `a969942` |
+| Repository baseline | `ec62d9a` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -25,7 +25,7 @@ than discovered here.**
 A cost model has two sides. The demand side — how much CoBudget will consume —
 is **complete, approved, and stated at all three scenarios** in the CBD-102
 demand model. The price side — what each candidate charges for that consumption
-— is **`UNKNOWN` in five of six categories**.
+— is **`UNKNOWN` in four of six categories**.
 
 Multiplying a complete quantity by an unknown rate does not produce an estimate.
 It produces a number with no evidence record behind it, in a document whose only
@@ -48,12 +48,18 @@ same conclusion: *"Producing estimates would therefore create figures with no
 evidence record behind them, in a document whose purpose is to make cost
 comparable."* This document applies it to all six.
 
-**One category is different.** CBD-104 retrieved identity prices, and §6.6 states
+**Two categories are different.** CBD-104 retrieved identity prices, and §6.6 states
 them carefully: at Base demand, **C2 `$0.00 + unknowns`, C3 `$0.00 + unknowns`,
 C4 `≥ $35.00/month`**. Two of those three totals depend on unresolved tier
 questions, and the third carries the sharpest cliff in the set — `OQ-104-008`,
 which could move C4 to an unbounded contact-sales Enterprise tier. **They are a
 starting position, not a settled comparison** (`OI-104-013`).
+
+**Category E was priced by this package on August 29, 2026** — see the evidence
+retrieval pass §4.2, on records `EV-102-212`–`215`. At Base, **C2 `$0.04`, C3
+`$0.06 + data`, C5 `$15.00`** per month. That pass also **falsified** CBD-106
+§5.1's hypothesis that Base volume sits inside every candidate's included
+allowance: it sits inside none of the three.
 
 ## 3. The demand side, which is complete
 
@@ -87,12 +93,14 @@ category where the metering question is as consequential as the rate.
 | **H** — Hosting | **No** | CBD-103 §6.1 — no price retrieved for any of C1, C2, C3. Cost record structure recorded with unknowns marked |
 | **I** — Identity | **Partially** | The only category with figures. Two of three totals carry unresolved tier risk — CBD-104 §6.6 |
 | **D** — PostgreSQL | **No** | `CT-102-006` recorded as `UNKNOWN × 0.4 GB Base` |
-| **E** — Email | **No** | `CT-102-006` recorded as `UNKNOWN × 250 Base`; `OQ-106-010` names the retrieval |
+| **E** — Email | **Yes** — August 29, 2026 | Retrieved by this package: `EV-102-212`–`215`. C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` at Base. C3's rate carries the vendor's own *"illustrative purposes"* disclaimer and is held at Low confidence |
 | **F** — Financial connectivity | **No** | `OQ-107-020` records that this category **requires provider contact** — reading will not close it |
 | **N** — Push and SMS | **No** | `CT-102-006` recorded as `UNKNOWN × 60 segments Base` |
 
-**A combined total therefore has one partially-known term out of six.** There is
-no honest way to present that as a low/base/high range.
+**A combined total therefore has two known-ish terms out of six**, and four
+`UNKNOWN`. There is still no honest way to present that as a low/base/high
+range — but the position has moved for the first time, and §7's list is one item
+shorter.
 
 ## 5. What is known without prices
 
@@ -147,9 +155,10 @@ In the order that produces the most per unit of effort:
    is the bulk of the model and it is ordinary desk work.
 2. **`OQ-104-008` and `OQ-103-019`** — the two tier questions whose answers move
    figures by more than the rates do.
-3. **`OQ-106-010`** — the included monthly allowance for each email candidate.
-   CBD-106 §5.1's hypothesis, that Base volume sits inside every candidate's
-   allowance, is checkable in one page per candidate.
+3. ~~**`OQ-106-010`** — the included monthly allowance for each email
+   candidate.~~ **Done, August 29, 2026.** One page per candidate, exactly as
+   CBD-106 §5.1 predicted the effort would be. The hypothesis it tested turned
+   out to be false for all three candidates — retrieval pass §4.1.
 4. **`OQ-107-020`** — category F pricing, which **requires provider contact**,
    and which must also settle the per-account versus per-connection metering
    question from §3.
@@ -160,7 +169,8 @@ In the order that produces the most per unit of effort:
 Items 1–3 are desk retrievals and would move five of six categories from
 `UNKNOWN` to a comparable figure. **The cost model is the least
 evidence-blocked deliverable in CBD-108 and the one closest to being
-completable.**
+completable** — and item 3 took a single sitting, which is evidence for that
+claim rather than an assertion of it.
 
 ## 8. Open items
 
