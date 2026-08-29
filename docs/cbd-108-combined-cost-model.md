@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.30 |
+| Document version | 0.31 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.30; Cross-Category Coherence Review v0.30; Carried Item Disposition Register v0.30; Acceptance Criteria Traceability v0.30; Evidence Retrieval Pass v0.30 |
+| Companions | Provider Set Disposition Register v0.31; Cross-Category Coherence Review v0.31; Carried Item Disposition Register v0.31; Acceptance Criteria Traceability v0.31; Evidence Retrieval Pass v0.31 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `2d23f3e` |
+| Repository baseline | `471f0de` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -108,6 +108,12 @@ category where the metering question is as consequential as the rate.
 `UNKNOWN`. There is still no honest way to present that as a low/base/high
 range — but the position has moved for the first time, and §7's list is one item
 shorter.
+
+### 4.1 The price side is blocked asymmetrically, not uniformly — added at v0.31
+
+Retrieval attempts across tranches 28 and 29 did not fail evenly. **AWS list prices have retrieved on every attempt.** **Google's have failed six times**, across support tiers (four URLs, `EV-102-266`) and Cloud KMS (`EV-102-268`, where the documentation domain redirects to the marketing domain, so the two routes are one). **Azure's render structure but never figures** — Key Vault shows *"$- per key per month"* (`EV-102-267`) exactly as Communication Services showed *"$-/Email sent"* (`EV-102-215`).
+
+**This changes what completing §4 requires.** It is not one more retrieval pass. For C1 and C3 the remaining route is a signed-in pricing calculator or a quote (`OQ-108-050`), which no amount of public reading substitutes for. It also means **a comparison drawn today would favour C2 by legibility rather than by price**, which `OI-108-037` records so the cost model is not read that way. Retrieval pass §4.41.
 
 ## 5. What is known without prices
 
