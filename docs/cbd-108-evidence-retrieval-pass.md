@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.16 |
+| Document version | 0.17 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Provider Set Disposition Register v0.16; Cross-Category Coherence Review v0.16; Combined Cost Model v0.16; Carried Item Disposition Register v0.16; Acceptance Criteria Traceability v0.16 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `93429d5` |
+| Repository baseline | `93429d5` (tranche 15 stacks on the unmerged tranche 14) |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -512,6 +512,20 @@ permits lowering below the class but never raising.
 | Content | {S}2.3 is headed *"Your Security and Backup"*: *"You are responsible for properly configuring and using the Services and otherwise taking appropriate action to secure, protect and backup your accounts and Your Content in a manner that will provide appropriate security and protection, which might include use of encryption to protect Your Content from unauthorized access and routinely archiving Your Content."* |
 | **What it adds** | A **second instrument** making the allocation `EV-102-240` found at DPA {S}5.2 and {S}8. Two AWS contracts now assign backup and archiving to the customer, in a section the Customer Agreement titles *"Your Security and Backup"*. `EV-102-240`'s finding {D} that for C2 the retention and expiry elements fail by **allocation** rather than by silence {D} rests on two independent instruments rather than one. |
 | Limitations | **Corroborates; moves nothing.** Register {S}3.1 is explicit that repetition is not corroboration for *confidence*, and this record does not raise `EV-102-240`'s. What it establishes is that the allocation is the settled position of the AWS contract set rather than a feature of one document. It does not establish that AWS holds no backups, only that no AWS instrument read so far undertakes anything about them. |
+| Re-verify by | Contract term or amendment |
+
+### EV-102-245 — Front Door is absent from the Azure Core Services list; Logic Apps is present, inside the App Service entry
+
+| Field | Content |
+| --- | --- |
+| Claim | Scope condition on `EV-102-237`, for C3, category **X** (`OQ-108-023`) |
+| Provider / category | Microsoft Azure (C3) / X |
+| Source | *"Privacy & Security Terms"*, `https://www.microsoft.com/licensing/terms/product/PrivacyandSecurityTerms/all`, **Core Online Services → Microsoft Azure Core Services** |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | **Contractual** / Medium |
+| Content | A targeted re-read of the same list `EV-102-241` enumerated, asking only whether two named services appear. **Azure Front Door: absent.** Neither *"Azure Front Door"* nor *"Front Door"* appears. **Logic Apps: present**, not under its own name but within the entry *"App Service (API Apps, Logic Apps, Mobile Apps, WebJobs, Functions)"*. The list runs alphabetically from **Anomaly Detector** to **VPN Gateway** and rendered without truncation on this retrieval. |
+| Limitations | Establishes membership for **two named services only**. It does not re-verify the rest of `EV-102-241`'s enumeration, and it does not address the qualifier `EV-102-241` records — that a service may be **on** the list and still not configurable to a Geo, which remains true of both. |
+| Refines | **`EV-102-241`**, which recorded both services as *"not seen"*. That record stands as the enumeration; this one corrects what the enumeration implied about Logic Apps. |
 | Re-verify by | Contract term or amendment |
 
 ## 4. What the records establish
@@ -1679,6 +1693,80 @@ somewhere in the package. A citation of a **real** identifier in the **wrong**
 place satisfies that check exactly as a correct one does. The guard validates
 **existence, not appropriateness** — `OI-108-026`.
 
+### 4.26 `OQ-108-023` settled, and it splits: Logic Apps is covered, Front Door is not
+
+Tranche 13 recorded both as *"not seen"* rather than absent, on the ground that
+the enumeration might be incomplete. **That caution was right, and it paid on
+one of the two.**
+
+| Service | Tranche 13 | Tranche 15 |
+| --- | --- | --- |
+| **Logic Apps** | Not seen | **Present** — inside *"App Service (API Apps, Logic Apps, Mobile Apps, WebJobs, Functions)"* |
+| **Azure Front Door** | Not seen | **Absent**, on a targeted check of a list that rendered in full |
+
+**Logic Apps was never missing; it was nested.** The Core Services list names it
+inside a parenthesised group under **App Service**, so a flat enumeration of
+top-level entries — which is what `EV-102-241` produced — does not surface it.
+This is a retrieval-shape failure rather than a reading error, and it is the
+kind that a second, narrower question catches and a broader one does not.
+
+**Front Door is absent, and the check was made in the form that can establish
+that.** `EV-102-245` asked only about two named services against a list that ran
+alphabetically from Anomaly Detector to VPN Gateway without truncating. That is
+a materially stronger basis than tranche 13's, which is why *"not seen"* becomes
+*"absent"* here and not there.
+
+#### C3's composition now has one uncovered component, not two
+
+| C3 component | Covered by `EV-102-237`'s commitment? |
+| --- | --- |
+| Container Apps, API Management, Service Bus, Key Vault, Azure Monitor | **Yes** |
+| **Logic Apps** (the scheduling half of CBD-103 §5) | **Yes** |
+| Azure Database for PostgreSQL, Azure Communication Services, Microsoft Entra ID | **Yes** |
+| **Azure Front Door** | **No** |
+
+**And the symmetry with C1 is exact.** CBD-103 §5 names C3's edge as *"Front
+Door / API Management"* — two products, of which **API Management is on the list
+and Front Door is not**. That is the same structure the C1 composition had at
+tranche 7: an edge line naming two products, one listed and one not, with the
+unlisted one being the **global** product.
+
+**Front Door is Azure's global edge**, as the global external Application Load
+Balancer is Google's. The `CR5` reasoning CBD-103 §6 applies — that multi-region
+capability is *"an option CoBudget is not exercising"* — reaches it the same way,
+and `OI-103-001`'s single-region posture is the same argument against it.
+
+**So the remedy that closed C1's edge gap is available here, and this document
+does not apply it.** Whether C3's composition can drop Front Door and stand on
+API Management is a CBD-103 question and a functional one: Front Door and API
+Management are not the same product, any more than a global and a regional load
+balancer were. `OQ-108-028` puts it, and §4.12's caution applies unchanged —
+**dropping a global edge tier is a functional change, not a swap.**
+
+#### What the ruling at §4.24 does and does not do here
+
+The Product Owner ruling that `HG-102-013` accepts written evidence rather than
+requiring a contract **does not help Front Door**. The objection to Front Door
+is **scope** — it is not in the set the commitment operates on — not **class**.
+A documentation-grade statement about Front Door would still not bring it inside
+`EV-102-237`, because `EV-102-237` reaches only Core Services.
+
+What the ruling changes for C3 is elsewhere, and §4.24 already records it:
+`EV-102-236` becomes sufficient on its own for the region element. **The
+scope-versus-class distinction is the one to hold**: the ruling relaxed class
+for the whole catalog row and left every scope condition exactly where it was.
+
+#### The correction ledger
+
+| Tranche | Claim | Corrected by | Direction |
+| --- | --- | --- | --- |
+| 13 | **Logic Apps** *"not seen"* on the Core Services list | **15** | **For C3** |
+
+Recorded as a correction rather than a completion because tranche 13's table put
+Logic Apps in the same row as Front Door, and a reader scanning it would have
+taken two gaps where there was one. The hedge was accurate; the impression it
+left was not.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -1701,11 +1789,12 @@ place satisfies that check exactly as a correct one does. The guard validates
 | OQ-108-020 | Does any provision of the AWS Service Terms **conflict** with DPA §12.1? §16 makes the Service Terms control over the DPA, and `EV-102-220`'s parse was partial. | **Whether C2's region element survives its own subordination clause.** No conflict is known; the parse that would establish none has not been done |
 | OQ-108-021 | Does CoBudget hold data in AWS that is **not Personal Data** under Applicable Data Protection Law? DPA §12.1 commits only as to Personal Data, so any such data sits outside the region commitment by the instrument's own definition. | **A question about CoBudget, not about AWS.** Product Owner judgment against the `DI-91-*` classes — and the reason C2's contractual upgrade is not a clean improvement |
 | OQ-108-022 | ~~Is there an AWS instrument stating **provider-controlled** backup retention and expiry, as C1's CDPA does (`EV-102-168`)?~~ **Answered at §4.23: no.** The Customer Agreement, the last unread general AWS instrument, states a 30-day post-termination floor (`EV-102-243`) and assigns backup to the customer (`EV-102-244`). | Closed. **The term is not absent, it is deferred** — Service Terms §1.15 points at per-service technical documentation, which `EV-102-220` recorded at tranche 2 and this tranche re-reads. `OQ-108-025` follows the deferral |
-| OQ-108-023 | Are **Azure Front Door** and **Logic Apps** on the Microsoft Azure Core Services list? Neither was seen in `EV-102-241`'s retrieval, which may be incomplete. | **Decides whether C3's composition has the same two uncovered components as C1's** — an edge and a scheduler. Tranche 3 made the mirror-image mistake, so this is recorded as *not seen* rather than banked |
+| OQ-108-023 | ~~Are Azure Front Door and Logic Apps on the Microsoft Azure Core Services list?~~ **Settled at §4.26, and it splits.** **Logic Apps: present**, nested inside *"App Service (API Apps, Logic Apps, Mobile Apps, WebJobs, Functions)"* — never missing, only invisible to a flat enumeration. **Front Door: absent**, on a targeted check of a list that rendered in full (`EV-102-245`). | Closed. **C3 has one uncovered component, not two**, and it is the **global edge** — the exact structure C1 had before the tranche 7 swap. `OQ-108-028` |
 | OQ-108-024 | Does CoBudget's C3 composition depend on **Microsoft Entra managed identities**, whose issued certificates `EV-102-242` records as written to Cosmos DB *"in the East US region"* with a read-only copy in every region the service runs? | Only material if the composition uses them; this pass establishes the provider behaviour, not CoBudget's dependence on it |
 | OQ-108-025 | What do the **per-service technical documents** that Service Terms §1.15 defers to state, for the components of CoBudget's evaluated C2 composition? | **The whole of `HG-102-013`'s retention and expiry elements for C2.** Class `D3` and bounded — the clause names where to look. Under the August 29 ruling this documentation **can** satisfy the gate, so this retrieval is capable of moving a gate outcome |
 | OQ-108-026 | Is there an Azure retention and expiry statement scoped to the **evaluated C3 composition** rather than to Recovery Services vaults? `EV-102-221` gives 14 days for soft-deleted vault data and fails on scope. | **C3's retention and expiry elements.** The ruling voids `EV-102-221`'s class objection and leaves only its scope objection, so the target is now a narrower retrieval than tranche 2 supposed |
 | OQ-108-027 | Should the `HG-102-013` catalog row be amended so its gate statement and pass test agree? The row demands a contract in one and admits written evidence in the other; the Product Owner has ruled the pass test governs. | **Upstream, in approved CBD-102.** The ruling settles the reading but not the text, so the contradiction survives for the next reader. Recorded here rather than amended, per `OI-108-020` |
+| OQ-108-028 | Can C3's composition stand on **API Management** without **Azure Front Door**? CBD-103 §5 names the edge as *"Front Door / API Management"*; API Management is on the Core Services list and Front Door is not. | **The C3 counterpart of the swap that closed C1's edge gap at tranche 7**, and subject to the same caution — Front Door is a global product and dropping it is a functional change, not a swap. A CBD-103 question |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
