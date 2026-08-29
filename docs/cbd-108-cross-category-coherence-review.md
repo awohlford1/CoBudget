@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.13 |
+| Document version | 0.14 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.13; Combined Cost Model v0.13; Carried Item Disposition Register v0.13; Acceptance Criteria Traceability v0.13; Evidence Retrieval Pass v0.13 |
+| Companions | Provider Set Disposition Register v0.14; Combined Cost Model v0.14; Carried Item Disposition Register v0.14; Acceptance Criteria Traceability v0.14; Evidence Retrieval Pass v0.14 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `5a28996` |
+| Repository baseline | `071d430` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
@@ -188,24 +188,33 @@ compounds — the achievable availability of the whole is bounded by the product
 of the single-region availabilities of each distinct vendor in it, and no
 approved source sets a target that would make this a gate.
 
-**Amended again at v0.13 — the three candidates do not commit alike.** The
-retrieval pass §4.18 and §4.19 put the same region question to all three. **C1 and
-C3 both commit contractually and conditionally**, C1 in the Service Specific Terms
-against an enumerated service list and C3 in the Privacy & Security Terms
-against an unenumerated set of *"Core Services"*. **C2's commitment has not been
-found in a contract at all** — the DPA sits inside the Service Terms, which were
-read without producing a region clause, leaving only an Asserted statement; C2's sits on a compliance FAQ and C3's in
-documentation, and evidence register §3.2 forbids a hard gate passing on
-Asserted evidence. They also differ in **granularity** — C1 and C2 commit at
-**region** level, C3 at **Geo** level, and a Geo contains many regions, so a
-commitment honoured to the letter still permits C3 to hold data in a region
-other than the one CoBudget deploys to. And they differ in **shape**: C1
-publishes a per-service list, C3 publishes exceptions and non-regional
-services, and **C2 publishes neither**, so no per-composition check is possible
-against it at all. That last point matters for how this dimension is read —
-**C1's single uncovered component was found because C1 can be checked**, and
-the absence of an equivalent finding for C2 is an absence of evidence rather
-than a clean result.
+**Amended again at v0.14 — all three commit contractually, and they still
+do not commit alike.** The retrieval pass §4.18, §4.19 and §4.20 put the same
+region question to all three, and the answer moved twice before settling. **All
+three make a contractual commitment**: C1 in the Service Specific Terms against
+an enumerated service list, C3 in the Privacy & Security Terms against an
+unenumerated set of *"Core Services"*, and C2 at DPA §12.1 against no service
+list at all. Tranche 11's finding that C2's commitment could not be found in a
+contract rested on a page describing the DPA rather than on the DPA itself;
+tranche 12 read the instrument and corrected it.
+
+They differ in three ways that matter more than the class they share. In
+**granularity**, C1 and C2 commit at **region** level and C3 at **Geo** level,
+and a Geo contains many regions, so a commitment honoured to the letter still
+permits C3 to hold data in a region other than the one CoBudget deploys to. In
+**what the commitment attaches to**, C1's and C3's are conditional on the
+**service** — which is why C1's uncovered component could be found at all —
+while C2's is conditional on the **data**, reaching *"Personal Data"* only (DPA
+§17), so any part of CoBudget's estate that is not personal data sits outside
+it. And in **standing**, C2's alone is subordinated: DPA §16 makes the Service
+Terms control over the DPA.
+
+**The shape argument this section previously made no longer holds.** It read
+C1's single uncovered component as an artefact of C1 being checkable, and the
+absence of an equivalent C2 finding as an absence of evidence. That was right
+about C1 and wrong about C2: **C2 publishes no service list because its
+commitment does not turn on one.** The C2 gap is real but lies on a different
+axis — data class rather than service — and `OQ-108-021` puts it.
 
 `HG-102-011` is the gate here, and it is the one where the documentary pass made
 most progress: seven of ten provider identities disclosed. The three that did
@@ -225,6 +234,15 @@ but defers region to terms not retrieved; the AWS addendum could not be parsed;
 and the Microsoft retention page that appears to answer it is **scoped to
 Microsoft 365, not Azure**, and is registered as a negative record so it is not
 re-found and misread. None of the three is provider silence *yet*.
+
+**Amended at v0.14.** The AWS addendum has since been read (`EV-102-239`,
+`EV-102-240`). It carries the region element at §12.1 and **assigns backup and
+archiving to the customer** at §5.2 and §8, committing AWS to redundancy for
+availability instead. For C2 the retention and expiry elements therefore fail by
+**allocation** rather than by silence — a finding no further parse of that
+document can overturn, and one that moves the remaining work to whether another
+AWS instrument carries what C1's CDPA carries (`OQ-108-022`). Retrieval pass
+§4.20.
 
 **Reading the remaining DPAs is the highest-leverage action available to
 CBD-108**, in the precise sense that it is the one retrieval whose outcome could
