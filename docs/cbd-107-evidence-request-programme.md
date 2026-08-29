@@ -3,13 +3,13 @@
 | Field | Value |
 | --- | --- |
 | Status | **Working programme document, not a governing artifact.** It plans retrievals; it establishes no gate outcome and settles no verdict. Nothing here may be cited as evidence. The `EV-102-*` register remains the only place a retrieval becomes evidence. |
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`, deliberately — see §7. |
-| Repository baseline | `df04231` |
-| Last updated | August 22, 2026 |
+| Repository baseline | `717f143` |
+| Last updated | August 29, 2026 |
 
 ## 1. Why this exists
 
@@ -72,6 +72,8 @@ report, which is a public-summary document carrying neither the control detail
 buys nothing this programme wants. Ask what else is available **before** signing,
 rather than signing to find out.
 
+**§5 supersedes the grounds for both recommendations.** `OI-102-023` was settled on August 29, 2026, and the answer makes an NDA-gated route unable to produce a registrable record at all — which decides C7 on stronger grounds than the SOC 3 argument above, and makes C6 the only confirmed route that can close a gate.
+
 ## 4. Why this matters beyond filling gaps
 
 Rubric rule `R2` caps a criterion scored on vendor assertion at `2`, and reserves
@@ -87,37 +89,77 @@ Until these requests are made, this category is structurally capped below every
 other one, and any comparison CBD-108 draws across categories inherits that
 artifact.
 
-## 5. The problem to settle before the first document arrives
+## 5. Settled: material received under an NDA does not enter the register
 
-**Material received under NDA cannot be recorded the way the evidence register
-records everything else.**
+**Product Owner decision, August 29, 2026, resolving `OI-102-023`.** Recorded
+normatively at evidence register §3.0.2; restated here because it changes what
+this programme is for.
 
-The register's method is verbatim quotation with a source URL and a retrieval
-date. That is what makes a record checkable by a second reader, and it is why
-every `EV-102-*` limitation field quotes the vendor rather than paraphrasing.
-Published `EV-102-*` records also synchronize to Confluence.
+A document received under a non-disclosure agreement, or through a trust portal
+whose terms restrict onward disclosure, is not registered as an `EV-102-*`
+record — not quoted, not cited, not summarized, not named — and therefore
+**supports no finding**. A gate it bears on stays `UNPROVEN`.
 
-A document received under NDA cannot be quoted into a published record. Three
-dispositions are available and the register does not currently choose between
-them:
+The decision turned on a fact §5 did not have when it set out the three options:
+**this repository is public**, not merely un-access-controlled. Recording without
+publishing to Confluence would still have published verbatim NDA'd text to the
+world through git, and citing without quoting would have published a restricted
+document's issuer, date and scope the same way.
 
-1. **Cite without quoting.** The record names the document, its date and its
-   scope, and states the conclusion drawn, with no quoted text. Weakest for a
-   second reader, and it moves the register toward the assertion it was built to
-   avoid — but it keeps the evidence trail continuous.
-2. **Keep NDA'd material out of the register entirely.** It informs a gate
-   outcome without appearing as a record. Cleanest legally, worst for
-   traceability: a gate outcome would rest on something the register does not
-   contain, which `CBD-92` §10.3 is precisely about.
-3. **Record it, and do not publish it.** The record exists in the repository
-   with its quotations and is excluded from the Confluence sync. Preserves the
-   method at the cost of a private tier the register has never had, and the
-   repository is not an access-controlled store.
+### 5.1 What this does to the four routes
 
-This is a method question of the same shape as `OI-106-017`, and it should be
-settled **before** the first NDA'd document arrives rather than after, because
-the disposition changes how the document may be read and stored from the moment
-it is received. Raised at `OI-102-023` in the evidence register.
+The question that decides whether a route can produce evidence is no longer how
+fast or how cheap it is. It is whether the route imposes an NDA.
+
+| Route | NDA | Can it produce a registrable record? |
+| --- | --- | --- |
+| **C6 Plaid** | Not stated | **Yes, if it stays that way.** Material from a portal imposing no onward-disclosure restriction is ordinary Documented or Attested evidence |
+| **C7 MX** | **Yes, explicitly** | **No.** Whatever it yields moves no gate and no score |
+| **C8 Mastercard** | Unknown | **Establish before requesting**, not after |
+| **C9 Akoya** | Unknown | **Establish before requesting**, not after |
+
+Three consequences follow, and none of them was visible when §3 was written.
+
+**C6 is no longer merely first — it is the only confirmed route that can close
+anything.** Its recommendation in §3 rests on speed and self-service; it now
+rests on the only property that matters.
+
+**The C7 request is no longer worth making for gate purposes.** §3 already
+flagged it as the request most likely to disappoint because its portal
+advertises a SOC 3. That was an argument about the document's contents. This is
+stronger and independent of contents: an NDA-gated route cannot produce a
+registrable record whatever it hands over. Signing MX's NDA to obtain evaluation
+evidence would buy nothing this programme wants, and the CBD-15 amendment
+permits it without making it useful.
+
+**For C8 and C9, the NDA terms must be asked about before the material is
+requested.** Receiving a restricted document by surprise is the one outcome
+this decision is designed to prevent, because the disposition binds from the
+moment of receipt. Ask on what terms material would be supplied; then decide
+whether to ask for it at all.
+
+### 5.2 What restricted material may still legitimately do
+
+None of these is a register entry, and none moves a gate:
+
+* decide whether to pursue a candidate at all, or to stop;
+* design an observation — restricted material is good at telling CoBudget what
+  to test and where;
+* frame a question whose **answer** can then be obtained on registrable terms.
+
+That last one is the productive route out. Register §3.0.2 permits a fact first
+learned from restricted material to be registered from an *independent*
+registrable source — a published page, a clause in an executed agreement, an
+observation CoBudget performs — provided the record stands on that source alone
+and the retrieval was actually made.
+
+### 5.3 The cost, accepted knowingly
+
+Category **F**'s rubric ceiling of `2` described in §4 **stands** for any
+candidate whose only stronger material is NDA-bound. This programme does not
+lift it; the observation pass and any publicly published attestation are what
+can. CBD-108 must weigh that asymmetry as a limit of what was obtainable on
+publishable terms, not as a finding about the aggregators.
 
 ## 6. What this programme does not do
 
@@ -128,8 +170,8 @@ it is received. Raised at `OI-102-023` in the evidence register.
   them.
 * It changes no gate outcome, no verdict, no tally and no rubric score. Nothing
   in this document is evidence, and no `EV-102-*` record cites it.
-* It does not settle `OI-102-023`. Until that is settled, an NDA may be signed
-  but the resulting document has no agreed home.
+* It does not lift category **F**'s rubric ceiling. §5.3 explains why the requests planned here cannot, now that `OI-102-023` is settled.
+* It does not recommend signing MX's NDA. §5.1 explains why that route can no longer produce evidence, whatever it would hand over.
 
 ## 7. Why this document is not published to Confluence
 
