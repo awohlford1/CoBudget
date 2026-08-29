@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.11 |
+| Document version | 0.12 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.11; Combined Cost Model v0.11; Carried Item Disposition Register v0.11; Acceptance Criteria Traceability v0.11; Evidence Retrieval Pass v0.11 |
+| Companions | Provider Set Disposition Register v0.12; Combined Cost Model v0.12; Carried Item Disposition Register v0.12; Acceptance Criteria Traceability v0.12; Evidence Retrieval Pass v0.12 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `422a569` |
+| Repository baseline | `5e5f491` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
@@ -188,6 +188,21 @@ compounds — the achievable availability of the whole is bounded by the product
 of the single-region availabilities of each distinct vendor in it, and no
 approved source sets a target that would make this a gate.
 
+**Amended again at v0.12 — the three candidates do not commit alike.** The
+retrieval pass §4.18 puts the same region question to all three. **Only C1's
+commitment is contractual**; C2's sits on a compliance FAQ and C3's in
+documentation, and evidence register §3.2 forbids a hard gate passing on
+Asserted evidence. They also differ in **granularity** — C1 and C2 commit at
+**region** level, C3 at **Geo** level, and a Geo contains many regions, so a
+commitment honoured to the letter still permits C3 to hold data in a region
+other than the one CoBudget deploys to. And they differ in **shape**: C1
+publishes a per-service list, C3 publishes exceptions and non-regional
+services, and **C2 publishes neither**, so no per-composition check is possible
+against it at all. That last point matters for how this dimension is read —
+**C1's single uncovered component was found because C1 can be checked**, and
+the absence of an equivalent finding for C2 is an absence of evidence rather
+than a clean result.
+
 `HG-102-011` is the gate here, and it is the one where the documentary pass made
 most progress: seven of ten provider identities disclosed. The three that did
 not, plus one undated, fall almost entirely in category F — §5.
@@ -239,6 +254,13 @@ That is the second correlated-failure mode in the set, after `HG-102-013`. It is
 now an observation rather than a document — `OQ-103-028` asks what an exercised
 AWS support interaction actually produces in CloudTrail — which places it inside
 the route-A pass rather than ahead of it.
+
+**A second finding now points at the same component.** `EV-102-236` names
+**Microsoft Entra ID** among Azure services that do not let the customer specify
+a region. Whether that reaches **Entra External ID**, the C3 identity candidate,
+is `OQ-108-016` and this review does not assume it — but two independent
+retrievals now converge on the same component from different directions, which
+is the pattern a coherence review exists to notice.
 
 The Customer Lockbox family shows the opposite pattern, where a control assumed
 to be ecosystem-wide is not. `EV-102-012` establishes that **Microsoft Entra
