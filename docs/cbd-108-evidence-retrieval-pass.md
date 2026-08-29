@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.9 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome, and the composition it produces leaves Cloud Scheduler as the single uncovered component.** It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.10 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.9; Cross-Category Coherence Review v0.9; Combined Cost Model v0.9; Carried Item Disposition Register v0.9; Acceptance Criteria Traceability v0.9 |
+| Companions | Provider Set Disposition Register v0.10; Cross-Category Coherence Review v0.10; Combined Cost Model v0.10; Carried Item Disposition Register v0.10; Acceptance Criteria Traceability v0.10 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `ee5eb99` |
+| Repository baseline | `a24161e` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,7 +22,7 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`232` are
+anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`233` are
 registered below and the remainder are unused.
 
 **This tranche covers two questions**, chosen because each is answerable from
@@ -344,6 +344,19 @@ permits lowering below the class but never raising.
 | Limitations | Classed Contractual because `EV-102-218` attaches its commitment to *"any Service listed at"* this page, so inclusion is what the contract operates on. The page carries **no effective date** in the content supplied, so it cannot be compared by version against `EV-102-224`. Coverage of a service by this list establishes only that the Data Location commitment reaches it — not any retention or expiry term, which come from the CDPA at `EV-102-168`. |
 | Supersedes | **`EV-102-224`**, the April 9, 2024 snapshot, which is now known to be stale in at least one respect |
 | Re-verify by | Contract term or amendment |
+
+### EV-102-233 — Cloud Armor policy types, and what regional backend policies support
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-020`, `HG-102-021`, `HG-102-025` supporting material for C1, category **H** (`OQ-108-014`) |
+| Provider / category | Google Cloud Armor (C1) / H |
+| Source | *"Security policy overview"*, `https://docs.cloud.google.com/armor/docs/security-policy-overview` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | **Globally scoped**: backend security policy, edge security policy, internal service security policy. **Regionally scoped**: regional backend security policy, network edge security policy. **Global backend** policies attach to the global external Application Load Balancer, the classic Application Load Balancer, the global external proxy Network Load Balancer, and the classic proxy Network Load Balancer. **Regional backend** policies attach to the **regional external Application Load Balancer** and the regional internal Application Load Balancer. Regional backend security policies support: **Client IP address, Client geography, Client ASN, Rate limiting, TLS fingerprinting (JA3 and JA4), Bot management, HTTP filtering, WAF, Adaptive Protection, Address Group, and Request logging.** |
+| Limitations | **The page does not state feature parity between global and regional policies in comparative language.** It presents each type's supported features in its own table. This record therefore establishes what regional policies **do** support; it does not establish that nothing is lost relative to global. A capability CoBudget later depends on must be checked against the regional table specifically. |
+| Re-verify by | February 28, 2027 |
 
 ## 4. What the records establish
 
@@ -855,6 +868,84 @@ precisely to name services that store nothing — does not include it.
 **category** contradicts the regional posture; what is now open is whether one
 **component** of one candidate's composition does.
 
+### 4.14 `OQ-108-014` is settled: the regional-only swap moves no gate outcome
+
+The question was whether regional Cloud Armor offers the capability set the
+CBD-103 gate matrix relied on when it was evaluated against a global load
+balancer. **It does not arise, and four separate checks say so.**
+
+**1 — No WAF gate exists.** Neither the hard-gate catalog nor the evaluation
+rubric contains a gate or criterion requiring a web application firewall. The
+concern that prompted this question assumed one.
+
+**2 — Cloud Armor is cited by no gate row.** It appears exactly **once** in the
+whole CBD-103 package: in the §5 composition line, *"Cloud Armor / HTTPS Load
+Balancing"*. No matrix cell, no evidence record, and no finding rests on a Cloud
+Armor capability.
+
+**3 — The two edge gates that *are* capability-dependent are already
+`UNPROVEN`.** `TD-103-012` and `TD-103-013` do make the edge load-bearing for
+rate limiting, and the topology is explicit that header suppression *"is a
+genuine differentiator between gateway products"*. But the matrix records both
+as unresolved for **all three** candidates:
+
+| Gate | Kind | C1 | Why |
+| --- | --- | --- | --- |
+| `HG-102-020` uniform throttled response | `OBS` | `UNPROVEN` | Blocked by §3 — observation-bound |
+| `HG-102-021` per-surface ceilings | `DOC` | `UNPROVEN` | Not retrieved |
+
+**A swap cannot lower an `UNPROVEN`.** Neither gate is holding a pass that the
+change could take away.
+
+**4 — The one edge gate that passes does not depend on the product.**
+`HG-102-025`, webhook verification at the edge, is `PASS (design)` of kind
+`CFG`, resting on `TD-103-016` — CoBudget's own design record. It is a statement
+about what the topology requires, not about what Google supplies, and nothing in
+`TD-103-012`'s edge description is global-specific: TLS termination, origin and
+input validation, per-surface ceilings, uniform denial shape, and webhook
+signature verification are all available on the regional product.
+
+**And the capability is there anyway.** `EV-102-233` records that regional
+backend security policies support **rate limiting, WAF, Adaptive Protection, bot
+management, TLS fingerprinting and HTTP filtering**, and attach to the
+**regional external Application Load Balancer** — which is the product
+`EV-102-232` lists under *"Cloud Load Balancing - Regional Load Balancers
+(Application, Proxy Network)"*. The swap lands inside the Data Location
+commitment rather than beside it.
+
+#### The residual, which is real and is not a blocker
+
+`HG-102-020` and `HG-102-021` are `UNPROVEN` and will be evaluated later. **They
+must be evaluated against the regional product, not the global one.** The
+header-suppression behaviour `HG-102-020` turns on, and the per-surface policy
+attachment across eleven `EP-92-*` entry points that `HG-102-021` requires, are
+both configuration surfaces that could differ between the two Cloud Armor policy
+types — and `EV-102-233` explicitly does **not** establish parity, only what
+regional supports.
+
+So the swap is safe **because nothing currently passes on the global product**,
+not because the two products have been shown equivalent. That is a narrower
+claim and it is the one the evidence supports.
+
+#### What the composition would look like after the swap
+
+| Component | On the data-residency list? |
+| --- | --- |
+| Cloud Run | **Yes** |
+| Google Cloud Armor | **Yes** |
+| Regional Load Balancers (Application) | **Yes** |
+| Pub/Sub | **Yes** |
+| Secret Manager | **Yes** |
+| Cloud KMS | **Yes** |
+| Cloud Logging | **Yes** |
+| **Cloud Scheduler** | **No** |
+
+**The regional-only swap would leave Cloud Scheduler as the single remaining
+uncovered component of the C1 composition**, and `OQ-108-012` — whether
+`TD-103-004`'s scheduling requirement must be met by Cloud Scheduler rather than
+by the listed Workflows or Eventarc — becomes the last thing between C1 and a
+`HG-102-013` region element that covers the whole composition.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -868,7 +959,7 @@ precisely to name services that store nothing — does not include it.
 | OQ-108-011 | ~~Is CoBudget's C1 HTTPS load balancing the regional or the global Application Load Balancer?~~ **Answered by the Product Owner, August 29, 2026: the composition uses both.** The regional half is listed; the **global** external Application Load Balancer is on none of the four lists. | Closed. **Two C1 components remain uncovered, and unlike the scheduler this one has no like-for-like substitute** — §4.12. Raises `OQ-108-013` |
 | OQ-108-012 | Must `TD-103-004`'s fifteen-minute scheduling requirement be met by **Cloud Scheduler**, the one composition component absent from all four data-residency lists? **Workflows** and **Eventarc** are both listed. | **The other thing `HG-102-013` for C1 turns on.** A CBD-103 composition question, not a CBD-108 one |
 | OQ-108-013 | Does the **global external Application Load Balancer** store Customer Data at rest? It is absent both from the configurable list and from the companion list of services that store nothing. | **Decides whether the C1 front door merely sits outside the region commitment or actually contradicts the single-region posture** — §4.13 |
-| OQ-108-014 | Do Google Cloud Armor's **regional** backend security policies offer the capability set the CBD-103 gate matrix relied on when it was evaluated against a **global** load balancer? | **Must be settled before the regional-only swap is executed.** A silent narrowing of WAF capability would move a gate outcome, not only a data-location scope — §4.12 |
+| OQ-108-014 | ~~Do Cloud Armor's regional backend policies offer the capability set the CBD-103 gate matrix relied on?~~ **Settled at §4.14: the question does not arise.** No WAF gate exists; Cloud Armor is cited by no gate row; the two capability-dependent edge gates are already `UNPROVEN` for all three candidates; and the one that passes is `PASS (design)` on CoBudget's own record. | Closed. **The swap is clear to execute.** The residual is that `HG-102-020` and `HG-102-021` must later be evaluated against the **regional** product — `EV-102-233` establishes what regional supports, not parity with global |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
