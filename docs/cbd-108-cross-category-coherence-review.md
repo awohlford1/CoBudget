@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.21 |
+| Document version | 0.22 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.21; Combined Cost Model v0.21; Carried Item Disposition Register v0.21; Acceptance Criteria Traceability v0.21; Evidence Retrieval Pass v0.21 |
+| Companions | Provider Set Disposition Register v0.22; Combined Cost Model v0.22; Carried Item Disposition Register v0.22; Acceptance Criteria Traceability v0.22; Evidence Retrieval Pass v0.22 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `d2953eb` |
+| Repository baseline | `e386dd8` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
@@ -249,6 +249,8 @@ AWS instrument carries what C1's CDPA carries (`OQ-108-022`). Retrieval pass
 The ruling moves no gate — `HG-102-013` is still `UNPROVEN` for all three — but it changes what would. **For C2 and C3 the outstanding elements are now a bounded documentation retrieval rather than a hunt for a contractual statement.** C2's expiry is deferred by Service Terms §1.15 to per-service technical documentation (`OQ-108-025`); C3's nearest record, `EV-102-221`, loses its class objection and retains only its scope objection, being written about Recovery Services vaults rather than the evaluated composition (`OQ-108-026`). C1 is untouched by the ruling and still blocked by Cloud Scheduler. Retrieval pass §4.23 and §4.24.
 
 **Amended at v0.20, and the C2 route is now closed rather than open.** Tranche 18 followed Service Terms §1.15's deferral into the per-service documentation for four C2 components. It found one provider-enforced expiry (KMS, 7—30 days, `EV-102-246`) and otherwise **customer-configured retention with provider lag on top** — CloudWatch Logs deleting *"up to 72 hours"* after the configured period *"but in rare situations might take longer"* (`EV-102-249`), and RDS support recovery *"for up to six days after the deletion request"* (`EV-102-248`). **`HG-102-013` asks for provider behaviour and the documentation states operator configuration**, so the gate does not move and no further retrieval in that direction will move it. This corrects the v0.16 amendment's expectation that the post-ruling path was *"materially better"*. Retrieval pass §4.30.
+
+**Amended at v0.22 with the per-service picture, which does not aggregate.** Tranche 20 completed the C2 component sweep for SQS and EventBridge Scheduler. **Retention in the C2 set is a property of each service rather than of the composition**: SQS bounds a message at *"14 days"* and the customer cannot raise it (`EV-102-250`); CloudWatch Logs holds *"indefinitely"* by default (`EV-102-249`); KMS enforces both a floor and a ceiling (`EV-102-246`); RDS and EventBridge Scheduler enforce neither, and a recurring schedule without an `EndDate` is never auto-deleted (`EV-102-251`). **A statement about "C2's retention" is not available and should not be attempted**, which is a further reason `HG-102-013` cannot be satisfied by summing per-service answers — it asks a composition-level question. `OI-108-028`. Retrieval pass §4.32.
 
 **Reading the remaining DPAs is the highest-leverage action available to
 CBD-108**, in the precise sense that it is the one retrieval whose outcome could
