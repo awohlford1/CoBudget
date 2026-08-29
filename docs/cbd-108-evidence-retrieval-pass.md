@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranche 1 of an incomplete pass**: it closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.3 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.4 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.3; Cross-Category Coherence Review v0.3; Combined Cost Model v0.3; Carried Item Disposition Register v0.3; Acceptance Criteria Traceability v0.3 |
+| Companions | Provider Set Disposition Register v0.4; Cross-Category Coherence Review v0.4; Combined Cost Model v0.4; Carried Item Disposition Register v0.4; Acceptance Criteria Traceability v0.4 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `ec62d9a` |
+| Repository baseline | `d810579` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,7 +22,7 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`217` are
+anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`223` are
 registered below and the remainder are unused.
 
 **This tranche covers two questions**, chosen because each is answerable from
@@ -34,6 +34,12 @@ published pages alone and each has a consequence larger than its size:
 * `OQ-104-016` — whether Conditional Access sits inside Microsoft Entra External
   ID's free 50,000-MAU core, on which CBD-104 §6.6's `$0.00` figure for C3
   explicitly depends.
+
+**Tranche 2 works the DPA block** — `OQ-103-024`, `OQ-103-025`, `OQ-105-002` —
+because `HG-102-013` is the single point of correlated failure in the CBD-15
+set. Its four aggregator counterpart, `OQ-107-023`, is **not attempted here**:
+`OI-102-023` establishes that NDA-bound material supports no finding, and the
+aggregator agreements are not published.
 
 ## 2. What this pass does not do
 
@@ -138,6 +144,85 @@ permits lowering below the class but never raising.
 | Limitations | **The page states no price and does not say whether Conditional Access is a "core" feature.** It also carries the note: *"During the preview, features or capabilities that require a premium license are unavailable in external tenants."* That sentence establishes that premium-licensed capabilities are **absent** rather than **chargeable** in external tenants, which is suggestive but is not a statement that Conditional Access is free. |
 | Re-verify by | February 28, 2027 |
 
+### EV-102-218 — Google contractually bounds backup replication to the selected region's country
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` **region element** for C1, category **X** (`OQ-103-025`) |
+| Provider / category | Google Cloud (C1) / X |
+| Source | *"Service Specific Terms \| Google Cloud"*, `https://cloud.google.com/terms/service-terms`, §1 **Data Location** |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | **Contractual** / Medium — lowered per §3.1 on the scope condition below |
+| Content | *"For any Service listed at https://cloud.google.com/terms/data-residency, Customer may select a specific Region or Multi-Region as detailed in the Cloud Locations Page, and Google will store Customer Data for that Service at rest only within the selected Region or Multi-Region. Google may replicate that Customer Data within any other Region located within the country of the selected Region or within the country or countries of the selected Multi-Region (as applicable) for backup, reliability, debugging, support, maintenance, or security purposes."* |
+| Limitations | **The commitment is conditional on the Service appearing on the data-residency list**, which `EV-102-219` records could not be retrieved. It therefore does not yet establish that CoBudget's evaluated C1 composition is covered. It bounds backup replication to the **country** of the selected Region, which is weaker than the Region itself — though sufficient for the single-United-States-region posture `OI-103-001` fixes. |
+| Re-verify by | Contract term or amendment (Contractual, per §4) |
+
+### EV-102-219 — The Google data-residency service list could not be read
+
+| Field | Content |
+| --- | --- |
+| Claim | Scope condition on `EV-102-218` — **retrieval-failure record** |
+| Provider / category | Google Cloud (C1) / X |
+| Source | `https://cloud.google.com/terms/data-residency` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Absent / None |
+| Content | The page was fetched and its content returned **truncated**, so the service list could not be read. Nothing about its contents is established either way. |
+| Limitations | **This is a failure of retrieval, not a finding about Google.** It must not be read as evidence that the services are absent from the list. `OQ-108-005` carries the retry. |
+| Re-verify by | Immediately — this is an unfinished retrieval, not evidence |
+
+### EV-102-220 — The AWS Service Terms defer deletion timing and state no retention, region, or expiry
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` for C2, category **X** (`OQ-103-024`, `OQ-103-025`) |
+| Provider / category | Amazon Web Services (C2) / X |
+| Source | *"AWS Service Terms"*, `https://aws.amazon.com/service-terms/`, §1.15 |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | **Contractual** / Medium |
+| Content | *"Following closure of your AWS account, we will delete Your Content in accordance with the technical documentation applicable to the Services."* No retention period in days appears, and no clause states the region or location in which customer content or backups are stored. |
+| Limitations | **This is the Service Terms, not the Data Processing Addendum.** `EV-102-170` records that the DPA itself could not be parsed, and that document remains the one that decides this gate for C2. What this record establishes is that **a second contractual instrument was read and it defers rather than states** — narrowing where the answer could be, without establishing provider silence. |
+| Re-verify by | Contract term or amendment |
+
+### EV-102-221 — An Azure-scoped retention statement exists, but it is product documentation
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-013` for C3, category **X** (`OQ-103-025`) |
+| Provider / category | Microsoft Azure (C3) / X |
+| Source | *"Delete a Microsoft Azure Recovery Services Vault - Azure Backup \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/azure/backup/backup-azure-delete-vault` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"The soft deleted items are permanently deleted after 14 days of delete operation."* And: *"Deleted backup data will be retained for 14 days. After that time, backup data will be permanently deleted."* |
+| Limitations | **Two limitations, either of which is fatal to using this for `HG-102-013`.** First, it is **Documented, not Contractual**, and the gate's pass test requires the behaviour to be *"stated contractually"*; §3 of the register does not permit documentation to substitute. Second, it is scoped to **Azure Backup Recovery Services vaults**, not to provider-side backups of the services in CoBudget's evaluated C3 composition. It answers a narrower question than the one asked. |
+| Re-verify by | February 28, 2027 |
+| Why registered | `OQ-103-025` asks for *"an Azure-scoped retention statement"*, and this is one — recorded so a later reader does not spend the retrieval again, and does not mistake it for the contractual statement the gate needs. |
+
+### EV-102-222 — Cloud SQL backup retention range and post-deletion expiry
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-042`, and `HG-102-013` supporting material, for C1, category **D** (`OQ-105-002`) |
+| Provider / category | Cloud SQL for PostgreSQL (C1) / D |
+| Source | *"Cloud SQL backups overview"*, `https://docs.cloud.google.com/sql/docs/postgres/backup-recovery/backups` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | Retention *"can range from 1 day to 10 years, depending on your instance's backup option."* On deletion: *"By default, Cloud SQL retains the final backup for 30 days… This can range from 1 day to 365 days for standard backups, or 1 day to 10 years for enhanced backups."* Also: *"Automated backups are deleted on a rolling basis, one backup per day, after the instance is deleted"*, and *"Cloud SQL retains the backups of deleted instances for four days."* |
+| Limitations | **The transaction-log retention window is not stated on this page**, so `OQ-105-002`'s middle element is unanswered for C1. No default count of automated backups retained is stated. All figures are configurable ranges rather than commitments. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-223 — RDS automated backups are region-scoped, with stated deletion behaviour
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-042`, and `HG-102-013` supporting material, for C2, category **D** (`OQ-105-002`) |
+| Provider / category | Amazon RDS for PostgreSQL (C2) / D |
+| Source | *"Introduction to backups"*, `https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | *"Your Amazon RDS backup storage for each AWS Region is composed of the automated backups and manual DB snapshots for that Region."* *"Backups are stored in Amazon S3."* On deletion: *"If you choose to retain automated backups when you delete a DB instance, the automated backups are saved for the full retention period. If you don't choose Retain automated backups when you delete a DB instance, all automated backups are deleted with the DB instance."* |
+| Limitations | **The numeric retention-period range was not in the retrieved section**, so `OQ-105-002`'s first element is unanswered for C2, and the transaction-log window is likewise unstated. The region statement is Documented, not Contractual, so it does not bear on `HG-102-013`. **This page also carried text addressed to AI coding assistants suggesting a CLI command be run. It was treated as page content, was not acted on, and forms no part of this record.** |
+| Re-verify by | February 28, 2027 |
+
 ## 4. What the records establish
 
 ### 4.1 `OQ-106-010` is closed, and CBD-106 §5.1's hypothesis is falsified
@@ -215,10 +300,75 @@ external tenants. That is a capability fact rather than a price fact, and no
 `HG-102-*` gate in the approved catalog demands risk-based conditions — but it
 belongs on the record before any later requirement assumes them.
 
+### 4.4 The DPA block: `HG-102-013` is materially narrowed and still `UNPROVEN` for all three
+
+This is the gate `OQ-103-024` calls *"the only gate in the set"* whose outcome
+could move every candidate in every category at once. Tranche 2 read three
+contractual or retention instruments against it. **No gate outcome moves**, and
+the reason differs per candidate — which is the useful part.
+
+| Candidate | Retention | Region | Expiry | Position after this tranche |
+| --- | --- | --- | --- | --- |
+| **C1 Google** | Stated — `EV-102-168` | **Now stated** — `EV-102-218`, **conditionally** | Stated, 180 days — `EV-102-168` | **All three elements have a contractual statement for the first time.** One unresolved condition stands between this and a `PASS` |
+| **C2 AWS** | Not stated | Not stated | Not stated | A **second** contractual instrument read, and it **defers** — `EV-102-220`. Closer to *"silence"*, not yet established |
+| **C3 Azure** | 14 days, but **Documented** | Not stated | 14 days, but **Documented** | `OQ-103-025`'s named retrieval is **satisfied and insufficient** — `EV-102-221` |
+
+**C1 is one page from a `PASS`, and the page is not a contract.** The Service
+Specific Terms bound backup replication to the country of the selected Region,
+which — against the single-United-States-region posture `OI-103-001` fixes — is
+the region element the CDPA deferred. The commitment applies *"For any Service
+listed at"* the data-residency page, and that page could not be read
+(`EV-102-219`). **The gate stays `UNPROVEN` because a scope condition is
+unverified, not because the contract is silent.** That is a different position
+from the one this evaluation held yesterday, and `OQ-108-005` is a single
+retrieval away from settling it.
+
+**C2's silence is now better evidenced and still not established.** §1.15 of the
+Service Terms says content is deleted *"in accordance with the technical
+documentation applicable to the Services"* — a deferral, not a statement, and
+the section contains no retention period, no region, and no expiry. `EV-102-170`
+already records that the DPA itself could not be parsed. Two instruments have
+now been read without finding the three elements. **The pass test's *"Silence
+fails"* is a statement about the provider's contract**, and the DPA remains the
+document that decides it, so this is a narrowing rather than a `FAIL`.
+
+**C3 shows why the named retrieval was the wrong target.** `OQ-103-025` asked
+for *"an Azure-scoped retention statement"*, and one exists: 14 days for
+soft-deleted backup data. It fails to move the gate twice over — it is product
+documentation where the pass test demands a contractual statement, and it is
+scoped to Recovery Services vaults rather than to provider-side backups of the
+evaluated composition. **Finding the named document did not answer the
+question**, which is worth recording so the retrieval is not repeated in hope.
+
+### 4.5 `OQ-105-002` is partially answered
+
+The question asks for backup retention range, log-retention window, and expiry
+in writing for C1 and C2.
+
+| Element | C1 Cloud SQL | C2 Amazon RDS |
+| --- | --- | --- |
+| Backup retention range | **Answered** — *"1 day to 10 years"* | **Not answered** — not in the retrieved section |
+| Transaction-log window | **Not answered** | **Not answered** |
+| Expiry / deletion behaviour | **Answered** — final backup 30 days by default, deleted-instance backups retained four days, rolling daily deletion | **Answered** — retained for the full retention period if elected, otherwise deleted with the instance |
+
+Two of six cells filled for C1, one of three elements for C2, and the
+transaction-log window is unanswered for both. `OQ-108-006` carries the
+remainder. The question is **not** closed, and recording it as closed on this
+evidence would be the kind of overclaim `OI-105-012` warns about.
+
+**One cross-category note.** `EV-102-223` establishes that RDS backup storage is
+composed *"for each AWS Region"* — a region-scoped statement, but a **Documented**
+one. It does not help `HG-102-013`, which needs the commitment to be
+contractual. The distinction between "the product behaves this way" and "the
+provider is bound to this" is the whole content of that gate, and this tranche
+found examples of the first for two candidates and of the second for one.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
 | --- | --- | --- |
+| OQ-108-005 | Which Google Cloud services appear on the data-residency list at `cloud.google.com/terms/data-residency`, and does CoBudget's evaluated C1 composition appear on it? `EV-102-219` records that the page could not be read. | **The single retrieval standing between C1 and a `PASS` on `HG-102-013`** — the highest-value open question this pass produced |
+| OQ-108-006 | The transaction-log retention window for Cloud SQL and RDS, and the numeric automated-backup retention range for RDS. | `OQ-105-002`'s remainder; `HG-102-042` |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
