@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.1 |
+| Document version | 0.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.1; Combined Cost Model v0.1; Carried Item Disposition Register v0.1; Acceptance Criteria Traceability v0.1 |
+| Companions | Cross-Category Coherence Review v0.2; Combined Cost Model v0.2; Carried Item Disposition Register v0.2; Acceptance Criteria Traceability v0.2 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `020bf0c` |
+| Repository baseline | `a969942` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -284,5 +284,5 @@ performed, and this package does not constitute one.**
 | OI-108-002 | **Cost warning and stop thresholds cannot be set** — §5. No budget ceiling exists and prices are `UNKNOWN` in five of six categories. | The ticket's fifth acceptance criterion is **partially met**: owner, cadence, action structure and cliffs are explicit; the two numbers are not. |
 | OI-108-003 | **Category F's rubric scores are not comparable on their face with the other five categories'**, because `OI-102-023` caps them at `2` for any candidate whose stronger material is NDA-bound. | Any cross-category comparison must state this. It is a limit of what was obtainable on publishable terms, not a finding about the aggregators. |
 | OI-108-004 | **This package has been reviewed by no one other than its author**, and inherits the same limitation from all six evaluations it consumes. | The independent security review required before public launch remains outstanding. A selection made on this basis carries that residual. |
-| OI-108-005 | **CBD-108 is blocked in Jira by CBD-77, CBD-78 and CBD-79** — the activation, engagement and reliability metrics subtasks — all `Ready` and unstarted. The ticket's own `DEPENDENCIES` line names only *"all CBD-15 category evaluations and CBD-14 reconciliation"*, and no metrics definition bears on provider selection. | **The links appear to be wrong and the ticket needs correcting**, in the same way `OI-107-021` records for CBD-107's inverted CBD-14 dependency. A Jira edit, applied directly when authorized; it requires no repository change and no Confluence synchronization. |
+| OI-108-005 | ~~**CBD-108 is blocked in Jira by CBD-77, CBD-78 and CBD-79**~~ **Resolved — the three links were removed on August 29, 2026.** Verified against the live issue the same day: CBD-108 now carries eight links, and all seven inbound blockers — CBD-95, CBD-103, CBD-104, CBD-105, CBD-106, CBD-107 and CBD-130 — are `Done`, with the outbound link to CBD-120 intact. | Closed. **CBD-108 is no longer blocked by anything in Jira.** That removes a tracker obstacle and not an evidence one: the route-A observation pass still stands between every disposition in §4 and a selection, and this issue's `Ready` status is now an accurate description of the position rather than an artifact of three unstarted metrics subtasks. |
 | OI-108-006 | **The ticket's `DEPENDENCIES` line names "CBD-14 reconciliation", but the reconciliation this package can consume is CBD-95's**, whose matrix reconciles **CBD-12** (`docs/cbd-95-cbd-12-reconciliation-matrix.md`). CBD-14's own findings reach the CBD-15 packages as the `SR-94-*`, `EM-92-*`, `NT-92-*` and `DI-91-*` registers rather than as a reconciliation artifact. | Recorded rather than resolved. The traceability companion maps the acceptance criterion to what actually exists; if the Product Owner reads the dependency differently, the mapping changes and no evidence does. |

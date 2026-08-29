@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Three of seven acceptance criteria are met, three partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.1 |
+| Document version | 0.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.1; Cross-Category Coherence Review v0.1; Combined Cost Model v0.1; Carried Item Disposition Register v0.1 |
+| Companions | Provider Set Disposition Register v0.2; Cross-Category Coherence Review v0.2; Combined Cost Model v0.2; Carried Item Disposition Register v0.2 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `020bf0c` |
+| Repository baseline | `a969942` |
 | Last updated | August 29, 2026 |
 
 ## 1. Package contents
@@ -180,14 +180,19 @@ does. Recorded at `OI-108-006`.
 
 ### 4.2 The Jira blocking links
 
-CBD-108 is blocked in Jira by **CBD-77, CBD-78 and CBD-79** — the activation,
-engagement and reliability metrics subtasks — all `Ready` and unstarted. The
-ticket's own `DEPENDENCIES` line does not mention them, and no metrics
-definition bears on provider selection.
+CBD-108 **was** blocked in Jira by **CBD-77, CBD-78 and CBD-79** — the
+activation, engagement and reliability metrics subtasks — all `Ready` and
+unstarted, while the ticket's own `DEPENDENCIES` line did not mention them and no
+metrics definition bears on provider selection.
 
-**The links appear to be wrong and the ticket needs correcting.** That is a Jira
-edit, applied directly when authorized; it requires no repository change and no
-Confluence synchronization. Recorded at `OI-108-005`.
+**Resolved: the three links were removed on August 29, 2026**, and the removal
+was verified against the live issue the same day. CBD-108 now carries eight
+links, all seven inbound blockers are `Done`, and the outbound link to CBD-120 is
+intact. `OI-108-005` is closed.
+
+**CBD-108 is therefore no longer blocked by anything in Jira.** That is a tracker
+correction, not an evidence one — §2's dispositions are unchanged, and the
+route-A observation pass still stands between each of them and a selection.
 
 ## 5. Consistency check against the approved decisions
 
@@ -226,3 +231,4 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | Version | Date | Change |
 | --- | --- | --- |
 | 0.1 | August 29, 2026 | Initial draft package. Issues the CBD-108 decision package on the evidence that exists: seven dispositions across six categories with **zero selected**, the `OI-103-011` coherence review with one live contradiction and five conditional ones, a cost model with a complete demand side and an empty price side, and a carried-item register holding all **227** open questions and items with completeness enforced by `scripts/audit-cbd-108.py`. **No verdict, gate outcome, rubric score, evidence record or price moves anywhere.** |
+| 0.2 | August 29, 2026 | Closes `OI-108-005`. The three incorrect Jira blocking links from CBD-77, CBD-78 and CBD-79 were removed on August 29, 2026 and the removal was verified against the live issue: eight links remain, all seven inbound blockers are `Done`, and the outbound link to CBD-120 is intact. **CBD-108 is no longer blocked by anything in Jira.** Recorded in §4.2 and in the disposition register's open items. The whole package moves to v0.2 because its documents cite each other by version and it is one unapproved draft; the coherence review, cost model and carried-item register carry no content change at this version. **No disposition, gate outcome, verdict, rubric score, evidence record or price changes, and the route-A observation pass remains unperformed.** |
