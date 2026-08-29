@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
-| Document version | 0.6 |
+| Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. It performs no observation, contacts no provider, and moves no gate outcome or verdict. |
+| Document version | 0.7 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.6; Cross-Category Coherence Review v0.6; Combined Cost Model v0.6; Carried Item Disposition Register v0.6; Acceptance Criteria Traceability v0.6 |
+| Companions | Provider Set Disposition Register v0.7; Cross-Category Coherence Review v0.7; Combined Cost Model v0.7; Carried Item Disposition Register v0.7; Acceptance Criteria Traceability v0.7 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `153312e` |
+| Repository baseline | `d5bc165` |
 | Last updated | August 29, 2026 |
 
 ## 1. Scope and evidence block
@@ -22,7 +22,7 @@ CBD-108 discharges them.
 
 **Evidence block: `EV-102-212` onward.** CBD-103's cross-category pass reserved
 through `EV-102-211` (evaluation §8.1), and no number above that is claimed
-anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`229` are
+anywhere in the corpus. `212`–`241` is reserved for this pass; `212`–`231` are
 registered below and the remainder are unused.
 
 **This tranche covers two questions**, chosen because each is answerable from
@@ -302,6 +302,33 @@ permits lowering below the class but never raising.
 | Re-verify by | February 28, 2027 |
 | Supersedes | Narrows `EV-102-011`, which stated only that PIM *"requires licensing"* without naming the tier |
 
+### EV-102-230 — Azure PostgreSQL Flexible Server CMK is create-time-only and irreversible
+
+| Field | Content |
+| --- | --- |
+| Claim | `HG-102-039`, `DP-105-009` for C3, category **D** (`OQ-105-009`, `OI-105-004`) |
+| Provider / category | Azure Database for PostgreSQL Flexible Server (C3) / D |
+| Source | *"Data Encryption at Rest in Azure Database for PostgreSQL Flexible Server - Azure Database for PostgreSQL \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-data-encryption` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | From the limitations section: *"You can configure customer managed key encryption only during creation of a new server, not as an update to an existing Azure Database for PostgreSQL flexible server."* And: *"After you configure customer managed key encryption, you can't revert back to system managed key."* And: *"The instance of Azure Key Vault Managed HSM or the instance of Azure Key Vault on which you plan to store the encryption key must exist in the same region where you're creating the Azure Database for flexible server."* Also, in the body: *"You can select the mode only at server creation time. You can't change the mode from one to another for the lifetime of the server."* |
+| **Negative finding** | **The limitations section states no compute-tier restriction on CMK.** Burstable, General Purpose and Memory Optimized are not distinguished anywhere on the page in relation to customer-managed keys. |
+| Limitations | Establishes the constraint for **C3 only**. It does not establish the equivalent for C1 Cloud SQL or C2 Amazon RDS, which `OQ-105-009` also asks about and this tranche did not retrieve. The absence of a stated tier restriction is an absence on **this** page, not a positive statement that every tier supports CMK. |
+| Re-verify by | February 28, 2027 |
+
+### EV-102-231 — Azure's cheapest PostgreSQL tier is disqualified from production by its own documentation
+
+| Field | Content |
+| --- | --- |
+| Claim | `CR0`, `WR-102-019`/`020` for C3, category **D** (`OQ-105-009`) |
+| Provider / category | Azure Database for PostgreSQL Flexible Server (C3) / D |
+| Source | *"Compute Options - Azure Database for PostgreSQL \| Microsoft Learn"*, `https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-compute` |
+| Retrieval date | August 29, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | Three tiers are offered: **Burstable, General Purpose, Memory Optimized**. Of Burstable: *"Best suited for web servers, proof-of-concept environments, small databases, and development builds. **Not recommended for production workloads.**"* And: *"This tier is primarily designed for nonproduction scenarios such as development, staging, or testing, **does not qualify for 24/7 support**, and root cause analysis (RCA) may not be provided."* The smallest General Purpose server type is **D2s_v3 at 2 vCores and 8 GiB**. Automated backup retention is **7 to 35 days** on all three tiers, with long-term retention *"up to 10 years"*. |
+| Limitations | The vendor's recommendation is not a technical restriction — nothing here says Burstable cannot run a production database, only that it is not recommended and carries no 24/7 support. Whether CoBudget treats that as disqualifying is a Product Owner judgment, recorded at `OQ-108-010`. No price is attached to any tier on this page. |
+| Re-verify by | February 28, 2027 |
+
 ## 4. What the records establish
 
 ### 4.1 `OQ-106-010` is closed, and CBD-106 §5.1's hypothesis is falsified
@@ -577,6 +604,81 @@ the identity category's bill. Neither condition is settled, and **both point the
 same way** — C3's zero is the least robust figure in the one category that has
 figures at all.
 
+### 4.9 Category D: the cheapest tier is not the cheapest *viable* tier, and `CR0` turns on that
+
+`OQ-105-009` asks whether any candidate's cheapest viable tier restricts CMK,
+private networking, or PITR. For **C3** the answer is more interesting than the
+question anticipated, and this tranche covers **C3 only** — §4.10 records what
+was not done.
+
+**The expected finding did not appear.** The obvious hypothesis was a tier
+restriction on customer-managed keys — that CMK requires General Purpose or
+above. `EV-102-230` records that **the limitations section states no
+compute-tier restriction at all**. That is recorded as a negative finding rather
+than passed over, because it is the kind of assumption a selection would
+otherwise carry unexamined.
+
+**A sharper constraint appeared instead.** CMK on C3 is **create-time-only and
+irreversible**: *"You can select the mode only at server creation time"*, and
+*"After you configure customer managed key encryption, you can't revert back to
+system managed key."* Reversing either decision means restoring to a new server.
+This is the constraint `OI-105-004` anticipated — it recorded that the
+single-region backup choice *"is create-time-only on at least one candidate"* —
+and it now has a source. It bears on `HG-102-039`, whose subject is whether key
+custody can be separated from backup-data access: on C3 that separation is a
+decision taken once, at provisioning, and not revisited.
+
+**The `CR0` finding is the one that moves the cost floor.** Azure's cheapest
+PostgreSQL tier is **Burstable**, and Microsoft's own documentation says it is
+*"Not recommended for production workloads"*, is *"primarily designed for
+nonproduction scenarios"*, and **"does not qualify for 24/7 support"** with RCA
+*"may not be provided"*.
+
+`CR0` prices the cheapest **gate-clearing** tier, not the cheapest tier. If
+CoBudget will not run its primary datastore on a tier the vendor excludes from
+production support, then C3's category **D** floor is **General Purpose**, whose
+smallest server type is `D2s_v3` at 2 vCores and 8 GiB.
+
+**That is a floor set by support terms, not by demand.** `DM-102-030` puts the
+Base database at **0.4 GB** and High at **4.1 GB**, against a minimum General
+Purpose server carrying 8 GiB of memory and a 32 GiB storage minimum. Category D
+will be paying for roughly twenty times the storage it uses and a machine sized
+for a workload CoBudget does not have — which is precisely the floor-dominated
+outcome CBD-103 §6.2 predicted, now with a named tier rather than an inference.
+
+**Whether Burstable is actually disqualifying is a Product Owner call**, not a
+gate outcome. Nothing says Burstable cannot run the database; it says Microsoft
+does not recommend it and will not support it around the clock. `OQ-108-010`
+puts that question rather than settling it by drafting — and the answer moves
+C3's category D cost by the difference between the two tiers.
+
+**One incidental answer.** `EV-102-231` records automated backup retention of
+**7 to 35 days on all three tiers**, which is part of what `OQ-105-002` asks and
+which the evaluation had recorded as settled for C3 by `EV-102-033`. It
+corroborates rather than moves.
+
+### 4.10 What this tranche did not do
+
+Stated plainly because the tranche was opened to work **categories H and D**, and
+it covered part of one of them.
+
+* **Category H is untouched.** No hosting price was retrieved for any candidate.
+  `OQ-103-015` remains open in full, and `OQ-103-016` — whether any candidate's
+  cheapest gate-clearing tier caps seats at one, which converts to an
+  `HG-102-006` failure per `OI-102-015` — was not attempted.
+* **Category D covers C3 only.** `OQ-105-009` asks about all three candidates;
+  the Cloud SQL and Amazon RDS tier restrictions were not retrieved, and
+  `OQ-105-008`'s price lines were not retrieved for any candidate.
+* **No price figure was obtained in either category.** Both pages consulted
+  defer pricing to a calculator or a separate pricing page. What this tranche
+  produced is a **constraint on which tier must be priced**, not a price.
+
+The remaining H and D work is larger than the tranches before it: category H
+prices a composition of six services across three providers, and neither
+category has an established instance sizing to price against. That is a
+different shape of work from the single-page retrievals that closed category E
+and answered `OQ-103-019`, and `OI-108-022` records it.
+
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -586,6 +688,7 @@ figures at all.
 | OQ-108-007 | Do **Cloud Scheduler** and **Secret Manager** appear on the current Google data-residency list, or on the companion *"without location configuration"* list? `EV-102-224` is an April 2024 snapshot that omits both; `EV-102-226` records that the companion list could not be read. | **The retrieval that now decides `HG-102-013` for C1**, replacing `OQ-108-005` in that role |
 | OQ-108-008 | The per-segment US SMS send rate and the quantified carrier fees for AWS End User Messaging. `EV-102-227` records that neither is on the pricing page. | `CT-102-006` for C2, category N — the one term missing from the §4.7 comparison |
 | OQ-108-009 | Can `HG-102-005` be satisfied for C3 without Privileged Identity Management, and if not, what does Entra ID P2 or ID Governance cost per administrator seat? | **`CR0` for C3 across categories H and I.** `EV-102-229` establishes what PIM requires, not that PIM is required |
+| OQ-108-010 | Does CoBudget accept a database tier its vendor describes as *"Not recommended for production workloads"* and that *"does not qualify for 24/7 support"*? If not, C3's category D floor is General Purpose rather than Burstable. | **Product Owner decision, and it sets `CR0` for C3 in category D.** `EV-102-231` |
 | OQ-108-001 | Does *"core features"* in the Entra External ID allowance include Conditional Access, and what is the per-MAU rate beyond 50,000? Neither is stated on any page retrieved. | `OQ-104-016`; CBD-104 §6.6's `$0.00` figure for C3 |
 | OQ-108-002 | Which plan clears the `ED-106-*` gate set for each email candidate? `CR0` prices the **cheapest gate-clearing tier**, and these records price the cheapest tier of any kind. For C2 that is Essentials; whether Essentials clears the gates is unestablished. | `CR0`; `OQ-106-010`'s remainder |
 | OQ-108-003 | What is CoBudget's average outbound message size? C3 meters data transferred at `$0.00012/MB`, and no approved source establishes a message size, so the C3 figure carries an unresolved term. | `CT-102-006` for C3, category E |
@@ -595,6 +698,7 @@ figures at all.
 
 | ID | Item | Effect |
 | --- | --- | --- |
+| OI-108-022 | **The remaining H and D pricing work is a different shape from the tranches that preceded it.** Category H prices a composition of six services across three providers, and neither category has an established instance sizing to price against — which is part of why both were `UNKNOWN` to begin with. | Recorded so the pass's rate of progress is not extrapolated from the single-page retrievals that closed category E. The next useful step in category H may be `OQ-103-016`, which converts to an `HG-102-006` failure and is a gate question wearing a cost question's clothes, rather than the price lines of `OQ-103-015`. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | **`EV-102-214` is the first cost record in the corpus whose own source disclaims it.** Register §3.2 requires Documented-or-stronger for a cost figure, and this is Documented — but the page says its figures *"may not reflect the latest Azure pricing."* | Recorded at Low confidence per §3.1 rather than excluded, because a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces, and the disclaimer is quoted so no reader mistakes it for a firm price. If a firm C3 email rate is needed, `OQ-108-004` is the route. |
