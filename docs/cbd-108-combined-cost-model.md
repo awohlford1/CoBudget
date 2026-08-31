@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.33 |
+| Document version | 0.34 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.33; Cross-Category Coherence Review v0.33; Carried Item Disposition Register v0.33; Acceptance Criteria Traceability v0.33; Evidence Retrieval Pass v0.33 |
+| Companions | Provider Set Disposition Register v0.34; Cross-Category Coherence Review v0.34; Carried Item Disposition Register v0.34; Acceptance Criteria Traceability v0.34; Evidence Retrieval Pass v0.34 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `b3058cd` |
+| Repository baseline | `b96485b` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -130,6 +130,14 @@ The `OI-102-015` seat check found **no seat cap** on C2 (1000 roles per account,
 The check did price **Entra ID P2 at $10.00 user/month** (`EV-102-272`), answering the half of `OQ-108-009` open since tranche 5. With `CT-102-003`'s **two** seats that is $20.00/month, and with Developer support at $29.00 it gives C3 an identified floor of **$49.00/month**.
 
 **That figure carries three cautions and should not appear without them.** It counts **only the forcers identified so far** — `CT-102-001`, `002`, `004`, `006` and `007` remain `UNKNOWN` for C3 and Key Vault Premium is a forced tier with no price. It is **conditional** on PIM being required, which `EV-102-229` did not establish. And it has **no counterpart**: C2's seat cost is not stated and C1's was not retrieved, so **$49.00 cannot be compared to anything**. `OI-108-039`. Retrieval pass §4.43.
+
+### 4.4 The gate-forcing map is complete, and it is not a ranking — added at v0.34
+
+**`OI-108-040` states the correction plainly**: §4.3's predecessor read the partial map as favouring C1 and C2 on cost. **C2's zeros are absences of capability.** AWS ships **no native** just-in-time elevation and validates partner products instead (`EV-102-008`), and its staff-access visibility raises a `FAIL` question (`OI-103-018`). You cannot force a tier for a capability a provider does not offer, so **the candidate with the least tier-forcing holds the worst position on those gates, not the best**.
+
+**The template cannot record C2's actual cost.** `CT-102-001`—`007` price provider charges; a third-party licence bought to supply a missing capability fits none of them, so it would be recorded as absent — `CR4`'s *"a missing line item must never silently improve a total"* occurring through the template itself. `OQ-108-055`.
+
+**And a third caution on C3's $49.00.** `EV-102-012`'s complete Customer Lockbox supported-services list **omits Azure Container Apps**, the C3 runtime CBD-103 §5 carries. The $29.00/month support plan `HG-102-009` forces therefore buys a control that does not cover the evaluated compute service. The plan is still forced; the figure is **less useful than it looked**. Retrieval pass §4.44.
 
 ## 5. What is known without prices
 
