@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.41 |
+| Document version | 0.42 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.41; Combined Cost Model v0.41; Carried Item Disposition Register v0.41; Acceptance Criteria Traceability v0.41; Evidence Retrieval Pass v0.41 |
+| Companions | Provider Set Disposition Register v0.42; Combined Cost Model v0.42; Carried Item Disposition Register v0.42; Acceptance Criteria Traceability v0.42; Evidence Retrieval Pass v0.42 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `587eadd` |
+| Repository baseline | `f3fb289` |
 | Last updated | August 29, 2026 |
 
 ## 1. What this review is for
