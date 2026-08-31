@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.34 |
+| Document version | 0.35 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.34; Cross-Category Coherence Review v0.34; Carried Item Disposition Register v0.34; Acceptance Criteria Traceability v0.34; Evidence Retrieval Pass v0.34 |
+| Companions | Provider Set Disposition Register v0.35; Cross-Category Coherence Review v0.35; Carried Item Disposition Register v0.35; Acceptance Criteria Traceability v0.35; Evidence Retrieval Pass v0.35 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `b96485b` |
+| Repository baseline | `b7b0f8a` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -138,6 +138,14 @@ The check did price **Entra ID P2 at $10.00 user/month** (`EV-102-272`), answeri
 **The template cannot record C2's actual cost.** `CT-102-001`—`007` price provider charges; a third-party licence bought to supply a missing capability fits none of them, so it would be recorded as absent — `CR4`'s *"a missing line item must never silently improve a total"* occurring through the template itself. `OQ-108-055`.
 
 **And a third caution on C3's $49.00.** `EV-102-012`'s complete Customer Lockbox supported-services list **omits Azure Container Apps**, the C3 runtime CBD-103 §5 carries. The $29.00/month support plan `HG-102-009` forces therefore buys a control that does not cover the evaluated compute service. The plan is still forced; the figure is **less useful than it looked**. Retrieval pass §4.44.
+
+### 4.5 The first `$-` gap closes, and it opens a 2,336x question — added at v0.35
+
+Key Vault pricing supplied by the Product Owner (`EV-102-276`) corrects §4.1's framing twice. **Premium carries no plan fee**: Standard and Premium charge identical rates for secrets operations and for software-protected keys, differing only in whether HSM-protected keys may be held. So the forced tier's cost is **$1 per key per month** in `CT-102-007`, not a `CT-102-001` plan fee of any size.
+
+**And `HG-102-024` has two Azure answers three orders of magnitude apart.** HSM-protected keys in Key Vault Premium cost **$1 per key per month**; a **Managed HSM pool** costs **$3.20 per hour, $2,336.00 per month**, charged per pool. C3's identified floor is therefore either about **$50** or about **$2,385** depending on which the gate requires, and **the cost model cannot be completed for C3 until that is settled** (`OQ-108-056`). No further price retrieval substitutes for the answer.
+
+Rotation compounds it: *"each version of an HSM protected key is counted as a separate key"*, and automated rotation is $1 per scheduled rotation. Retrieval pass §4.45.
 
 ## 5. What is known without prices
 
