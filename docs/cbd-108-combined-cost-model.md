@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.37 |
+| Document version | 0.38 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.37; Cross-Category Coherence Review v0.37; Carried Item Disposition Register v0.37; Acceptance Criteria Traceability v0.37; Evidence Retrieval Pass v0.37 |
+| Companions | Provider Set Disposition Register v0.38; Cross-Category Coherence Review v0.38; Carried Item Disposition Register v0.38; Acceptance Criteria Traceability v0.38; Evidence Retrieval Pass v0.38 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `499de2e` |
+| Repository baseline | `4bff303` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -162,6 +162,22 @@ Rotation compounds it: *"each version of an HSM protected key is counted as a se
 **No figure in this model moves.** C3's email line was already `$0.06 + data` at Base, and 250 x $0.00025 is $0.0625. What changes is that it no longer rests on a source that disclaims itself.
 
 **One term still open, and it is small.** `$0.00012/MB` needs a message size, which `OQ-108-003` records as unestablished by any approved source — a CoBudget input, not a retrieval. At Base a 100 KB message adds about **$0.003** and a 1 MB message about **$0.03**, so it bounds a rounding error rather than a decision. Retrieval pass §4.47.
+
+### 4.8 The rulings of August 30, and C3's floor settles at $61.41 — added at v0.38
+
+Three Product Owner rulings close the open cost decisions for C3.
+
+| Line | Monthly | Ruling |
+| --- | --- | --- |
+| Developer support | **$29.00** | Vendor-disclaimed tiers accepted for the Private MVP |
+| Entra ID P2 x 2 seats | **$20.00** | Conditional on PIM being required (`OQ-108-009`) |
+| Key Vault Standard | **$0.00** | *"Where supported"* makes HSM optional |
+| PostgreSQL Burstable B1ms | **$12.41** | Same ruling as the support plan |
+| **Identified, categories H and D** | **$61.41** | |
+
+**The range collapses from *$62.41, or $213.52, or about $2,548* to one figure**, and what was removed was **decision** uncertainty rather than measurement uncertainty. Every `OI-108-039` caution still applies: two of six categories, PIM assumed required, and **no counterpart figure for C1 or C2**, so this is not a comparison.
+
+The strict reading of ruling 1 would have cost **$222.11/month more**, and the acceptance is scoped to the Private MVP with a revisit that still needs a named trigger (`OQ-108-058`). Retrieval pass §4.48.
 
 ## 5. What is known without prices
 
