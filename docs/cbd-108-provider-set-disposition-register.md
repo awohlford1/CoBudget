@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.43 |
+| Document version | 0.44 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.43; Combined Cost Model v0.43; Carried Item Disposition Register v0.43; Acceptance Criteria Traceability v0.43; Evidence Retrieval Pass v0.43 |
+| Companions | Cross-Category Coherence Review v0.44; Combined Cost Model v0.44; Carried Item Disposition Register v0.44; Acceptance Criteria Traceability v0.44; Evidence Retrieval Pass v0.44 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `4ae8deb` |
+| Repository baseline | `b12ace4` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -51,7 +51,7 @@ but not selectable*.
 
 | Category | Subtask | Candidates | Verdicts | Observation-bound pass tests |
 | --- | --- | --- | --- | --- |
-| **H** — Hosting, runtime, jobs, telemetry | CBD-103 | C1 Google Cloud, C2 AWS, C3 Azure | **All three `INELIGIBLE`** — `HG-102-013` `FAIL` on re-measurement against catalog v1.3, CBD-103 v1.4 | 10 (`OI-103-008`) |
+| **H** — Hosting, runtime, jobs, telemetry | CBD-103 | C1 Google Cloud, C2 AWS, C3 Azure | **C1 `ELIGIBLE-PENDING-EVIDENCE`; C2 and C3 `INELIGIBLE`** — `HG-102-013` `FAIL` at CBD-103 v1.4, corrected for C1 at v1.6 | 10 (`OI-103-008`) |
 | **I** — Identity | CBD-104 | C2 Amazon Cognito, C3 Microsoft Entra External ID, C4 Auth0 | All three `ELIGIBLE-PENDING-EVIDENCE` | 9 (`OI-104-007`) |
 | **D** — Managed PostgreSQL | CBD-105 | C1 Cloud SQL, C2 Amazon RDS, C3 Azure Flexible Server | C1 and C3 `ELIGIBLE-PENDING-EVIDENCE`; **C2 `INELIGIBLE`** — `HG-102-013` `FAIL`, CBD-105 v1.4 | 8 (`OI-105-007`) |
 | **E** — Transactional email | CBD-106 | C2 Amazon SES, C3 Azure Communication Services Email, C5 Postmark | All three `ELIGIBLE-PENDING-EVIDENCE` | 11 (`OI-106-007`) |
