@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.32 |
+| Document version | 0.33 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.32; Cross-Category Coherence Review v0.32; Carried Item Disposition Register v0.32; Acceptance Criteria Traceability v0.32; Evidence Retrieval Pass v0.32 |
+| Companions | Provider Set Disposition Register v0.33; Cross-Category Coherence Review v0.33; Carried Item Disposition Register v0.33; Acceptance Criteria Traceability v0.33; Evidence Retrieval Pass v0.33 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `816f188` |
+| Repository baseline | `b3058cd` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -122,6 +122,14 @@ Retrieval attempts across tranches 28 and 29 did not fail evenly. **AWS list pri
 **`HG-102-024` gates a tier on C3 alone.** Azure reserves HSM-protected keys to **Premium** (`EV-102-267`); AWS makes non-exportability the standard property of every KMS key, so the cost is a usage rate in `CT-102-007` rather than a plan fee (`EV-102-270`); Google names no tier, though only as an absence held at Low confidence (`EV-102-271`, `OQ-108-051`).
 
 **Both completed rows favour C1 and C2 on cost, and neither is a ranking** — three rows of the map are unchecked on two candidates each, and the seat check `OQ-108-052` could convert a cost line into an `HG-102-006` failure. Retrieval pass §4.42.
+
+### 4.3 The first numbered floor, and why it must not be quoted alone — added at v0.33
+
+The `OI-102-015` seat check found **no seat cap** on C2 (1000 roles per account, `EV-102-273`) or C3 (Entra ID Free exists); C1 was not retrieved (`EV-102-274`). The feared `HG-102-006` failure does not materialise on either candidate checked.
+
+The check did price **Entra ID P2 at $10.00 user/month** (`EV-102-272`), answering the half of `OQ-108-009` open since tranche 5. With `CT-102-003`'s **two** seats that is $20.00/month, and with Developer support at $29.00 it gives C3 an identified floor of **$49.00/month**.
+
+**That figure carries three cautions and should not appear without them.** It counts **only the forcers identified so far** — `CT-102-001`, `002`, `004`, `006` and `007` remain `UNKNOWN` for C3 and Key Vault Premium is a forced tier with no price. It is **conditional** on PIM being required, which `EV-102-229` did not establish. And it has **no counterpart**: C2's seat cost is not stated and C1's was not retrieved, so **$49.00 cannot be compared to anything**. `OI-108-039`. Retrieval pass §4.43.
 
 ## 5. What is known without prices
 
