@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.39 |
+| Document version | 0.40 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.39; Combined Cost Model v0.39; Carried Item Disposition Register v0.39; Acceptance Criteria Traceability v0.39; Evidence Retrieval Pass v0.39 |
+| Companions | Cross-Category Coherence Review v0.40; Combined Cost Model v0.40; Carried Item Disposition Register v0.40; Acceptance Criteria Traceability v0.40; Evidence Retrieval Pass v0.40 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `598dbbb` |
+| Repository baseline | `8ccf59f` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -252,7 +252,114 @@ absent decision that is not absent.
 
 **Review trigger for SMS.** The observation pass, plus `OQ-130-011`.
 
-## 5. Cost guardrails
+## 5. `HG-102-013` exception records, drafted for approval
+
+**These are drafts.** `EX-102-001` reserves approval to the Product Owner, so
+nothing here is granted. **Two rules may prevent them being granted at all**,
+and both are stated before the records rather than after.
+
+### 5.0 Two blockers, neither of which this package can clear
+
+**`EX-102-006` may bar individual approval entirely.** The rule: *"any exception
+on a gate citing S4 material requires a full re-evaluation rather than another
+individual approval."* `HG-102-013` cites **CBD-91 {S}5.1**, and that section does
+mention S4 {D} *"S4 classes listed below are excluded"* from the relevant
+application-data backup.
+
+Two readings, and this package picks neither:
+
+1. **The gate cites S4, so `EX-102-006` fires.** The citation is the test the
+   rule names, and it is met on its face. Individual approval is unavailable and
+   a full re-evaluation is required instead.
+2. **The gate's subject matter excludes S4.** {S}5.1 mentions S4 precisely to
+   exclude those classes from backups, so a gate about **backup** retention does
+   not reach S4 material, and the rule's purpose {D} preventing protections on
+   the most sensitive tier being traded away {D} is not engaged.
+
+**Reading 2 is the more faithful to intent and reading 1 is the more faithful to
+the text**, which is exactly the kind of disagreement `EX-102-001` reserves to
+the Product Owner. `OQ-108-059`.
+
+**`EX-102-007` limits what approval would achieve.** The rule: *"A compensating
+control that is CoBudget-side work is not effective until built and verified.
+Until then the exception is provisional and the gate remains `FAIL`."*
+
+The compensating control below is **hybrid** {D} a vendor capability that
+CoBudget must configure {D} so on the conservative reading it is CoBudget-side
+work until built and verified. **If so, approving these exceptions does not
+produce a selectable set today.** It produces a route to one, conditional on
+`SR-94-*` verification. That is a materially weaker outcome than {S}4.35
+anticipated when it described the exception route as *"a way to proceed"*, and
+it is stated here so the decision is made with it in view.
+
+### 5.1 The compensating control offered
+
+**Cryptographic erasure through provider-enforced key deletion.**
+
+A provider-held copy whose encryption key has been destroyed is unreadable
+regardless of how long the copy persists. That converts an unbounded **retention**
+question into a bounded **key-deletion** question, and the key-deletion bound is
+stated where the retention bound is not:
+
+* **C2** {D} AWS KMS *"requires you to set a waiting period of 7 " + D + " 30 days"*
+  and *"After the waiting period ends, AWS KMS deletes the KMS key, its aliases,
+  and all related AWS KMS metadata"* (CBD-108 {S}4.30). Provider-enforced at both
+  ends.
+* **C3** {D} customer-managed keys are supported on Flexible Server, and
+  CBD-108 {S}4.9 records the mode as create-time-only and irreversible, which
+  constrains **when** the control can be adopted rather than whether.
+* **C1** {D} not established. Cloud KMS key-destruction timing was not
+  retrieved, and CBD-108 records six failed attempts at Google pricing and
+  documentation in this area. **C1's control is therefore unevidenced**, which
+  is why its record below is the weakest of the three.
+
+**Whether this is a vendor capability or CoBudget work: both.** The provider
+supplies the key-deletion guarantee; CoBudget must adopt customer-managed keys,
+hold them, and destroy them on the disposition schedule. `EX-102-002` requires
+the classification and the honest answer is hybrid, which `EX-102-007` then
+treats conservatively.
+
+**One thing it does not compensate for.** The gate has a **region** element as
+well as a lifetime element, and cryptographic erasure does not bound where a
+copy sits. **C1 and C3 fail on region**, not on lifetime, so for those two this
+control addresses a limb they did not fail. `OQ-108-060`.
+
+### 5.2 The records
+
+Fields per `EX-102-002`. **Expiry is fixed by `EX-102-004`** at twelve months
+from approval or the end of the Private MVP phase, whichever is sooner.
+
+| Field | **EXC-108-001** | **EXC-108-002** | **EXC-108-003** |
+| --- | --- | --- | --- |
+| Provider / category | C1 Google Cloud / H | C2 AWS / H and D | C3 Azure / H |
+| Failed gate | `HG-102-013` | `HG-102-013` | `HG-102-013` |
+| Cited source | CBD-91 {S}5.1 provider row | CBD-91 {S}5.1 provider row | CBD-91 {S}5.1 provider row |
+| Limb failed | **Region** {D} the current data-residency list omits Cloud Scheduler | **Lifetime** {D} CloudWatch Logs states a bound with an unbounded tail; RDS states no provider ceiling | **Region** {D} Front Door is absent from the Core Services list |
+| Compensating control | Cryptographic erasure, **unevidenced for C1** | Cryptographic erasure via KMS, provider-enforced 7{D}30 days | Cryptographic erasure via customer-managed keys, create-time-only |
+| Vendor or CoBudget | **Hybrid**, so provisional under `EX-102-007` | **Hybrid**, so provisional under `EX-102-007` | **Hybrid**, so provisional under `EX-102-007` |
+| Does the control address the failed limb? | **No** {D} erasure does not bound location | **Yes** | **No** {D} erasure does not bound location |
+| Residual risk | Copies of scheduler job definitions and target URLs sit outside the region commitment, unbounded in location | Log and database copies persist past the configured period by an amount AWS declines to bound | Edge-tier copies sit outside the Geo commitment, unbounded in location |
+| Approver | **Not approved** | **Not approved** | **Not approved** |
+| Approval date | {D} | {D} | {D} |
+| Expiry if approved | 12 months or end of Private MVP, whichever is sooner | Same | Same |
+
+### 5.3 What this package recommends, and what it will not do
+
+**`EXC-108-002` is the only one of the three whose control addresses the limb
+that failed.** C2 fails on lifetime and cryptographic erasure bounds lifetime.
+C1 and C3 fail on **region**, and no key deletion moves a copy.
+
+**So the exception route as drafted does not rescue C1 or C3.** For those two the
+honest options are a composition change {D} dropping Cloud Scheduler and Front
+Door respectively, which CBD-108 {S}4.17 and `OQ-108-028` already put to CBD-103
+{D} or provider contact. Neither is an exception.
+
+**This package does not grant, recommend granting, or assume any of the three.**
+`EX-102-001` reserves that, and {S}5.0's two blockers are unresolved. What it
+does is put drafted records in front of the decision so that approving or
+refusing them is a choice made on stated terms.
+
+## 6. Cost guardrails
 
 The ticket requires that *"cost warning/stop thresholds, owner, cadence, and
 actions are explicit."* The structure is specified below. **The two threshold
@@ -279,7 +386,7 @@ Two facts block the numbers, both recorded upstream rather than discovered here:
 **This is a named gap, recorded at `OI-108-002`.** The combined cost model
 companion sets out exactly what must be retrieved to close it.
 
-## 6. Legal and contract review
+## 7. Legal and contract review
 
 Required by the ticket's fifth acceptance criterion. **No legal review has been
 performed, and this package does not constitute one.**
@@ -291,7 +398,7 @@ performed, and this package does not constitute one.**
 | **Executed agreements after selection** | Out of scope here. `OI-102-024` records the register question it raises: a confidential executed DPA is not registrable under evidence register §3.0.2, yet `HG-102-013` expects gate outcomes to rest on exactly such instruments |
 | **Limitation** | No qualified legal reviewer has read any instrument in this set. Every contractual statement in the CBD-15 packages is a reading of a published document by its author |
 
-## 7. What this package does not establish
+## 8. What this package does not establish
 
 * **No provider is selected, in any category.** Nothing here is a preference, a
   shortlist within a shortlist, or a ranking.
@@ -303,7 +410,7 @@ performed, and this package does not constitute one.**
 * **This is a desk package by one author**, inheriting that limitation from all
   six evaluations, none of which was reviewed by anyone other than its author.
 
-## 8. Open items
+## 9. Open items
 
 | ID | Item | Effect |
 | --- | --- | --- |
