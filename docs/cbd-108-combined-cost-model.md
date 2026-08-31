@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.35 |
+| Document version | 0.36 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.35; Cross-Category Coherence Review v0.35; Carried Item Disposition Register v0.35; Acceptance Criteria Traceability v0.35; Evidence Retrieval Pass v0.35 |
+| Companions | Provider Set Disposition Register v0.36; Cross-Category Coherence Review v0.36; Carried Item Disposition Register v0.36; Acceptance Criteria Traceability v0.36; Evidence Retrieval Pass v0.36 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `b7b0f8a` |
+| Repository baseline | `643c44d` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -99,7 +99,7 @@ category where the metering question is as consequential as the rate.
 | --- | --- | --- |
 | **H** — Hosting | **Partly** — August 29, 2026 | **`CT-102-005` is priced for two of three.** C3 **$29.00/month** Developer support, the first `CR0`-forced price in the category, and not optional (`EV-102-265`); C2 **$0.00** unless a gate is found to force it off free Basic, its entry paid tier being $29 (`EV-102-264`); **C1 not retrieved across four URLs** (`EV-102-266`), and subordinate to `OQ-103-007` in any case. Five of seven line items remain `UNKNOWN`. Retrieval pass §4.40 |
 | **I** — Identity | **Partially** | The only category with figures. Two of three totals carry unresolved tier risk — CBD-104 §6.6 |
-| **D** — PostgreSQL | **No**, but the floor is narrowed | `CT-102-006` still `UNKNOWN × 0.4 GB Base`. **The tier to price is now identified for C3**: `EV-102-231` records that Azure's cheapest tier is excluded from production support, so `CR0` is plausibly General Purpose at 2 vCores / 8 GiB rather than Burstable — pending `OQ-108-010` |
+| **D** — PostgreSQL | **Compute priced** — August 30, 2026 | `CT-102-006` still `UNKNOWN × 0.4 GB Base`. **The tier to price is now identified for C3**: `EV-102-231` records that Azure's cheapest tier is excluded from production support, so `CR0` is plausibly General Purpose at 2 vCores / 8 GiB rather than Burstable — pending `OQ-108-010` |
 | **E** — Email | **Yes** — August 29, 2026 | Retrieved by this package: `EV-102-212`–`215`. C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` at Base. C3's rate carries the vendor's own *"illustrative purposes"* disclaimer and is held at Low confidence |
 | **F** — Financial connectivity | **No** | `OQ-107-020` records that this category **requires provider contact** — reading will not close it |
 | **N** — Push and SMS | **Partly** — August 29, 2026 | Floors and registration fees retrieved for both candidates (`EV-102-227`–`228`); **C2's per-segment rate was not obtainable** and carrier fees are unquantified for it (`OQ-108-008`) |
@@ -146,6 +146,14 @@ Key Vault pricing supplied by the Product Owner (`EV-102-276`) corrects §4.1's 
 **And `HG-102-024` has two Azure answers three orders of magnitude apart.** HSM-protected keys in Key Vault Premium cost **$1 per key per month**; a **Managed HSM pool** costs **$3.20 per hour, $2,336.00 per month**, charged per pool. C3's identified floor is therefore either about **$50** or about **$2,385** depending on which the gate requires, and **the cost model cannot be completed for C3 until that is settled** (`OQ-108-056`). No further price retrieval substitutes for the answer.
 
 Rotation compounds it: *"each version of an HSM protected key is counted as a separate key"*, and automated rotation is $1 per scheduled rotation. Retrieval pass §4.45.
+
+### 4.6 Category D compute is priced, and the ruling is worth $151.11 a month — added at v0.36
+
+`EV-102-277`, supplied by the Product Owner, prices the `OQ-108-010` decision. `CR0` takes C3's category D line from **$12.41/month** (Burstable **B1ms**, 1 vCore, 2 GiB) to **$163.52/month** (General Purpose **DC2ads v6**, 2 vCores, 8 GiB) if the Product Owner rules against a tier the vendor scopes away from production. `DM-102-030` puts Base at **0.4 GB**, so B1ms is ample on capacity and the question is entirely the production disclaimer.
+
+**The 13.2x is a `CR0` artefact.** At matched 2 vCores and 8 GiB, B2ms is $99.28 against $163.52, a ratio of 1.65. Excluding Burstable does not move CoBudget to the matched Burstable size; it moves it to the cheapest General Purpose one.
+
+**And the General Purpose ceiling may be too high.** Everything supplied under General Purpose is the **DCadsv6 confidential-computing** series. If a cheaper General Purpose series exists, $163.52 over-states the floor — `OQ-108-057`, which should be answered **before** `OQ-108-010` is decided. Compute only: storage, backup and IOPS were not supplied, so `CT-102-006` is not closed. Retrieval pass §4.46.
 
 ## 5. What is known without prices
 
