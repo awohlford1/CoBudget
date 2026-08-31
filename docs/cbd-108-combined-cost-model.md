@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.36 |
+| Document version | 0.37 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.36; Cross-Category Coherence Review v0.36; Carried Item Disposition Register v0.36; Acceptance Criteria Traceability v0.36; Evidence Retrieval Pass v0.36 |
+| Companions | Provider Set Disposition Register v0.37; Cross-Category Coherence Review v0.37; Carried Item Disposition Register v0.37; Acceptance Criteria Traceability v0.37; Evidence Retrieval Pass v0.37 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `643c44d` |
+| Repository baseline | `499de2e` |
 | Last updated | August 29, 2026 |
 
 ## 1. What was asked for, and what is available
@@ -154,6 +154,14 @@ Rotation compounds it: *"each version of an HSM protected key is counted as a se
 **The 13.2x is a `CR0` artefact.** At matched 2 vCores and 8 GiB, B2ms is $99.28 against $163.52, a ratio of 1.65. Excluding Burstable does not move CoBudget to the matched Burstable size; it moves it to the cheapest General Purpose one.
 
 **And the General Purpose ceiling may be too high.** Everything supplied under General Purpose is the **DCadsv6 confidential-computing** series. If a cheaper General Purpose series exists, $163.52 over-states the floor — `OQ-108-057`, which should be answered **before** `OQ-108-010` is decided. Compute only: storage, backup and IOPS were not supplied, so `CT-102-006` is not closed. Retrieval pass §4.46.
+
+### 4.7 The email rates are confirmed, and the disclaimer discharged — added at v0.37
+
+`EV-102-278`, supplied by the Product Owner, carries **`$0.00025/Email sent`** and **`$0.00012/MB transferred`** from the authoritative page that `EV-102-215` recorded as rendering `$-`. **They match `EV-102-214`'s figures exactly**, so the Learn page's self-disclaimer is discharged and `OI-108-021` resolves.
+
+**No figure in this model moves.** C3's email line was already `$0.06 + data` at Base, and 250 x $0.00025 is $0.0625. What changes is that it no longer rests on a source that disclaims itself.
+
+**One term still open, and it is small.** `$0.00012/MB` needs a message size, which `OQ-108-003` records as unestablished by any approved source — a CoBudget input, not a retrieval. At Base a 100 KB message adds about **$0.003** and a 1 MB message about **$0.03**, so it bounds a rounding error rather than a decision. Retrieval pass §4.47.
 
 ## 5. What is known without prices
 
