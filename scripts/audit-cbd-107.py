@@ -72,7 +72,7 @@ PACKAGE_FILES = (SPEC, EVALUATION, LIFECYCLE, OPERATIONAL, TRACE)
 # stale baseline or fail a correct one.
 REPOSITORY_BASELINE = {
     SPEC: "`c15b526`",
-    EVALUATION: "`9aabc13`",
+    EVALUATION: "`598dbbb`",
     LIFECYCLE: "`c15b526`",
     OPERATIONAL: "`c15b526`",
     TRACE: "`9aabc13`",

@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Applies the approved CBD-102 method to managed PostgreSQL candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. Product Owner approved v1.1 on August 21, 2026: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. v1.2 reuses the CBD-103 cross-category documentary pass: four documentary gate outcomes move, **no verdict does**, and §7.6 records that Customer Lockbox may not cover Flexible Server at all. |
-| Document version | 1.3 |
+| Status | **Approved** — Product Owner approved v1.0 on August 20, 2026. Applies the approved CBD-102 method to managed PostgreSQL candidates. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why, and the remedy is already authorized. Product Owner approved v1.1 on August 21, 2026: it moves this package's evidence-register reservation out of a range a sibling evaluation had already registered records in, and changes no record, gate outcome, verdict, tally, or price. v1.2 reuses the CBD-103 cross-category documentary pass: four documentary gate outcomes move, **no verdict does**, and §7.6 records that Customer Lockbox may not cover Flexible Server at all. **v1.4 re-measures `HG-102-013` against CBD-102 v1.3. C3's `PASS` holds and is better supported; C2 now `FAIL`s for want of a provider-stated retention ceiling and is `INELIGIBLE`; C1 remains `UNPROVEN` on an unretrieved equivalent.** |
+| Document version | 1.4 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-105](https://cobudget.atlassian.net/browse/CBD-105) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Data Protection and Recovery Specification v1.2; Operational and Cost Assessment v1.1; Acceptance Criteria Traceability v1.3 |
 | Confluence page | [CBD-105 — PostgreSQL Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/12845057) |
-| Repository baseline | `c689192` |
+| Repository baseline | `598dbbb` |
 | Last updated | August 22, 2026 |
 
 ## 1. Purpose
@@ -151,7 +151,7 @@ documentation or a contract can settle. `CFG` marks a Config gate.
 | HG-102-010 encryption in transit and at rest | DOC | `PASS` | `PASS` | `PASS` | **Settled for two of three at v1.2.** v1.0 had the service-level key facts (`EV-102-034`–`036`) but not the algorithm-and-custody statements the pass test demands, because those records were retrieved against `HG-102-039`. The provider-level pass supplies the missing half. C1 `EV-102-164` (*"AES-256 by default"*, AES-GCM, *"We own and manage the keys"*) with `EV-102-165` (ALTS, PSP) and CMEK at `EV-102-034`. C3 `EV-102-162` (AES-256 DEK, KEK never leaving Key Vault) with `EV-102-163` (MACsec, AES-256, SHA-384) and CMK at `EV-102-036`. C2 `EV-102-009` names 256-bit AES-GCM and `EV-102-035` covers RDS. **C2 settled at v1.1 by a later retrieval in the same pass**: `EV-102-174`, the current EC2 data-protection page, states *"All data flowing across AWS Regions over the AWS global network is automatically encrypted at the physical layer before it leaves AWS secured facilities"*, *"All traffic between AZs is encrypted"*, and the TLS floor *"We require TLS 1.2"*. It supersedes the historical whitepaper, which is no longer relied on for anything. C3 additionally gains service-level confirmation at `EV-102-176`: encryption at rest with service-managed keys *"covers the primary server, replicas, point-in-time-recovery (PITR), and backups"*, which is the per-service assurance the provider-level records could not give. |
 | HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `PASS` | `UNPROVEN` | **Settled for C2 at v1.2.** `EV-102-007`: an enumerated AWS-wide list dated "Last Updated: July 28, 2026" on the page, with a 30-day advance-notice commitment and region scoping. C1 and C3 remain `UNPROVEN` because neither list was **obtained** — Google's page defeated retrieval three times and Microsoft's sits on the Service Trust Portal (`OQ-103-018`). Both are CoBudget-side retrieval gaps, not vendor silence. |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. |
-| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | **`PASS`** | `EV-102-033` states retention range, redundancy options, and expiry-on-deletion in writing, dated. C1/C2 equivalent pages not yet retrieved — `OQ-105-002`. |
+| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | **`FAIL`** | **`PASS`** | **Re-measured against v1.3 on August 30, 2026.** **C3's `PASS` holds and is now better supported**: `EV-102-033` is joined by the Flexible Server backup record CBD-108 §4.28 carries, which states all three elements — retention 7 to 35 days, expiry *"automatically deleted after the retention period"*, and zone-redundant storage restricting replication *"to within a country or region"*. **C2 now fails.** CBD-108 §4.30 establishes RDS retention as *"the retention period that is in effect for the DB instance at the time when you delete it"* — customer-configured, with **no provider-stated ceiling**, which v1.3 requires before a customer-set period can satisfy the gate. **C1 remains `UNPROVEN`**: the Cloud SQL equivalent was never retrieved (`OQ-105-002`), so this is absent evidence rather than evidence of absence. |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `TD-103-017`, `TD-103-018`, `TD-103-022`; `DP-105-001`. Non-exceptable. |
 | HG-102-015 append-only evidence | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. §7.5 records the category-D interpretation. |
 
@@ -180,9 +180,9 @@ summarizes.
 | --- | --- | --- | --- |
 | `PASS` | 6 | 4 | 7 |
 | `PASS (design)` | 2 | 2 | 2 |
-| `UNPROVEN` | 16 | 18 | 15 |
-| `FAIL` | 0 | 0 | 0 |
-| **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` | `ELIGIBLE-PENDING-EVIDENCE` |
+| `UNPROVEN` | 16 | 17 | 15 |
+| `FAIL` | 0 | 1 | 0 |
+| **Verdict** | `ELIGIBLE-PENDING-EVIDENCE` | `INELIGIBLE` | `ELIGIBLE-PENDING-EVIDENCE` |
 
 **v1.2 moved five documentary outcomes and no verdict.** C1 gained
 `HG-102-010`; C2 gained `HG-102-011` and `HG-102-010`; C3 gained `HG-102-005`

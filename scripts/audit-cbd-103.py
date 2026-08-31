@@ -59,7 +59,7 @@ CBD_102_FILES = (CATALOG, RUBRIC, DEMAND, COST, EVIDENCE)
 # document so an amended file cannot quietly keep its predecessor's baseline.
 REPOSITORY_BASELINE: dict[Path, str] = {
     TOPOLOGY: "5745587",
-    EVALUATION: "d381bab",
+    EVALUATION: "598dbbb",
     OPERATIONAL: "5745587",
     TRACE: "d381bab",
 }
