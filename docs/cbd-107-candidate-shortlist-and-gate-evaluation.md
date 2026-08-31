@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to U.S. financial-data aggregators. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why. **v1.4 records the `OI-102-023` decision of August 29, 2026: material received under an NDA does not enter the evidence register and supports no finding, so an NDA-gated route cannot close a gate in this category whatever it supplies.** `OQ-107-024` is amended accordingly. **v1.5 moves the companion reference only, after the traceability record closed `OI-107-021`.** No gate outcome, verdict, tally, price or `FC-107-*` decision changes. |
-| Document version | 1.5 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Applies the approved CBD-102 method to U.S. financial-data aggregators. It selects no provider; CBD-108 does that. No candidate reaches `ELIGIBLE` until the authorized observations are performed — §3 records why. **v1.4 records the `OI-102-023` decision of August 29, 2026: material received under an NDA does not enter the evidence register and supports no finding, so an NDA-gated route cannot close a gate in this category whatever it supplies.** `OQ-107-024` is amended accordingly. **v1.5 moves the companion reference only, after the traceability record closed `OI-107-021`.** No gate outcome, verdict, tally, price or `FC-107-*` decision changes. **v1.6 re-measures `HG-102-013` against CBD-102 v1.3 as §12.1 requires. The outcome is unchanged: this category's components were never read for this gate, so the position is absent evidence rather than evidence of absence, and stays `UNPROVEN`.** |
+| Document version | 1.6 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-107](https://cobudget.atlassian.net/browse/CBD-107) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Connection and Provenance Boundary Specification v1.0; Transaction Lifecycle and Coverage Map v1.0; Operational and Cost Assessment v1.0; Acceptance Criteria Traceability v1.5 |
 | Confluence page | [CBD-107 — Financial-Data Connectivity Candidate Shortlist and Gate Evaluation](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/13533185) |
-| Repository baseline | `9aabc13` |
+| Repository baseline | `598dbbb` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose
@@ -222,7 +222,7 @@ or a contract can settle. `CFG` marks a Config gate.
 | HG-102-010 encryption in transit and at rest | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not compiled to the pass test's algorithm-and-custody standard. C9's TLS 1.2 floor is incidentally recorded in `EV-102-105`. |
 | HG-102-011 region and subprocessors | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **Asked of all four at v1.1, and the reason none passes is now established rather than assumed — see §3.2.** No candidate publishes an enumerated subprocessor list. C6 `EV-102-182`: categories of recipient only, with a Trust Center behind an access request. C7 `EV-102-183`: a documented third-party risk programme naming no third parties, with compliance material *"shared securely under NDA"*. C8 `EV-102-184`: categories, plus sharing *"to affiliates within the Mastercard group"* with the affiliate scope unbounded on the page. C9 `EV-102-185`: neither. **None is a `FAIL`** — the gate fails a provider that *"will not enumerate subprocessors"*, and a list held behind an access request has not been shown to be refused. `OQ-107-007`, `OQ-107-024` |
 | HG-102-012 evidenced deletion | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. `HG-102-065` is this gate's category-F instance. |
-| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Not retrieved. |
+| HG-102-013 contractual backup behaviour | DOC | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | **Re-measured against `HG-102-013` v1.3 on August 30, 2026; outcome unchanged.** CBD-108's retrieval pass reached the **hosting** and **database** compositions for this gate and not this category's, so the components this evaluation carries have no retention, expiry or region statement on record. That is **absent evidence, not evidence of absence**, which register §3.3 makes `UNPROVEN` rather than `FAIL` — the distinction v1.1 drew and which v1.3 does not disturb. **The v1.3 changes do not reach an unread composition**: scoping the test to *"the evaluated composition"* and extending it to routine expiry both bite only where components have been read. |
 | HG-102-014 S4 out of ordinary surfaces | CFG | `PASS (design)` | `PASS (design)` | `PASS (design)` | `PASS (design)` | `FC-107-002`; `TD-103-017`, `TD-103-018`. Non-exceptable under exception rules §5.2. |
 | HG-102-015 append-only evidence | OBS | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | `UNPROVEN` | Blocked by §3. `TD-103-030` places CoBudget's own audit evidence in the datastore. |
 

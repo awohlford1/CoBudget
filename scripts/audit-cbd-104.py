@@ -94,7 +94,7 @@ EVIDENCE_KINDS = ("OBS", "DOC", "CFG")
 # stale baseline or fail a correct one.
 BASELINE = {
     BOUNDARY: "`6b1ac8e`",
-    EVALUATION: "`c689192`",
+    EVALUATION: "`598dbbb`",
     ASSESSMENT: "`6b1ac8e`",
     TRACE: "`c689192`",
 }
