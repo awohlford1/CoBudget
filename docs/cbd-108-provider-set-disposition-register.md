@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.65 |
+| Document version | 0.66 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.65; Combined Cost Model v0.65; Carried Item Disposition Register v0.65; Acceptance Criteria Traceability v0.65; Evidence Retrieval Pass v0.65 |
+| Companions | Cross-Category Coherence Review v0.66; Combined Cost Model v0.66; Carried Item Disposition Register v0.66; Acceptance Criteria Traceability v0.66; Evidence Retrieval Pass v0.66 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `5b9d74f` |
+| Repository baseline | `26652bc` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -102,11 +102,11 @@ been shown to have.
 | 2 | **I** — Identity | **Selected: C2 Amazon Cognito** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. C2 and C3 tied 3—3 on documentary evidence and the identity gates `PASS` for all three; **the tie was broken on vendor footprint**, which is not a scored criterion. Nine observation tests resolve during build |
 | 3 | **D** — PostgreSQL | **Selected: C1 Cloud SQL** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **The first selection to trade documentary evidence for architecture** — C3 led 4—3 and holds the corpus's only `HG-102-013` `PASS`. Eight observation tests and every price line resolve during build |
 | 4 | **E** — Email | **Selected: C2 Amazon SES** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **Decided on evidence coverage, not on price** — the Base spread is $14.96/month in absolute terms. Eleven observation tests, requiring live sending, resolve during build |
-| 5 | **F** — Financial connectivity | **Blocked, and doubly** | Route-A observation pass unperformed (9 tests); **and** the documentary gap is now constrained by `OI-102-023` — §4.5 |
+| 5 | **F** — Financial connectivity | **Selected: C6 Plaid** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **The thinnest evidence base of the six** — C6 and C9 tied on two documentary `PASS`es each against ~27 gates. Broken on CoBudget's own approved inventory, not on vendor material. Nine observation tests and the `OI-102-023` documentary gap resolve during build |
 | 6a | **N** — SMS | **Selected: C2 AWS End User Messaging** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. C2 and C3 tied 3—3; `OI-130-020` and vendor footprint both favour C2. Observation tests and the A2P carrier floors at `OQ-108-008` resolve during build |
 | 6b | **N** — Push | **Deferred** | **No selection exists to make** — §4.6 |
 
-Six categories, seven dispositions. **Five selected.**
+Six categories, seven dispositions. **Six selected, one deferred.**
 
 **Five categories are selected at `ELIGIBLE-PENDING-EVIDENCE`** under CBD-103 §3.3's route B,
 taken by Product Owner decision of September 2, 2026 and recorded at evidence register
@@ -119,8 +119,15 @@ taken by Product Owner decision of September 2, 2026 and recorded at evidence re
 | **D** PostgreSQL | **C1 Cloud SQL** | Evidence traded for architecture |
 | **E** Email | **C2 Amazon SES** | Decided on documentary coverage |
 | **N** SMS | **C2 AWS End User Messaging** | Tied on evidence; `OI-130-020` and footprint |
+| **F** Financial | **C6 Plaid** | Tied on evidence; broken on `DI-91-055` and `DI-91-057` |
 
-**The set is two clouds, not four vendors.** `OI-108-072` recorded that a C1
+**Push remains deferred**, because §4.6 records that no selection exists to make — the
+transports are subprocessors the platform forces, not candidates.
+
+**The set is three vendors: Google Cloud for hosting and database, AWS for
+identity, email and SMS, and Plaid for financial connectivity.**
+
+**The two-cloud shape held.** `OI-108-072` recorded that a C1
 hosting selection forces non-Google vendors in identity, email and SMS. All three
 went to the same vendor, so the result is **Google Cloud for hosting and
 database, AWS for identity, email and SMS**.
@@ -288,9 +295,29 @@ register's usual shelf life.
 
 ### 4.5 F — Financial-data connectivity
 
-**Blocked, and the only category blocked by two independent things.**
+**Selected: C6 Plaid, at `ELIGIBLE-PENDING-EVIDENCE`, September 2, 2026.**
+**On the thinnest evidence of the six categories, and that is stated rather than
+smoothed.** C6 and C9 Akoya tied on **two** documentary `PASS`es each against some
+twenty-seven gates; C8 held one and C7 none. Every cross-category X gate is
+`UNPROVEN` for all four with no inherited passes, because no candidate here is a
+hyperscaler.
 
-Nine pass tests are observation-bound, as elsewhere. What is not as elsewhere is
+**The tie broke on CoBudget's approved material rather than on a vendor page.**
+`DI-91-055` is *"Connection sync cursor, provider operational state, and private
+health details"* and `DI-91-057` is *"Connection-specific incremental-sync
+financial payload"*. **The inventory presupposes a cursor**, and CBD-107 §7.1
+records that C6's `/transactions/sync` delta stream is *"a true delta stream, and
+it is the only one"* among the four.
+
+**What was given up is recorded.** C9's identifier stability is **native** — it
+*"survives the path C6's does not"* — and §7.2 concludes that under `FC-107-005`
+*"both work, but only one of them tolerates a mistake"*. C9 also holds
+`HG-102-058`, the refresh token inside CoBudget's boundary, which C6 does not.
+**`FC-107-005` is therefore load-bearing**: C6's identifier stays stable only if
+the repair path is built correctly.
+
+**Blocked gaps that now resolve during build, and one does not resolve by
+observation at all.** Nine pass tests are observation-bound, as elsewhere. What is not as elsewhere is
 the documentary position. `OI-102-023` was settled on August 29, 2026: material
 received under a non-disclosure agreement does not enter the evidence register
 and supports no finding. All four candidates gate their subprocessor and
