@@ -20,7 +20,7 @@ Performed 2 September 2026 against the production build (`next start`) in Chrome
 | Select | With the control focused, ArrowDown opens the option list; ArrowDown moves the active option; Enter chooses it ("Weekly") and closes the list. |
 | Radio | With one radio focused, ArrowDown moves focus and selection to the next radio in the group. |
 | Dialog | Opens modally from its trigger; focus lands on the Close button; `Escape` is the browser's cancel; Close returns focus to the trigger. |
-| Not exercised here | Space to toggle a checkbox, Enter to activate a button, Escape to cancel a dialog. All three are the browser's native behaviour for native elements — nothing in this codebase handles them — and the browser tool used for this pass did not deliver those particular keys to the page. They take ten seconds by hand on `/foundation` and belong in the next hand pass. |
+| Checkbox, button, dialog keys | Space toggles a checkbox, Enter activates a button, Escape cancels the dialog. All three are the browser's native behaviour for native elements — nothing in this codebase handles them. The automated pass could not deliver those keys; checked by hand by the Product Owner on 2 September 2026 on the production build at `/foundation`, and confirmed working as intended. |
 
 ## Screen reader
 
@@ -42,4 +42,4 @@ The accessibility tree the browser exposes is what a screen reader reads. Read o
 
 `globals.css` carries a `prefers-reduced-motion: reduce` rule that sets `animation-duration`, `transition-duration`, and `animation-iteration-count` to effectively zero on every element. Verified present in the served stylesheet on 2 September 2026; without the preference the spinner runs `spin 1s`, and the only motion in the set is the spinner and the card skeleton's pulse.
 
-Verifying it *with the setting enabled* needs an operating-system toggle the browser tool cannot flip: Windows Settings → Accessibility → Visual effects → Animation effects off, then reload `/foundation` and confirm the Loading spinners and the Loading card are still. That is a hand check, and it is the one item on this ticket not yet performed.
+Verifying it *with the setting enabled* needs an operating-system toggle the browser tool cannot flip. Done by hand by the Product Owner on 2 September 2026: Windows Settings → Accessibility → Visual effects → Animation effects off, reload `/foundation`, and the Loading spinners and the Loading card's placeholder bars are still. Confirmed working as intended.
