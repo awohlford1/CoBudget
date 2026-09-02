@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.66 |
+| Document version | 0.67 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.66; Combined Cost Model v0.66; Carried Item Disposition Register v0.66; Acceptance Criteria Traceability v0.66; Evidence Retrieval Pass v0.66 |
+| Companions | Cross-Category Coherence Review v0.67; Combined Cost Model v0.67; Carried Item Disposition Register v0.67; Acceptance Criteria Traceability v0.67; Evidence Retrieval Pass v0.67 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `26652bc` |
+| Repository baseline | `f080215` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -553,7 +553,7 @@ performed, and this package does not constitute one.**
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-108-001 | **The package selects nothing, which is a permitted outcome but not a useful one.** Its value sits in the coherence review, the carried-item register, and the named gaps — not in the selection deliverable the ticket leads with. | Recorded so approving this package is not mistaken for completing CBD-108. A second version after the observation pass is what converts dispositions into selections. |
+| OI-108-001 | ~~**The package selects nothing, which is a permitted outcome but not a useful one.**~~ **Overtaken September 2, 2026: six categories are selected and push is deferred**, under route B. | **What the item warned of has changed shape rather than gone.** It said approving the package should not be mistaken for completing CBD-108, and that *"a second version after the observation pass is what converts dispositions into selections"*. **The selections were made without that pass**, by taking route B, so the conversion happened on deferred evidence rather than on performed observations. The caution still applies to AC7's approval — it now attaches to the deferral rather than to an empty selection deliverable. |
 | OI-108-002 | **Cost warning and stop thresholds cannot be set** — §5. No budget ceiling exists and prices are `UNKNOWN` in five of six categories. | The ticket's fifth acceptance criterion is **partially met**: owner, cadence, action structure and cliffs are explicit; the two numbers are not. |
 | OI-108-003 | **Category F's rubric scores are not comparable on their face with the other five categories'**, because `OI-102-023` caps them at `2` for any candidate whose stronger material is NDA-bound. | Any cross-category comparison must state this. It is a limit of what was obtainable on publishable terms, not a finding about the aggregators. |
 | OI-108-004 | **This package has been reviewed by no one other than its author**, and inherits the same limitation from all six evaluations it consumes. | The independent security review required before public launch remains outstanding. A selection made on this basis carries that residual. |

@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Three of seven acceptance criteria are met, three partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.66 |
+| Document version | 0.67 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.66; Cross-Category Coherence Review v0.66; Combined Cost Model v0.66; Carried Item Disposition Register v0.66; Evidence Retrieval Pass v0.66 |
+| Companions | Provider Set Disposition Register v0.67; Cross-Category Coherence Review v0.67; Combined Cost Model v0.67; Carried Item Disposition Register v0.67; Evidence Retrieval Pass v0.67 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `26652bc` |
+| Repository baseline | `f080215` |
 | Last updated | August 29, 2026 |
 
 ## 1. Package contents
@@ -37,19 +37,24 @@ partial would be generous to itself.
 
 **Status: Met.**
 
-| Category | Disposition | Named gap | Where |
+| Category | Disposition | Deferred gap | Where |
 | --- | --- | --- | --- |
-| H — Hosting | Blocked | Observation pass; no price; `HG-102-013` `UNPROVEN` | Disposition §4.1 |
-| I — Identity | Blocked | Observation pass; `OQ-104-008` tier question | Disposition §4.2 |
-| D — PostgreSQL | Blocked | Observation pass; no price; `OI-105-009` custody questions | Disposition §4.3 |
-| E — Email | Blocked | Observation pass; no price; `OI-106-010` preview dependency | Disposition §4.4 |
-| F — Financial connectivity | Blocked, doubly | Observation pass; `OI-102-023` documentary constraint | Disposition §4.5 |
-| N — SMS | Blocked | Observation pass; field reduced to two by C10's `INELIGIBLE` | Disposition §4.6 |
+| H — Hosting | **Selected: C1 Google Cloud** | Observation pass; no price; `HG-102-013` `UNPROVEN` | Disposition §4.1 |
+| I — Identity | **Selected: C2 Amazon Cognito** | Observation pass; `OQ-104-008` tier question | Disposition §4.2 |
+| D — PostgreSQL | **Selected: C1 Cloud SQL** | Observation pass; no price; `HG-102-013` `UNPROVEN` | Disposition §4.3 |
+| E — Email | **Selected: C2 Amazon SES** | Observation pass | Disposition §4.4 |
+| F — Financial connectivity | **Selected: C6 Plaid** | Observation pass; `OI-102-023` documentary constraint | Disposition §4.5 |
+| N — SMS | **Selected: C2 AWS End User Messaging** | Observation pass | Disposition §4.6 |
 | N — Push | Deferred | No selection exists to make | Disposition §4.6 |
 
-**The criterion is met in its third branch, not its first.** Zero categories are
-selected. The criterion's wording permits that explicitly, and `OI-108-001`
-records that meeting it this way does not complete the ticket.
+**Amended September 2, 2026. The criterion is now met in its first branch.** Six
+categories are selected and push is deferred, under CBD-103 §3.3's route B and
+evidence register §3.3.1 — selection at `ELIGIBLE-PENDING-EVIDENCE`, with the ten
+observation tests deferred to build rather than cancelled.
+
+**This table previously read *"Blocked"* in every row and stated that zero
+categories were selected.** It was four tranches stale: the document's version was
+bumped each time and this content was not. `OI-108-077`.
 
 ### AC2 — No selection rests only on a weighted score
 
@@ -145,8 +150,11 @@ reconciliation artifact the ticket names does not exist in the form named.
 This is the gate the package is submitted to, not a claim it can make about
 itself. The residual risks requiring explicit acceptance are:
 
-1. **Nothing is selected** (`OI-108-001`) — approving this package does not
-   complete CBD-108.
+1. **The selections were made at `ELIGIBLE-PENDING-EVIDENCE`** under route B, so
+   **the ten observation tests are deferred to build, not performed** (`OI-108-001`, amended September 2, 2026). CBD-103 §3.3 stated the risk when it offered
+   the route: *"a gate that fails on first observation invalidates the selection
+   after integration work has started"*. **It is largest in category F**, which
+   rests on two documentary `PASS`es of some twenty-seven.
 2. **No coherence clearance** (`OI-108-007`) — six named combinations are
    conditional risks, not cleared ones.
 3. **No cost totals or thresholds** (`OI-108-002`, `OI-108-011`).
@@ -158,7 +166,7 @@ itself. The residual risks requiring explicit acceptance are:
 
 | Deliverable | Status | Where |
 | --- | --- | --- |
-| Selection and fallback disposition for every category | **Partially met** — dispositions complete; **no fallback can be named**, because naming a second choice would rank candidates the evaluations deliberately declined to rank | Disposition §4 |
+| Selection and fallback disposition for every category | **Met for selection, not for fallback** — six categories selected September 2, 2026 and push deferred; **no fallback can be named**, because naming a second choice would rank candidates the evaluations deliberately declined to rank | Disposition §4 |
 | Decision records with alternatives, evidence, tradeoffs, hard-gate results, risks, cost guardrails, review triggers | **Partially met** — gate results, risks, guardrail structure and review triggers are here; alternatives and tradeoffs remain in the source evaluations and are not re-derived | Disposition §4, §5 |
 | Combined low/base/high monthly and annual cost model | **Not met** — no total can be produced at any scenario; the demand side is complete and the price side is empty | Cost model §2–§4, `OI-108-011` |
 | Cross-provider data-flow, subprocessor, outage, support, and lock-in review | **Met** | Coherence §5, §6, §7 |
