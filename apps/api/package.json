@@ -1,0 +1,34 @@
+{
+  "name": "@cobudget/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CoBudget HTTP API.",
+  "scripts": {
+    "dev": "node --env-file-if-exists=../../.env.local --watch --import=tsx src/main.ts",
+    "start": "node --env-file-if-exists=../../.env.local --import=tsx src/main.ts",
+    "build": "tsc --noEmit && esbuild ./src/main.ts --bundle --platform=node --format=esm --packages=external --tsconfig=./tsconfig.json --outfile=dist/main.js --sourcemap",
+    "lint": "eslint .",
+    "test": "tsx --test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cobudget/contracts": "*",
+    "@fastify/helmet": "13.1.1",
+    "@fastify/static": "10.1.3",
+    "@nestjs/common": "12.0.1",
+    "@nestjs/core": "12.0.1",
+    "@nestjs/platform-fastify": "12.0.1",
+    "@nestjs/swagger": "12.0.1",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "12.0.1",
+    "@typescript-eslint/parser": "^8.66.0",
+    "esbuild": "0.28.2",
+    "eslint": "^9.39.5",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.0"
+  }
+}
