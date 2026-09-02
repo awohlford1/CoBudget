@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. |
-| Document version | 1.3 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. **v1.4 adds §5.3, defining *"a full re-evaluation"* under `EX-102-006` as a re-measurement of every applicable gate for one candidate, by Product Owner decision of September 2, 2026. It resolves CBD-108 `OQ-108-074` and governs the only remaining route for both surviving `HG-102-013` exception records.** |
+| Document version | 1.4 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the evidence record and its required fields, the six evidence classes and their confidence mapping, the `UNPROVEN` outcome and the four eligibility verdicts, the staleness and re-verification rules, `EX-102-001`–`007`, the §5.2 non-exceptable gates, and the residual-risk record. It grants no exception and does not close the open items in §8. **v1.3 adds §3.0.2 by Product Owner decision of August 29, 2026, resolving `OI-102-023`: material received under a non-disclosure agreement does not enter this register and therefore supports no finding.** No existing record, class, confidence, gate outcome or exception rule changes. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Cost Template v1.0 |
 | Confluence page | [CBD-102 — Evidence Register and Exception Rules](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9601048) |
-| Repository baseline | `717f143` |
-| Last updated | August 29, 2026 |
+| Repository baseline | `fd36443` |
+| Last updated | September 2, 2026 |
 
 ## 1. Purpose
 
@@ -282,6 +282,39 @@ analytics unconditionally for Private MVP, but `AN-92-007` supplies an explicit
 amendment path requiring new Product Owner and privacy approval. A provider that
 cannot disable behavioural capture therefore fails a gate that can only be
 changed by taking that path — which is a contract amendment, not an exception.
+
+### 5.3 What *"a full re-evaluation"* means — Product Owner decision, September 2, 2026
+
+`EX-102-006` requires *"a full re-evaluation rather than another individual
+approval"*, and the phrase was defined nowhere in the corpus. CBD-108 §4.66
+recorded four constraints that follow from surrounding text and two candidate
+readings.
+
+**The provider-scope reading is adopted.** A full re-evaluation is a
+re-measurement of **every applicable gate for that candidate**, on current
+evidence, producing a fresh verdict under §3.3 — in place of approving a
+residual against the one gate that failed.
+
+Three things it is not:
+
+* **Not an individual approval.** `EX-102-003` bars an exception from converting
+  a `FAIL` into a `PASS`; a re-evaluation measures the gate instead of accepting
+  a residual against it, which is why the rule offers it **instead of** an
+  approval rather than as a heavier form of one.
+* **Not the catalog §12.1 re-measurement**, which is per-gate and applies to
+  every candidate after an amendment. This one is per-candidate and applies to
+  every gate.
+* **Not a reopening of the selection.** The demand model's headroom ceiling and
+  the multi-region triggers in CBD-103 and CBD-105 denote that heavier event.
+  This decision does not extend `EX-102-006` to it.
+
+**It is performed by the package that owns the evaluation** and recorded as a
+version of that package's gate matrix.
+
+**`EX-102-006` is not weakened.** On the evidence in hand this governs
+`EXC-108-002` and `EXC-108-003`, and any exception on the eight gates citing
+CBD-91 §5.1's provider row — `HG-102-011`, `HG-102-012`, `HG-102-013`,
+`HG-102-035`, `HG-102-042`, `HG-102-052`, `HG-102-053` and `HG-102-065`.
 
 ## 6. Residual-risk record
 

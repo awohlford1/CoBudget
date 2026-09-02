@@ -2,16 +2,16 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. The structure a CBD-103–107 and CBD-130 cost comparison must be recorded in. It contains no prices; providers are not selected here. |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. The structure a CBD-103–107 and CBD-130 cost comparison must be recorded in. It contains no prices; providers are not selected here. **v1.1 adds `CT-102-022`, a line for a third-party licence a gate requires, by Product Owner decision of September 2, 2026. It closes a `CR4` breach occurring through the template itself — CBD-108 `OQ-108-055`.** |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 21 line items, the CR0–CR7 rules, the cost record structure, and the per-category billable units. It fixes no price, approves no tier, and does not close the open items in §8 — including the recorded consequence of `OI-102-017`, that no budget ceiling exists. |
+| Reviewer | Alexander Wohlford — Product Owner. Approval covers the 22 line items, the CR0–CR7 rules, the cost record structure, and the per-category billable units. It fixes no price, approves no tier, and does not close the open items in §8 — including the recorded consequence of `OI-102-017`, that no budget ceiling exists. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Evidence Register and Exception Rules v1.0 |
 | Confluence page | [CBD-102 — Provider Cost Template](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9469982) |
-| Repository baseline | `52d764a` |
-| Last updated | August 18, 2026 |
+| Repository baseline | `fd36443` |
+| Last updated | September 2, 2026 |
 
 ## 1. Purpose
 
@@ -82,6 +82,17 @@ One record per provider per category. Line items are stable citation keys.
 | CT-102-003 | Per-seat cost | **Two seats**, not one: the operator, plus the named second principal from catalog §2.5.1 who holds key-recovery custody and restore approval. Record the per-seat rate as well as the total, and note where a provider charges full price for a seat that only approves |
 | CT-102-004 | Minimum committed spend | Where a contract sets a floor above the plan fee |
 | CT-102-005 | Support plan fee | Flat, or a percentage of spend — state which |
+| CT-102-022 | Third-party licence required by a gate | Where a gate's pass test is reachable only through a partner or third-party product, that product's licence cost. **Numbered out of sequence deliberately**, to leave `CT-102-006`—`021` untouched; it belongs to **section A** and is therefore inside `CT-102-017`. Added September 2, 2026 — see the note below |
+
+**Why `CT-102-022` exists — Product Owner decision, September 2, 2026.** `CR4` holds that a
+missing line item must never silently improve a total. CBD-108 `OQ-108-055` found that
+breach occurring **through this template**: where a gate is clearing only because a
+third-party product supplies the capability — CBD-108 `EV-102-008` records AWS shipping
+no native just-in-time elevation and validating partner products instead — that
+licence is not a provider charge and had no line. It was therefore absent from
+`CT-102-017`, the comparison figure, making a candidate that must buy a product look
+cheaper than one whose capability is native. **Record the cost whether or not it is
+incurred**; where the gate is met natively, record zero.
 
 ### 4.3 B — Variable usage, metered against the demand model
 
