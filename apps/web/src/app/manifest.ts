@@ -4,10 +4,10 @@ import { THEME_COLORS } from "../styles/theme-colors";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "CoBudget",
-    short_name: "CoBudget",
+    name: "MoneyPact",
+    short_name: "MoneyPact",
     description:
-      "Collaborative budgeting that helps people build better financial futures together.",
+      "Collaborative budgeting and financial accountability. Make a plan. Keep your commitments.",
     start_url: "/",
     display: "standalone",
     background_color: THEME_COLORS.light,
