@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.63 |
+| Document version | 0.64 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.63; Combined Cost Model v0.63; Carried Item Disposition Register v0.63; Acceptance Criteria Traceability v0.63; Evidence Retrieval Pass v0.63 |
+| Companions | Cross-Category Coherence Review v0.64; Combined Cost Model v0.64; Carried Item Disposition Register v0.64; Acceptance Criteria Traceability v0.64; Evidence Retrieval Pass v0.64 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `c5b7074` |
+| Repository baseline | `624e6d6` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -101,18 +101,21 @@ been shown to have.
 | 1 | **H** — Hosting | **Selected: C1 Google Cloud** | **Forced, not chosen** — C2 and C3 are `INELIGIBLE` on `HG-102-013`, so C1 is the only candidate standing. Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. Ten observation tests and every price line remain outstanding and resolve during build |
 | 2 | **I** — Identity | **Blocked** | Route-A observation pass unperformed (9 tests); `OQ-104-008` unresolved, which moves C4's price by an unbounded amount |
 | 3 | **D** — PostgreSQL | **Blocked** | Route-A observation pass unperformed (8 tests); no price retrieved; C3 custody questions at `OI-105-009` unanswered |
-| 4 | **E** — Email | **Blocked** | Route-A observation pass unperformed (11 tests, requiring live sending); C3 suppression list in preview without an SLA (`OI-106-010`). **The price gap is closed** — see §4.4 |
+| 4 | **E** — Email | **Selected: C2 Amazon SES** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **Decided on evidence coverage, not on price** — the Base spread is $14.96/month in absolute terms. Eleven observation tests, requiring live sending, resolve during build |
 | 5 | **F** — Financial connectivity | **Blocked, and doubly** | Route-A observation pass unperformed (9 tests); **and** the documentary gap is now constrained by `OI-102-023` — §4.5 |
 | 6a | **N** — SMS | **Blocked** | Route-A observation pass unperformed; field reduced to two by C10's `INELIGIBLE` verdict |
 | 6b | **N** — Push | **Deferred** | **No selection exists to make** — §4.6 |
 
-Six categories, seven dispositions. **One selected, and it was forced.**
+Six categories, seven dispositions. **Two selected.**
 
-**Category H is selected at `ELIGIBLE-PENDING-EVIDENCE`** under CBD-103 §3.3's
-route B, taken by Product Owner decision of September 2, 2026 and recorded at evidence
-register §3.3.1. The remaining five categories are **not** selected: route B
-lifts the observation cap and supplies no cost model, and each of them has two
-or more candidates standing with no comparison figure to choose between them.
+**Categories H and E are selected at `ELIGIBLE-PENDING-EVIDENCE`** under CBD-103
+§3.3's route B, taken by Product Owner decision of September 2, 2026 and recorded at
+evidence register §3.3.1. **H was forced** — one candidate standing. **E was
+decided**, on documentary coverage rather than on price.
+
+The remaining four categories are **not** selected: route B lifts the observation
+cap and supplies no cost model, and each has two or more candidates standing with
+no comparison figure to choose between them.
 
 **What route B does not do is as important as what it does.** The ten pass
 tests are deferred, not cancelled. The risk CBD-103 §3.3 stated when it offered
@@ -164,9 +167,10 @@ and `OQ-108-005` for the `HG-102-013` half.
 ### 4.2 I — Identity
 
 **Blocked.** Nine pass tests are observation-bound. This is the only category
-with retrieved prices, and they do not help: `CR3` prevents cost from selecting,
-and CBD-104 §6.6 states the honest summary — identity cost is close to a
-rounding error against the decision's other terms.
+with retrieved prices, and they do not separate the candidates: CBD-104 §6.6
+states the honest summary — identity cost is close to a rounding error against
+the decision's other terms. **This paragraph previously attributed that to
+`CR3`, which is not what that rule says. Corrected September 2, 2026 — CBD-108 §4.72.**
 
 **One gap is disproportionate to its size.** `OQ-104-008` asks whether
 `HG-102-031` can be satisfied by refresh-token revocation on Auth0's Essentials
@@ -199,7 +203,25 @@ C3 could be selected here.
 
 ### 4.4 E — Transactional email
 
-**Blocked.** Eleven pass tests are observation-bound, and this is the only
+**Selected: C2 Amazon SES, at `ELIGIBLE-PENDING-EVIDENCE`, September 2, 2026.**
+**Decided rather than forced**, and decided on **documentary coverage**: C2 and C3
+each hold three gate `PASS`es and C5 Postmark holds none, which makes C5 the least
+evidenced of the three rather than merely the dearest. Between C2 and C3,
+`OI-106-010` separates them — C3's suppression list is in public preview without a
+service-level agreement while `ED-106-003` depends on suppression working.
+
+**Price did not decide it, and could not have.** The Base spread is 375—fold as a
+ratio and **$14.96 a month in absolute terms**; selecting on that would be
+selecting on noise. C2 happens to be both cheapest and best evidenced, so nothing
+was traded.
+
+**The coherence cost is real and is recorded rather than absorbed.** Hosting is
+C1 Google Cloud, so C2 means standing up an AWS account and IAM footprint for
+email alone. C5 Postmark was the standalone option that would have avoided it,
+and it lost on evidence.
+
+**Blocked gaps that now resolve during build.** Eleven pass tests are
+observation-bound, and this is the only
 category whose observations mean **sending mail**. `OI-106-007` records the
 guardrail the route-A authorization imposes: destinations must be mailboxes
 CoBudget controls, and no live customer address appears in an evaluation
@@ -209,9 +231,12 @@ account.
 true. The retrieval pass of August 29, 2026 registered `EV-102-212`–`215`: at
 Base, **C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00`** per month. It also
 falsified CBD-106 §5.1's hypothesis — Base volume of 250 messages sits inside
-**none** of the three candidates' allowances. The disposition does not change,
-because `CR3` prevents cost from selecting and eleven observation-bound tests
-remain, but the ~250× spread is now a known input rather than an unknown, and it
+**none** of the three candidates' allowances. **This paragraph previously said `CR3` prevents cost from
+selecting. That overstates the rule and is corrected September 2, 2026** — `CR3` says an
+**`INELIGIBLE`** provider's cost *"is not compared"* and that *"being cheapest is
+not a route back into consideration"*. It bars cost from rescuing a disqualified
+candidate; it does not bar cost from discriminating among candidates that clear
+equally. CBD-108 §4.72. The ~250× spread is a known input, and it
 prices the standalone option a C1 hosting selection would force.
 
 `OI-106-010` records that C3's suppression list is in public preview without a
