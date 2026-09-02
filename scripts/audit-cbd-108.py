@@ -56,7 +56,7 @@ RETRIEVAL = Path("docs/cbd-108-evidence-retrieval-pass.md")
 PACKAGE_FILES = (DISPOSITION, COHERENCE, COST, CARRIED, TRACE, RETRIEVAL)
 
 # The commit each document was written against.
-REPOSITORY_BASELINE = {path: "`28d6748`" for path in PACKAGE_FILES}
+REPOSITORY_BASELINE = {path: "`c5b7074`" for path in PACKAGE_FILES}
 
 SOURCE_PACKAGES = ("103", "104", "105", "106", "107", "130")
 
@@ -294,9 +294,17 @@ def main() -> int:
         not eligible_anywhere,
         "a source evaluation now holds an ELIGIBLE verdict; the dispositions must be revisited",
     )
+    # Route B, Product Owner decision of September 2, 2026 (evidence register
+    # 3.3.1): a candidate at ELIGIBLE-PENDING-EVIDENCE may be selected. The
+    # register must carry the basis and the deferred risk on its face, so that a
+    # later reader cannot mistake the selection for a settled evaluation.
     audit.check(
-        "**Zero selected.**" in texts[DISPOSITION],
-        "disposition register: must state plainly that nothing is selected while no candidate is ELIGIBLE",
+        "at `ELIGIBLE-PENDING-EVIDENCE` under" in texts[DISPOSITION],
+        "disposition register: a selection under route B must state that basis explicitly",
+    )
+    audit.check(
+        "resolve during build" in texts[DISPOSITION],
+        "disposition register: must carry route B's deferred-observation consequence",
     )
 
     # --- identifier references resolve ------------------------------------
@@ -436,8 +444,9 @@ def main() -> int:
         print(f"  - {warning}")
     if not audit.failures:
         print(
-            "Result: PASS (documentation integrity only; no category is "
-            "selected and the observation pass remains unperformed)"
+            "Result: PASS (documentation integrity only; category H is selected at "
+            "ELIGIBLE-PENDING-EVIDENCE under route B, five categories are not "
+            "selected, and the observation pass remains unperformed)"
         )
     return 1 if audit.failures else 0
 

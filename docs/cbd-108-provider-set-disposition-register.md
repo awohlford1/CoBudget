@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.62 |
+| Document version | 0.63 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.62; Combined Cost Model v0.62; Carried Item Disposition Register v0.62; Acceptance Criteria Traceability v0.62; Evidence Retrieval Pass v0.62 |
+| Companions | Cross-Category Coherence Review v0.63; Combined Cost Model v0.63; Carried Item Disposition Register v0.63; Acceptance Criteria Traceability v0.63; Evidence Retrieval Pass v0.63 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `28d6748` |
+| Repository baseline | `c5b7074` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -98,7 +98,7 @@ been shown to have.
 
 | # | Category | Disposition | Named gap |
 | --- | --- | --- | --- |
-| 1 | **H** — Hosting | **Blocked** | Route-A observation pass unperformed (10 tests); no price retrieved for any candidate; `HG-102-013` `UNPROVEN` for all three |
+| 1 | **H** — Hosting | **Selected: C1 Google Cloud** | **Forced, not chosen** — C2 and C3 are `INELIGIBLE` on `HG-102-013`, so C1 is the only candidate standing. Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. Ten observation tests and every price line remain outstanding and resolve during build |
 | 2 | **I** — Identity | **Blocked** | Route-A observation pass unperformed (9 tests); `OQ-104-008` unresolved, which moves C4's price by an unbounded amount |
 | 3 | **D** — PostgreSQL | **Blocked** | Route-A observation pass unperformed (8 tests); no price retrieved; C3 custody questions at `OI-105-009` unanswered |
 | 4 | **E** — Email | **Blocked** | Route-A observation pass unperformed (11 tests, requiring live sending); C3 suppression list in preview without an SLA (`OI-106-010`). **The price gap is closed** — see §4.4 |
@@ -106,11 +106,29 @@ been shown to have.
 | 6a | **N** — SMS | **Blocked** | Route-A observation pass unperformed; field reduced to two by C10's `INELIGIBLE` verdict |
 | 6b | **N** — Push | **Deferred** | **No selection exists to make** — §4.6 |
 
-Six categories, seven dispositions. **Zero selected.**
+Six categories, seven dispositions. **One selected, and it was forced.**
+
+**Category H is selected at `ELIGIBLE-PENDING-EVIDENCE`** under CBD-103 §3.3's
+route B, taken by Product Owner decision of September 2, 2026 and recorded at evidence
+register §3.3.1. The remaining five categories are **not** selected: route B
+lifts the observation cap and supplies no cost model, and each of them has two
+or more candidates standing with no comparison figure to choose between them.
+
+**What route B does not do is as important as what it does.** The ten pass
+tests are deferred, not cancelled. The risk CBD-103 §3.3 stated when it offered
+the route — *"a gate that fails on first observation invalidates the selection
+after integration work has started"* — is accepted, not retired.
 
 ### 4.1 H — Hosting, runtime, jobs, telemetry
 
-**Blocked.** Ten pass tests are observation-bound and none has been run. No
+**Selected: C1 Google Cloud, at `ELIGIBLE-PENDING-EVIDENCE`, September 2, 2026.**
+**The selection is forced rather than chosen.** C2 and C3 are `INELIGIBLE` on
+`HG-102-013` — C2 on lifetime, through CloudWatch Logs and now RDS; C3 on both
+limbs, the lifetime one through Service Bus. **One candidate was standing and it
+was selected.** No ranking was performed and none was needed.
+
+**The gaps below are unchanged by the selection and resolve during build.**
+Ten pass tests are observation-bound and none has been run. No
 price was retrieved for any of the three candidates — CBD-103 §6.1 records that
 this is deliberate, because cost rule `CR4` forbids recording an unknown price
 as zero and evidence register §3.2 requires Documented-or-stronger evidence for

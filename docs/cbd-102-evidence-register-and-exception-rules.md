@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. **v1.4 adds §5.3, defining *"a full re-evaluation"* under `EX-102-006` as a re-measurement of every applicable gate for one candidate, by Product Owner decision of September 2, 2026. It resolves CBD-108 `OQ-108-074` and governs the only remaining route for both surviving `HG-102-013` exception records.** |
-| Document version | 1.4 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Governs how a provider claim becomes evidence, and when a failed hard gate may be accepted with a compensating control. **v1.4 adds §5.3, defining *"a full re-evaluation"* under `EX-102-006` as a re-measurement of every applicable gate for one candidate, by Product Owner decision of September 2, 2026. It resolves CBD-108 `OQ-108-074` and governs the only remaining route for both surviving `HG-102-013` exception records.** **v1.5 adds §3.3.1: a candidate at `ELIGIBLE-PENDING-EVIDENCE` may be selected for the Private MVP phase, by Product Owner decision of September 2, 2026 taking CBD-103 §3.3's route B. `FAIL` is untouched and the ten observations remain owed.** |
+| Document version | 1.5 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the evidence record and its required fields, the six evidence classes and their confidence mapping, the `UNPROVEN` outcome and the four eligibility verdicts, the staleness and re-verification rules, `EX-102-001`–`007`, the §5.2 non-exceptable gates, and the residual-risk record. It grants no exception and does not close the open items in §8. **v1.3 adds §3.0.2 by Product Owner decision of August 29, 2026, resolving `OI-102-023`: material received under a non-disclosure agreement does not enter this register and therefore supports no finding.** No existing record, class, confidence, gate outcome or exception rule changes. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | Hard-Gate Catalog v1.0; Evaluation Rubric v1.0; Demand Model v1.0; Cost Template v1.0 |
 | Confluence page | [CBD-102 — Evidence Register and Exception Rules](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/9601048) |
-| Repository baseline | `fd36443` |
+| Repository baseline | `c5b7074` |
 | Last updated | September 2, 2026 |
 
 ## 1. Purpose
@@ -205,6 +205,35 @@ This adds a verdict to the three in rubric rule R1:
 | `ELIGIBLE-PENDING-EVIDENCE` | One or more `UNPROVEN`, none `FAIL`. Cannot be selected until resolved, but is not disqualified |
 | `CONDITIONAL` | One or more `FAIL` carrying an approved exception under §5 |
 | `INELIGIBLE` | One or more `FAIL` without an approved exception |
+
+### 3.3.1 A candidate at `ELIGIBLE-PENDING-EVIDENCE` may be selected — Product Owner decision, September 2, 2026
+
+§3.3's verdict table says `ELIGIBLE-PENDING-EVIDENCE` *"cannot be selected
+until resolved"*. **That is amended for the Private MVP phase only.**
+
+CBD-103 §3.3 put three routes to the Product Owner on August 20, 2026 and route
+A was chosen: authorise evidence provisioning, then select. **Route B is now also
+taken** — *"select at `ELIGIBLE-PENDING-EVIDENCE` and resolve during build"* —
+because twelve days after route A was authorised the observation pass has not
+been run, and the selection is what other work waits on.
+
+**Three conditions, all recorded rather than implied:**
+
+* **The risk is the one CBD-103 §3.3 stated when it offered the route**: *"a
+  gate that fails on first observation invalidates the selection after
+  integration work has started"*, with `HG-102-001` and `HG-102-024` named as
+  most likely to bite. Taking the route accepts that risk; it does not retire it.
+* **`FAIL` is untouched.** This amends what `ELIGIBLE-PENDING-EVIDENCE` permits
+  and nothing else. A candidate with any `FAIL` and no approved exception remains
+  `INELIGIBLE` and is not selectable, and `EX-102-003` still bars an exception
+  from converting a `FAIL` into a `PASS`.
+* **The observations are still owed.** Route A's authorisation stands. Selecting
+  early defers the ten pass tests to build; it does not cancel them, and a
+  candidate whose gate fails on first observation must be re-measured.
+
+**A selection made on this basis must say so on its face**, so that no later
+reader mistakes it for a settled evaluation. `scripts/audit-cbd-108.py` checks
+that the disposition register does.
 
 ## 4. Staleness and re-verification
 
