@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Gives an explicit disposition to every open question and open item carried forward by the six CBD-15 category packages — **227 in total**, none closed by silence. Evidence register §7 requires that carrying: *"A question that stops being asked is recorded as `Absent` evidence, which scores 0 under rubric rule R3."* Completeness is guaranteed mechanically by `scripts/audit-cbd-108.py`; the class assigned to each item is derived from the item's own recorded text by the stated rule in §3, and 23 items are recorded as **not derivable**, which is itself a finding. |
-| Document version | 0.49 |
+| Document version | 0.50 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.49; Cross-Category Coherence Review v0.49; Combined Cost Model v0.49; Acceptance Criteria Traceability v0.49; Evidence Retrieval Pass v0.49 |
+| Companions | Provider Set Disposition Register v0.50; Cross-Category Coherence Review v0.50; Combined Cost Model v0.50; Acceptance Criteria Traceability v0.50; Evidence Retrieval Pass v0.50 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `e4ea4a8` |
+| Repository baseline | `1ee6b59` |
 | Last updated | August 29, 2026 |
 
 ## 1. Why this register exists
@@ -107,10 +107,25 @@ dispositions — and the traceability record maps which document answers which.
 can answer, which makes them the items most likely to be forgotten by a desk
 process and the ones with the longest lead time.
 
+**And they are authorised, which this register did not say and a reader would
+not assume.** *Closed to reading* has been taken for *closed to action*.
+CBD-15's OUT OF SCOPE list names *"production accounts, credentials, contracts,
+purchasing, provisioning, deployment, or integration"* — **a written question to
+a provider is none of those**, and `OI-103-022` separately permitted
+trust-portal requests and NDAs on August 22, 2026. CBD-108 §4.58 works this
+through: the plain question is the registrable route, because CBD-102 §3.0.2
+keeps NDA'd material out of the evidence register entirely. **The `D4` class is
+the longest-lead work in the set and nothing is stopping it from starting.**
+
 **`D9` is a single item, and its size understates it.** `OI-102-023`'s
 constraint does not merely block one question; it caps what category F's
 evidence can ever establish while its material stays NDA-bound. The item count is
 one; the consequence is a whole category's rubric ceiling.
+
+**`OI-102-023` is itself resolved** — CBD-102 §3.0.2, August 29, 2026 — so `D9`
+blocks on a **settled rule** rather than an open question. That sharpens it
+rather than softening it: the material is obtainable, and unusable once
+obtained.
 
 **`D0` at 23 items is a defect in the corpus, not in this register.** An item
 whose own text does not say what would resolve it cannot be scheduled, assigned,
