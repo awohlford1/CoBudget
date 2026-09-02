@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { THEME_COLORS } from "../styles/theme-colors";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "CoBudget",
@@ -8,7 +10,7 @@ export default function manifest(): MetadataRoute.Manifest {
       "Collaborative budgeting that helps people build better financial futures together.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f4f1e9",
-    theme_color: "#16433c",
+    background_color: THEME_COLORS.light,
+    theme_color: THEME_COLORS.light,
   };
 }
