@@ -5,14 +5,16 @@ import { themeScript } from "../theme/theme-script";
 
 import "./globals.css";
 
+// Name, descriptor, and tagline are the approved strings in
+// docs/brand-foundation.md. Change them there first.
 export const metadata: Metadata = {
   title: {
-    default: "CoBudget",
-    template: "%s | CoBudget",
+    default: "MoneyPact",
+    template: "%s | MoneyPact",
   },
   description:
-    "Collaborative budgeting that helps people build better financial futures together.",
-  applicationName: "CoBudget",
+    "Collaborative budgeting and financial accountability. Make a plan. Keep your commitments.",
+  applicationName: "MoneyPact",
 };
 
 // No `themeColor` here on purpose: the theme-color metas are created by the
