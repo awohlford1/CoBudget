@@ -1,0 +1,22 @@
+{
+  "name": "@cobudget/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Configuration and types shared by the API and worker. No I/O beyond reading the environment, no framework, no persistence, no provider SDK.",
+  "exports": {
+    "./config": "./src/config/index.ts",
+    "./health": "./src/health/index.ts",
+    "./telemetry": "./src/telemetry/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.66.0",
+    "eslint": "^9.39.5",
+    "typescript": "^5.9.0"
+  }
+}
