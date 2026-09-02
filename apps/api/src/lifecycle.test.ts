@@ -1,0 +1,177 @@
+import assert from "node:assert/strict";
+import { spawn } from "node:child_process";
+import { createServer } from "node:net";
+import { dirname, resolve } from "node:path";
+import { describe, it } from "node:test";
+import { fileURLToPath } from "node:url";
+
+type ShutdownSignal = "SIGINT" | "SIGTERM";
+
+interface ProcessResult {
+  readonly code: number | null;
+  readonly signal: NodeJS.Signals | null;
+  readonly stderr: string;
+  readonly stdout: string;
+}
+
+const sourceEntry = resolve(dirname(fileURLToPath(import.meta.url)), "main.ts");
+
+async function availablePort(): Promise<number> {
+  const server = createServer();
+  await new Promise<void>((resolveListening, reject) => {
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", resolveListening);
+  });
+  const address = server.address();
+  assert.ok(address && typeof address === "object");
+  await new Promise<void>((resolveClosed, reject) => {
+    server.close((error) => (error ? reject(error) : resolveClosed()));
+  });
+  return address.port;
+}
+
+async function runUntilSignal(signal: ShutdownSignal): Promise<string> {
+  const port = await availablePort();
+  const child = spawn(process.execPath, ["--import=tsx", sourceEntry], {
+    env: {
+      API_PORT: String(port),
+      LOG_LEVEL: "info",
+      NODE_ENV: "test",
+      SERVICE_VERSION: "signal-test",
+    },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+
+  return new Promise<string>((resolveRun, reject) => {
+    let stdout = "";
+    let stderr = "";
+    let sent = false;
+
+    const timeout = setTimeout(() => {
+      child.kill("SIGKILL");
+      reject(new Error(`API did not stop after ${signal}. stdout=${stdout} stderr=${stderr}`));
+    }, 10_000);
+
+    child.stdout.setEncoding("utf8");
+    child.stderr.setEncoding("utf8");
+    child.stderr.on("data", (chunk: string) => {
+      stderr += chunk;
+    });
+    child.stdout.on("data", (chunk: string) => {
+      stdout += chunk;
+      if (!sent && stdout.includes('"operation":"startup"')) {
+        sent = true;
+        child.kill(signal);
+      }
+    });
+    child.once("error", (error) => {
+      clearTimeout(timeout);
+      reject(error);
+    });
+    child.once("exit", (code, receivedSignal) => {
+      clearTimeout(timeout);
+      try {
+        assert.equal(code, 0, stderr);
+        assert.equal(receivedSignal, null);
+        assert.equal(sent, true, "the API exited before reporting readiness");
+        assert.match(stdout, /"operation":"shutdown"/);
+        resolveRun(stdout);
+      } catch (error: unknown) {
+        reject(error);
+      }
+    });
+  });
+}
+
+async function runToExit(
+  environment: Readonly<Record<string, string>>,
+): Promise<ProcessResult> {
+  const child = spawn(process.execPath, ["--import=tsx", sourceEntry], {
+    env: environment,
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+
+  return new Promise<ProcessResult>((resolveRun, reject) => {
+    let stdout = "";
+    let stderr = "";
+    const timeout = setTimeout(() => {
+      child.kill("SIGKILL");
+      reject(new Error(`API did not exit. stdout=${stdout} stderr=${stderr}`));
+    }, 10_000);
+
+    child.stdout.setEncoding("utf8");
+    child.stderr.setEncoding("utf8");
+    child.stdout.on("data", (chunk: string) => {
+      stdout += chunk;
+    });
+    child.stderr.on("data", (chunk: string) => {
+      stderr += chunk;
+    });
+    child.once("error", (error) => {
+      clearTimeout(timeout);
+      reject(error);
+    });
+    child.once("exit", (code, signal) => {
+      clearTimeout(timeout);
+      resolveRun({ code, signal, stderr, stdout });
+    });
+  });
+}
+
+describe("API startup failures", () => {
+  it("fails closed with a sanitized configuration diagnostic", async () => {
+    const result = await runToExit({
+      LOG_LEVEL: "info",
+      NODE_ENV: "test",
+      SERVICE_VERSION: "must-not-leak",
+    });
+
+    assert.equal(result.code, 1);
+    assert.equal(result.signal, null);
+    assert.equal(result.stdout, "");
+    assert.match(result.stderr, /API_PORT/);
+    assert.doesNotMatch(result.stderr, /must-not-leak/);
+  });
+
+  it("reports only an allowlisted code when the listen port is occupied", async () => {
+    const blocker = createServer();
+    await new Promise<void>((resolveListening, reject) => {
+      blocker.once("error", reject);
+      blocker.listen(0, "127.0.0.1", resolveListening);
+    });
+    const address = blocker.address();
+    assert.ok(address && typeof address === "object");
+
+    try {
+      const result = await runToExit({
+        API_LISTEN_ADDRESS: "127.0.0.1",
+        API_PORT: String(address.port),
+        LOG_LEVEL: "info",
+        NODE_ENV: "test",
+        SERVICE_VERSION: "must-not-leak",
+      });
+
+      assert.equal(result.code, 1);
+      assert.equal(result.signal, null);
+      assert.equal(result.stdout, "");
+      assert.equal(result.stderr, "API startup failed (EADDRINUSE).\n");
+    } finally {
+      await new Promise<void>((resolveClosed, reject) => {
+        blocker.close((error) => (error ? reject(error) : resolveClosed()));
+      });
+    }
+  });
+});
+
+describe("API process lifecycle", { skip: process.platform === "win32" }, () => {
+  for (const signal of ["SIGTERM", "SIGINT"] as const) {
+    it(`closes cleanly after ${signal}`, async () => {
+      const stdout = await runUntilSignal(signal);
+
+      for (const line of stdout.trim().split("\n")) {
+        const event = JSON.parse(line) as Record<string, unknown>;
+        assert.deepEqual(Object.keys(event).sort(), ["operation", "outcome", "service", "version"]);
+      }
+    });
+  }
+});
