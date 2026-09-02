@@ -56,7 +56,7 @@ RETRIEVAL = Path("docs/cbd-108-evidence-retrieval-pass.md")
 PACKAGE_FILES = (DISPOSITION, COHERENCE, COST, CARRIED, TRACE, RETRIEVAL)
 
 # The commit each document was written against.
-REPOSITORY_BASELINE = {path: "`1ee6b59`" for path in PACKAGE_FILES}
+REPOSITORY_BASELINE = {path: "`7a97d84`" for path in PACKAGE_FILES}
 
 SOURCE_PACKAGES = ("103", "104", "105", "106", "107", "130")
 
@@ -411,6 +411,21 @@ def main() -> int:
         "no gate outcome" in texts[RETRIEVAL],
         "retrieval pass: must state that it moves no gate outcome",
     )
+
+    # OI-108-055: template placeholders and generator source have shipped into
+    # merged prose three times, each through a green build. The claim that a
+    # document audit could not see this was wrong -- the residue is literal text.
+    for path in PACKAGE_FILES:
+        for token in ('{D}', '{S}', '" + D + "', '" + S + "'):
+            occurrences = texts[path].count(token)
+            # The retrieval pass documents this defect at OI-108-055, so a
+            # backticked mention of the token is discussion, not residue.
+            if path == RETRIEVAL:
+                occurrences -= texts[path].count("`" + token + "`")
+            audit.check(
+                occurrences == 0,
+                f"{path.name}: unrendered template residue {token!r} in prose",
+            )
 
     print(f"CBD-108 documentation audit: {audit.checks} checks")
     print(f"Failures: {len(audit.failures)}")
