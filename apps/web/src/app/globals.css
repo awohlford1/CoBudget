@@ -62,6 +62,49 @@ textarea {
   font: inherit;
 }
 
+/*
+ * The select's option list. A native picker is painted by the operating
+ * system and takes no tokens; opting into the customizable select renders it
+ * in the page instead, so the list and its options carry the roles like any
+ * other surface, while keyboard operation, typeahead, and screen-reader
+ * semantics stay the platform's. Browsers without it (Safari, at the time of
+ * writing) ignore both declarations and keep the native list — the control
+ * still works, it just looks like the platform's. Options are the consumer's
+ * elements with no class of their own, which is why these are global rules;
+ * `@apply` keeps them on the token pairs so they follow a container's scheme.
+ */
+select,
+select::picker(select) {
+  appearance: base-select;
+}
+
+select::picker(select) {
+  /* Block margin on both sides: the browser flips the list above the control
+     when there is no room below. */
+  @apply my-1 min-w-[anchor-size(width)] rounded-md border border-border-strong bg-surface-raised p-1 text-on-surface shadow-overlay;
+}
+
+select::picker-icon {
+  @apply text-on-surface-muted;
+}
+
+select option {
+  @apply rounded-sm px-3 py-2;
+}
+
+select option:hover,
+select option:focus-visible {
+  @apply bg-border/40;
+}
+
+select option:checked {
+  @apply font-semibold text-interactive;
+}
+
+select option:disabled {
+  @apply text-on-surface-disabled;
+}
+
 /* Focus is always visible and never suppressed. The attribute form is the
    forced state the review surface uses; see styles/states.css. `@apply`
    rather than `var(--color-focus)` so the ring follows a container's scheme:
