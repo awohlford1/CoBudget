@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
+@import "../styles/states.css";
 
 /*
  * Theme resolution. `light dark` lets the user agent follow
@@ -16,6 +17,21 @@
 }
 
 :root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/*
+ * A container that shows one scheme regardless of the page's: the review
+ * surface uses both to render every component in both themes at once. These
+ * must be stylesheet rules, not inline styles. The CSS pipeline polyfills
+ * `light-dark()` into a pair of custom properties that it sets wherever it
+ * sees a `color-scheme` declaration — and it cannot see a style attribute.
+ */
+.scheme-light {
+  color-scheme: light;
+}
+
+.scheme-dark {
   color-scheme: dark;
 }
 
@@ -46,10 +62,15 @@ textarea {
   font: inherit;
 }
 
-/* Focus is always visible and never suppressed. */
-:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
+/* Focus is always visible and never suppressed. The attribute form is the
+   forced state the review surface uses; see styles/states.css. `@apply`
+   rather than `var(--color-focus)` so the ring follows a container's scheme:
+   the utility carries the light-dark() pair, the var is resolved at :root. */
+:focus-visible,
+[data-state~="focus-visible"] {
+  @apply outline-3 outline-focus outline-offset-2;
+
+  outline-style: solid;
 }
 
 .site-shell {
