@@ -10,7 +10,9 @@
   "scripts": {
     "dev": "npm run dev --workspace=@cobudget/web",
     "dev:api": "npm run dev --workspace=@cobudget/api",
+    "dev:worker": "npm run dev --workspace=@cobudget/worker",
     "start:api": "npm run start --workspace=@cobudget/api",
+    "start:worker": "npm run start --workspace=@cobudget/worker",
     "build": "npm run build --workspaces --if-present",
     "start": "npm run start --workspace=@cobudget/web",
     "check:docs": "node scripts/check-mermaid.mjs",

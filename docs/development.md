@@ -54,6 +54,31 @@ also send HSTS; local HTTP responses deliberately do not. TLS termination and
 the required per-surface rate limits are deployment-edge controls, not replaced
 by these application defaults.
 
+## Run the worker application
+
+The worker uses the same `.env.local` shared configuration as the API. Start it
+as a separate process from the repository root:
+
+```sh
+npm run dev:worker
+```
+
+For a production-equivalent start, build the workspace and run the compiled
+artifact (the start command does not depend on the TypeScript development
+loader):
+
+```sh
+npm run build --workspace=@cobudget/worker
+npm run start:worker
+```
+
+It writes structured startup and readiness records, then remains idle until
+`SIGINT` or `SIGTERM`. Either signal produces one structured shutdown record and
+a clean exit. Shutdown work is idempotent and has a ten-second safety deadline,
+so a future resource drain cannot leave a deployment stuck indefinitely. The
+worker has no queue, database, scheduler, provider client, or jobs yet; those
+dependencies belong to their own implementation stories.
+
 ## Validate changes
 
 ```sh
