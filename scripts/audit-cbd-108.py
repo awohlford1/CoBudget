@@ -56,7 +56,7 @@ RETRIEVAL = Path("docs/cbd-108-evidence-retrieval-pass.md")
 PACKAGE_FILES = (DISPOSITION, COHERENCE, COST, CARRIED, TRACE, RETRIEVAL)
 
 # The commit each document was written against.
-REPOSITORY_BASELINE = {path: "`c5b7074`" for path in PACKAGE_FILES}
+REPOSITORY_BASELINE = {path: "`624e6d6`" for path in PACKAGE_FILES}
 
 SOURCE_PACKAGES = ("103", "104", "105", "106", "107", "130")
 
@@ -444,9 +444,9 @@ def main() -> int:
         print(f"  - {warning}")
     if not audit.failures:
         print(
-            "Result: PASS (documentation integrity only; category H is selected at "
-            "ELIGIBLE-PENDING-EVIDENCE under route B, five categories are not "
-            "selected, and the observation pass remains unperformed)"
+            "Result: PASS (documentation integrity only; selections are recorded at "
+            "disposition register section 4, made at ELIGIBLE-PENDING-EVIDENCE under "
+            "route B, and the observation pass remains unperformed)"
         )
     return 1 if audit.failures else 0
 
