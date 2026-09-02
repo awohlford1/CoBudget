@@ -116,22 +116,6 @@ select option:disabled {
   outline-style: solid;
 }
 
-.site-shell {
-  display: grid;
-  min-height: 100vh;
-  place-items: center;
-  padding: 2rem;
-}
-
-.intro {
-  width: min(100%, 52rem);
-  padding: clamp(2rem, 7vw, 5rem);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: color-mix(in srgb, var(--color-surface-raised) 92%, transparent);
-  box-shadow: var(--shadow-overlay);
-}
-
 .eyebrow {
   margin: 0 0 1.25rem;
   color: var(--color-on-surface-muted);
@@ -149,34 +133,6 @@ h1 {
   font-weight: 650;
   letter-spacing: -0.065em;
   line-height: 0.98;
-}
-
-.mission {
-  max-width: 38rem;
-  margin: 2rem 0;
-  color: var(--color-on-surface-muted);
-  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
-  line-height: 1.6;
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.7rem 0.9rem;
-  border-radius: var(--radius-full);
-  background: var(--color-on-surface);
-  color: var(--color-surface-raised);
-  font-size: 0.85rem;
-  font-weight: 650;
-}
-
-.status span {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: var(--radius-full);
-  background: var(--color-accent);
-  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--color-accent) 15%, transparent);
 }
 
 .theme-choice {
@@ -204,18 +160,6 @@ h1 {
 
 .theme-choice input {
   accent-color: var(--color-interactive);
-}
-
-@media (max-width: 36rem) {
-  .site-shell {
-    align-items: end;
-    padding: 1rem;
-  }
-
-  .intro {
-    padding: 2rem 1.5rem;
-    border-radius: var(--radius-lg);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
