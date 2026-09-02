@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.64 |
+| Document version | 0.65 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.64; Combined Cost Model v0.64; Carried Item Disposition Register v0.64; Acceptance Criteria Traceability v0.64; Evidence Retrieval Pass v0.64 |
+| Companions | Cross-Category Coherence Review v0.65; Combined Cost Model v0.65; Carried Item Disposition Register v0.65; Acceptance Criteria Traceability v0.65; Evidence Retrieval Pass v0.65 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `624e6d6` |
+| Repository baseline | `5b9d74f` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -99,23 +99,33 @@ been shown to have.
 | # | Category | Disposition | Named gap |
 | --- | --- | --- | --- |
 | 1 | **H** — Hosting | **Selected: C1 Google Cloud** | **Forced, not chosen** — C2 and C3 are `INELIGIBLE` on `HG-102-013`, so C1 is the only candidate standing. Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. Ten observation tests and every price line remain outstanding and resolve during build |
-| 2 | **I** — Identity | **Blocked** | Route-A observation pass unperformed (9 tests); `OQ-104-008` unresolved, which moves C4's price by an unbounded amount |
-| 3 | **D** — PostgreSQL | **Blocked** | Route-A observation pass unperformed (8 tests); no price retrieved; C3 custody questions at `OI-105-009` unanswered |
+| 2 | **I** — Identity | **Selected: C2 Amazon Cognito** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. C2 and C3 tied 3—3 on documentary evidence and the identity gates `PASS` for all three; **the tie was broken on vendor footprint**, which is not a scored criterion. Nine observation tests resolve during build |
+| 3 | **D** — PostgreSQL | **Selected: C1 Cloud SQL** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **The first selection to trade documentary evidence for architecture** — C3 led 4—3 and holds the corpus's only `HG-102-013` `PASS`. Eight observation tests and every price line resolve during build |
 | 4 | **E** — Email | **Selected: C2 Amazon SES** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **Decided on evidence coverage, not on price** — the Base spread is $14.96/month in absolute terms. Eleven observation tests, requiring live sending, resolve during build |
 | 5 | **F** — Financial connectivity | **Blocked, and doubly** | Route-A observation pass unperformed (9 tests); **and** the documentary gap is now constrained by `OI-102-023` — §4.5 |
-| 6a | **N** — SMS | **Blocked** | Route-A observation pass unperformed; field reduced to two by C10's `INELIGIBLE` verdict |
+| 6a | **N** — SMS | **Selected: C2 AWS End User Messaging** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. C2 and C3 tied 3—3; `OI-130-020` and vendor footprint both favour C2. Observation tests and the A2P carrier floors at `OQ-108-008` resolve during build |
 | 6b | **N** — Push | **Deferred** | **No selection exists to make** — §4.6 |
 
-Six categories, seven dispositions. **Two selected.**
+Six categories, seven dispositions. **Five selected.**
 
-**Categories H and E are selected at `ELIGIBLE-PENDING-EVIDENCE`** under CBD-103
-§3.3's route B, taken by Product Owner decision of September 2, 2026 and recorded at
-evidence register §3.3.1. **H was forced** — one candidate standing. **E was
-decided**, on documentary coverage rather than on price.
+**Five categories are selected at `ELIGIBLE-PENDING-EVIDENCE`** under CBD-103 §3.3's route B,
+taken by Product Owner decision of September 2, 2026 and recorded at evidence register
+§3.3.1.
 
-The remaining four categories are **not** selected: route B lifts the observation
-cap and supplies no cost model, and each has two or more candidates standing with
-no comparison figure to choose between them.
+| Category | Selected | How |
+| --- | --- | --- |
+| **H** Hosting | **C1 Google Cloud** | Forced — one candidate standing |
+| **I** Identity | **C2 Amazon Cognito** | Tied on evidence; broken on vendor footprint |
+| **D** PostgreSQL | **C1 Cloud SQL** | Evidence traded for architecture |
+| **E** Email | **C2 Amazon SES** | Decided on documentary coverage |
+| **N** SMS | **C2 AWS End User Messaging** | Tied on evidence; `OI-130-020` and footprint |
+
+**The set is two clouds, not four vendors.** `OI-108-072` recorded that a C1
+hosting selection forces non-Google vendors in identity, email and SMS. All three
+went to the same vendor, so the result is **Google Cloud for hosting and
+database, AWS for identity, email and SMS**.
+
+**Category F is not selected**, and route B does not reach it — §4.5.
 
 **What route B does not do is as important as what it does.** The ten pass
 tests are deferred, not cancelled. The risk CBD-103 §3.3 stated when it offered
@@ -166,7 +176,17 @@ and `OQ-108-005` for the `HG-102-013` half.
 
 ### 4.2 I — Identity
 
-**Blocked.** Nine pass tests are observation-bound. This is the only category
+**Selected: C2 Amazon Cognito, at `ELIGIBLE-PENDING-EVIDENCE`, September 2, 2026.**
+**Tied on evidence and broken on footprint.** C2 and C3 each hold three
+cross-category `PASS`es and the identity gates `PASS` for all three, so nothing in
+the gate set separates them; `HG-102-030`, which CBD-104 §7.1 calls the sharpest
+differentiator, is observation-bound. C4 Auth0 holds one, and `OQ-104-008` puts an
+unbounded price movement on its Essentials tier. **The tie was broken on vendor
+footprint — reusing the AWS account email already requires — which is an
+architectural consideration and not a criterion this corpus scores.**
+
+**Blocked gaps that now resolve during build.** Nine pass tests are
+observation-bound. This is the only category
 with retrieved prices, and they do not separate the candidates: CBD-104 §6.6
 states the honest summary — identity cost is close to a rounding error against
 the decision's other terms. **This paragraph previously attributed that to
@@ -190,7 +210,25 @@ coherence review as a constraint to verify, not as a conclusion.
 
 ### 4.3 D — Managed PostgreSQL
 
-**Blocked.** Eight pass tests are observation-bound. `OI-105-007` records that
+**Selected: C1 Cloud SQL, at `ELIGIBLE-PENDING-EVIDENCE`, September 2, 2026.**
+**This is the first selection to trade documentary evidence for architecture, and
+what was given up is recorded rather than glossed.** C3 Azure Flexible Server
+leads 4—3 and holds **the only `HG-102-013` `PASS` anywhere in this corpus**, plus
+`HG-102-042` for PITR, retention and expiry in writing. C1 holds `HG-102-009`
+uniquely, on Access Transparency.
+
+**C1 was selected for locality**: the database sits in the hosting cloud, under one
+IAM model and one private-networking boundary, rather than splitting the
+application tier from its datastore across two clouds. **That is an architectural
+judgment, not a gate outcome**, and it cost two documentary `PASS`es.
+
+**One consequence follows immediately.** `HG-102-013` is now `UNPROVEN` on **two**
+selected components rather than one — C1 hosting and C1 Cloud SQL — so the request
+drafted at CBD-108 §4.70 bears on both. It remains unsent by Product Owner
+direction.
+
+**Blocked gaps that now resolve during build.** Eight pass tests are
+observation-bound. `OI-105-007` records that
 the D observations can share the H evaluation accounts, so this category adds
 little to the pass's cost. No price was retrieved.
 
@@ -281,7 +319,12 @@ C8/C9 terms enquiries.
 
 ### 4.6 N — Push and SMS, which need separate dispositions
 
-**SMS: blocked.** Observation-bound as elsewhere, on a field of two. C3's
+**SMS: selected — C2 AWS End User Messaging, at `ELIGIBLE-PENDING-EVIDENCE`, September 2, 2026.**
+C2 and C3 tied 3—3 on documentary evidence. **Two things favoured C2**: the
+preview dependency below, and reuse of the AWS account identity and email already
+require. The second is an architectural consideration and not a scored criterion.
+
+**Blocked gaps that now resolve during build.** Observation-bound as elsewhere, on a field of two. C3's
 Opt-Out Management API is in preview without an SLA and `HG-102-073` depends on
 it (`OI-130-020`), which is a real risk to a two-candidate field —
 `OQ-130-011` re-verifies by **November 21, 2026**.
