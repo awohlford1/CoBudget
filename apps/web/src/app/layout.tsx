@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
-import { THEME_COLORS } from "../styles/theme-colors";
 import { themeScript } from "../theme/theme-script";
 
 import "./globals.css";
@@ -16,12 +15,10 @@ export const metadata: Metadata = {
   applicationName: "CoBudget",
 };
 
+// No `themeColor` here on purpose: the theme-color metas are created by the
+// inline script below so that React never owns them. See theme-script.ts.
 export const viewport: Viewport = {
   colorScheme: "light dark",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.light },
-    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.dark },
-  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

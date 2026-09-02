@@ -23,6 +23,14 @@ export function readTheme(): ThemeChoice {
   return pinned === "light" || pinned === "dark" ? pinned : "system";
 }
 
+function themeColorMeta(content: string, media?: string): HTMLMetaElement {
+  const meta = document.createElement("meta");
+  meta.name = "theme-color";
+  meta.content = content;
+  if (media) meta.media = media;
+  return meta;
+}
+
 export function applyTheme(choice: ThemeChoice): void {
   const root = document.documentElement;
   if (choice === "system") {
@@ -31,16 +39,16 @@ export function applyTheme(choice: ThemeChoice): void {
     root.dataset.theme = choice;
   }
 
-  // The chrome colour metas carry `media` queries so the browser follows the
-  // system preference; an explicit choice replaces them with a single colour.
-  for (const meta of document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')) {
-    if (choice === "system") {
-      meta.media = meta.dataset.media ?? "";
-    } else {
-      meta.dataset.media ??= meta.media;
-      meta.media = "";
-      meta.content = THEME_COLORS[choice];
-    }
+  // The theme-color metas belong to the inline script and this function, not
+  // to React — see theme-script.ts. Replace them wholesale for the new choice.
+  for (const meta of document.querySelectorAll('meta[name="theme-color"]')) meta.remove();
+  if (choice === "system") {
+    document.head.append(
+      themeColorMeta(THEME_COLORS.light, "(prefers-color-scheme: light)"),
+      themeColorMeta(THEME_COLORS.dark, "(prefers-color-scheme: dark)"),
+    );
+  } else {
+    document.head.append(themeColorMeta(THEME_COLORS[choice]));
   }
 
   try {
