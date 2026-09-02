@@ -1,0 +1,29 @@
+{
+  "$comment": "CBD-126. Every pairing the token system permits, with the WCAG 2.2 AA minimum it must meet in both themes. `kind` is text (4.5:1), non-text (3:1, for boundaries and indicators that identify a control), or exempt (measured and recorded, not enforced, with the clause that exempts it). scripts/check-tokens.mjs measures each pairing from the light-dark() values in tokens.css, fails naming the pairing and the theme, and writes contrast-record.md.",
+  "pairings": [
+    { "foreground": "on-surface", "background": "surface", "kind": "text", "use": "Body text on the page ground." },
+    { "foreground": "on-surface", "background": "surface-raised", "kind": "text", "use": "Body text on cards, inputs, dialogs, and the select picker." },
+    { "foreground": "on-surface-muted", "background": "surface", "kind": "text", "use": "Secondary text: hints, eyebrows, table headers, state labels." },
+    { "foreground": "on-surface-muted", "background": "surface-raised", "kind": "text", "use": "Secondary text inside a raised surface, including alert bodies." },
+    { "foreground": "on-surface-placeholder", "background": "surface-raised", "kind": "text", "use": "Placeholder text in inputs. Placeholder is text and is not exempt." },
+    { "foreground": "on-surface-placeholder", "background": "surface", "kind": "text", "use": "Placeholder text in a control sitting directly on the page ground." },
+    { "foreground": "interactive", "background": "surface", "kind": "text", "use": "Links and the checked select option, on the page ground." },
+    { "foreground": "interactive", "background": "surface-raised", "kind": "text", "use": "Links inside cards and the select picker." },
+    { "foreground": "danger", "background": "surface", "kind": "text", "use": "Error messages under fields and in the table error row." },
+    { "foreground": "danger", "background": "surface-raised", "kind": "text", "use": "Alert titles in the danger tone." },
+    { "foreground": "on-accent", "background": "accent", "kind": "text", "use": "Primary button label." },
+    { "foreground": "on-danger", "background": "danger", "kind": "text", "use": "Danger button label." },
+    { "foreground": "border-strong", "background": "surface", "kind": "non-text", "use": "Control boundary of inputs and selects on the page ground (WCAG 1.4.11)." },
+    { "foreground": "border-strong", "background": "surface-raised", "kind": "non-text", "use": "Control boundary inside a card, and the select picker's edge." },
+    { "foreground": "focus", "background": "surface", "kind": "non-text", "use": "Focus ring against the page ground. The ring sits 2px outside every control, so the surface is what it is adjacent to." },
+    { "foreground": "focus", "background": "surface-raised", "kind": "non-text", "use": "Focus ring against a raised surface." },
+    { "foreground": "danger", "background": "surface-raised", "kind": "non-text", "use": "Error border on an invalid control (2px), also judged as a boundary." },
+    { "foreground": "focus", "background": "accent", "kind": "exempt", "exemption": "The ring is offset 2px onto the surface and never touches the fill; the governing pairings are focus on surface and on surface-raised.", "use": "Focus ring around a primary button." },
+    { "foreground": "on-surface-disabled", "background": "surface", "kind": "exempt", "exemption": "WCAG 1.4.3 exempts text of inactive components.", "use": "Disabled labels and disabled link text." },
+    { "foreground": "on-surface-disabled", "background": "surface-raised", "kind": "exempt", "exemption": "WCAG 1.4.3 exempts text of inactive components.", "use": "Disabled control text inside a raised surface." },
+    { "foreground": "accent", "background": "surface", "kind": "exempt", "exemption": "WCAG 1.4.11: the fill's boundary is not required to identify the control; its on-accent label (a text pairing above) does. No control may rely on this fill alone.", "use": "Primary button fill on the page ground." },
+    { "foreground": "accent", "background": "surface-raised", "kind": "exempt", "exemption": "WCAG 1.4.11, as above.", "use": "Primary button fill inside a card or dialog." },
+    { "foreground": "border", "background": "surface", "kind": "exempt", "exemption": "Decorative separation between regions; WCAG 1.4.11 applies to boundaries needed to identify a component.", "use": "Card edges, table row lines, section frames." },
+    { "foreground": "border", "background": "surface-raised", "kind": "exempt", "exemption": "Decorative, as above.", "use": "Row lines inside a table on a raised surface." }
+  ]
+}
