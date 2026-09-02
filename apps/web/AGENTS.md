@@ -23,6 +23,20 @@ That file is also generated, and CBD-97 reached the opposite conclusion for it: 
 
 The distinction is whether a human is meant to read the file, not whether a tool generates it.
 
+## Theming and design tokens
+
+Decided under CBD-124. `src/styles/tokens.css` is the only vocabulary for colour, radius, elevation, and type. Every colour token names a role (`surface`, `on-surface-muted`, `border-strong`, `interactive`, `danger`) and is declared once as `light-dark(light, dark)`, so both themes exist for every token by construction and switching theme changes values, never rules. Tailwind's default palette is reset in that file: `bg-surface` exists, `bg-red-500` does not.
+
+Three rules are enforced by `scripts/check-tokens.mjs`, which runs in `npm run check`:
+
+- A `--color-*` token declared any way other than `light-dark(<light>, <dark>)` fails the build.
+- A raw colour — hex, `rgb()`, `oklch()`, and the rest — anywhere under `src/` other than `tokens.css` and `theme-colors.ts` fails the build. Reference a role.
+- `theme-colors.ts` holds the two chrome colours that HTML metadata and the manifest need as literals, and the check verifies they equal `--color-surface`.
+
+Theme resolution: `:root { color-scheme: light dark }` in `globals.css` follows `prefers-color-scheme`; `data-theme="light" | "dark"` on `<html>` pins one scheme. The attribute is written in exactly two places — the inline script in the root layout (`src/theme/theme-script.ts`), which runs before first paint from the stored choice, and `applyTheme` in `src/theme/theme.ts` — and read in exactly one, `globals.css`. Components never branch on it. The choice persists in `localStorage` under `cobudget-theme`; storing it on the user record is CBD-22's.
+
+Contrast is measured, not judged: every text pairing the tokens permit meets WCAG 2.2 AA in both themes, and every control boundary and focus ring meets 3:1. The one recorded exception is the lime `accent` fill on the light `surface` (1.12:1), which 1.4.11 exempts because the fill's `on-accent` text (10.7:1) identifies the control — so no control may rely on that fill alone. CBD-126 records the full table and wires the measurement into the gate.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

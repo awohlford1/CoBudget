@@ -1,0 +1,82 @@
+/*
+ * CoBudget design tokens (CBD-124).
+ *
+ * Every token names a role. Color tokens carry both themes in one declaration —
+ * `light-dark(light, dark)` — which resolves against the root `color-scheme`,
+ * so the dark theme is a value table rather than a second rule set and no token
+ * can exist in one theme without the other. `scripts/check-tokens.mjs` fails the
+ * build if a `--color-*` token is declared any other way, or if a raw color
+ * appears anywhere else under `apps/web/src`.
+ *
+ * Theme resolution lives in `app/globals.css`: `color-scheme: light dark`
+ * follows `prefers-color-scheme`, and `data-theme="light" | "dark"` on `<html>`
+ * pins it. The attribute is set before first paint by `theme/theme-script.ts`
+ * from the stored choice, and by `theme/theme.ts` when the choice changes;
+ * nothing else may reference it.
+ *
+ * Tailwind's default palette, radii, shadows, and fonts are reset so the roles
+ * below are the only vocabulary a class name can reach. `bg-surface`,
+ * `text-on-surface`, `rounded-md`, and `shadow-raised` exist; `bg-red-500`
+ * does not.
+ *
+ * The foundation carries no financial semantics. "Over budget" is not a role.
+ */
+@theme {
+  --color-*: initial;
+  --shadow-*: initial;
+  --radius-*: initial;
+  --font-*: initial;
+
+  /* Surfaces: the page ground and anything raised off it. */
+  --color-surface: light-dark(#f4f1e9, #101a18);
+  --color-surface-raised: light-dark(#fffdf8, #182420);
+
+  /* Content on a surface, by emphasis. Placeholder and disabled are separate
+     roles so their contrast is a measured pairing rather than an accident. */
+  --color-on-surface: light-dark(#17332e, #e8ede9);
+  --color-on-surface-muted: light-dark(#4f625c, #a6b3ad);
+  --color-on-surface-placeholder: light-dark(#5b6e68, #8e9c96);
+  --color-on-surface-disabled: light-dark(#8a9791, #66736e);
+
+  /* Boundaries. `border` separates regions; `border-strong` bounds a control
+     and must meet 3:1 against the surface it sits on. */
+  --color-border: light-dark(#d9ddd4, #2a3833);
+  --color-border-strong: light-dark(#6f7f79, #6f7f79);
+
+  /* Emphasis fill and what sits on it. */
+  --color-accent: light-dark(#d8f06a, #d8f06a);
+  --color-on-accent: light-dark(#17332e, #101a18);
+
+  /* Text and icons that signal an action. Distinct from `accent`, which is a
+     fill: lime text on cream does not meet contrast, deep green does. */
+  --color-interactive: light-dark(#1f5c52, #9fd9c9);
+
+  /* The focus indicator. Never suppressed; must meet 3:1 against any surface. */
+  --color-focus: light-dark(#1f5c52, #9fd9c9);
+
+  /* Failure and destructive intent, as a fill or as text. */
+  --color-danger: light-dark(#a3261e, #ff8f85);
+  --color-on-danger: light-dark(#fffdf8, #2a0c0a);
+
+  /* Elevation colour; the shadow scale below references it. */
+  --color-shadow: light-dark(rgb(23 51 46 / 12%), rgb(0 0 0 / 50%));
+
+  /* Typography. One stack, two roles, so display can diverge later without
+     touching a component. */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-sans);
+
+  /* Spacing: Tailwind's scale, with the base stated rather than assumed. */
+  --spacing: 0.25rem;
+
+  /* Radius. */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-full: 9999px;
+
+  /* Elevation. */
+  --shadow-raised: 0 0.25rem 1rem var(--color-shadow);
+  --shadow-overlay: 0 2rem 5rem var(--color-shadow);
+}

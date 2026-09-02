@@ -1,3 +1,5 @@
+import { ThemeToggle } from "../theme/ThemeToggle";
+
 export default function Home() {
   return (
     <main className="site-shell">
@@ -12,6 +14,7 @@ export default function Home() {
           <span aria-hidden="true" />
           Web foundation ready
         </div>
+        <ThemeToggle />
       </section>
     </main>
   );
