@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.56 |
+| Document version | 0.57 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.56; Combined Cost Model v0.56; Carried Item Disposition Register v0.56; Acceptance Criteria Traceability v0.56; Evidence Retrieval Pass v0.56 |
+| Companions | Cross-Category Coherence Review v0.57; Combined Cost Model v0.57; Carried Item Disposition Register v0.57; Acceptance Criteria Traceability v0.57; Evidence Retrieval Pass v0.57 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `cacaeaf` |
+| Repository baseline | `e43d534` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -260,25 +260,27 @@ and both are stated before the records rather than after.
 
 ### 5.0 Two blockers, neither of which this package can clear
 
-**`EX-102-006` may bar individual approval entirely.** The rule: *"any exception
-on a gate citing S4 material requires a full re-evaluation rather than another
-individual approval."* `HG-102-013` cites **CBD-91 §5.1**, and that section does
-mention S4 — *"S4 classes listed below are excluded"* from the relevant
-application-data backup.
+**`EX-102-006` fires. Settled at CBD-108 §4.65 from the primary text.** The rule:
+*"any exception on a gate citing S4 material requires a full re-evaluation rather
+than another individual approval."*
 
-Two readings, and this package picks neither:
+**The gate cites S4 material.** `HG-102-013`'s cited source is not §5.1 at large but
+**CBD-91 §5.1's provider row**, whose applicable classes are *"Provider/vendor
+copies represented by DI-91-001—012 ... DI-91-072—073"*. **`DI-91-072` is
+*"Secret-store/KMS recovery copies and recovery authorization material"* at S4**,
+named explicitly, and the `001`—`012` range carries `DI-91-002`, `003`, `006` and
+`010`, all S4.
 
-1. **The gate cites S4, so `EX-102-006` fires.** The citation is the test the
-   rule names, and it is met on its face. Individual approval is unavailable and
-   a full re-evaluation is required instead.
-2. **The gate's subject matter excludes S4.** §5.1 mentions S4 precisely to
-   exclude those classes from backups, so a gate about **backup** retention does
-   not reach S4 material, and the rule's purpose — preventing protections on
-   the most sensitive tier being traded away — is not engaged.
+**This section previously argued the opposite and quoted the wrong row.** §5.1's
+last row excludes those classes from **ordinary application-data backups** —
+CoBudget's backups. The provider row hands the same classes to providers as
+*"Provider-controlled"*, which is the gap `HG-102-013` exists to close.
 
-**Reading 2 is the more faithful to intent and reading 1 is the more faithful to
-the text**, which is exactly the kind of disagreement `EX-102-001` reserves to
-the Product Owner. `OQ-108-059`.
+**It escalates rather than bars.** §5.2 is the barring instrument, its list was
+closed by Product Owner confirmation on August 16, and **`HG-102-013` is not on
+it**. So `EXC-108-002` and `EXC-108-003` remain available — but **not by
+individual approval**. And *"a full re-evaluation"* is defined nowhere in the
+corpus: `OQ-108-074`. **The same rule fires on all eight gates citing that row.**
 
 **`EX-102-007` limits what approval would achieve.** The rule: *"A compensating
 control that is CoBudget-side work is not effective until built and verified.
