@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.47 |
+| Document version | 0.48 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.47; Combined Cost Model v0.47; Carried Item Disposition Register v0.47; Acceptance Criteria Traceability v0.47; Evidence Retrieval Pass v0.47 |
+| Companions | Cross-Category Coherence Review v0.48; Combined Cost Model v0.48; Carried Item Disposition Register v0.48; Acceptance Criteria Traceability v0.48; Evidence Retrieval Pass v0.48 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `78ad2c7` |
+| Repository baseline | `853ef0f` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -262,8 +262,8 @@ and both are stated before the records rather than after.
 
 **`EX-102-006` may bar individual approval entirely.** The rule: *"any exception
 on a gate citing S4 material requires a full re-evaluation rather than another
-individual approval."* `HG-102-013` cites **CBD-91 {S}5.1**, and that section does
-mention S4 {D} *"S4 classes listed below are excluded"* from the relevant
+individual approval."* `HG-102-013` cites **CBD-91 §5.1**, and that section does
+mention S4 — *"S4 classes listed below are excluded"* from the relevant
 application-data backup.
 
 Two readings, and this package picks neither:
@@ -271,10 +271,10 @@ Two readings, and this package picks neither:
 1. **The gate cites S4, so `EX-102-006` fires.** The citation is the test the
    rule names, and it is met on its face. Individual approval is unavailable and
    a full re-evaluation is required instead.
-2. **The gate's subject matter excludes S4.** {S}5.1 mentions S4 precisely to
+2. **The gate's subject matter excludes S4.** §5.1 mentions S4 precisely to
    exclude those classes from backups, so a gate about **backup** retention does
-   not reach S4 material, and the rule's purpose {D} preventing protections on
-   the most sensitive tier being traded away {D} is not engaged.
+   not reach S4 material, and the rule's purpose — preventing protections on
+   the most sensitive tier being traded away — is not engaged.
 
 **Reading 2 is the more faithful to intent and reading 1 is the more faithful to
 the text**, which is exactly the kind of disagreement `EX-102-001` reserves to
@@ -284,11 +284,11 @@ the Product Owner. `OQ-108-059`.
 control that is CoBudget-side work is not effective until built and verified.
 Until then the exception is provisional and the gate remains `FAIL`."*
 
-The compensating control below is **hybrid** {D} a vendor capability that
-CoBudget must configure {D} so on the conservative reading it is CoBudget-side
+The compensating control below is **hybrid** — a vendor capability that
+CoBudget must configure — so on the conservative reading it is CoBudget-side
 work until built and verified. **If so, approving these exceptions does not
 produce a selectable set today.** It produces a route to one, conditional on
-`SR-94-*` verification. That is a materially weaker outcome than {S}4.35
+`SR-94-*` verification. That is a materially weaker outcome than §4.35
 anticipated when it described the exception route as *"a way to proceed"*, and
 it is stated here so the decision is made with it in view.
 
@@ -301,14 +301,14 @@ regardless of how long the copy persists. That converts an unbounded **retention
 question into a bounded **key-deletion** question, and the key-deletion bound is
 stated where the retention bound is not:
 
-* **C2** {D} AWS KMS *"requires you to set a waiting period of 7 " + D + " 30 days"*
+* **C2** — AWS KMS *"requires you to set a waiting period of 7 — 30 days"*
   and *"After the waiting period ends, AWS KMS deletes the KMS key, its aliases,
-  and all related AWS KMS metadata"* (CBD-108 {S}4.30). Provider-enforced at both
+  and all related AWS KMS metadata"* (CBD-108 §4.30). Provider-enforced at both
   ends.
-* **C3** {D} customer-managed keys are supported on Flexible Server, and
-  CBD-108 {S}4.9 records the mode as create-time-only and irreversible, which
+* **C3** — customer-managed keys are supported on Flexible Server, and
+  CBD-108 §4.9 records the mode as create-time-only and irreversible, which
   constrains **when** the control can be adopted rather than whether.
-* **C1** {D} not established. Cloud KMS key-destruction timing was not
+* **C1** — not established. Cloud KMS key-destruction timing was not
   retrieved, and CBD-108 records six failed attempts at Google pricing and
   documentation in this area. **C1's control is therefore unevidenced**, which
   is why its record below is the weakest of the three.
@@ -321,8 +321,13 @@ treats conservatively.
 
 **One thing it does not compensate for.** The gate has a **region** element as
 well as a lifetime element, and cryptographic erasure does not bound where a
-copy sits. **C1 and C3 fail on region**, not on lifetime, so for those two this
-control addresses a limb they did not fail. `OQ-108-060`.
+copy sits. **C3 fails on region**, so for C3 this control addresses a limb it
+did not fail. `OQ-108-060`.
+
+**This paragraph said "C1 and C3" as drafted, and C1 has since come out.**
+CBD-103 v1.6 finds C1's region limb met and its live limb lifetime, at
+`UNPROVEN` rather than `FAIL` — so C1 has no failed gate for an exception to
+address. CBD-108 §4.56 withdraws `EXC-108-001` on that ground.
 
 ### 5.2 The records
 
@@ -331,31 +336,37 @@ from approval or the end of the Private MVP phase, whichever is sooner.
 
 | Field | **EXC-108-001** | **EXC-108-002** | **EXC-108-003** |
 | --- | --- | --- | --- |
-| Provider / category | C1 Google Cloud / H | C2 AWS / H and D | C3 Azure / H |
-| Failed gate | `HG-102-013` | `HG-102-013` | `HG-102-013` |
-| Cited source | CBD-91 {S}5.1 provider row | CBD-91 {S}5.1 provider row | CBD-91 {S}5.1 provider row |
-| Limb failed | **Region** {D} the current data-residency list omits Cloud Scheduler | **Lifetime** {D} CloudWatch Logs states a bound with an unbounded tail; RDS states no provider ceiling | **Region** {D} Front Door is absent from the Core Services list |
-| Compensating control | Cryptographic erasure, **unevidenced for C1** | Cryptographic erasure via KMS, provider-enforced 7{D}30 days | Cryptographic erasure via customer-managed keys, create-time-only |
-| Vendor or CoBudget | **Hybrid**, so provisional under `EX-102-007` | **Hybrid**, so provisional under `EX-102-007` | **Hybrid**, so provisional under `EX-102-007` |
-| Does the control address the failed limb? | **No** {D} erasure does not bound location | **Yes** | **No** {D} erasure does not bound location |
-| Residual risk | Copies of scheduler job definitions and target URLs sit outside the region commitment, unbounded in location | Log and database copies persist past the configured period by an amount AWS declines to bound | Edge-tier copies sit outside the Geo commitment, unbounded in location |
-| Approver | **Not approved** | **Not approved** | **Not approved** |
-| Approval date | {D} | {D} | {D} |
-| Expiry if approved | 12 months or end of Private MVP, whichever is sooner | Same | Same |
+| Provider / category | ~~C1 Google Cloud / H~~ **WITHDRAWN** | C2 AWS / H and D | C3 Azure / H |
+| Failed gate | **None** — C1 is `UNPROVEN`, not `FAIL` | `HG-102-013` | `HG-102-013` |
+| Cited source | CBD-91 §5.1 provider row | CBD-91 §5.1 provider row | CBD-91 §5.1 provider row |
+| Limb failed | **Not applicable.** Region limb **met** (CBD-108 §4.51, §4.55); lifetime limb `UNPROVEN` | **Lifetime** — CloudWatch Logs states a bound with an unbounded tail; RDS states no provider ceiling | **Region** — Front Door is absent from the Core Services list |
+| Compensating control | — | Cryptographic erasure via KMS, provider-enforced 7—30 days | Cryptographic erasure via customer-managed keys, create-time-only |
+| Vendor or CoBudget | — | **Hybrid**, so provisional under `EX-102-007` | **Hybrid**, so provisional under `EX-102-007` |
+| Does the control address the failed limb? | **No limb failed.** `EX-102` presupposes a `FAIL`; `EX-102-003` bars converting one to `PASS` | **Yes** | **No** — erasure does not bound location |
+| Residual risk | **Not an exception question.** C1's open item is evidence of a routine-expiry bound, class `D4` (CBD-108 §4.56) | Log and database copies persist past the configured period by an amount AWS declines to bound | Edge-tier copies sit outside the Geo commitment, unbounded in location |
+| Approver | **Withdrawn, not for approval** | **Not approved** | **Not approved** |
+| Approval date | Withdrawn September 1, 2026 | — | — |
+| Expiry if approved | — | 12 months or end of Private MVP, whichever is sooner | Same |
 
 ### 5.3 What this package recommends, and what it will not do
 
-**`EXC-108-002` is the only one of the three whose control addresses the limb
-that failed.** C2 fails on lifetime and cryptographic erasure bounds lifetime.
-C1 and C3 fail on **region**, and no key deletion moves a copy.
+**Two records remain, and only one of them works.** `EXC-108-002` is the only
+one whose control addresses the limb that failed: C2 fails on lifetime and
+cryptographic erasure bounds lifetime. **C3 fails on region**, and no key
+deletion moves a copy.
 
-**So the exception route as drafted does not rescue C1 or C3.** For those two the
-honest options are a composition change {D} dropping Cloud Scheduler and Front
-Door respectively, which CBD-108 {S}4.17 and `OQ-108-028` already put to CBD-103
-{D} or provider contact. Neither is an exception.
+**`EXC-108-001` is withdrawn.** C1's region limb is met and its lifetime limb is
+`UNPROVEN`, so there is no failed gate for an exception to address — CBD-108
+§4.56. **That is not good news for C1**: it needs evidence Google has not
+published, which is class `D4`, and `EX-102` supplies no instrument for
+proceeding on an unproven gate. `OQ-108-069`.
+
+**So the exception route does not rescue C3 either.** Its honest options are a
+composition change — dropping Front Door, which CBD-108 §4.17 and `OQ-108-028`
+already put to CBD-103 — or provider contact. Neither is an exception.
 
 **This package does not grant, recommend granting, or assume any of the three.**
-`EX-102-001` reserves that, and {S}5.0's two blockers are unresolved. What it
+`EX-102-001` reserves that, and §5.0's two blockers are unresolved. What it
 does is put drafted records in front of the decision so that approving or
 refusing them is a choice made on stated terms.
 
