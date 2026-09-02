@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Three of seven acceptance criteria are met, three partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.62 |
+| Document version | 0.63 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.62; Cross-Category Coherence Review v0.62; Combined Cost Model v0.62; Carried Item Disposition Register v0.62; Evidence Retrieval Pass v0.62 |
+| Companions | Provider Set Disposition Register v0.63; Cross-Category Coherence Review v0.63; Combined Cost Model v0.63; Carried Item Disposition Register v0.63; Evidence Retrieval Pass v0.63 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `28d6748` |
+| Repository baseline | `c5b7074` |
 | Last updated | August 29, 2026 |
 
 ## 1. Package contents
