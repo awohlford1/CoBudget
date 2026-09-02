@@ -1,0 +1,25 @@
+{
+  "name": "@cobudget/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CoBudget background worker process.",
+  "scripts": {
+    "dev": "node --env-file-if-exists=../../.env.local --watch --import=tsx src/main.ts",
+    "start": "node --env-file-if-exists=../../.env.local dist/main.js",
+    "build": "tsc --noEmit && esbuild ./src/main.ts --bundle --platform=node --format=esm --packages=external --tsconfig=./tsconfig.json --outfile=dist/main.js --sourcemap",
+    "lint": "eslint .",
+    "test": "tsx --test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cobudget/contracts": "*"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.66.0",
+    "esbuild": "0.28.2",
+    "eslint": "^9.39.5",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.0"
+  }
+}

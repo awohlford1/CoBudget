@@ -1,0 +1,162 @@
+import assert from "node:assert/strict";
+import { spawn } from "node:child_process";
+import { dirname, resolve } from "node:path";
+import { describe, it } from "node:test";
+import { fileURLToPath } from "node:url";
+
+import type { ShutdownSignal } from "./signals.js";
+
+interface ProcessResult {
+  readonly code: number | null;
+  readonly signal: NodeJS.Signals | null;
+  readonly stderr: string;
+  readonly stdout: string;
+}
+
+const sourceEntry = resolve(dirname(fileURLToPath(import.meta.url)), "main.ts");
+const validEnvironment = {
+  LOG_LEVEL: "info",
+  NODE_ENV: "test",
+  SERVICE_VERSION: "process-test",
+};
+
+function spawnWorker(environment: Readonly<Record<string, string>>) {
+  return spawn(process.execPath, ["--import=tsx", sourceEntry], {
+    env: environment,
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+}
+
+async function runToExit(environment: Readonly<Record<string, string>>): Promise<ProcessResult> {
+  const child = spawnWorker(environment);
+
+  return new Promise<ProcessResult>((resolveRun, reject) => {
+    let stdout = "";
+    let stderr = "";
+    const timeout = setTimeout(() => {
+      child.kill("SIGKILL");
+      reject(new Error(`Worker did not exit. stdout=${stdout} stderr=${stderr}`));
+    }, 10_000);
+
+    child.stdout.setEncoding("utf8");
+    child.stderr.setEncoding("utf8");
+    child.stdout.on("data", (chunk: string) => {
+      stdout += chunk;
+    });
+    child.stderr.on("data", (chunk: string) => {
+      stderr += chunk;
+    });
+    child.once("error", (error) => {
+      clearTimeout(timeout);
+      reject(error);
+    });
+    child.once("exit", (code, signal) => {
+      clearTimeout(timeout);
+      resolveRun({ code, signal, stderr, stdout });
+    });
+  });
+}
+
+async function runUntilReady(signal?: ShutdownSignal): Promise<ProcessResult> {
+  const child = spawnWorker(validEnvironment);
+
+  return new Promise<ProcessResult>((resolveRun, reject) => {
+    let stdout = "";
+    let stderr = "";
+    let ready = false;
+    const timeout = setTimeout(() => {
+      child.kill("SIGKILL");
+      reject(new Error(`Worker did not become ready. stdout=${stdout} stderr=${stderr}`));
+    }, 10_000);
+
+    child.stdout.setEncoding("utf8");
+    child.stderr.setEncoding("utf8");
+    child.stderr.on("data", (chunk: string) => {
+      stderr += chunk;
+    });
+    child.stdout.on("data", (chunk: string) => {
+      stdout += chunk;
+      if (!ready && stdout.includes('"status":"ready"')) {
+        ready = true;
+        if (signal === undefined) {
+          setTimeout(() => child.kill("SIGKILL"), 100);
+        } else {
+          child.kill(signal);
+        }
+      }
+    });
+    child.once("error", (error) => {
+      clearTimeout(timeout);
+      reject(error);
+    });
+    child.once("exit", (code, receivedSignal) => {
+      clearTimeout(timeout);
+      if (!ready) {
+        reject(new Error(`Worker exited before readiness. stdout=${stdout} stderr=${stderr}`));
+        return;
+      }
+      resolveRun({ code, signal: receivedSignal, stderr, stdout });
+    });
+  });
+}
+
+describe("worker process lifecycle", () => {
+  it("fails closed with a sanitized configuration diagnostic", async () => {
+    const result = await runToExit({ LOG_LEVEL: "info", NODE_ENV: "test" });
+
+    assert.equal(result.code, 1);
+    assert.equal(result.signal, null);
+    assert.equal(result.stdout, "");
+    assert.match(result.stderr, /SERVICE_VERSION/);
+  });
+
+  it("never echoes a malformed configuration value", async () => {
+    const malformedValue = "sensitive-invalid-log-level";
+    const result = await runToExit({
+      ...validEnvironment,
+      LOG_LEVEL: malformedValue,
+    });
+
+    assert.equal(result.code, 1);
+    assert.equal(result.signal, null);
+    assert.equal(result.stdout, "");
+    assert.match(result.stderr, /LOG_LEVEL/);
+    assert.doesNotMatch(result.stderr, new RegExp(malformedValue));
+  });
+
+  it("logs startup and readiness, then stays running", async () => {
+    const result = await runUntilReady();
+    const lines = result.stdout.trim().split("\n").map((line) => JSON.parse(line));
+
+    assert.equal(result.code, null);
+    assert.equal(result.signal, "SIGKILL");
+    assert.equal(result.stderr, "");
+    assert.deepEqual(lines, [
+      {
+        service: "worker",
+        version: "process-test",
+        operation: "startup",
+        outcome: "ok",
+      },
+      { service: "worker", version: "process-test", status: "ready" },
+    ]);
+  });
+});
+
+describe("worker operating-system signals", { skip: process.platform === "win32" }, () => {
+  for (const signal of ["SIGTERM", "SIGINT"] as const) {
+    it(`exits cleanly after ${signal} with no process left running`, async () => {
+      const result = await runUntilReady(signal);
+      const lines = result.stdout.trim().split("\n").map((line) => JSON.parse(line));
+
+      assert.equal(result.code, 0, result.stderr);
+      assert.equal(result.signal, null);
+      assert.deepEqual(lines.at(-1), {
+        service: "worker",
+        version: "process-test",
+        operation: "shutdown",
+        outcome: "ok",
+      });
+    });
+  }
+});
