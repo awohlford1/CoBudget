@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.48 |
+| Document version | 0.49 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.48; Combined Cost Model v0.48; Carried Item Disposition Register v0.48; Acceptance Criteria Traceability v0.48; Evidence Retrieval Pass v0.48 |
+| Companions | Cross-Category Coherence Review v0.49; Combined Cost Model v0.49; Carried Item Disposition Register v0.49; Acceptance Criteria Traceability v0.49; Evidence Retrieval Pass v0.49 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `853ef0f` |
+| Repository baseline | `e4ea4a8` |
 | Last updated | August 29, 2026 |
 
 ## 1. Purpose and standing
@@ -359,13 +359,26 @@ deletion moves a copy.
 `UNPROVEN`, so there is no failed gate for an exception to address — CBD-108
 §4.56. **That is not good news for C1**: it needs evidence Google has not
 published, which is class `D4`, and `EX-102` supplies no instrument for
-proceeding on an unproven gate. `OQ-108-069`.
+proceeding on an unproven gate — CBD-108 §4.57 confirms it from the verdict
+table, where `ELIGIBLE-PENDING-EVIDENCE` *"cannot be selected until resolved"*
+and `CONDITIONAL` is conditioned on `FAIL`. **C1's blocker is an authorisation
+gap**: the August 20 evidence-provisioning decision was scoped to the ten `OBS`
+gates, and this one is `DOC`. `OQ-108-070`.
 
 **So the exception route does not rescue C3 either.** Its honest options are a
 composition change — dropping Front Door, which CBD-108 §4.17 and `OQ-108-028`
 already put to CBD-103 — or provider contact. Neither is an exception.
 
-**This package does not grant, recommend granting, or assume any of the three.**
+**What an approved exception would actually produce, which these records did
+not state as drafted.** Not a `PASS`. Evidence register §3.3 gives
+`CONDITIONAL` — *"One or more `FAIL` carrying an approved exception"* — and
+`EX-102-003` adds that an exception *"never removes the `CONDITIONAL` verdict
+from any report of that provider."* **Approving `EXC-108-002` selects C2 as a
+provider permanently reported as `CONDITIONAL`**, which is a standing
+disclosure obligation rather than a resolved gate. That belongs in front of the
+decision, not behind it.
+
+**This package does not grant, recommend granting, or assume either record.**
 `EX-102-001` reserves that, and §5.0's two blockers are unresolved. What it
 does is put drafted records in front of the decision so that approving or
 refusing them is a choice made on stated terms.
