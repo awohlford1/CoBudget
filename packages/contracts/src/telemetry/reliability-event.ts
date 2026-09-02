@@ -8,14 +8,23 @@
  * or identifier of any kind.
  *
  * This type is the allowlist as a type. There is no field on it for anything
- * outside the list, so a log line built from it cannot carry more. CBD-17 sets
- * the logging shape once, at the start, because narrowing it later is harder
- * than starting narrow; this is where it is set.
+ * outside the list, so a log line built from it cannot carry more — and the
+ * fields that could smuggle free text are closed unions rather than strings,
+ * so a request path or an error message cannot be passed off as a "class".
+ * CBD-17 sets the logging shape once, at the start, because narrowing it later
+ * is harder than starting narrow; this is where it is set. Adding a member to
+ * one of these unions is deliberate and reviewed, which is the point.
  *
  * Both the API (CBD-110) and the worker (CBD-111) import it from here. It is
  * the type CBD-17 requires to be shared through the workspace package, so that
  * changing it breaks the type check in both.
  */
+
+/** Coarse operation classes — a phase or kind of work, never a path or a name. */
+export type OperationClass = "startup" | "shutdown" | "health" | "request" | "job";
+
+/** Safe error classes — what kind of thing went wrong, never what it said. */
+export type ErrorClass = "config" | "timeout" | "unavailable" | "internal" | "unknown";
 
 /** Coarse buckets, so a duration never becomes a timing side channel. */
 export type DurationBucket = "sub-100ms" | "100ms-1s" | "1s-10s" | "over-10s";
@@ -30,27 +39,38 @@ export interface ReliabilityEvent {
   readonly service: string;
   /** Deployed version, from `SERVICE_VERSION`. */
   readonly version: string;
-  /** Coarse operation class — `startup`, `request`, `job` — never a path or a name. */
-  readonly operation: string;
+  readonly operation: OperationClass;
   readonly outcome: Outcome;
-  /** A safe error class such as `timeout` or `config`. Never a message. */
-  readonly errorClass?: string;
+  readonly errorClass?: ErrorClass;
   readonly durationBucket?: DurationBucket;
   readonly capacityBucket?: CapacityBucket;
   /** An aggregate count, never a per-subject one. */
   readonly healthCount?: number;
 }
 
-const ALLOWED_KEYS = [
-  "service",
-  "version",
-  "operation",
-  "outcome",
-  "errorClass",
-  "durationBucket",
-  "capacityBucket",
-  "healthCount",
-] as const satisfies readonly (keyof ReliabilityEvent)[];
+/**
+ * The allowlist as a value, for the runtime filter below.
+ *
+ * Typed as `Record<keyof ReliabilityEvent, true>` rather than as an array so
+ * that the compiler enforces it in both directions: a key here that is not on
+ * the type is an excess property, and a field added to the type without a key
+ * here is a missing property. Either is a build failure, which is what keeps
+ * the runtime allowlist from silently diverging from the type.
+ */
+const ALLOWED: Readonly<Record<keyof ReliabilityEvent, true>> = {
+  service: true,
+  version: true,
+  operation: true,
+  outcome: true,
+  errorClass: true,
+  durationBucket: true,
+  capacityBucket: true,
+  healthCount: true,
+};
+
+// The only cast in this module: Object.keys returns string[] by design, and the
+// object above is typed so its keys are exactly keyof ReliabilityEvent.
+const ALLOWED_KEYS = Object.keys(ALLOWED) as readonly (keyof ReliabilityEvent)[];
 
 /**
  * Builds an event carrying only the allowlisted keys.

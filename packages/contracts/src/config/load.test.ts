@@ -109,4 +109,17 @@ describe("loadConfig", () => {
 
     assert.equal("UNRELATED" in config, false);
   });
+
+  // The loaded type tells a required variable from an optional one. `tsc`
+  // fails if the `@ts-expect-error` below is unused, so if ConfigOf ever stops
+  // marking optional variables as possibly undefined, the build breaks here.
+  it("types an optional variable as possibly undefined and a required one as not", () => {
+    const config = loadConfig(schema, valid);
+    const required: string = config.REQUIRED_STRING;
+    // @ts-expect-error — an optional variable may be undefined
+    const optional: string = config.OPTIONAL_STRING;
+
+    assert.equal(required, "hello");
+    assert.equal(optional, undefined);
+  });
 });

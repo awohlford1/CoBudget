@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import { reliabilityEvent } from "./reliability-event.ts";
-import type { ReliabilityEvent } from "./reliability-event.ts";
+import type { OperationClass, ReliabilityEvent } from "./reliability-event.ts";
 
 describe("reliabilityEvent", () => {
   it("passes an allowlisted event through unchanged", () => {
@@ -42,5 +42,19 @@ describe("reliabilityEvent", () => {
     assert.equal("userId" in event, false);
     assert.equal("path" in event, false);
     assert.equal("message" in event, false);
+  });
+
+  // The fields that could carry free text are closed unions. These assertions
+  // are checked by `tsc`, which fails if an `@ts-expect-error` directive is
+  // unused — so if either union ever widens to `string`, the build breaks here.
+  it("refuses free text where a coarse class is declared, at compile time", () => {
+    // @ts-expect-error — a request path is not an operation class
+    const path: OperationClass = "GET /budgets/42";
+    // @ts-expect-error — an error message is not an error class
+    const message: ReliabilityEvent["errorClass"] = "connect ECONNREFUSED 10.0.0.1:5432";
+    const valid: OperationClass = "request";
+
+    assert.notEqual(path, valid);
+    assert.notEqual(message, valid);
   });
 });
