@@ -1,12 +1,20 @@
 /*
- * CoBudget design tokens (CBD-124).
+ * MoneyPact design tokens (CBD-124).
  *
  * Every token names a role. Color tokens carry both themes in one declaration —
- * `light-dark(light, dark)` — which resolves against the root `color-scheme`,
- * so the dark theme is a value table rather than a second rule set and no token
- * can exist in one theme without the other. `scripts/check-tokens.mjs` fails the
- * build if a `--color-*` token is declared any other way, or if a raw color
- * appears anywhere else under `apps/web/src`.
+ * `light-dark(light, dark)` — which resolves against the element's inherited
+ * `color-scheme`, so the dark theme is a value table rather than a second rule
+ * set and no token can exist in one theme without the other.
+ * `scripts/check-tokens.mjs` fails the build if a `--color-*` token is declared
+ * any other way, or if a raw color appears anywhere else under `apps/web/src`.
+ *
+ * `@theme inline` matters: utilities carry the `light-dark()` expression
+ * themselves rather than `var(--color-…)`, so a container that sets its own
+ * `color-scheme` — in a stylesheet rule such as `.scheme-dark` in globals.css,
+ * never an inline style — re-themes everything inside it, which is how
+ * /foundation shows both themes on one page. A `var(--color-…)` in handwritten CSS is
+ * resolved once, at `:root`, and inherits that resolution; use it for page
+ * chrome, not for anything that must follow a container's scheme.
  *
  * Theme resolution lives in `app/globals.css`: `color-scheme: light dark`
  * follows `prefers-color-scheme`, and `data-theme="light" | "dark"` on `<html>`
@@ -21,7 +29,7 @@
  *
  * The foundation carries no financial semantics. "Over budget" is not a role.
  */
-@theme {
+@theme inline {
   --color-*: initial;
   --shadow-*: initial;
   --radius-*: initial;
@@ -76,7 +84,8 @@
   --radius-xl: 2rem;
   --radius-full: 9999px;
 
-  /* Elevation. */
+  /* Elevation. The shadow colour is a var, so it follows the root scheme
+     rather than a container's; a shadow's tint is not worth a second token. */
   --shadow-raised: 0 0.25rem 1rem var(--color-shadow);
   --shadow-overlay: 0 2rem 5rem var(--color-shadow);
 }

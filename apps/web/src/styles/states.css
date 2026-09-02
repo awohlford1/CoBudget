@@ -1,0 +1,19 @@
+/*
+ * Interaction-state variants (CBD-125).
+ *
+ * Three built-in variants are widened so a state can be forced with
+ * `data-state` — `data-state="hover"`, `"active"`, `"focus-visible"`, or any
+ * space-separated combination. The review surface at /foundation uses this to
+ * render every state of every component statically, in both themes, without
+ * any component knowing it is being reviewed. Disabled, loading, error, and
+ * empty need no forcing: they are real attributes (`disabled`, `aria-busy`,
+ * `aria-invalid`) or real data.
+ *
+ * The cost is that `hover:` no longer carries Tailwind's `@media (hover: hover)`
+ * guard, so a touch device can show a hover style after a tap until the next
+ * tap elsewhere. Accepted: the review surface is the only way to see the
+ * hover state in a screenshot, and CBD-126 reviews from screenshots.
+ */
+@custom-variant hover (&:hover, &[data-state~="hover"]);
+@custom-variant active (&:active, &[data-state~="active"]);
+@custom-variant focus-visible (&:focus-visible, &[data-state~="focus-visible"]);
