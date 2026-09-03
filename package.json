@@ -20,7 +20,8 @@
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
-    "check": "npm run check:docs && npm run check:tokens && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
+    "check": "npm run check:docs && npm run check:tokens && npm run check:copy && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
+    "check:copy": "node scripts/check-copy-language.mjs",
     "check:pages": "node scripts/check-public-pages.mjs"
   },
   "engines": {

@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0.1 — Product Owner approved the exact package on August 18, 2026 after closing `OI-73-001` and the `OI-73-008` Failed-state semantics, and it is published to Confluence. Approval covers the specification only; the remaining §7 gates stay open** |
-| Document version | 1.0.1 |
+| Status | **Approved v1.0.2 — Product Owner approved the exact package on August 18, 2026 after closing `OI-73-001` and the `OI-73-008` Failed-state semantics, and it is published to Confluence. Approval covers the specification only; the remaining §7 gates stay open** |
+| Document version | 1.0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -356,6 +356,7 @@ earlier clean run against different blobs.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Brand amendment. The two customer-facing strings that named the product, in `MSG-73-002` and `MSG-73-010`, said "a CoBudget invitation". The September 2, 2026 brand decision recorded in `docs/brand-foundation.md` makes MoneyPact the customer-facing name and keeps CoBudget as the internal codename, so a customer-readable invitation must say MoneyPact. Both now do. No semantic rule changes; the naming standard is `RT-75-*` in the CBD-75 package. | Product Owner authorized September 2, 2026 |
 | 1.0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Corrected the status line, closed `OI-73-007` with the page IDs, versions, and source commit, closed `RV-73-026`, marked the Confluence publication gate complete, and recorded the five page IDs in the front matter. No rule, decision, or gate changed. | Correction to approved v1.0 |
 | 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Recorded the Product Owner decisions closing `OI-73-001` and the `OI-73-008` Failed-state semantics, added §1.1 stating exactly what the approval does and does not cover, closed `RV-73-006`, and updated every range and total for 47 transitions, 48 messages, 32 audit events, 13 data records, and 101 scenarios. | **Approved v1.0** |
 | 0.2.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Independent completeness review of merged v0.2. Recorded `RV-73-028` and `RV-73-029`, corrected the overclaiming `RV-73-003` disposition, added `INV-73-18`/`VER-73-11` coverage for the §4.4 rule 6 recipient-side checks, restored the literal `CBD-73-AC14` case names, and updated every scenario range and total to 97. No product rule, open issue, or gate changed. | Draft; Product Owner review required |

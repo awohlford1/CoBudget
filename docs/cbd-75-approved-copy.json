@@ -1,0 +1,69 @@
+{
+  "$comment": [
+    "The customer-facing strings CBD-75 approves outright, as opposed to the",
+    "per-surface strings that stay gated under OI-75-001. Every string here is",
+    "rendered in docs/cbd-75-role-terminology-and-copy-standard.md and must match it",
+    "verbatim; scripts/audit-cbd-75.py enforces that in both directions.",
+    "",
+    "scripts/check-copy-language.mjs runs the prohibited-language register over every",
+    "string in this file. That is the point of the file: the standard is applied to",
+    "the copy the standard itself approves, so a rule that would forbid honest copy",
+    "fails the build on the day it is written rather than the day copy lands.",
+    "",
+    "Scope is product-copy. These strings name roles, so PL-75-14 keeps them off the",
+    "public marketing pages."
+  ],
+  "package": "CBD-75",
+  "version": "0.1",
+  "document": "docs/cbd-75-role-terminology-and-copy-standard.md",
+  "scope": "product-copy",
+  "roles": [
+    {
+      "id": "RD-75-01",
+      "name": "Primary Owner",
+      "plural": "Primary Owners",
+      "enum": "primary_owner",
+      "short": "Looks after this budget space. Only the Primary Owner can hand it over, archive it, or delete it.",
+      "long": "The Primary Owner looks after this budget space. Every budget space has exactly one. Only the Primary Owner can hand the space to someone else, archive it, or delete it, and each of those steps asks for a fresh sign-in first. Like everyone else, the Primary Owner manages only the bank connections they set up themselves. A Primary Owner who wants to step away hands the space over or archives it, so no one is ever stuck."
+    },
+    {
+      "id": "RD-75-02",
+      "name": "Co-owner",
+      "plural": "Co-owners",
+      "enum": "co_owner",
+      "short": "Shares the day-to-day running of this budget space with the Primary Owner. Cannot remove the Primary Owner or delete the space.",
+      "long": "A Co-owner shares the day-to-day running of the budget space: budgets, categories, bills, goals, members, and shared settings. A Co-owner cannot remove the Primary Owner, take the space over, or delete it, and manages only the bank connections they set up themselves. A budget space can have more than one Co-owner."
+    },
+    {
+      "id": "RD-75-03",
+      "name": "Collaborator",
+      "plural": "Collaborators",
+      "enum": "collaborator",
+      "short": "Plans and records the shared budget as an equal contributor. Cannot manage members, permissions, or anyone else's bank connections.",
+      "long": "A Collaborator takes part in the shared budget as an equal contributor. They can plan budgets and targets, add and edit categories, bills, and goals, record manual transactions, categorize imported ones, and leave comments. They cannot manage members or permissions, cannot change anyone else's bank connection, and cannot archive or delete the budget space."
+    },
+    {
+      "id": "RD-75-04",
+      "name": "Viewer",
+      "plural": "Viewers",
+      "enum": "viewer",
+      "short": "Reads one shared view of this budget space and cannot change anything in it.",
+      "long": "A Viewer reads one shared view of the budget space, chosen for them by the Primary Owner or a Co-owner: the whole budget, planning only, selected category groups, or selected account groups. A Viewer sees what that view includes and nothing outside it, and cannot edit, comment, or export anything themselves. Only the Primary Owner or a Co-owner can make a copy of that view to hand to the Viewer, and the copy stops working within a day. A new Viewer starts without a view and so sees nothing until one is chosen."
+    },
+    {
+      "id": "RD-75-05",
+      "name": "Accountability Partner",
+      "plural": "Accountability Partners",
+      "enum": "accountability_partner",
+      "short": "Gives voluntary support with a read-only view of the whole shared budget. Cannot move money, change anything, or block a payment.",
+      "long": "An Accountability Partner gives voluntary support. They see the whole shared budget — balances, transactions, categories, bills, goals, and reports — and cannot change any of it. They never see bank credentials, connection settings, or anyone else's notification settings. They can acknowledge their own firm alerts and leave comments, and none of that moves money, alters a budget, or changes who sees what. An Accountability Partner can end the arrangement themselves at any time, without anyone else agreeing, and the Primary Owner or a Co-owner can end it too. When someone should see less than the whole budget, invite them as a Viewer instead."
+    }
+  ],
+  "labels": [
+    {
+      "id": "RD-75-06",
+      "purpose": "The scope label a derived view carries when the reader's visibility profile is anything other than Full budget. Inherited verbatim from the approved CBD-72 section 5.1 item 10; CBD-75 records it rather than restating it as its own decision.",
+      "text": "Shared view—not the full budget"
+    }
+  ]
+}

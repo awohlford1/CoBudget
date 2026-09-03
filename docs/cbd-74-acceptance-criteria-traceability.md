@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0 — Product Owner approved this exact version on September 2, 2026. `OI-74-002`–`OI-74-005` and `OI-74-007` remain open gates on implementation and release, not on this approval** |
-| Document version | 1.0 |
+| Status | **Approved v1.0.1 — Product Owner approved this exact version on September 2, 2026. `OI-74-002`–`OI-74-005` and `OI-74-007` remain open gates on implementation and release, not on this approval** |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -33,7 +33,7 @@ Values are the exact versions this draft was written against. A later source cha
 | --- | --- | --- |
 | CBD-71 MVP Schedule Decisions | v1.1, approved August 15, 2026 | `SD-071-043` firm/informational classes, `SD-071-044` three-record model and income-variance trigger, `SD-071-046`–`SD-071-048`. `SD-071-016` was listed here in error and is removed; see §4 row 7 |
 | CBD-72 Collaboration Permission Model | v0.1.54; approved August 18, 2026 at v0.1.53, §5.4 amended September 2, 2026 | Roles, permissions 11a–11d/12/13, §5.1 Viewer hierarchy, §5.3 Partner boundary, §5.4 personal-settings boundary, §5.4.1 three-record model, §9 audit envelope |
-| CBD-73 Invitation, Consent, and Revocation Lifecycle | v1.0.1, approved August 18, 2026 | `IC-73-019` mandatory notice independence, `RC-73-02` alert-eligibility end, `RC-73-03` queued suppression and destination-association retirement, `RC-73-12` subject notice |
+| CBD-73 Invitation, Consent, and Revocation Lifecycle | v1.0.2; approved August 18, 2026 at v1.0.1, brand-amended September 2, 2026 | `IC-73-019` mandatory notice independence, `RC-73-02` alert-eligibility end, `RC-73-03` queued suppression and destination-association retirement, `RC-73-12` subject notice |
 | CBD-92 System Flow and Technical Threat Model | v1.0.1 | `NT-92-001`–`NT-92-006` push/SMS ceiling, `EM-92-001`–`EM-92-007` email tiers |
 | CBD-94 Risk and Security/Privacy Requirement Register | v1.0 | `SR-94-044`–`SR-94-054` |
 | CBD-68 Paycheck and Custom Cadence | approved | `PD-68-16` confirmed actual-income variance trigger and deduplication |
@@ -144,6 +144,7 @@ Nothing here closes a register row; each row closes on the evidence it names.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.1 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Brand amendment. The §6.1 transport bodies and the §6.4 custody copy specified customer-readable text naming CoBudget: a push and email body announcing "a CoBudget update", the public CoBudget application URL, and custody copy saying CoBudget does not promise confidentiality. The September 2, 2026 brand decision makes MoneyPact the customer-facing name and keeps CoBudget as the internal codename, so all five now say MoneyPact. No rule, ceiling, or prohibition changes; the naming standard is `RT-75-*` in the CBD-75 package. | Product Owner authorized September 2, 2026 |
 | 1.0 | September 2, 2026 | Alexander Wohlford — Product Owner | **Approved.** Recorded Product Owner approval of the exact package: §8 review gates updated, `OI-74-001` confirmed and `OI-74-006` accepted as a named residual risk, and the authorized Jira synchronization applied the same day. | Approved September 2, 2026 |
 | 0.3 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded discrepancy rows 10 through 16 for the remaining review findings and their corrections: the missing rendering-time recheck, the over-broad and uncapped `MN-74-01`, the omitted timing disclosure, the unspecified digest, the absent locator and destination-retention rules, four misattributed citations, and three precision defects. Scenario total updated to 51. | Draft; Product Owner approval outstanding |
 | 0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner review corrections. Withdrew rows 1, 2, and 3 as stale when written, since live CBD-12 and CBD-74 fields already carried the reconciliations they asked for; `OI-74-008` closed with no change to `CBD-12-AC11`. Added row 3a for the `CBD-12-AC19` privacy-detail contradiction the draft missed, corrected in Jira the same day. Added rows 7, 8, and 9 for the Superseded `SD-071-016` citation, the half-implemented `RC-73-03`, and the false §6.2 exhaustiveness claim. Corrected the scenario total from 44 to 47 and the audit-event range to `AE-74-23`. | Draft; Product Owner approval outstanding |

@@ -30,6 +30,9 @@ jobs:
       - name: Check CBD-74 documentation package
         run: python3 scripts/audit-cbd-74.py
 
+      - name: Check CBD-75 documentation package
+        run: python3 scripts/audit-cbd-75.py
+
       - name: Check CBD-103 documentation package
         run: python3 scripts/audit-cbd-103.py
 

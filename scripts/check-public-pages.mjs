@@ -12,20 +12,29 @@
 //     the tagline, the descriptor, and the mission. Drift in either direction
 //     fails.
 //  2. Language. With the approved strings removed, what remains of each page
-//     — headings, navigation, chrome — must not use shame, fear, or
-//     surveillance framing, must not describe anything as real-time or
-//     instantaneous, and must not name the role CBD-12 has not settled.
+//     — headings, navigation, chrome — is held to the CBD-75 prohibited-
+//     language register at public-page scope. The register is the single list;
+//     this script no longer keeps one of its own. That scope includes
+//     PL-75-14, which keeps role names off marketing pages: a role named
+//     without the boundary that makes it safe implies exactly the authority
+//     the standard prohibits, and the boundary does not fit here. The ban is
+//     deliberate, not a leftover from when the role was unsettled — that was
+//     settled when FU-95-003 closed on August 16, 2026.
+//
+//     The approved strings removed here are not unchecked. They are held to
+//     the same register by scripts/check-copy-language.mjs, which is the only
+//     thing that looks at them.
 //  3. Trackers. Neither page may reference a resource on another origin:
 //     no script, image, frame, stylesheet, preconnect, or prefetch beyond
 //     this site (AN-92-001, AN-92-002). A public page that loads nothing
 //     external cannot carry an analytics SDK, a pixel, or session replay.
 
 import { readFile } from "node:fs/promises";
-import { dirname, join, relative } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join, relative } from "node:path";
 
-const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
-const sourcePath = join(repositoryRoot, "docs", "brand-foundation.md");
+import { brandPath, readApprovedBrand } from "./brand-foundation.mjs";
+import { describe, loadRegister, repositoryRoot, scan } from "./copy-language.mjs";
+
 const buildRoot = join(repositoryRoot, "apps", "web", ".next", "server", "app");
 const pages = {
   landing: join(buildRoot, "index.html"),
@@ -37,51 +46,15 @@ const label = (path) => relative(repositoryRoot, path).replaceAll("\\", "/");
 
 // --- The approved strings, read independently of the app's parser. ---------
 
-const markdown = await readFile(sourcePath, "utf8");
-const sections = new Map();
-let heading = "";
-for (const line of markdown.split(/\r?\n/)) {
-  const h2 = line.match(/^## (.+)$/);
-  if (h2) {
-    heading = h2[1];
-    sections.set(heading, []);
-  } else {
-    sections.get(heading)?.push(line);
-  }
-}
-const paragraphs = (lines) =>
-  lines
-    .join("\n")
-    .split(/\n\s*\n/)
-    .map((block) => block.trim().split("\n").map((l) => l.trim()).join(" "))
-    .filter((p) => p && !p.startsWith("#"));
-
-const identity = new Map();
-for (const line of sections.get("Brand name and identity") ?? []) {
-  const row = line.match(/^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|$/);
-  if (row) identity.set(row[1], row[2]);
-}
-const values = [];
-for (const block of (sections.get("Core values") ?? []).join("\n").split(/^### \d+\. /m).slice(1)) {
-  const [name, ...rest] = block.split("\n");
-  values.push({ name: name.trim(), text: paragraphs(rest)[0] });
-}
-const approved = {
-  tagline: identity.get("Leading tagline"),
-  descriptor: identity.get("Descriptor"),
-  mission: paragraphs(sections.get("Mission statement") ?? [])[0],
-  vision: paragraphs(sections.get("Vision statement") ?? [])[0],
-  values,
-  manifesto: paragraphs(sections.get("Brand manifesto") ?? []),
-};
-approved.closingLine = approved.manifesto.at(-1);
+const approved = await readApprovedBrand();
+const register = await loadRegister();
 
 for (const [key, value] of Object.entries(approved)) {
   if (value === undefined || (Array.isArray(value) && value.length === 0)) {
-    failures.push(`${label(sourcePath)}: could not read the ${key}`);
+    failures.push(`${label(brandPath)}: could not read the ${key}`);
   }
 }
-if (approved.values.length !== 7) failures.push(`${label(sourcePath)}: expected seven values, read ${approved.values.length}`);
+if (approved.values.length !== 7) failures.push(`${label(brandPath)}: expected seven values, read ${approved.values.length}`);
 
 // --- The built pages. -------------------------------------------------------
 
@@ -100,14 +73,6 @@ const textOf = (html) =>
       .replace(/<[^>]+>/g, " "),
   );
 const mainOf = (html) => html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? "";
-
-const FORBIDDEN = [
-  /\bshame\b/i, /\bshaming\b/i, /\bashamed\b/i, /\bguilt\b/i, /\bguilty\b/i,
-  /\bfear\b/i, /\bafraid\b/i, /\bscared\b/i,
-  /\bsurveillance\b/i, /\bspy(?:ing)?\b/i, /\bmonitor(?:ing|ed)?\b/i, /\bpolic(?:e|ing)\b/i,
-  /\breal[- ]time\b/i, /\binstant(?:ly|aneous)?\b/i,
-  /\bGuardian\b/, /\bAccountability Partner\b/,
-];
 
 function check(page, html, required, { endsWith } = {}) {
   const page_ = label(pages[page]);
@@ -141,9 +106,14 @@ function check(page, html, required, { endsWith } = {}) {
     }
   }
 
-  for (const pattern of FORBIDDEN) {
-    const hit = remainder.match(pattern);
-    if (hit) failures.push(`${page_}: forbidden wording "${hit[0]}" outside the approved copy`);
+  // The remainder is lossy on purpose: approved strings are cut out of it so
+  // the manifesto is not judged by rules written for chrome. Cutting can leave
+  // a fragment, so the rule that reports a violation is not always the rule a
+  // reader would have predicted — "Accountability Partner" loses its first
+  // word to the value of the same name and is caught as a bare role term. The
+  // finding is still real; only the attribution shifts.
+  for (const finding of scan(remainder, "public-page", register.rules)) {
+    failures.push(describe(`${page_}, outside the approved copy`, finding));
   }
 
   for (const match of html.matchAll(/<(script|img|iframe|link|source|video|audio)\b[^>]*?\b(?:src|href)=["']([^"']+)["']/gi)) {
@@ -191,5 +161,5 @@ if (failures.length > 0) {
   process.exit(1);
 }
 console.log(
-  `Public pages check passed: Mission page renders the approved content in order and ends with the closing line; landing renders the tagline, descriptor, and mission; no forbidden wording; nothing loads from another origin`,
+  `Public pages check passed: Mission page renders the approved content in order and ends with the closing line; landing renders the tagline, descriptor, and mission; the remaining page text clears all ${register.rules.length} CBD-75 rules at public-page scope; nothing loads from another origin`,
 );

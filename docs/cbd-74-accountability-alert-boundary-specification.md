@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0 — Product Owner approved this exact version on September 2, 2026. `OI-74-002`–`OI-74-005` and `OI-74-007` remain open gates on implementation and release, not on this approval** |
-| Document version | 1.0 |
+| Status | **Approved v1.0.1 — Product Owner approved this exact version on September 2, 2026. `OI-74-002`–`OI-74-005` and `OI-74-007` remain open gates on implementation and release, not on this approval** |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
 | Governing schedule decisions | CBD-71 **MVP Schedule Decisions v1.1**, approved August 15, 2026 — `SD-071-043`, `SD-071-044`, `SD-071-046`–`SD-071-048`. `SD-071-016` is **not** an input: CBD-71 §4A marks it Superseded and unimplementable, and `SD-071-043`/`SD-071-044` replace it. |
 | Governing permission model | CBD-72 **v0.1.54**, approved August 18, 2026 at v0.1.53 with the September 2, 2026 §5.4 amendment — permissions 1, 11a–11d, 12, 13, 22, 24, 25; §5.1, §5.3, §5.4, §5.4.1 |
-| Governing consent lifecycle | CBD-73 **v1.0.1**, approved August 18, 2026 — `IC-73-019`, `RC-73-02`, `RC-73-03`, `RC-73-12` |
+| Governing consent lifecycle | CBD-73 **v1.0.2**, approved August 18, 2026 at v1.0.1 with the September 2, 2026 brand amendment — `IC-73-019`, `RC-73-02`, `RC-73-03`, `RC-73-12` |
 | Governing transport ceilings | CBD-92 **v1.0.1** — `NT-92-001`–`NT-92-006`, `EM-92-001`–`EM-92-007` |
 | Governing security requirements | CBD-94 **v1.0** — `SR-94-044`–`SR-94-054` |
 | Governing product decisions | `RI-93-012`–`RI-93-015` and `RI-93-016`, recorded August 16, 2026 in `docs/cbd-95-architecture-roadmap-follow-up-register.md` §6. `RI-93-016` governs `AB-74-015` custody honesty and was previously used without being declared here. |
@@ -159,9 +159,9 @@ An external delivery failure at any step never removes, delays, or duplicates th
 
 | Transport | Exactly what may appear | Governing contract |
 | --- | --- | --- |
-| Push | The fixed content-free body: a statement that a CoBudget update exists and an instruction to open CoBudget. Tapping opens a generic authenticated entry point or notification inbox. | `NT-92-001`, `NT-92-002` |
-| SMS | The same fixed content-free body. A URL, if present, is only the ordinary public CoBudget application URL. | `NT-92-001`, `NT-92-002` |
-| Routine alert email | A generic subject and body stating only that a CoBudget update is available and directing the recipient to authenticate. | `EM-92-001` |
+| Push | The fixed content-free body: a statement that a MoneyPact update exists and an instruction to open MoneyPact. Tapping opens a generic authenticated entry point or notification inbox. | `NT-92-001`, `NT-92-002` |
+| SMS | The same fixed content-free body. A URL, if present, is only the ordinary public MoneyPact application URL. | `NT-92-001`, `NT-92-002` |
+| Routine alert email | A generic subject and body stating only that a MoneyPact update is available and directing the recipient to authenticate. | `EM-92-001` |
 
 No alert email qualifies for the `EM-92-002` invitation tier or the `EM-92-003` lifecycle and security tier. Every alert email is routine product email and is therefore content-free.
 
@@ -189,7 +189,7 @@ Protected alert detail appears only in an authenticated in-app surface. On open,
 
 ### 6.4 Shared-device and custody honesty
 
-Copy accompanying channel settings must state plainly that lock screens, notification centers, paired devices, carriers, SMS forwarding, inboxes, backups, and screenshots are outside CoBudget's control; that delivered copies cannot be recalled or erased remotely; that the provider handling a message retains its own delivery records under its own retention; and that CoBudget does not promise confidentiality after delivery (`NT-92-006`; `EM-92-007`; `SR-94-053`). It must not claim that previews are hidden or that a channel is private.
+Copy accompanying channel settings must state plainly that lock screens, notification centers, paired devices, carriers, SMS forwarding, inboxes, backups, and screenshots are outside MoneyPact's control; that delivered copies cannot be recalled or erased remotely; that the provider handling a message retains its own delivery records under its own retention; and that MoneyPact does not promise confidentiality after delivery (`NT-92-006`; `EM-92-007`; `SR-94-053`). It must not claim that previews are hidden or that a channel is private.
 
 **Timing is disclosed, because content rules cannot hide it.** `SR-94-053` requires the timing limit to be stated, and it is the only honest control over an inference the design cannot remove: a content-free notification still discloses that something happened, when it happened, and how often. A recipient who enables an external channel for one category alone makes every message on that channel mean that category to anyone who sees the device. Channel copy must say so plainly at the point of choosing a channel or a category, so the choice is informed rather than assumed safe. No content rule in §6.2 mitigates this, and none may be described as doing so.
 
@@ -365,6 +365,7 @@ Every row is open unless its route records a closure date. The interim behavior 
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.1 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Brand amendment. The §6.1 transport bodies and the §6.4 custody copy specified customer-readable text naming CoBudget: a push and email body announcing "a CoBudget update", the public CoBudget application URL, and custody copy saying CoBudget does not promise confidentiality. The September 2, 2026 brand decision makes MoneyPact the customer-facing name and keeps CoBudget as the internal codename, so all five now say MoneyPact. No rule, ceiling, or prohibition changes; the naming standard is `RT-75-*` in the CBD-75 package. | Product Owner authorized September 2, 2026 |
 | 1.0 | September 2, 2026 | Alexander Wohlford — Product Owner | **Approved.** Product Owner approval of this exact version after the nineteen-finding review. `OI-74-001` closed: the `CAT-74-06` firm classification is confirmed, still derived rather than quoted, and §4.1 continues to say so. `OI-74-006` closed by acceptance rather than mitigation: the Product Owner accepted the `RI-93-014` Partner observation residual as the named risk authority under CBD-94 §3.6, and §4.3 rule 6 continues to state the risk plainly so acceptance is never read as absence. `OI-74-002`–`OI-74-005` and `OI-74-007` remain open gates on persistence design, copy, execution-level values, provider and template approval, and fixtures; none gates this approval. | Approved September 2, 2026 |
 | 0.3 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Closed the remaining sixteen review findings. `AB-74-003` and §5.3 item 5 now require separate rendering and send-time rechecks per `SR-94-048`, and `AB-74-003` regains the change-triggered recompute from CBD-72 §5.4.1 item 2. `MN-74-01` separates subject notices from other recipients notices, caps external content for both, and points at CBD-73 §11.3 and §7 rather than its audit inventory. §6.4 adds the `SR-94-053` timing and provider-retention disclosure. New §8.4 specifies digest delivery, which §5.3 item 4 previously referenced with no section behind it. §6.3 item 5 adds `SR-94-047` locator-leakage protection and `DR-74-05` adds `SR-94-051` retention and retirement. §7.4 states that a Viewer may not comment. Four citations now name their real sources rather than `SD-071-043`, `SD-071-044`, and `PD-68-16`. `AB-74-012` and §8.1 restore at most one shared event. §6.3 item 2 reconciles `SD-071-047`. The header declares `RI-93-016` and the `RG-94-007`/`RG-94-012` release gates. | Draft; Product Owner approval outstanding |
 | 0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner review corrections. Removed the Superseded `SD-071-016` from the governing inputs. Added `RV-74-08`, `DR-74-07`, and `AE-74-23` so the second half of CBD-73 `RC-73-03`, atomic retirement of the destination association bound to an ended membership, is expressible and audited; `DR-74-05` alone carried no membership or space binding. Replaced the false exhaustiveness claim in §6.2 with the governing `NT-92-001` residual clause, added support/security facts, collapse and grouping keys, badge and unread counts, and priority, sound, and channel tiers to the prohibited vectors, added the `EM-92-007` email no-tracking rule, and defined channel controls in §5.3 item 6 as transport mechanics carrying no customer-specific value with one template per transport. Corrected the `RV-74-07` cross-reference from §12 to §14. | Draft; Product Owner approval outstanding |
