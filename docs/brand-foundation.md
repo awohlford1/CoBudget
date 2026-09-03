@@ -30,7 +30,7 @@ link previews.
 ## Mission statement
 
 Our mission is to make responsible money management a shared experience.
-MoneyPact provides collaborative tools and real-time insights that help
+MoneyPact provides collaborative tools and clear insights that help
 individuals, partners, and families build healthy financial habits and support
 each other through modern financial challenges.
 
@@ -72,7 +72,7 @@ modern financial challenges — no labels, no stigma.
 ### 6. Stability
 
 We help users build long-term financial resilience through consistent habits,
-shared oversight, and meaningful insights.
+shared understanding, and meaningful insights.
 
 ### 7. Trust
 
@@ -93,7 +93,7 @@ learning to rebuild their financial foundation.
 
 We create tools that make money transparent, conversations easier, and
 decisions smarter. We support healthier habits through shared visibility,
-real-time insights, and gentle accountability — because financial wellbeing is
+practical insights, and gentle accountability — because financial wellbeing is
 a team effort.
 
 MoneyPact is more than a budgeting app. It’s a shared space for growth,

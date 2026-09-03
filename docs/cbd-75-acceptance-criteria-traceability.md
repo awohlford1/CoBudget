@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.1 — Product Owner review and approval required** |
-| Document version | 0.1 |
+| Status | **Draft v0.2 — Product Owner review and approval required** |
+| Document version | 0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-75](https://cobudget.atlassian.net/browse/CBD-75) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
 | Standard | `docs/cbd-75-role-terminology-and-copy-standard.md` |
 | Machine-readable registers | `docs/cbd-75-prohibited-language-register.json`, `docs/cbd-75-approved-copy.json` |
 | Mechanical audit | `python3 scripts/audit-cbd-75.py` |
-| Last updated | September 2, 2026 |
+| Last updated | September 3, 2026 |
 
 ## 1. Purpose
 
@@ -52,7 +52,7 @@ There is no separate negative-scenario test inventory, and that is a scope decis
 
 | # | Finding | Status |
 | --- | --- | --- |
-| 1 | The approved mission statement and manifesto promise real-time insights, and the Stability value describes the product as building resilience through shared oversight. All three breach this standard, contradict the brand foundation's own copy guidance three sections below the mission, and are live on the public pages. | **Open — `OI-75-003`.** Recorded as enforced exceptions in §6.3. Correcting approved brand copy is a Product Owner decision, so nothing was changed. |
+| 1 | The approved mission statement and manifesto promised real-time insights, and the Stability value described the product as building resilience through shared oversight. All three breached this standard, contradicted the brand foundation's own copy guidance three sections below the mission, and were live on the public pages. | **Corrected September 3, 2026 by Product Owner decision**, closing `OI-75-003`. The v0.1 draft recorded them as enforced exceptions instead of fixing them, because rewriting approved brand copy is not an editorial call. `docs/brand-foundation.md` now reads clear insights, shared understanding, and practical insights; the standard's §6.3 records what changed and the register's exception list keeps only the `PL-75-10` rule limit. |
 | 2 | `CBD-12-AC21` specified that an invitation email may identify itself as a CoBudget invitation, which the September 2, 2026 brand decision makes wrong on a customer-readable surface. | **Corrected in Jira September 2, 2026** on Product Owner authorization. AC21 now says MoneyPact and carries the naming rule. |
 | 3 | `CBD-12-AC17` and `CBD-12-AC36` referred to CoBudget sign-in and an existing CoBudget account in requirement prose. | **Reworded in Jira September 2, 2026** to product sign-in and an existing product account, which commits to neither name. Flagged for Product Owner confirmation, since the authorization named AC21 only. |
 | 4 | The first draft of `RD-75-04` told a Viewer they could not export. CBD-72 §5.1 item 11 prohibits Viewer-initiated bulk export but permits downloading an owner-created snapshot under §5.8. | **Corrected before approval.** The description now separates what a Viewer cannot do themselves from what an owner can hand them, and states the snapshot's expiry. |
@@ -99,7 +99,7 @@ Finding 7 is the pattern this project has now hit twice: a register that records
 | Accessibility | Assistive-technology testing against `SD-071-048` | **OPEN — `OI-75-002`** |
 | Comprehension | A study with people outside the team on consent and disclosure copy | **OPEN — `OI-75-002`** |
 | Safety and coercion review | Specialist review of role, alert, revocation, and support language | **OPEN — CBD-14 / `FU-95-027`** |
-| Brand copy correction | Product Owner decision on the three defects in §6.3 | **OPEN — `OI-75-003`** |
+| Brand copy correction | Product Owner decision on the three defects in §6.3 | **CLOSED September 3, 2026.** Decision taken, all three corrected, `OI-75-003` closed |
 | Legacy vocabulary removal | Focused change to `docs/product-plan.md` and `docs/architecture.md`, amending CBD-91 `CR-91-003` and `CR-91-004` in the same change | **OPEN — `OI-75-004`** |
 | Localization | Equivalent role terms and an equivalent register per supported locale | **OPEN — `OI-75-005`** |
 | Support response | Exact copy, restricted intake, procedure, and training for `PT-75-05` | **OPEN — `OI-75-006`** |
@@ -108,4 +108,5 @@ Finding 7 is the pattern this project has now hit twice: a register that records
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.2 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded the brand copy correction. Finding 1 moves from open to corrected and its evidence gate closes; `OI-75-003` is closed in the standard. Seven findings remain as recorded, and `OI-75-004` stays open for its own focused task. No criterion mapping changed. | Draft; Product Owner review required |
 | 0.1 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Initial record for the CBD-75 v0.1 draft. Eight discrepancy findings, three of them corrected in this change and two corrected in Jira; ten criteria mapped; eight CBD-12 criteria supported; eight evidence gates open. | Draft; Product Owner review required |
