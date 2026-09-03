@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.7 — Product Owner review and approval required. Per-surface strings remain gated by `OI-75-001`** |
-| Document version | 0.7 |
+| Status | **Approved v1.0 — the Product Owner approved this exact version on September 3, 2026.** Approval fixes the role vocabulary, the copy standard, and both machine-readable registers as the controlling baseline. It closes no open issue, supplies no evidence, and approves no per-surface string; `OI-75-001` and the five gates beside it remain binding |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-75](https://cobudget.atlassian.net/browse/CBD-75) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -259,6 +259,7 @@ Evidence log. This is the template and the current state; every row is honest ab
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | September 3, 2026 | Alexander Wohlford — Product Owner, with Claude | **Approved.** Promoted the v0.7 content unchanged; the only edits were status and version. No rule, role, written form, enum, message pattern, prohibition, checklist item, validation rule, or open issue was altered by approval. Approval fixes `RD-75-01`–`RD-75-06`, `RT-75-01`–`RT-75-06`, `CS-75-01`–`CS-75-12`, `PT-75-01`–`PT-75-09`, `PL-75-01`–`PL-75-14`, `CK-75-01`–`CK-75-10`, and `VP-75-01`–`VP-75-07` as the controlling baseline for role naming and customer copy. It accepts no evidence gap: `OI-75-001`, `OI-75-002`, and `OI-75-005` through `OI-75-008` remain open, and the evidence log's four empty rows remain empty. | **Approved v1.0** |
 | 0.7 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the `CBD-12-AC17` and `CBD-12-AC36` settlement, which took both criteria to the product model's own term rather than to a brand. No rule, role, pattern, checklist item, or open issue changed in this document; the finding is recorded in the traceability record. | Draft; Product Owner review required |
 | 0.6 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-92 brand amendment, which applied `RT-75-01` to the four customer-visible strings its transport and email contracts fix, and to the five approved documents quoting them. The governing lifecycle source moves to CBD-73 v1.0.3. No rule, role, pattern, checklist item, or open issue changed in this document; the findings are recorded in the traceability record. | Draft; Product Owner review required |
 | 0.5 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-91 `CR-91-002` correction, which the Product Owner authorized separately: the product plan's Collaborator connection authority now matches CBD-72 §2.2, and traceability finding 9 moves from deliberately-uncorrected to corrected. No rule, role, pattern, checklist item, or open issue changed in this document. | Draft; Product Owner review required |
