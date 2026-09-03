@@ -8,7 +8,7 @@
 | Verified baseline | `6167d7d77975743e464da36ccb030241c3547ee1` on `main` |
 | Final integration base | `3c4013fca3feb6ac4db12de5f1129725a9a119b6` on `main` |
 | Verified baseline workflow | `.github/workflows/ci.yml` (`24b1019b7d5ba20069e97363740b05270574e7db`) |
-| Hardened workflow in this change | `.github/workflows/ci.yml` (`3278b4bd834889b27de3f41b0821dc9b87619627`) |
+| Hardened workflow in this change | `.github/workflows/ci.yml` (`68461ef5e473e7fbb05183ed5b67fde0cdef7987`) |
 | Automated contract guard | `scripts/check-ci-contract.mjs` with 22 negative/positive self-tests |
 | Production merge gate | Protected `main`; strict required check `Documentation, lint, type-check, test, and build` from GitHub Actions app ID `15368` |
 | Node version source | `.nvmrc` (`a45fd52cc5891570d6299fab38643103c3955474`), containing `24` |
@@ -44,12 +44,12 @@ The `checks` job runs on every pull request and on pushes to `main`, with
 read-only repository contents permission and a 15-minute timeout. Its effective
 order is:
 
-1. `actions/checkout` pinned to reviewed v4.4.0 commit
-   `11d5960a326750d5838078e36cf38b85af677262`, with persisted Git credentials
+1. `actions/checkout` pinned to reviewed v7.0.1 commit
+   `3d3c42e5aac5ba805825da76410c181273ba90b1`, with persisted Git credentials
    disabled;
 2. the repository's Python documentation audits;
-3. `actions/setup-node` pinned to reviewed v4.4.0 commit
-   `49933ea5288caeca8642d1e84afbd3f7d6820020`, with
+3. `actions/setup-node` pinned to reviewed v7.0.0 commit
+   `820762786026740c76f36085b0efc47a31fe5020`, with
    `node-version-file: .nvmrc` and lockfile-bound npm caching;
 4. `npm ci`;
 5. `npm audit --audit-level=high`; and

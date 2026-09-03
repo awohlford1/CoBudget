@@ -3,8 +3,8 @@ import { describe, it } from "node:test";
 
 import { validateCiContract } from "./check-ci-contract.mjs";
 
-const checkoutSha = "11d5960a326750d5838078e36cf38b85af677262";
-const setupNodeSha = "49933ea5288caeca8642d1e84afbd3f7d6820020";
+const checkoutSha = "3d3c42e5aac5ba805825da76410c181273ba90b1";
+const setupNodeSha = "820762786026740c76f36085b0efc47a31fe5020";
 
 const validWorkflow = `name: CI
 
@@ -29,10 +29,10 @@ jobs:
       CI: "true"
       SCARF_ANALYTICS: "false"
     steps:
-      - uses: actions/checkout@${checkoutSha} # v4.4.0
+      - uses: actions/checkout@${checkoutSha} # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@${setupNodeSha} # v4.4.0
+      - uses: actions/setup-node@${setupNodeSha} # v7.0.0
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -123,7 +123,7 @@ describe("CI contract checker", () => {
   it("rejects unreviewed actions, commands, and secret expressions", () => {
     const workflow = validWorkflow
       .replace(
-        `      - uses: actions/setup-node@${setupNodeSha} # v4.4.0`,
+        `      - uses: actions/setup-node@${setupNodeSha} # v7.0.0`,
         `      - uses: example/unknown@${setupNodeSha}\n      - run: curl https://example.invalid\n        env:\n          TOKEN: \${{ secrets.DEPLOY_TOKEN }}`,
       );
     const result = failures({ workflow });
