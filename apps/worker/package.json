@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node --env-file-if-exists=../../.env.local --watch --import=tsx src/main.ts",
     "start": "node --env-file-if-exists=../../.env.local dist/main.js",
-    "build": "tsc --noEmit && esbuild ./src/main.ts --bundle --platform=node --format=esm --packages=external --tsconfig=./tsconfig.json --outfile=dist/main.js --sourcemap",
+    "build": "node -e \"process.exit(112)\"",
     "lint": "eslint .",
     "test": "tsx --test",
     "typecheck": "tsc --noEmit"
