@@ -20,6 +20,11 @@ const validEnvironment = {
   SERVICE_VERSION: "process-test",
 };
 
+// A cold Windows checkout can spend more than ten seconds starting the tsx
+// loader from a synced filesystem. Keep the Linux/CI watchdog tight while
+// bounding the slower supported local path instead of accepting a flaky test.
+const processDeadlineMs = process.platform === "win32" ? 30_000 : 10_000;
+
 function spawnWorker(environment: Readonly<Record<string, string>>) {
   return spawn(process.execPath, ["--import=tsx", sourceEntry], {
     env: environment,
@@ -36,7 +41,7 @@ async function runToExit(environment: Readonly<Record<string, string>>): Promise
     const timeout = setTimeout(() => {
       child.kill("SIGKILL");
       reject(new Error(`Worker did not exit. stdout=${stdout} stderr=${stderr}`));
-    }, 10_000);
+    }, processDeadlineMs);
 
     child.stdout.setEncoding("utf8");
     child.stderr.setEncoding("utf8");
@@ -67,7 +72,7 @@ async function runUntilReady(signal?: ShutdownSignal): Promise<ProcessResult> {
     const timeout = setTimeout(() => {
       child.kill("SIGKILL");
       reject(new Error(`Worker did not become ready. stdout=${stdout} stderr=${stderr}`));
-    }, 10_000);
+    }, processDeadlineMs);
 
     child.stdout.setEncoding("utf8");
     child.stderr.setEncoding("utf8");

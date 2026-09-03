@@ -16,6 +16,11 @@ interface ProcessResult {
 
 const sourceEntry = resolve(dirname(fileURLToPath(import.meta.url)), "main.ts");
 
+// A cold Windows checkout can spend more than ten seconds starting the tsx
+// loader from a synced filesystem. Keep the Linux/CI watchdog tight while
+// bounding the slower supported local path instead of accepting a flaky test.
+const processDeadlineMs = process.platform === "win32" ? 30_000 : 10_000;
+
 async function availablePort(): Promise<number> {
   const server = createServer();
   await new Promise<void>((resolveListening, reject) => {
@@ -50,7 +55,7 @@ async function runUntilSignal(signal: ShutdownSignal): Promise<string> {
     const timeout = setTimeout(() => {
       child.kill("SIGKILL");
       reject(new Error(`API did not stop after ${signal}. stdout=${stdout} stderr=${stderr}`));
-    }, 10_000);
+    }, processDeadlineMs);
 
     child.stdout.setEncoding("utf8");
     child.stderr.setEncoding("utf8");
@@ -97,7 +102,7 @@ async function runToExit(
     const timeout = setTimeout(() => {
       child.kill("SIGKILL");
       reject(new Error(`API did not exit. stdout=${stdout} stderr=${stderr}`));
-    }, 10_000);
+    }, processDeadlineMs);
 
     child.stdout.setEncoding("utf8");
     child.stderr.setEncoding("utf8");
