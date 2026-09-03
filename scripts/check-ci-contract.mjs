@@ -10,6 +10,7 @@ const REQUIRED_CHECK_STAGES = [
   "npm run check:ci",
   "npm run check:docs",
   "npm run check:tokens",
+  "npm run check:copy",
   "npm run lint",
   "npm run typecheck",
   "npm run test",
@@ -17,7 +18,8 @@ const REQUIRED_CHECK_STAGES = [
   "npm run check:pages",
 ];
 
-const REQUIRED_ROOT_WORKSPACE_SCRIPTS = {
+const REQUIRED_ROOT_SCRIPTS = {
+  "check:copy": "node scripts/check-copy-language.mjs",
   lint: "eslint scripts && npm run lint --workspaces --if-present",
   typecheck: "npm run typecheck --workspaces --if-present",
   test: "npm run test --workspaces --if-present",
@@ -35,6 +37,7 @@ const REQUIRED_WORKFLOW_COMMANDS = [
   "python3 scripts/check-doc-vocabulary.py",
   "python3 scripts/audit-cbd-73.py",
   "python3 scripts/audit-cbd-74.py",
+  "python3 scripts/audit-cbd-75.py",
   "python3 scripts/audit-cbd-103.py",
   "python3 scripts/audit-cbd-104.py",
   "python3 scripts/audit-cbd-105.py",
@@ -290,7 +293,7 @@ function checkRootScripts(rootPackage, failures) {
     failures.push(`package.json check must run exactly: ${REQUIRED_CHECK_STAGES.join(" && ")}`);
   }
 
-  for (const [name, expected] of Object.entries(REQUIRED_ROOT_WORKSPACE_SCRIPTS)) {
+  for (const [name, expected] of Object.entries(REQUIRED_ROOT_SCRIPTS)) {
     if (scripts[name] !== expected) {
       failures.push(`package.json ${name} must remain ${JSON.stringify(expected)}`);
     }

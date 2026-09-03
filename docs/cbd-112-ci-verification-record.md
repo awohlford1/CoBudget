@@ -6,9 +6,9 @@
 | Jira | [CBD-112](https://cobudget.atlassian.net/browse/CBD-112) |
 | Verification date | September 2, 2026 |
 | Verified baseline | `6167d7d77975743e464da36ccb030241c3547ee1` on `main` |
-| Final integration base | `3c4013fca3feb6ac4db12de5f1129725a9a119b6` on `main` |
+| Final integration base | `8863b892d41d44924d72df11927f90ad35567956` on `main` |
 | Verified baseline workflow | `.github/workflows/ci.yml` (`24b1019b7d5ba20069e97363740b05270574e7db`) |
-| Hardened workflow in this change | `.github/workflows/ci.yml` (`68461ef5e473e7fbb05183ed5b67fde0cdef7987`) |
+| Hardened workflow in this change | `.github/workflows/ci.yml` (`d4567db3b654fb309d07d5ee1471e760cb8cd976`) |
 | Automated contract guard | `scripts/check-ci-contract.mjs` with 22 negative/positive self-tests |
 | Production merge gate | Protected `main`; strict required check `Documentation, lint, type-check, test, and build` from GitHub Actions app ID `15368` |
 | Node version source | `.nvmrc` (`a45fd52cc5891570d6299fab38643103c3955474`), containing `24` |
@@ -63,7 +63,7 @@ pull requests cannot cancel one another.
 At the verified baseline, `npm run check` is a fail-fast command chain:
 
 ```text
-check:ci -> check:docs -> check:tokens -> lint -> typecheck -> test -> build -> check:pages
+check:ci -> check:docs -> check:tokens -> check:copy -> lint -> typecheck -> test -> build -> check:pages
 ```
 
 The root `engines.node` constraint, `>=24 <25`, agrees with `.nvmrc`. The

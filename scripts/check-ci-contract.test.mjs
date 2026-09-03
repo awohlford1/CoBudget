@@ -40,6 +40,7 @@ jobs:
       - run: python3 scripts/check-doc-vocabulary.py
       - run: python3 scripts/audit-cbd-73.py
       - run: python3 scripts/audit-cbd-74.py
+      - run: python3 scripts/audit-cbd-75.py
       - run: python3 scripts/audit-cbd-103.py
       - run: python3 scripts/audit-cbd-104.py
       - run: python3 scripts/audit-cbd-105.py
@@ -76,12 +77,13 @@ const validRootPackage = {
     "check:ci": "node --test scripts/check-ci-contract.test.mjs && node scripts/check-ci-contract.mjs",
     "check:docs": "node scripts/check-mermaid.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
+    "check:copy": "node scripts/check-copy-language.mjs",
     lint: "eslint scripts && npm run lint --workspaces --if-present",
     typecheck: "npm run typecheck --workspaces --if-present",
     test: "npm run test --workspaces --if-present",
     build: "npm run build --workspaces --if-present",
     "check:pages": "node scripts/check-public-pages.mjs",
-    check: "npm run check:ci && npm run check:docs && npm run check:tokens && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
+    check: "npm run check:ci && npm run check:docs && npm run check:tokens && npm run check:copy && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
   },
 };
 
