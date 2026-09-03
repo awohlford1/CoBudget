@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1; five sources re-frozen September 3, 2026, and CBD-91, CBD-92, CBD-93 and CBD-94 again the same day** |
-| Document version | 1.0.6 |
+| Document version | 1.0.7 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -53,11 +53,11 @@ blob below still resolves. A blob change requires the impact review in §8.
 
 | Component | Version and status | Git blob | Normative use |
 | --- | --- | --- | --- |
-| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.4; approved v1.0 plus the controlled RF-72-61 and conflict-register amendments | `1ee2ae84afbc34b7ce916d5e1a74dce4b478f207` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
+| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.5; approved v1.0 plus the controlled RF-72-61 and conflict-register amendments | `5e3b1255fa6f6c020a54869cf22828a27792e04d` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
 | `docs/cbd-92-system-flow-technical-threat-model.md` | v1.0.1; approved, brand amendment to the customer-visible transport and email strings | `2417cea6cbd47cb98fe9b44ca8e926781c3bdcfd` | Actors, systems, entry points, trust boundaries, 45 technical threats, 12 review findings, nine normative contract families |
 | `docs/cbd-92-acceptance-criteria-traceability.md` | v1.0; approved | `6938bbb0ca8eafad11b4712f1b3d35da432723af` | CBD-92 deliverable/criterion evidence, coverage review, limitations, and public-launch policy |
 | `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1.2; approved at v1.1, then an editorial header correction and a brand amendment | `beabfa99835cd78126bc3c744d6224dbeda80d15` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
-| `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0.3; approved, with all seven section 8 reconciliations for the architecture and product-plan files recorded done | `5e7540cdd3c2dfdec5995c94137a9ae450728b63` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
+| `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0.4; approved, with all seven section 8 reconciliations for the architecture and product-plan files recorded done | `ce6b3e105aff7f120eb670d3685c787082911516` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
 | `docs/cbd-94-verification-review-inventory.md` | v1.0; approved | `e139cdd75646f8070b8e253ff6cc95c1f6bca966` | 270 verification cases, 15 manual packages, 15 specialist reviews, fixtures, parameters, monitors, and evidence rules |
 | `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.2; approved at v1.0.1, missing-criterion correction only | `ff70668fbeb3ddea2a843a3c11fb0024e8bf3957` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
 | `docs/cbd-94-exhaustive-review-findings.md` | v1.0; accepted, all findings closed | `c7c02611b7b2c6cfc78ed5467e013b615128b8c6` | Independent re-execution evidence and closed `RV-94-011–017` findings |
@@ -396,6 +396,29 @@ superseded blob since the CBD-93 v1.1.1 header correction. Nothing checks the
 hashes CBD-94 records in prose, which is why that one sat unnoticed. No threat,
 boundary, contract rule, scenario, safeguard, residual, risk, rating,
 requirement, gate, or route changed.
+
+A fourth re-freeze on September 3, 2026 covers CBD-91 v1.0.5 and CBD-94 v1.0.4,
+and closes the last two rows of CBD-91's conflict register that concerned an
+editable source.
+
+`CR-91-007` was a stale reference. FF-008 in the future-feature register asked
+what permissions govern export on the premise that CBD-12 prohibits unrestricted
+export for Viewers and Collaborators, a boundary CBD-72 superseded under formal
+change control when it permitted a protected allowlisted Collaborator export.
+The question now states the CBD-72 position. Format and scheduled delivery
+remain deferred and no permission was reopened.
+
+`CR-91-008` is narrowed rather than closed, and the reason is worth recording.
+CBD-92 `CA-92-012` was approved on August 16, 2026, a day after this register's
+baseline, and it settles exactly the cardinality the row called unsettled: one
+active person-level financial profile per account subject, one authorizer per
+connection, profile-local canonical accounts carrying many account-to-space
+links, and no profile transfer, merge, split, or sharing between subjects in
+Private MVP. The row had been describing as open a question that was already
+half answered. What remains is the physical schema and the executable sync and
+lifecycle contracts at `RF-92-006`, which still block account and
+synchronization implementation. No data class, classification, flow, risk,
+rating, requirement, gate, or route changed.
 
 The four CBD-95 pages are registered in `scripts/sync-confluence.py` and
 published: the manifest as `9797633`, the reconciliation matrix as `9830401`,

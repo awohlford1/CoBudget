@@ -196,14 +196,14 @@ GOVERNING_BLOBS = {
     # kept its controlling outcome; no data class, classification, flow, rule,
     # or evidence gap changed, so no CBD-73 rule is affected.
     Path("docs/cbd-91-private-mvp-data-inventory.md"): (
-        "1ee2ae84afbc34b7ce916d5e1a74dce4b478f207"
+        "5e3b1255fa6f6c020a54869cf22828a27792e04d"
     ),
     # Re-pinned September 3, 2026, most recently for CBD-94 v1.0.3, which marks
     # every section 8 reconciliation done and re-pins its own CBD-91 and CBD-92
     # source rows.  CBD-73 cites SR-94-007 through SR-94-011, none of which
     # changed.
     Path("docs/cbd-94-risk-mitigation-requirement-register.md"): (
-        "5e7540cdd3c2dfdec5995c94137a9ae450728b63"
+        "ce6b3e105aff7f120eb670d3685c787082911516"
     ),
     Path("docs/cbd-95-architecture-roadmap-follow-up-register.md"): (
         "29d884a4238dda85975bc66d1f107ecbf9296a87"

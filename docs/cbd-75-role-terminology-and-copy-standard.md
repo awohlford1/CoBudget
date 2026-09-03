@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.6 — Product Owner review and approval required. Per-surface strings remain gated by `OI-75-001`** |
-| Document version | 0.6 |
+| Status | **Draft v0.7 — Product Owner review and approval required. Per-surface strings remain gated by `OI-75-001`** |
+| Document version | 0.7 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-75](https://cobudget.atlassian.net/browse/CBD-75) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -259,6 +259,7 @@ Evidence log. This is the template and the current state; every row is honest ab
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.7 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the `CBD-12-AC17` and `CBD-12-AC36` settlement, which took both criteria to the product model's own term rather than to a brand. No rule, role, pattern, checklist item, or open issue changed in this document; the finding is recorded in the traceability record. | Draft; Product Owner review required |
 | 0.6 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-92 brand amendment, which applied `RT-75-01` to the four customer-visible strings its transport and email contracts fix, and to the five approved documents quoting them. The governing lifecycle source moves to CBD-73 v1.0.3. No rule, role, pattern, checklist item, or open issue changed in this document; the findings are recorded in the traceability record. | Draft; Product Owner review required |
 | 0.5 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-91 `CR-91-002` correction, which the Product Owner authorized separately: the product plan's Collaborator connection authority now matches CBD-72 §2.2, and traceability finding 9 moves from deliberately-uncorrected to corrected. No rule, role, pattern, checklist item, or open issue changed in this document. | Draft; Product Owner review required |
 | 0.4 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Closed `OI-75-004`. The records that described the corrected guardian condition were amended in the same change: CBD-91 to v1.0.2, CBD-94 to v1.0.1, and the CBD-95 manifest and traceability recording the re-freeze. Five pinned blobs were re-frozen with stated reasons, three of which had been stale since August 18, 2026 because `scripts/audit-cbd-95.py` was never a CI step. It is one now. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |

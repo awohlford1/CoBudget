@@ -35,7 +35,7 @@ FROZEN_BLOBS = {
     # CR-91-003/CR-91-004 source corrections.  CBD-95 counts no CBD-91
     # identifier that changed: DI, DF, and EG family membership is untouched.
     Path("docs/cbd-91-private-mvp-data-inventory.md"): (
-        "1ee2ae84afbc34b7ce916d5e1a74dce4b478f207"
+        "5e3b1255fa6f6c020a54869cf22828a27792e04d"
     ),
     Path("docs/cbd-92-system-flow-technical-threat-model.md"): (
         "2417cea6cbd47cb98fe9b44ca8e926781c3bdcfd"
@@ -52,7 +52,7 @@ FROZEN_BLOBS = {
     # counts this audit enforces are unchanged; only two section 8 rows and the
     # CBD-91 source pin moved.
     Path("docs/cbd-94-risk-mitigation-requirement-register.md"): (
-        "5e7540cdd3c2dfdec5995c94137a9ae450728b63"
+        "ce6b3e105aff7f120eb670d3685c787082911516"
     ),
     Path("docs/cbd-94-verification-review-inventory.md"): (
         "e139cdd75646f8070b8e253ff6cc95c1f6bca966"
