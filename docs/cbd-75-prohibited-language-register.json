@@ -17,7 +17,7 @@
     "it plants the frame the denial is trying to remove."
   ],
   "package": "CBD-75",
-  "version": "0.3",
+  "version": "0.4",
   "document": "docs/cbd-75-role-terminology-and-copy-standard.md",
   "negationWindow": 80,
   "negators": [

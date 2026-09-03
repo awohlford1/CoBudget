@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0 — provider-independent CBD-94 baseline.** Approval fixes the risk model, requirements, and gates. It accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
-| Document version | 1.0 |
+| Status | **Approved v1.0.1 — provider-independent CBD-94 baseline.** Approval fixes the risk model, requirements, and gates. It accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-94](https://cobudget.atlassian.net/browse/CBD-94) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
 | Consumes | CBD-91 v1.0.1; CBD-92 approved v1.0; CBD-93 approved v1.1 |
 | Repository baseline | `be20177` on `main` |
-| Last updated | August 16, 2026 |
+| Last updated | September 3, 2026 |
 
 ## 1. Purpose, authority, and completion boundary
 
@@ -44,7 +44,7 @@ release effect is scoped without ambiguity.
 
 | Source | Frozen version | Required use in CBD-94 |
 | --- | --- | --- |
-| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.1; Git blob `1e1134415915238752440da4b2e4acaa293d20e6` | `DI-91-001–076`, `DF-91-001–013`, copy/noninterference rules, `EG-91-001–024`, and approved lifecycle/custody constraints |
+| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.2; Git blob `fa3fb737d937896b0901ee965b46d6a4d7e1412b` | `DI-91-001–076`, `DF-91-001–013`, copy/noninterference rules, `EG-91-001–024`, and approved lifecycle/custody constraints |
 | `docs/cbd-92-system-flow-technical-threat-model.md` | approved v1.0; Git blob `7c69addb47f843e080827ba8241636cb948ccad5` | 45 `TH-92-*` threats, 17 boundaries, 15 entry points, nine normative contracts, and `RF-92-001–012` |
 | `docs/cbd-92-acceptance-criteria-traceability.md` | approved v1.0; Git blob `6938bbb0ca8eafad11b4712f1b3d35da432723af` | Authoritative flow/boundary relation, actor/entry-point coverage, and CBD-92 limitation/approval record |
 | `docs/cbd-93-privacy-coercion-abuse-analysis.md` | approved v1.1; Git blob `b84aa6f2aed66c7ffad35a4fc58eead1602bcf65` | 86 `AB-93-*` scenarios, 96 active safeguards, `EG-93-001–010`, 13 accepted-residual scenario rows represented by 12 residual-register entries, and `RI-93-001–019` |
@@ -641,8 +641,8 @@ edit those artifacts or Jira.
 | --- | --- | --- |
 | `docs/architecture.md` | Add `CL/PA/NT/EM/OP/AN/RL-92-*`, typed authorization/service-purpose contract, tenant/cache/index keys, queue schemas, audit/telemetry boundaries, deletion/recovery ledger, and provider-evidence gates | CBD-92 normative contracts and `RF-92-001–012` |
 | `docs/architecture.md` | Mark Plaid and every named technology/provider as a hypothesis until CBD-15 evidence and selection | CBD-92 provider-independent limit |
-| `docs/architecture.md` | Replace “append-only audit history for access and guardian actions” with the approved differentiated customer/admin/security evidence model and current role terms | CBD-72/CBD-92/CBD-93 |
-| `docs/product-plan.md` | Reconcile legacy `Owner`/`guardian` terminology and the statement that Accountability Partner is scoped/revocable by the subject with the approved Primary Owner/Co-owner/Accountability Partner boundaries | CBD-72/CBD-93; current prose is materially misleading |
+| `docs/architecture.md` | ~~Replace “append-only audit history for access and guardian actions” with the approved differentiated customer/admin/security evidence model and current role terms~~ **Done September 3, 2026** under CBD-75 `OI-75-004`; the line is now the three-way member/administrative/security evidence model and the role terms are current | CBD-72/CBD-92/CBD-93 |
+| `docs/product-plan.md` | ~~Reconcile legacy `Owner`/`guardian` terminology and the statement that Accountability Partner is scoped/revocable by the subject with the approved Primary Owner/Co-owner/Accountability Partner boundaries~~ **Done September 3, 2026** under `SR-94-145` and CBD-75 `OI-75-004` | CBD-72/CBD-93; the prose was materially misleading until corrected |
 | `docs/product-plan.md` | Remove optional rollover from MVP or explicitly point to deferred `FF-003` | Approved cadence scope and future-feature register |
 | `docs/product-plan.md` | Reconcile notification scope: mandatory in-app plus opt-in supported email/push/SMS versus the plan's in-app/email MVP and push-in-Product-depth statements | CBD-12/CBD-92 channel contracts |
 | `docs/product-plan.md` | State product analytics is disabled for Private MVP; early measures may use only the approved coarse, non-drillable aggregates until a new analytics decision | `AN-92-*` |
@@ -674,6 +674,7 @@ provider custody, deletion completion, backup expiry, or safety outcome.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.1 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded completion of the two §8 reconciliations for `docs/architecture.md` and `docs/product-plan.md`, both done September 3, 2026 under `SR-94-145` and CBD-75 `OI-75-004`. Re-pinned the CBD-91 source row to v1.0.2, whose only change is the matching `CR-91-003`/`CR-91-004` correction record. The five remaining §8 rows are untouched and still required. No risk, rating, override, disposition, requirement, gate, route, or release effect changed. | Consequential amendment to an approved document under change control; the v1.0 baseline approval otherwise stands |
 | 1.0 | August 16, 2026 | Alexander Wohlford as Product Owner, Claude assisting | **Approved as CBD-94 v1.0.** Promoted the v0.1.4 content unchanged to the approved provider-independent CBD-94 baseline; the only edits were status, version, and the self-descriptive “draft” wording in §1, §3.6, §4, and §7. No risk, rating, override, disposition, requirement, gate, route, or release effect was altered by approval. Approval fixes the risk model, requirements, and gates as the controlling baseline; it accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. All 21 families remain residual-unscored and evidence-pending. Confluence publication follows the merge to `main` under the repository working rules. | **Product Owner approved** |
 | 0.1.4 | August 16, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner dispositions on two open review findings. `RV-94-011`: applied the §3.4 mandatory Critical override as a scoped source-level override on `TH-92-001/002/004` within `RK-94-001`, mirroring the existing `TH-92-032/033/044` treatment in `RK-94-010`; the family inherent rating remains 3/5/15 High, non-overridden `TH-92-003` remains High, and §4.1 and §4.2 were updated. The override also reconciles CBD-94 with CBD-92's frozen initial triage, which independently rated those same three threats Critical and `TH-92-003` High. `RV-94-015`: added the §3.7 rule that the §4 requirement column is the dependency set and the §6 `Principal risk/source` column is the ownership set, making the 54 one-directional edges correct by definition rather than a traceability defect. No source routing, requirement text, disposition, owner, gate, or release effect was changed. | Product Owner rating and method decisions incorporated; complete document remains draft |
 | 0.1.3 | August 16, 2026 | Claude | Independent exhaustive-review corrections recorded as `RV-94-016`: replaced two stale `v0.1.1` self-scopes in §3.6 and §4 with version-agnostic wording so the no-new-acceptance rule and the unscored-residual rule cannot silently expire against a later draft. No risk, rating, requirement, disposition, gate, or route was changed. Open review findings `RV-94-011` (unapplied §3.4 authentication override) and `RV-94-015` (one-directional risk→requirement edges) remain recorded in the traceability record §13 and are not resolved here. | Editorial correction only; complete document remains draft |
