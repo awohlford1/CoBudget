@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0.2 — Product Owner approved the exact package on August 18, 2026 after closing `OI-73-001` and the `OI-73-008` Failed-state semantics, and it is published to Confluence. Approval covers the specification only; the remaining §7 gates stay open** |
-| Document version | 1.0.2 |
+| Status | **Approved v1.0.3 — Product Owner approved the exact package on August 18, 2026 after closing `OI-73-001` and the `OI-73-008` Failed-state semantics, and it is published to Confluence. Approval covers the specification only; the remaining §7 gates stay open** |
+| Document version | 1.0.3 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -83,8 +83,8 @@ be silently treated as evidence for this draft.
 | --- | --- | --- | --- |
 | `docs/cbd-71-mvp-schedule-decision-register.md` | Document version **1.1.1**; decision-set target **MVP Schedule Decisions v1.1**, approved August 15, 2026 | `a0c97c4302ab062a4fbe185014bcf686f14d3fb2` | Alert semantics, mandatory in-app instances, personal delivery preferences, server-side enforcement, accessibility |
 | `docs/cbd-72-collaboration-permission-model.md` | Document version **0.1.54**; approved August 18, 2026 at v0.1.53, §5.4 amended September 2, 2026 | `f1842e5d020e7781c6808730ae4df43faedaaabd` | Roles, permissions 24–29, one-role/one-Primary invariants, protected actions, transfer, revocation, ownership exits, attribution and audit schema. Re-pinned for the v0.1.54 §5.4 amendment removing the recipient-configurable "privacy" item; CBD-73 cites §5.4 only for the personal-settings boundary, which the amendment reinforces, so no CBD-73 rule is affected |
-| `docs/cbd-91-private-mvp-data-inventory.md` | Document version **1.0.3**, approved | `0aa16d4510b1c8ccb3f77fe2ed4afd5b1f31b8d9` | Existing data-class, audience, lifecycle, and prohibited-disclosure boundaries; source alignment and new/split classes remain `OI-73-003` |
-| `docs/cbd-94-risk-mitigation-requirement-register.md` | Document version **1.0.2**, approved provider-independent baseline | `f9b606b229d86c51dafc7bac80ae9923a530a1e8` | Normative `SR-94-007`–`SR-94-011` invitation security/privacy requirements and dependent release gates |
+| `docs/cbd-91-private-mvp-data-inventory.md` | Document version **1.0.4**, approved | `1ee2ae84afbc34b7ce916d5e1a74dce4b478f207` | Existing data-class, audience, lifecycle, and prohibited-disclosure boundaries; source alignment and new/split classes remain `OI-73-003` |
+| `docs/cbd-94-risk-mitigation-requirement-register.md` | Document version **1.0.3**, approved provider-independent baseline | `5e7540cdd3c2dfdec5995c94137a9ae450728b63` | Normative `SR-94-007`–`SR-94-011` invitation security/privacy requirements and dependent release gates |
 | `docs/cbd-95-architecture-roadmap-follow-up-register.md` | Front-matter status says **Approved v1.0.1** while the observed Document version is **1.0.9** | `29d884a4238dda85975bc66d1f107ecbf9296a87` | Product Owner dispositions for `RI-93-001`–`RI-93-019`, follow-up ownership, safety-channel routing, and copy/implementation gates |
 
 Reproduce the governing blob values without reading the working tree:
@@ -356,6 +356,7 @@ earlier clean run against different blobs.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.3 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Brand amendment. The ceremony-entry disclosure in the specification's §7 said the surface discloses "that this is a CoBudget invitation requiring verification"; it now says MoneyPact, matching `EM-92-002` as amended at CBD-92 v1.0.1 and the `MSG-73-002`/`MSG-73-010` rows already corrected at v1.0.2. The naming standard is `RT-75-01`. No lifecycle transition, invariant, message row, scenario, or gate changed. | Consequential amendment to an approved document under change control; the v1.0 approval otherwise stands |
 | 1.0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Brand amendment. The two customer-facing strings that named the product, in `MSG-73-002` and `MSG-73-010`, said "a CoBudget invitation". The September 2, 2026 brand decision recorded in `docs/brand-foundation.md` makes MoneyPact the customer-facing name and keeps CoBudget as the internal codename, so a customer-readable invitation must say MoneyPact. Both now do. No semantic rule changes; the naming standard is `RT-75-*` in the CBD-75 package. | Product Owner authorized September 2, 2026 |
 | 1.0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Corrected the status line, closed `OI-73-007` with the page IDs, versions, and source commit, closed `RV-73-026`, marked the Confluence publication gate complete, and recorded the five page IDs in the front matter. No rule, decision, or gate changed. | Correction to approved v1.0 |
 | 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Recorded the Product Owner decisions closing `OI-73-001` and the `OI-73-008` Failed-state semantics, added §1.1 stating exactly what the approval does and does not cover, closed `RV-73-006`, and updated every range and total for 47 transitions, 48 messages, 32 audit events, 13 data records, and 101 scenarios. | **Approved v1.0** |

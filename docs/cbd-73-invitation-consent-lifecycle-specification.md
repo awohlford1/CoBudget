@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0.2 — Product Owner approved this exact specification on August 18, 2026. The §15 open issues remain binding; approval is of the specification, not of any implementation or evidence** |
-| Document version | 1.0.2 |
+| Status | **Approved v1.0.3 — Product Owner approved this exact specification on August 18, 2026. The §15 open issues remain binding; approval is of the specification, not of any implementation or evidence** |
+| Document version | 1.0.3 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -285,7 +285,7 @@ account before any grant exists.
 ### 7.1 Surface boundary
 
 1. The external delivery message (email or SMS) carries the minimum needed to act: the link with its opaque code and generic CoBudget framing within the approved channel ceilings. Protected detail belongs to the authenticated, verified ceremony surfaces, not to the external message (FU-95-001 decision; IC-73-013). The exact external template is gated by OI-73-004.
-2. Before channel verification, the ceremony surface discloses only the approved ceremony-entry minimum — that this is a CoBudget invitation requiring verification — and no budget-space identity, inviter identity, member list, or financial data (IC-73-010).
+2. Before channel verification, the ceremony surface discloses only the approved ceremony-entry minimum — that this is a MoneyPact invitation requiring verification — and no budget-space identity, inviter identity, member list, or financial data (IC-73-010).
 3. The full disclosure below and its accept/decline/decline-and-block choices are presented only after channel verification **and** authenticated account attachment in the same ceremony (§5).
 4. The pre-authentication surface may additionally offer only the explicit invitation-scoped TR-73-11 decline after exact-channel verification. It discloses no protected detail and cannot create an account-level block or any other persistent account state.
 
@@ -549,6 +549,7 @@ Audit-placement rules:
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.3 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Brand amendment. The ceremony-entry disclosure in the specification's §7 said the surface discloses "that this is a CoBudget invitation requiring verification"; it now says MoneyPact, matching `EM-92-002` as amended at CBD-92 v1.0.1 and the `MSG-73-002`/`MSG-73-010` rows already corrected at v1.0.2. The naming standard is `RT-75-01`. No lifecycle transition, invariant, message row, scenario, or gate changed. | Consequential amendment to an approved document under change control; the v1.0 approval otherwise stands |
 | 1.0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Brand amendment. The two customer-facing strings that named the product, in `MSG-73-002` and `MSG-73-010`, said "a CoBudget invitation". The September 2, 2026 brand decision recorded in `docs/brand-foundation.md` makes MoneyPact the customer-facing name and keeps CoBudget as the internal codename, so a customer-readable invitation must say MoneyPact. Both now do. No semantic rule changes; the naming standard is `RT-75-*` in the CBD-75 package. | Product Owner authorized September 2, 2026 |
 | 1.0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Corrected the v1.0 status line, which kept a stale trailing clause and so read as approved and awaiting review at the same time. No rule, decision, or gate changed. | Correction to approved v1.0 |
 | 1.0 | August 18, 2026 | Alexander Wohlford — Product Owner, with Claude | Closed `OI-73-001` with the §5.1 intended-recipient confirmation (TR-73-38, TR-73-39, `DR-73-13`, AE-73-32, `MSG-73-050`–`MSG-73-052`, `AwaitingConfirmation` state) so no membership commits until the current permission holder confirms the specific accepting account. Settled the `OI-73-008` Failed-state semantics as active restricted delivery metadata and added the cause-neutral `MSG-73-053` prompt so typo recovery does not leak a block. Approval covers the specification only. | **Approved v1.0** |

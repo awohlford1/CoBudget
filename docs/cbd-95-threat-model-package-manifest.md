@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1; five sources re-frozen September 3, 2026, and CBD-91 and CBD-94 again the same day** |
-| Document version | 1.0.5 |
+| Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1; five sources re-frozen September 3, 2026, and CBD-91, CBD-92, CBD-93 and CBD-94 again the same day** |
+| Document version | 1.0.6 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -53,11 +53,11 @@ blob below still resolves. A blob change requires the impact review in §8.
 
 | Component | Version and status | Git blob | Normative use |
 | --- | --- | --- | --- |
-| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.3; approved v1.0 plus the controlled RF-72-61 and conflict-register amendments | `0aa16d4510b1c8ccb3f77fe2ed4afd5b1f31b8d9` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
-| `docs/cbd-92-system-flow-technical-threat-model.md` | v1.0; approved | `7c69addb47f843e080827ba8241636cb948ccad5` | Actors, systems, entry points, trust boundaries, 45 technical threats, 12 review findings, nine normative contract families |
+| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.4; approved v1.0 plus the controlled RF-72-61 and conflict-register amendments | `1ee2ae84afbc34b7ce916d5e1a74dce4b478f207` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
+| `docs/cbd-92-system-flow-technical-threat-model.md` | v1.0.1; approved, brand amendment to the customer-visible transport and email strings | `2417cea6cbd47cb98fe9b44ca8e926781c3bdcfd` | Actors, systems, entry points, trust boundaries, 45 technical threats, 12 review findings, nine normative contract families |
 | `docs/cbd-92-acceptance-criteria-traceability.md` | v1.0; approved | `6938bbb0ca8eafad11b4712f1b3d35da432723af` | CBD-92 deliverable/criterion evidence, coverage review, limitations, and public-launch policy |
-| `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1.1; approved at v1.1, editorial header correction only | `c1caf49653802f5c4d1f69f48d61f9aa881591a3` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
-| `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0.2; approved, with all seven section 8 reconciliations for the architecture and product-plan files recorded done | `f9b606b229d86c51dafc7bac80ae9923a530a1e8` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
+| `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1.2; approved at v1.1, then an editorial header correction and a brand amendment | `beabfa99835cd78126bc3c744d6224dbeda80d15` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
+| `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0.3; approved, with all seven section 8 reconciliations for the architecture and product-plan files recorded done | `5e7540cdd3c2dfdec5995c94137a9ae450728b63` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
 | `docs/cbd-94-verification-review-inventory.md` | v1.0; approved | `e139cdd75646f8070b8e253ff6cc95c1f6bca966` | 270 verification cases, 15 manual packages, 15 specialist reviews, fixtures, parameters, monitors, and evidence rules |
 | `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.2; approved at v1.0.1, missing-criterion correction only | `ff70668fbeb3ddea2a843a3c11fb0024e8bf3957` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
 | `docs/cbd-94-exhaustive-review-findings.md` | v1.0; accepted, all findings closed | `c7c02611b7b2c6cfc78ed5467e013b615128b8c6` | Independent re-execution evidence and closed `RV-94-011–017` findings |
@@ -368,6 +368,34 @@ them, which is their correct state, and the provider marking distinguishes
 frameworks the repository actually runs from providers that remain unselected,
 because marking a running framework a hypothesis would be false. No data class,
 classification, flow, risk, rating, requirement, gate, or route changed.
+
+A third re-freeze on September 3, 2026 covers CBD-91 v1.0.4, CBD-92 v1.0.1,
+CBD-93 v1.1.2 and CBD-94 v1.0.3, and its cause is the brand decision rather than
+anything in this package.
+
+CBD-92's transport and email contracts fix four strings a customer reads: the
+push and SMS body in `NT-92-001`, the entry point and application URL in
+`NT-92-002`, the routine email body in `EM-92-001`, and the invitation
+identification in `EM-92-002`. All four said CoBudget, which `RT-75-01` makes
+the internal codename. Changing them alone would have left five approved
+documents quoting a superseded string, so CBD-93 `AB-93-025`, the CBD-73
+lifecycle specification, the CBD-106 email boundary, and both CBD-130 documents
+moved in the same change. Prose describing the system keeps the codename under
+`RT-75-03`; only strings a customer reads, and restatements of them, changed.
+
+One consequence was arithmetic rather than editorial. MoneyPact is a character
+longer than CoBudget and appears twice in the fixed SMS body, so CBD-130's
+segment calculation moves from 56 to 58 characters. Every conclusion holds — one
+GSM-7 segment, and a UCS-2 warning that is now sharper at 58 of 70 — but the
+numbers were recomputed rather than left stale.
+
+CBD-91 v1.0.4 records the `CR-91-005` correction, which is unrelated to the
+brand and was authorized separately. CBD-94 v1.0.3 re-pins its CBD-91 and CBD-92
+source rows, and also its CBD-93 row, which had been recording v1.1 and a
+superseded blob since the CBD-93 v1.1.1 header correction. Nothing checks the
+hashes CBD-94 records in prose, which is why that one sat unnoticed. No threat,
+boundary, contract rule, scenario, safeguard, residual, risk, rating,
+requirement, gate, or route changed.
 
 The four CBD-95 pages are registered in `scripts/sync-confluence.py` and
 published: the manifest as `9797633`, the reconciliation matrix as `9830401`,
