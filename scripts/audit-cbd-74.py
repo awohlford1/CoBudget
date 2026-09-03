@@ -231,7 +231,7 @@ def main() -> int:
     )
     audit.check(
         f"**{SCENARIO_TOTAL} scenarios in 8 families**" in texts[TESTS],
-        "test inventory does not declare the 44-scenario total",
+        "test inventory does not declare the 46-scenario total",
     )
     dangling_scenarios = sorted(set(SCENARIO_ID.findall(package_text)) - set(scenarios))
     audit.check(not dangling_scenarios, f"dangling scenario identifiers: {dangling_scenarios}")

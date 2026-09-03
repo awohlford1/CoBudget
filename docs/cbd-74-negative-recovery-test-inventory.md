@@ -145,4 +145,4 @@ This inventory contains **46 scenarios in 8 families**: 8 `CAT-74-T*`, 6 `CFG-74
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
-| 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: assertion contract, eight families, 44 scenarios, and the `CBD-74-AC13` required-case coverage check. | Draft; Product Owner review required |
+| 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: assertion contract, eight families, 46 scenarios, and the `CBD-74-AC13` required-case coverage check. | Draft; Product Owner review required |

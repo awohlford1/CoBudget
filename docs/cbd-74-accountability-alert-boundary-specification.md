@@ -178,7 +178,7 @@ Protected alert detail appears only in an authenticated in-app surface. On open,
 
 1. A recipient whose scope narrowed since the instance was created sees only what their current scope permits; content outside it is absent, not masked in a way that reveals its existence (`PM-72-006`).
 2. A recipient who lost eligibility entirely cannot open the instance, and the denial discloses neither the content nor the reason beyond a safe outcome class.
-3. The in-app instance identifies the budget space. This is the surface CBD-12-AC11 refers to; the external transports remain content-free under CBD-12-AC21. That reconciliation is recorded in the traceability register as a required CBD-12 wording correction, not as a new decision.
+3. The in-app instance identifies the budget space. This is the surface CBD-12-AC11 refers to; the external transports remain content-free under CBD-12-AC21. CBD-12-AC11 already states this split in terms, having been corrected on August 16, 2026, so no correction to it is outstanding (`OI-74-008`, closed).
 4. Detail content states the condition and the affected resource within the recipient's scope, and omits actor attribution (`AB-74-008`).
 
 ### 6.4 Shared-device and custody honesty
@@ -326,7 +326,7 @@ Placement rules:
 
 ## 15. Open-issue register
 
-Every row is open. The interim behavior stated is binding until the row closes; none of it substitutes for the decision or evidence named.
+Every row is open unless its route records a closure date. The interim behavior stated is binding until the row closes; none of it substitutes for the decision or evidence named.
 
 | ID | Open issue | Binding interim behavior | Route and effect |
 | --- | --- | --- | --- |
@@ -337,7 +337,7 @@ Every row is open. The interim behavior stated is binding until the row closes; 
 | OI-74-005 | **Provider selection and per-channel template approval**, including proof that template names, tags, and headers encode nothing prohibited by §6.2. | The §6 ceiling is binding regardless of provider. | `EG-91-006`/CBD-106; blocks external delivery release. |
 | OI-74-006 | **`RI-93-014` residual disposition.** Partner informational eligibility is retained; the observation and surveillance risk is explicit and unaccepted. | Eligibility per §4.3; `AB-74-008` removes actor attribution. | Named risk authority per CBD-94 §3.6; does not block this specification but remains open. |
 | OI-74-007 | **Deterministic fixtures** for the test inventory. | Rule-level inventory only. | `VT-94-*` test design; blocks implementation sign-off. |
-| OI-74-008 | **CBD-12-AC11 wording correction.** AC11 requires every notification to identify the budget space; AC21 forbids that in external transports. | §6.3 item 3 governs: in-app identifies the space, external transports are content-free. | Authorized CBD-12 Jira correction; recorded in the traceability register. |
+| OI-74-008 | **CBD-12 alert-preference wording.** Opened against `CBD-12-AC11` on the belief that it mandated budget-space identification in every notification. That was already false when this draft was written: `AC11` was corrected on August 16, 2026 and states that in-app surfaces identify the space while push, SMS, and routine email stay content-free under `AC21`. The genuine stale field was `CBD-12-AC19`, which still listed member-configurable "privacy detail". | §6.3 item 3 and §6.2 govern unchanged; no interim behavior depended on either wording. | **Closed September 2, 2026.** `AC11` needed no correction. `AC19` was corrected the same day to remove "privacy detail", to name the closed `CF-74-01`–`CF-74-06` choices, and to state that `AC21` content is never widened by preference. |
 
 ## 16. Revision history
 
