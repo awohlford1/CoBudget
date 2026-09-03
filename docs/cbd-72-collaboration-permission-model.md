@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v0.1.53 — final package approved by the Product Owner, August 18, 2026** |
-| Document version | 0.1.53 |
+| Status | **Approved v0.1.54 — approved by the Product Owner August 18, 2026 at v0.1.53; the v0.1.54 §5.4 privacy-preference amendment was authorized September 2, 2026** |
+| Document version | 0.1.54 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-72](https://cobudget.atlassian.net/browse/CBD-72) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -180,7 +180,7 @@ Notification channels, delivery preferences, alert instances, and acknowledgemen
 
 Eligibility continues to follow the accepted role, current authorization, masking, and supported-event rules; actual external delivery follows the recipient's personal channel and delivery preferences. No budget-space member can view or alter another member's notification settings. CBD-69, CBD-70, CBD-71, and CBD-72 now use this same boundary.
 
-MVP alert event types, trigger meanings, and numeric thresholds are built in and cannot be changed by a member. System-owned deduplication and cooldown behavior prevents repeat noise without becoming a shared setting. Each recipient may configure only supported external channels, event/category delivery preferences, quiet hours, time zone, privacy, and digest/immediate behavior. An eligible in-app instance is always created. The recipient may archive or dismiss only their own instance from the active view; this changes neither the underlying alert fact nor eligibility nor another recipient's instance. Custom thresholds and arbitrary alert rules are highest-priority post-MVP work under FF-009.
+MVP alert event types, trigger meanings, and numeric thresholds are built in and cannot be changed by a member. System-owned deduplication and cooldown behavior prevents repeat noise without becoming a shared setting. Each recipient may configure only supported external channels, event/category delivery preferences, quiet hours, time zone, and digest/immediate behavior. There is no recipient-configurable privacy or verbosity choice: external notification content is fixed by purpose tier under `CBD-12-AC21` and the CBD-92 transport ceilings, and no preference, setting, or opt-in widens it. Protected detail exists only in authenticated in-app views. An eligible in-app instance is always created. The recipient may archive or dismiss only their own instance from the active view; this changes neither the underlying alert fact nor eligibility nor another recipient's instance. Custom thresholds and arbitrary alert rules are highest-priority post-MVP work under FF-009.
 
 #### 5.4.1 Three-record alert model
 
@@ -356,6 +356,7 @@ This table records what was decided at each revision, not current behavior. Wher
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.1.54 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Focused amendment to §5.4. The recipient-configurable list included "privacy", which contradicted `CBD-12-AC21`, the CBD-92 transport ceilings, and the closed `CF-74-01`–`CF-74-06` set in the CBD-74 specification, all of which fix external content by purpose tier and forbid widening it by preference. The item is removed and the boundary is stated positively: no recipient-configurable privacy or verbosity choice exists, and protected detail lives only in authenticated in-app views. Found during the CBD-74 review; the matching `CBD-12-AC19` correction was applied the same day. No other §5.4 rule changes. | Product Owner authorized September 2, 2026 |
 | 0.1.53 | August 18, 2026 | Alexander Wohlford — Product Owner | **Approved.** Final package approval of this exact version after the August 18 close-out audit: blobs verified against the approved CBD-95 manifest, mechanical cross-document audit passed, every review gate dispositioned, RF-72-62 and RF-72-63 applied. This document is the controlling MVP collaboration permission model. | **Approved v0.1.53** |
 | 0.1.53 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Applied the FU-95-020 focused amendment (RF-72-62): the §6.3 inactive-owner request no longer notifies “through every channel on record”. Every notice creates its mandatory authenticated in-app instance; an external copy about the subject routes only to that subject's verified private safety channel with no fallback to any other external destination, per RI-93-012 approved August 16, 2026. No other rule changed. | Product Owner authorized August 18, 2026; RI-93-012 synchronization for CBD-72 complete |
 | 0.1.52 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Amended OD-72-05 so that **export follows read scope** from an archived budget space. §6.5 item 10 previously ended with a blanket bar on any export or snapshot from an archived space; §6.5 item 11 now states that a member retains the export or snapshot authority they held at archival, evaluated against the frozen archival-time scope, with every live control except the invalidate-on-change trigger, which cannot fire and is not needed while scope is immutable. §6.4 item 2 makes the restore window explicit, so notice that a payload is about to be purged is never notice without a remedy. Raised by the CBD-93 abuse analysis as `AB-93-041`/`SG-93-053`; recorded as RF-72-61. The prior §6.5 item 11 is renumbered 12 with no change. | Product Owner approved August 15, 2026 |

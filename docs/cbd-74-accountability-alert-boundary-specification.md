@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.1 — Product Owner review required** |
-| Document version | 0.1 |
+| Status | **Draft v0.2 — Product Owner review required; September 2, 2026 review corrections applied** |
+| Document version | 0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
-| Governing schedule decisions | CBD-71 **MVP Schedule Decisions v1.1**, approved August 15, 2026 — `SD-071-016`, `SD-071-043`, `SD-071-044`, `SD-071-046`–`SD-071-048` |
-| Governing permission model | CBD-72 **v0.1.53**, approved August 18, 2026 — permissions 1, 11a–11d, 12, 13, 22, 24, 25; §5.1, §5.3, §5.4, §5.4.1 |
+| Governing schedule decisions | CBD-71 **MVP Schedule Decisions v1.1**, approved August 15, 2026 — `SD-071-043`, `SD-071-044`, `SD-071-046`–`SD-071-048`. `SD-071-016` is **not** an input: CBD-71 §4A marks it Superseded and unimplementable, and `SD-071-043`/`SD-071-044` replace it. |
+| Governing permission model | CBD-72 **v0.1.54**, approved August 18, 2026 at v0.1.53 with the September 2, 2026 §5.4 amendment — permissions 1, 11a–11d, 12, 13, 22, 24, 25; §5.1, §5.3, §5.4, §5.4.1 |
 | Governing consent lifecycle | CBD-73 **v1.0.1**, approved August 18, 2026 — `IC-73-019`, `RC-73-02`, `RC-73-03`, `RC-73-12` |
 | Governing transport ceilings | CBD-92 **v1.0.1** — `NT-92-001`–`NT-92-006`, `EM-92-001`–`EM-92-007` |
 | Governing security requirements | CBD-94 **v1.0** — `SR-94-044`–`SR-94-054` |
@@ -17,7 +17,7 @@
 | Test inventory | `docs/cbd-74-negative-recovery-test-inventory.md` |
 | Traceability and review | `docs/cbd-74-acceptance-criteria-traceability.md` |
 | Mechanical audit | `python scripts/audit-cbd-74.py` |
-| Last updated | August 18, 2026 |
+| Last updated | September 2, 2026 |
 
 > **Authority.** The approved CBD-11/CBD-71 alert decisions, the CBD-72 permission model, the CBD-92 transport ceilings, the CBD-94 security requirements, and the `RI-93-012`–`RI-93-015` product decisions are controlling inputs. This specification applies them to accountability alerts. It cannot weaken or broaden an approved outcome. Where this document and a governing source appear to differ, the governing source controls and the difference is recorded in the traceability register.
 
@@ -147,7 +147,7 @@ Delivery follows this exact order. Each step is a precondition for the next.
 3. One mandatory in-app instance is created for each eligible recipient (`AB-74-002`). This step never consults a preference.
 4. For each recipient with a matching opted-in external channel, delivery is scheduled subject to quiet hours and digest choice (§8.3).
 5. At send time, the delivery boundary rechecks recipient identity, destination ownership and version, opt-in, current eligibility, authorization and lifecycle versions, template version, material revision, and suppression state (`SR-94-048`; `NT-92-004`; `EM-92-006`). Any failed recheck suppresses the attempt.
-6. The provider receives only the allowlisted minimum: destination or token, the fixed body or approved template identifier, channel controls, an opaque attempt or correlation identifier, and minimum delivery metadata (`NT-92-003`; `EM-92-005`).
+6. The provider receives only the allowlisted minimum: destination or token, the fixed body or approved template identifier, channel controls, an opaque attempt or correlation identifier, and minimum delivery metadata (`NT-92-003`; `EM-92-005`). **Channel controls** means only transport mechanics that carry no customer-specific value: time-to-live, retry and priority settings that do not vary by category or class, and required protocol fields. It does not include collapse or grouping keys, badge or unread counts, per-category sound or channel tiers, or any control whose value is derived from the event, the space, the recipient's state, or the category. One template per transport is used for all six categories, so neither the template identifier nor the `DR-74-03` rendered-template version partitions traffic by category.
 7. Provider callbacks may update delivery-attempt state only. A callback never authenticates anyone, acknowledges an instance, creates or recreates an event, or changes a preference (`NT-92-005`; `SR-94-050`).
 
 An external delivery failure at any step never removes, delays, or duplicates the in-app instance (`SD-071-044`).
@@ -166,9 +166,13 @@ No alert email qualifies for the `EM-92-002` invitation tier or the `EM-92-003` 
 
 ### 6.2 Prohibited in every external transport
 
-An external alert notification must not contain, encode, imply, or allow inference of any of the following. This list is exhaustive of the categories named by the governing contracts and is not a set of examples:
+An external alert notification must not contain, encode, imply, or allow inference of any of the following. The list names every category the governing contracts enumerate; it is **not** a closed set, because `NT-92-001` ends in a residual clause and this section inherits it:
 
-budget-space name or identifier; any person's name, role, membership, or relationship; account or institution identity; event category or alert condition; amount, balance, or currency value; merchant or payee; category, goal, or bill label; comment text; period or deadline; lifecycle state; reason; resource identifier or locator; recipient state; and any provider template name, tag, category, header, analytics label, or callback field that encodes any of the above (`AB-74-004`; `NT-92-001`/`NT-92-003`; `EM-92-001`/`EM-92-005`; `SR-94-045`/`SR-94-046`/`SR-94-049`).
+budget-space name or identifier; any person's name, role, membership, or relationship; account or institution identity; event category or alert condition; amount, balance, or currency value; merchant or payee; category, goal, or bill label; comment text; period or deadline; lifecycle state; reason; support or security fact; resource identifier or locator; recipient state; and any provider template name, tag, category, header, analytics label, collapse or grouping key, badge or unread count, priority, sound, or channel tier, or callback field that encodes any of the above (`AB-74-004`; `NT-92-001`/`NT-92-003`; `EM-92-001`/`EM-92-005`; `SR-94-045`/`SR-94-046`/`SR-94-049`).
+
+**The residual clause governs.** Any other customer-specific content, by whatever mechanism and whether or not it is text, is prohibited on the same terms. A vector absent from the list above is not thereby permitted; where this section and `NT-92-001` differ in reach, `NT-92-001` controls.
+
+Email additionally carries no third-party tracking pixel, remote customer-specific image, open or read fingerprint, externally hosted sensitive asset, or link decoration beyond the opaque protected locator (`EM-92-007`).
 
 **No preference widens this.** There is no per-user opt-in, verbosity level, privacy-detail setting, or trusted-device exception that adds customer-specific content to an external notification (CBD-74-AC05; CBD-12-AC21).
 
@@ -230,7 +234,8 @@ These effects are the alert-side complement of the CBD-73 revocation checklist a
 | RV-74-04 | A scope reduction that leaves membership intact narrows eligibility rather than ending it: categories and resources outside the new scope stop producing instances, and existing instances outside the new scope close. | Atomic with the reduction |
 | RV-74-05 | The person's alert settings, instances, and dismissal state in every other budget space are untouched, as is their sign-in. | Always |
 | RV-74-06 | Mandatory notices under §4.2 are unaffected. Membership end does not suppress the subject's own lifecycle notice, which CBD-73 `RC-73-12` creates independently of membership authority. | Always |
-| RV-74-07 | Every effect above is audited under §12, and asynchronous completions record their own completion event so the cutoff is provable. | With each step |
+| RV-74-07 | Every effect above is audited under §14, and asynchronous completions record their own completion event so the cutoff is provable. | With each step |
+| RV-74-08 | The notification-destination association bound to the ended membership and budget space is atomically retired, emitting exactly one retirement audit record where such an active association exists. An association the same person independently verified for another membership or budget space is untouched, and the underlying destination remains theirs. This is the second half of CBD-73 `RC-73-03`; queue suppression under `RV-74-03` does not satisfy it. | Atomic with commit |
 
 ## 10. Prohibitions
 
@@ -277,6 +282,7 @@ Field lists are semantic requirements. Physical schemas may narrow but not broad
 | DR-74-03 | Delivery attempt | Attempt identifier; instance and event correlation; channel; privacy-safe destination reference; rendered template version or hash; requested, sent, failed, or suppressed status and time; provider receipt or error class; retry lineage. Holds no notification content. | CBD-72 §5.4.1 layer 3; `DI-91-059` |
 | DR-74-04 | Recipient delivery preferences | Recipient account; budget-space membership; per-category channel opt-in; quiet-hour window; time zone; digest or immediate selection; preference version. Visible and editable only to that recipient. | `DI-91-029` |
 | DR-74-05 | Verified notification destination | Recipient account; channel type; destination or token with verified ownership; verification and rotation state; suppression state from provider callbacks. Separate from authentication and recovery authority. | `DI-91-029`/`DI-91-049`; `SR-94-051`/`SR-94-052` |
+| DR-74-07 | Destination association | The binding of one `DR-74-05` destination to one membership in one budget space, with its own activation state, activation and retirement times, and retirement cause class. A destination the same person verified for several memberships has one association per membership, each independently activated and retired. Without this record `RV-74-08` cannot be expressed, since `DR-74-05` alone has no membership or budget-space binding. | CBD-73 §9 items 3 and 7; `RC-73-03` |
 | DR-74-06 | Eligibility evaluation record | Event reference; recipient membership; inputs evaluated (membership, role, consent, profile and scope-group versions, readability outcome); result; evaluation time and stage. Restricted evidence; never a customer-visible surface. | `DI-91-005`/`DI-91-008` |
 
 ## 13. Cross-budget isolation
@@ -316,6 +322,7 @@ Every event uses the CBD-72 §9 envelope: event identifier, time, actor or syste
 | AE-74-20 | Cross-space attempt denied | Records the denial without disclosing the foreign target. |
 | AE-74-21 | Revocation or scope-change alert effect completed | One per `RV-74-01`–`RV-74-04` effect that completes asynchronously, proving the cutoff. |
 | AE-74-22 | Denied alert mutation | Any attempt to create, edit, pause, or disable a built-in alert, or to change another person's settings or instance state; no state change. |
+| AE-74-23 | Destination association retired | Exactly one per `RV-74-08` retirement, recording the membership and space whose association ended and the cause class. Never the raw destination, and never another membership's association. Correlates with the CBD-73 `AE-73-16` retirement child rather than duplicating it. |
 
 Placement rules:
 
@@ -343,4 +350,5 @@ Every row is open unless its route records a closure date. The interim behavior 
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner review corrections. Removed the Superseded `SD-071-016` from the governing inputs. Added `RV-74-08`, `DR-74-07`, and `AE-74-23` so the second half of CBD-73 `RC-73-03`, atomic retirement of the destination association bound to an ended membership, is expressible and audited; `DR-74-05` alone carried no membership or space binding. Replaced the false exhaustiveness claim in §6.2 with the governing `NT-92-001` residual clause, added support/security facts, collapse and grouping keys, badge and unread counts, and priority, sound, and channel tiers to the prohibited vectors, added the `EM-92-007` email no-tracking rule, and defined channel controls in §5.3 item 6 as transport mechanics carrying no customer-specific value with one template per transport. Corrected the `RV-74-07` cross-reference from §12 to §14. | Draft; Product Owner approval outstanding |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: closed six-category set with recipient matrix, mandatory-notice separation, recipient-owned configuration set, delivery sequence, external content ceiling and prohibitions, in-app detail rules, acknowledgement and comment boundaries, deduplication/cooldown/quiet-hours/dismissal, revocation effects, twelve prohibitions, copy requirements, data requirements, cross-space isolation, twenty-two audit events, and the open-issue register. | Draft; Product Owner review required |

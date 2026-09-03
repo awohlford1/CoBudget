@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.1 — Product Owner review required** |
-| Document version | 0.1 |
+| Status | **Draft v0.2 — Product Owner review required; September 2, 2026 review corrections applied** |
+| Document version | 0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -11,7 +11,7 @@
 | Test inventory | `docs/cbd-74-negative-recovery-test-inventory.md` |
 | Reviewed repository baseline | `d95988c` on `main` |
 | Mechanical audit | `python scripts/audit-cbd-74.py`; structural evidence only, never open-issue closure |
-| Last updated | August 18, 2026 |
+| Last updated | September 2, 2026 |
 
 ## 1. Completion and evidence boundary
 
@@ -31,9 +31,9 @@ Values are the exact versions this draft was written against. A later source cha
 
 | Source | Version used | What CBD-74 takes from it |
 | --- | --- | --- |
-| CBD-71 MVP Schedule Decisions | v1.1, approved August 15, 2026 | `SD-071-016`, `SD-071-043` firm/informational classes, `SD-071-044` three-record model and income-variance trigger, `SD-071-046`–`SD-071-048` |
-| CBD-72 Collaboration Permission Model | v0.1.53, approved August 18, 2026 | Roles, permissions 11a–11d/12/13, §5.1 Viewer hierarchy, §5.3 Partner boundary, §5.4 personal-settings boundary, §5.4.1 three-record model, §9 audit envelope |
-| CBD-73 Invitation, Consent, and Revocation Lifecycle | v1.0.1, approved August 18, 2026 | `IC-73-019` mandatory notice independence, `RC-73-02` alert-eligibility end, `RC-73-03` queued suppression, `RC-73-12` subject notice |
+| CBD-71 MVP Schedule Decisions | v1.1, approved August 15, 2026 | `SD-071-043` firm/informational classes, `SD-071-044` three-record model and income-variance trigger, `SD-071-046`–`SD-071-048`. `SD-071-016` was listed here in error and is removed; see §4 row 7 |
+| CBD-72 Collaboration Permission Model | v0.1.54; approved August 18, 2026 at v0.1.53, §5.4 amended September 2, 2026 | Roles, permissions 11a–11d/12/13, §5.1 Viewer hierarchy, §5.3 Partner boundary, §5.4 personal-settings boundary, §5.4.1 three-record model, §9 audit envelope |
+| CBD-73 Invitation, Consent, and Revocation Lifecycle | v1.0.1, approved August 18, 2026 | `IC-73-019` mandatory notice independence, `RC-73-02` alert-eligibility end, `RC-73-03` queued suppression and destination-association retirement, `RC-73-12` subject notice |
 | CBD-92 System Flow and Technical Threat Model | v1.0.1 | `NT-92-001`–`NT-92-006` push/SMS ceiling, `EM-92-001`–`EM-92-007` email tiers |
 | CBD-94 Risk and Security/Privacy Requirement Register | v1.0 | `SR-94-044`–`SR-94-054` |
 | CBD-68 Paycheck and Custom Cadence | approved | `PD-68-16` confirmed actual-income variance trigger and deduplication |
@@ -45,10 +45,10 @@ Values are the exact versions this draft was written against. A later source cha
 | --- | --- | --- | --- |
 | Alert category and recipient matrix | §4.1 closed six-category set, §4.2 mandatory-notice separation, §4.3 role eligibility with six rules | `CAT-74-T01`–`CAT-74-T08` | **Mapped.** `OI-74-001` gates one category's class |
 | Configuration and delivery rules | §5.1 closed recipient-owned set, §5.2 suggestion rule, §5.3 seven-step delivery sequence | `CFG-74-T01`–`CFG-74-T06`, `DLV-74-T01`–`DLV-74-T06` | **Mapped.** Values gated by `OI-74-004` |
-| Notification-preview and detail-view data rules | §6.1 per-transport ceiling, §6.2 exhaustive prohibition, §6.3 in-app detail, §6.4 custody honesty | `PRV-74-T01`–`PRV-74-T06`, `DLV-74-T06` | **Mapped.** Templates gated by `OI-74-005` |
+| Notification-preview and detail-view data rules | §6.1 per-transport ceiling, §6.2 prohibition list with its governing residual clause, §6.3 in-app detail, §6.4 custody honesty | `PRV-74-T01`–`PRV-74-T06`, `DLV-74-T06` | **Mapped.** Templates gated by `OI-74-005` |
 | Acknowledgement/comment behavior | §7 items 1–7 | `ACK-74-T01`–`ACK-74-T06` | **Mapped** |
-| Cooldown, deduplication, quiet-hour, pause, dismissal, revocation rules | §8.1–§8.4, §9 `RV-74-01`–`RV-74-07` | `SUP-74-T01`–`SUP-74-T05`, `RVK-74-T01`–`RVK-74-T06` | **Mapped.** Windows gated by `OI-74-004` |
-| Alert audit-event and test inventory | §14 `AE-74-01`–`AE-74-22` with placement rules; test inventory §§1–5 | All 46 scenarios | **Mapped.** Fixtures gated by `OI-74-007` |
+| Cooldown, deduplication, quiet-hour, pause, dismissal, revocation rules | §8.1–§8.4, §9 `RV-74-01`–`RV-74-08` | `SUP-74-T01`–`SUP-74-T05`, `RVK-74-T01`–`RVK-74-T07` | **Mapped.** Windows gated by `OI-74-004` |
+| Alert audit-event and test inventory | §14 `AE-74-01`–`AE-74-23` with placement rules; test inventory §§1–5 | All 47 scenarios | **Mapped.** Fixtures gated by `OI-74-007` |
 
 ## 4. Discrepancy register
 
@@ -63,6 +63,9 @@ Approved documents outrank ticket text. Where the ticket contradicts an approved
 | 4 | **`CAT-74-06` firm classification is derived.** `SD-071-043` lists only settled overspending and late-adjustment overage as firm; `PD-68-16` gives confirmed income variance settled-fact behavior. | Treated as firm with the derivation stated in §4.1 and gated by `OI-74-001`. Not asserted as quoted. |
 | 5 | **Planning-note scheduling text is stale.** It says due August 25, 2026; the live due date is August 26, 2026. | Informational; no package impact. Correct with the next authorized Jira update. |
 | 6 | **`RI-93-014` residual is unaccepted.** Partner informational eligibility permits observation of a provisional condition before the household can correct it. | Retained per the August 16, 2026 decision, recorded in §4.3 rule 6 and `OI-74-006`. Not treated as mitigated by `AB-74-008`. |
+| 7 | **`SD-071-016` was cited as a governing input but is Superseded.** CBD-71 §4A states the 19 grouping rows there "are **Superseded** and cannot be approved or implemented", and `SD-071-020`–`SD-071-050` replace them. `SD-071-016` is the predecessor of `SD-071-043`/`SD-071-044`, which this package also cites. | **Corrected September 2, 2026.** Removed from the specification header and from §2 above. No rule depended on it: it was never used in the body, and its content is subsumed by `SD-071-043` and `SD-071-044`. Found by source verification during the September 2 review. |
+| 8 | **CBD-73 `RC-73-03` was implemented in half.** The rule requires both suppressing queued attempts *and* atomically retiring the destination association bound to the ended membership. The draft characterised it as "queued suppression" and implemented only that; `DR-74-05` carried no membership or budget-space binding, so the second half could not be expressed at all. §9's preamble nonetheless claimed to be the complete alert-side complement of the CBD-73 checklist. | **Corrected September 2, 2026.** `RV-74-08` adds the retirement effect, `DR-74-07` adds the destination-association record that makes it expressible, `AE-74-23` audits it, and `RVK-74-T07` tests it, including that another membership's association survives. |
+| 9 | **§6.2 declared its prohibition list exhaustive; `NT-92-001` ends in a residual clause.** A closed enumeration is strictly narrower than a ceiling ending in "or other customer-specific content", and the list omitted support/security facts and every non-text vector: collapse keys, badge counts, and per-class priority or sound tiers. `EM-92-007`'s no-tracking half was absent from the package entirely, and §5.3's "channel controls" allowance was undefined. | **Corrected September 2, 2026.** §6.2 now states the list is not closed and that `NT-92-001` controls where they differ, adds the missing vectors and the email no-tracking rule, and §5.3 item 6 defines channel controls as transport mechanics carrying no customer-specific value, with one template per transport so neither template identity nor rendered-template version partitions traffic by category. |
 
 ## 5. Per-criterion mapping
 
@@ -118,7 +121,7 @@ Nothing here closes a register row; each row closes on the evidence it names.
 | Source consistency | No rule contradicts CBD-71, CBD-72, CBD-73, CBD-92, or CBD-94 | **Draft verified** by construction; §4 records the two contradictions found in ticket text rather than sources |
 | Product Owner review | Row-level approval, including the §4 dispositions and `OI-74-001` | **Pending** |
 | Copy and specialist evidence | Exact strings, accessibility, localization, safety review | **Open** under `OI-74-003`; named and routed |
-| Fixtures | Deterministic fixtures for 46 scenarios | **Routed** to `VT-94-*` under `OI-74-007` |
+| Fixtures | Deterministic fixtures for 47 scenarios | **Routed** to `VT-94-*` under `OI-74-007` |
 | Jira synchronization | Description, acceptance criteria, and traceability summary all match | **Pending**; requires authorization and the §4 corrections |
 | Publication | Confluence pages match the approved merged version | **Pending**; post-merge |
 
@@ -134,4 +137,5 @@ Nothing here closes a register row; each row closes on the evidence it names.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner review corrections. Withdrew rows 1, 2, and 3 as stale when written, since live CBD-12 and CBD-74 fields already carried the reconciliations they asked for; `OI-74-008` closed with no change to `CBD-12-AC11`. Added row 3a for the `CBD-12-AC19` privacy-detail contradiction the draft missed, corrected in Jira the same day. Added rows 7, 8, and 9 for the Superseded `SD-071-016` citation, the half-implemented `RC-73-03`, and the false §6.2 exhaustiveness claim. Corrected the scenario total from 44 to 47 and the audit-event range to `AE-74-23`. | Draft; Product Owner approval outstanding |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: governing-source baseline, deliverable and per-criterion traceability in both directions, supported CBD-12 mapping, six-item discrepancy register, routed follow-up coverage, review gates, and remaining work. | Draft; Product Owner review required |

@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.1 — Product Owner review required** |
-| Document version | 0.1 |
+| Status | **Draft v0.2 — Product Owner review required; September 2, 2026 review corrections applied** |
+| Document version | 0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
 | Governing specification | `docs/cbd-74-accountability-alert-boundary-specification.md` |
 | Traceability | `docs/cbd-74-acceptance-criteria-traceability.md` |
-| Last updated | August 18, 2026 |
+| Last updated | September 2, 2026 |
 
 ## 1. Assertion contract
 
@@ -113,6 +113,7 @@ Scenario identifiers are stable, repository-unique, and never reused or renumber
 | RVK-74-T04 | A person removed from space A holds membership in space B with the same verified email address. | A's eligibility, instances, and queued delivery end. B's settings, instances, dismissal state, and delivery continue unchanged, and no message reveals the A change. | `RV-74-05`; `AB-74-011` |
 | RVK-74-T05 | A member's own consent to a shared resource is withdrawn, narrowing what they may read, while events referencing that resource are active. | Eligibility for those events ends and their instances close, without ending the membership itself or affecting categories still within scope. | `AB-74-013`; CBD-74-AC03 |
 | RVK-74-T06 | Membership ends while a mandatory lifecycle notice for that same person is pending. | The mandatory notice is created and remains available under CBD-73 `RC-73-12`, independent of the alert suppression. Alert suppression never suppresses it. | `RV-74-06`; `AB-74-010`; `PB-74-11` |
+| RVK-74-T07 | A person has the same verified destination associated with memberships in spaces A and B. Their membership in A ends while an unsent attempt is queued for A. | A's association is atomically retired with exactly one `AE-74-23`, and A's queued attempt is suppressed. B's association stays active and still delivers, and the destination itself remains verified and owned by that person. Queue suppression alone does not satisfy the retirement. | `RV-74-08`; `RV-74-03`; `RV-74-05`; `DR-74-07`; `AE-74-23`; CBD-73 `RC-73-03` |
 
 ### 3.8 `XSP-74-*` — cross-space isolation
 
@@ -139,10 +140,11 @@ Scenario identifiers are stable, repository-unique, and never reused or renumber
 
 ## 5. Totals
 
-This inventory contains **46 scenarios in 8 families**: 8 `CAT-74-T*`, 6 `CFG-74-T*`, 6 `DLV-74-T*`, 6 `PRV-74-T*`, 6 `ACK-74-T*`, 5 `SUP-74-T*`, 6 `RVK-74-T*`, and 3 `XSP-74-T*`.
+This inventory contains **47 scenarios in 8 families**: 8 `CAT-74-T*`, 6 `CFG-74-T*`, 6 `DLV-74-T*`, 6 `PRV-74-T*`, 6 `ACK-74-T*`, 5 `SUP-74-T*`, 7 `RVK-74-T*`, and 3 `XSP-74-T*`.
 
 ## 6. Revision history
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Added `RVK-74-T07`, covering atomic retirement of a destination association on membership end while the same verified destination stays active for another space, which queue suppression alone does not satisfy. Total is 47 scenarios in 8 families; the 44 in the v0.1 entry was already wrong when written. | Draft; Product Owner approval outstanding |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: assertion contract, eight families, 46 scenarios, and the `CBD-74-AC13` required-case coverage check. | Draft; Product Owner review required |
