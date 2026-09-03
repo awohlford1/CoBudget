@@ -173,10 +173,10 @@ def main() -> int:
         audit.check(text.endswith("\n"), f"{path}: missing final newline")
         audit.check(text.count("```") % 2 == 0, f"{path}: unbalanced fenced block")
         audit.check(
-            "| Status | **Draft v0.3" in text, f"{path}: status is not Draft v0.3"
+            "| Status | **Approved v1.0" in text, f"{path}: status is not Approved v1.0"
         )
         audit.check(
-            "| Document version | 0.3 |" in text, f"{path}: version is not 0.3"
+            "| Document version | 1.0 |" in text, f"{path}: version is not 1.0"
         )
         for heading in REQUIRED_HEADINGS[path]:
             audit.check(heading in text, f"{path}: missing heading {heading!r}")

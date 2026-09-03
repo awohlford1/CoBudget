@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.3 — Product Owner review required; all nineteen September 2, 2026 review findings closed** |
-| Document version | 0.3 |
+| Status | **Approved v1.0 — Product Owner approved this exact version on September 2, 2026. `OI-74-002`–`OI-74-005` and `OI-74-007` remain open gates on implementation and release, not on this approval** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -150,6 +150,7 @@ This inventory contains **51 scenarios in 8 families**: 8 `CAT-74-T*`, 6 `CFG-74
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | September 2, 2026 | Alexander Wohlford — Product Owner | **Approved.** Product Owner approval of the exact 51-scenario inventory. Deterministic fixtures remain routed to `VT-94-*` under `OI-74-007`. | Approved September 2, 2026 |
 | 0.3 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Added four scenarios for the second review round: `DLV-74-T07` separate rendering and send rechecks, `PRV-74-T07` locale equivalence, `PRV-74-T08` locator leakage through referrer, redirect, and access log, and `XSP-74-T04` simultaneous immediate delivery across two spaces on one destination. Extended `DLV-74-T06` to capture collapse keys, badge counts, and per-class tiers and to compare firm against informational, and `PRV-74-T06` to check the timing and provider-retention disclosure. Total is 51 scenarios in 8 families. | Draft; Product Owner approval outstanding |
 | 0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Added `RVK-74-T07`, covering atomic retirement of a destination association on membership end while the same verified destination stays active for another space, which queue suppression alone does not satisfy. Total is 47 scenarios in 8 families; the 44 in the v0.1 entry was already wrong when written. | Draft; Product Owner approval outstanding |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: assertion contract, eight families, 46 scenarios, and the `CBD-74-AC13` required-case coverage check. | Draft; Product Owner review required |
