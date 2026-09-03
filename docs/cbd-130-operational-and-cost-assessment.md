@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Records the operational and cost half of CBD-130 against the approved CBD-102 cost template. **It contains no prices**; §5 records every line as unknown under cost rule `CR4`. §2.2 carries the message-to-segment conversion CBD-130's acceptance criteria require, computed rather than assumed. |
-| Document version | 1.0 |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
@@ -66,24 +66,24 @@ record** rather than silently inherited.
 
 Restated here, and then verified rather than left as an assumption.
 
-`NT-92-001` fixes the body: *"You have a new CoBudget update. Open CoBudget to
-review."* That is **56 characters**, every one of them in the basic GSM-7
+`NT-92-001` fixes the body: *"You have a new MoneyPact update. Open MoneyPact to
+review."* That is **58 characters**, every one of them in the basic GSM-7
 alphabet, so none consumes the two character-slots the GSM-7 extension table
 requires.
 
 | Encoding | Single-segment limit | Body alone | With the `NT-92-002` URL |
 | --- | --- | --- | --- |
-| **GSM-7** — Latin scripts | 160 | 56 chars → **1 segment**, 104 spare | ~82 chars → **1 segment**, ~78 spare |
-| **UCS-2** — non-Latin scripts | 70 | 56 chars → **1 segment**, 14 spare | ~82 chars → **2 segments** |
+| **GSM-7** — Latin scripts | 160 | 58 chars → **1 segment**, 102 spare | ~84 chars → **1 segment**, ~76 spare |
+| **UCS-2** — non-Latin scripts | 70 | 58 chars → **1 segment**, 12 spare | ~84 chars → **2 segments** |
 
 **The assumption holds for Private MVP**, which is US English-only, with
-generous headroom: the body uses 35% of a GSM-7 segment, so an English-length
+generous headroom: the body uses 36% of a GSM-7 segment, so an English-length
 localized equivalent stays comfortably inside one.
 
 **It fails the moment a non-Latin locale is added**, and the arithmetic sharpens
 the template's warning rather than repeating it. The template anticipated a
 longer translation tipping past the boundary. The real trigger is smaller than
-that: in UCS-2 the *current English* body already occupies 56 of 70 characters,
+that: in UCS-2 the *current English* body already occupies 58 of 70 characters,
 so **the permitted application URL alone doubles the line** before any
 translation is considered.
 

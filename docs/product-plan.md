@@ -43,6 +43,8 @@ minors, and financial control by another person are outside the initial scope.
 - Built-in alerts with per-recipient delivery preferences and acknowledgement
 - Mandatory in-app notifications for every eligible recipient, plus opt-in
   email, Web Push, and SMS per supported event or category
+- Comments on supported readable records, as plain text without attachments or
+  mentions
 - Basic category and period reports
 - Connection health, consent history, audit history, export, and deletion
 
@@ -98,9 +100,8 @@ and basic notifications. Test with a small supported cohort.
 
 ### Product depth
 
-Add native mobile clients and their native push transports, transaction
-splits and rules,
-recurring-item detection, shared comments, richer support-role guardrails, and
+Add native mobile clients and their native push transports, transaction splits
+and rules, recurring-item detection, richer support-role guardrails, and
 cash-flow forecasting.
 
 ### Financial breadth

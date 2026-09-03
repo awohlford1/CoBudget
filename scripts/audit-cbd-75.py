@@ -38,7 +38,7 @@ CHECKS = (
     Path("scripts/check-public-pages.mjs"),
 )
 
-DOCUMENT_VERSION = "0.5"
+DOCUMENT_VERSION = "0.6"
 
 # Exact identifier sets for the reviewed version. A semantic change must update
 # both the document and this expectation, which is what makes drift visible.

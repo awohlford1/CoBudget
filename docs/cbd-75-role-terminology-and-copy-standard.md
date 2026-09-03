@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.5 — Product Owner review and approval required. Per-surface strings remain gated by `OI-75-001`** |
-| Document version | 0.5 |
+| Status | **Draft v0.6 — Product Owner review and approval required. Per-surface strings remain gated by `OI-75-001`** |
+| Document version | 0.6 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-75](https://cobudget.atlassian.net/browse/CBD-75) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
 | Governing permission model | CBD-72 v0.1.54 — §2.1, §2.2, §5.1, §5.3, §5.8 |
-| Governing lifecycle | CBD-73 v1.0.2 — §2 cross-cutting semantic rules; the `MSG-73-*` inventory |
+| Governing lifecycle | CBD-73 v1.0.3 — §2 cross-cutting semantic rules; the `MSG-73-*` inventory |
 | Governing alert boundary | CBD-74 v1.0.1 — `CP-74-01`–`CP-74-08`, `AB-74-015`, `PB-74-06`, `PB-74-09`, `PB-74-12`, §6.2, §6.4 |
 | Semantic standard | `RI-93-016` and `RI-93-017`, approved August 16, 2026; enforcement gate `FU-95-021` |
 | Brand source | `docs/brand-foundation.md`; brand decided September 2, 2026 |
@@ -259,6 +259,7 @@ Evidence log. This is the template and the current state; every row is honest ab
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.6 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-92 brand amendment, which applied `RT-75-01` to the four customer-visible strings its transport and email contracts fix, and to the five approved documents quoting them. The governing lifecycle source moves to CBD-73 v1.0.3. No rule, role, pattern, checklist item, or open issue changed in this document; the findings are recorded in the traceability record. | Draft; Product Owner review required |
 | 0.5 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-91 `CR-91-002` correction, which the Product Owner authorized separately: the product plan's Collaborator connection authority now matches CBD-72 §2.2, and traceability finding 9 moves from deliberately-uncorrected to corrected. No rule, role, pattern, checklist item, or open issue changed in this document. | Draft; Product Owner review required |
 | 0.4 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Closed `OI-75-004`. The records that described the corrected guardian condition were amended in the same change: CBD-91 to v1.0.2, CBD-94 to v1.0.1, and the CBD-95 manifest and traceability recording the re-freeze. Five pinned blobs were re-frozen with stated reasons, three of which had been stale since August 18, 2026 because `scripts/audit-cbd-95.py` was never a CI step. It is one now. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |
 | 0.3 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Legacy vocabulary correction. `docs/product-plan.md` and `docs/architecture.md` now use the approved role names, state the naming decision as settled, and describe the Accountability Partner boundary as comprehensive, fixed-field, and financially read-only, satisfying `SR-94-145`. `OI-75-004` records the prose as corrected and stays open for the four records that still describe the old condition in the present tense. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |

@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0.2 — provider-independent CBD-94 baseline.** Approval fixes the risk model, requirements, and gates. It accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
-| Document version | 1.0.2 |
+| Status | **Approved v1.0.3 — provider-independent CBD-94 baseline.** Approval fixes the risk model, requirements, and gates. It accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
+| Document version | 1.0.3 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-94](https://cobudget.atlassian.net/browse/CBD-94) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -44,10 +44,10 @@ release effect is scoped without ambiguity.
 
 | Source | Frozen version | Required use in CBD-94 |
 | --- | --- | --- |
-| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.3; Git blob `0aa16d4510b1c8ccb3f77fe2ed4afd5b1f31b8d9` | `DI-91-001–076`, `DF-91-001–013`, copy/noninterference rules, `EG-91-001–024`, and approved lifecycle/custody constraints |
-| `docs/cbd-92-system-flow-technical-threat-model.md` | approved v1.0; Git blob `7c69addb47f843e080827ba8241636cb948ccad5` | 45 `TH-92-*` threats, 17 boundaries, 15 entry points, nine normative contracts, and `RF-92-001–012` |
+| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.4; Git blob `1ee2ae84afbc34b7ce916d5e1a74dce4b478f207` | `DI-91-001–076`, `DF-91-001–013`, copy/noninterference rules, `EG-91-001–024`, and approved lifecycle/custody constraints |
+| `docs/cbd-92-system-flow-technical-threat-model.md` | approved v1.0.1; Git blob `2417cea6cbd47cb98fe9b44ca8e926781c3bdcfd` | 45 `TH-92-*` threats, 17 boundaries, 15 entry points, nine normative contracts, and `RF-92-001–012` |
 | `docs/cbd-92-acceptance-criteria-traceability.md` | approved v1.0; Git blob `6938bbb0ca8eafad11b4712f1b3d35da432723af` | Authoritative flow/boundary relation, actor/entry-point coverage, and CBD-92 limitation/approval record |
-| `docs/cbd-93-privacy-coercion-abuse-analysis.md` | approved v1.1; Git blob `b84aa6f2aed66c7ffad35a4fc58eead1602bcf65` | 86 `AB-93-*` scenarios, 96 active safeguards, `EG-93-001–010`, 13 accepted-residual scenario rows represented by 12 residual-register entries, and `RI-93-001–019` |
+| `docs/cbd-93-privacy-coercion-abuse-analysis.md` | approved v1.1.2; Git blob `beabfa99835cd78126bc3c744d6224dbeda80d15` | 86 `AB-93-*` scenarios, 96 active safeguards, `EG-93-001–010`, 13 accepted-residual scenario rows represented by 12 residual-register entries, and `RI-93-001–019` |
 | `docs/cbd-72-*` suite | Product Owner-approved controlling baseline | Current role, permission, invitation, visibility, alert, lifecycle, ownership, connection, export, audit, and non-escalation behavior |
 | CBD-94 Jira description | Live read August 16, 2026 | Purpose, five deliverables, six acceptance criteria, dependency, and estimate boundary |
 
@@ -674,6 +674,7 @@ provider custody, deletion completion, backup expiry, or safety outcome.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.3 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Re-pinned the CBD-91 source row to v1.0.4 and the CBD-92 source row to v1.0.1. CBD-91 records the `CR-91-005` correction; CBD-92 carries the brand amendment to the four customer-visible strings its transport and email contracts fix, which `RT-75-01` required and which five documents quoting those strings moved with. No risk, rating, override, disposition, requirement, gate, route, or release effect changed, and no §8 row moved. | Consequential amendment to an approved document under change control; the v1.0 baseline approval otherwise stands |
 | 1.0.2 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded completion of the five remaining §8 reconciliations for `docs/architecture.md` and `docs/product-plan.md`: the CBD-92 contracts and `RF-92-*` gates, the provider-hypothesis marking, rollover, notification scope, and analytics. Section 8 now has no open row for either file. Two rows carry a stated deviation: the architecture note records the twelve `RF-92-*` designs as open rather than resolving them, and the provider marking distinguishes implemented frameworks from unselected providers rather than marking everything a hypothesis. Re-pinned the CBD-91 source row to v1.0.3. No risk, rating, override, disposition, requirement, gate, route, or release effect changed. | Consequential amendment to an approved document under change control; the v1.0 baseline approval otherwise stands |
 | 1.0.1 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded completion of the two §8 reconciliations for `docs/architecture.md` and `docs/product-plan.md`, both done September 3, 2026 under `SR-94-145` and CBD-75 `OI-75-004`. Re-pinned the CBD-91 source row to v1.0.2, whose only change is the matching `CR-91-003`/`CR-91-004` correction record. The five remaining §8 rows are untouched and still required. No risk, rating, override, disposition, requirement, gate, route, or release effect changed. | Consequential amendment to an approved document under change control; the v1.0 baseline approval otherwise stands |
 | 1.0 | August 16, 2026 | Alexander Wohlford as Product Owner, Claude assisting | **Approved as CBD-94 v1.0.** Promoted the v0.1.4 content unchanged to the approved provider-independent CBD-94 baseline; the only edits were status, version, and the self-descriptive “draft” wording in §1, §3.6, §4, and §7. No risk, rating, override, disposition, requirement, gate, route, or release effect was altered by approval. Approval fixes the risk model, requirements, and gates as the controlling baseline; it accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. All 21 families remain residual-unscored and evidence-pending. Confluence publication follows the merge to `main` under the repository working rules. | **Product Owner approved** |

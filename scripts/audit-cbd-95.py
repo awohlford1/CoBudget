@@ -35,10 +35,10 @@ FROZEN_BLOBS = {
     # CR-91-003/CR-91-004 source corrections.  CBD-95 counts no CBD-91
     # identifier that changed: DI, DF, and EG family membership is untouched.
     Path("docs/cbd-91-private-mvp-data-inventory.md"): (
-        "0aa16d4510b1c8ccb3f77fe2ed4afd5b1f31b8d9"
+        "1ee2ae84afbc34b7ce916d5e1a74dce4b478f207"
     ),
     Path("docs/cbd-92-system-flow-technical-threat-model.md"): (
-        "7c69addb47f843e080827ba8241636cb948ccad5"
+        "2417cea6cbd47cb98fe9b44ca8e926781c3bdcfd"
     ),
     Path("docs/cbd-92-acceptance-criteria-traceability.md"): (
         "6938bbb0ca8eafad11b4712f1b3d35da432723af"
@@ -46,13 +46,13 @@ FROZEN_BLOBS = {
     Path("docs/cbd-93-privacy-coercion-abuse-analysis.md"): (
         # Re-frozen at CBD-93 v1.1.1, an editorial header correction that
         # changed no normative content. See manifest section 6.
-        "c1caf49653802f5c4d1f69f48d61f9aa881591a3"
+        "beabfa99835cd78126bc3c744d6224dbeda80d15"
     ),
     # Re-frozen September 3, 2026 at CBD-94 v1.0.1.  The RK, SR, and RG family
     # counts this audit enforces are unchanged; only two section 8 rows and the
     # CBD-91 source pin moved.
     Path("docs/cbd-94-risk-mitigation-requirement-register.md"): (
-        "f9b606b229d86c51dafc7bac80ae9923a530a1e8"
+        "5e7540cdd3c2dfdec5995c94137a9ae450728b63"
     ),
     Path("docs/cbd-94-verification-review-inventory.md"): (
         "e139cdd75646f8070b8e253ff6cc95c1f6bca966"
