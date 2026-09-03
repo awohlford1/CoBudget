@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.4 — Product Owner review and approval required. Per-surface strings remain gated by `OI-75-001`** |
-| Document version | 0.4 |
+| Status | **Draft v0.5 — Product Owner review and approval required. Per-surface strings remain gated by `OI-75-001`** |
+| Document version | 0.5 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-75](https://cobudget.atlassian.net/browse/CBD-75) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -259,6 +259,7 @@ Evidence log. This is the template and the current state; every row is honest ab
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.5 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-91 `CR-91-002` correction, which the Product Owner authorized separately: the product plan's Collaborator connection authority now matches CBD-72 §2.2, and traceability finding 9 moves from deliberately-uncorrected to corrected. No rule, role, pattern, checklist item, or open issue changed in this document. | Draft; Product Owner review required |
 | 0.4 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Closed `OI-75-004`. The records that described the corrected guardian condition were amended in the same change: CBD-91 to v1.0.2, CBD-94 to v1.0.1, and the CBD-95 manifest and traceability recording the re-freeze. Five pinned blobs were re-frozen with stated reasons, three of which had been stale since August 18, 2026 because `scripts/audit-cbd-95.py` was never a CI step. It is one now. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |
 | 0.3 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Legacy vocabulary correction. `docs/product-plan.md` and `docs/architecture.md` now use the approved role names, state the naming decision as settled, and describe the Accountability Partner boundary as comprehensive, fixed-field, and financially read-only, satisfying `SR-94-145`. `OI-75-004` records the prose as corrected and stays open for the four records that still describe the old condition in the present tense. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |
 | 0.2 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Brand copy correction. The Product Owner decided the three defects the v0.1 draft had recorded as exceptions rather than fixed. `docs/brand-foundation.md` changed in the same commit: the mission statement and the manifesto no longer promise real-time insights, and the Stability value no longer describes the product as shared oversight. `OI-75-003` is closed, the register's exception list keeps only the `PL-75-10` rule limit, and §6.3 records what changed so the finding is not lost with the defect. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |

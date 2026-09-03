@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1; five sources re-frozen September 3, 2026** |
-| Document version | 1.0.4 |
+| Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1; five sources re-frozen September 3, 2026, and CBD-91 and CBD-94 again the same day** |
+| Document version | 1.0.5 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -53,11 +53,11 @@ blob below still resolves. A blob change requires the impact review in §8.
 
 | Component | Version and status | Git blob | Normative use |
 | --- | --- | --- | --- |
-| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.2; approved v1.0 plus the controlled RF-72-61 and conflict-register amendments | `fa3fb737d937896b0901ee965b46d6a4d7e1412b` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
+| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.3; approved v1.0 plus the controlled RF-72-61 and conflict-register amendments | `0aa16d4510b1c8ccb3f77fe2ed4afd5b1f31b8d9` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
 | `docs/cbd-92-system-flow-technical-threat-model.md` | v1.0; approved | `7c69addb47f843e080827ba8241636cb948ccad5` | Actors, systems, entry points, trust boundaries, 45 technical threats, 12 review findings, nine normative contract families |
 | `docs/cbd-92-acceptance-criteria-traceability.md` | v1.0; approved | `6938bbb0ca8eafad11b4712f1b3d35da432723af` | CBD-92 deliverable/criterion evidence, coverage review, limitations, and public-launch policy |
 | `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1.1; approved at v1.1, editorial header correction only | `c1caf49653802f5c4d1f69f48d61f9aa881591a3` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
-| `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0.1; approved, with two section 8 reconciliations recorded done | `9c751c58a771d2494e94f69e1c77b2ab5a5e8040` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
+| `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0.2; approved, with all seven section 8 reconciliations for the architecture and product-plan files recorded done | `f9b606b229d86c51dafc7bac80ae9923a530a1e8` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
 | `docs/cbd-94-verification-review-inventory.md` | v1.0; approved | `e139cdd75646f8070b8e253ff6cc95c1f6bca966` | 270 verification cases, 15 manual packages, 15 specialist reviews, fixtures, parameters, monitors, and evidence rules |
 | `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.2; approved at v1.0.1, missing-criterion correction only | `ff70668fbeb3ddea2a843a3c11fb0024e8bf3957` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
 | `docs/cbd-94-exhaustive-review-findings.md` | v1.0; accepted, all findings closed | `c7c02611b7b2c6cfc78ed5467e013b615128b8c6` | Independent re-execution evidence and closed `RV-94-011–017` findings |
@@ -355,6 +355,19 @@ controlling outcome and gained the correction date, and CBD-94 marked the two
 matching section 8 reconciliations done. No data class, classification, flow,
 risk, rating, requirement, gate, or route changed, so no section 8 impact review
 of the reconciliation outcomes was triggered.
+
+CBD-91 and CBD-94 were re-frozen a second time on September 3, 2026, at
+v1.0.3 and v1.0.2, when the remaining section 8 reconciliations for
+`docs/architecture.md` and `docs/product-plan.md` were completed. CBD-91's
+conflict register records three further source corrections at `CR-91-001`,
+`CR-91-002`, and `CR-91-006`, and CBD-94 marks its last five open rows for
+those two files done. Section 8 now carries no open row for either file. Two of
+those rows record a deviation rather than a plain completion: the architecture
+note carries the twelve `RF-92-*` decisions as open gates rather than resolving
+them, which is their correct state, and the provider marking distinguishes
+frameworks the repository actually runs from providers that remain unselected,
+because marking a running framework a hypothesis would be false. No data class,
+classification, flow, risk, rating, requirement, gate, or route changed.
 
 The four CBD-95 pages are registered in `scripts/sync-confluence.py` and
 published: the manifest as `9797633`, the reconciliation matrix as `9830401`,
