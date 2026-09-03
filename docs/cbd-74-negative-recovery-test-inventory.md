@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.2 — Product Owner review required; September 2, 2026 review corrections applied** |
-| Document version | 0.2 |
+| Status | **Draft v0.3 — Product Owner review required; all nineteen September 2, 2026 review findings closed** |
+| Document version | 0.3 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -27,12 +27,12 @@ Scenario identifiers are stable, repository-unique, and never reused or renumber
 | --- | --- | --- |
 | CAT-74 | Category, class, and eligibility | Each category's class behavior; role eligibility including Viewer exclusion and Partner inclusion; partial-readability suppression |
 | CFG-74 | Configuration ownership | Recipient-owned set; prohibited configuration; suggestion without activation; cross-space independence |
-| DLV-74 | Delivery sequence and send-time recheck | Mandatory in-app instance; opt-in gating; stale suppression; callback limits; failure isolation |
-| PRV-74 | Preview and detail-view content | External ceiling per transport; provider metadata; no preference widening; in-app authorization on open |
+| DLV-74 | Delivery sequence, rendering and send-time recheck | Mandatory in-app instance; opt-in gating; separate rendering and send checks; stale suppression; provider payload and channel metadata; callback limits; failure isolation |
+| PRV-74 | Preview and detail-view content | External ceiling per transport; no preference widening; in-app authorization on open; custody and timing disclosure; locale equivalence; locator leakage |
 | ACK-74 | Acknowledgement, comment, dismissal | Firm-only acknowledgement; informational rejection; personal scope; no authority; no escalation |
-| SUP-74 | Deduplication, cooldown, quiet hours | One event per revision; retry behavior; quiet-hour deferment and no override; digest |
+| SUP-74 | Deduplication, cooldown, quiet hours | At most one event per revision; retry behavior; quiet-hour deferment and no override |
 | RVK-74 | Revocation and scope change | Eligibility end; instance closure; queued suppression; scope reduction; other-space isolation |
-| XSP-74 | Cross-space isolation | Independent settings; foreign identifiers; shared destination |
+| XSP-74 | Cross-space isolation | Independent settings; foreign identifiers; shared destination; no cross-space batching; simultaneous immediate delivery |
 
 ## 3. Scenario inventory
 
@@ -69,7 +69,8 @@ Scenario identifiers are stable, repository-unique, and never reused or renumber
 | DLV-74-T03 | An external send fails at the provider, retries within limits, then fails terminally. | Retries reuse the same attempt lineage and create no second event or instance. Terminal failure records AE-74-12 and leaves the in-app instance intact and unread-state unchanged. No customer surface reports provider failure detail. | `SD-071-044`; §5.3; `DR-74-03` |
 | DLV-74-T04 | A delivery callback attempts to acknowledge the instance, change a preference, authenticate the recipient, and recreate a suppressed event. | Every attempt is refused. Only delivery-attempt state changes, recording AE-74-13. Replay and duplicate callbacks are idempotent. | `NT-92-005`; `SR-94-050` |
 | DLV-74-T05 | The same trigger fires twice against one source revision, and the fan-out job runs twice. | Exactly one shared event and one instance per recipient exist. The repeat records AE-74-02 and creates nothing. | `AB-74-012`; §8.1 |
-| DLV-74-T06 | The provider payload, template identifier, tags, headers, and callback fields are captured for a firm overspending delivery on each channel. | Each carries only the allowlisted minimum. No field encodes the space, person, category, condition, amount, or resource, including through template naming or analytics labels. | `NT-92-003`; `EM-92-005`; `SR-94-049`; `PB-74-09` |
+| DLV-74-T06 | The provider payload, template identifier, tags, headers, callback fields, collapse or grouping key, badge or unread count, and priority, sound, or channel tier are captured for a firm overspending delivery on each channel, and compared against the same capture for an informational delivery. | Each carries only the allowlisted minimum. No field encodes the space, person, category, condition, amount, or resource, including through template naming, analytics labels, collapse keys, badge counts, or per-class tiers. The two captures differ in no field, so class is not derivable from transport metadata. One template per transport is used for all six categories. | `NT-92-003`; `EM-92-005`; `SR-94-049`; `PB-74-09`; §5.3 item 6; §6.2 |
+| DLV-74-T07 | A message is rendered for a recipient, then the recipient loses eligibility during a quiet-hour deferment before the send. | The rendering-time check passes and the send-time check fails independently, the rendered message is discarded rather than sent, and the suppression is audited. A single combined check at either point alone would fail this scenario. | `SR-94-048`; `AB-74-003`; §5.3 item 5 |
 
 ### 3.4 `PRV-74-*` — preview and detail-view content
 
@@ -80,7 +81,9 @@ Scenario identifiers are stable, repository-unique, and never reused or renumber
 | PRV-74-T03 | A recipient opens protected alert detail after their profile narrowed below some of the event's inputs. | The open re-evaluates authorization. Only currently readable content appears; withheld content is absent rather than masked in a way that reveals its existence. The open records AE-74-17. | `AB-74-005`; §6.3 items 1–2 |
 | PRV-74-T04 | A person whose membership ended opens a link to an alert detail view, then replays a stale in-app deep link. | Both are denied with no content and a safe reason class only, recording AE-74-18. The denial reveals neither the content nor whether the event still exists. | `AB-74-005`; `RV-74-02` |
 | PRV-74-T05 | The in-app instance is inspected for budget-space identification, alongside the external bodies for the same event. | The in-app surface identifies the budget space; every external transport identifies nothing. The CBD-12-AC11 and AC21 reconciliation holds in exactly one direction. | §6.3 item 3; `OI-74-008` |
-| PRV-74-T06 | Channel settings and delivered-copy copy are inspected for custody claims. | Copy states the shared-device, inbox, carrier, mirror, forwarding, backup, and screenshot limits accurately, and claims no confidentiality, sole control, preview suppression, or remote erasure. | `AB-74-015`; `CP-74-05`; `SR-94-053` |
+| PRV-74-T06 | Channel settings and delivered-copy copy are inspected for custody claims. | Copy states the shared-device, inbox, carrier, mirror, forwarding, backup, screenshot, provider-retention, and timing limits accurately, and claims no confidentiality, sole control, preview suppression, or remote erasure. The timing statement is present wherever a channel or category is chosen. | `AB-74-015`; `CP-74-05`; `SR-94-053`; §6.4 |
+| PRV-74-T07 | Every external body and template is rendered in each supported locale and inspected. | Each rendering carries the same fixed content-free body with the same semantics, and no locale variant, pluralization, date or currency format, or right-to-left rendering introduces a customer-specific value, a category signal, or a length difference from which one could be inferred. A locale whose approved rendering is missing suppresses external delivery rather than falling back to another locale's text. | §6.1; §6.2; `SR-94-054`; `CP-74-08`; `OI-74-003` |
+| PRV-74-T08 | An external notice's locator is followed, and the request chain, referrer headers, redirects, and access logs are inspected. | The locator resolves only to a generic authenticated entry point, authorizes nothing, and carries no resource, event, space, or recipient identifier in path, query, or fragment. No identifier reaches a third party through a referrer or redirect, and no access log records one where a wider audience can read it than may open the instance. A denied or expired locator returns the same safe outcome class as any other denied open. | §6.3 item 5; `SR-94-047`; `SR-94-049`; `EM-92-004` |
 
 ### 3.5 `ACK-74-*` — acknowledgement, comment, dismissal
 
@@ -121,7 +124,8 @@ Scenario identifiers are stable, repository-unique, and never reused or renumber
 | --- | --- | --- | --- |
 | XSP-74-T01 | An actor in space B submits a space A event identifier, instance identifier, and preference identifier through B authority. | Each is denied before any protected detail is returned, with no state change and exactly one AE-74-20 per attempt. No response confirms that the foreign object exists. | `AB-74-011`; `PM-72-010` |
 | XSP-74-T02 | A person holds an Accountability Partner membership in space A and a Collaborator membership in space B, with the same verified destination. | Delivery decisions are made per membership. No message, digest, count, or surface combines the two spaces or reveals that both memberships exist. | §13; `PB-74-08` |
-| XSP-74-T03 | Simultaneous events fire in both of a person's spaces inside one digest window. | Each space's content stays separate. The external digest still carries only the content-free body, so no combination is possible on the external transport, and the in-app surfaces remain space-scoped. | §13; §6.1 |
+| XSP-74-T03 | Simultaneous events fire in both of a person's spaces inside one digest window. | Each space's content stays separate. The external digest still carries only the content-free body, so no combination is possible on the external transport, and the in-app surfaces remain space-scoped. Batches are never combined across spaces. | §13; §6.1; §8.4 item 4 |
+| XSP-74-T04 | The same person has immediate, not digest, delivery enabled on one destination for memberships in two spaces, and events fire in both within seconds. | Two separate attempts are made, each scoped to its own membership, and neither body, provider payload, nor callback reveals that the other exists. The inspection records that simultaneous arrival is a volume signal no content rule removes, and that §6.4 timing disclosure is the control that covers it. | §13; §8.4 item 4; §6.4; `PB-74-08` |
 
 ## 4. Required-case coverage check
 
@@ -140,11 +144,12 @@ Scenario identifiers are stable, repository-unique, and never reused or renumber
 
 ## 5. Totals
 
-This inventory contains **47 scenarios in 8 families**: 8 `CAT-74-T*`, 6 `CFG-74-T*`, 6 `DLV-74-T*`, 6 `PRV-74-T*`, 6 `ACK-74-T*`, 5 `SUP-74-T*`, 7 `RVK-74-T*`, and 3 `XSP-74-T*`.
+This inventory contains **51 scenarios in 8 families**: 8 `CAT-74-T*`, 6 `CFG-74-T*`, 7 `DLV-74-T*`, 8 `PRV-74-T*`, 6 `ACK-74-T*`, 5 `SUP-74-T*`, 7 `RVK-74-T*`, and 4 `XSP-74-T*`.
 
 ## 6. Revision history
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 0.3 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Added four scenarios for the second review round: `DLV-74-T07` separate rendering and send rechecks, `PRV-74-T07` locale equivalence, `PRV-74-T08` locator leakage through referrer, redirect, and access log, and `XSP-74-T04` simultaneous immediate delivery across two spaces on one destination. Extended `DLV-74-T06` to capture collapse keys, badge counts, and per-class tiers and to compare firm against informational, and `PRV-74-T06` to check the timing and provider-retention disclosure. Total is 51 scenarios in 8 families. | Draft; Product Owner approval outstanding |
 | 0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Added `RVK-74-T07`, covering atomic retirement of a destination association on membership end while the same verified destination stays active for another space, which queue suppression alone does not satisfy. Total is 47 scenarios in 8 families; the 44 in the v0.1 entry was already wrong when written. | Draft; Product Owner approval outstanding |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: assertion contract, eight families, 46 scenarios, and the `CBD-74-AC13` required-case coverage check. | Draft; Product Owner review required |
