@@ -28,7 +28,9 @@ minors, and financial control by another person are outside the initial scope.
 - Secure authentication and multifactor authentication
 - Personal and shared budget spaces
 - Weekly, monthly, biweekly, semimonthly, paycheck, and custom schedules
-- Category allocations and optional rollover
+- Category allocations. Rollover and carry-forward are deferred to FF-003: a
+  period's remainder or overspend stays in that period's history and never
+  changes a later target
 - Manual accounts and transactions
 - Checking, savings, and credit-card transaction synchronization through one
   aggregation provider
@@ -39,7 +41,8 @@ minors, and financial control by another person are outside the initial scope.
 - Primary Owner, Co-owner, Collaborator, Viewer, and Accountability Partner
   invitations
 - Built-in alerts with per-recipient delivery preferences and acknowledgement
-- In-app and email notifications
+- Mandatory in-app notifications for every eligible recipient, plus opt-in
+  email, Web Push, and SMS per supported event or category
 - Basic category and period reports
 - Connection health, consent history, audit history, export, and deletion
 
@@ -51,7 +54,8 @@ minors, and financial control by another person are outside the initial scope.
 - **Co-owner:** Shares day-to-day administration with the Primary Owner. Cannot
   remove or demote the Primary Owner, transfer ownership, or delete the space.
 - **Collaborator:** Can categorize transactions and edit agreed budgets, bills,
-  and goals, but cannot manage ownership or financial connections.
+  and goals. Controls only the bank connections they personally authorized, and
+  cannot manage ownership, membership, permissions, or anyone else's connection.
 - **Viewer:** Reads one owner-assigned visibility profile and the resources it
   inherits. Read-only, and starts with no profile and therefore no access.
 - **Accountability Partner:** A voluntary support role with comprehensive,
@@ -94,7 +98,8 @@ and basic notifications. Test with a small supported cohort.
 
 ### Product depth
 
-Add native mobile clients, push notifications, transaction splits and rules,
+Add native mobile clients and their native push transports, transaction
+splits and rules,
 recurring-item detection, shared comments, richer support-role guardrails, and
 cash-flow forecasting.
 
@@ -104,6 +109,16 @@ Add lender data, additional aggregation providers, advanced reporting, anomaly
 detection, and subscription billing when validated by usage.
 
 ## Early success measures
+
+Product analytics is disabled for Private MVP. `AN-92-001` and `AN-92-002`
+prohibit behavioral event pipelines, session replay, heatmaps, and third-party
+trackers, and neither a consent banner nor pseudonymization makes them
+permitted. These measures may therefore be computed only as coarse,
+non-drillable aggregates inside an authorized operational boundary under
+`AN-92-005`, where the released result cannot single out a person, budget
+space, relationship, or small cohort, and where no contributing customer-level
+event is retained. Enabling ordinary product analytics later requires a new
+Product Owner and privacy approval under `AN-92-007`; silence is not approval.
 
 - Percentage of new users who create a first budget period
 - Time required to create a usable budget
