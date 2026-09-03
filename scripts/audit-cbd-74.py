@@ -33,25 +33,25 @@ EXPECTED = {
     "CAT": {f"CAT-74-{n:02d}" for n in range(1, 7)},
     "MN": {f"MN-74-{n:02d}" for n in range(1, 3)},
     "CF": {f"CF-74-{n:02d}" for n in range(1, 7)},
-    "RV": {f"RV-74-{n:02d}" for n in range(1, 8)},
+    "RV": {f"RV-74-{n:02d}" for n in range(1, 9)},
     "PB": {f"PB-74-{n:02d}" for n in range(1, 13)},
     "CP": {f"CP-74-{n:02d}" for n in range(1, 9)},
-    "DR": {f"DR-74-{n:02d}" for n in range(1, 7)},
-    "AE": {f"AE-74-{n:02d}" for n in range(1, 23)},
+    "DR": {f"DR-74-{n:02d}" for n in range(1, 8)},
+    "AE": {f"AE-74-{n:02d}" for n in range(1, 24)},
     "OI": {f"OI-74-{n:03d}" for n in range(1, 9)},
 }
 
 SCENARIO_COUNTS = {
     "CAT": 8,
     "CFG": 6,
-    "DLV": 6,
-    "PRV": 6,
+    "DLV": 7,
+    "PRV": 8,
     "ACK": 6,
     "SUP": 5,
-    "RVK": 6,
-    "XSP": 3,
+    "RVK": 7,
+    "XSP": 4,
 }
-SCENARIO_TOTAL = 46
+SCENARIO_TOTAL = 51
 
 EXPECTED_AC = {f"CBD-74-AC{n:02d}" for n in range(1, 15)}
 
@@ -70,7 +70,7 @@ REQUIRED_HEADINGS = {
         "## 5. Configuration and delivery rules",
         "## 6. Notification preview and detail-view data rules",
         "## 7. Acknowledgement and comment behavior",
-        "## 8. Cooldown, deduplication, quiet hours, dismissal, and pause",
+        "## 8. Cooldown, deduplication, quiet hours, digest, dismissal, and pause",
         "## 10. Prohibitions",
         "## 14. Audit-event inventory",
         "## 15. Open-issue register",
@@ -173,10 +173,10 @@ def main() -> int:
         audit.check(text.endswith("\n"), f"{path}: missing final newline")
         audit.check(text.count("```") % 2 == 0, f"{path}: unbalanced fenced block")
         audit.check(
-            "| Status | **Draft v0.1" in text, f"{path}: status is not Draft v0.1"
+            "| Status | **Draft v0.3" in text, f"{path}: status is not Draft v0.3"
         )
         audit.check(
-            "| Document version | 0.1 |" in text, f"{path}: version is not 0.1"
+            "| Document version | 0.3 |" in text, f"{path}: version is not 0.3"
         )
         for heading in REQUIRED_HEADINGS[path]:
             audit.check(heading in text, f"{path}: missing heading {heading!r}")
@@ -231,7 +231,7 @@ def main() -> int:
     )
     audit.check(
         f"**{SCENARIO_TOTAL} scenarios in 8 families**" in texts[TESTS],
-        "test inventory does not declare the 44-scenario total",
+        "test inventory does not declare the 51-scenario total",
     )
     dangling_scenarios = sorted(set(SCENARIO_ID.findall(package_text)) - set(scenarios))
     audit.check(not dangling_scenarios, f"dangling scenario identifiers: {dangling_scenarios}")

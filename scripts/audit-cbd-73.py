@@ -184,8 +184,12 @@ GOVERNING_BLOBS = {
     Path("docs/cbd-71-mvp-schedule-decision-register.md"): (
         "a0c97c4302ab062a4fbe185014bcf686f14d3fb2"
     ),
+    # Re-pinned September 2, 2026 for the CBD-72 v0.1.54 section 5.4 amendment,
+    # which removed the recipient-configurable "privacy" item.  CBD-73 cites
+    # section 5.4 only for the personal-settings boundary, which the amendment
+    # reinforces rather than changes, so no CBD-73 rule is affected.
     Path("docs/cbd-72-collaboration-permission-model.md"): (
-        "21025baf7f50795f318d0fc1decbb5dbef5ae439"
+        "f1842e5d020e7781c6808730ae4df43faedaaabd"
     ),
     Path("docs/cbd-91-private-mvp-data-inventory.md"): (
         "1e1134415915238752440da4b2e4acaa293d20e6"
