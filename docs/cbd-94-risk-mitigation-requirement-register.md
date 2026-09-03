@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0.3 — provider-independent CBD-94 baseline.** Approval fixes the risk model, requirements, and gates. It accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
-| Document version | 1.0.3 |
+| Status | **Approved v1.0.4 — provider-independent CBD-94 baseline.** Approval fixes the risk model, requirements, and gates. It accepts no residual risk, closes no release gate, and closes no evidence or specialist gap. |
+| Document version | 1.0.4 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-94](https://cobudget.atlassian.net/browse/CBD-94) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -44,7 +44,7 @@ release effect is scoped without ambiguity.
 
 | Source | Frozen version | Required use in CBD-94 |
 | --- | --- | --- |
-| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.4; Git blob `1ee2ae84afbc34b7ce916d5e1a74dce4b478f207` | `DI-91-001–076`, `DF-91-001–013`, copy/noninterference rules, `EG-91-001–024`, and approved lifecycle/custody constraints |
+| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.5; Git blob `5e3b1255fa6f6c020a54869cf22828a27792e04d` | `DI-91-001–076`, `DF-91-001–013`, copy/noninterference rules, `EG-91-001–024`, and approved lifecycle/custody constraints |
 | `docs/cbd-92-system-flow-technical-threat-model.md` | approved v1.0.1; Git blob `2417cea6cbd47cb98fe9b44ca8e926781c3bdcfd` | 45 `TH-92-*` threats, 17 boundaries, 15 entry points, nine normative contracts, and `RF-92-001–012` |
 | `docs/cbd-92-acceptance-criteria-traceability.md` | approved v1.0; Git blob `6938bbb0ca8eafad11b4712f1b3d35da432723af` | Authoritative flow/boundary relation, actor/entry-point coverage, and CBD-92 limitation/approval record |
 | `docs/cbd-93-privacy-coercion-abuse-analysis.md` | approved v1.1.2; Git blob `beabfa99835cd78126bc3c744d6224dbeda80d15` | 86 `AB-93-*` scenarios, 96 active safeguards, `EG-93-001–010`, 13 accepted-residual scenario rows represented by 12 residual-register entries, and `RI-93-001–019` |
@@ -674,6 +674,7 @@ provider custody, deletion completion, backup expiry, or safety outcome.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0.4 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Re-pinned the CBD-91 source row to v1.0.5, which closes `CR-91-007` on its FF-008 source correction and narrows `CR-91-008` to the residual that CBD-92 `CA-92-012` left open. No risk, rating, override, disposition, requirement, gate, route, or release effect changed, and no §8 row moved. | Consequential amendment to an approved document under change control; the v1.0 baseline approval otherwise stands |
 | 1.0.3 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Re-pinned the CBD-91 source row to v1.0.4 and the CBD-92 source row to v1.0.1. CBD-91 records the `CR-91-005` correction; CBD-92 carries the brand amendment to the four customer-visible strings its transport and email contracts fix, which `RT-75-01` required and which five documents quoting those strings moved with. No risk, rating, override, disposition, requirement, gate, route, or release effect changed, and no §8 row moved. | Consequential amendment to an approved document under change control; the v1.0 baseline approval otherwise stands |
 | 1.0.2 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded completion of the five remaining §8 reconciliations for `docs/architecture.md` and `docs/product-plan.md`: the CBD-92 contracts and `RF-92-*` gates, the provider-hypothesis marking, rollover, notification scope, and analytics. Section 8 now has no open row for either file. Two rows carry a stated deviation: the architecture note records the twelve `RF-92-*` designs as open rather than resolving them, and the provider marking distinguishes implemented frameworks from unselected providers rather than marking everything a hypothesis. Re-pinned the CBD-91 source row to v1.0.3. No risk, rating, override, disposition, requirement, gate, route, or release effect changed. | Consequential amendment to an approved document under change control; the v1.0 baseline approval otherwise stands |
 | 1.0.1 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded completion of the two §8 reconciliations for `docs/architecture.md` and `docs/product-plan.md`, both done September 3, 2026 under `SR-94-145` and CBD-75 `OI-75-004`. Re-pinned the CBD-91 source row to v1.0.2, whose only change is the matching `CR-91-003`/`CR-91-004` correction record. The five remaining §8 rows are untouched and still required. No risk, rating, override, disposition, requirement, gate, route, or release effect changed. | Consequential amendment to an approved document under change control; the v1.0 baseline approval otherwise stands |
