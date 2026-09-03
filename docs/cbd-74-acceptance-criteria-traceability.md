@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.3 — Product Owner review required; all nineteen September 2, 2026 review findings closed** |
-| Document version | 0.3 |
+| Status | **Approved v1.0 — Product Owner approved this exact version on September 2, 2026. `OI-74-002`–`OI-74-005` and `OI-74-007` remain open gates on implementation and release, not on this approval** |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-74](https://cobudget.atlassian.net/browse/CBD-74) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -124,12 +124,12 @@ Nothing here closes a register row; each row closes on the evidence it names.
 
 | Gate | Required evidence | Current result |
 | --- | --- | --- |
-| Package completeness | Six deliverables mapped in both directions | **Draft complete** — §3, §5 |
+| Package completeness | Six deliverables mapped in both directions | **Complete** — §3, §5 |
 | Source consistency | No rule contradicts CBD-71, CBD-72, CBD-73, CBD-92, or CBD-94 | **Draft verified** by construction; §4 records the two contradictions found in ticket text rather than sources |
-| Product Owner review | Row-level approval, including the §4 dispositions and `OI-74-001` | **Pending** |
+| Product Owner review | Row-level approval, including the §4 dispositions and `OI-74-001` | **Approved September 2, 2026** by Alexander Wohlford, on this exact version, after the nineteen-finding review. `OI-74-001` confirmed firm; `OI-74-006` accepted as a named residual risk rather than mitigated |
 | Copy and specialist evidence | Exact strings, accessibility, localization, safety review | **Open** under `OI-74-003`; named and routed |
 | Fixtures | Deterministic fixtures for 51 scenarios | **Routed** to `VT-94-*` under `OI-74-007` |
-| Jira synchronization | Description, acceptance criteria, and traceability summary all match | **Pending**; requires authorization and the §4 corrections |
+| Jira synchronization | Description, acceptance criteria, and traceability summary all match | **Authorized and applied September 2, 2026**, after approval and after the merge of the §4 corrections |
 | Publication | Confluence pages match the approved merged version | **Pending**; post-merge |
 
 ## 9. Remaining work
@@ -144,6 +144,7 @@ Nothing here closes a register row; each row closes on the evidence it names.
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | September 2, 2026 | Alexander Wohlford — Product Owner | **Approved.** Recorded Product Owner approval of the exact package: §8 review gates updated, `OI-74-001` confirmed and `OI-74-006` accepted as a named residual risk, and the authorized Jira synchronization applied the same day. | Approved September 2, 2026 |
 | 0.3 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded discrepancy rows 10 through 16 for the remaining review findings and their corrections: the missing rendering-time recheck, the over-broad and uncapped `MN-74-01`, the omitted timing disclosure, the unspecified digest, the absent locator and destination-retention rules, four misattributed citations, and three precision defects. Scenario total updated to 51. | Draft; Product Owner approval outstanding |
 | 0.2 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Product Owner review corrections. Withdrew rows 1, 2, and 3 as stale when written, since live CBD-12 and CBD-74 fields already carried the reconciliations they asked for; `OI-74-008` closed with no change to `CBD-12-AC11`. Added row 3a for the `CBD-12-AC19` privacy-detail contradiction the draft missed, corrected in Jira the same day. Added rows 7, 8, and 9 for the Superseded `SD-071-016` citation, the half-implemented `RC-73-03`, and the false §6.2 exhaustiveness claim. Corrected the scenario total from 44 to 47 and the audit-event range to `AE-74-23`. | Draft; Product Owner approval outstanding |
 | 0.1 | August 18, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft: governing-source baseline, deliverable and per-criterion traceability in both directions, supported CBD-12 mapping, six-item discrepancy register, routed follow-up coverage, review gates, and remaining work. | Draft; Product Owner review required |
