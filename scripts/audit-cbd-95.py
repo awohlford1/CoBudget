@@ -31,8 +31,11 @@ PACKAGE_FILES = (
 # exact authority sources are unchanged while allowing `main` to advance with
 # unrelated work, including the merge of this package itself.
 FROZEN_BLOBS = {
+    # Re-frozen September 3, 2026 at CBD-91 v1.0.2, which records the
+    # CR-91-003/CR-91-004 source corrections.  CBD-95 counts no CBD-91
+    # identifier that changed: DI, DF, and EG family membership is untouched.
     Path("docs/cbd-91-private-mvp-data-inventory.md"): (
-        "1e1134415915238752440da4b2e4acaa293d20e6"
+        "fa3fb737d937896b0901ee965b46d6a4d7e1412b"
     ),
     Path("docs/cbd-92-system-flow-technical-threat-model.md"): (
         "7c69addb47f843e080827ba8241636cb948ccad5"
@@ -45,8 +48,11 @@ FROZEN_BLOBS = {
         # changed no normative content. See manifest section 6.
         "c1caf49653802f5c4d1f69f48d61f9aa881591a3"
     ),
+    # Re-frozen September 3, 2026 at CBD-94 v1.0.1.  The RK, SR, and RG family
+    # counts this audit enforces are unchanged; only two section 8 rows and the
+    # CBD-91 source pin moved.
     Path("docs/cbd-94-risk-mitigation-requirement-register.md"): (
-        "8be224d4ef5779f1743bdd7b4a53f731f31d564e"
+        "9c751c58a771d2494e94f69e1c77b2ab5a5e8040"
     ),
     Path("docs/cbd-94-verification-review-inventory.md"): (
         "e139cdd75646f8070b8e253ff6cc95c1f6bca966"
@@ -61,14 +67,34 @@ FROZEN_BLOBS = {
     Path("docs/cbd-94-exhaustive-review-findings.md"): (
         "c7c02611b7b2c6cfc78ed5467e013b615128b8c6"
     ),
+    # The three CBD-72 pins below went stale on August 18, 2026, when the
+    # CBD-72 package was approved -- two days after this freeze was taken at
+    # 43e87be -- and again on September 2 for the permission model.  Nothing
+    # caught it because this audit was never wired into CI; that is fixed in
+    # the same change that re-freezes these.  Each drift was checked rather
+    # than assumed benign:
+    #
+    #   permission model  v0.1.52 -> v0.1.54.  Approval, plus the section 5.4
+    #                     amendment that removed the member-configurable
+    #                     "privacy" detail.  That narrows what a member may
+    #                     set, so it reinforces the CBD-95 citations rather
+    #                     than contradicting them.
+    #   scenario catalog  v0.1.13 -> v0.1.14.  Approval, plus routing
+    #                     deterministic fixtures to VT-94-*.  Its own revision
+    #                     row states no scenario rule changed.
+    #   traceability      v0.1.12 -> v0.1.13.  Approval; gate results moved
+    #                     from pending to Pass.  No rule changed.
+    #
+    # CBD-72 is a context freeze here, not a source family: SOURCE_FAMILIES
+    # counts no CBD-72 identifier, so none of this moves a CBD-95 total.
     Path("docs/cbd-72-collaboration-permission-model.md"): (
-        "f0fb564aada318b125451b9ec2752fcd5657e7e1"
+        "f1842e5d020e7781c6808730ae4df43faedaaabd"
     ),
     Path("docs/cbd-72-authorization-scenario-catalog.md"): (
-        "ecc8bd56cd75042f4918c4f51e2a7e43c1ef1d48"
+        "2c6030df745adf1e1b6a812d3a0afbd4985ba7a0"
     ),
     Path("docs/cbd-72-acceptance-criteria-traceability.md"): (
-        "ed4a410d0442310ecc733a2e547b14ba881039e0"
+        "ce7cdc70399e2fbf7df276eb7189760c8a3aac20"
     ),
 }
 

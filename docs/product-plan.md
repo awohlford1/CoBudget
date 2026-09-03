@@ -8,8 +8,8 @@ matches their lives while receiving support from people they trust.
 The two initial differentiators are:
 
 1. Budgets organized weekly, monthly, by paycheck, or using custom periods.
-2. Explicit viewer, collaborator, and guardian relationships with scoped
-   permissions, consent, alerts, and audit history.
+2. Explicit Viewer, Collaborator, and Accountability Partner relationships
+   with defined permissions, consent, alerts, and audit history.
 
 The approved mission, vision, values, and manifesto are maintained in the
 [brand foundation](brand-foundation.md). A public Mission or About Us page using
@@ -36,25 +36,36 @@ minors, and financial control by another person are outside the initial scope.
 - Basic dashboard with available, spent, remaining, and upcoming amounts
 - Manual bills on a calendar
 - Savings goals
-- Owner, viewer, collaborator, and guardian invitations
-- Configurable guardian alerts and acknowledgement
+- Primary Owner, Co-owner, Collaborator, Viewer, and Accountability Partner
+  invitations
+- Built-in alerts with per-recipient delivery preferences and acknowledgement
 - In-app and email notifications
 - Basic category and period reports
 - Connection health, consent history, audit history, export, and deletion
 
 ## Role intent
 
-- **Owner:** Controls the budget space, connections, membership, and sharing.
-- **Viewer:** Can see only the financial information explicitly shared.
+- **Primary Owner:** Responsible for the budget space. The only role that can
+  transfer, archive, or delete it. Manages membership and sharing, and controls
+  only the bank connections they personally authorized.
+- **Co-owner:** Shares day-to-day administration with the Primary Owner. Cannot
+  remove or demote the Primary Owner, transfer ownership, or delete the space.
 - **Collaborator:** Can categorize transactions and edit agreed budgets, bills,
   and goals, but cannot manage ownership or financial connections.
-- **Guardian:** Receives agreed oversight alerts and may acknowledge or comment
-  on them. Guardian access is scoped and revocable; it does not permit money
-  movement or locking out the owner.
+- **Viewer:** Reads one owner-assigned visibility profile and the resources it
+  inherits. Read-only, and starts with no profile and therefore no access.
+- **Accountability Partner:** A voluntary support role with comprehensive,
+  financially read-only visibility of the budget space within a fixed field
+  boundary. It may acknowledge its own firm alerts and leave attributed
+  comments; it can never move money, change financial data, administer
+  membership, or lock anyone out. It has no resource-level grants, so Viewer is
+  the role for narrower, profile-scoped sharing.
 
-"Accountability Partner" should be evaluated as an alternative customer-facing
-name for the guardian role unless legal guardianship becomes part of the
-product.
+The approved role vocabulary, including internal enum values and the
+customer-facing descriptions, is CBD-75 in
+`docs/cbd-75-role-terminology-and-copy-standard.md`. Accountability Partner is
+the sole official term for the support role and Guardian is retired. The
+controlling permission boundaries are CBD-72.
 
 ## Deferred capabilities
 
@@ -84,7 +95,7 @@ and basic notifications. Test with a small supported cohort.
 ### Product depth
 
 Add native mobile clients, push notifications, transaction splits and rules,
-recurring-item detection, shared comments, richer guardian guardrails, and
+recurring-item detection, shared comments, richer support-role guardrails, and
 cash-flow forecasting.
 
 ### Financial breadth
@@ -99,6 +110,6 @@ detection, and subscription billing when validated by usage.
 - Successful financial-account connection and sync rate
 - Percentage of transactions categorized or confirmed
 - Collaboration invitation acceptance rate
-- Guardian alert acknowledgement and dismissal rates
+- Accountability Partner alert acknowledgement and dismissal rates
 - Four- and eight-week active retention by budget cadence
 - Number of duplicate, late, or incorrect alerts per active user

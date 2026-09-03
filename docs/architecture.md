@@ -70,7 +70,9 @@ provider update.
 - Encrypt data in transit, provider tokens at the field level, and backups at
   rest.
 - Exclude secrets and financial details from logs and product analytics.
-- Maintain append-only audit history for access and guardian actions.
+- Maintain distinct append-only evidence rather than one audit log: budget-space
+  resource history visible to members, Primary-Owner administrative history, and
+  privileged security evidence, each with its own audience and fields.
 - Support consent revocation, data export, and deletion.
 - Test backup restoration and incident response before public launch.
 - Conduct independent security and legal review before broad production use.
@@ -83,5 +85,5 @@ provider update.
 - Pending-to-posted transaction replacement
 - Notification deduplication and cooldown behavior
 - Cross-budget-space authorization attempts
-- Guardian permission changes and consent revocation
+- Role and visibility-profile changes, and consent revocation
 - Historical reporting after category or budget edits

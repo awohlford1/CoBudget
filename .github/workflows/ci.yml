@@ -42,6 +42,13 @@ jobs:
       - name: Check CBD-75 documentation package
         run: python3 scripts/audit-cbd-75.py
 
+      # CBD-95 verifies eleven frozen source blobs. It was written before this
+      # workflow existed and was never added, so three CBD-72 pins went stale on
+      # August 18, 2026 and nothing noticed for a fortnight. Its working-tree
+      # scope check is vacuous on a fresh checkout; the blob checks are the value.
+      - name: Check CBD-95 documentation package
+        run: python3 scripts/audit-cbd-95.py
+
       - name: Check CBD-103 documentation package
         run: python3 scripts/audit-cbd-103.py
 

@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1** |
-| Document version | 1.0.3 |
+| Status | **Approved v1.0.1 — Product Owner approved v1.0 August 16, 2026; CBD-93 re-frozen at v1.1.1; five sources re-frozen September 3, 2026** |
+| Document version | 1.0.4 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-95](https://cobudget.atlassian.net/browse/CBD-95) |
 | Parent | [CBD-14](https://cobudget.atlassian.net/browse/CBD-14) |
@@ -53,11 +53,11 @@ blob below still resolves. A blob change requires the impact review in §8.
 
 | Component | Version and status | Git blob | Normative use |
 | --- | --- | --- | --- |
-| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.1; approved v1.0 plus controlled RF-72-61 amendment | `1e1134415915238752440da4b2e4acaa293d20e6` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
+| `docs/cbd-91-private-mvp-data-inventory.md` | v1.0.2; approved v1.0 plus the controlled RF-72-61 and conflict-register amendments | `fa3fb737d937896b0901ee965b46d6a4d7e1412b` | 76 data classes, 13 flows, copy/noninterference rules, 24 evidence gaps, conflict register, lifecycle decisions |
 | `docs/cbd-92-system-flow-technical-threat-model.md` | v1.0; approved | `7c69addb47f843e080827ba8241636cb948ccad5` | Actors, systems, entry points, trust boundaries, 45 technical threats, 12 review findings, nine normative contract families |
 | `docs/cbd-92-acceptance-criteria-traceability.md` | v1.0; approved | `6938bbb0ca8eafad11b4712f1b3d35da432723af` | CBD-92 deliverable/criterion evidence, coverage review, limitations, and public-launch policy |
 | `docs/cbd-93-privacy-coercion-abuse-analysis.md` | v1.1.1; approved at v1.1, editorial header correction only | `c1caf49653802f5c4d1f69f48d61f9aa881591a3` | 86 abuse scenarios, 96 active safeguards, 10 evidence gaps, residual-analysis register, 19 independent CBD-12 inputs |
-| `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0; approved | `8be224d4ef5779f1743bdd7b4a53f731f31d564e` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
+| `docs/cbd-94-risk-mitigation-requirement-register.md` | v1.0.1; approved, with two section 8 reconciliations recorded done | `9c751c58a771d2494e94f69e1c77b2ab5a5e8040` | 21 risk families, source dispositions, 147 normative requirements, 16 release/process gates |
 | `docs/cbd-94-verification-review-inventory.md` | v1.0; approved | `e139cdd75646f8070b8e253ff6cc95c1f6bca966` | 270 verification cases, 15 manual packages, 15 specialist reviews, fixtures, parameters, monitors, and evidence rules |
 | `docs/cbd-94-acceptance-criteria-traceability.md` | v1.0.2; approved at v1.0.1, missing-criterion correction only | `ff70668fbeb3ddea2a843a3c11fb0024e8bf3957` | Bidirectional source routes, expected sets, twelve-part audit, discrepancies, and approval record |
 | `docs/cbd-94-exhaustive-review-findings.md` | v1.0; accepted, all findings closed | `c7c02611b7b2c6cfc78ed5467e013b615128b8c6` | Independent re-execution evidence and closed `RV-94-011–017` findings |
@@ -68,9 +68,9 @@ approved CBD-14 source package component. It is the reconciliation target:
 | Target | Current repository/Jira state | Git blob where applicable |
 | --- | --- | --- |
 | CBD-12 Jira | In Progress; 36 numbered acceptance criteria; updated August 15, 2026 | Live Jira record, not mirrored locally |
-| `docs/cbd-72-collaboration-permission-model.md` | v0.1.52; permission decisions approved, final package gates pending | `f0fb564aada318b125451b9ec2752fcd5657e7e1` |
-| `docs/cbd-72-authorization-scenario-catalog.md` | v0.1.13; rule inventory approved, deterministic fixtures pending | `ecc8bd56cd75042f4918c4f51e2a7e43c1ef1d48` |
-| `docs/cbd-72-acceptance-criteria-traceability.md` | v0.1.12; all product decisions closed, CBD-14 and other review gates pending | `ed4a410d0442310ecc733a2e547b14ba881039e0` |
+| `docs/cbd-72-collaboration-permission-model.md` | v0.1.54; package approved August 18, 2026, plus the September 2 section 5.4 amendment | `f1842e5d020e7781c6808730ae4df43faedaaabd` |
+| `docs/cbd-72-authorization-scenario-catalog.md` | v0.1.14; package approved August 18, 2026, deterministic fixtures routed to test design | `2c6030df745adf1e1b6a812d3a0afbd4985ba7a0` |
+| `docs/cbd-72-acceptance-criteria-traceability.md` | v0.1.13; package approved August 18, 2026, gate results recorded | `ce7cdc70399e2fbf7df276eb7189760c8a3aac20` |
 | CBD-73 / CBD-74 / CBD-75 / CBD-76 Jira | Ready; each contains current planning text plus the discrepancies recorded by CBD-95 | Live Jira records, not mirrored locally |
 
 ## 3. Stable identifier inventory
@@ -330,6 +330,31 @@ re-frozen in the same change, and the audit reverifies all eleven blobs. The
 edit was editorial: no scenario, safeguard, evidence gap, residual, or
 `RI-93-*` decision changed, so no §8 impact review of the reconciliation
 outcomes was triggered.
+
+Five further sources were re-frozen on September 3, 2026, and the reason
+divides into two halves.
+
+Three CBD-72 pins had been wrong since August 18, 2026. This package froze them
+at `43e87be` on August 16; the CBD-72 package was approved two days later, which
+moved all three blobs, and the permission model moved again on September 2 for
+the section 5.4 amendment. Nothing caught it for a fortnight because
+`scripts/audit-cbd-95.py` was never wired into the CI workflow. It is now, in
+the same change, so this cannot recur silently. Each drift was checked rather
+than assumed benign: the permission model gained package approval and lost a
+member-configurable privacy detail, which narrows what a member may set and so
+reinforces the citations here; the scenario catalog gained approval and routed
+deterministic fixtures to test design, its own revision row recording that no
+scenario rule changed; and the CBD-72 traceability record gained approval with
+gate results moving from pending to Pass. CBD-72 is a context freeze in this
+package rather than a source family, so none of it moves a CBD-95 total.
+
+CBD-91 and CBD-94 were re-frozen deliberately, at v1.0.2 and v1.0.1. Both record
+that the legacy guardian vocabulary in `docs/product-plan.md` and
+`docs/architecture.md` has been corrected: CBD-91's conflict register kept its
+controlling outcome and gained the correction date, and CBD-94 marked the two
+matching section 8 reconciliations done. No data class, classification, flow,
+risk, rating, requirement, gate, or route changed, so no section 8 impact review
+of the reconciliation outcomes was triggered.
 
 The four CBD-95 pages are registered in `scripts/sync-confluence.py` and
 published: the manifest as `9797633`, the reconciliation matrix as `9830401`,
