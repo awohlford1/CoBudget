@@ -15,12 +15,13 @@
     "start:worker": "npm run start --workspace=@cobudget/worker",
     "build": "npm run build --workspaces --if-present",
     "start": "npm run start --workspace=@cobudget/web",
+    "check:ci": "node --test scripts/check-ci-contract.test.mjs && node scripts/check-ci-contract.mjs",
     "check:docs": "node scripts/check-mermaid.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
-    "lint": "npm run lint --workspaces --if-present",
+    "lint": "eslint scripts && npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
-    "check": "npm run check:docs && npm run check:tokens && npm run check:copy && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
+    "check": "npm run check:ci && npm run check:docs && npm run check:tokens && npm run check:copy && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
     "check:copy": "node scripts/check-copy-language.mjs",
     "check:pages": "node scripts/check-public-pages.mjs"
   },
@@ -29,6 +30,8 @@
   },
   "packageManager": "npm@11.12.1",
   "devDependencies": {
-    "@mermaid-js/mermaid-cli": "11.16.0"
+    "@eslint/js": "9.39.5",
+    "@mermaid-js/mermaid-cli": "11.16.0",
+    "eslint": "9.39.5"
   }
 }
