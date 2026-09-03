@@ -1,0 +1,464 @@
+{
+  "$comment": [
+    "CBD-75 prohibited-language register. This file is the machine-readable half of",
+    "docs/cbd-75-role-terminology-and-copy-standard.md section 6; the document is the",
+    "authority and this file must not drift from it. scripts/audit-cbd-75.py enforces",
+    "that every rule here is defined there and vice versa.",
+    "",
+    "scripts/check-copy-language.mjs applies these rules. It scans declared customer",
+    "copy only -- the strings in docs/cbd-75-approved-copy.json and the built public",
+    "pages -- never documentation prose, which must be free to name a prohibited",
+    "phrase in order to prohibit it.",
+    "",
+    "negatable:true means an honest denial is permitted and required: the product has",
+    "to be able to say it cannot approve spending or block a payment. The checker",
+    "looks backwards from a match for a negator, stopping at a sentence boundary.",
+    "negatable:false means the phrase is prohibited even when denied, because naming",
+    "it plants the frame the denial is trying to remove."
+  ],
+  "package": "CBD-75",
+  "version": "0.1",
+  "document": "docs/cbd-75-role-terminology-and-copy-standard.md",
+  "negationWindow": 80,
+  "negators": [
+    "cannot",
+    "can't",
+    "can not",
+    "never",
+    "no one",
+    "nobody",
+    "nothing",
+    "none",
+    "not",
+    "does not",
+    "doesn't",
+    "do not",
+    "don't",
+    "is not",
+    "isn't",
+    "are not",
+    "aren't",
+    "will not",
+    "won't",
+    "without",
+    "unable to",
+    "neither",
+    "nor"
+  ],
+  "knownExceptions": [
+    {
+      "where": "the mission statement",
+      "rule": "PL-75-09",
+      "phrase": "real-time",
+      "kind": "copy-defect",
+      "recorded": "2026-09-02",
+      "why": "The approved mission statement promises real-time insights. Bank data arrives on the aggregation provider's schedule, and the brand foundation's own copy guidance requires describing freshness accurately rather than promising instantaneous updates, so the mission contradicts the rule stated further down the same document. This string is rendered on the landing page and the Mission page today.",
+      "closes": "OI-75-003"
+    },
+    {
+      "where": "the mission statement",
+      "rule": "PL-75-10",
+      "phrase": "partners",
+      "kind": "rule-limit",
+      "recorded": "2026-09-02",
+      "why": "\"individuals, partners, and families\" is the domestic sense of the word, disambiguated by the company it keeps. PL-75-10 cannot tell it from the role term, and narrowing the pattern enough to try would let the ambiguous cases through. Recorded as a known limit of the rule rather than a defect in the copy.",
+      "closes": null
+    },
+    {
+      "where": "value 6 text",
+      "rule": "PL-75-03",
+      "phrase": "oversight",
+      "kind": "copy-defect",
+      "recorded": "2026-09-02",
+      "why": "The Stability value describes the product as building resilience through shared oversight. CBD-12-AC24 and SG-93-093 prohibit copy that frames one member as answerable to another, and oversight is the word that frame is built from. Rendered on the Mission page today.",
+      "closes": "OI-75-003"
+    },
+    {
+      "where": "manifesto paragraph 4",
+      "rule": "PL-75-09",
+      "phrase": "real-time",
+      "kind": "copy-defect",
+      "recorded": "2026-09-02",
+      "why": "The manifesto repeats the mission statement's real-time promise. Same defect, same decision, and it must be corrected in the same change so the two do not diverge. Rendered on the Mission page today.",
+      "closes": "OI-75-003"
+    }
+  ],
+  "scopes": {
+    "all": "Every declared customer-visible surface.",
+    "product-copy": "In-product copy, email, and notification bodies. Not public marketing pages.",
+    "public-page": "The public marketing pages only, which introduce the product rather than the role model."
+  },
+  "rules": [
+    {
+      "id": "PL-75-01",
+      "title": "Spending authority",
+      "scope": "all",
+      "negatable": true,
+      "why": "No role approves, permits, or authorizes another person's spending. Copy that says otherwise describes a product that does not exist and invites the coercion CBD-12-AC22 guards against.",
+      "instead": "Name the actual capability: sees, comments on, is alerted to. State the limit alongside it.",
+      "sources": [
+        "CBD-12-AC24",
+        "CBD-75-AC07",
+        "SR-94-089"
+      ],
+      "example": "Your Accountability Partner approves purchases over fifty dollars.",
+      "negatedExample": "An Accountability Partner cannot approve purchases.",
+      "patterns": [
+        "\\b(?:approv\\w+|authoriz\\w+|authoris\\w+|permit(?:s|ted|ting)?|allow(?:s|ed|ing)?)\\s+(?:\\w+\\s+){0,2}(?:spending|purchases?|transactions?|payments?|expenses?)\\b",
+        "\\bpermission to (?:spend|buy|purchase|pay)\\b",
+        "\\b(?:spending|purchase|payment)\\s+(?:approval|permission|authoriz\\w+)\\b",
+        "\\bask(?:s|ing|ed)? (?:for )?permission\\b",
+        "\\bneeds? (?:your|their|his|her) approval\\b",
+        "\\ballowances?\\b"
+      ]
+    },
+    {
+      "id": "PL-75-02",
+      "title": "Custodial and legal authority",
+      "scope": "all",
+      "negatable": false,
+      "why": "The product supports no custodial, supervisory, or legal-guardian relationship, and legally supervised arrangements are excluded from the MVP. Naming one implies authority a court grants and this product does not, even in a denial.",
+      "instead": "Accountability Partner, and the boundary in RD-75-05.",
+      "sources": [
+        "CBD-12-AC23",
+        "CBD-12-AC24",
+        "SR-94-089",
+        "SR-94-145"
+      ],
+      "example": "Add a guardian to your budget space.",
+      "patterns": [
+        "\\bguardians?\\b",
+        "\\bguardianship\\b",
+        "\\bcustodians?\\b",
+        "\\bcustodial\\b",
+        "\\btrustees?\\b",
+        "\\bdependants?\\b",
+        "\\bsupervis(?:e|es|ed|ing|or|ors|ion|ory)\\b",
+        "\\bin charge of (?:your|their|his|her|another|someone)\\b"
+      ]
+    },
+    {
+      "id": "PL-75-03",
+      "title": "Surveillance of another person",
+      "scope": "all",
+      "negatable": false,
+      "why": "Support is not observation. Surveillance words describe the relationship the product refuses to build, and a denial still supplies the frame. SG-93-021 forbids implying that being observed is a condition of taking part.",
+      "instead": "Describe what a person can see, in their own scope, and why they were invited to see it.",
+      "sources": [
+        "CBD-12-AC09",
+        "CBD-12-AC24",
+        "SG-93-021",
+        "SG-93-093",
+        "SR-94-089"
+      ],
+      "example": "Monitor their spending from the shared dashboard.",
+      "patterns": [
+        "\\bsurveillance\\b",
+        "\\bmonitor(?:s|ed|ing)?\\b",
+        "\\bspy(?:s|ing)?\\b",
+        "\\bspies\\b",
+        "\\bpolic(?:e|es|ed|ing)\\b",
+        "\\bkeep(?:s|ing)? tabs\\b",
+        "\\bwatch(?:es|ing)? (?:over|what|how|your|their|his|her|them)\\b",
+        "\\boversee(?:s|ing)?\\b",
+        "\\boversight\\b",
+        "\\bcheck(?:s|ing)? up on\\b",
+        "\\btrack(?:s|ed|ing)? (?:their|his|her|another|someone)\\b",
+        "\\blook(?:s|ing)? over (?:your|their|his|her) shoulder\\b"
+      ]
+    },
+    {
+      "id": "PL-75-04",
+      "title": "Shame, fear, blame, and judgement",
+      "scope": "all",
+      "negatable": false,
+      "why": "The brand foundation requires copy free of shame and fear, and CBD-12-AC24 requires it be nonjudgemental. A reassurance that the product will not shame someone introduces shame as the subject, and telling a person they have nothing to fear tells them there was something to fear.",
+      "instead": "State the financial fact and the affected resource. Leave the person out of it.",
+      "sources": [
+        "CBD-12-AC24",
+        "CBD-75-AC08",
+        "SR-94-089",
+        "docs/brand-foundation.md"
+      ],
+      "example": "No more shame about where last month went.",
+      "patterns": [
+        "\\bshame(?:s|d|ful)?\\b",
+        "\\bshaming\\b",
+        "\\bashamed\\b",
+        "\\bguilt(?:y)?\\b",
+        "\\bfears?\\b",
+        "\\bfearful\\b",
+        "\\bafraid\\b",
+        "\\bscared\\b",
+        "\\bscary\\b",
+        "\\banxious\\b",
+        "\\banxiety\\b",
+        "\\bpanic(?:s|ked|king)?\\b",
+        "\\bdread(?:s|ed|ing)?\\b",
+        "\\bterrif(?:y|ies|ying|ied)\\b",
+        "\\balarming\\b",
+        "\\bblame(?:s|d)?\\b",
+        "\\bblaming\\b",
+        "\\birresponsible\\b",
+        "\\breckless(?:ly)?\\b",
+        "\\bundisciplined\\b",
+        "\\blazy\\b",
+        "\\boverspenders?\\b",
+        "\\boffenders?\\b",
+        "\\bculprits?\\b",
+        "\\byou (?:should|shouldn't|should not) have\\b",
+        "\\bbad (?:habits?|spending|month|behaviou?r|choices?)\\b",
+        "\\bfail(?:s|ed|ing|ure)? to (?:stick|keep|stay|control)\\b"
+      ]
+    },
+    {
+      "id": "PL-75-05",
+      "title": "Punishment and enforcement",
+      "scope": "all",
+      "negatable": false,
+      "why": "No role penalizes another. PB-74-06 additionally prohibits surfacing that a person did not acknowledge or act, which is the mechanism these words would describe.",
+      "instead": "Describe the state of the budget, never a consequence for a person.",
+      "sources": [
+        "CBD-12-AC22",
+        "CBD-12-AC24",
+        "PB-74-06",
+        "SR-94-089"
+      ],
+      "example": "Missing a target twice carries a penalty.",
+      "patterns": [
+        "\\bpunish(?:es|ed|ing|ment)?\\b",
+        "\\bpenal(?:ty|ties|ise|ize|ised|ized|ising|izing)\\b",
+        "\\bdisciplin(?:e|ed|es|ary)\\b",
+        "\\benforce(?:s|d|ment)?\\b",
+        "\\bsanction(?:s|ed)?\\b",
+        "\\bstrikes? against\\b"
+      ]
+    },
+    {
+      "id": "PL-75-06",
+      "title": "Money movement and transaction control",
+      "scope": "all",
+      "negatable": true,
+      "why": "The product moves no money, blocks no transaction, and controls no external account. CBD-12-AC09 requires stating those limits plainly, so the denial must remain available while the claim stays prohibited.",
+      "instead": "Say what the product does with the record, not with the money.",
+      "sources": [
+        "CBD-12-AC09",
+        "CBD-12-AC24",
+        "CBD-75-AC07"
+      ],
+      "example": "Block a payment before it clears.",
+      "negatedExample": "A Collaborator cannot block a payment.",
+      "patterns": [
+        "\\bblock(?:s|ed|ing)? (?:a |the |your |their )?(?:transactions?|payments?|purchases?|cards?|spending)\\b",
+        "\\bfreez(?:e|es|ing)\\s+(?:the |your |their )?(?:accounts?|cards?|funds?|money)\\b",
+        "\\bfrozen\\s+(?:accounts?|cards?|funds?)\\b",
+        "\\bdeclin(?:e|es|ing|ed)\\s+(?:a |the )?(?:transactions?|payments?|purchases?)\\b",
+        "\\brevers(?:e|es|ing)\\s+(?:a |the )?(?:transactions?|payments?|charges?)\\b",
+        "\\bmov(?:e|es|ing)\\s+(?:your |their |the )?money\\b",
+        "\\btransfer(?:s|ring)?\\s+(?:your |their |the )?(?:funds?|money)\\b",
+        "\\bcontrol(?:s|led|ling)?\\s+(?:your|their|his|her|the)\\s+(?:accounts?|money|spending|funds?|card)\\b",
+        "\\block(?:s|ed|ing)?\\s+(?:you|them|him|her|the \\w+)\\s+out\\b"
+      ]
+    },
+    {
+      "id": "PL-75-07",
+      "title": "Irrevocable access",
+      "scope": "all",
+      "negatable": false,
+      "why": "Every membership can be ended, and CBD-12-AC22 guarantees no one is left without a supported way out. Copy suggesting access is permanent is false and is the exact claim a coercive party would quote.",
+      "instead": "State how the arrangement ends and who can end it.",
+      "sources": [
+        "CBD-12-AC22",
+        "CBD-12-AC24",
+        "CBD-75-AC07"
+      ],
+      "example": "They will always see your balance.",
+      "patterns": [
+        "\\bpermanent(?:ly)? (?:access|shared|visible|available)\\b",
+        "\\b(?:access|sharing|visibility)\\s+(?:is|remains|stays)\\s+(?:permanent|forever|indefinite|irrevocable)\\b",
+        "\\b(?:access|sharing|visibility)\\s+(?:that\\s+)?(?:cannot|can't|can never)\\s+be\\s+(?:revoked|removed|stopped|ended|undone)\\b",
+        "\\balways (?:be able to )?(?:see|access|view)\\b",
+        "\\bunlimited access\\b",
+        "\\birrevocable\\b",
+        "\\bforever\\b"
+      ]
+    },
+    {
+      "id": "PL-75-08",
+      "title": "Confidentiality and recall the product cannot deliver",
+      "scope": "all",
+      "negatable": true,
+      "why": "A delivered external copy is recipient- and platform-controlled. AB-74-015 and PB-74-12 prohibit promising recall, erasure, or preview suppression, and CBD-74 section 6.4 requires the opposite disclosure.",
+      "instead": "Disclose the custody limits at the point of choosing a channel, following PT-75-07.",
+      "sources": [
+        "AB-74-015",
+        "PB-74-12",
+        "CP-74-05",
+        "SR-94-053",
+        "RI-93-016"
+      ],
+      "example": "Send a confidential alert nobody else receives.",
+      "negatedExample": "We do not promise a confidential alert.",
+      "patterns": [
+        "\\b(?:recall|unsend|un-send)(?:s|ing)?\\b",
+        "\\bdelete (?:it |them |this )?for everyone\\b",
+        "\\bremotely (?:delete|erase|wipe|remove|revoke)\\b",
+        "\\bonly you can (?:see|read|access|open)\\b",
+        "\\b(?:private|confidential|secure|encrypted)\\s+(?:notifications?|messages?|alerts?|previews?|channels?|emails?|texts?)\\b",
+        "\\bconfidential\\b",
+        "\\bhide(?:s|n)? (?:the )?previews?\\b",
+        "\\bno one else can (?:see|read)\\b"
+      ]
+    },
+    {
+      "id": "PL-75-09",
+      "title": "False immediacy",
+      "scope": "all",
+      "negatable": true,
+      "why": "Bank data arrives on the aggregation provider's schedule. The brand foundation requires describing freshness accurately rather than promising instantaneous updates.",
+      "instead": "Name when the data was last updated.",
+      "sources": [
+        "CBD-75-AC08",
+        "docs/brand-foundation.md"
+      ],
+      "example": "Watch your balance change in real time.",
+      "negatedExample": "Balances are not real-time.",
+      "patterns": [
+        "\\breal[\\s-]?time\\b",
+        "\\binstant(?:ly|aneous(?:ly)?)?\\b",
+        "\\blive (?:balances?|data|transactions?|feed|updates?)\\b",
+        "\\bup[\\s-]to[\\s-]the[\\s-](?:minute|second)\\b",
+        "\\balways (?:current|up[\\s-]to[\\s-]date)\\b",
+        "\\bas soon as (?:it happens|you spend|they spend)\\b",
+        "\\bthe moment (?:you|they) (?:spend|pay|buy)\\b"
+      ]
+    },
+    {
+      "id": "PL-75-10",
+      "title": "Retired and ambiguous role terms",
+      "scope": "all",
+      "negatable": false,
+      "why": "RC-95-023 approves no role term or enum outside the closed set of five. A bare owner does not say which of two roles is meant, and a bare partner collides with the everyday sense of the word in a product built for couples.",
+      "instead": "The exact names in RD-75-01 through RD-75-05.",
+      "sources": [
+        "CBD-12-AC23",
+        "CBD-75-AC01",
+        "CBD-75-AC03",
+        "RC-95-023",
+        "SR-94-145"
+      ],
+      "example": "Invite a partner or an admin to help.",
+      "patterns": [
+        "(?<!Primary )(?<!primary )(?<!Co-)(?<!co-)\\bowners?\\b",
+        "(?<!Accountability )(?<!accountability )\\bpartners?\\b",
+        "\\badmins?\\b",
+        "\\badministrators?\\b",
+        "\\bobservers?\\b",
+        "\\bwatchers?\\b",
+        "\\bread[\\s-]only users?\\b",
+        "\\bsub[\\s-]accounts?\\b",
+        "\\bmaster account\\b"
+      ]
+    },
+    {
+      "id": "PL-75-11",
+      "title": "Internal codename and misspelled brand",
+      "scope": "all",
+      "negatable": false,
+      "why": "The September 2, 2026 brand decision makes MoneyPact the customer-facing name and keeps CoBudget as the internal codename. RT-75-01 states the rule; this enforces it.",
+      "instead": "MoneyPact, spelled and cased exactly.",
+      "sources": [
+        "RT-75-01",
+        "RT-75-06",
+        "docs/brand-foundation.md"
+      ],
+      "caseSensitive": true,
+      "example": "Welcome back to CoBudget.",
+      "patterns": [
+        "\\bCo-?[Bb]udget\\b",
+        "\\bco-?budget\\b",
+        "\\bMoney ?[Pp]act\\b(?<!MoneyPact)",
+        "\\bmoneypact\\b",
+        "\\bMONEYPACT\\b",
+        "\\bMoneypact\\b"
+      ]
+    },
+    {
+      "id": "PL-75-12",
+      "title": "Obligation and coercion framing",
+      "scope": "all",
+      "negatable": false,
+      "why": "Participation is voluntary and no member owes another an account of their spending. SG-93-093 forbids framing one member as accountable to another, and the framing survives a denial.",
+      "instead": "Describe what the person chose to share and how they can stop.",
+      "sources": [
+        "CBD-12-AC22",
+        "CBD-12-AC24",
+        "SG-93-021",
+        "SG-93-093",
+        "RI-93-016"
+      ],
+      "example": "You are accountable to them for every purchase.",
+      "patterns": [
+        "\\bowes?\\s+(?:them|him|her|you|your)\\b",
+        "\\baccountable to\\b",
+        "\\brequired to (?:share|explain|justify|report|disclose)\\b",
+        "\\bmust (?:let|allow|give|show|tell) (?:them|him|her)\\b",
+        "\\bhas? (?:a |the )?right to (?:see|know|access)\\b",
+        "\\bexpected to (?:explain|justify|report)\\b",
+        "\\bjustify (?:your|their|his|her) (?:spending|purchases?|choices?)\\b",
+        "\\banswer(?:s|able)? to\\b",
+        "\\bexplain yourself\\b"
+      ]
+    },
+    {
+      "id": "PL-75-13",
+      "title": "Unsupported safety, security, and compliance claims",
+      "scope": "all",
+      "negatable": true,
+      "why": "CBD-75-AC09 forbids recording an unsupported legal, security, usability, or market claim as validated. No specialist review has been completed, so none of these claims has evidence behind it.",
+      "instead": "Say what the product does. Claim conformance only when VP-75-06 evidence exists.",
+      "sources": [
+        "CBD-12-AC25",
+        "CBD-75-AC09",
+        "RI-93-016"
+      ],
+      "example": "Bank-level security, guaranteed.",
+      "negatedExample": "We do not claim bank-level security.",
+      "patterns": [
+        "\\bbank[\\s-]level\\b",
+        "\\bmilitary[\\s-]grade\\b",
+        "\\b(?:fully |industry )?compliant\\b",
+        "\\bcertified\\b",
+        "\\bguarantee(?:s|d|ing)?\\b",
+        "\\b100%\\s+(?:safe|secure|private|accurate)\\b",
+        "\\bcompletely (?:safe|secure|private)\\b",
+        "\\bproven\\b",
+        "\\bvalidated\\b",
+        "\\bindustry[\\s-]standard\\b"
+      ]
+    },
+    {
+      "id": "PL-75-14",
+      "title": "Role names on public marketing pages",
+      "scope": "public-page",
+      "negatable": false,
+      "why": "A public page introduces the product, not the role model. A role named without the boundary that makes it safe implies exactly the authority PL-75-02 and PL-75-03 prohibit, and the boundary does not fit on a marketing page. This rule replaces the stale rationale that the role was unsettled; it has been settled since FU-95-003 closed on August 16, 2026, and the ban is now deliberate.",
+      "instead": "Describe the relationship in ordinary words. Name roles once the reader is inside the product and the boundary can be shown with them.",
+      "sources": [
+        "CBD-12-AC23",
+        "CBD-12-AC24",
+        "RC-95-023",
+        "OI-75-008"
+      ],
+      "caseSensitive": true,
+      "example": "Meet your Accountability Partner.",
+      "patterns": [
+        "\\bAccountability Partner",
+        "\\bPrimary Owner",
+        "\\bCo-owner",
+        "\\bCollaborators?\\b",
+        "\\bViewers?\\b"
+      ]
+    }
+  ]
+}

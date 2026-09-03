@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Remediation verified v1.0.1 — 27 of 29 findings closed; `RV-73-021` and `RV-73-025` retain source-alignment and audit-rebaseline gates. `RV-73-006` and `RV-73-013` closed with the August 18, 2026 Product Owner decisions; `RV-73-026` closed on publication** |
-| Document version | 1.0.1 |
+| Document version | 1.0.2 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-73](https://cobudget.atlassian.net/browse/CBD-73) |
 | Reviewed repository baseline | `c096928a903dd5446b26ba21eaf7eaa2d84ce936` on `main` (PR #64 merge) |
