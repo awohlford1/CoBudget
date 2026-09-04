@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Three of seven acceptance criteria are met, three partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.68 |
+| Document version | 0.69 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.68; Cross-Category Coherence Review v0.68; Combined Cost Model v0.68; Carried Item Disposition Register v0.68; Evidence Retrieval Pass v0.68 |
+| Companions | Provider Set Disposition Register v0.69; Cross-Category Coherence Review v0.69; Combined Cost Model v0.69; Carried Item Disposition Register v0.69; Evidence Retrieval Pass v0.69 |
 | Confluence page | **Not published.** Registration follows approval. |
-| Repository baseline | `9bd04bb` |
+| Repository baseline | `054bc56` |
 | Last updated | August 29, 2026 |
 
 ## 1. Package contents
@@ -60,8 +60,11 @@ bumped each time and this content was not. `OI-108-077`.
 
 **Status: Met.**
 
-No selection rests on anything, because none is made. Three approved rules make
-the position binding rather than a stylistic choice, and disposition §2.1 cites
+No selection rests on a score. Until September 2, 2026 none was made; the six
+route-B selections since then rest on forced eligibility, documentary coverage,
+architecture, and recorded tie-breaks (disposition §4, `OI-108-074`), and none
+on a price or an exception. Three approved rules make the position binding
+rather than a stylistic choice, and disposition §2.1 cites
 each: `CR3` (cost never overrides a gate), `EX-102-003` (an exception never
 converts an `UNPROVEN`), and evidence register §4 (evidence must be current on
 the date of selection).
@@ -222,7 +225,8 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 
 ## 6. What this package does not establish
 
-* **No provider is selected in any category**, and no ranking is published.
+* **No ranking is published.** The six selections are recorded at disposition
+  §4 with the basis each rests on.
 * **No coherence clearance is issued**; six combinations are named as risks.
 * **No cost total exists** at any scenario.
 * **No observation was performed, no provider contacted, no account created,
