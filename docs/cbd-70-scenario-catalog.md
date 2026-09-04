@@ -2,15 +2,15 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v1.1 synchronization review** |
-| Document version | 1.1.0-draft |
+| Status | **Approved v1.1 — Product Owner approved September 4, 2026** |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of three Codex technical review passes, an independent Claude review that re-derived every date, interval, and monetary result, and the resolution of findings RF-70-01 through RF-70-06 (§8). |
+| Reviewer | Alexander Wohlford — Product Owner approval of **v1.0** on August 14, 2026, on the evidence of three Codex technical review passes, an independent Claude review that re-derived every date, interval, and monetary result, and the resolution of findings RF-70-01 through RF-70-06 (§8). **v1.1** approved September 4, 2026 on the evidence of the synchronization review recorded in the traceability record §8.1 and the re-run mechanical checks in §8.3. |
 | Jira subtask | [CBD-70](https://cobudget.atlassian.net/browse/CBD-70) |
 | Governing traceability record | [CBD-70 Acceptance Criteria Traceability and Review Record](cbd-70-acceptance-criteria-traceability.md) |
 | Calendar example set | [CBD-70 Deterministic Calendar Example Set](cbd-70-calendar-example-set.md) |
-| Repository baseline | `eedd136` |
-| Last updated | August 14, 2026 |
+| Repository baseline | `bff3d8e` (v1.1); `eedd136` (v1.0) |
+| Last updated | September 4, 2026 |
 
 ## 1. Purpose and current scope
 
@@ -161,7 +161,7 @@ These IDs identify the reusable calendars defined in the [CBD-70 Deterministic C
 | ALERT-01 | Informational pending warning clears when pending activity disappears | Recovery | CAL-CROSS-SETTLE | CBD-69-AC04, AC06, AC11 | Approved |
 | ALERT-02 | Settled overspending creates a firm alert that can be acknowledged | Boundary | CAL-HISTORY-01 | CBD-67-AC14; CBD-69-AC11 | Approved |
 | ALERT-03 | Late adjustment creates a distinct completed-period alert | Boundary | CAL-HISTORY-01 | CBD-69-AC09, AC10, AC11 | Approved |
-| ALERT-04 | Partner authorization, masking, personal delivery preferences, and alert-type behavior remain explicit | Boundary | CAL-SAME-DATE | CBD-69-AC11, AC12, AC15 | Draft amendment |
+| ALERT-04 | Partner authorization, masking, personal delivery preferences, and alert-type behavior remain explicit | Boundary | CAL-SAME-DATE | CBD-69-AC11, AC12, AC15 | Approved |
 | REP-01 | Budget-date and statement-date views explain different period placement | Normal | CAL-CROSS-SETTLE | CBD-69-AC01, AC10, AC15 | Approved |
 | AUDIT-01 | Disputed match, override, late settlement, and category correction remain reconstructable | End-to-end | CAL-CROSS-SETTLE | CBD-69-AC05, AC06, AC09, AC11, AC12, AC15 | Approved |
 | E2E-01 | Weekly-to-monthly change preserves target, income, transaction, alert, and audit invariants | End-to-end | CAL-TRANS-MID, CAL-MULTI-01 | CBD-67-AC10, AC12, AC14–AC18; CBD-68-AC04–AC06; CBD-69-AC04, AC05, AC11, AC12, AC15 | Approved |
@@ -1920,15 +1920,15 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 
 | Checkpoint | Exact time | Event |
 | --- | --- | --- |
-| T0 — Active schedule viewed | `2028-06-01T09:00:00-04:00` America/New_York | ACTOR-02 opens the provisioned schedule view |
+| T0 — Active schedule viewed | `2028-06-01T09:00:00-04:00` America/New_York | ACTOR-02 opens the Planning-profile schedule view |
 | T1 — Pending summary viewed | `2028-06-01T09:05:00-04:00` America/New_York | ACTOR-02 opens the confirmed pending-change summary |
 
 | Outcome layer | Expected result at T1 |
 | --- | --- |
 | Period / schedule | Authorized schedule dates and pending effective date are read-only; active and pending versions remain unchanged |
-| Targets | Only provisioned target information is visible; no target edit control exists and no value changes |
+| Targets | Only Planning-profile target information is visible; no target edit control exists and no value changes |
 | Income / cash | Planning profile exposes no accounts, transactions, balances, actuals, or actual-derived values; restricted values are omitted rather than shown as zero; no financial value changes |
-| Transactions / bills | Only provisioned records are visible; no mutation or override control exists |
+| Transactions / bills | Only Planning-profile records are visible, so no account, transaction, balance, or actual-derived value appears; no mutation or override control exists |
 | Validation / alerts | Configure, Preview change, Confirm, Edit pending change, and Cancel pending change controls are absent; read-only context explains that schedule changes require an authorized role; no denied-action error because no action was attempted |
 | Audit | Viewing creates no successful or denied schedule-mutation audit event; ordinary access logging, if present, remains separate from financial audit history |
 | Non-changes | Merely viewing cannot create a proposal, preview, pending revision, cancellation, schedule version, period, target, financial mutation, or security-denial event |
@@ -1986,9 +1986,9 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | Transactions / bills | TX-SEC-OVR retains budget date 2028-03-02 and spending `USD 82.00`. SPACE-SEC-MATCH remains Duplicate-review with one counted `USD 82.00` settlement and separate visible candidate evidence; bills remain empty |
 | Validation / alerts | T1 and T2 return `You don't have permission to change this. Ask a Primary Owner, Co-owner, or Collaborator.` Controls remain hidden after denial; report and alert state remain unchanged |
 | Audit | Two denied-action security events record actor, role, timestamp, space, target action, record IDs, attempted values, authorization result, and identical before/after financial state; no override or reconciliation-success event is created |
-| Non-changes | Direct access cannot broaden provisioning, expose restricted details, edit a date, resolve a match, change totals, move cash, change alerts, or create a successful financial mutation |
+| Non-changes | Direct access cannot broaden a Viewer profile or the Partner role boundary, expose restricted details, edit a date, resolve a match, change totals, move cash, change alerts, or create a successful financial mutation |
 
-**Given** provisioned read-only actors are not offered financial mutation controls, **when** they nevertheless submit direct override and reconciliation requests, **then** authorization denies both, records both security events, and preserves every date, record, total, and alert exactly.
+**Given** profile-scoped and role-bounded read-only actors are not offered financial mutation controls, **when** they nevertheless submit direct override and reconciliation requests, **then** authorization denies both, records both security events, and preserves every date, record, total, and alert exactly.
 
 #### RECOV-01 — Recoverable bank-data inconsistency preserves evidence and offers a recovery path
 
@@ -2039,7 +2039,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | Targets | CAT-01 target remains `USD 100.00` |
 | Income / cash | Income remains `USD 0.00`; cash remains `USD 1,000.00` because nothing settles |
 | Transactions / bills | T0 keeps settled spending `USD 40.00` and separately shows provisional `USD 75.00`; T1 moves the hold to Removed-without-settlement and restores pending to `USD 0.00`; bills unchanged |
-| Validation / alerts | T0 creates one informational shared event; ACTOR-01 and active PARTNER-01 receive mandatory personal instances while VIEWER-01 is ineligible. Optional external sends become separate attempts under each recipient's preferences. T1 resolves the event, closes both instances, suppresses queued attempts, and creates no firm event or acknowledgement state |
+| Validation / alerts | T0 creates one informational shared event stating that pending activity would make CAT-01 `USD 15.00` over if it settles and never asserting an exceeded target; ACTOR-01 and active PARTNER-01 receive mandatory personal instances while VIEWER-01 is ineligible. Optional external sends become separate attempts under each recipient's preferences. T1 resolves the event, closes both instances, suppresses queued attempts, and creates no firm event or acknowledgement state |
 | Audit | Pending import/removal, shared event trigger/dedup/resolution, instance eligibility/closure, and privacy-safe delivery outcomes retain correlated identities and timestamps |
 | Non-changes | Informational resolution/delivery changes no permission, profile, financial state, acknowledgement state, or another event; removal creates no settled spending, cash movement, firm event, target change, or boundary change |
 
@@ -2065,7 +2065,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 | Targets | CAT-01 target remains `USD 100.00`; no negative amount carries to March |
 | Income / cash | Income remains `USD 0.00`; cash becomes `1,000.00 − 20.00 = USD 980.00` |
 | Transactions / bills | Settled spending becomes `90.00 + 20.00 = USD 110.00`; overspending is `110.00 − 100.00 = USD 10.00`; bills unchanged |
-| Validation / alerts | T0 creates one firm shared event and one mandatory instance for ACTOR-01, profile-eligible VIEWER-01, and active PARTNER-01. Optional delivery attempts follow personal settings. T1 acknowledges only ACTOR-01's instance; Viewer/Partner instances and the shared event remain unchanged and no instance self-clears |
+| Validation / alerts | T0 creates one firm shared event stating that CAT-01 is `USD 10.00` over, and one mandatory instance for ACTOR-01, profile-eligible VIEWER-01, and active PARTNER-01. Optional delivery attempts follow personal settings. T1 acknowledges only ACTOR-01's instance; Viewer/Partner instances and the shared event remain unchanged and no instance self-clears |
 | Audit | Settlement, shared event identity/type/material revision, instance identities/eligibility, overage calculation, ACTOR-01 acknowledgement, and privacy-safe delivery-attempt outcomes are correlated without exposing destinations |
 | Non-changes | Acknowledgement changes no spending, target, cash, transaction, period, role, profile, shared event/fact, other instance, or delivery attempt and creates no duplicate event/instance |
 
@@ -2099,7 +2099,7 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 
 **Given** a May 14 authorization settles June 1 and makes its completed period `USD 22.00` overspent, **when** the alert is viewed, **then** it is unmistakably a firm late-adjustment alert and every completed-period boundary, version, and target remains unchanged.
 
-#### ALERT-04 — Partner authorization, masking, and personal notification control remain explicit
+#### ALERT-04 — Partner authorization, masking, personal delivery preferences, and alert-type behavior remain explicit
 
 | Field | Value |
 | --- | --- |
@@ -2270,6 +2270,8 @@ Reconciliation at T2: `actual income 0.00`; `cash 1,000.00 + receipts 0.00 = 1,0
 
 | Version | Date | Author | Change |
 | --- | --- | --- | --- |
+| 1.1 | September 4, 2026 | Alexander Wohlford — Product Owner, with Claude | **Approved.** Product Owner approval of the v1.1 synchronization after a review that re-derived the draft against the approved CBD-69 v1.1, CBD-71 v1.1, CBD-72 v0.1.54, and CBD-68 v1.1 sources and re-ran the §8.3 mechanical checks that reproduce from the files. Closed four gaps found in the draft: the ALERT-04 registry row was still Draft amendment and its title differed from its detail heading; SEC-01 and SEC-03 still said “provisioned” after their fixtures moved to CBD-72 visibility profiles; ALERT-01 and ALERT-02 had lost the stated overage amounts (`USD 15.00`, `USD 10.00`) that v1.0 carried. The 75 scenario IDs, 21 calendar fixtures, bidirectional criterion symmetry, ISO dates, and checkpoint chronology reproduce. No calendar, interval, target, cash, or monetary result changed between v1.0 and v1.1; the only date additions are 2028-03-18 and 2028-12-23, which state when Late began under the CBD-100 rule. |
+| 1.1.1-draft | August 15, 2026 | Codex with Alexander Wohlford as Product Owner | Recorded at approval because the change shipped without a row. Synchronized ALERT-01 and ALERT-02 to the CBD-72 three-record model (shared event, recipient-personal instance, delivery attempt); moved the SEC-01, SEC-03, and ALERT-01/02/04 Viewer fixtures from item provisioning to CBD-72 visibility profiles; restated INC-04 T2 and VAL-04 T3 so Late begins the calendar day after the expected date, per the CBD-100 correction to CBD-68 PD-68-07 and CBD-69 EC-69-10. |
 | 1.1.0-draft | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Synchronized ALERT-01 and ALERT-04 with CBD-69/CBD-71/CBD-72: personal notification preferences replace relationship-level notification control; owner and Collaborator cross-account changes are denied; the Partner may change only their own settings. Scenario count remains 75. |
 | 1.0 | August 14, 2026 | Alexander Wohlford, Product Owner | **Approved.** Product Owner approval granted alongside the traceability record v1.0 and calendar example set v1.0. All 75 registry rows move from Drafted to Approved. No scenario ID, classification, calendar dependency, checkpoint, expected outcome, calculation, or Given/When/Then statement changed at approval. |
 | 0.10 | August 14, 2026 | Alexander Wohlford, Product Owner, with Claude assistance | Resolved independent-review findings RF-70-02 through RF-70-04 and RF-70-06. Replaced E2E-01's `CBD-67-AC10–AC18` range with an explicit list, since the range asserted AC11 (boundary-aligned change without proration) that a mid-period prorated transition cannot demonstrate, and AC13, which has no positive-remainder case in that scenario. Added CBD-68-AC08 to INC-10 and CBD-69-AC14 to E2E-02 to match the traceability record. Moved PER-M-01 to a 2027-12-20 confirmation with a year-boundary checkpoint so CAL-YEAR-01's stated purpose is exercised. Bound E2E-02 to the new `HOL-FED-2029-v1` fixture. Corrected the FIN-01 tie-break note: the CAT-02/CAT-03 remainders are exactly equal at `3/7`, not equal only at display precision. No expected period, monetary result, validation message, alert, or audit outcome changed. |
