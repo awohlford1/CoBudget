@@ -2,11 +2,23 @@
 
 The verification behind CBD-126's claims, so that each is something someone did rather than something someone believed. Update this file when the component set changes; the contrast half updates itself.
 
+## Review provenance
+
+Revalidated on 3 September 2026 against source revision `09782c0` in the
+non-OneDrive checkout `C:\Users\agw21\Documents\Codex\MoneyPact`. The complete
+root `npm run check` gate passed at that revision, including the production
+Next.js build and the post-build public-page check. The manual component pass
+below was originally recorded at `7ba84d5`; the component, token, theme, state,
+and reduced-motion sources are unchanged between that revision and `09782c0`.
+The public-page pass was originally recorded at `f9c16fb`; its only relevant
+source change through `09782c0` is the removal of the root `320px` minimum width
+described below. The dated measurements in this record revalidate that change.
+
 ## Contrast
 
 Measured, not judged, on every build. `src/styles/contrast-pairings.json` declares every pairing the tokens permit; `scripts/check-tokens.mjs` measures each from the `light-dark()` values in both themes and fails the build naming the pairing, the theme, the ratio, and the minimum. The current numbers are in [`src/styles/contrast-record.md`](src/styles/contrast-record.md), which the gate regenerates with `--write-record` and refuses to let go stale.
 
-As of 2 September 2026: seventeen enforced pairings pass in both themes; the lowest are `border-strong` on `surface` at 3.73:1 (light, minimum 3:1) and `on-surface-placeholder` on `surface` at 4.80:1 (light, minimum 4.5:1). Seven pairings are exempt and recorded with their clauses. The gate was proven to fire three ways before it was trusted: a lightened muted text failed both its pairings by name (2.19:1 and 2.43:1), a tampered record failed as stale, and a token removed from every pairing failed as unpaired.
+As of 2 September 2026, and revalidated by the passing token gate at `09782c0` on 3 September 2026: seventeen enforced pairings pass in both themes; the lowest are `border-strong` on `surface` at 3.73:1 (light, minimum 3:1) and `on-surface-placeholder` on `surface` at 4.80:1 (light, minimum 4.5:1). Seven pairings are exempt and recorded with their clauses. The gate was proven to fire three ways before it was trusted: a lightened muted text failed both its pairings by name (2.19:1 and 2.43:1), a tampered record failed as stale, and a token removed from every pairing failed as unpaired.
 
 ## Keyboard
 
@@ -40,18 +52,18 @@ The accessibility tree the browser exposes is what a screen reader reads. Read o
 
 ## Public pages (CBD-20)
 
-Performed 2 September 2026 against the production build (`next build` + `next start`) in Chrome 148, on `/` and `/mission`.
+Performed 2 September 2026 against the production build (`next build` + `next start`) in Chrome 148, on `/` and `/mission`, then revalidated on 3 September 2026 against `09782c0` with the Codex in-app Chromium browser and direct production HTTP responses. The in-app harness does not expose its Chromium version, so Chrome 148 remains the named browser-version evidence for the unchanged keyboard, accessibility-tree, and network claims; the current harness supplies the exact-revision responsive, theme, outline, and landmark measurements.
 
 | Check | Result |
 |---|---|
 | Copy against the source | `scripts/check-public-pages.mjs` runs after every build: an independent reading of `docs/brand-foundation.md` must find the mission, vision, all seven values, and every manifesto paragraph in the built Mission page in the required order with the closing line as the last text in `<main>`, and the tagline, descriptor, and mission in the built landing page. Proven to fail on a drifted mission sentence in the source, an injected "monitor … real-time" paragraph, a removed closing line, and an injected Google Tag Manager script — each by name — then restored and passing. |
 | Titles and descriptions | Landing: "MoneyPact", description the descriptor and tagline. Mission: "Our mission \| MoneyPact", description the mission statement. |
 | Landmarks and outline | Both pages: one `header` (banner) with the wordmark and a `nav` labelled "Site", one `main`, one `footer` (contentinfo) with the theme choice. Landing outline: H1 tagline, H2 "Money shouldn't be managed alone.", H2 "What we value". Mission outline: H1 "Our mission", H2 "Our vision", H2 "What we value" with an H3 per value in a seven-item list, H2 "Our manifesto". One `h1` per page. The accessibility tree reads in that order with every heading, list, and region exposed. |
-| 320-pixel viewport | Both pages: document and body width exactly 320; the widest element is the shell itself. No horizontal scroll. Usable at 1280. |
+| Responsive widths | The first `09782c0` review exposed the old `html { min-width: 320px }` as 15px of horizontal overflow when a Windows vertical scrollbar reduced the 320px viewport to a 305px client area. After removing that declaration, both routes measured `scrollWidth === clientWidth`: 305px at a 320px viewport, 753px at 768px, and 1265px at 1280px. The shell was the widest element at exactly the client width; no visible element crossed either horizontal edge, and navigation, links, and theme controls remained reachable. |
 | Keyboard | From a click in the content, Tab moves through "Read our mission", "All seven values, and why they matter", the theme radios, and wraps to the wordmark and "Our mission" — DOM order, which is visual order — with the 3px deep-green ring in the light theme. The Mission page's only interactive elements are the shell's. |
-| Both themes | Rendered in dark and in light (emulated `prefers-color-scheme: light`): the light body is the cream surface with deep-green text, the dark the dark surface with off-white text, from the same markup. |
+| Both themes | Rendered in dark and in light (emulated `prefers-color-scheme: light`): the light body is the cream surface with deep-green text, the dark the dark surface with off-white text, from the same markup. At `09782c0`, selecting Dark set `data-theme=dark` and resolved `color-scheme: dark` before and after reload; Light did the same for `light`; System removed the attribute and restored `color-scheme: light dark` before and after reload. |
 | No trackers | The network log on a fresh load of each page holds only this origin: the document, one stylesheet, the script chunks, and prefetches. No third-party request of any kind. The check also refuses any `script`, `img`, `iframe`, `link`, `source`, `video`, or `audio` on another origin in the built HTML, so a tracker cannot be added without failing the build (`AN-92-001`, `AN-92-002`). |
-| Account existence | Both pages are static and identical for every visitor; nothing reads a session or a store. |
+| Account existence | Both pages are static and nothing reads a session or store. At `09782c0`, direct production requests with no cookie, a valid-session-shaped cookie, and an expired-session-shaped cookie all returned 200 and byte-identical HTML. `/` was 17,547 bytes with SHA-256 `00020251da61bb9ef86b4f22a2e8bef20b4ddac1617f280f77bc54a6f28c3c13`; `/mission` was 26,275 bytes with SHA-256 `f05bedb5efaf2e5129fe4f321726a7299ade181b9a98665b2fe36079c281e17f`. Authentication is not implemented until CBD-21, so these are deliberately shaped cookies rather than issued credentials; static generation and the absence of any request/session read are the controlling equivalence evidence. |
 | Role terminology | Neither page names the role CBD-12 has not settled; "Guardian" and "Accountability Partner" are forbidden words in the check. |
 | Contrast | Every colour on both pages is a token pairing in the contrast record above; no page adds a colour. |
 
