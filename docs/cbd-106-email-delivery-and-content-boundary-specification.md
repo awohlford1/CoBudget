@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Defines the email posture CBD-106 evaluates transactional email providers against, including the authentication-versus-product routing recommendation the ticket asks for. It selects no provider; the candidate evaluation measures against it, and CBD-108 makes the selection. |
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-106](https://cobudget.atlassian.net/browse/CBD-106) |
@@ -70,7 +70,7 @@ than a target:
 | Tier | Contract | Maximum content | Volume driver |
 | --- | --- | --- | --- |
 | **Routine product** | `EM-92-001` | A generic subject and body stating only that a CoBudget update is available, directing the recipient to authenticate. No event category, person, budget, membership, account, institution, amount, merchant, label, alert condition, lifecycle fact, deadline, denial reason, or resource identifier. | `DM-102-037` |
-| **Invitation** | `EM-92-002` | That the message is a CoBudget invitation, plus the recipient-bound invitation locator. No inviter identity, budget name, proposed role, membership relationship, financial content, other recipient, expiration reason, or eligibility result. | `DM-102-033` |
+| **Invitation** | `EM-92-002` | That the message is a MoneyPact invitation, plus the recipient-bound invitation locator. No inviter identity, budget name, proposed role, membership relationship, financial content, other recipient, expiration reason, or eligibility result. | `DM-102-033` |
 | **Lifecycle and security** | `EM-92-003` | The safe action class, whether recipient action is required, and an applicable deadline. Nothing else. | `DM-102-034` |
 
 Two consequences follow immediately, and they shape the whole evaluation:

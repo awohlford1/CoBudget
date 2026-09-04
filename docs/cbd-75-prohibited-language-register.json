@@ -17,7 +17,7 @@
     "it plants the frame the denial is trying to remove."
   ],
   "package": "CBD-75",
-  "version": "0.1",
+  "version": "1.0",
   "document": "docs/cbd-75-role-terminology-and-copy-standard.md",
   "negationWindow": 80,
   "negators": [
@@ -48,39 +48,12 @@
   "knownExceptions": [
     {
       "where": "the mission statement",
-      "rule": "PL-75-09",
-      "phrase": "real-time",
-      "kind": "copy-defect",
-      "recorded": "2026-09-02",
-      "why": "The approved mission statement promises real-time insights. Bank data arrives on the aggregation provider's schedule, and the brand foundation's own copy guidance requires describing freshness accurately rather than promising instantaneous updates, so the mission contradicts the rule stated further down the same document. This string is rendered on the landing page and the Mission page today.",
-      "closes": "OI-75-003"
-    },
-    {
-      "where": "the mission statement",
       "rule": "PL-75-10",
       "phrase": "partners",
       "kind": "rule-limit",
       "recorded": "2026-09-02",
       "why": "\"individuals, partners, and families\" is the domestic sense of the word, disambiguated by the company it keeps. PL-75-10 cannot tell it from the role term, and narrowing the pattern enough to try would let the ambiguous cases through. Recorded as a known limit of the rule rather than a defect in the copy.",
       "closes": null
-    },
-    {
-      "where": "value 6 text",
-      "rule": "PL-75-03",
-      "phrase": "oversight",
-      "kind": "copy-defect",
-      "recorded": "2026-09-02",
-      "why": "The Stability value describes the product as building resilience through shared oversight. CBD-12-AC24 and SG-93-093 prohibit copy that frames one member as answerable to another, and oversight is the word that frame is built from. Rendered on the Mission page today.",
-      "closes": "OI-75-003"
-    },
-    {
-      "where": "manifesto paragraph 4",
-      "rule": "PL-75-09",
-      "phrase": "real-time",
-      "kind": "copy-defect",
-      "recorded": "2026-09-02",
-      "why": "The manifesto repeats the mission statement's real-time promise. Same defect, same decision, and it must be corrected in the same change so the two do not diverge. Rendered on the Mission page today.",
-      "closes": "OI-75-003"
     }
   ],
   "scopes": {

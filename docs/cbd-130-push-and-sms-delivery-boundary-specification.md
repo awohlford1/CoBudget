@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved** — Product Owner approved v1.0 on August 21, 2026. Defines the push and SMS posture CBD-130 evaluates providers against. It records that Private MVP has no push provider to select, and that SMS does. |
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-130](https://cobudget.atlassian.net/browse/CBD-130) |
@@ -53,8 +53,8 @@ actually selectable.
 `PN-130-001` — **Both channels carry the fixed `NT-92-001` body and nothing
 else, in any locale, under any preference.**
 
-`NT-92-001` fixes the semantic message: *"You have a new CoBudget update. Open
-CoBudget to review."* or an approved localized equivalent with identical
+`NT-92-001` fixes the semantic message: *"You have a new MoneyPact update. Open
+MoneyPact to review."* or an approved localized equivalent with identical
 information content. It excludes person, budget, membership or role, account,
 institution, event category, and every other customer-specific element.
 
@@ -248,7 +248,7 @@ The posture that survives that:
 `PN-130-009` — **The SMS body is the fixed text, and the only permitted URL is
 the ordinary public application URL.**
 
-`NT-92-002` permits *"only the ordinary public CoBudget application URL if a URL
+`NT-92-002` permits *"only the ordinary public MoneyPact application URL if a URL
 is included"*. No link shortener, no per-recipient link, no click tracking, and
 no campaign parameter — a shortened or rewritten link is a per-recipient
 identifier in a message that is supposed to carry none, and `HG-102-070` gates

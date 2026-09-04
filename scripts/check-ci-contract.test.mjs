@@ -41,6 +41,8 @@ jobs:
       - run: python3 scripts/audit-cbd-73.py
       - run: python3 scripts/audit-cbd-74.py
       - run: python3 scripts/audit-cbd-75.py
+      - run: python3 scripts/audit-cbd-82.py
+      - run: python3 scripts/audit-cbd-95.py
       - run: python3 scripts/audit-cbd-103.py
       - run: python3 scripts/audit-cbd-104.py
       - run: python3 scripts/audit-cbd-105.py

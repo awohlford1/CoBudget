@@ -38,7 +38,7 @@ CHECKS = (
     Path("scripts/check-public-pages.mjs"),
 )
 
-DOCUMENT_VERSION = "0.1"
+DOCUMENT_VERSION = "1.0"
 
 # Exact identifier sets for the reviewed version. A semantic change must update
 # both the document and this expectation, which is what makes drift visible.
@@ -161,8 +161,11 @@ def main() -> int:
             f"{path}: version is not {DOCUMENT_VERSION}",
         )
         audit.check(
-            f"**Draft v{DOCUMENT_VERSION}" in text,
-            f"{path}: status is not Draft v{DOCUMENT_VERSION}",
+            # Anchored on the Status field, not the bare string.  Unanchored,
+            # this matched the "**Approved v1.0**" cell in the revision table
+            # and so passed while the status line said Draft.
+            f"| Status | **Approved v{DOCUMENT_VERSION}" in text,
+            f"{path}: status line is not Approved v{DOCUMENT_VERSION}",
         )
         for heading in REQUIRED_HEADINGS[path]:
             audit.check(heading in text, f"{path}: missing heading {heading!r}")
