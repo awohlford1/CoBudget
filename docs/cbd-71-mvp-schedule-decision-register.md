@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved — MVP Schedule Decisions v1.1, Product Owner approved August 15, 2026** |
-| Document version | 1.1.2 |
+| Document version | 1.1.3 |
 | Decision-set target | MVP Schedule Decisions v1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval of **v1.0** on August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude covering source and traceability, calendar and calculation, and architecture alignment (see traceability record §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent. **v1.1** carries its own review evidence in §8A and its approval state in §9. |
@@ -11,7 +11,7 @@
 | Confluence page | [CBD-71 — MVP Schedule Decisions](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
 | Parent | [CBD-11](https://cobudget.atlassian.net/browse/CBD-11) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
-| Repository baseline | `2262807` (v1.1.2); `88be982` (v1.1.1) |
+| Repository baseline | `9c2425e` (v1.1.3); `2262807` (v1.1.2); `88be982` (v1.1.1) |
 | Last updated | September 4, 2026 |
 
 ## 1. Purpose and authority
@@ -35,7 +35,7 @@ For CBD-71, validated means Product Owner approved, internally consistent, imple
 | CBD-68 | Acceptance Criteria Traceability and Review Record | 1.0 | August 13, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3768321) |
 | CBD-68 | Paycheck and Custom Cadence Scenario Catalog | 1.0 | August 13, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3342349) |
 | CBD-69 | Period Edge Cases and Validation Rule Specification | 1.1 | August 15, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
-| CBD-69 | Acceptance Criteria Traceability and Review Record | 1.1 | August 15, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
+| CBD-69 | Acceptance Criteria Traceability and Review Record | 1.1.1 | August 15, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
 | CBD-69 | Period Edge-Case Scenario Catalog | 1.1 | August 15, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3571722) |
 | CBD-70 | Deterministic Budget Calendar and Financial Scenario Catalog | 1.1 | September 4, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6422529) |
 | CBD-70 | Deterministic Calendar Example Set | 1.0 | August 14, 2026 | [Calendar examples](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6062090) |
@@ -276,10 +276,23 @@ Required by §8.3 and §8.5. Recorded September 4, 2026.
 **Change-control workflow (§8.4).** The sequence is recorded as it happened rather than as it should have run. The re-pin was prepared and merged to `main` as `a6f3030` while CBD-71 was closed, on the reading that a §8.6 editorial correction does not require reopening. The Product Owner directed that the amendment workflow apply to any change to this approved register, so CBD-71 was reopened to In Review on September 4, 2026, this record was completed, and the ticket was re-closed once the completion merged and published. The precedent is CBD-72 `OD-72-06`, which records that CBD-71 was reopened to In Review for the v1.1 amendment rather than being amended while closed. A later editorial correction to this register follows the same route: reopen, amend, merge, publish, re-close.
 
 
+## 8C. Version 1.1.3 source re-pin and impact assessment
+
+Required by §8.3 and §8.5. Recorded September 4, 2026.
+
+**Source-version change (§8.5).** The CBD-69 Acceptance Criteria Traceability and Review Record moved from v1.1 to v1.1.1 on September 4, 2026. The change is editorial in CBD-69's own terms: `OD-69-04` had justified the specification's role model by CBD-12's then-unspecified state, a reason that ceased to hold when CBD-12 closed, so it is now dated to when it was written and the reconciliation it made contingent is recorded as due. No CBD-69 rule, invariant, edge case, fixture, criterion mapping, or approval changed, and the v1.1 approval of August 15, 2026 is retained — which is why the §2 approval date for that row is unchanged while its version moves.
+
+**Affected scope (§8.3).** None. No `SD-071` or `DD-071` row changes status, text, evidence, or dependencies; no CBD-1, CBD-11, CBD-67 through CBD-70, or CBD-71 criterion changes disposition; no scenario, data-model field, interface, alert, audit event, or test changes. The register cites CBD-69 for classification, reconciliation, and validation rules, none of which the correction touches.
+
+**Status under §8.6.** The impact review proves no expected outcome changed, so every decision status is retained and MVP Schedule Decisions v1.1 remains the authoritative decision set.
+
+**Change-control workflow (§8.4).** Followed the route §8B records: CBD-71 was reopened to In Review before the amendment, and re-closed after it merged and published. CBD-69 was reopened and re-closed the same way for its own correction.
+
 ## 9. Approval record
 
 | Version | Date | Author | Review evidence | Product Owner decision |
 | --- | --- | --- | --- | --- |
+| 1.1.3 | September 4, 2026 | Claude with Alexander Wohlford as Product Owner | Editorial correction under §8.6: §2 re-pins the CBD-69 traceability record from v1.1 to its v1.1.1 editorial correction, which dated an `OD-69-04` justification that CBD-12's closure had made false. The §8C impact assessment shows no CBD-71 decision, criterion, scenario, or expected outcome is affected, and the row's approval date is unchanged because CBD-69 v1.1.1 retains its August 15, 2026 approval. Reported by `scripts/check-jira-freshness.py`, which flagged the pin within seconds of the CBD-69 bump. | Editorial under §8.6; every decision status retained; MVP Schedule Decisions v1.1 remains the authoritative decision set |
 | 1.1.2 | September 4, 2026 | Claude with Alexander Wohlford as Product Owner | Editorial correction under §8.6: §2 is re-pinned to the approved CBD-68 v1.1 specification and the approved CBD-70 v1.1 scenario catalog and traceability record, which the register had continued to cite at superseded versions. The §8B impact assessment shows that `SD-071-032`, `SD-071-044`, and `SD-071-046` already agree with the newly pinned text, so no decision, criterion, scenario, or expected outcome changes. Also corrected the front-matter Confluence link, which named a “v1.0 Register” page title that does not exist. The change first merged while the ticket was closed; CBD-71 was then reopened to In Review, this record was completed under §8B, and the ticket was re-closed. | Editorial under §8.6; every decision status retained; MVP Schedule Decisions v1.1 remains the authoritative decision set |
 | 1.1.1 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Editorial correction under §8.6: the §2 baseline row for the CoBudget Future Feature Register moves from August 14 to August 15, 2026 after `FF-011` was captured there. The impact review in §8A records that `FF-011` maps to no `DD-071` row and changes no accepted decision, deferral, or expected outcome. | Editorial under §8.6; every decision status retained, v1.1 remains the approved set |
 | 0.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Initial consolidation of the frozen CBD-67 through CBD-70 baseline; validation and traceability review pending | Pending |
