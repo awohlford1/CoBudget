@@ -127,6 +127,78 @@ class Target:
 # CBD-72 then publishes before CBD-91, which cites its closed decisions, and
 # CBD-91 before CBD-92, which CBD-93 in turn consumes.
 TARGETS: tuple[Target, ...] = (
+    # CBD-67, CBD-68, and CBD-70 were published by hand before this script
+    # existed and were registered on September 4, 2026 so that the pages are
+    # guarded from then on. Their content matched the repository at
+    # registration, so the first run republishes identical text. They publish
+    # first because CBD-71 consolidates their decisions; none is a baseline,
+    # since CBD-71 §2 names the CBD-69 package and the Future Feature Register
+    # as its frozen sources rather than these. Two CBD-70 documents carry a
+    # v1.1 synchronization-review draft status in both places; publishing them
+    # reproduces that state and does not approve it.
+    Target(
+        key="cbd-67-specification",
+        doc_set="cbd-67",
+        page_id="655361",
+        expected_title="CBD-67 — Weekly and Monthly Budget Cycle Workflow Specification",
+        path="docs/cbd-67-weekly-monthly-cadence-workflow-specification.md",
+    ),
+    Target(
+        key="cbd-67-scenarios",
+        doc_set="cbd-67",
+        page_id="688129",
+        expected_title="CBD-67 — Weekly and Monthly Cadence Scenario Catalog",
+        path="docs/cbd-67-weekly-monthly-cadence-scenario-catalog.md",
+    ),
+    Target(
+        key="cbd-67-traceability",
+        doc_set="cbd-67",
+        page_id="720897",
+        expected_title="CBD-67 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-67-acceptance-criteria-traceability.md",
+    ),
+    Target(
+        key="cbd-68-specification",
+        doc_set="cbd-68",
+        page_id="3735553",
+        expected_title="CBD-68 — Paycheck and Custom Budget Cadence Workflow Specification",
+        path="docs/cbd-68-paycheck-custom-cadence-workflow-specification.md",
+    ),
+    Target(
+        key="cbd-68-scenarios",
+        doc_set="cbd-68",
+        page_id="3342349",
+        expected_title="CBD-68 — Paycheck and Custom Cadence Scenario Catalog",
+        path="docs/cbd-68-paycheck-custom-cadence-scenario-catalog.md",
+    ),
+    Target(
+        key="cbd-68-traceability",
+        doc_set="cbd-68",
+        page_id="3768321",
+        expected_title="CBD-68 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-68-acceptance-criteria-traceability.md",
+    ),
+    Target(
+        key="cbd-70-calendar-examples",
+        doc_set="cbd-70",
+        page_id="6062090",
+        expected_title="CBD-70 — Deterministic Calendar Example Set",
+        path="docs/cbd-70-calendar-example-set.md",
+    ),
+    Target(
+        key="cbd-70-scenarios",
+        doc_set="cbd-70",
+        page_id="6422529",
+        expected_title="CBD-70 — Deterministic Budget Calendar and Financial Scenario Catalog",
+        path="docs/cbd-70-scenario-catalog.md",
+    ),
+    Target(
+        key="cbd-70-traceability",
+        doc_set="cbd-70",
+        page_id="6225922",
+        expected_title="CBD-70 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-70-acceptance-criteria-traceability.md",
+    ),
     Target(
         key="cbd-69-specification",
         doc_set="cbd-69",
@@ -397,6 +469,54 @@ TARGETS: tuple[Target, ...] = (
         page_id="11403286",
         expected_title="CBD-73 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-73-acceptance-criteria-traceability.md",
+    ),
+    # CBD-74 consumes the CBD-72 permission model and the CBD-73 lifecycle, and
+    # CBD-75 consumes CBD-72 through CBD-74, so both publish after CBD-73. The
+    # CBD-74 specification and the CBD-75 standard are baselines because the
+    # CBD-76 record cites them as governing collaboration sources; the test
+    # inventory and the two traceability records are cited by nothing later.
+    # The CBD-75 JSON registers are normative companions and remain repository
+    # files, as does the CBD-76 register below.
+    #
+    # These five pages were created as placeholders on September 4, 2026 to
+    # reserve the targets; the first successful run replaces that text with the
+    # approved v1.0.1 (CBD-74) and v1.0 (CBD-75) content already merged to main.
+    Target(
+        key="cbd-74-specification",
+        doc_set="cbd-74",
+        page_id="18776065",
+        expected_title="CBD-74 — Accountability Alert Boundary Specification",
+        path="docs/cbd-74-accountability-alert-boundary-specification.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-74-test-inventory",
+        doc_set="cbd-74",
+        page_id="18612245",
+        expected_title="CBD-74 — Alert Negative and Recovery Test Inventory",
+        path="docs/cbd-74-negative-recovery-test-inventory.md",
+    ),
+    Target(
+        key="cbd-74-traceability",
+        doc_set="cbd-74",
+        page_id="18808833",
+        expected_title="CBD-74 — Acceptance Criteria Traceability and Review Record",
+        path="docs/cbd-74-acceptance-criteria-traceability.md",
+    ),
+    Target(
+        key="cbd-75-standard",
+        doc_set="cbd-75",
+        page_id="18841601",
+        expected_title="CBD-75 — Role Terminology and Customer-Facing Copy Standard",
+        path="docs/cbd-75-role-terminology-and-copy-standard.md",
+        baseline=True,
+    ),
+    Target(
+        key="cbd-75-traceability",
+        doc_set="cbd-75",
+        page_id="18874369",
+        expected_title="CBD-75 — Acceptance-Criteria Traceability and Review Record",
+        path="docs/cbd-75-acceptance-criteria-traceability.md",
     ),
     # CBD-102 derives its gates from the approved CBD-72 permission model, the
     # CBD-91 inventory, the CBD-92 contract registers, and the architecture
