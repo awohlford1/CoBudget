@@ -215,8 +215,14 @@ GOVERNING_BLOBS = {
     Path("docs/cbd-94-risk-mitigation-requirement-register.md"): (
         "ce6b3e105aff7f120eb670d3685c787082911516"
     ),
+    # Re-pinned September 4, 2026 for the CBD-95 v1.0.10 refresh, which brings
+    # the follow-up register's current-state fields up to date with the
+    # September 2 to 4 closures.  CBD-73 cites this register for the Product
+    # Owner dispositions RI-93-001 to RI-93-019; no disposition, priority,
+    # required work, closure evidence, or effect-while-open changed, so no
+    # CBD-73 rule is affected.
     Path("docs/cbd-95-architecture-roadmap-follow-up-register.md"): (
-        "29d884a4238dda85975bc66d1f107ecbf9296a87"
+        "92948bc3cd976c6155c1c23c3b7c872826706d43"
     ),
 }
 
