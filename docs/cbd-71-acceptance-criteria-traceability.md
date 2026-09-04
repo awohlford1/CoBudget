@@ -3,14 +3,14 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved — MVP Schedule Decisions v1.1, Product Owner approved August 15, 2026** |
-| Document version | 1.1 |
+| Document version | 1.1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude (see §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent |
 | Jira | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
 | Confluence page | [CBD-71 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6782985) |
 | Decision register | [MVP Schedule Decisions register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
 | Validation checklist | [Validation checklist](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6160404) |
-| Last updated | August 15, 2026 |
+| Last updated | September 4, 2026 |
 
 ## 1. Completion rule
 
@@ -92,6 +92,7 @@ No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted deci
 | RF-71-23 | Architecture alignment | SD-071-048 makes accessible schedule and reconciliation interaction MVP behavior, but `architecture.md` states no accessibility baseline and its critical automated tests include no accessibility coverage. | Add an accessibility baseline and automated coverage to the architecture. | Open — technical design follow-up |
 | RF-71-24 | Architecture alignment | SD-071-034 depends on the financial-data provider supplying reliable authorization dates. The architecture names a provider adapter with Plaid first; if authorization dates are unreliable, the approved posted-or-settlement fallback becomes the normal path and changes observed period attribution. | Confirm provider authorization-date reliability under CBD-15 before implementation. | Open — provider evidence needed, tracked with FF-007 |
 | RF-71-25 | Product Owner v1.1 amendment | CBD-72 review established that notification channels and delivery preferences belong exclusively to the recipient's personal account, superseding the earlier relationship-level notification policy. | Amend CBD-69 INV-69-25 and scenarios; amend SD-071-044 and its evidence; re-run consistency and scenario checks; synchronize CBD-70 and Confluence; obtain Product Owner approval of the exact revision. | **Resolved.** CBD-69 v1.1 approved August 15, 2026; register §2 baseline updated and the §8.5 impact assessment recorded in §8A. Product Owner approval of the CBD-71 revision remains |
+| RF-71-26 | Source-pin freshness review, September 4, 2026 | The register's §2 frozen baseline still named the CBD-68 specification at v1.0 and the CBD-70 scenario catalog and traceability record at v1.0, although CBD-68 moved to v1.1 on August 15, 2026 and both CBD-70 documents were approved at v1.1 on September 4, 2026. Because §2 states that only the listed artifacts may determine an accepted outcome, the register was reading its sources at superseded versions. | Re-pin the three §2 rows and record the §8.5 impact assessment and §8.3 change record. | **Resolved September 4, 2026** in register v1.1.2 §2 and §8B. The impact assessment found no affected decision: `SD-071-046` already carried the CBD-72 role wording, `SD-071-032` delegates the Late-window timing rather than stating it, and `SD-071-044` already used the three-record alert model. |
 | RF-71-26 | Product Owner v1.1 amendment | CBD-72 AUD-72-011 separated the shared alert fact, recipient-personal state, and external delivery outcome. | Amend SD-071-044 and the permission-12 note to use shared event, mandatory personal instance, and optional delivery attempt; preserve event dedup, instance acknowledgement/archive, and delivery retry/privacy boundaries. | Implemented and synchronized August 15, 2026 |
 
 ## 6. Completion summary
@@ -114,6 +115,7 @@ No CBD-11 criterion is unmet. All 20 are dispositioned against the accepted deci
 
 | Version | Date | Author | Summary | Decision |
 | --- | --- | --- | --- | --- |
+| 1.1.1 | September 4, 2026 | Claude with Alexander Wohlford as Product Owner | Recorded RF-71-26 and its resolution: the register's §2 baseline was re-pinned to CBD-68 v1.1 and the approved CBD-70 v1.1 documents. No criterion mapping, CBD-11 disposition, or follow-up disposition changed. | Editorial; CBD-71 v1.1 remains complete |
 | 1.1 | August 15, 2026 | Alexander Wohlford — Product Owner | Recorded Product Owner approval of MVP Schedule Decisions v1.1 and closed RF-71-21 by the `UD-071-02` decision that in-app, email, push, and SMS are all MVP channels. | **Approved; CBD-71 v1.1 complete** |
 | 1.1.0 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Closed RF-71-25 after the CBD-69 v1.1 approval and aligned this record's version with the register and checklist, which had drifted to three different numbers for one amendment. | Product Owner approval is the only remaining v1.1 gate |
 | 0.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Created initial CBD-71 criterion mapping, CBD-11 disposition, follow-up disposition, and review-finding record against the approved CBD-70 baseline. | Draft; approval pending |

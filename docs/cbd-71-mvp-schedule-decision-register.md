@@ -3,16 +3,16 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved — MVP Schedule Decisions v1.1, Product Owner approved August 15, 2026** |
-| Document version | 1.1.1 |
+| Document version | 1.1.2 |
 | Decision-set target | MVP Schedule Decisions v1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval of **v1.0** on August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude covering source and traceability, calendar and calculation, and architecture alignment (see traceability record §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent. **v1.1** carries its own review evidence in §8A and its approval state in §9. |
 | Jira subtask | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
-| Confluence page | [CBD-71 — MVP Schedule Decisions v1.0 Register](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
+| Confluence page | [CBD-71 — MVP Schedule Decisions](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
 | Parent | [CBD-11](https://cobudget.atlassian.net/browse/CBD-11) |
 | Epic | [CBD-1](https://cobudget.atlassian.net/browse/CBD-1) |
-| Repository baseline | `88be982` |
-| Last updated | August 15, 2026 |
+| Repository baseline | `2262807` (v1.1.2); `88be982` (v1.1.1) |
+| Last updated | September 4, 2026 |
 
 ## 1. Purpose and authority
 
@@ -31,20 +31,22 @@ For CBD-71, validated means Product Owner approved, internally consistent, imple
 | CBD-67 | Weekly and Monthly Budget Cycle Workflow Specification | 1.3 | August 12, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/655361) |
 | CBD-67 | Acceptance Criteria Traceability and Review Record | 1.5 | August 12, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/720897) |
 | CBD-67 | Weekly and Monthly Cadence Scenario Catalog | 1.5 | August 12, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/688129) |
-| CBD-68 | Paycheck and Custom Budget Cadence Workflow Specification | 1.0 | August 13, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3735553) |
+| CBD-68 | Paycheck and Custom Budget Cadence Workflow Specification | 1.1 | August 15, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3735553) |
 | CBD-68 | Acceptance Criteria Traceability and Review Record | 1.0 | August 13, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3768321) |
 | CBD-68 | Paycheck and Custom Cadence Scenario Catalog | 1.0 | August 13, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3342349) |
 | CBD-69 | Period Edge Cases and Validation Rule Specification | 1.1 | August 15, 2026 | [Specification](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3538946) |
 | CBD-69 | Acceptance Criteria Traceability and Review Record | 1.1 | August 15, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3670026) |
 | CBD-69 | Period Edge-Case Scenario Catalog | 1.1 | August 15, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/3571722) |
-| CBD-70 | Deterministic Budget Calendar and Financial Scenario Catalog | 1.0 | August 14, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6422529) |
+| CBD-70 | Deterministic Budget Calendar and Financial Scenario Catalog | 1.1 | September 4, 2026 | [Scenario catalog](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6422529) |
 | CBD-70 | Deterministic Calendar Example Set | 1.0 | August 14, 2026 | [Calendar examples](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6062090) |
-| CBD-70 | Acceptance Criteria Traceability and Review Record | 1.0 | August 14, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6225922) |
+| CBD-70 | Acceptance Criteria Traceability and Review Record | 1.1 | September 4, 2026 | [Traceability](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6225922) |
 | Cross-cutting | CoBudget Future Feature Register | Current at baseline | August 15, 2026 | [Future features](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/950274) |
 
 The v1.0 baseline contained 50 approved governing criteria and 75 approved deterministic scenarios. Version 1.1 is a controlled amendment incorporating **CBD-69 v1.1, approved August 15, 2026**: notification preferences become recipient-controlled personal-account settings, and ALT-07 supplies the active cross-account denial evidence. The §8.5 impact assessment for that source-version change is recorded in the CBD-69 traceability record §12 and summarized in §8A below.
 
 The amendment changes exactly one decision, `SD-071-044`. It touches no calendar, financial, classification, reconciliation, or date-derivation rule, so the 50 governing criteria and 75 scenarios carry forward unchanged in count and in content, with `CBD-69-AC11` and `INV-69-25` now citing their approved v1.1 text. This amendment was approved on August 15, 2026 and is recorded in §9.
+
+**Version 1.1.2, September 4, 2026.** The baseline is re-pinned to the approved CBD-68 v1.1 specification and the approved CBD-70 v1.1 scenario catalog and traceability record. The decision set remains **MVP Schedule Decisions v1.1**: no decision text, status, evidence, or expected outcome changes, so the re-pin is an editorial correction under §8.6. Its §8.5 impact assessment and §8.3 change record are in §8B.
 
 ## 3. Register conventions
 
@@ -243,10 +245,40 @@ Required by §8.3 and §8.5. The v1.1 amendment previously carried neither.
 
 **Editorial correction under §8.6, August 15, 2026.** The §2 baseline row for the CoBudget Future Feature Register moved from August 14 to August 15, 2026 after `FF-011` (category-specific budget horizons) was captured there. Impact review: `FF-011` is a newly captured future concept with target `_TBD_` and status `Captured`. It maps to no `DD-071` row — the deferrals in §5 map to `FF-001` through `FF-010` — and it changes no accepted decision, no deferral, and no expected outcome. `FF-011` sits adjacent to `FF-003` (carry-forward) and `FF-006` (allocation), and the Future Feature Register carries a disambiguation note confirming it reopens neither; the MVP positions stay fixed by `SD-071-028` and `SD-071-031`. Every decision status is unchanged, so the correction retains status under §8.6.
 
+## 8B. Version 1.1.2 source re-pin and impact assessment
+
+Required by §8.3 and §8.5. Recorded September 4, 2026.
+
+**Why this was needed.** §2 states that only the listed artifacts may determine an accepted outcome, so a pin that names a superseded version is a live defect rather than a stale note. Three rows named versions that no longer existed: the CBD-68 specification had moved to v1.1 on August 15, 2026, and the CBD-70 scenario catalog and traceability record were approved at v1.1 on September 4, 2026. The register was reading its own sources at the wrong version.
+
+**Source-version change (§8.5).**
+
+| Source | Pinned before | Pinned now | Impact on this register |
+| --- | --- | --- | --- |
+| CBD-68 Paycheck and Custom Budget Cadence Workflow Specification | 1.0 (August 13, 2026) | 1.1 (August 15, 2026) | **None to any accepted decision.** v1.1 carries two amendments. The CBD-72 role amendment restates PD-68-12 so Viewer visibility follows one visibility profile and the Accountability Partner holds comprehensive role-scoped eligibility with no resource-level provisioning; `SD-071-046` already states exactly that and cites CBD-72, so the register was ahead of its own pin. The CBD-100 correction opens the Late window the calendar day after the expected date while still closing it on the fifth Federal Reserve business day; `SD-071-032` states only the `Projected → Expected today → Late → Missing` progression and delegates the exact timing to CBD-68 `PD-68-07` and CBD-69 `EC-69-10`, so no register text stated the superseded timing. The specification carries no dated revision table; August 15, 2026 is the date its v1.1 content merged, in commits `09826e3`, `b7d25e0`, and `7d846b2`. |
+| CBD-70 Deterministic Budget Calendar and Financial Scenario Catalog | 1.0 (August 14, 2026) | 1.1 (September 4, 2026) | **None to any accepted decision.** v1.1 synchronizes `ALERT-01`, `ALERT-02`, and `ALERT-04` to the three-record alert model this register already adopted in `SD-071-044`, moves the `SEC-01`, `SEC-03`, and alert Viewer fixtures to CBD-72 visibility profiles, and restates the `INC-04` and `VAL-04` Late checkpoints under the CBD-100 rule. The CBD-70 approval record confirms no calendar, interval, target, cash, or monetary result changed between v1.0 and v1.1. |
+| CBD-70 Acceptance Criteria Traceability and Review Record | 1.0 (August 14, 2026) | 1.1 (September 4, 2026) | **None to any accepted decision.** v1.1 re-pins CBD-70's own sources and records the synchronization review. The criterion inventory remains 50 of 50 and the scenario count remains 75. |
+| CBD-70 Deterministic Calendar Example Set | 1.0 | 1.0 | Unchanged. It was not amended and remains approved at v1.0. |
+
+**Affected scope (§8.3).**
+
+| Dimension | Affected items |
+| --- | --- |
+| Decision | None. No `SD-071` or `DD-071` row changes status, text, evidence, or dependencies. `SD-071-032`, `SD-071-044`, and `SD-071-046` were each re-read against the newly pinned sources and already agree with them. |
+| CBD-1 / CBD-11 / CBD-71 criteria | None. Every disposition is unchanged. |
+| CBD-67 / CBD-68 / CBD-69 criteria | None. The 50-criterion inventory is unchanged in count and content. |
+| Scenario IDs | None withdrawn or added. CBD-70's 75 approved scenarios carry forward; `ALERT-01`, `ALERT-02`, `ALERT-04`, `SEC-01`, `SEC-03`, `INC-04`, and `VAL-04` carry amended supporting text within the same IDs. |
+| Data-model fields, interfaces, alerts, audit events, tests | None beyond the three alert layers already recorded in §8A. |
+| Consumers | None re-opened. CBD-72 §5.4.1 continues to inherit `SD-071-044` as approved at v1.1. |
+
+**Status under §8.6.** The impact review above proves that no expected outcome changed, so every decision status is retained and the authoritative decision set remains MVP Schedule Decisions v1.1. This revision changes source pins and adds this record; it changes no rule.
+
+
 ## 9. Approval record
 
 | Version | Date | Author | Review evidence | Product Owner decision |
 | --- | --- | --- | --- | --- |
+| 1.1.2 | September 4, 2026 | Claude with Alexander Wohlford as Product Owner | Editorial correction under §8.6: §2 is re-pinned to the approved CBD-68 v1.1 specification and the approved CBD-70 v1.1 scenario catalog and traceability record, which the register had continued to cite at superseded versions. The §8B impact assessment shows that `SD-071-032`, `SD-071-044`, and `SD-071-046` already agree with the newly pinned text, so no decision, criterion, scenario, or expected outcome changes. Also corrected the front-matter Confluence link, which named a “v1.0 Register” page title that does not exist. | Editorial under §8.6; every decision status retained; MVP Schedule Decisions v1.1 remains the authoritative decision set |
 | 1.1.1 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Editorial correction under §8.6: the §2 baseline row for the CoBudget Future Feature Register moves from August 14 to August 15, 2026 after `FF-011` was captured there. The impact review in §8A records that `FF-011` maps to no `DD-071` row and changes no accepted decision, deferral, or expected outcome. | Editorial under §8.6; every decision status retained, v1.1 remains the approved set |
 | 0.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Initial consolidation of the frozen CBD-67 through CBD-70 baseline; validation and traceability review pending | Pending |
 | 0.2 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Product Owner review accepted all structural recommendations: split compound rows into SD-071-020–048, moved determinism to governance, enumerated business-day policies and alert triggers, separated permissions/enforcement/accessibility, reclassified DD-071-002, and split DD-071-004 from DD-071-010. | Content changes approved for continued review; final v1.0 approval pending |
