@@ -70,7 +70,15 @@ user and per supported event or category. Their content ceilings are fixed by
 - Store timestamps in UTC and keep a budget-space timezone for calendar rules.
 - Generate concrete budget periods from versioned schedule definitions.
 - Preserve historical periods when a user changes a schedule.
-- Scope financial records to a budget space and authorize access server-side.
+- Store provider connections, canonical accounts, and canonical transaction
+  source records in the individual account subject's financial profile.
+- Expose a canonical account to a budget space only through an explicit,
+  versioned account-to-budget assignment. Keep each budget space's
+  classification, category, reporting, permission, and assignment history as
+  separate overlays without duplicating the canonical account or transaction.
+- Authorize every access server-side. Budget-space membership never grants
+  authority over another person's provider connection or unrelated
+  financial-profile records.
 - Treat imported transactions as changeable records because pending items can
   be posted, modified, or removed.
 - Encrypt financial-provider tokens separately from ordinary application data.
