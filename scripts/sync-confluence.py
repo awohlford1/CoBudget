@@ -761,6 +761,29 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-130 — Acceptance Criteria Traceability and Review Record",
         path="docs/cbd-130-acceptance-criteria-traceability.md",
     ),
+    # CBD-76 consolidates approved CBD-71 through CBD-75 and CBD-91 through
+    # CBD-95 decisions, so it publishes after every set above. Neither page is a
+    # baseline: nothing later cites the record, and the traceability report
+    # cites the record rather than the reverse. The machine-readable register
+    # docs/cbd-76-mvp-boundary-register.json is normative with the record but
+    # is not a Confluence page; the record names its repository path.
+    #
+    # Both pages were created as placeholders on September 4, 2026 to reserve
+    # the targets after the package was approved at v1.0 and merged as f7edd90.
+    Target(
+        key="cbd-76-record",
+        doc_set="cbd-76",
+        page_id="18612225",
+        expected_title="CBD-76 — MVP Boundary and Readiness Record",
+        path="docs/cbd-76-mvp-boundary-and-readiness-record.md",
+    ),
+    Target(
+        key="cbd-76-traceability",
+        doc_set="cbd-76",
+        page_id="18579458",
+        expected_title="CBD-76 — Acceptance Criteria Traceability and Completeness Report",
+        path="docs/cbd-76-acceptance-criteria-traceability.md",
+    ),
 )
 
 
