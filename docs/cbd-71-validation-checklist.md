@@ -3,13 +3,13 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved — MVP Schedule Decisions v1.1, Product Owner approved August 15, 2026** |
-| Document version | 1.1 |
+| Document version | 1.1.1 |
 | Decision register | [CBD-71 MVP Schedule Decisions](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6914050) |
 | Jira | [CBD-71](https://cobudget.atlassian.net/browse/CBD-71) |
 | Confluence page | [CBD-71 — MVP Schedule Decisions Validation Checklist](https://cobudget.atlassian.net/wiki/spaces/CBD/pages/6160404) |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner approval of **v1.0** on August 14, 2026, on the evidence of Codex-authored consolidation drafts and an independent AI-assisted critical audit by Claude (see traceability record §5, RF-71-05 through RF-71-24), consistent with the CBD-68 and CBD-70 precedent. **v1.1** evidence is recorded in register §8A. |
-| Last updated | August 15, 2026 |
+| Last updated | September 4, 2026 |
 
 ## 1. Validation standard
 
@@ -19,7 +19,7 @@ A decision is validated only when it is Product Owner approved, internally consi
 
 | Gate | Evidence | Result |
 | --- | --- | --- |
-| Governing sources are identified by artifact and version. | Register §2; CBD-70 traceability §2 | **Pass** — CBD-69 v1.1 approved August 15, 2026; §2 baseline updated and the §8.5 impact assessment recorded in register §8A |
+| Governing sources are identified by artifact and version. | Register §2; CBD-70 traceability §2 | **Pass** — re-verified September 4, 2026 against every pinned artifact. CBD-69 v1.1 was approved August 15, 2026 with its §8.5 impact assessment in register §8A. The CBD-68 specification v1.1 and the CBD-70 v1.1 scenario catalog and traceability record were re-pinned in register §2 with their impact assessment in register §8B. Each of the thirteen rows now names the version its artifact currently carries. |
 | All 50 approved governing criteria are represented by an active decision or governance control. | Register §§3.4, 4; 50 of 50 | Pass |
 | All 75 approved deterministic scenarios are referenced. | Register §§3.4, 4; 75 of 75 | Pass |
 | Every decision has a stable ID and permitted status. | Register §§3–6 | Pass |
@@ -133,6 +133,7 @@ The Pass results mean each decision has evidence in the frozen baseline. The `PO
 
 | Version | Date | Author | Summary | Outcome |
 | --- | --- | --- | --- | --- |
+| 1.1.1 | September 4, 2026 | Claude with Alexander Wohlford as Product Owner | Re-verified the source-identification gate after the register's §2 re-pin to CBD-68 v1.1 and CBD-70 v1.1. No other gate result changed and no decision was revalidated, because the §8B impact assessment shows no decision text or expected outcome changed. | **Complete;** all register-level gates continue to pass |
 | 1.1 | August 15, 2026 | Alexander Wohlford — Product Owner | Recorded Product Owner approval of MVP Schedule Decisions v1.1. All register-level gates pass. `SD-071-044` is Accepted for MVP after `UD-071-02` closed in favour of the register's channel set. | **Complete;** SD-071-020 through SD-071-050 Accepted for MVP |
 | 1.1.0 | August 15, 2026 | Claude with Alexander Wohlford as Product Owner | Closed the CBD-69 source gate after CBD-69 v1.1 was approved, and corrected §5, which simultaneously reported 31 of 31 decisions approved and 31 proposed. The counts now read 30 Accepted and 1 Proposed. Restated the blocking gate as the Product Owner approval alone. | Product Owner approval is the only remaining v1.1 gate |
 | 0.1 | August 14, 2026 | Codex with Alexander Wohlford as Product Owner | Created the validation framework and performed the initial source-consistency pass over SD-071-001–019. | In review |

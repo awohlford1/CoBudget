@@ -77,11 +77,13 @@ CBD-102 convention, it records its own limits:
 The following values are the exact sources observed at the reviewed
 `c096928a903dd5446b26ba21eaf7eaa2d84ce936` baseline. They are recorded rather
 than normalized. A later source change requires an impact review; it must not
-be silently treated as evidence for this draft.
+be silently treated as evidence for this draft. Where a row has since been
+re-pinned to a newer approved version, the impact review that permitted it is
+recorded beside that source's hash in `scripts/audit-cbd-73.py`.
 
 | Source | Exact observed version/status | Git blob at reviewed baseline | CBD-73 use |
 | --- | --- | --- | --- |
-| `docs/cbd-71-mvp-schedule-decision-register.md` | Document version **1.1.1**; decision-set target **MVP Schedule Decisions v1.1**, approved August 15, 2026 | `a0c97c4302ab062a4fbe185014bcf686f14d3fb2` | Alert semantics, mandatory in-app instances, personal delivery preferences, server-side enforcement, accessibility |
+| `docs/cbd-71-mvp-schedule-decision-register.md` | Document version **1.1.2**; decision-set target **MVP Schedule Decisions v1.1**, approved August 15, 2026 | `ee36265983f2400a8c683753d812a8d68a2948de` | Alert semantics, mandatory in-app instances, personal delivery preferences, server-side enforcement, accessibility |
 | `docs/cbd-72-collaboration-permission-model.md` | Document version **0.1.54**; approved August 18, 2026 at v0.1.53, §5.4 amended September 2, 2026 | `f1842e5d020e7781c6808730ae4df43faedaaabd` | Roles, permissions 24–29, one-role/one-Primary invariants, protected actions, transfer, revocation, ownership exits, attribution and audit schema. Re-pinned for the v0.1.54 §5.4 amendment removing the recipient-configurable "privacy" item; CBD-73 cites §5.4 only for the personal-settings boundary, which the amendment reinforces, so no CBD-73 rule is affected |
 | `docs/cbd-91-private-mvp-data-inventory.md` | Document version **1.0.5**, approved | `5e3b1255fa6f6c020a54869cf22828a27792e04d` | Existing data-class, audience, lifecycle, and prohibited-disclosure boundaries; source alignment and new/split classes remain `OI-73-003` |
 | `docs/cbd-94-risk-mitigation-requirement-register.md` | Document version **1.0.4**, approved provider-independent baseline | `ce6b3e105aff7f120eb670d3685c787082911516` | Normative `SR-94-007`–`SR-94-011` invitation security/privacy requirements and dependent release gates |

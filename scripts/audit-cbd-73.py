@@ -181,8 +181,16 @@ TRANSITION_MESSAGE_REFERENCE_MANIFEST: dict[str, set[str]] = {
 NON_EMITTING_MESSAGES = {"MSG-73-020"}
 
 GOVERNING_BLOBS = {
+    # Re-pinned September 4, 2026 for CBD-71 v1.1.2, which re-pins its own
+    # section 2 baseline to the approved CBD-68 v1.1 and CBD-70 v1.1 sources.
+    # It is editorial under CBD-71 section 8.6: no SD-071 or DD-071 decision
+    # changed status, text, or evidence, and MVP Schedule Decisions v1.1 remains
+    # the decision set.  CBD-73 cites this register for alert semantics,
+    # mandatory in-app instances, personal delivery preferences, server-side
+    # enforcement, and accessibility, none of which the re-pin touches, so no
+    # CBD-73 rule is affected.
     Path("docs/cbd-71-mvp-schedule-decision-register.md"): (
-        "a0c97c4302ab062a4fbe185014bcf686f14d3fb2"
+        "ee36265983f2400a8c683753d812a8d68a2948de"
     ),
     # Re-pinned September 2, 2026 for the CBD-72 v0.1.54 section 5.4 amendment,
     # which removed the recipient-configurable "privacy" item.  CBD-73 cites
