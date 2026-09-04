@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "documentVersion": "0.1",
+  "status": "Draft — Product Owner approval required",
+  "reviewDate": "2026-09-03",
+  "owner": "Alexander Wohlford",
+  "classifications": [
+    {
+      "id": "INC-76-001",
+      "classification": "Included",
+      "capability": "Budget-space roles, permissions, and ownership",
+      "boundary": "Exactly one active Primary Owner, multiple active Co-owners, one active role per person per budget space, default-deny Viewer scope, full-space Collaborator scope, and the fixed comprehensive financially read-only Accountability Partner boundary. Primary transfer may be accepted by any other active member after the approved ceremony; the outgoing Primary becomes a Co-owner, existing Co-owners remain unchanged, and connection authority remains individual.",
+      "sources": ["CBD-72 §§2–8", "CBD-12-AC01–AC11", "CBD-12-AC28–AC33"],
+      "owner": "Product Owner",
+      "targetPhase": "Private MVP"
+    },
+    {
+      "id": "INC-76-002",
+      "classification": "Included",
+      "capability": "Invitation, consent, role change, revocation, and removal lifecycle",
+      "boundary": "Only accepted current membership confers access. Invitation links use opaque single-use reconciliation codes; invited-channel proof is separate from authentication and consent; expansions require current disclosure and consent; reductions, revocation, and removal cut off authority at commit and remain space-scoped.",
+      "sources": ["CBD-73 §§3–12", "CBD-12-AC12–AC18", "CBD-12-AC34–AC36"],
+      "owner": "Product Owner",
+      "targetPhase": "Private MVP"
+    },
+    {
+      "id": "INC-76-003",
+      "classification": "Included",
+      "capability": "Built-in alert facts, recipient instances, and delivery attempts",
+      "boundary": "The closed built-in event set, category meanings, triggers, numeric thresholds, eligibility, mandatory eligible in-app instances, personal optional external delivery, firm acknowledgements, informational resolution, and system-owned cooldown/deduplication are fixed MVP behavior.",
+      "sources": ["CBD-72 §5.4.1", "CBD-74 §§3–9", "CBD-12-AC19–AC21"],
+      "owner": "Product Owner",
+      "targetPhase": "Private MVP"
+    },
+    {
+      "id": "INC-76-004",
+      "classification": "Included",
+      "capability": "Notification privacy and personal delivery control",
+      "boundary": "Push, SMS, and routine product email are content-free. Protected detail remains in authenticated in-app views. Each recipient controls only their own supported external channels, quiet hours, digest/immediate choice, and personal presentation state; preferences never widen content.",
+      "sources": ["CBD-74 §§5–8", "CBD-12-AC11", "CBD-12-AC19", "CBD-12-AC21", "CBD-92 NT-92/EM-92"],
+      "owner": "Product Owner",
+      "targetPhase": "Private MVP"
+    },
+    {
+      "id": "INC-76-005",
+      "classification": "Included",
+      "capability": "Primary-only customer administrative-history export",
+      "boundary": "A recipient-bound package may contain only allowlisted customer-visible membership/invitation, role/Viewer-scope, ownership, and protected-action history and expires within 24 hours. It excludes privileged security, fraud/risk, telemetry, support, authentication/session/network, connection, financial, and personal-state data.",
+      "sources": ["CBD-72 §5.7", "CBD-12 description", "FU-95-016"],
+      "owner": "Product Owner",
+      "targetPhase": "Private MVP"
+    },
+    {
+      "id": "INC-76-006",
+      "classification": "Included",
+      "capability": "Supportive role terminology and copy safety",
+      "boundary": "Primary Owner, Co-owner, Collaborator, Viewer, and Accountability Partner are the only role names. Accountability Partner is the sole official support-role term. Customer copy is voluntary, plain, nonjudgmental, and may not imply legal authority, surveillance entitlement, punishment, money control, or irrevocable access.",
+      "sources": ["CBD-75 §§3–7", "CBD-12-AC23–AC24"],
+      "owner": "Product Owner",
+      "targetPhase": "Private MVP"
+    },
+    {
+      "id": "INC-76-007",
+      "classification": "Included",
+      "capability": "Server-side authorization, audit, isolation, and negative testing",
+      "boundary": "Authorization is deny-by-default and binds the current account/profile, space, membership, consent, resource scope, lifecycle, purpose/effect, and relevant versions. Denials change no protected state and are audited. Queries, caches, jobs, exports, alerts, reports, and derived views cannot cross budget spaces or leak excluded resources.",
+      "sources": ["CBD-72 §§7–9", "CBD-73 §14", "CBD-74 §§12–14", "CBD-94", "CBD-12-AC05", "CBD-12-AC10–AC11"],
+      "owner": "Engineering and Security",
+      "targetPhase": "Private MVP"
+    },
+    {
+      "id": "INC-76-008",
+      "classification": "Included",
+      "capability": "Accessible collaboration and recovery behavior",
+      "boundary": "Invitation, consent, authorization denial, alert, error, exit, and recovery interfaces must meet the approved accessibility requirements; approval of a product rule is not accessibility conformance evidence.",
+      "sources": ["CBD-71 SD-071-048", "CBD-73 OI-73-004", "CBD-74 OI-74-003", "CBD-75 OI-75-002", "CBD-12-AC24–AC25"],
+      "owner": "Design and Engineering",
+      "targetPhase": "Private MVP"
+    },
+    {
+      "id": "PRO-76-001",
+      "classification": "Prohibited",
+      "capability": "Unauthorized access",
+      "boundary": "No missing, stale, inferred, identifier-only, cross-space, or client-asserted input may grant protected access.",
+      "sources": ["CBD-72 PM-72-001–PM-72-004", "CBD-12-AC05", "CBD-12-AC10"],
+      "owner": "Engineering and Security",
+      "targetPhase": "Permanent boundary"
+    },
+    {
+      "id": "PRO-76-002",
+      "classification": "Prohibited",
+      "capability": "Money movement",
+      "boundary": "No collaboration role or product interaction initiates or executes movement of money.",
+      "sources": ["CBD-72 §4", "CBD-75 PL-75-01", "CBD-12-AC09"],
+      "owner": "Product Owner",
+      "targetPhase": "Permanent boundary"
+    },
+    {
+      "id": "PRO-76-003",
+      "classification": "Prohibited",
+      "capability": "Spending or purchase approval",
+      "boundary": "The product and its roles do not approve, deny, authorize, or punish a person's spending or purchases.",
+      "sources": ["CBD-75 PL-75-01/PL-75-06", "CBD-12-AC09", "CBD-12-AC24"],
+      "owner": "Product Owner",
+      "targetPhase": "Permanent boundary"
+    },
+    {
+      "id": "PRO-76-004",
+      "classification": "Prohibited",
+      "capability": "Transaction blocking",
+      "boundary": "No role, alert, acknowledgement, comment, or workflow can block an external or recorded transaction.",
+      "sources": ["CBD-72 §4", "CBD-12-AC09", "CBD-12-AC20"],
+      "owner": "Product Owner",
+      "targetPhase": "Permanent boundary"
+    },
+    {
+      "id": "PRO-76-005",
+      "classification": "Prohibited",
+      "capability": "External-account control",
+      "boundary": "No budget role grants control over another person's external financial account or connection; only the individual authorizer manages their connection.",
+      "sources": ["CBD-72 PM-72-009/PM-72-011", "CBD-12-AC09", "CBD-12-AC28"],
+      "owner": "Product Owner and Security",
+      "targetPhase": "Permanent boundary"
+    },
+    {
+      "id": "PRO-76-006",
+      "classification": "Prohibited",
+      "capability": "User lockout",
+      "boundary": "No member can lock another person out of their personal account; the sole Primary always has transfer and archival exits, and support cannot invent an authority-transfer bypass.",
+      "sources": ["CBD-72 §6", "CBD-73 IC-73-008", "CBD-12-AC17", "CBD-12-AC22"],
+      "owner": "Product Owner and Security",
+      "targetPhase": "Permanent boundary"
+    },
+    {
+      "id": "PRO-76-007",
+      "classification": "Prohibited",
+      "capability": "Coercive monitoring",
+      "boundary": "The product does not create surveillance entitlement, forced acknowledgement, another person's alert-state control, retaliation mechanics, or hidden participation.",
+      "sources": ["CBD-74 §§7–10", "CBD-75 PL-75-05/PL-75-07/PL-75-12", "CBD-12-AC22–AC24"],
+      "owner": "Product Owner and Safety",
+      "targetPhase": "Permanent boundary"
+    },
+    {
+      "id": "PRO-76-008",
+      "classification": "Prohibited",
+      "capability": "Cross-budget disclosure",
+      "boundary": "Membership, resource identifiers, alerts, exports, counts, timing, searches, reports, caches, and derived data from one budget space cannot disclose another space or a resource outside current scope.",
+      "sources": ["CBD-72 PM-72-006/PM-72-010", "CBD-74 §13", "CBD-12-AC11", "CBD-12-AC31"],
+      "owner": "Engineering and Security",
+      "targetPhase": "Permanent boundary"
+    },
+    {
+      "id": "EXC-76-001",
+      "classification": "Excluded from MVP",
+      "capability": "Legally supervised arrangements",
+      "rationale": "The approved roles are voluntary product roles and confer no legal, fiduciary, guardianship, conservatorship, or supervisory authority.",
+      "reconsiderationGate": "Separate product scope plus qualified legal, privacy, safety, identity, and jurisdictional review before any design or claim.",
+      "sources": ["CBD-12 scope", "CBD-75 PL-75-02/PL-75-13"],
+      "owner": "Product Owner and Legal",
+      "targetPhase": "No target phase"
+    },
+    {
+      "id": "EXC-76-002",
+      "classification": "Excluded from MVP",
+      "capability": "Minor accounts or arrangements involving minors",
+      "rationale": "Age, consent, guardian authority, safety, and regulatory requirements are not established by the Private-MVP evidence.",
+      "reconsiderationGate": "Separate minor-account proposal with qualified legal, privacy, safety, identity, consent, and jurisdictional evidence.",
+      "sources": ["CBD-12 scope", "CBD-75 §3.3"],
+      "owner": "Product Owner and Legal",
+      "targetPhase": "No target phase"
+    },
+    {
+      "id": "EXC-76-003",
+      "classification": "Excluded from MVP",
+      "capability": "Employer monitoring or organizational administration",
+      "rationale": "The model is person-to-person collaboration inside a household budget, not institutional oversight or workforce monitoring.",
+      "reconsiderationGate": "A separately validated product, legal basis, consent model, data boundary, anti-coercion review, and organizational authorization model.",
+      "sources": ["CBD-12 scope", "CBD-93 abuse analysis"],
+      "owner": "Product Owner, Legal, Privacy, and Safety",
+      "targetPhase": "No target phase"
+    },
+    {
+      "id": "EXC-76-004",
+      "classification": "Excluded from MVP",
+      "capability": "Unsupported legal, security, privacy, usability, or market-validation claims",
+      "rationale": "Product Owner approval and internal checks establish product decisions or conformance only; they are not specialist or external validation.",
+      "reconsiderationGate": "The exact claim must be supported by its named qualified discipline and evidence programme before use.",
+      "sources": ["CBD-75 VP-75-01–VP-75-07", "CBD-12-AC25", "CBD-132"],
+      "owner": "Claim owner and qualified reviewer",
+      "targetPhase": "Before the affected release or claim"
+    },
+    {
+      "id": "DEF-76-001",
+      "classification": "Deferred",
+      "capability": "Role stacking within one budget space",
+      "rationale": "One role per membership keeps authority, visibility, consent, revocation, notification, and audit behavior deterministic for Private MVP.",
+      "risk": "Combining roles could accidentally union authority or visibility, create ambiguous consent and removal outcomes, and weaken default deny.",
+      "evidenceGate": "A product decision, permission-union/intersection model, consent and revocation lifecycle, abuse/threat review, migration rules, accessible disclosure, and exhaustive authorization/isolation fixtures.",
+      "sources": ["CBD-72 §2.1", "CBD-12-AC03"],
+      "owner": "Product Owner",
+      "targetPhase": "Post-MVP only",
+      "followUp": "CBD-365"
+    },
+    {
+      "id": "DEF-76-002",
+      "classification": "Deferred",
+      "capability": "User-authored arbitrary alert rules and thresholds",
+      "rationale": "Private MVP uses a closed built-in event set so eligibility, copy, privacy, deduplication, and response behavior remain deterministic.",
+      "risk": "Arbitrary conditions can create coercive monitoring, notification leakage, unbounded fan-out, inconsistent semantics, and unsafe automation.",
+      "evidenceGate": "Product rule language and operator model, ownership/recipient authority, privacy and anti-coercion review, limiter and cost model, accessible builder design, and deterministic abuse/deduplication/isolation tests.",
+      "sources": ["FF-009", "CBD-74 §4.1", "CBD-12-AC19"],
+      "owner": "Product Owner",
+      "targetPhase": "Highest-priority post-MVP review",
+      "followUp": "CBD-366"
+    },
+    {
+      "id": "DEF-76-003",
+      "classification": "Deferred",
+      "capability": "Final managed delivery-provider selection",
+      "rationale": "Provider choice is an execution-level decision and does not reopen the approved content, consent, recipient, or authority model.",
+      "risk": "A provider set can violate identity, regional, retention, deletion, webhook, cost, outage, or lock-in assumptions across categories.",
+      "evidenceGate": "CBD-108 exact-package approval, cross-provider coherence, signed-in pricing/quotes, cost warning and stop thresholds, legal/contract needs, residual-risk ownership, and applicable observation gates.",
+      "sources": ["CBD-108", "CBD-95 FU-95-028", "CBD-74 OI-74-005"],
+      "owner": "CBD-108 owner and Product Owner",
+      "targetPhase": "Before provider-dependent Private-MVP implementation",
+      "followUp": "CBD-108"
+    },
+    {
+      "id": "DEF-76-004",
+      "classification": "Deferred",
+      "capability": "Final production message inventory and templates",
+      "rationale": "CBD-73–75 approve semantics and ceilings, not every final string, locale, rendering, provider template, or comprehension result.",
+      "risk": "Premature strings can leak protected detail, imply false authority or safety, expose private reasons, fail accessibility, or drift by channel.",
+      "evidenceGate": "Versioned exact-copy inventory and template hashes, Product Owner approval, channel and locale equivalence, assistive-technology and comprehension evidence, privacy/safety/legal review where routed, and forbidden-field fixtures.",
+      "sources": ["CBD-73 OI-73-004", "CBD-74 OI-74-003/OI-74-005", "CBD-75 OI-75-001/OI-75-002", "FU-95-017"],
+      "owner": "Product Owner with Design, Accessibility, Privacy, Safety, and Legal reviewers",
+      "targetPhase": "Before customer-facing Private-MVP release",
+      "followUp": "CBD-367"
+    },
+    {
+      "id": "DEF-76-005",
+      "classification": "Deferred",
+      "capability": "Formal external validation",
+      "rationale": "Internal product decisions and structural/mechanical audits are not customer, market, legal, privacy, safety, accessibility, or security validation.",
+      "risk": "Treating internal approval as external evidence would overstate safety, usability, compliance, comprehension, and market fit.",
+      "evidenceGate": "Separate qualified review legs with explicit claims, samples/methods, owners, results, residual risks, and release dispositions.",
+      "sources": ["CBD-12-AC25", "CBD-75 §8", "CBD-132", "CBD-273"],
+      "owner": "CBD-132 owner and each qualified discipline owner",
+      "targetPhase": "Before the release or claim gated by each discipline",
+      "followUp": "CBD-132 coordinates distinct specialist issues; CBD-273 owns the qualified safety/privacy review leg. CBD-13/CBD-77–CBD-80 own beta metric definitions, not validation results."
+    }
+  ]
+}
