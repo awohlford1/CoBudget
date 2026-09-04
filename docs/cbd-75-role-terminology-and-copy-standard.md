@@ -2,20 +2,20 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft v0.1 — Product Owner review and approval required. Per-surface strings remain gated by `OI-75-001`** |
-| Document version | 0.1 |
+| Status | **Approved v1.0 — the Product Owner approved this exact version on September 3, 2026.** Approval fixes the role vocabulary, the copy standard, and both machine-readable registers as the controlling baseline. It closes no open issue, supplies no evidence, and approves no per-surface string; `OI-75-001` and the five gates beside it remain binding |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-75](https://cobudget.atlassian.net/browse/CBD-75) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
 | Governing permission model | CBD-72 v0.1.54 — §2.1, §2.2, §5.1, §5.3, §5.8 |
-| Governing lifecycle | CBD-73 v1.0.2 — §2 cross-cutting semantic rules; the `MSG-73-*` inventory |
+| Governing lifecycle | CBD-73 v1.0.3 — §2 cross-cutting semantic rules; the `MSG-73-*` inventory |
 | Governing alert boundary | CBD-74 v1.0.1 — `CP-74-01`–`CP-74-08`, `AB-74-015`, `PB-74-06`, `PB-74-09`, `PB-74-12`, §6.2, §6.4 |
 | Semantic standard | `RI-93-016` and `RI-93-017`, approved August 16, 2026; enforcement gate `FU-95-021` |
 | Brand source | `docs/brand-foundation.md`; brand decided September 2, 2026 |
 | Machine-readable registers | `docs/cbd-75-prohibited-language-register.json`, `docs/cbd-75-approved-copy.json` |
 | Enforcement | `npm run check:copy`, `npm run check:pages`, `python3 scripts/audit-cbd-75.py` |
 | Traceability | `docs/cbd-75-acceptance-criteria-traceability.md` |
-| Last updated | September 2, 2026 |
+| Last updated | September 3, 2026 |
 
 > **Authority.** CBD-72 controls the permission model, CBD-73 the lifecycle semantics, CBD-74 the alert boundary, and `docs/brand-foundation.md` the brand. This document controls only how those decisions are named and worded. Where it appears to change one of them, the governing source wins and this document is wrong.
 
@@ -182,18 +182,23 @@ What is scanned is declared copy only — the strings in `docs/cbd-75-approved-c
 
 ### 6.3 Recorded exceptions
 
-Approved brand copy is held to this standard, and in four places it does not meet it. Each is recorded with its reason and the issue that settles it. The check fails if an exception stops matching, so the ledger cannot outlive the copy it excuses.
+Approved brand copy is held to this standard. One exception is recorded, and the check fails if it stops matching, so the ledger cannot outlive the copy it excuses.
 
 | Where | Rule | Phrase | Kind | Settled by |
 | --- | --- | --- | --- | --- |
-| The mission statement | `PL-75-09` | real-time | Copy defect | `OI-75-003` |
 | The mission statement | `PL-75-10` | partners | Rule limit | Not a defect |
-| Value 6 text | `PL-75-03` | oversight | Copy defect | `OI-75-003` |
-| Manifesto paragraph 4 | `PL-75-09` | real-time | Copy defect | `OI-75-003` |
 
-The three copy defects are the same two problems. The mission statement and the manifesto both promise real-time insights, which the brand foundation's own guidance forbids three sections further down, and which the product cannot deliver because bank data arrives on the aggregation provider's schedule. The Stability value describes the product as building resilience through shared oversight, which is the framing CBD-12-AC24 and `SG-93-093` prohibit. All three are live on the public pages today. Correcting approved brand copy is a Product Owner decision, so this document records the finding and changes nothing.
+In the mission statement, partners means life partners, disambiguated by the company it keeps. `PL-75-10` cannot tell that from the role term, and narrowing the pattern enough to try would let the genuinely ambiguous cases through. It is recorded as a known limit of the rule, not a defect in the copy.
 
-The rule limit is different in kind. In the mission statement, partners means life partners, disambiguated by the company it keeps. `PL-75-10` cannot tell that from the role term, and narrowing the pattern enough to try would let the genuinely ambiguous cases through. It is recorded as a known limit of the rule, not a defect in the copy.
+**Three copy defects were found, and are now corrected.** The v0.1 draft recorded them as enforced exceptions rather than fixing them, because rewriting approved brand copy is a Product Owner decision and not an editorial one. That decision was taken on September 3, 2026, and `docs/brand-foundation.md` changed in the same commit as this section.
+
+| Where | Was | Now | Rule |
+| --- | --- | --- | --- |
+| Mission statement | collaborative tools and real-time insights | collaborative tools and clear insights | `PL-75-09` |
+| Value 6, Stability | consistent habits, shared oversight, and meaningful insights | consistent habits, shared understanding, and meaningful insights | `PL-75-03` |
+| Manifesto paragraph 4 | shared visibility, real-time insights, and gentle accountability | shared visibility, practical insights, and gentle accountability | `PL-75-09` |
+
+The two real-time promises were one defect stated twice. The brand foundation forbids promising instantaneous bank updates three sections below the mission that promised them, and the aggregation provider's schedule could not have delivered them in any case. Shared oversight was the framing CBD-12-AC24 and `SG-93-093` prohibit, sitting in the one value most likely to be quoted back as a description of what the product does. All three were live on the public pages until this change.
 
 ## 7. Consistency checklist
 
@@ -239,12 +244,12 @@ Evidence log. This is the template and the current state; every row is honest ab
 
 ## 9. Open-issue register
 
-| ID | Issue | Effect while open |
+| ID | Issue | Status and effect |
 | --- | --- | --- |
 | `OI-75-001` | Per-surface exact strings are not approved here. This document approves role names, forms, enums, short and long role descriptions, and the standard. | CBD-73 `MSG-73-*` and CBD-74 `CP-74-*` strings stay gated under `FU-95-017` and `OI-73-004`. Nothing ships as final copy. |
 | `OI-75-002` | No accessibility or comprehension evidence exists for any copy in this package. | `SD-071-048` is asserted as a requirement, never as conformance. `VP-75-03` and `VP-75-04` bind. |
-| `OI-75-003` | Approved brand copy breaches this standard in three places: real-time in the mission statement and the manifesto, and shared oversight in the Stability value. All are live on the public pages. | Recorded as exceptions in §6.3 and enforced as such. Correcting approved brand copy needs a Product Owner decision; until then the pages ship copy this standard prohibits. |
-| `OI-75-004` | Legacy guardian vocabulary survives in `docs/product-plan.md` and `docs/architecture.md`, which `SR-94-145` requires removing. `docs/product-plan.md` also still frames the Accountability Partner naming decision as open and describes the role's access as scoped and revocable by the subject, which CBD-94 records as materially misleading. | `CK-75-06` fails on review. `FU-95-005`'s instruction not to make a broad cleanup change puts this in its own focused task, which must also amend CBD-91 `CR-91-003` and `CR-91-004` so a corrected condition is not left recorded as live. |
+| `OI-75-003` | Approved brand copy breached this standard in three places: real-time in the mission statement and the manifesto, and shared oversight in the Stability value. All three were live on the public pages. | **Closed September 3, 2026 by Product Owner decision.** The three strings were corrected in `docs/brand-foundation.md`, the exceptions were removed from the register, and §6.3 records what changed. The public pages render the corrected copy, since they read the brand document at build time. |
+| `OI-75-004` | Legacy guardian vocabulary survived in `docs/product-plan.md` and `docs/architecture.md`, which `SR-94-145` required removing. The product plan also framed the Accountability Partner naming decision as still open and described the role's access as scoped and revocable by the subject, which CBD-94 records as materially misleading. | **Closed September 3, 2026.** Both files now use the approved vocabulary, the naming decision is stated as settled, and the Accountability Partner boundary reads comprehensive, fixed-field, financially read-only. `CK-75-06` passes on review. The four records that described the old condition were amended in the same change: CBD-91 to v1.0.2 and CBD-94 to v1.0.1, with the CBD-95 manifest and traceability recording the re-freeze. Five pinned blobs were re-frozen with their reasons stated, and `scripts/audit-cbd-95.py`, which had been failing unnoticed since August 18, is now wired into CI. |
 | `OI-75-005` | The vocabulary and the register are English-only. A locale may have no equivalent for Accountability Partner, and the register's patterns do not transfer. | No localized copy is approved. §3.2 item 5 keeps display names out of payloads so this stays possible. |
 | `OI-75-006` | The `RI-93-017` support response has its semantic shape at `PT-75-05`, but exact copy, restricted intake, staff procedure, and training are absent. | Gated by `FU-95-021` and `FU-95-025`. No support macro is approved. `CK-75-10` cannot pass. |
 | `OI-75-007` | `SG-93-014` least-privilege recommendation behavior stays unimplemented until CBD-12 or CBD-75 records an explicit Product Owner decision (`SR-94-142`). | No copy may imply a role can be narrowed or can contribute outside its approved boundary. §3.1 descriptions state fixed boundaries only. |
@@ -254,4 +259,11 @@ Evidence log. This is the template and the current state; every row is honest ab
 
 | Version | Date | Author | Change | Approval |
 | --- | --- | --- | --- | --- |
+| 1.0 | September 3, 2026 | Alexander Wohlford — Product Owner, with Claude | **Approved.** Promoted the v0.7 content unchanged; the only edits were status and version. No rule, role, written form, enum, message pattern, prohibition, checklist item, validation rule, or open issue was altered by approval. Approval fixes `RD-75-01`–`RD-75-06`, `RT-75-01`–`RT-75-06`, `CS-75-01`–`CS-75-12`, `PT-75-01`–`PT-75-09`, `PL-75-01`–`PL-75-14`, `CK-75-01`–`CK-75-10`, and `VP-75-01`–`VP-75-07` as the controlling baseline for role naming and customer copy. It accepts no evidence gap: `OI-75-001`, `OI-75-002`, and `OI-75-005` through `OI-75-008` remain open, and the evidence log's four empty rows remain empty. | **Approved v1.0** |
+| 0.7 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the `CBD-12-AC17` and `CBD-12-AC36` settlement, which took both criteria to the product model's own term rather than to a brand. No rule, role, pattern, checklist item, or open issue changed in this document; the finding is recorded in the traceability record. | Draft; Product Owner review required |
+| 0.6 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-92 brand amendment, which applied `RT-75-01` to the four customer-visible strings its transport and email contracts fix, and to the five approved documents quoting them. The governing lifecycle source moves to CBD-73 v1.0.3. No rule, role, pattern, checklist item, or open issue changed in this document; the findings are recorded in the traceability record. | Draft; Product Owner review required |
+| 0.5 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Version alignment for the CBD-91 `CR-91-002` correction, which the Product Owner authorized separately: the product plan's Collaborator connection authority now matches CBD-72 §2.2, and traceability finding 9 moves from deliberately-uncorrected to corrected. No rule, role, pattern, checklist item, or open issue changed in this document. | Draft; Product Owner review required |
+| 0.4 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Closed `OI-75-004`. The records that described the corrected guardian condition were amended in the same change: CBD-91 to v1.0.2, CBD-94 to v1.0.1, and the CBD-95 manifest and traceability recording the re-freeze. Five pinned blobs were re-frozen with stated reasons, three of which had been stale since August 18, 2026 because `scripts/audit-cbd-95.py` was never a CI step. It is one now. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |
+| 0.3 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Legacy vocabulary correction. `docs/product-plan.md` and `docs/architecture.md` now use the approved role names, state the naming decision as settled, and describe the Accountability Partner boundary as comprehensive, fixed-field, and financially read-only, satisfying `SR-94-145`. `OI-75-004` records the prose as corrected and stays open for the four records that still describe the old condition in the present tense. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |
+| 0.2 | September 3, 2026 | Claude with Alexander Wohlford as Product Owner | Brand copy correction. The Product Owner decided the three defects the v0.1 draft had recorded as exceptions rather than fixed. `docs/brand-foundation.md` changed in the same commit: the mission statement and the manifesto no longer promise real-time insights, and the Stability value no longer describes the product as shared oversight. `OI-75-003` is closed, the register's exception list keeps only the `PL-75-10` rule limit, and §6.3 records what changed so the finding is not lost with the defect. No rule, role, pattern, or checklist item changed. | Draft; Product Owner review required |
 | 0.1 | September 2, 2026 | Claude with Alexander Wohlford as Product Owner | Initial complete draft. Role vocabulary `RD-75-01`–`RD-75-06`, product naming `RT-75-01`–`RT-75-06`, copy standard `CS-75-01`–`CS-75-12`, message patterns `PT-75-01`–`PT-75-09`, prohibited language `PL-75-01`–`PL-75-14`, consistency checklist `CK-75-01`–`CK-75-10`, validation plan `VP-75-01`–`VP-75-07`, and eight open issues. Two machine-readable registers and two build checks, each proven to fail on a deliberate violation. Recorded four exceptions where approved brand copy breaches the standard, three of them genuine defects awaiting a Product Owner decision. | Draft; Product Owner review required |

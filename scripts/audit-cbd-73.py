@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Repeatable structural and traceability audit for the CBD-73 package.
 
-The audit fixes the exact Approved v1.0.2 identifier sets, source baseline, declared
+The audit fixes the exact Approved v1.0.3 identifier sets, source baseline, declared
 totals, cross-document references, open-gate namespace, and repository wiring.
 It proves documentation integrity only.  Product approval, implementation,
 specialist review, and runtime evidence remain governed by OI-73-001..012.
@@ -191,11 +191,19 @@ GOVERNING_BLOBS = {
     Path("docs/cbd-72-collaboration-permission-model.md"): (
         "f1842e5d020e7781c6808730ae4df43faedaaabd"
     ),
+    # Re-pinned September 3, 2026, most recently for CBD-91 v1.0.4, which
+    # records the corrected CR-91-001/002/003/004/005/006 sources.  Every row
+    # kept its controlling outcome; no data class, classification, flow, rule,
+    # or evidence gap changed, so no CBD-73 rule is affected.
     Path("docs/cbd-91-private-mvp-data-inventory.md"): (
-        "1e1134415915238752440da4b2e4acaa293d20e6"
+        "5e3b1255fa6f6c020a54869cf22828a27792e04d"
     ),
+    # Re-pinned September 3, 2026, most recently for CBD-94 v1.0.3, which marks
+    # every section 8 reconciliation done and re-pins its own CBD-91 and CBD-92
+    # source rows.  CBD-73 cites SR-94-007 through SR-94-011, none of which
+    # changed.
     Path("docs/cbd-94-risk-mitigation-requirement-register.md"): (
-        "8be224d4ef5779f1743bdd7b4a53f731f31d564e"
+        "ce6b3e105aff7f120eb670d3685c787082911516"
     ),
     Path("docs/cbd-95-architecture-roadmap-follow-up-register.md"): (
         "29d884a4238dda85975bc66d1f107ecbf9296a87"
@@ -358,12 +366,12 @@ def check_markdown_structure(audit: Audit, path: Path, text: str) -> None:
         f"{path}: trailing whitespace on lines {', '.join(map(str, trailing))}",
     )
     audit.check(
-        "| Status | **Approved v1.0.2 " in text,
-        f"{path}: package status is not Approved v1.0.2",
+        "| Status | **Approved v1.0.3 " in text,
+        f"{path}: package status is not Approved v1.0.3",
     )
     audit.check(
-        "| Document version | 1.0.2 |" in text,
-        f"{path}: document version is not 1.0.2",
+        "| Document version | 1.0.3 |" in text,
+        f"{path}: document version is not 1.0.3",
     )
 
     headings = re.findall(r"^#{2,6}\s+(.+)$", text, flags=re.MULTILINE)
@@ -514,8 +522,8 @@ def main() -> int:
             EXPECTED_REVIEW_FINDINGS,
         )
         audit.check(
-            "| Document version | 1.0.2 |" in review_text,
-            f"{REVIEW}: remediation review is not version 1.0.2",
+            "| Document version | 1.0.3 |" in review_text,
+            f"{REVIEW}: remediation review is not version 1.0.3",
         )
 
     trace_review_rows = table_ids(texts[TRACE], r"RV-73-\d{3}")

@@ -126,5 +126,7 @@ console.log(
   `Copy language check passed: ${strings.length} CBD-75 strings across ${approved.roles.length} roles and ${brandStrings(brand).length} brand strings cleared ${register.rules.length} rules, each of which caught its own example`,
 );
 console.log(
-  `  ${register.knownExceptions.length} recorded exceptions still match, ${defects} of them approved copy that breaches this standard and awaits a Product Owner decision under OI-75-003`,
+  defects === 0
+    ? `  ${register.knownExceptions.length} recorded exceptions still match, none of them a copy defect`
+    : `  ${register.knownExceptions.length} recorded exceptions still match, ${defects} of them approved copy that breaches this standard and awaits a decision under OI-75-003`,
 );
