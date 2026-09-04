@@ -2,35 +2,37 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Issues the CBD-108 decision package on the evidence that exists on August 29, 2026. **It selects no provider, because no candidate in any category is selectable**, and §2 records why that is a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. |
-| Document version | 0.68 |
+| Status | **Draft — not approved.** Issues the CBD-108 decision package and records the provider selections. **Six categories are selected and push is deferred** (§4), under CBD-103 §3.3 route B by Product Owner decision of September 2, 2026: every selection at `ELIGIBLE-PENDING-EVIDENCE` with its observation tests deferred to build rather than performed, no combined cost model, and the ticket's seventh acceptance criterion — Product Owner approval of the package — not met. §2 records the position the package inherited on August 29, 2026, when no candidate was selectable, and why that was a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. **Until v0.69 this row and the prose in §1, §2.1, §4 and §8 still said the package selected no provider**, six tranches after the first selection — `OI-108-079`. |
+| Document version | 0.69 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Cross-Category Coherence Review v0.68; Combined Cost Model v0.68; Carried Item Disposition Register v0.68; Acceptance Criteria Traceability v0.68; Evidence Retrieval Pass v0.68 |
+| Companions | Cross-Category Coherence Review v0.69; Combined Cost Model v0.69; Carried Item Disposition Register v0.69; Acceptance Criteria Traceability v0.69; Evidence Retrieval Pass v0.69 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
-| Repository baseline | `9bd04bb` |
-| Last updated | August 29, 2026 |
+| Repository baseline | `054bc56` |
+| Last updated | September 3, 2026 |
 
 ## 1. Purpose and standing
 
 CBD-108's title has two halves — *"Select managed provider set **and** issue
-decision package"* — and only one of them is available on current evidence.
+decision package"* — and both are now delivered: the package on August 29,
+2026, and the selection on September 2, 2026 under route B, recorded in §4.
 
-This document issues the package. It does not select, and §2 explains that the
-inability to select is not a judgment this document is making. The ticket's
-first acceptance criterion permits exactly this: *"Every category is
-**selected, deferred, or blocked by a named evidence gap**."* Three outcomes,
-not one.
+This document issues the package and records the selections. Until September 2
+it could not select, and §2 explains that the inability to select was not a
+judgment this document was making. The ticket's first acceptance criterion
+names three outcomes: *"Every category is **selected, deferred, or blocked by a
+named evidence gap**."* §4 uses two of them: six categories selected, push
+deferred.
 
 **What this document does.** It gives each category an explicit disposition, a
 named gap where it is blocked, a fallback where one can be named, the review
 trigger that changes the disposition, and the legal and contractual work the
 category will need. It closes nothing by silence.
 
-**What it does not do.** It names no preferred provider, publishes no ranking,
-performs no observation, retrieves no price, and grants no exception. It also
+**What it does not do.** It publishes no ranking, performs no observation,
+retrieves no price, and grants no exception. It also
 does not weaken any evaluation's verdict: every verdict below is the one its own
 approved package recorded, restated rather than re-derived.
 
@@ -49,6 +51,11 @@ gate is `UNPROVEN`, and a candidate with one or more `UNPROVEN` and no `FAIL` is
 `ELIGIBLE-PENDING-EVIDENCE`, which that section defines as *not disqualified,
 but not selectable*.
 
+**Evidence register §3.3.1 amended that on September 2, 2026, for the Private MVP
+phase only**: a candidate at `ELIGIBLE-PENDING-EVIDENCE` may be selected, with
+the observations still owed and the risk CBD-103 §3.3 stated accepted rather than
+retired. §4 records the selections made under it.
+
 | Category | Subtask | Candidates | Verdicts | Observation-bound pass tests |
 | --- | --- | --- | --- | --- |
 | **H** — Hosting, runtime, jobs, telemetry | CBD-103 | C1 Google Cloud, C2 AWS, C3 Azure | **C1 `ELIGIBLE-PENDING-EVIDENCE`; C2 and C3 `INELIGIBLE`** — `HG-102-013` `FAIL` at CBD-103 v1.4, corrected for C1 at v1.6 | 10 (`OI-103-008`) |
@@ -64,12 +71,12 @@ but not selectable*.
 route-A guardrail that observations run only on candidates without a documentary
 `FAIL`, drops out of the observation pass entirely. Category N's field is two.
 
-### 2.1 Why a selection cannot be made by weighing what is known
+### 2.1 Why a selection could not be made by weighing what was known
 
 The ticket's second acceptance criterion — *"No selection rests only on a
-weighted score"* — is satisfied here in the strongest available form: **no
-selection rests on anything, because none is made.** Three rules make the
-position binding rather than cautious.
+weighted score"* — was satisfied on August 29, 2026 in the strongest available
+form: **no selection rested on anything, because none was made.** Three rules
+made the position binding rather than cautious.
 
 * **`CR3` — cost never overrides a gate.** The one category with retrieved
   prices, identity, has a spread of `$0.00 + unknowns` to `$35.00/month`
@@ -81,6 +88,17 @@ position binding rather than cautious.
 * **Evidence register §4 — re-verify before final selection.** Evidence must be
   current *on the date the provider is chosen*. Selecting now on August evidence
   and observing afterwards inverts that rule.
+
+**Route B, September 2, 2026, changed none of these three rules.** Evidence
+register §3.3.1 amends only §3.3's *"cannot be selected until resolved"*, for the
+Private MVP phase: a candidate at `ELIGIBLE-PENDING-EVIDENCE` may be selected,
+the observations remain owed, a `FAIL` remains disqualifying, and the risk
+CBD-103 §3.3 stated is accepted rather than retired. The §4 selections were made
+on the August evidence with observation deferred to build — the sequence the
+third bullet warns against — so that warning is carried as an accepted risk
+(§4, `OI-108-001`) rather than answered. None of the six selections rests on a
+score, a price, or an exception; `OI-108-074` records the two that were broken
+on vendor footprint.
 
 ## 3. Disposition vocabulary
 
@@ -108,7 +126,7 @@ been shown to have.
 
 Six categories, seven dispositions. **Six selected, one deferred.**
 
-**Five categories are selected at `ELIGIBLE-PENDING-EVIDENCE`** under CBD-103 §3.3's route B,
+**Six categories are selected at `ELIGIBLE-PENDING-EVIDENCE`** under CBD-103 §3.3's route B,
 taken by Product Owner decision of September 2, 2026 and recorded at evidence register
 §3.3.1.
 
@@ -131,8 +149,6 @@ identity, email and SMS, and Plaid for financial connectivity.**
 hosting selection forces non-Google vendors in identity, email and SMS. All three
 went to the same vendor, so the result is **Google Cloud for hosting and
 database, AWS for identity, email and SMS**.
-
-**Category F is not selected**, and route B does not reach it — §4.5.
 
 **What route B does not do is as important as what it does.** The ten pass
 tests are deferred, not cancelled. The risk CBD-103 §3.3 stated when it offered
@@ -539,8 +555,8 @@ performed, and this package does not constitute one.**
 
 ## 8. What this package does not establish
 
-* **No provider is selected, in any category.** Nothing here is a preference, a
-  shortlist within a shortlist, or a ranking.
+* **No ranking is published.** Each selection in §4 records the basis it rests
+  on; nothing here is a preference or a shortlist within a shortlist.
 * **No verdict moves.** Every verdict in §2 is restated from its approved
   package.
 * **No gate outcome, rubric score, price, or evidence record changes.**

@@ -25,10 +25,14 @@ What is specific to CBD-108, and why each guard exists:
   class and fails if the published table has drifted from what the rules
   produce.
 
-* CBD-108 selects nothing. That is a permitted acceptance-criterion outcome
-  rather than an oversight, so the audit asserts it positively: no document in
-  this package may record a category as Selected while its source evaluation
-  holds no ELIGIBLE verdict.
+* CBD-108 selected six categories on September 2, 2026 under route B, at
+  ELIGIBLE-PENDING-EVIDENCE with the observations deferred to build (evidence
+  register section 3.3.1). The audit asserts that the disposition register
+  states that basis and its deferred consequence on its face, states the
+  selection outcome, and no longer carries the pre-selection claim that it
+  selects no provider -- a claim this audit required until tranche 65, six
+  tranches after it stopped being true. It also fails if any source evaluation
+  moves to ELIGIBLE, because the dispositions would then need revisiting.
 
 Documentation integrity only. It verifies no gate result, retrieves no
 evidence, prices nothing, performs no observation, and does not establish that
@@ -56,7 +60,7 @@ RETRIEVAL = Path("docs/cbd-108-evidence-retrieval-pass.md")
 PACKAGE_FILES = (DISPOSITION, COHERENCE, COST, CARRIED, TRACE, RETRIEVAL)
 
 # The commit each document was written against.
-REPOSITORY_BASELINE = {path: "`9bd04bb`" for path in PACKAGE_FILES}
+REPOSITORY_BASELINE = {path: "`054bc56`" for path in PACKAGE_FILES}
 
 SOURCE_PACKAGES = ("103", "104", "105", "106", "107", "130")
 
@@ -277,8 +281,9 @@ def main() -> int:
                 f"cbd-{package}: verdict row carries no recognised verdict",
             )
 
-    # A source evaluation holding no ELIGIBLE verdict may not be recorded here
-    # as Selected. This is the acceptance criterion stated as a guard.
+    # No source evaluation holds an ELIGIBLE verdict. If one appears, the
+    # route-B selections were made on a weaker basis than is now available
+    # and the dispositions must be revisited.
     eligible_anywhere = False
     for package in SOURCE_PACKAGES:
         source = read(
@@ -403,9 +408,17 @@ def main() -> int:
     )
 
     # --- the package does not overclaim -----------------------------------
+    # Tranche 65: this guard required the words "selects no provider" for six
+    # tranches after the register selected six categories, which kept the
+    # stale sentence in place. Inverted: the register must state the outcome
+    # and must not carry the old claim.
     audit.check(
-        "selects no provider" in texts[DISPOSITION],
-        "disposition register: must state that it selects no provider",
+        "Six selected, one deferred" in texts[DISPOSITION],
+        "disposition register: must state the selection outcome on its face",
+    )
+    audit.check(
+        "selects no provider" not in texts[DISPOSITION],
+        "disposition register: still carries the pre-route-B claim that it selects no provider",
     )
     audit.check(
         "clears nothing" in texts[COHERENCE],
