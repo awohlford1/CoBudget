@@ -38,6 +38,7 @@ const REQUIRED_WORKFLOW_COMMANDS = [
   "python3 scripts/audit-cbd-73.py",
   "python3 scripts/audit-cbd-74.py",
   "python3 scripts/audit-cbd-75.py",
+  "python3 scripts/audit-cbd-76.py",
   "python3 scripts/audit-cbd-82.py",
   "python3 scripts/audit-cbd-95.py",
   "python3 scripts/audit-cbd-103.py",
