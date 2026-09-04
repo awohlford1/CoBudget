@@ -114,6 +114,25 @@ licence.
 | `RF-92-011` | Product Owner confirmation of the CBD-92 §6 flow-to-boundary crossing map | Nothing directly, but an error there propagates into every CBD-94 verification target |
 | `RF-92-012` | Concrete `RL-92-*` windows, thresholds, burst allowances, counting-key derivation, and counter storage | Release of every rate-limited surface |
 
+One of these is not waiting on a design. **`RF-92-008` is blocked on a person.**
+`OP-92-004` requires the requester and the approver to be distinct strongly
+authenticated identities, and `OP-92-006` requires backup data access, key
+recovery, restore execution, and return-to-service approval to be separated so
+that no one person can combine data and keys. With a single operator neither is
+satisfiable, and CBD-102 §2.5 records that the CBD-94 solo-operator disposition
+which would have relaxed those two gates does not exist, so both stand firm.
+
+CBD-245 already owns the answer and states it plainly: the second-principal
+recovery custody role is defined and nobody holds it. Naming that person is a
+Product Owner decision available now; provisioning their identity waits on the
+CBD-120 environment and IAM work, because the provider accounts do not exist
+yet. The rest of `RF-92-008` — mediated tooling, evidence capture, notice
+delay, and recovery rehearsal — is routed to CBD-120, CBD-62, and CBD-247
+through CBD-249.
+
+So `RF-92-008` should not be read as missing analysis. Its design is spread
+across live tickets and its blocking element is an empty seat.
+
 ## Synchronization flow
 
 1. Verify and durably record each provider webhook.
