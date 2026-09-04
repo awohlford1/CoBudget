@@ -35,6 +35,10 @@ const REQUIRED_EXTERNAL_ACTIONS = new Map([
 
 const REQUIRED_WORKFLOW_COMMANDS = [
   "python3 scripts/check-doc-vocabulary.py",
+  // --offline only: the freshness check's Jira half needs credentials the
+  // runner does not have. The offline half compares pinned source versions
+  // against the documents they name and is deterministic.
+  "python3 scripts/check-jira-freshness.py --offline",
   "python3 scripts/audit-cbd-73.py",
   "python3 scripts/audit-cbd-74.py",
   "python3 scripts/audit-cbd-75.py",
