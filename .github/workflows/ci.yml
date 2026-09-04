@@ -33,6 +33,13 @@ jobs:
       - name: Check document vocabulary consistency
         run: python3 scripts/check-doc-vocabulary.py
 
+      # --offline is the half that needs no Jira credentials: it compares every
+      # pinned source version against the document it names, which is how the
+      # CBD-71 baseline sat on CBD-68 v1.0 for twenty days after v1.1 landed.
+      # The status half reads live Jira and stays a manual pre-closure step.
+      - name: Check pinned source versions
+        run: python3 scripts/check-jira-freshness.py --offline
+
       - name: Check CBD-73 documentation package
         run: python3 scripts/audit-cbd-73.py
 

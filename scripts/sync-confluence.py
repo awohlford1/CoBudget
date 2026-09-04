@@ -59,21 +59,26 @@ from __future__ import annotations
 
 import argparse
 import html
+import importlib
 import os
 import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-try:
-    import markdown  # type: ignore
-except ImportError:  # pragma: no cover - dependency guidance
-    sys.exit("Missing dependency. Run: pip install markdown requests")
 
-try:
-    import requests  # type: ignore
-except ImportError:  # pragma: no cover - dependency guidance
-    sys.exit("Missing dependency. Run: pip install markdown requests")
+def require(name: str):
+    """Import a publish-time dependency, with installation guidance if absent.
+
+    These are imported where they are used rather than at module level so the
+    TARGETS table can be read by tooling that only needs the page-to-file map.
+    `scripts/check-jira-freshness.py` does exactly that, and runs in CI where
+    neither package is installed.
+    """
+    try:
+        return importlib.import_module(name)
+    except ImportError:  # pragma: no cover - dependency guidance
+        sys.exit(f"Missing dependency: {name}. Run: pip install markdown requests")
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -954,6 +959,7 @@ def session_from_env() -> tuple[requests.Session, str]:
             "repository root."
         )
 
+    requests = require("requests")
     session = requests.Session()
     session.auth = (email, token)
     session.headers.update({"Accept": "application/json"})
@@ -968,6 +974,7 @@ def to_storage(markdown_text: str) -> str:
     tables, lists, inline code, bold, and links. A ```mermaid fence becomes a
     code block; see the MERMAID_FENCE comment for why that is the decision.
     """
+    markdown = require("markdown")
     rendered = markdown.markdown(
         markdown_text,
         extensions=["tables", "fenced_code", "sane_lists", "attr_list"],
