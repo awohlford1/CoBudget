@@ -3,12 +3,12 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Gives an explicit disposition to every open question and open item carried forward by the six CBD-15 category packages — **227 in total**, none closed by silence. Evidence register §7 requires that carrying: *"A question that stops being asked is recorded as `Absent` evidence, which scores 0 under rubric rule R3."* Completeness is guaranteed mechanically by `scripts/audit-cbd-108.py`; the class assigned to each item is derived from the item's own recorded text by the stated rule in §3, and 23 items are recorded as **not derivable**, which is itself a finding. |
-| Document version | 0.78 |
+| Document version | 0.79 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.69; Cross-Category Coherence Review v0.69; Combined Cost Model v0.69; Acceptance Criteria Traceability v0.69; Evidence Retrieval Pass v0.69 |
+| Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
 | Last updated | September 4, 2026 |
