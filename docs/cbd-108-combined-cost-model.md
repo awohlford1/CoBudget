@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.73 |
+| Document version | 0.74 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -102,7 +102,7 @@ category where the metering question is as consequential as the rate.
 | **D** — PostgreSQL | **C1 fully priced** — September 4, 2026 | **C1's complete list pricing is retrieved** (`EV-102-300`): compute, storage, backup and egress, at `us-central1`. The line is still not final, for three reasons that are not price questions — no `CR0` tier is chosen (`OQ-105-009`), the region is not fixed, and storage bills provisioned capacity rather than `DM-102-030`'s database size (`OQ-108-077`). At the three tiers priced the category runs `$7.74` to `$49.38`/month, comfortably inside the `$250` ceiling. **The tier to price is identified for C3**: `EV-102-231` records that Azure's cheapest tier is excluded from production support, so `CR0` is plausibly General Purpose at 2 vCores / 8 GiB rather than Burstable — pending `OQ-108-010` |
 | **E** — Email | **Yes** — August 29, 2026 | Retrieved by this package: `EV-102-212`–`215`. C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` at Base. C3's rate carries the vendor's own *"illustrative purposes"* disclaimer and is held at Low confidence |
 | **F** — Financial connectivity | **Unit only** — September 4, 2026 | No rate is published (`EV-102-298`), so `OQ-107-020` still needs provider contact. **The metering unit is answered**: Plaid bills per `Item` (`EV-102-299`), pointing at `DM-102-010`'s 61 connections at Base rather than 135 accounts — held at Medium against a wording conflict in Plaid's own material |
-| **N** — Push and SMS | **Partly** — August 29, 2026 | Floors and registration fees retrieved for both candidates (`EV-102-227`–`228`); **C2's per-segment rate was not obtainable** and carrier fees are unquantified for it (`OQ-108-008`) |
+| **N** — Push and SMS | **SMS fully priced** — September 4, 2026 | **C2's per-segment rate and carrier fee are retrieved** from AWS's own CSV (`EV-102-309`): `$0.00774` per message part plus `$0.00421` 10DLC carrier fee, giving `$11.72`/month at Base including the `$10.00` campaign and `$1.00` number. Push has no provider to price. Formerly: floors and registration fees retrieved for both candidates (`EV-102-227`–`228`); C2's per-segment rate was not obtainable and carrier fees are unquantified for it (`OQ-108-008`) |
 
 **A combined total therefore has three known-ish terms out of six**, and three
 `UNKNOWN`. There is still no honest way to present that as a low/base/high
