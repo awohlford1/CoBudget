@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Four of seven acceptance criteria are met, two partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.77 |
+| Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Five of seven acceptance criteria are met, one partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
+| Document version | 0.78 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -142,8 +142,7 @@ this set.**
 
 ### AC6 — CBD-14 findings have explicit dispositions
 
-**Status: Partially met**, and §4.1 records why the criterion cannot be read
-literally.
+**Status: Met.**
 
 The carried-item register gives an explicit disposition to all **227** open
 questions and items from the six category packages, with completeness enforced
@@ -152,10 +151,22 @@ reached the CBD-15 packages, because CBD-14's output arrives as the `SR-94-*`,
 `EM-92-*`, `NT-92-*` and `DI-91-*` registers rather than as a separate findings
 list.
 
-**Why partial.** Two limits. `OI-108-015` records that 24 of the 227 do not
-state, in their own text, what would resolve them, so their class is `D0` —
-recorded honestly rather than guessed. And §4.1 below records that the
-reconciliation artifact the ticket names does not exist in the form named.
+**The dependency has an address, established at retrieval pass §4.85.** `FU-95-028`
+is the CBD-95 follow-up whose target is CBD-15 and CBD-102–108 and whose source is
+*"`RK-94-006`, `SR-94-039–043/146`, `PR-94-*`"* — the CBD-14 findings this criterion
+asks about, routed here by an approved register. §4.85 dispositions each: two are
+carried as gates pending the observation pass, three are CoBudget obligations that
+provider selection does not discharge, one is an open risk, and two are recorded as
+mis-routed to `FU-95-028` in the first place.
+
+**Two residuals, stated rather than hidden.** `RK-94-006` remains open at 15 High, and
+the gates expressing `SR-94-040` and `SR-94-041` — `HG-102-014` and `HG-102-024` — are
+`UNPROVEN` until the observation pass runs. An explicit disposition is not a closed
+finding, and this criterion asks for the former.
+
+`OI-108-015`'s 24 `D0` items are not a failure of this criterion. `D0` **is** an explicit
+disposition, and an honest one: it states that the item's own recorded text does not say
+what would resolve it, and names the consequence.
 
 ### AC7 — Product Owner approves the exact package and residual risks
 
@@ -202,6 +213,13 @@ CBD-15 packages as approved registers, not as a reconciliation document.
 **This package followed the approved documents and proceeded.** If the Product
 Owner reads the dependency differently, the AC6 mapping changes and no evidence
 does. Recorded at `OI-108-006`.
+
+**Refined at tranche 74.** The finding above is correct and stopped one step short.
+The named artifact does not exist, but the dependency does, and its address is
+`FU-95-028` — the CBD-95 follow-up routing `RK-94-006`, `SR-94-039–043/146` and
+`PR-94-*` to CBD-15 and CBD-102–108. Retrieval pass §4.85 dispositions each and moves
+AC6 to Met. `OI-108-006` stays open only for the wording of the ticket's own
+`DEPENDENCIES` line, which names an artifact that was never produced.
 
 ### 4.2 The Jira blocking links
 
@@ -255,7 +273,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-108-018 | **Three of seven acceptance criteria are partially met and one is not met**, and the unmet one is the approval gate itself. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
+| OI-108-018 | **One of seven acceptance criteria is partially met and one is not met**, and the unmet one is the approval gate itself. Was three partially met at tranche 65; AC4 closed at tranche 66 on the budget-ceiling decision and AC6 at tranche 74 once `FU-95-028` was identified as the dependency's address. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
 
 ## 8. Revision record
 
