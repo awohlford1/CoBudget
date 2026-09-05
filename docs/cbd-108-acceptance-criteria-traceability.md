@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Six of seven acceptance criteria are met and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.79 |
+| Document version | 0.80 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -11,7 +11,7 @@
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
-| Last updated | September 4, 2026 |
+| Last updated | September 5, 2026 |
 
 ## 1. Package contents
 
@@ -50,7 +50,9 @@ partial would be generous to itself.
 **Amended September 2, 2026. The criterion is now met in its first branch.** Six
 categories are selected and push is deferred, under CBD-103 §3.3's route B and
 evidence register §3.3.1 — selection at `ELIGIBLE-PENDING-EVIDENCE`, with the ten
-observation tests deferred to build rather than cancelled.
+observation-bound pass tests deferred to build rather than cancelled. **Counted
+per candidate that is twenty-seven observations across three provider
+accounts**, scoped at retrieval pass §4.83.
 
 **This table previously read *"Blocked"* in every row and stated that zero
 categories were selected.** It was four tranches stale: the document's version was
@@ -119,7 +121,7 @@ a single-ecosystem set across five categories while the third does not.
 | --- | --- |
 | Owner | **Explicit** — Product Owner, per `EX-102-001` |
 | Cadence | **Explicit** — monthly, aligned to the provider billing period |
-| Actions | **Explicit** — disposition §5, including the rule that no automatic tier downgrade is permitted because `CR0` ties tier to gate clearance |
+| Actions | **Explicit** — disposition §6, including the rule that no automatic tier downgrade is permitted because `CR0` ties tier to gate clearance |
 | Cliffs | **Explicit** — six enumerated in cost model §5.1 |
 | Warning threshold | **Explicit** — `USD 175.00` per month, 70% of the ceiling |
 | Stop threshold | **Explicit** — `USD 250.00` per month; `USD 3,000.00` per year |
@@ -134,14 +136,18 @@ could never have closed on its own. The cost template's own row left the door
 open: *"a ceiling can be introduced later if one becomes obvious."*
 
 **The Product Owner reopened and re-decided `OI-102-017` on September 4, 2026**
-at `USD 250.00` per month. Both thresholds follow from it and are stated in
-disposition §5.
+at `USD 250.00` per month. Both thresholds follow from it and are stated at
+disposition §6.
 
-**What the ceiling does not do.** Prices remain `UNKNOWN` in three of six
-categories, so whether the selected set sits under the ceiling cannot yet be
-answered — the thresholds exist, the comparison does not. That is `OI-108-011`,
-which is a separate deliverable and remains open. Cost model §7 lists the
-retrievals that would close the price side.
+**And the comparison the thresholds exist for can now be made.** Tranches 68
+through 71 closed the price side in every category, so the selected set can be
+measured against the ceiling rather than only judged eligible for one: `$45.57`
+/ `$62.56` / `$164.21` monthly, **every scenario inside both thresholds**, with
+High clearing the `$175` warning by `$10.79`. `OI-108-011` is closed.
+
+**What the ceiling does not do** is exclude a provider. It sets review and
+escalation, not eligibility — `CR0` ties tier to gate clearance, so disposition
+§6 permits no automatic downgrade on a breach.
 
 ### AC5 — Legal/contract review needs and limitations are stated
 
@@ -179,7 +185,7 @@ the gates expressing `SR-94-040` and `SR-94-041` — `HG-102-014` and `HG-102-02
 `UNPROVEN` until the observation pass runs. An explicit disposition is not a closed
 finding, and this criterion asks for the former.
 
-`OI-108-015`'s 24 `D0` items are not a failure of this criterion. `D0` **is** an explicit
+`OI-108-015`'s 23 `D0` items are not a failure of this criterion. `D0` **is** an explicit
 disposition, and an honest one: it states that the item's own recorded text does not say
 what would resolve it, and names the consequence.
 
@@ -191,13 +197,20 @@ This is the gate the package is submitted to, not a claim it can make about
 itself. The residual risks requiring explicit acceptance are:
 
 1. **The selections were made at `ELIGIBLE-PENDING-EVIDENCE`** under route B, so
-   **the ten observation tests are deferred to build, not performed** (`OI-108-001`, amended September 2, 2026). CBD-103 §3.3 stated the risk when it offered
+   **the ten observation-bound pass tests are deferred to build, not performed**
+   (`OI-108-001`, amended September 2, 2026) — **twenty-seven observations across
+   three provider accounts** once counted per candidate (retrieval pass §4.83).
+   CBD-103 §3.3 stated the risk when it offered
    the route: *"a gate that fails on first observation invalidates the selection
    after integration work has started"*. **It is largest in category F**, which
    rests on two documentary `PASS`es of some twenty-seven.
 2. **No coherence clearance** (`OI-108-007`) — six named combinations are
    conditional risks, not cleared ones.
-3. **No cost totals or thresholds** (`OI-108-002`, `OI-108-011`).
+3. **The cost model's largest line is its weakest source** (`OI-108-081`).
+   ~~No cost totals or thresholds~~ — both were produced on September 4, 2026 and
+   `OI-108-002` and `OI-108-011` are closed. What replaces that risk is narrower
+   and real: category F is `Attested` rather than `Documented`, and it is 68% of
+   the High bill.
 4. **Category F is not comparable with the other five** (`OI-108-003`).
 5. **No independent review** (`OI-108-004`) — this package and all six it
    consumes were written and reviewed by the same person.

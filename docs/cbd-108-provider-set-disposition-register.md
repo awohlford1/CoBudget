@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package and records the provider selections. **Six categories are selected and push is deferred** (§4), under CBD-103 §3.3 route B by Product Owner decision of September 2, 2026: every selection at `ELIGIBLE-PENDING-EVIDENCE` with its observation tests deferred to build rather than performed, no combined cost model, and the ticket's seventh acceptance criterion — Product Owner approval of the package — not met. §2 records the position the package inherited on August 29, 2026, when no candidate was selectable, and why that was a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. **Until v0.69 this row and the prose in §1, §2.1, §4 and §8 still said the package selected no provider**, six tranches after the first selection — `OI-108-079`. |
-| Document version | 0.79 |
+| Document version | 0.80 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -11,7 +11,7 @@
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
 | Repository baseline | `054bc56` |
-| Last updated | September 4, 2026 |
+| Last updated | September 5, 2026 |
 
 ## 1. Purpose and standing
 
@@ -116,9 +116,9 @@ been shown to have.
 
 | # | Category | Disposition | Named gap |
 | --- | --- | --- | --- |
-| 1 | **H** — Hosting | **Selected: C1 Google Cloud** | **Forced, not chosen** — C2 and C3 are `INELIGIBLE` on `HG-102-013`, so C1 is the only candidate standing. Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. Ten observation tests and every price line remain outstanding and resolve during build |
+| 1 | **H** — Hosting | **Selected: C1 Google Cloud** | **Forced, not chosen** — C2 and C3 are `INELIGIBLE` on `HG-102-013`, so C1 is the only candidate standing. Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **Priced September 4, 2026** at a flat `$24.31`/month across all three scenarios — every usage-metered component sits inside free tier even at High, so the line is always-on infrastructure. Ten observation tests remain outstanding and resolve during build |
 | 2 | **I** — Identity | **Selected: C2 Amazon Cognito** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. C2 and C3 tied 3—3 on documentary evidence and the identity gates `PASS` for all three; **the tie was broken on vendor footprint**, which is not a scored criterion. Nine observation tests resolve during build |
-| 3 | **D** — PostgreSQL | **Selected: C1 Cloud SQL** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **The first selection to trade documentary evidence for architecture** — C3 led 4—3 and holds the corpus's only `HG-102-013` `PASS`. Eight observation tests and every price line resolve during build |
+| 3 | **D** — PostgreSQL | **Selected: C1 Cloud SQL** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **The first selection to trade documentary evidence for architecture** — C3 led 4—3 and holds the corpus's only `HG-102-013` `PASS`. **Priced September 4, 2026** at `$7.68` / `$7.74` / `$8.36` on `db-f1-micro`; `OQ-105-009`'s `CR0` tier choice and `OQ-108-077`'s provisioned-storage question are selections rather than retrievals. Eight observation tests resolve during build |
 | 4 | **E** — Email | **Selected: C2 Amazon SES** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **Decided on evidence coverage, not on price** — the Base spread is $14.96/month in absolute terms. Eleven observation tests, requiring live sending, resolve during build |
 | 5 | **F** — Financial connectivity | **Selected: C6 Plaid** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. **The thinnest evidence base of the six** — C6 and C9 tied on two documentary `PASS`es each against ~27 gates. Broken on CoBudget's own approved inventory, not on vendor material. Nine observation tests and the `OI-102-023` documentary gap resolve during build |
 | 6a | **N** — SMS | **Selected: C2 AWS End User Messaging** | Selected at `ELIGIBLE-PENDING-EVIDENCE` under route B, September 2, 2026. C2 and C3 tied 3—3; `OI-130-020` and vendor footprint both favour C2. Observation tests and the A2P carrier floors at `OQ-108-008` resolve during build |
@@ -151,7 +151,8 @@ went to the same vendor, so the result is **Google Cloud for hosting and
 database, AWS for identity, email and SMS**.
 
 **What route B does not do is as important as what it does.** The ten pass
-tests are deferred, not cancelled. The risk CBD-103 §3.3 stated when it offered
+tests are deferred, not cancelled — **twenty-seven observations across three
+provider accounts** once counted per candidate, scoped at CBD-108 §4.83. The risk CBD-103 §3.3 stated when it offered
 the route — *"a gate that fails on first observation invalidates the selection
 after integration work has started"* — is accepted, not retired.
 
@@ -526,12 +527,13 @@ Two facts govern them, both recorded upstream rather than discovered here:
   September 4, 2026: `USD 250.00` per month, `USD 3,000.00` per year. Cost still
   cannot exclude a provider on its own, because `CR0` ties tier to gate
   clearance; the thresholds govern review and escalation.
-* **Prices are `UNKNOWN` in three of six categories**, down from five after the
-  August 29, 2026 retrieval pass priced category E and partly priced category N.
-  So whether the selected set sits under the ceiling cannot yet be answered. Identity and email carry
-  retrieved figures; two of identity's three totals depend on unresolved tier
-  questions (CBD-104 §6.6), and email's C3 rate is held at Low confidence on the
-  vendor's own disclaimer.
+* **Every category is priced**, as of September 4, 2026, so the selected set can
+  be measured against the ceiling rather than only judged eligible for one. The
+  combined model is `$45.57` / `$62.56` / `$164.21` monthly and **every scenario
+  sits inside both thresholds**, High clearing the warning by `$10.79`. Five
+  categories rest on `Documented` list prices; **category F rests on an
+  `Attested` figure supplied rather than retrieved**, and it is the largest and
+  most volatile line — `OI-108-081`.
 
 | Element | Position |
 | --- | --- |
@@ -542,10 +544,11 @@ Two facts govern them, both recorded upstream rather than discovered here:
 | **Action on breach** | Structure available: identify the driving `CT-102-*` line, check it against the cliffs each cost assessment enumerates, and refer a tier change to the Product Owner. No automatic downgrade, because `CR0` ties tier to gate clearance — a cheaper tier can fail a gate |
 | **Cliffs to monitor** | Enumerated per category in each assessment's cost-cliff section. The sharpest is `OQ-104-008`'s unbounded Auth0 Enterprise move |
 
-**`OI-108-002` is closed by the September 4, 2026 ceiling decision.** The
-thresholds are stated; what remains open is the price side, so the question the
-thresholds answer — is the selected set under the ceiling — cannot yet be put.
-The combined cost model companion sets out exactly what must be retrieved.
+**`OI-108-002` is closed by the September 4, 2026 ceiling decision**, and the
+question the thresholds answer can now be put and answered: **the selected set
+sits under the ceiling at every scenario.** The combined cost model companion
+carries the derivation and the three confirmations still outstanding, none of
+which blocks the deliverable.
 
 ## 7. Legal and contract review
 
@@ -576,7 +579,7 @@ performed, and this package does not constitute one.**
 | ID | Item | Effect |
 | --- | --- | --- |
 | OI-108-001 | ~~**The package selects nothing, which is a permitted outcome but not a useful one.**~~ **Overtaken September 2, 2026: six categories are selected and push is deferred**, under route B. | **What the item warned of has changed shape rather than gone.** It said approving the package should not be mistaken for completing CBD-108, and that *"a second version after the observation pass is what converts dispositions into selections"*. **The selections were made without that pass**, by taking route B, so the conversion happened on deferred evidence rather than on performed observations. The caution still applies to AC7's approval — it now attaches to the deferral rather than to an empty selection deliverable. |
-| OI-108-002 | **Cost warning and stop thresholds cannot be set** — §5. No budget ceiling exists and prices are `UNKNOWN` in five of six categories. | The ticket's fifth acceptance criterion is **partially met**: owner, cadence, action structure and cliffs are explicit; the two numbers are not. |
+| OI-108-002 | ~~**Cost warning and stop thresholds cannot be set** — §5. No budget ceiling exists and prices are `UNKNOWN` in five of six categories.~~ **Closed September 4, 2026**: `OI-102-017` was reopened and re-decided at `USD 250.00`/month, giving a `USD 175.00` warning, and tranches 68–71 closed the price side in every category. | The ticket's fifth acceptance criterion is **met**: owner, cadence, action structure, cliffs and both numbers are explicit at §6, and the selected set is measurable against them. **The blocker was never a research gap** — the absence of a ceiling was itself a closed Product Owner decision, so the thresholds were unsettable rather than pending. |
 | OI-108-003 | **Category F's rubric scores are not comparable on their face with the other five categories'**, because `OI-102-023` caps them at `2` for any candidate whose stronger material is NDA-bound. | Any cross-category comparison must state this. It is a limit of what was obtainable on publishable terms, not a finding about the aggregators. |
 | OI-108-004 | **This package has been reviewed by no one other than its author**, and inherits the same limitation from all six evaluations it consumes. | The independent security review required before public launch remains outstanding. A selection made on this basis carries that residual. |
 | OI-108-005 | ~~**CBD-108 is blocked in Jira by CBD-77, CBD-78 and CBD-79**~~ **Resolved — the three links were removed on August 29, 2026.** Verified against the live issue the same day: CBD-108 now carries eight links, and all seven inbound blockers — CBD-95, CBD-103, CBD-104, CBD-105, CBD-106, CBD-107 and CBD-130 — are `Done`, with the outbound link to CBD-120 intact. | Closed. **CBD-108 is no longer blocked by anything in Jira.** That removes a tracker obstacle and not an evidence one: the route-A observation pass still stands between every disposition in §4 and a selection, and this issue's `Ready` status is now an accurate description of the position rather than an artifact of three unstarted metrics subtasks. |

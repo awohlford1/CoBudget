@@ -25,6 +25,13 @@ What is specific to CBD-108, and why each guard exists:
   class and fails if the published table has drifted from what the rules
   produce.
 
+* Tranche 71 completed the cost model and six places across three documents
+  went on saying it could not be completed, through 117 green checks, because
+  the guard of the day pinned one sentence and the survivors used six other
+  wordings. The price-side guard therefore matches the *claim* as a family
+  across the five current-state documents, exempting struck and quoted text so
+  that recording the defect does not trip it. OI-108-082.
+
 * CBD-108 selected six categories on September 2, 2026 under route B, at
   ELIGIBLE-PENDING-EVIDENCE with the observations deferred to build (evidence
   register section 3.3.1). The audit asserts that the disposition register
@@ -480,6 +487,79 @@ def main() -> int:
         "no gate outcome" in texts[RETRIEVAL],
         "retrieval pass: must state that it moves no gate outcome",
     )
+
+    # OI-108-084: the carried register's class table is derived above and was
+    # never wrong. What went wrong twice was a count written in prose beside a
+    # correct table -- the D0 figure taken from the D2 row four lines below it.
+    # So this anchors on the claim's shape, "N `D0` items" or "N carried items",
+    # and requires N to be the derived D0 count or the carried total. Derived,
+    # not pinned: re-classifying an item moves the guard with the table.
+    #
+    # Quoted text is exempt for the reason section 4.87 needs it to be -- that
+    # section quotes the wrong figure verbatim in order to record it, and a
+    # guard that fails on its own correction is the section 4.77 defect.
+    d0_count = len(derived_by_class[UNCLASSIFIED])
+    carried_total = sum(len(members) for members in derived_by_class.values())
+    d0_prose = re.compile(
+        r"(\d{1,4})\s+(?:of\s+\d{1,4}\s+)?(?:`D0`\s+items|carried\s+items)",
+        re.IGNORECASE,
+    )
+    quoted_span = re.compile(r'\*"[^"]{0,400}"\*', re.DOTALL)
+    for path in (TRACE, RETRIEVAL, CARRIED, DISPOSITION):
+        live = quoted_span.sub(" ", " ".join(texts[path].split()))
+        for stated in d0_prose.findall(live):
+            audit.check(
+                int(stated) in (d0_count, carried_total),
+                f"{path.name}: prose states {stated} carried/D0 items, which is "
+                f"neither the derived D0 count ({d0_count}) nor the carried "
+                f"total ({carried_total}) -- OI-108-084",
+            )
+
+    # OI-108-082: the price-side decay class. Tranche 71 completed the cost
+    # model and six places across three documents went on saying it could not
+    # be completed, two of them contradicting newer text on their own page,
+    # through 117 green checks. The tranche 71 guard below pins one sentence --
+    # "no combined total is produced" -- and the six survivors phrased the same
+    # claim six other ways, which is the lesson: a guard pinned to a sentence
+    # catches that sentence.
+    #
+    # So this one matches the CLAIM as a family. It runs on the five
+    # current-state documents and not on the retrieval pass, which is an
+    # append-only ledger of dated tranches where a superseded statement is the
+    # record rather than a defect. Struck text and quoted text are exempt for
+    # the same reason: section 4.87 quotes every one of these verbatim in order
+    # to record that they were stale, and a guard that fails on its own
+    # correction is the section 4.77 defect again.
+    struck = re.compile(r"~~.*?~~", re.DOTALL)
+    quoted = re.compile(r'\*"[^"]{0,400}"\*', re.DOTALL)
+    price_side_decay = (
+        ("price side is empty", re.compile(r"price side[^.\n|]{0,30}\bis empty\b", re.I)),
+        ("the total cannot be produced", re.compile(r"\bcannot be produced\b", re.I)),
+        ("no combined total exists", re.compile(r"\bno (?:combined )?total (?:is|exists|can be)\b", re.I)),
+        ("no cost totals", re.compile(r"\bno cost totals\b", re.I)),
+        ("thresholds cannot be set", re.compile(r"\bthresholds cannot be set\b", re.I)),
+        ("no budget ceiling exists", re.compile(r"\bno budget ceiling exists\b", re.I)),
+        (
+            "prices unknown in N of six categories",
+            re.compile(r"\bprices?\b[^.\n|]{0,20}\b(?:are|remain)\b[^.\n|]{0,20}`?UNKNOWN`?[^.\n|]{0,20}\bin\b[^.\n|]{0,20}\bof six\b", re.I),
+        ),
+    )
+    revision_record = re.compile(r"^## \d+\. Revision record$.*", re.M | re.DOTALL)
+    for path in PACKAGE_FILES:
+        if path == RETRIEVAL:
+            continue
+        # A revision record is the same kind of artifact as the retrieval pass:
+        # dated entries describing what was true at that version. Exempt it for
+        # the same reason, and only it -- the exemption is anchored to the
+        # heading, so prose cannot drift into it.
+        current = revision_record.sub("", texts[path])
+        live = quoted.sub(" ", struck.sub(" ", current))
+        for label, pattern in price_side_decay:
+            audit.check(
+                pattern.search(live) is None,
+                f"{path.name}: still asserts, unstruck, that {label} -- "
+                "the cost model states $45.57/$62.56/$164.21 at section 2.1 (OI-108-082)",
+            )
 
     # OI-108-055: template placeholders and generator source have shipped into
     # merged prose three times, each through a green build. The claim that a
