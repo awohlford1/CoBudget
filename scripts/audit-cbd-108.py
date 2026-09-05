@@ -64,6 +64,24 @@ REPOSITORY_BASELINE = {path: "`054bc56`" for path in PACKAGE_FILES}
 
 SOURCE_PACKAGES = ("103", "104", "105", "106", "107", "130")
 
+# The exact verdict row each source evaluation carries, in candidate order.
+#
+# Tranche 66. The guard below this used to check only that no source had been
+# upgraded to a bare ELIGIBLE, while the traceability claimed the audit "fails
+# if a source verdict changes". It did not: mutating every identity candidate to
+# INELIGIBLE -- including C2 Amazon Cognito, which CBD-108 selects -- passed with
+# zero failures. A selected candidate turning INELIGIBLE is the most dangerous
+# drift available to this package, so the verdicts are pinned exactly and any
+# change in any direction fails until the dispositions are revisited.
+SOURCE_VERDICTS = {
+    "103": ("ELIGIBLE-PENDING-EVIDENCE", "INELIGIBLE", "INELIGIBLE"),
+    "104": ("ELIGIBLE-PENDING-EVIDENCE",) * 3,
+    "105": ("ELIGIBLE-PENDING-EVIDENCE", "INELIGIBLE", "ELIGIBLE-PENDING-EVIDENCE"),
+    "106": ("ELIGIBLE-PENDING-EVIDENCE",) * 3,
+    "107": ("ELIGIBLE-PENDING-EVIDENCE",) * 4,
+    "130": ("ELIGIBLE-PENDING-EVIDENCE", "ELIGIBLE-PENDING-EVIDENCE", "INELIGIBLE"),
+}
+
 CATALOG = Path("docs/cbd-102-provider-requirements-hard-gate-catalog.md")
 RUBRIC = Path("docs/cbd-102-provider-evaluation-rubric.md")
 DEMAND = Path("docs/cbd-102-demand-model.md")
@@ -281,9 +299,29 @@ def main() -> int:
                 f"cbd-{package}: verdict row carries no recognised verdict",
             )
 
-    # No source evaluation holds an ELIGIBLE verdict. If one appears, the
-    # route-B selections were made on a weaker basis than is now available
-    # and the dispositions must be revisited.
+    # Every source verdict row still reads exactly as it did when the
+    # dispositions were made. Any change -- an upgrade that would make the
+    # selection basis weaker than what is available, or a downgrade that could
+    # leave an INELIGIBLE candidate selected -- fails here.
+    for package, expected in SOURCE_VERDICTS.items():
+        source = read(
+            Path(f"docs/cbd-{package}-candidate-shortlist-and-gate-evaluation.md")
+        )
+        actual: tuple[str, ...] = ()
+        for row in source.splitlines():
+            if row.startswith("| **Verdict**"):
+                actual = tuple(
+                    cell.strip().strip("`")
+                    for cell in row.split("|")[2:]
+                    if cell.strip()
+                )
+        audit.check(
+            actual == expected,
+            f"cbd-{package}: verdicts are now {actual}, pinned as {expected}; "
+            "the CBD-108 dispositions must be revisited",
+        )
+
+    # Retained as a named check so the ELIGIBLE case reports its own reason.
     eligible_anywhere = False
     for package in SOURCE_PACKAGES:
         source = read(

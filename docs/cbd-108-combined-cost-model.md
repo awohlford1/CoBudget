@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.69 |
+| Document version | 0.70 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -11,7 +11,7 @@
 | Companions | Provider Set Disposition Register v0.69; Cross-Category Coherence Review v0.69; Carried Item Disposition Register v0.69; Acceptance Criteria Traceability v0.69; Evidence Retrieval Pass v0.69 |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
-| Last updated | August 29, 2026 |
+| Last updated | September 4, 2026 |
 
 ## 1. What was asked for, and what is available
 
@@ -240,9 +240,10 @@ In the order that produces the most per unit of effort:
 4. **`OQ-107-020`** — category F pricing, which **requires provider contact**,
    and which must also settle the per-account versus per-connection metering
    question from §3.
-5. **A budget ceiling, or an explicit decision that none exists** —
-   `OI-102-017`. Without it the warning and stop thresholds have nothing to be
-   measured against, regardless of how complete the price side becomes.
+5. ~~**A budget ceiling**~~ — **closed September 4, 2026.** `OI-102-017` was
+   reopened and re-decided: `USD 250.00` per month, `USD 3,000.00` per year. The
+   warning and stop thresholds are stated in disposition §5. What the price side
+   still blocks is not the thresholds but the comparison against them.
 
 Items 1–3 are desk retrievals and would move five of six categories from
 `UNKNOWN` to a comparable figure. **The cost model is the least
@@ -256,5 +257,5 @@ claim rather than an assertion of it.
 | --- | --- | --- |
 | OI-108-011 | **No combined total is produced, at any scenario.** The ticket's third deliverable is not met. | Deliberate. `CR4` forbids the alternative, and an estimated total in a comparison document is worse than no total. §7 is the route to producing one. |
 | OI-108-012 | **The one category with figures cannot be generalized from.** Identity is cheap, retrievable, and floor-dominated; category F is none of those. | `OI-104-013` already records that its figures are a starting position. Nothing about the identity result predicts the shape of the aggregator bill. |
-| OI-108-013 | **Cost thresholds cannot be set** — mirrors `OI-108-002` in the disposition register. | The blocker is `OI-102-017`, not retrieval. Even a complete price side would not produce a warning threshold without a ceiling to measure against. |
+| OI-108-013 | ~~**Cost thresholds cannot be set**~~ — **closed September 4, 2026** by the `OI-102-017` ceiling decision; the thresholds are stated in disposition §5. What remains is that no total exists to compare against them. | Formerly: the blocker is `OI-102-017`, not retrieval. Even a complete price side would not produce a warning threshold without a ceiling to measure against. |
 | OI-108-014 | **Category F's billable unit is not established per candidate**, and the two candidate units differ by more than 2× at Base. | Recorded so that any later comparison in this category states which unit each figure uses. Comparing a per-account price against a per-connection price is not a comparison. |

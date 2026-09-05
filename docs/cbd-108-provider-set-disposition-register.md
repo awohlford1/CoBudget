@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package and records the provider selections. **Six categories are selected and push is deferred** (§4), under CBD-103 §3.3 route B by Product Owner decision of September 2, 2026: every selection at `ELIGIBLE-PENDING-EVIDENCE` with its observation tests deferred to build rather than performed, no combined cost model, and the ticket's seventh acceptance criterion — Product Owner approval of the package — not met. §2 records the position the package inherited on August 29, 2026, when no candidate was selectable, and why that was a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. **Until v0.69 this row and the prose in §1, §2.1, §4 and §8 still said the package selected no provider**, six tranches after the first selection — `OI-108-079`. |
-| Document version | 0.69 |
+| Document version | 0.70 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -11,7 +11,7 @@
 | Companions | Cross-Category Coherence Review v0.69; Combined Cost Model v0.69; Carried Item Disposition Register v0.69; Acceptance Criteria Traceability v0.69; Evidence Retrieval Pass v0.69 |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
 | Repository baseline | `054bc56` |
-| Last updated | September 3, 2026 |
+| Last updated | September 4, 2026 |
 
 ## 1. Purpose and standing
 
@@ -517,14 +517,18 @@ refusing them is a choice made on stated terms.
 ## 6. Cost guardrails
 
 The ticket requires that *"cost warning/stop thresholds, owner, cadence, and
-actions are explicit."* The structure is specified below. **The two threshold
-values cannot be set**, and saying so is more useful than inventing them.
+actions are explicit."* The structure is specified below, and **both threshold
+values are now set** against the ceiling decided on September 4, 2026.
 
-Two facts block the numbers, both recorded upstream rather than discovered here:
+Two facts govern them, both recorded upstream rather than discovered here:
 
-* **`OI-102-017` — no budget ceiling exists.** No approved source sets one, so
-  cost cannot exclude a provider in any category.
-* **Prices are `UNKNOWN` in four of six categories.** Identity and email carry
+* **`OI-102-017` — a budget ceiling now exists.** Reopened and re-decided on
+  September 4, 2026: `USD 250.00` per month, `USD 3,000.00` per year. Cost still
+  cannot exclude a provider on its own, because `CR0` ties tier to gate
+  clearance; the thresholds govern review and escalation.
+* **Prices are `UNKNOWN` in three of six categories**, down from five after the
+  August 29, 2026 retrieval pass priced category E and partly priced category N.
+  So whether the selected set sits under the ceiling cannot yet be answered. Identity and email carry
   retrieved figures; two of identity's three totals depend on unresolved tier
   questions (CBD-104 §6.6), and email's C3 rate is held at Low confidence on the
   vendor's own disclaimer.
@@ -533,13 +537,15 @@ Two facts block the numbers, both recorded upstream rather than discovered here:
 | --- | --- |
 | **Owner** | Product Owner, as the only role `EX-102-001` permits to accept a residual |
 | **Cadence** | Monthly during Private MVP, aligned to the provider billing period |
-| **Warning threshold** | **Cannot be set.** Requires a budget ceiling (`OI-102-017`) and retrieved prices |
-| **Stop threshold** | **Cannot be set**, same reason |
+| **Warning threshold** | **`USD 175.00` per month**, 70% of the ceiling set at `OI-102-017` on September 4, 2026 |
+| **Stop threshold** | **`USD 250.00` per month**, the ceiling itself; `USD 3,000.00` per year |
 | **Action on breach** | Structure available: identify the driving `CT-102-*` line, check it against the cliffs each cost assessment enumerates, and refer a tier change to the Product Owner. No automatic downgrade, because `CR0` ties tier to gate clearance — a cheaper tier can fail a gate |
 | **Cliffs to monitor** | Enumerated per category in each assessment's cost-cliff section. The sharpest is `OQ-104-008`'s unbounded Auth0 Enterprise move |
 
-**This is a named gap, recorded at `OI-108-002`.** The combined cost model
-companion sets out exactly what must be retrieved to close it.
+**`OI-108-002` is closed by the September 4, 2026 ceiling decision.** The
+thresholds are stated; what remains open is the price side, so the question the
+thresholds answer — is the selected set under the ceiling — cannot yet be put.
+The combined cost model companion sets out exactly what must be retrieved.
 
 ## 7. Legal and contract review
 
