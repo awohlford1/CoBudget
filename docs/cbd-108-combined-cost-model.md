@@ -9,7 +9,7 @@
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
-| Confluence page | **Not published.** Registration follows approval. |
+| Confluence page | [CBD-108 — Combined Cost Model](https://cobudget.atlassian.net/wiki/spaces/CoBudget/pages/19988481) — registered in `scripts/sync-confluence.py` and published September 5, 2026, after the package was approved at v1.0 and merged. Repository is the source; the page is the copy |
 | Repository baseline | `054bc56` |
 | Last updated | September 5, 2026 |
 | Approval | Product Owner, September 5, 2026 — traceability AC7. **What was approved is a set at `ELIGIBLE-PENDING-EVIDENCE` with twenty-seven route-A observations owed**, not an evidenced set |
