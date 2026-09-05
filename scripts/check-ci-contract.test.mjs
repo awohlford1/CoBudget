@@ -79,6 +79,7 @@ const validRootPackage = {
   packageManager: "npm@11.12.1",
   scripts: {
     "check:ci": "node --test scripts/check-ci-contract.test.mjs && node scripts/check-ci-contract.mjs",
+    "check:env": "node --test scripts/check-environment.test.mjs && node scripts/check-environment.mjs",
     "check:docs": "node scripts/check-mermaid.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
     "check:copy": "node scripts/check-copy-language.mjs",
@@ -87,7 +88,7 @@ const validRootPackage = {
     test: "npm run test --workspaces --if-present",
     build: "npm run build --workspaces --if-present",
     "check:pages": "node scripts/check-public-pages.mjs",
-    check: "npm run check:ci && npm run check:docs && npm run check:tokens && npm run check:copy && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
+    check: "npm run check:ci && npm run check:env && npm run check:docs && npm run check:tokens && npm run check:copy && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
   },
 };
 

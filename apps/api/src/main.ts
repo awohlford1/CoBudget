@@ -3,7 +3,7 @@ import "reflect-metadata";
 import { ConfigError } from "@cobudget/contracts/config";
 
 import { createApiApplication } from "./application.js";
-import { loadApiConfig } from "./config.js";
+import { loadApiConfig, resolveApiListenAddress } from "./config.js";
 import { stdoutReliabilitySink, writeStartupDiagnostic } from "./telemetry.js";
 
 const SAFE_STARTUP_ERROR_CODES = new Set(["EACCES", "EADDRINUSE", "EADDRNOTAVAIL"]);
@@ -16,10 +16,6 @@ function messageForStartupFailure(error: unknown): string {
   return code !== undefined && SAFE_STARTUP_ERROR_CODES.has(code)
     ? `API startup failed (${code}).`
     : "API startup failed with an internal error.";
-}
-
-function resolveListenAddress(nodeEnv: "development" | "test" | "production"): string {
-  return nodeEnv === "production" ? "0.0.0.0" : "127.0.0.1";
 }
 
 process.on("uncaughtException", () => {
@@ -37,7 +33,7 @@ export async function bootstrap(): Promise<void> {
   const app = await createApiApplication(config, stdoutReliabilitySink);
 
   app.enableShutdownHooks(["SIGINT", "SIGTERM"], { useProcessExit: true });
-  const listenAddress = config.API_LISTEN_ADDRESS ?? resolveListenAddress(config.NODE_ENV);
+  const listenAddress = resolveApiListenAddress(config);
   await app.listen(config.API_PORT, listenAddress);
   stdoutReliabilitySink({
     service: "api",

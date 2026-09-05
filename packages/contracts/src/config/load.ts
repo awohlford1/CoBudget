@@ -1,3 +1,4 @@
+import { isIP } from "node:net";
 import type { ConfigOf, ConfigSchema, VariableSpec } from "./schema.ts";
 
 /**
@@ -32,6 +33,8 @@ const INTEGER_PATTERN = /^-?\d+$/;
 
 function validateValue(name: string, spec: VariableSpec, raw: string): { value: unknown } | { failure: ConfigFailure } {
   switch (spec.kind) {
+    case "ip":
+      return isIP(raw) ? { value: raw } : { failure: { variable: name, reason: "must be an IPv4 or IPv6 address" } };
     case "string":
       return { value: raw };
 

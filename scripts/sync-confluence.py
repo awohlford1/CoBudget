@@ -60,11 +60,11 @@ from __future__ import annotations
 import argparse
 import html
 import importlib
-import os
 import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from tool_config import ConfigurationError, load_tool_config
 
 
 def require(name: str):
@@ -934,36 +934,16 @@ def load_env_file() -> dict[str, str]:
 
 
 def session_from_env() -> tuple[requests.Session, str]:
-    from_file = load_env_file()
-
-    def credential(name: str) -> str:
-        return os.environ.get(name) or from_file.get(name, "")
-
-    base = credential("CONFLUENCE_BASE_URL").rstrip("/")
-    email = credential("CONFLUENCE_EMAIL")
-    token = credential("CONFLUENCE_API_TOKEN")
-    missing = [
-        name
-        for name, value in (
-            ("CONFLUENCE_BASE_URL", base),
-            ("CONFLUENCE_EMAIL", email),
-            ("CONFLUENCE_API_TOKEN", token),
-        )
-        if not value
-    ]
-    if missing:
-        sys.exit(
-            "Missing credential(s): "
-            + ", ".join(missing)
-            + ". Set them in the environment or in an untracked .env.local at the "
-            "repository root."
-        )
+    try:
+        config = load_tool_config("confluence", load_env_file())
+    except ConfigurationError as error:
+        sys.exit(str(error))
 
     requests = require("requests")
     session = requests.Session()
-    session.auth = (email, token)
+    session.auth = (config["CONFLUENCE_EMAIL"], config["CONFLUENCE_API_TOKEN"])
     session.headers.update({"Accept": "application/json"})
-    return session, base
+    return session, config["CONFLUENCE_BASE_URL"]
 
 
 def to_storage(markdown_text: str) -> str:

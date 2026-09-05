@@ -4,6 +4,8 @@
 
 - Node.js 24
 - npm 11
+- Python 3.10 or later on PATH (`python3`, `python`, or Windows `py -3`) for
+  the environment contract and repository-tool tests.
 
 On Windows PowerShell systems that block script shims, use `npm.cmd` anywhere
 this guide shows `npm` (for example, `npm.cmd run dev`).
@@ -87,6 +89,43 @@ npm run check
 
 This checks documentation and tokens, then runs linting, type checking, tests,
 and production builds across all workspaces.
+
+## Environment contract
+
+`config/environment-inventory.json` is the inventory for every first-party
+environment consumer. `npm run check:env` runs in the root gate and compares
+application schemas, Python tool groups, source reads, and `.env.example`.
+It checks eleven operator settings plus the three platform/test settings
+`CI`, `SCARF_ANALYTICS`, and `TZ`. It never reads `.env.local` or real
+credentials; fixtures provide synthetic dictionaries and mocked HTTP clients.
+
+To add a variable:
+
+1. Add its name, classification (`application`, `tooling`, `platform`, or
+   `test`), consumer paths, owner, required flag, sensitivity, source,
+   validation rule, description, and template disposition to the inventory.
+2. For application configuration, add the typed schema declaration and use
+   the shared loader. The guard compares its validation and required flag
+   with the inventory. `API_LISTEN_ADDRESS` accepts IPv4/IPv6 literals only;
+   omission retains the documented environment-specific defaults.
+3. For Python tooling, add the variable to its inventory group and consume it
+   through `load_tool_config`. Environment values take precedence over
+   `.env.local`, including explicit empty values. Required empty values fail;
+   optional values use only the declared default. URLs must be HTTPS origins;
+   validation happens before authenticated sessions, requests, or preview writes.
+4. For every operator setting, add a safe placeholder and preceding comment
+   to `.env.example`. Secret placeholders must be empty. Platform and test
+   settings carry their rationale in the inventory and stay out of the template.
+5. Add positive and isolated negative tests, then run `npm run check`.
+
+The AST guards reject direct, dynamic, or aliased environment access outside
+the shared loaders. Two domain test files may pass the ambient environment
+unchanged to subprocesses with a test-only `TZ` override. Generated output,
+dependencies, declarations, caches, and agent metadata are excluded. New
+source files are discovered recursively; undocumented reads fail the build.
+These structural guards are not a secret scanner; committed-value detection
+belongs to CBD-114. The Confluence and Jira settings are tooling-only and
+are not required to start the API or worker or to run the normal build.
 
 ## Workspace conventions
 
