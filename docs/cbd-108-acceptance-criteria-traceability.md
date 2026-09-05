@@ -11,7 +11,7 @@
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
-| Last updated | September 4, 2026 |
+| Last updated | September 5, 2026 |
 
 ## 1. Package contents
 
@@ -185,7 +185,7 @@ the gates expressing `SR-94-040` and `SR-94-041` — `HG-102-014` and `HG-102-02
 `UNPROVEN` until the observation pass runs. An explicit disposition is not a closed
 finding, and this criterion asks for the former.
 
-`OI-108-015`'s 24 `D0` items are not a failure of this criterion. `D0` **is** an explicit
+`OI-108-015`'s 23 `D0` items are not a failure of this criterion. `D0` **is** an explicit
 disposition, and an honest one: it states that the item's own recorded text does not say
 what would resolve it, and names the consequence.
 

@@ -488,6 +488,33 @@ def main() -> int:
         "retrieval pass: must state that it moves no gate outcome",
     )
 
+    # OI-108-084: the carried register's class table is derived above and was
+    # never wrong. What went wrong twice was a count written in prose beside a
+    # correct table -- the D0 figure taken from the D2 row four lines below it.
+    # So this anchors on the claim's shape, "N `D0` items" or "N carried items",
+    # and requires N to be the derived D0 count or the carried total. Derived,
+    # not pinned: re-classifying an item moves the guard with the table.
+    #
+    # Quoted text is exempt for the reason section 4.87 needs it to be -- that
+    # section quotes the wrong figure verbatim in order to record it, and a
+    # guard that fails on its own correction is the section 4.77 defect.
+    d0_count = len(derived_by_class[UNCLASSIFIED])
+    carried_total = sum(len(members) for members in derived_by_class.values())
+    d0_prose = re.compile(
+        r"(\d{1,4})\s+(?:of\s+\d{1,4}\s+)?(?:`D0`\s+items|carried\s+items)",
+        re.IGNORECASE,
+    )
+    quoted_span = re.compile(r'\*"[^"]{0,400}"\*', re.DOTALL)
+    for path in (TRACE, RETRIEVAL, CARRIED, DISPOSITION):
+        live = quoted_span.sub(" ", " ".join(texts[path].split()))
+        for stated in d0_prose.findall(live):
+            audit.check(
+                int(stated) in (d0_count, carried_total),
+                f"{path.name}: prose states {stated} carried/D0 items, which is "
+                f"neither the derived D0 count ({d0_count}) nor the carried "
+                f"total ({carried_total}) -- OI-108-084",
+            )
+
     # OI-108-082: the price-side decay class. Tranche 71 completed the cost
     # model and six places across three documents went on saying it could not
     # be completed, two of them contradicting newer text on their own page,

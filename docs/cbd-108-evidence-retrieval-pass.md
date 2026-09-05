@@ -11,7 +11,7 @@
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
-| Last updated | September 4, 2026 |
+| Last updated | September 5, 2026 |
 
 ## 1. Scope and evidence block
 
@@ -7214,7 +7214,7 @@ open at 15 High, and the gates that express `SR-94-040` and `SR-94-041` are `UNP
 until the pass runs.
 
 The `D0` limb of the old verdict does not survive as a failure. `OI-108-015` records that
-24 of 227 carried items do not state, in their own text, what would resolve them — but
+23 of 227 carried items do not state, in their own text, what would resolve them — but
 `D0` **is** an explicit disposition, and an honest one. A criterion asking for explicit
 dispositions is satisfied by a class that says *"not derivable from the item's own
 recorded text"* and names the consequence.
@@ -7361,11 +7361,25 @@ description rule survives at three vendors exactly as it did at four: choosing C
 raised the count from one ecosystem, and the set must never be described as
 consolidating.
 
+#### A second number of this pass's own, and it was wrong
+
+§4.85 said at tranche 74 that *"24 of 227 carried items"* are `D0`, and AC6
+repeated it. **It is 23.** The carried register says 23 in five places and its
+class table lists 23 identifiers; **24 is the `D2` count**, four rows below `D0`
+in the same table. The mechanically derived table was right throughout — the
+error was in prose written beside it.
+
+**Both numbers this tranche corrected were introduced by this pass**, one tranche
+apart, and both by reading a neighbouring row: four vendors from the coherence
+review's projection, 24 from the `D2` line. `OI-108-084` records the guard that
+now derives both from the artifact rather than trusting the sentence.
+
 #### What this tranche does not do
 
 It registers no evidence, moves no gate outcome, retrieves no price, and changes
-no figure in §2.1. **Every number in the package is the number it was before this
-tranche ran.** What changed is that the documents now agree with them.
+no figure in §2.1. **Every price and every verdict in the package is what it was
+before this tranche ran.** What changed is that the documents now agree with
+them, and that two counts written beside correct tables now match those tables.
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -7519,6 +7533,7 @@ tranche ran.** What changed is that the documents now agree with them.
 | OI-108-080 | **A published document answered half of a `D4` item, and the other nine have not been re-read.** `OQ-107-020` was classed `D4` — *"requires provider contact — no published document can answer it"* — and `EV-102-299` answered its metering half on the first read. | **This is `OI-108-016`'s stated risk, demonstrated**: the class was derived from CBD-107's wording rather than from reading the item. The nine other `D4` items — `OI-103-015`, `OI-107-018`, `OQ-103-011`, `OQ-104-005`, `OQ-104-006`, `OQ-104-021`, `OQ-107-008`, `OQ-107-010`, `OQ-130-014` — may hold the same partial answers. Re-reading them is a retrieval tranche of its own; this one was scoped to category F. No disposition changes until they are read. |
 | OI-108-082 | **A status row and a residual-risk list are derived views, and this package restates them by hand.** Six places went on describing an empty price side after tranche 71 filled it, two of them contradicting newer text on their own page, and the 117-check audit passed throughout. | **Third instance of the `OI-108-079` decay class and the first where a string guard is not the remedy.** A guard pinned to a sentence catches that sentence; what decays is the claim, phrased differently in each document. **Tranche 76 executed the containable half**: the audit now matches the claim as a seven-pattern family across the five current-state documents, exempting struck, quoted and revision-record text, and each pattern was proven by reintroducing it into a document other than its original home. 117 checks to 152. **The structural half is recorded and not taken** — stopping the restatement altogether means rewriting six status rows as derived text, which is a change to how the package is written and the Product Owner's call. A guard makes the decay loud; only that makes it impossible. |
 | OI-108-083 | **A superseded projection was quoted as a current fact.** §4.86 said the selected set is four vendors, from the coherence review's pre-selection projection that *"a C1 set spans four vendors plus an aggregator"*. The selections consolidated identity, email and SMS onto AWS, making it **three**. | **Seventeenth ledger entry, and a shape the previous sixteen do not have.** The source was accurate when written and was outrun by decisions taken after it — neither a misreading nor a missed record. `OI-108-024`'s rule sends the reader to the primary document, which here would have **confirmed** the error. The remedy is to check a projection against the decisions made since, which is a different action from checking a source. |
+| OI-108-084 | **Two counts written beside correct tables did not match those tables**, both introduced by this pass one tranche apart. §4.86 took the vendor count from the coherence review's superseded projection; §4.85 took the `D0` count from the `D2` row four lines below it in the same table. | **The artifact was right both times and the prose beside it was not**, which is the inverse of the defect the audits were built for. The carried register's class table is mechanically derived and was never wrong. `scripts/audit-cbd-108.py` now derives the `D0` figure and fails on any number stated in a sentence with `OI-108-015` that is neither it nor the 227 total — a derived check rather than a pinned one, proven by restating the count as the neighbouring class's and watching the build fail. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | ~~**`EV-102-214` is the first cost record in the corpus whose own source disclaims it.**~~ **Resolved at §4.47.** The authoritative page carries the same two rates (`EV-102-278`), so the disclaimed figures were correct. | Closed. The decision to record it at Low rather than exclude it — *"a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces"* — is **vindicated rather than merely defensible**. Worth keeping as precedent for the next disclaimed source. |
