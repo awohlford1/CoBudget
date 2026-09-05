@@ -13,6 +13,11 @@ export const root = dirname(dirname(fileURLToPath(import.meta.url)));
 export const inventory = JSON.parse(readFileSync(join(root, "config/environment-inventory.json"), "utf8"));
 const excluded = new Set(["node_modules", ".git", ".next", "dist", "build", "coverage", "__pycache__", ".confluence-preview", ".codex", ".agents"]);
 const inheritedTestPaths = new Set(["packages/budget-domain/src/shared/iso-date.test.ts", "packages/budget-domain/src/schedule/period.test.ts"]);
+const reviewedFileImports = {
+  "packages/contracts/src/barrel.test.ts": ["pathToFileURL(path).href"],
+  "packages/budget-domain/src/barrel.test.ts": ['newURL("index.ts",group.directory).href', "newURL(fileName,group.directory).href"],
+};
+const environmentModules = new Set(["node:process", "process", "node:module", "module"]);
 
 export function sources(directory = root) {
   const result = {};
@@ -59,18 +64,37 @@ export function scanJavaScript(source, path) {
         fail(node, "environment schema consumer is not registered in the inventory guard");
       }
     }
-    if (ts.isImportDeclaration(node) && ["node:process", "process"].includes(node.moduleSpecifier.text)) {
-      fail(node, "process imports can alias environment access; use the shared loader");
+    if ((ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) && environmentModules.has(node.moduleSpecifier?.text)) {
+      const compilerLoader = path === "scripts/check-environment.mjs" && ts.isImportDeclaration(node)
+        && node.moduleSpecifier.text === "node:module" && node.importClause?.namedBindings?.getText(tree) === "{ createRequire }";
+      if (!compilerLoader) fail(node, "process/module imports can alias environment access; use the shared loader");
     }
-    if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === "require"
-        && ["node:process", "process"].includes(node.arguments[0]?.text)) fail(node, "process require bypasses the shared loader");
+    if (ts.isBindingElement(node) && node.propertyName?.text === "process") fail(node, "destructured process access is unsupported");
+    if (ts.isIdentifier(node) && node.text === "require") {
+      const parent = node.parent;
+      const call = ts.isCallExpression(parent) && parent.expression === node;
+      const key = ts.isPropertyAssignment(parent) && parent.name === node;
+      if (!key && (!call || !parent.arguments[0] || !ts.isStringLiteralLike(parent.arguments[0])
+          || environmentModules.has(parent.arguments[0].text))) {
+        fail(node, "aliased, nonliteral, or process require is unsupported");
+      }
+    }
+    if (ts.isCallExpression(node) && node.expression.kind === ts.SyntaxKind.ImportKeyword) {
+      const argument = node.arguments[0];
+      const reviewed = argument && reviewedFileImports[path]?.includes(argument.getText(tree).replaceAll(/\s/g, ""));
+      if (!reviewed && (!argument || !ts.isStringLiteralLike(argument) || environmentModules.has(argument.text))) {
+        fail(node, "dynamic process or nonliteral module import is unsupported");
+      }
+    }
     if (property(node) === "process") fail(node, "indirect process access bypasses the shared loader");
     if (ts.isIdentifier(node) && node.text === "process") {
       const parent = node.parent;
+      if (ts.isPropertyAssignment(parent) && parent.name === node) return;
       // Other process uses (signals, executable, exit code) are not configuration reads.
       if ((ts.isPropertyAccessExpression(parent) || ts.isElementAccessExpression(parent)) && parent.expression === node) {
         const key = property(parent);
         if (!key) fail(parent, "dynamic process access is unsupported");
+        if (["getBuiltinModule", "mainModule", "binding", "_linkedBinding"].includes(key)) fail(parent, "indirect module access through process is unsupported");
         if (key === "env") {
           const use = parent.parent;
           const loader = path === "packages/contracts/src/config/load.ts" && ts.isCallExpression(use)
@@ -81,12 +105,11 @@ export function scanJavaScript(source, path) {
             && use.parent.parent.name.getText(tree) === "env";
           if (!loader && !inherited) fail(parent, `${property(use) ?? "dynamic/aliased environment"} bypasses the shared loader`);
         }
-      } else if (ts.isShorthandPropertyAssignment(parent) || ts.isVariableDeclaration(parent)
-          || ts.isBindingElement(parent) || ts.isCallExpression(parent)) {
+      } else {
         // The worker passes process only to the reviewed signal coordinator.
         const signal = path === "apps/worker/src/main.ts" && ts.isCallExpression(parent)
           && parent.expression.getText(tree) === "createShutdownCoordinator";
-        if (!signal) fail(node, "aliased process access is unsupported");
+        if (!signal) fail(node, "wrapped, aliased, or reflective process access is unsupported");
       }
     }
     ts.forEachChild(node, visit);

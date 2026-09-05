@@ -75,6 +75,8 @@ def require(name: str):
     `scripts/check-jira-freshness.py` does exactly that, and runs in CI where
     neither package is installed.
     """
+    if name not in ("markdown", "requests"):
+        sys.exit("Unsupported publisher dependency.")
     try:
         return importlib.import_module(name)
     except ImportError:  # pragma: no cover - dependency guidance

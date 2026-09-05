@@ -59,4 +59,55 @@ describe("environment contract", () => {
     const result = python([join(root, "scripts/test_tool_config.py")]);
     assert.equal(result.status, 0, result.stdout + result.stderr);
   });
+  it("rejects the review bypasses through the production inventory validator", () => {
+    const javascript = [
+      "console.log((process).env.CBD_113_UNDECLARED)",
+      "let p; p = process; console.log(p.env.CBD_113_UNDECLARED)",
+      "const p = {runtime: process}; console.log(p.runtime.env.CBD_113_UNDECLARED)",
+      'const p = await import("node:process"); console.log(p.env.CBD_113_UNDECLARED)',
+      "console.log((process as NodeJS.Process).env.CBD_113_UNDECLARED)",
+      "console.log(process!.env.CBD_113_UNDECLARED)",
+      "function getProcess() { return process; }",
+      'const p = await import(moduleName); console.log(p.env.CBD_113_UNDECLARED)',
+      'console.log(process.getBuiltinModule("process").env.CBD_113_UNDECLARED)',
+      'export {env} from "node:process"',
+      'const p = require("node:" + "process"); console.log(p.env.CBD_113_UNDECLARED)',
+      'const load = require; console.log(load("process").env.CBD_113_UNDECLARED)',
+      'const {"process": p} = globalThis; console.log(p.env.CBD_113_UNDECLARED)',
+      'import {createRequire as load} from "node:module"; load(import.meta.url)("process").env.CBD_113_UNDECLARED',
+    ];
+    const pythonSources = [
+      'import os\nx = os.__dict__["environ"].get("CBD_113_UNDECLARED")',
+      'import importlib\nx = importlib.import_module("os").getenv("CBD_113_UNDECLARED")',
+      'import importlib as lib\nx = lib.import_module("os").getenv("CBD_113_UNDECLARED")',
+      'from importlib import import_module as load\nx = load("os").getenv("CBD_113_UNDECLARED")',
+      'x = __import__("os").getenv("CBD_113_UNDECLARED")',
+      'import importlib\nload = importlib.import_module\nx = load(module_name)',
+      'import importlib as lib\nalias = lib\nx = alias.import_module("os").getenv("CBD_113_UNDECLARED")',
+      'from builtins import __import__ as load\nx = load("os").getenv("CBD_113_UNDECLARED")',
+      'from os import __dict__ as d\nx = d["environ"].get("CBD_113_UNDECLARED")',
+      '__import__("os.path").getenv("CBD_113_UNDECLARED")',
+      '__import__("importlib").import_module("os").getenv("CBD_113_UNDECLARED")',
+    ];
+    for (const [extension, inputs] of [["ts", javascript], ["py", pythonSources]]) {
+      for (const source of inputs) {
+        const path = `scripts/review-fixture.${extension}`;
+        assert.ok(validateInventory(inventory, template, { ...files, [path]: source }).some(f => f.includes(path)), source);
+      }
+    }
+  });
+  it("permits non-environment process uses and static unrelated imports", () => {
+    assert.deepEqual(scanJavaScript('const policy = {process: "readonly"}; process.stdout.write("ok");', "scripts/fixture.mjs"), []);
+    assert.deepEqual(scanJavaScript('const fs = await import("node:fs");', "scripts/fixture.mjs"), []);
+  });
+  it("rejects malformed tooling rules and defaults at build time", () => {
+    for (const validation of [null, {}, { kind: "unknown" }, { kind: "https-origin", extra: true },
+      { kind: "https-origin", default: "http://bad.invalid/path" },
+      { kind: "https-origin", default: "https://example.invalid#" },
+      { kind: "https-origin", default: 42 }, { kind: "https-origin", default: "" }]) {
+      const changed = structuredClone(inventory);
+      changed.variables.find(v => v.name === "JIRA_BASE_URL").validation = validation;
+      assert.ok(validateInventory(changed, template, files).some(f => f.includes("JIRA_BASE_URL")));
+    }
+  });
 });

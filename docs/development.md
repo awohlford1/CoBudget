@@ -118,8 +118,19 @@ To add a variable:
    settings carry their rationale in the inventory and stay out of the template.
 5. Add positive and isolated negative tests, then run `npm run check`.
 
-The AST guards reject direct, dynamic, or aliased environment access outside
-the shared loaders. Two domain test files may pass the ambient environment
+The AST guards enforce a restricted source convention: environment access must
+use the shared loaders. Wrapped/aliased `process` references, dynamic process
+imports, reflective `os` access, and dynamic environment imports are rejected.
+Python's existing optional-dependency import in the publisher's `require`
+helper (restricted to Markdown and HTTP dependencies), the inventory checker's
+compiler loader, and the two package barrel tests' file-URL imports are reviewed
+exceptions. Arbitrary runtime code generation, malicious
+reflection, and dependency behavior are outside this static-analysis guarantee
+and require code review; this is not a security sandbox.
+Tooling rules and their defaults are validated at build time and runtime.
+HTTPS origins require valid DNS labels and no query/fragment delimiter, even
+an empty one; accepted origins are canonicalized before API paths are appended.
+Two domain test files may pass the ambient environment
 unchanged to subprocesses with a test-only `TZ` override. Generated output,
 dependencies, declarations, caches, and agent metadata are excluded. New
 source files are discovered recursively; undocumented reads fail the build.

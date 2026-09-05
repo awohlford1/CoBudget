@@ -125,7 +125,7 @@ async function runToExit(
 
 describe("API startup failures", () => {
   for (const name of ["NODE_ENV", "LOG_LEVEL", "SERVICE_VERSION", "API_PORT"]) {
-    it(`rejects missing ${name} before readiness or listening`, async () => {
+    it(`exits without readiness for missing ${name} and leaves no listener`, async () => {
       const port = await availablePort();
       const environment: Record<string, string> = { NODE_ENV: "test", LOG_LEVEL: "info", SERVICE_VERSION: "CBD113_VALUE_MUST_NOT_APPEAR", API_PORT: String(port) };
       delete environment[name];

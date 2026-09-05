@@ -2,10 +2,12 @@
 import contextlib
 import importlib.util
 import io
+import json
 from pathlib import Path
 import sys
 import unittest
 from unittest import mock
+from urllib.parse import urlsplit
 
 import tool_config as config
 
@@ -28,6 +30,13 @@ SENTINEL = "CBD113_VALUE_MUST_NOT_APPEAR"
 
 
 class ToolConfigTests(unittest.TestCase):
+    def test_reviewed_dependency_loader_cannot_import_environment_modules(self):
+        for name in ("os", "tool_config", "importlib"):
+            with mock.patch.object(publisher.importlib, "import_module") as importer:
+                with self.assertRaisesRegex(SystemExit, "Unsupported publisher dependency"):
+                    publisher.require(name)
+                importer.assert_not_called()
+
     def test_valid_and_environment_precedence(self):
         value = config.load_tool_config("confluence", VALID, {"CONFLUENCE_EMAIL": "override@example.invalid"})
         self.assertEqual(value["CONFLUENCE_EMAIL"], "override@example.invalid")
@@ -66,6 +75,11 @@ class ToolConfigTests(unittest.TestCase):
             "https://example.invalid/path", "https://example.invalid?token=" + SENTINEL,
             "https://example.invalid#" + SENTINEL, "https://example.invalid:443",
             "https://[invalid", " https://example.invalid", "https://example.invalid\n")]
+        cases += [("CONFLUENCE_BASE_URL", value) for value in (
+            "https://.", "https://..", "https://-bad.example.invalid", "https://bad-.example.invalid",
+            "https://example..invalid", "https://" + "a" * 64 + ".invalid",
+            "https://" + ".".join(["a" * 63] * 4), "https://example.invalid?", "https://example.invalid#",
+            "https://example.invalid/?", "https://example.invalid/#")]
         cases += [("CONFLUENCE_EMAIL", SENTINEL), ("CONFLUENCE_API_TOKEN", SENTINEL + "\n")]
         for name, value in cases:
             with self.subTest(name=name), mock.patch("tool_config.os.environ", {**VALID, name: value}), \
@@ -78,6 +92,42 @@ class ToolConfigTests(unittest.TestCase):
                 self.assertIn(name, str(result.exception))
                 self.assertNotIn(SENTINEL, output.getvalue() + errors.getvalue() + str(result.exception))
                 dependency.assert_not_called()
+
+    def test_canonical_origin_constructs_the_exact_api_path(self):
+        for value in ("https://example.invalid", "HTTPS://EXAMPLE.INVALID/", "https://a-b.example.invalid/"):
+            with self.subTest(value=value):
+                base = config.validate("CONFLUENCE_BASE_URL", value, {"kind": "https-origin"}, True)
+                session = mock.Mock()
+                publisher.fetch_page(session, base, "123")
+                target = session.get.call_args.args[0]
+                parsed = urlsplit(target)
+                self.assertEqual(parsed.scheme, "https")
+                self.assertEqual(parsed.netloc, urlsplit(value).hostname.lower())
+                self.assertEqual(parsed.path, "/wiki/api/v2/pages/123")
+                self.assertEqual((parsed.query, parsed.fragment), ("", ""))
+
+    def test_defaults_and_rule_shapes_are_validated_before_use(self):
+        invalid = [None, {}, {"kind": "unknown"}, {"kind": "https-origin", "extra": True},
+                   {"kind": "https-origin", "default": "http://bad.invalid/path"},
+                   {"kind": "https-origin", "default": "https://example.invalid#"},
+                   {"kind": "https-origin", "default": ""}, {"kind": "https-origin", "default": 42},
+                   {"kind": "token", "default": "synthetic-placeholder"}]
+        for spec in invalid:
+            for raw in (None, "", "https://example.invalid"):
+                with self.subTest(spec=spec, raw=raw), self.assertRaisesRegex(config.ConfigurationError, "EXAMPLE_URL"):
+                    config.validate("EXAMPLE_URL", raw, spec, False)
+        rule = {"kind": "https-origin", "default": "HTTPS://EXAMPLE.INVALID/"}
+        for raw in (None, ""):
+            self.assertEqual(config.validate("EXAMPLE_URL", raw, rule, False), "https://example.invalid")
+        self.assertIsNone(config.validate("EXAMPLE_URL", None, {"kind": "https-origin"}, False))
+        with self.assertRaises(config.ConfigurationError):
+            config.validate("EXAMPLE_URL", None, rule, True)
+        row = {"name": "EXAMPLE_URL", "group": "fixture", "required": False,
+               "validation": {"kind": "https-origin", "default": "http://bad.invalid/path"}}
+        with mock.patch.object(config, "INVENTORY") as inventory:
+            inventory.read_text.return_value = json.dumps({"variables": [row]})
+            with self.assertRaisesRegex(config.ConfigurationError, "EXAMPLE_URL"):
+                config.load_tool_config("fixture", {}, {})
 
     def test_valid_publisher_constructs_mock_session_only(self):
         with mock.patch("tool_config.os.environ", VALID), mock.patch.object(publisher, "load_env_file", return_value={}), \
@@ -98,6 +148,11 @@ class ToolConfigTests(unittest.TestCase):
             'import os\ngetattr(os, "environ")',
             'from tool_config import load_tool_config\nread = load_tool_config',
             'import tool_config\nread = tool_config.load_tool_config',
+            'import os\nos.__dict__["environ"].get("CBD_113_UNDECLARED")',
+            'import importlib\nimportlib.import_module("os").getenv("CBD_113_UNDECLARED")',
+            'import importlib as lib\nlib.import_module("os").getenv("CBD_113_UNDECLARED")',
+            'from importlib import import_module as load\nload("os").getenv("CBD_113_UNDECLARED")',
+            '__import__("os").getenv("CBD_113_UNDECLARED")',
         ):
             with self.subTest(source=source):
                 errors, _ = scanner.scan(source, "scripts/fixture.py", [])

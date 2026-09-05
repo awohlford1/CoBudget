@@ -3,7 +3,8 @@ import "reflect-metadata";
 import { ConfigError } from "@cobudget/contracts/config";
 
 import { createApiApplication } from "./application.js";
-import { loadApiConfig, resolveApiListenAddress } from "./config.js";
+import { loadApiConfig } from "./config.js";
+import { runApiBootstrap } from "./bootstrap.js";
 import { stdoutReliabilitySink, writeStartupDiagnostic } from "./telemetry.js";
 
 const SAFE_STARTUP_ERROR_CODES = new Set(["EACCES", "EADDRINUSE", "EADDRNOTAVAIL"]);
@@ -29,18 +30,7 @@ process.on("unhandledRejection", () => {
 });
 
 export async function bootstrap(): Promise<void> {
-  const config = loadApiConfig();
-  const app = await createApiApplication(config, stdoutReliabilitySink);
-
-  app.enableShutdownHooks(["SIGINT", "SIGTERM"], { useProcessExit: true });
-  const listenAddress = resolveApiListenAddress(config);
-  await app.listen(config.API_PORT, listenAddress);
-  stdoutReliabilitySink({
-    service: "api",
-    version: config.SERVICE_VERSION,
-    operation: "startup",
-    outcome: "ok",
-  });
+  await runApiBootstrap({ loadConfig: loadApiConfig, createApplication: createApiApplication, sink: stdoutReliabilitySink });
 }
 
 try {
