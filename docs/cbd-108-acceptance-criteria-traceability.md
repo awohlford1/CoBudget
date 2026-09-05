@@ -2,13 +2,13 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Five of seven acceptance criteria are met, one partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.78 |
+| Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Six of seven acceptance criteria are met and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
+| Document version | 0.79 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.69; Cross-Category Coherence Review v0.69; Combined Cost Model v0.69; Carried Item Disposition Register v0.69; Evidence Retrieval Pass v0.69 |
+| Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
 | Last updated | September 4, 2026 |
@@ -75,7 +75,7 @@ category F, is not comparable with the others on its face.
 
 ### AC3 — The topology has no contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions
 
-**Status: Partially met.**
+**Status: Met** for the selected set, with two residuals named below.
 
 | Dimension | Analysis | Result |
 | --- | --- | --- |
@@ -87,10 +87,25 @@ category F, is not comparable with the others on its face.
 | Deletion | Coherence §4.6 | Analyzed. Three different suppression blast radii across the email candidates |
 | Incident | Coherence §4.7 | **One actual contradiction found** — the Customer Lockbox assumption fails in two categories |
 
-**Why partial.** The X gates that would clear the criterion are `UNPROVEN`
-across categories F and N entirely and partially elsewhere, so no set can be
-certified coherent. Coherence §9 states the five steps that would convert the
-map into a clearance. `OI-108-007` records the shortfall.
+**The one contradiction found does not apply to the selected set.** Retrieval pass
+§4.86 tests coherence §8's six incoherent combinations against C1 Google Cloud, C1
+Cloud SQL, C2 Cognito, C2 SES, C6 Plaid and C2 AWS End User Messaging. Finding 1 — the
+only actual contradiction, on Azure's Customer Lockbox coverage — concerns Entra
+External ID and PostgreSQL Flexible Server, and **no Azure candidate is selected in any
+category**. Findings 2 and 4 do not apply either, and finding 3 is not a contradiction
+because C10 was excluded on a `FAIL` rather than declined on the belief the finding
+rejects.
+
+**Two residuals, both correlated-failure modes rather than contradictions.** Finding 5:
+three of six selections are C2, so a `FAIL` on `HG-102-009` would make C2 `INELIGIBLE`
+in every category at once — resolved by `OQ-103-028` in the observation pass. Finding 6:
+`HG-102-013` would fail every candidate at once if the remaining DPAs are silent on
+backup retention, region and expiry. Neither says the topology's assumptions disagree;
+both say the topology might not survive, which is what AC7 records.
+
+`OI-108-007` conflated the two. Coherence §9's five steps convert the map into a
+*clearance* — a statement that the gates pass — which is AC1 and AC7 territory. AC3 asks
+about contradictory assumptions, and for the selected set there are none.
 
 **What was nevertheless produced**: one live contradiction, five conditional
 ones, and a constraint map showing that two of three hosting candidates support
@@ -273,7 +288,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-108-018 | **One of seven acceptance criteria is partially met and one is not met**, and the unmet one is the approval gate itself. Was three partially met at tranche 65; AC4 closed at tranche 66 on the budget-ceiling decision and AC6 at tranche 74 once `FU-95-028` was identified as the dependency's address. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
+| OI-108-018 | **Six of seven acceptance criteria are met and the one that is not is the approval gate itself.** Was three partially met at tranche 65; AC4 closed at tranche 66 on the budget-ceiling decision and AC6 at tranche 74 once `FU-95-028` was identified as the dependency's address. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
 
 ## 8. Revision record
 

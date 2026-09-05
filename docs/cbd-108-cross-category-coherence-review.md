@@ -3,12 +3,12 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Performs the review `OI-103-011` assigns to CBD-108 and that no category evaluation could perform: whether a combined provider set would share contradictory identity, networking, secret, regional, retention, deletion, or incident assumptions. **It clears nothing**, because §2 establishes that the gates which would clear it are largely `UNPROVEN`. It maps the constraint structure, names the specific combinations that would be incoherent, and records what must be observed to convert the map into a clearance. |
-| Document version | 0.78 |
+| Document version | 0.79 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.69; Combined Cost Model v0.69; Carried Item Disposition Register v0.69; Acceptance Criteria Traceability v0.69; Evidence Retrieval Pass v0.69 |
+| Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
 | Last updated | September 4, 2026 |
@@ -428,7 +428,7 @@ In dependency order, cheapest first:
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-108-007 | **This review clears nothing.** The X gates that would clear it are `UNPROVEN` across category F and N entirely, and partially elsewhere. | The acceptance criterion is **partially met**: the dimensions are analyzed and six incoherent combinations are named, but no set is certified coherent. §9 states what would change that. |
+| OI-108-007 | **This review clears nothing**, in the sense that it certifies no gate. The X gates are `UNPROVEN` across category F and N entirely, and partially elsewhere. **Narrowed at tranche 75:** clearing gates and finding contradictions are different questions, and §8's six combinations were tested against the selected set at retrieval pass §4.86. The one actual contradiction concerns an Azure set that was not selected; the two live findings are correlated-failure modes rather than contradictions. | The acceptance criterion is **partially met**: the dimensions are analyzed and six incoherent combinations are named, but no set is certified coherent. §9 states what would change that. |
 | OI-108-008 | **Finding 1 in §8 is the only contradiction found by reading; the other five are conditional.** | Recorded so the review is not read as having found a set of live defects. Five of the six are constraints on future choices, not errors in present ones. |
 | OI-108-009 | **The C1 branch analysis rests on two single-record screening judgments** that both source evaluations flagged as unconfirmed (`EV-102-029`; CBD-106 §4.3's "not separately evidenced"). | §3.1 declines to rely on them. If either is wrong, §3's constraint table changes shape and findings 2 and 3 weaken. Two retrievals settle it. |
 | OI-108-010 | **`OQ-103-029`'s standing constraint is recorded in an evaluation appendix, but it binds CoBudget's build rather than any provider.** | It should reach the implementation brief for CBD-120 and its siblings, not only the evaluation record. Adopting the Application Insights browser SDK would silently reopen a passed gate in five categories. |
