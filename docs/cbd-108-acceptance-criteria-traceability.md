@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Three of seven acceptance criteria are met, three partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.69 |
+| Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Four of seven acceptance criteria are met, two partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
+| Document version | 0.70 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -11,7 +11,7 @@
 | Companions | Provider Set Disposition Register v0.69; Cross-Category Coherence Review v0.69; Combined Cost Model v0.69; Carried Item Disposition Register v0.69; Evidence Retrieval Pass v0.69 |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
-| Last updated | August 29, 2026 |
+| Last updated | September 4, 2026 |
 
 ## 1. Package contents
 
@@ -98,7 +98,7 @@ a single-ecosystem set across five categories while the third does not.
 
 ### AC4 — Cost warning/stop thresholds, owner, cadence, and actions are explicit
 
-**Status: Partially met.**
+**Status: Met.**
 
 | Element | Status |
 | --- | --- |
@@ -106,16 +106,27 @@ a single-ecosystem set across five categories while the third does not.
 | Cadence | **Explicit** — monthly, aligned to the provider billing period |
 | Actions | **Explicit** — disposition §5, including the rule that no automatic tier downgrade is permitted because `CR0` ties tier to gate clearance |
 | Cliffs | **Explicit** — six enumerated in cost model §5.1 |
-| Warning threshold | **Cannot be set** |
-| Stop threshold | **Cannot be set** |
+| Warning threshold | **Explicit** — `USD 175.00` per month, 70% of the ceiling |
+| Stop threshold | **Explicit** — `USD 250.00` per month; `USD 3,000.00` per year |
 
-Two blockers, both recorded upstream: `OI-102-017` (no budget ceiling exists)
-and `UNKNOWN` prices in three of six categories — **down from five**, because the
-retrieval pass priced category E and partly priced category N on August 29,
-2026. `OI-108-002` and `OI-108-013`
-record it. Cost model §7 lists the retrievals that would close the price side —
-and notes that even a complete price side leaves the thresholds unset without a
-ceiling.
+**This criterion was partially met until September 4, 2026, and the reason it
+could not close is worth recording, because it was not a research gap.**
+`OI-102-017` was described throughout this package as *"no budget ceiling
+exists"*, which reads as a missing input. It was in fact a **closed Product
+Owner decision** of August 16, 2026 that there would be no ceiling — so the two
+thresholds were not pending retrieval, they were unsettable, and this criterion
+could never have closed on its own. The cost template's own row left the door
+open: *"a ceiling can be introduced later if one becomes obvious."*
+
+**The Product Owner reopened and re-decided `OI-102-017` on September 4, 2026**
+at `USD 250.00` per month. Both thresholds follow from it and are stated in
+disposition §5.
+
+**What the ceiling does not do.** Prices remain `UNKNOWN` in three of six
+categories, so whether the selected set sits under the ceiling cannot yet be
+answered — the thresholds exist, the comparison does not. That is `OI-108-011`,
+which is a separate deliverable and remains open. Cost model §7 lists the
+retrievals that would close the price side.
 
 ### AC5 — Legal/contract review needs and limitations are stated
 
@@ -217,9 +228,14 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 * **No CBD-102 rule is amended.** `CR0`, `CR3`, `CR4`, `EX-102-001`,
   `EX-102-003`, evidence register §3.3 and §4 are applied as written.
 * **No CBD-103–107 or CBD-130 verdict, gate outcome, rubric score, evidence
-  record, or price moves.** Every verdict restated here is derived from its
-  source matrix by `scripts/audit-cbd-108.py` rather than retyped, and the
-  audit fails if a source verdict changes without this package being revisited.
+  record, or price moves.** Every source evaluation's verdict row is
+  pinned exactly in `scripts/audit-cbd-108.py`, so a change in any direction —
+  including a downgrade of a selected candidate — fails the audit until this
+  package is revisited. **Before tranche 66 that claim was broader than the
+  guard.** The check detected only an upgrade to `ELIGIBLE`; every identity
+  candidate could have been downgraded to `INELIGIBLE`, the selected C2 among
+  them, and the audit still reported `PASS`. Verified by mutation before the
+  guard was widened.
 * **`OI-102-023` is applied, not revisited.** Its consequence for category F is
   carried into the disposition and the coherence review.
 
@@ -242,6 +258,17 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | OI-108-018 | **Three of seven acceptance criteria are partially met and one is not met**, and the unmet one is the approval gate itself. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
 
 ## 8. Revision record
+
+**This record lapsed after v0.38 and is resumed here.** Versions 0.39 through
+0.69 carry no row, although the package advanced through tranche 65 in that
+span and made its largest change — the route-B selections of September 2, 2026 —
+inside it. The per-tranche narrative for those versions is not lost: it is in
+`docs/cbd-108-evidence-retrieval-pass.md` §4.37 through §4.77, which is where
+tranches 37 onward were written up while the table here was not maintained.
+Recorded rather than reconstructed, because rows written now from a later
+reading would be a reconstruction presented as a contemporaneous record. It
+matters for AC7: a Product Owner is asked to approve *"the exact package"*, and
+for thirty-one versions this table did not say what changed.
 
 | Version | Date | Change |
 | --- | --- | --- |
@@ -282,3 +309,4 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 | 0.36 | August 30, 2026 | Tranche 34 registers **Azure PostgreSQL Flexible Server compute pricing supplied by the Product Owner** (`EV-102-277`), the **second `$-` gap closed by supply in two tranches**. **`OQ-108-010` now has a price**: `CR0` moves C3's category D line from **$12.41/month** (Burstable **B1ms**) to **$163.52/month** (General Purpose **DC2ads v6**, 2 vCores, 8 GiB) if the Product Owner rules against a tier `EV-102-231` records as *"Not recommended for production workloads"* — a **13.2x** move, and `OI-108-042` records the decision as worth **$151.11 a month** where it had been open since tranche 5 as a judgment about a disclaimer. `DM-102-030` puts Base at **0.4 GB**, so B1ms is ample on capacity and the question is entirely the disclaimer. **The 13.2x is a `CR0` artefact**, not a like-for-like gap: at matched 2 vCores and 8 GiB the ratio is **1.65** ($99.28 against $163.52). **The General Purpose ceiling may be too high** — everything supplied under that heading is the **DCadsv6 confidential-computing** series, and `OQ-108-057` asks whether a cheaper series exists, **to be answered before `OQ-108-010` is decided**, since ruling against Burstable on a confidential-computing price would be ruling on the wrong number. The running identified total across categories **H and D** is **$62.41** or **$213.52** depending on that ruling, and about **$2,548** on the Managed HSM branch `OQ-108-056` governs — with every `OI-108-039` caution still attached, and **no counterpart figure for C1 or C2**. Compute only: storage, backup and IOPS were not supplied. The cost model gains §4.6 and its category D row moves to **Compute priced**. **No verdict, gate outcome, rubric score or disposition changes.** |
 | 0.37 | August 30, 2026 | Tranche 35 registers **Azure Communication Services pricing supplied by the Product Owner** (`EV-102-278`), the **third `$-` gap closed by supply in three tranches**, and settles `OQ-108-004`. **The disclaimed figures were right**: the authoritative page carries **`$0.00025/Email sent`** and **`$0.00012/MB transferred`**, matching `EV-102-214`'s figures exactly — which came from a Learn page stating its own prices *"are for illustrative purposes and may not reflect the latest Azure pricing"*. `OI-108-021` **resolves**, and the decision to record a disclaimed vendor figure at Low rather than exclude it is **vindicated rather than merely defensible**. **No figure in the cost model moves** — C3's email line was already `$0.06 + data` and 250 x $0.00025 is $0.0625; what changes is that it no longer rests on a self-disclaiming source. **This tranche confirms where the previous two corrected**, which is worth recording: a pass that only ever reports corrections describes its own error rate rather than the evidence. **One term still open for category E and it is small**: `$0.00012/MB` needs a message size, unestablished by any approved source (`OQ-108-003`), and at Base it bounds about **$0.003** for a 100 KB message or **$0.03** for 1 MB — a rounding error, not a decision. The SMS routes render as *"Learn more"* and are already carried by `EV-102-228`. **The remaining Azure gap is the category H composition**, which supply does not solve, since `OI-108-022` records it needs a container sizing decision first. The cost model gains §4.7. **No verdict, gate outcome, rubric score or disposition changes.** |
 | 0.38 | August 30, 2026 | Tranche 36 records **three Product Owner rulings of August 30, 2026** and **registers no evidence**, on the pattern §4.12 and §4.24 set. **Ruling 1**: vendor-disclaimed tiers are **accepted for the Private MVP, to be revisited before public launch** — PostgreSQL **Burstable B1ms at $12.41** and **Developer support at $29.00**, closing `OQ-108-010` and `OQ-108-047` together as §4.40 required, and saving **$222.11 a month** against the strict reading at the cost of knowingly running on tiers Microsoft scopes away from production. The scope needs a testable trigger (`OQ-108-058`). **Ruling 2**: `HG-102-024`'s *"where supported"* **makes HSM optional**, so Key Vault Standard with software keys satisfies the gate and C3's Key Vault line is **$0.00** — closing `OQ-108-049` and rendering `OQ-108-056`'s 2,336x question **moot rather than answered**. `OI-108-043` records that `HG-102-024` now forces a tier on **no candidate**, leaving `HG-102-009` and `HG-102-005` as the only forcers in category H, both on C3 alone. **Ruling 3**: the `EX-102` question is **deferred until the six evaluations re-measure against `HG-102-013` v1.2**, which is the right order — none has been done, so it would otherwise be answered on stale inputs — and which makes **the six evaluation revisions the critical path**, outside this pass under `OI-108-020`. **C3's identified floor settles at $61.41** across categories H and D, down from a range of *$62.41, $213.52 or about $2,548*; the uncertainty removed was **decision** uncertainty, not measurement uncertainty. Every `OI-108-039` caution still applies and there is still **no counterpart figure for C1 or C2**. The cost model gains §4.8. **No verdict, gate outcome, rubric score or disposition changes.** |
+| 0.70 | September 4, 2026 | Tranche 66, from an independent review of the package. **Three corrections.** **One:** the evidence register §3.3.1 amendment that every selection rests on was carried in two documents and restated unamended in three — the CBD-102 rubric's §4 verdict table, the hard-gate catalog's `UNPROVEN` text, and CBD-104 §3, which called C2 not selectable while CBD-108 had selected it. All three now carry the amendment; rubric to v1.1, catalog to v1.4, CBD-104 to v1.5, with no gate outcome, verdict, score, or evidence record changed. **Two:** `OI-102-017` was reopened and re-decided at `USD 250.00` per month, so AC4's warning and stop thresholds are stated and AC4 moves from partially met to met; cost template to v1.2. The package had described that closed decision as a missing input, which made AC4 look pending when it was unsettleable. **Three:** the §5 claim that the audit fails on any source verdict change was broader than the guard, which caught only upgrades to `ELIGIBLE`; the verdicts are now pinned exactly and the claim matches. Also resumed this record, fixed five stale `Last updated` stamps, and corrected the disposition register's *"four of six"* unpriced categories to three. |

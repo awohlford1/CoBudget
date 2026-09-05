@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Derived from approved CBD-72/CBD-91/CBD-92 material and the `docs/architecture.md` security baseline. CBD-103–107 and CBD-130 may now measure a vendor against it. v1.1 amends the `HG-102-006` and `HG-102-074` pass tests and records the §2.5.1 second-principal disposition, by Product Owner decision on August 22, 2026 — see §12.1. **v1.2 amends the `HG-102-013` gate and pass test on the same grounds, by Product Owner decision on August 29, 2026. v1.3 settles three questions of construction in that amended text, by Product Owner decision on August 30, 2026** — see §12.1. |
-| Document version | 1.3 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Derived from approved CBD-72/CBD-91/CBD-92 material and the `docs/architecture.md` security baseline. CBD-103–107 and CBD-130 may now measure a vendor against it. v1.1 amends the `HG-102-006` and `HG-102-074` pass tests and records the §2.5.1 second-principal disposition, by Product Owner decision on August 22, 2026 — see §12.1. **v1.2 amends the `HG-102-013` gate and pass test on the same grounds, by Product Owner decision on August 29, 2026. v1.3 settles three questions of construction in that amended text, by Product Owner decision on August 30, 2026** — see §12.1. **v1.4 carries the evidence register §3.3.1 amendment into the §4 `UNPROVEN` text, by Product Owner decision of September 2, 2026. No gate, pass test, or exception rule changes.** |
+| Document version | 1.4 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the 75 hard gates, their cited sources, the Vendor/Config satisfaction types, the §2.5.1 second-principal disposition, and the §11 candidates deliberately not made gates. It does not close the open items in §12, does not select or rank any provider, and does not substitute for the independent security review that CBD-92 §1 and the architecture baseline require before public launch. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
@@ -101,7 +101,7 @@ A gate also has a fourth possible outcome, `UNPROVEN`, defined in the evidence
 register §3.3: the evidence was vendor assertion or absent, so the property is
 neither confirmed nor refuted. A gate never passes on assertion alone. An
 `UNPROVEN` gate is not a failure and needs no compensating control — it needs
-better evidence — but it does block selection until resolved. The exception
+better evidence — and it blocked selection until resolved. **Amended for the Private MVP phase by evidence register §3.3.1, Product Owner decision of September 2, 2026: such a candidate may be selected, with the observations still owed.** The exception
 rules in that document govern who may approve a `Fail + compensating control`
 outcome, and §5.2 there lists the gates for which no exception may be granted at
 all.
