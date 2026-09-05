@@ -90,6 +90,13 @@ npm run check
 This checks documentation and tokens, then runs linting, type checking, tests,
 and production builds across all workspaces.
 
+It also runs `npm run check:secrets`: synthetic scanner regression tests and a
+scan of HEAD, staged files, and tracked working files. Stage new files before
+running the guard; ignored/untracked local credentials are not read. The first
+run downloads a checksum-verified Gitleaks release from GitHub. See
+[secret scanning](secret-scanning.md) for history coverage, exceptions, and
+incident handling.
+
 ## Environment contract
 
 `config/environment-inventory.json` is the inventory for every first-party

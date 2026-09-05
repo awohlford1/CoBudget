@@ -1,0 +1,17 @@
+title = "CoBudget committed-secret detection"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "cobudget-postgresql-credential"
+description = "PostgreSQL connection URL containing a password"
+regex = '''(?i)postgres(?:ql)?://[^\s/:@]+:([^\s/@]+)@'''
+secretGroup = 1
+
+[[rules]]
+id = "cobudget-secret-assignment"
+description = "High-entropy application credential assignment"
+regex = '''(?i)(?:secret|password|token)\s*[=:]\s*["']?([A-Za-z0-9_+/=-]{24,})'''
+secretGroup = 1
+entropy = 3.5

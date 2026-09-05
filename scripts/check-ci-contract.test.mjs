@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { readFileSync } from "node:fs";
+import { URL } from "node:url";
 
-import { validateCiContract } from "./check-ci-contract.mjs";
+import { validateCiContract, validateScannerPins } from "./check-ci-contract.mjs";
 
 const checkoutSha = "3d3c42e5aac5ba805825da76410c181273ba90b1";
 const setupNodeSha = "820762786026740c76f36085b0efc47a31fe5020";
@@ -32,6 +34,8 @@ jobs:
       - uses: actions/checkout@${checkoutSha} # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0
+      - run: python3 scripts/secret_scanner.py ci '\${{ github.event_name }}' '\${{ github.event.pull_request.base.sha }}' '\${{ github.event.pull_request.head.sha }}' '\${{ github.sha }}'
       - uses: actions/setup-node@${setupNodeSha} # v7.0.0
         with:
           node-version-file: .nvmrc
@@ -80,6 +84,7 @@ const validRootPackage = {
   scripts: {
     "check:ci": "node --test scripts/check-ci-contract.test.mjs && node scripts/check-ci-contract.mjs",
     "check:env": "node --test scripts/check-environment.test.mjs && node scripts/check-environment.mjs",
+    "check:secrets": "node scripts/check-secrets.mjs",
     "check:docs": "node scripts/check-mermaid.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
     "check:copy": "node scripts/check-copy-language.mjs",
@@ -88,7 +93,7 @@ const validRootPackage = {
     test: "npm run test --workspaces --if-present",
     build: "npm run build --workspaces --if-present",
     "check:pages": "node scripts/check-public-pages.mjs",
-    check: "npm run check:ci && npm run check:env && npm run check:docs && npm run check:tokens && npm run check:copy && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
+    check: "npm run check:ci && npm run check:secrets && npm run check:env && npm run check:docs && npm run check:tokens && npm run check:copy && npm run lint && npm run typecheck && npm run test && npm run build && npm run check:pages",
   },
 };
 
@@ -115,6 +120,22 @@ function expectFailure(result, fragment) {
 }
 
 describe("CI contract checker", () => {
+  it("rejects shallow history, substituted scan ranges, and missing scanner steps", () => {
+    expectFailure(failures({ workflow: validWorkflow.replace("fetch-depth: 0", "fetch-depth: 1") }), "complete history");
+    expectFailure(failures({ workflow: validWorkflow.replace("          fetch-depth: 0\n", "") }), "full-history checkout");
+    expectFailure(failures({ workflow: validWorkflow.replace("github.event.pull_request.base.sha", "github.event.before") }), "reviewed command allowlist");
+    expectFailure(failures({ workflow: validWorkflow.replace(/^.*run: python3 scripts\/secret_scanner.py.*\n/m, "") }), "must appear exactly once");
+  });
+
+  it("rejects floating scanner versions, changed digests, and detection suppression", () => {
+    const pin = readFileSync(new URL("../config/secret-scanner.json", import.meta.url), "utf8");
+    const rules = readFileSync(new URL("../config/gitleaks.toml", import.meta.url), "utf8");
+    assert.deepEqual(validateScannerPins(pin, rules), []);
+    expectFailure(validateScannerPins(pin.replaceAll("8.30.1", "latest"), rules), "immutable release digests");
+    expectFailure(validateScannerPins(pin.replace("d29144", "000000"), rules), "immutable release digests");
+    expectFailure(validateScannerPins(pin, rules + '\n[allowlist]\npaths = [".*"]\n'), "without broad suppression");
+  });
+
   it("accepts the complete hardened contract", () => {
     assert.deepEqual(failures(), []);
   });
