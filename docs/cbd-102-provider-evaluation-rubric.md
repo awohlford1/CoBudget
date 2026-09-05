@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Scores the non-gating qualities of a provider that has already been measured against the CBD-102 hard-gate catalog. The §4 weight profiles were approved separately on August 16, 2026 and are fixed for CBD-103–107 and CBD-130. |
-| Document version | 1.0 |
+| Status | **Approved** — Product Owner approved v1.0 on August 18, 2026. Scores the non-gating qualities of a provider that has already been measured against the CBD-102 hard-gate catalog. The §4 weight profiles were approved separately on August 16, 2026 and are fixed for CBD-103–107 and CBD-130. **v1.1 carries the evidence register §3.3.1 amendment into the §4 verdict table, by Product Owner decision of September 2, 2026: `ELIGIBLE-PENDING-EVIDENCE` may be selected for the Private MVP phase. No weight, score, profile, or other verdict changes.** |
+| Document version | 1.1 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. Approval covers the 33 criteria, the seven weighted dimensions, the per-category weight profiles, the scoring scale, and the five rules in §3 that keep a score from hiding a failed gate. It does not close `OI-102-007`, and it approves no provider score. |
 | Jira | [CBD-102](https://cobudget.atlassian.net/browse/CBD-102) |
@@ -67,7 +67,7 @@ verdict attached:
 | Verdict | Meaning |
 | --- | --- |
 | `ELIGIBLE` | Every applicable gate passed. |
-| `ELIGIBLE-PENDING-EVIDENCE` | One or more gates are `UNPROVEN` — evidence was Asserted or Absent, so the property is neither confirmed nor refuted — and none failed. Not disqualified, but cannot be selected until the evidence is obtained. |
+| `ELIGIBLE-PENDING-EVIDENCE` | One or more gates are `UNPROVEN` — evidence was Asserted or Absent, so the property is neither confirmed nor refuted — and none failed. Not disqualified, and could not be selected until the evidence was obtained. **Amended for the Private MVP phase by evidence register §3.3.1, Product Owner decision of September 2, 2026: such a candidate may be selected, with the observations still owed.** |
 | `CONDITIONAL` | One or more gates failed but carry a recorded compensating control, residual risk, and named approver under catalog §2.4 and the exception rules. |
 | `INELIGIBLE` | One or more gates failed with no approved exception. |
 

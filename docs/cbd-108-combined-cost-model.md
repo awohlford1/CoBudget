@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.69 |
+| Document version | 0.79 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.69; Cross-Category Coherence Review v0.69; Carried Item Disposition Register v0.69; Acceptance Criteria Traceability v0.69; Evidence Retrieval Pass v0.69 |
+| Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
-| Last updated | August 29, 2026 |
+| Last updated | September 4, 2026 |
 
 ## 1. What was asked for, and what is available
 
@@ -19,19 +19,27 @@ CBD-108's third deliverable is a *"combined low/base/high monthly and annual cos
 model"*, and its fifth acceptance criterion requires explicit cost warning and
 stop thresholds.
 
-**Neither is available as a number, and the reason is recorded upstream rather
-than discovered here.**
+**Both are now available, as of September 4, 2026.** This section records what
+changed, because for most of this package's life neither was.
 
 A cost model has two sides. The demand side — how much CoBudget will consume —
-is **complete, approved, and stated at all three scenarios** in the CBD-102
-demand model. The price side — what each candidate charges for that consumption
-— is **`UNKNOWN` in three of six categories**.
+was **complete, approved, and stated at all three scenarios** throughout. The
+price side was `UNKNOWN` in three of six categories until tranches 68 through 71
+closed every one: Cloud SQL and the eight category H component pages by browser
+rendering, the AWS SMS rate from its own CSV, and Plaid's rate supplied by the
+Product Owner.
 
-Multiplying a complete quantity by an unknown rate does not produce an estimate.
-It produces a number with no evidence record behind it, in a document whose only
-purpose is to make cost comparable.
+**`CT-102-017`, the steady-state comparison figure, is `$62.56` per month**, and
+the low/base/high model is in §2.1. Retrieval pass §4.82 carries the derivation.
 
-## 2. Why there are no totals
+The thresholds follow from the `OI-102-017` ceiling decided the same day:
+`$175.00` warning, `$250.00` stop. **Every scenario clears both.**
+
+## 2. Why there were no totals, and what changed
+
+The rules below are why this document refused to estimate for sixty-odd
+revisions. They are retained because they governed the refusal and still govern
+the result: nothing here is an estimate.
 
 Three approved rules converge, and none of them is discretionary.
 
@@ -97,12 +105,12 @@ category where the metering question is as consequential as the rate.
 
 | Category | Prices retrieved? | Position |
 | --- | --- | --- |
-| **H** — Hosting | **Partly** — August 29, 2026 | **`CT-102-005` is priced for two of three.** C3 **$29.00/month** Developer support, the first `CR0`-forced price in the category, and not optional (`EV-102-265`); C2 **$0.00** unless a gate is found to force it off free Basic, its entry paid tier being $29 (`EV-102-264`); **C1 not retrieved across four URLs** (`EV-102-266`), and subordinate to `OQ-103-007` in any case. Five of seven line items remain `UNKNOWN`. Retrieval pass §4.40 |
+| **H** — Hosting | **C1 fully priced** — September 4, 2026 | **C1's eight component pages are all retrieved** (`EV-102-301`–`308`), by browser rendering after `OQ-108-076`. **At Base every usage-metered component is free** — requests, Cloud Run compute, jobs, log ingest, Pub/Sub and Scheduler all sit inside their free tiers — and the floor is always-on infrastructure: `$18.25` for the regional external Application Load Balancer, `$5.00` per Cloud Armor policy plus `$1.00` per rule, `$0.06` per software key version. **Floor `$24.31`/month** at one policy and one rule. **`CT-102-005` is priced for two of three.** C3 **$29.00/month** Developer support, the first `CR0`-forced price in the category, and not optional (`EV-102-265`); C2 **$0.00** unless a gate is found to force it off free Basic, its entry paid tier being $29 (`EV-102-264`); **C1 not retrieved across four URLs** (`EV-102-266`), and subordinate to `OQ-103-007` in any case. Five of seven line items remain `UNKNOWN`. Retrieval pass §4.40 |
 | **I** — Identity | **Partially** | The only category with figures. Two of three totals carry unresolved tier risk — CBD-104 §6.6 |
-| **D** — PostgreSQL | **Compute priced** — August 30, 2026 | `CT-102-006` still `UNKNOWN × 0.4 GB Base`. **The tier to price is now identified for C3**: `EV-102-231` records that Azure's cheapest tier is excluded from production support, so `CR0` is plausibly General Purpose at 2 vCores / 8 GiB rather than Burstable — pending `OQ-108-010` |
+| **D** — PostgreSQL | **C1 fully priced** — September 4, 2026 | **C1's complete list pricing is retrieved** (`EV-102-300`): compute, storage, backup and egress, at `us-central1`. The line is still not final, for three reasons that are not price questions — no `CR0` tier is chosen (`OQ-105-009`), the region is not fixed, and storage bills provisioned capacity rather than `DM-102-030`'s database size (`OQ-108-077`). At the three tiers priced the category runs `$7.74` to `$49.38`/month, comfortably inside the `$250` ceiling. **The tier to price is identified for C3**: `EV-102-231` records that Azure's cheapest tier is excluded from production support, so `CR0` is plausibly General Purpose at 2 vCores / 8 GiB rather than Burstable — pending `OQ-108-010` |
 | **E** — Email | **Yes** — August 29, 2026 | Retrieved by this package: `EV-102-212`–`215`. C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` at Base. C3's rate carries the vendor's own *"illustrative purposes"* disclaimer and is held at Low confidence |
-| **F** — Financial connectivity | **No** | `OQ-107-020` records that this category **requires provider contact** — reading will not close it |
-| **N** — Push and SMS | **Partly** — August 29, 2026 | Floors and registration fees retrieved for both candidates (`EV-102-227`–`228`); **C2's per-segment rate was not obtainable** and carrier fees are unquantified for it (`OQ-108-008`) |
+| **F** — Financial connectivity | **Unit only** — September 4, 2026 | No rate is published (`EV-102-298`), so `OQ-107-020` still needs provider contact. **The metering unit is answered**: Plaid bills per `Item` (`EV-102-299`), pointing at `DM-102-010`'s 61 connections at Base rather than 135 accounts — held at Medium against a wording conflict in Plaid's own material |
+| **N** — Push and SMS | **SMS fully priced** — September 4, 2026 | **C2's per-segment rate and carrier fee are retrieved** from AWS's own CSV (`EV-102-309`): `$0.00774` per message part plus `$0.00421` 10DLC carrier fee, giving `$11.72`/month at Base including the `$10.00` campaign and `$1.00` number. Push has no provider to price. Formerly: floors and registration fees retrieved for both candidates (`EV-102-227`–`228`); C2's per-segment rate was not obtainable and carrier fees are unquantified for it (`OQ-108-008`) |
 
 **A combined total therefore has three known-ish terms out of six**, and three
 `UNKNOWN`. There is still no honest way to present that as a low/base/high
@@ -179,6 +187,32 @@ Three Product Owner rulings close the open cost decisions for C3.
 
 The strict reading of ruling 1 would have cost **$222.11/month more**, and the acceptance is scoped to the Private MVP with a revisit that still needs a named trigger (`OQ-108-058`). Retrieval pass §4.48.
 
+## 2.1 The model
+
+| Category | Selected | Low | Base | High |
+| --- | --- | --- | ---: | ---: | ---: |
+| H — Hosting | C1 Google Cloud | `$24.31` | `$24.31` | `$24.31` |
+| I — Identity | C2 Amazon Cognito | `$0.11` | `$0.45` | `$1.80` |
+| D — PostgreSQL | C1 Cloud SQL, `db-f1-micro` | `$7.68` | `$7.74` | `$8.36` |
+| E — Email | C2 Amazon SES | `$0.01` | `$0.04` | `$0.26` |
+| F — Financial | C6 Plaid | `$2.40` | `$18.30` | `$112.50` |
+| N — SMS | C2 AWS End User Messaging | `$11.06` | `$11.72` | `$16.98` |
+| N — Push | Web Push, no provider | `$0.00` | `$0.00` | `$0.00` |
+| **Monthly** | | **`$45.57`** | **`$62.56`** | **`$164.21`** |
+| **Annual** | | **`$546.84`** | **`$750.72`** | **`$1,970.52`** |
+
+At the Enterprise database tier, Base is `$104.20`/month and `$1,250.40` annually.
+
+**One line is 68% of the High bill.** Plaid moves `$110.10` across the scenarios
+while every other category moves `$21.17` combined, and category H does not move
+at all. `CT-102-021`'s first overage threshold is therefore a category F
+question: at `$0.30` per item the `$175` warning is reached at roughly **610
+items**, an order of magnitude above the private beta's 61.
+
+**A total is not a clearance.** `CR3` holds: cost never overrides a gate. Every
+selection remains at `ELIGIBLE-PENDING-EVIDENCE` and the ten route-A
+observations are still owed.
+
 ## 5. What is known without prices
 
 Three structural facts are established, and they are more useful than a
@@ -237,12 +271,15 @@ In the order that produces the most per unit of effort:
    candidate.~~ **Done, August 29, 2026.** One page per candidate, exactly as
    CBD-106 §5.1 predicted the effort would be. The hypothesis it tested turned
    out to be false for all three candidates — retrieval pass §4.1.
-4. **`OQ-107-020`** — category F pricing, which **requires provider contact**,
-   and which must also settle the per-account versus per-connection metering
-   question from §3.
-5. **A budget ceiling, or an explicit decision that none exists** —
-   `OI-102-017`. Without it the warning and stop thresholds have nothing to be
-   measured against, regardless of how complete the price side becomes.
+4. **`OQ-107-020`** — category F pricing, which **requires provider contact**.
+   The metering question §3 raises is **partly answered**: `EV-102-299` records
+   Plaid billing per `Item`, so the connection row rather than the account row.
+   The conflict with Plaid's own pricing-page wording goes to the same
+   conversation as the rate.
+5. ~~**A budget ceiling**~~ — **closed September 4, 2026.** `OI-102-017` was
+   reopened and re-decided: `USD 250.00` per month, `USD 3,000.00` per year. The
+   warning and stop thresholds are stated in disposition §5. What the price side
+   still blocks is not the thresholds but the comparison against them.
 
 Items 1–3 are desk retrievals and would move five of six categories from
 `UNKNOWN` to a comparable figure. **The cost model is the least
@@ -254,7 +291,7 @@ claim rather than an assertion of it.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-108-011 | **No combined total is produced, at any scenario.** The ticket's third deliverable is not met. | Deliberate. `CR4` forbids the alternative, and an estimated total in a comparison document is worse than no total. §7 is the route to producing one. |
+| OI-108-011 | ~~**The combined total was absent at every scenario.**~~ **Closed September 4, 2026** at §2.1: `$45.57` low, `$62.56` base, `$164.21` high, monthly. The third deliverable is met. | Formerly deliberate. `CR4` forbade the alternative, and an estimated total in a comparison document is worse than no total. §7 is the route to producing one. |
 | OI-108-012 | **The one category with figures cannot be generalized from.** Identity is cheap, retrievable, and floor-dominated; category F is none of those. | `OI-104-013` already records that its figures are a starting position. Nothing about the identity result predicts the shape of the aggregator bill. |
-| OI-108-013 | **Cost thresholds cannot be set** — mirrors `OI-108-002` in the disposition register. | The blocker is `OI-102-017`, not retrieval. Even a complete price side would not produce a warning threshold without a ceiling to measure against. |
+| OI-108-013 | ~~**Cost thresholds cannot be set**~~ — **closed September 4, 2026** by the `OI-102-017` ceiling decision; the thresholds are stated in disposition §5. What remains is that no total exists to compare against them. | Formerly: the blocker is `OI-102-017`, not retrieval. Even a complete price side would not produce a warning threshold without a ceiling to measure against. |
 | OI-108-014 | **Category F's billable unit is not established per candidate**, and the two candidate units differ by more than 2× at Base. | Recorded so that any later comparison in this category states which unit each figure uses. Comparing a per-account price against a per-connection price is not a comparison. |

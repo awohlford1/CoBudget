@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026 and v1.1 on August 21, 2026. Applies the approved CBD-102 method to managed-identity candidates against the companion boundary specification. It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE`, because the authorized observation pass has not been performed — §3 explains the position this evaluation inherits from CBD-103.** v1.2 reuses the CBD-103 cross-category documentary pass (§3.1): three documentary gate outcomes move, **no verdict does**, and `EV-102-012` positively establishes what v1.0 could only decline to assume — Microsoft Entra External ID is absent from the Customer Lockbox supported-services list. **v1.4 re-measures `HG-102-013` against CBD-102 v1.3 as §12.1 requires. The outcome is unchanged: this category's components were never read for this gate, so the position is absent evidence rather than evidence of absence, and stays `UNPROVEN`.** |
-| Document version | 1.4 |
+| Status | **Approved** — Product Owner approved v1.0 on August 21, 2026 and v1.1 on August 21, 2026. Applies the approved CBD-102 method to managed-identity candidates against the companion boundary specification. It selects no provider; CBD-108 does that. **No candidate reaches `ELIGIBLE`, because the authorized observation pass has not been performed — §3 explains the position this evaluation inherits from CBD-103.** v1.2 reuses the CBD-103 cross-category documentary pass (§3.1): three documentary gate outcomes move, **no verdict does**, and `EV-102-012` positively establishes what v1.0 could only decline to assume — Microsoft Entra External ID is absent from the Customer Lockbox supported-services list. **v1.4 re-measures `HG-102-013` against CBD-102 v1.3 as §12.1 requires. The outcome is unchanged: this category's components were never read for this gate, so the position is absent evidence rather than evidence of absence, and stays `UNPROVEN`.** **v1.5 records that §3.3's selectability rule was amended by evidence register §3.3.1 on September 2, 2026 and that CBD-108 selected C2 under it. No gate outcome, verdict, score, or evidence record changes.** |
+| Document version | 1.5 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner |
 | Jira | [CBD-104](https://cobudget.atlassian.net/browse/CBD-104) |
@@ -55,7 +55,9 @@ What the authorization does not do is gather evidence. **No observation has
 been performed for any identity candidate**, so every gate whose pass test
 requires one is `UNPROVEN` here, and every candidate terminates at
 `ELIGIBLE-PENDING-EVIDENCE` — not disqualified, and not selectable until the
-observations run. Under the route-A guardrails, observations run only on
+observations run **under the rule as it stood when this evaluation was written.
+Evidence register §3.3.1 amended that on September 2, 2026, and CBD-108 selected
+C2 Amazon Cognito on the same day with the observations still owed.** Under the route-A guardrails, observations run only on
 candidates without a documentary `FAIL`; §6.3 shows no candidate carries one,
 so all three candidates are eligible for the observation pass.
 

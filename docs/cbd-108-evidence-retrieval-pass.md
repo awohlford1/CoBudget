@@ -3,15 +3,15 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Registers evidence obtained by CBD-108's retrieval pass against the `D3` class of the carried-item register — items whose disposition is that a document exists and has not been read. **Tranches 1 and 2 of an incomplete pass.** Tranche 1 closes `OQ-106-010`, partially answers `OQ-104-016`, and **falsifies a hypothesis CBD-106 §5.1 recorded as likely**. Tranche 2 works the DPA block and materially narrows `HG-102-013` — **the one gate whose outcome could move every candidate in every category at once** — without moving it, for a different reason per candidate. **Tranche 3 retries the retrieval tranche 2 named as decisive, and the answer removes a prospective `PASS` rather than producing one** — §4.6 records the correction explicitly. **Tranche 4 returns to the pricing block**: category **N** is partly priced, quantifying `OI-130-021`'s A2P-floor claim, and `OQ-103-019` is answered in a way that puts a **second** condition on C3's `$0.00` identity figure. **Tranche 5 opens categories H and D and covers part of one of them** — §4.10 states what it did not do. It finds that Azure's cheapest PostgreSQL tier is excluded from production support by Microsoft's own documentation, which moves the `CR0` floor without producing a price. **Tranche 6 closes `OQ-108-007` from a list the Product Owner supplied, corrects tranche 3, and brings `HG-102-013` for C1 down to nameable components. Tranche 7 answers `OQ-108-011` — the composition uses **both** global and regional load balancing, so the regional half is covered and the global half is not — and separates the two remaining gaps by whether a like-for-like substitute exists. It also corrects the coherence review's regional finding. **Tranche 8 settles `OQ-108-014`: the regional-only swap moves no gate outcome. Tranche 9 records the swap as executed in CBD-103, and answers `OQ-108-012` in the negative — **Workflows cannot substitute for Cloud Scheduler**, correcting tranche 6. The cheap fix for the remaining gap is gone. **Tranche 10 puts the region question to C2 and C3, and C1 turns out to look worse only because it publishes a list that can be checked. Tranche 11 settles `OQ-108-017` and corrects tranche 10 in turn: C3's commitment is contractual too, in the Product Terms — §4.19 also collects the four corrections this pass has made to itself. **Tranche 12 reads the AWS DPA itself, supplied by the Product Owner, and corrects tranche 11 in turn: §12.1 states the region commitment contractually, so all three candidates now have one — but for C2 it is **narrower** than the Asserted statement it replaces, and the DPA assigns backup to the customer, so `HG-102-013`'s retention and expiry elements fail by allocation rather than by silence. **Tranche 13 settles `OQ-108-018` and `OQ-108-016`: C3's composition can be checked against its commitment for the first time, and the tranche 10 worry about Entra External ID is retired. Tranche 14 reads the AWS Customer Agreement, the last unread general AWS instrument, and answers `OQ-108-022` in the negative — no AWS contract states a backup retention or expiry term, because Service Terms §1.15 defers it to documentation. It records the Product Owner's ruling that `HG-102-013` accepts written evidence, which changes what would move that gate for C2 and C3 without moving it, and corrects two misreferences in tranche 13.** **Tranche 18 follows Service Terms §1.15's deferral into the per-service documentation and answers `OQ-108-025`: the deferral is followable and what it leads to is the wrong shape — overwhelmingly customer-configured retention, with provider-controlled lag on top that one page leaves explicitly unbounded. It corrects tranche 14's optimism about the cheap path.** **Tranche 20 completes `OQ-108-030` for two of five C2 components and corrects the reason tranche 18 gave for asking it: the retention of CoBudget's data in these services serves the `DI-91-*` inventory, not `HG-102-003`, which is about AWS's own data model. The composition does not bound retention uniformly — SQS cannot hold a message beyond fourteen days and CloudWatch Logs holds indefinitely by default.** **Tranche 21 answers `OQ-108-034` and discharges the C2 third of the upstream `OQ-103-009`: CloudWatch Logs scopes IAM to an individual log group by ARN and by tag, so two destinations with distinct access roles are configurable and `HG-102-026`'s pass test is met on the evidence. It is the first retrieval in this pass to produce evidence sufficient for a gate to pass rather than evidence that narrows one, and the outcome is CBD-103's to record. It also finds that the provider's redaction mechanism is the one `TD-103-022` rejects, which costs CoBudget nothing because its redaction is structural.** **Tranche 22 completes `OQ-103-009` by putting the same question to C1 and C3, and all three candidates meet `HG-102-026`'s pass test. The gate CBD-103 called the second most likely to eliminate a candidate eliminates none of them, and the evidence block this pass reserved is now exhausted.** **Tranche 23 registers no evidence and answers `OQ-108-027` by synthesis: all three DPAs have now been read, none describes a provider-held backup, and the upstream `OQ-103-024` is answered in the way it feared. Read literally, `HG-102-013` fails every candidate in every category at once. The documentary route on this gate is exhausted and what remains is class `D4`.** **Tranche 24 records the `HG-102-013` amendment the Product Owner made on August 29 (CBD-102 v1.2, §12.1) and re-measures all three candidates against the new pass test from evidence already held. All three still fail, now each on a named component rather than on a definition, and three records change their bearing without changing their content.** **Tranche 25 answers `OQ-108-040`: the substitute exists and it is worse. FireLens can route ECS logs away from CloudWatch, but S3's expiration states only that *"there may be a delay"* with no bound and no typical figure, where CloudWatch at least gives 72 hours. The unbounded tail is a property of asynchronous deletion rather than of one service, which raises a question about the clause this pass drafted.** **Tranche 26 answers `OQ-108-043` and the tranche 25 concern is half allayed and half confirmed: the three logging surfaces say materially different things, so the clause discriminates where the compositions actually are, but all three object stores are unbounded and Google's says so outright. No evaluated composition contains object storage, which makes that a prospective trap rather than a current failure — and the remedy tranche 25 examined would have sprung it.** **Tranche 27 answers `OQ-108-036` from CBD-102 §2.2 rather than by analogy — the pass test is *"the observation that decides"* every gate, so it governs by definition and no amendment is needed. It also corrects this pass's own error: `HG-102-026` is typed **Vendor**, not `Config`, which strengthens tranches 21 and 22 rather than weakening them.** **Tranche 28 opens category H at the line CBD-103 §6.2 says decides it — the support plan, a fixed floor rather than a rate. `CT-102-005` is priced for C2 and C3 and not for C1, whose page would not render across four URLs. The first comparable cost line in the category separates the candidates, and Azure's forced plan is described for non-production, exactly as its cheapest database tier was.** **Tranche 29 works the category H gate-forcing map and finds two things: every tier-forcing gate identified so far lands on **C3**, and C3 is also the candidate whose prices will not render. The price side of the cost model is blocked asymmetrically — AWS retrieves, Google and Azure largely do not — which changes what closing it requires.** **Tranche 30 completes two rows of the map. `OQ-103-007` is answered and it **removes** a suspected forcer: Access Transparency is *"a default security control for every Google Cloud organization"*, so C1's floor is not moved by `HG-102-009` after all. And `HG-102-024` gates a tier on C3 alone — AWS makes non-exportability standard — which turns tranche 29's C3 concentration from a possible retrieval artefact into evidence, for that row.** **Tranche 31 runs the `OI-102-015` seat check. The failure it feared does not materialise on either candidate checked, but the check prices `OQ-108-009`'s open half — Entra ID P2 at **$10.00 user/month** — and with `CT-102-003`'s two seats gives C3 the **first numbered floor in category H**, at $49.00/month, conditional on PIM being required.** **Tranche 32 completes the category H gate-forcing map, and the completed map corrects the reading tranche 30 gave the partial one. C2 forces no tier on two gates because it has **no passing control to gate** — which is not the same as being cheap. And C3's only priced line buys a control from which its own evaluated runtime is absent.** **Tranche 33 closes the first `$-` gap, from pricing the Product Owner supplied, and the figures correct this pass twice: Key Vault Premium is **not a plan-fee tier**, so the cost belongs in `CT-102-007` rather than `CT-102-001`; and the same gate reading produces either **$1 per key per month** or **$2,336.00 per month** depending on which Azure HSM product it requires.** **Tranche 34 closes the second `$-` gap from Product Owner supply and puts a number on `OQ-108-010`: the Burstable ruling moves C3's category D line from **$12.41** to **$163.52** a month, a **13.2x** move on a Product Owner judgment. The supplied General Purpose figures are the confidential-computing series only, so that ceiling may be too high.** **Tranche 35 closes the third `$-` gap and settles `OQ-108-004` in the direction nobody could assume: the Azure email rates the Learn page **disclaimed** are the rates the authoritative page carries. The figure does not change; its standing does, and `OI-108-021` resolves.** **Tranche 36 records three Product Owner rulings of August 30, 2026 and registers no evidence. Two of them price out: C3's identified floor settles at **$61.41**, and `HG-102-024` now forces a tier on **no** candidate. The third defers the `EX-102` question until the six evaluations re-measure, which makes that re-measurement the critical path.** **Tranche 37 answers `OQ-108-060` and the answer qualifies the re-measurement this pass supported two days' work earlier: nothing compensates for a region failure, because the region failure rests on an unexamined premise. The gate governs copies of CoBudget data, and whether the two out-of-region components hold any has never been established.** **Tranche 38 answers `OQ-108-061` and both components turn out to be the same shape: whether they hold CoBudget data at rest is a **CoBudget configuration choice**, not a provider property. Cloud Scheduler stores a body only if a job specifies one; Front Door caches nothing when caching is disabled. The region failures are properties of a configuration nobody has fixed.** **Tranche 39 answers `OQ-108-063` from CoBudget's own approved topology rather than from a vendor page: the tick carries no body, because `TD-103-006` puts the authority context in the **queue** payload and Pub/Sub is on the data-residency list. Cloud Scheduler holds no CoBudget data, so C1's region failure has nothing to fail on.** **Tranche 40 is the exception: at the Product Owner's direction it records a gate outcome and a verdict, C1 returning to `ELIGIBLE-PENDING-EVIDENCE` at CBD-103 v1.6. The correction runs deeper than expected — C1's failure was cited on the wrong limb, and the right one is `UNPROVEN` rather than `FAIL`.** **Tranche 41 answers `OQ-108-065` in the negative and corrects the claim that raised it: the retrieval does not exist, on any Google page. What stands between C1 and a `PASS` is `OQ-108-044`, a wording question CBD-102 owns — not an observation. A different document turns up the provider-held backup tranche 23 said no provider describes, and bounds it.** **Tranche 42 runs the symmetry check tranche 41 raised, and for the first time in this pass a check of a standing outcome **confirms** it. AWS publishes no provider-wide deletion-timing statement across four general surfaces, so C2's `FAIL` was not measured on the wrong route — both limbs of the pass test's disjunction are closed against it. AWS's position is **allocation**, not omission, which makes the gap permanent rather than unretrieved.** **Tranche 43 answers `OQ-108-067` yes — and the evidence had been in this register since tranche 2. Google's Data Location clause carves out replication *"for backup"* and bounds it to the **country** of the selected Region, which `EV-102-218` recorded verbatim and annotated. The question should never have been raised as open, which is a different failure from the twelve before it: not a misread document, but a register unsearched.** **Tranche 44 answers `OQ-108-044` and finds it was settled on August 30 by CBD-102 v1.3, along with `OQ-108-041` and `OQ-108-042` — all three named in the amendment record's own opening line, and none struck here since. The test reaches routine expiry, so **C1 is not one decision from a `PASS`**: the decision was taken, and C1's lifetime limb is class `D4`. `EXC-108-001` is withdrawn, its premise gone. It also repairs unrendered template placeholders in two merged documents.** **Tranche 45 answers `OQ-108-069` and the corpus answers it three times over: the verdict table says `ELIGIBLE-PENDING-EVIDENCE` *"cannot be selected until resolved"*, `CONDITIONAL` is conditioned on `FAIL` rather than `UNPROVEN`, and CBD-103 §3.3 states that *"`UNPROVEN` has one remedy — better evidence"*. **Proceeding anyway was route B on August 20 and was not chosen.** What is new is an authorisation gap: the remedy that *was* authorised is scoped to the ten `OBS` gates, and `HG-102-013` is `DOC`.** **Tranche 46 answers `OQ-108-070`: no second amendment is needed, because the scope was amended twice and the half that mattered never needed amending. `OI-103-022` authorised trust-portal requests and NDAs on August 22; plain provider contact was never on the OUT OF SCOPE list at all. **The whole `D4` class is actionable**, C1's `HG-102-013` included. But §3.0.2 of August 29 makes NDA'd material unregistrable, so the route that survives is the one that needed no authorisation.** **Tranche 47 stops answering questions one at a time and sweeps the register instead, which is what four consecutive corrections implied. Five of the thirty-three open questions were already answered by material this pass holds — two by Product Owner decisions, one by an amendment it helped provoke, one by its own tranche 6, and one by a sibling question. It also answers `OQ-108-039`, whose deferral condition was satisfied two days ago: the exception route yields no selectable set.** **Tranche 48 clears the six `D3` retrievals §4.59 identified as unblocked, closing five and narrowing the sixth. Two findings outrun their questions: RDS states that *"backups can be retained longer than the backup retention period if a DB instance has been stopped"*, a **second** independent unbounded tail for C2; and AWS Service Terms §8.2 permits CloudWatch ML Content to be used *"in an AWS region outside"* the customer's — a named carve-out on C2's own logging surface, and a configuration rather than a property.** **Tranche 49 answers `OQ-108-028`: the swap works, and it does not rescue C3. API Management is on the Core Services list, no gate cell cites Front Door, and APIM's policy set covers the edge functions the gates test — so dropping Front Door removes C3's **region** failure. But §4.36 records C3's **lifetime** limb as not met on **Service Bus**, whose default entity expiration is *"the largest possible value for a signed 64-bit integer"* with no ceiling. The swap does not touch the broker.** **Tranche 50 answers `OQ-108-072` and the answer forecloses the cheap fix. A provider ceiling does exist — the **basic** tier's *"default (also maximum) expiration time"* of 14 days — but the dead-letter queue defeats it on every tier: *"time-to-live isn't observed"* and *"There's no automatic cleanup of the DLQ."* Expiry does not destroy a message, it **relocates** it to a sub-queue with no expiry, and max-delivery dead-lettering *"can't be disabled"*.** **Tranche 51 answers `OQ-108-073` and the answer is stronger than the inference tranche 50 declined to draw. SQS's ceiling reaches its dead-letter queues, and for standard queues the clock does not even restart: *"the expiration of a message is always based on its original enqueue timestamp."* **The unbounded dead-letter queue is a property of one vendor's broker, not of brokers**, so §4.38's reading does not extend here — and this is the first symmetry check in the pass to produce a differentiator rather than a correction.** **Tranche 52 sorts the remaining register by what would answer each question and builds a decision docket. Three more close on material already held — two of them moot because the finding that motivated them has been withdrawn. **Six decisions remain that no retrieval can reach**, each stated here with its options and a recommendation, and none of them taken by this pass.** **Tranche 53 answers `OQ-108-059` from the primary text and reverses the recommendation tranche 52 gave one tranche earlier. `EX-102-006` **fires**: the §5.1 **provider row** `HG-102-013` cites names `DI-91-072`, *"Secret-store/KMS recovery copies"*, at **S4**, and its `DI-91-001`—`012` range carries four more. §5.0 read the neighbouring **secrets row** instead. The consequence reaches **eight gates**, and the remedy it prescribes is defined nowhere.** **Tranche 54 works `OQ-108-074` as far as the corpus determines it and no further. No section defines *"a full re-evaluation"*, but four constraints follow from surrounding text, and the corpus's **three other** uses of *re-evaluation* all denote the event that ends the Private MVP phase rather than a per-gate re-measurement. **On either reading the exception route is not a fast path**, which confirms §4.59 from a second direction. The definition is CBD-102's and is not supplied here.** **Tranche 55 works three retrievable questions. `OQ-108-038` closes and C1's log-view separation turns out to hold **by configuration**: an unconditioned project-level `viewAccessor` grant reaches *"any log bucket in the project"*, and Google documents two ways to scope it. `OQ-108-051` firms up §4.32's weak leg — Google prices HSM **per key version** rather than gating it behind a tier. `OQ-108-009` narrows, and the retrieval raises a doubt about whether PIM satisfies `HG-102-005` at all.** **Tranche 56 answers `OQ-108-075` and closes it against the tranche that raised it. `HG-102-005` was settled `PASS` for C3 at CBD-103 v1.1 on `EV-102-011` and reused by three sibling packages, and §7.5 engages the exact clause §4.67 doubted. **The doubt was also asymmetric**: it would have applied equally to C1's Privileged Access Manager, and was not put to it. Fifth instance of the already-answered pattern, and the fastest caught.** **Tranche 57 records four Product Owner decisions of September 2, 2026 and is the first tranche to amend approved CBD-102 documents rather than only to read them. The evidence register reaches **v1.4** with a definition of *"a full re-evaluation"*, and the cost template reaches **v1.1** with `CT-102-022`. It also corrects a recommendation this pass made two tranches ago before the Product Owner acted on it.** **Tranche 58 drafts the `D4` request to Google that §4.58 established is already authorised and §4.56 identified as the only remaining route to a candidate clearing `HG-102-013`. **The request is drafted and unsent**; dispatch is the Product Owner's. It leads with a contract-construction question, because a *yes* to that one closes the gate on the agreement already in force and asks Google for no new commitment.** **Tranche 59 is the first to select a provider. Route B was taken on September 2, 2026 and **category H is selected: C1 Google Cloud, at `ELIGIBLE-PENDING-EVIDENCE`** — forced rather than chosen, because C2 and C3 are `INELIGIBLE`. **The consequence is architectural**: CBD-108's coherence review §3 establishes that a C1 hosting selection forces non-Google vendors in identity, email and SMS, and that the single-ecosystem sets were C2's and C3's.** **Tranche 60 selects category E: C2 Amazon SES, at `ELIGIBLE-PENDING-EVIDENCE`. Unlike H's, this selection was **decided rather than forced**, on documentary coverage — and it required correcting this package's own reading of `CR3`, which §4.4 had glossed as *"prevents cost from selecting"* when the rule bars only an `INELIGIBLE` provider's cost from being compared.** **Tranche 61 selects identity, database and SMS, taking the set to **five of six**. The vendor set resolves to **two clouds, not four** — Google for hosting and database, AWS for identity, email and SMS. **The database selection is the first to trade documentary evidence for architecture**, and what it gave up is recorded: C3 held the corpus's only `HG-102-013` `PASS`.** **Tranche 62 selects category F — C6 Plaid — and **the provider set is complete: six categories selected, push deferred because no selection exists to make**. F was decided on the thinnest evidence of the six, and the tie broke on **CoBudget's approved data inventory** rather than on a vendor page: `DI-91-055` and `DI-91-057` presuppose a cursor, and C6 has the only one.** **Tranche 63 finds the acceptance-criteria traceability four tranches stale and repairs it before anything reaches Jira. AC1's table read *"Blocked"* in every row and stated *"Zero categories are selected"* while six were; AC7's first residual risk and `OI-108-001` said the same. **Every one of those documents had its version bumped in the tranches that made the selections.**** **Tranche 64 records the Product Owner's direction of September 2, 2026 that CBD-108 stays unpublished, and registers a drift found while checking: **three approved Confluence pages are behind their merged sources** because this session amended them. CBD-108's own non-publication is correct and rule-following; the other three are not.** **Tranche 65 finds the disposition register's own header and prose six tranches stale — the status row still said the package selected no provider, and §1, §2.1, the §4 summary and §8 agreed — and repairs the register. `scripts/audit-cbd-108.py` had required the stale words; the guard is inverted and was shown to fail against the old text.** Otherwise it performs no observation, contacts no provider, and moves no other gate outcome or verdict. |
-| Document version | 0.69 |
+| Document version | 0.79 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
-| Companions | Provider Set Disposition Register v0.69; Cross-Category Coherence Review v0.69; Combined Cost Model v0.69; Carried Item Disposition Register v0.69; Acceptance Criteria Traceability v0.69 |
+| Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
-| Last updated | August 29, 2026 |
+| Last updated | September 4, 2026 |
 
 ## 1. Scope and evidence block
 
@@ -6580,11 +6580,697 @@ anything, because none is made"* and its §6 said *"No provider is selected in
 any category"* — the fifth and sixth places tranche 63 did not reach — and this
 document's own Companions row had read v0.20 since tranche 1. AC2 now states what
 the six selections rest on, §6 keeps only *"No ranking is published"*, and the
-Companions row reads v0.69. `OI-108-079`.
+Companions row reads v0.69. `OI-108-079`. **Superseded at tranche 75**, which removed the
+version number from every Companions row rather than resetting it: a figure repeated in six
+places decays in six places.
 
 **Not changed anywhere:** the selections, their bases, the verdicts, the
 deferred observation tests, AC7's `Not met`, and the non-publication rule.
 
+
+### 4.78 Plaid publishes no rate, and answers the metering question anyway — added at v0.71
+
+**Tranche 67, September 4, 2026.** `OQ-107-020` sits in class `D4` of the carried-item
+register — *"requires provider contact — no published document can answer it."* Two
+published documents were read to test that. **The classification is half right.**
+
+The rate half holds: Plaid's pricing page routes every figure to sales
+(`EV-102-298`). **The metering half does not.** Plaid's own billing documentation
+states the unit, and it is the `Item` — one connection to one institution — for
+both fee models (`EV-102-299`).
+
+#### Why the unit mattered more than the rate
+
+CBD-107 §2.1 recorded that some category F candidates meter per *account* and
+others per *connection*, *"a difference of more than 2× at Base and 3× at High"*,
+and that until the unit is known **the same demand produces two different bills**.
+Against the approved demand model that is `DM-102-010`'s **61 connections** at Base
+against `DM-102-012`'s **135 connected accounts**. The billing documentation points
+at the connection reading, which is the cheaper of the two.
+
+**It is not settled, and the reason is a conflict inside Plaid's own material.** The
+pricing page describes charges *"per connected account"* while the billing
+documentation meters on the `Item`. `EV-102-299` also records that the documentation
+does not address whether one `Item` holding several accounts incurs one charge or
+several — which is the exact question the wording conflict raises. That goes to
+provider contact with the rate, rather than being resolved by preference here.
+
+#### What this says about the `D4` class
+
+`OI-108-016` warned that class assignment *"is derived by rule from each item's
+recorded text, not by reading the item"*, and that **a badly worded disposition will
+be classified by its wording**. This is that risk, demonstrated. `OQ-107-020` was
+classed `D4` because CBD-107 said provider contact was required, and a published
+document answered part of it on the first read.
+
+**The nine other `D4` items have not been re-read.** They may hold the same
+partial answers. Recorded as `OI-108-080` rather than acted on, because re-reading
+them is a retrieval tranche of its own and this one was scoped to category F.
+
+### EV-102-298 — Plaid publishes no rate, tier price, or minimum
+
+| Field | Content |
+| --- | --- |
+| Claim | `OQ-107-020` category **F** pricing — the rate half |
+| Provider / category | Plaid (C6) / F |
+| Source | *"Pricing"*, `https://plaid.com/pricing/` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | **No per-unit rate, tier price, or minimum commitment is published.** Three plan tiers are named — Pay as You Go, Growth on a 12-month commitment, and Custom — with premium products marked *"Contact for pricing"*. A Limited Production tier allows *"up to 200 API calls with each available product using live data"*. Three billing models are described: one-time fee *"only once per connected account"*, subscription *"a monthly fee for each connected account"*, and per-request *"a flat fee for every successful API call"*. |
+| **What it settles** | The rate half of `OQ-107-020`. Reading will not close it, exactly as CBD-107 §5.1 recorded. Provider contact stands. |
+| Limitations | Marketing copy, not billing documentation. Its *"per connected account"* wording conflicts with `EV-102-299`; where the two differ, the billing documentation governs billing mechanics. |
+| Re-verify by | March 4, 2027 |
+
+### EV-102-299 — Plaid meters billing on the `Item`, not the account
+
+| Field | Content |
+| --- | --- |
+| Claim | `OQ-107-020` category **F** metering unit — the half `D4` said no document could answer |
+| Provider / category | Plaid (C6) / F |
+| Source | *"Billing"*, `https://plaid.com/docs/account/billing/` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / Medium |
+| Content | One-time fee products charge *"whenever the product is successfully added to an **Item**"*, and *"it does not matter how many API calls are made for the Item (or user); the cost is the same"*. Subscription products: *"an Item will incur a monthly subscription fee as long as a valid `access_token` exists for the Item."* An `Item` is a single connection to one financial institution. |
+| **What it settles** | The metering noun is the `Item`, which maps to `DM-102-010` provider connections — **61 at Base**, not `DM-102-012`'s 135 accounts. |
+| Limitations | **Held at Medium, not High.** The documentation does not state whether one `Item` holding several accounts incurs one charge or one per account, and the pricing page's *"per connected account"* wording points the other way. Webhook charging is not mentioned at all, so its absence is not evidence of no charge. |
+| Re-verify by | March 4, 2027 |
+
+### 4.79 The first Google price retrieves, and the method is the finding — added at v0.72
+
+**Tranche 68, September 4, 2026.** The Product Owner supplied the Cloud SQL pricing
+URL. It retrieved. **This is the first Google price this package has obtained**, after
+the six failures §4.1 records and a seventh on the supplied URL itself.
+
+#### Why the seventh attempt failed and the eighth did not
+
+The fetch returned the page title and no pricing. Google's pricing tables are
+rendered client-side, so a fetch that reads the delivered HTML finds headings and
+empty tables. **Rendering the same URL in a browser returned every figure.**
+
+`OI-108-022` and `OQ-108-050` both record the remaining Google route as *"a
+signed-in pricing calculator or a quote... which no amount of public reading
+substitutes for"*. That is now too strong. The blocker was never that the prices are
+private — they are public list prices — it was the retrieval method. **The category H
+pricing pages are likely retrievable the same way**, which is the largest single gap
+in the cost model. Recorded as `OQ-108-076` rather than acted on: this tranche was
+scoped to the URL supplied.
+
+#### What it does not settle
+
+Three conditions sit between these figures and a category D line, and none is a
+price question:
+
+* **No tier is chosen.** `CR0` prices the cheapest tier clearing every hard gate.
+  CBD-105's operational assessment records that *"none of these forces the priced
+  tier, because the gate set does not"* — but `OQ-105-009` asks whether a candidate's
+  cheapest viable tier restricts CMK, private networking, or PITR, and `HG-102-042`
+  requires point-in-time recovery. **The page states that shared-core machine types
+  are not covered by the Cloud SQL SLA**, which is the same shape as `EV-102-231`'s
+  Azure exclusion. Until `OQ-105-009` closes, the tier is undecided and so is the line.
+* **The region is not fixed.** CBD-103's operational assessment records *"United
+  States. The specific region is not fixed and is a per-candidate `HG-102-011`
+  question."* Every figure below is `us-central1` and moves with the region.
+* **Storage bills provisioned capacity, not database size.** `DM-102-030`'s 0.4 GB is
+  a database size. The page bills *"provisioned capacity"*, and does not state a
+  minimum. `OQ-108-077` records the gap.
+
+#### The arithmetic, at three tiers, none of them selected
+
+At 730 hours and `us-central1`. Storage shown at the `DM-102-030` Base figure, which
+`OQ-108-077` may raise.
+
+| Configuration | Compute / month | Storage 0.4 GiB SSD | Total |
+| --- | ---: | ---: | ---: |
+| `db-f1-micro` shared-core | `$7.67` | `$0.07` | **`$7.74`** |
+| `db-g1-small` shared-core | `$25.55` | `$0.07` | **`$25.62`** |
+| Enterprise, 1 vCPU + 3.75 GiB | `$49.31` | `$0.07` | **`$49.38`** |
+
+High availability doubles compute and storage exactly: `$0.0826` against `$0.0413`
+per vCPU-hour, `$0.000465753` against `$0.000232877` per GiB-hour. A `$0.01`/hour
+charge applies to an idle IPv4 address, `$7.30`/month, which private networking
+avoids.
+
+**Against the `$250` ceiling this category is comfortable at every tier priced**,
+which is worth stating because it is the first time any category could be compared
+to the ceiling at all.
+
+### EV-102-300 — Cloud SQL publishes complete list pricing for compute, storage, backup and egress
+
+| Field | Content |
+| --- | --- |
+| Claim | `OQ-105-008` category **D** price lines for C1, and `CT-102-006` |
+| Provider / category | Google Cloud (C1) / D |
+| Source | *"Cloud SQL pricing"*, `https://cloud.google.com/sql/pricing?hl=en#cloud-sql-pricing`, supplied by the Product Owner |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | **`us-central1`, Iowa.** Enterprise General Purpose: vCPU `$0.0413`/hour, memory `$0.007`/GiB-hour; HA doubles both. Enterprise Plus C4: vCPU `$0.054`/hour, memory `$0.009`/GiB-hour. Shared-core instance pricing: `db-f1-micro` `$0.0105`/hour, `db-g1-small` `$0.035`/hour, HA variants exactly double. Storage: SSD `$0.000232877`/GiB-hour, HDD `$0.000123288`/GiB-hour, backups used `$0.000109589`/GiB-hour; HA SSD `$0.000465753`/GiB-hour. Network: ingress free, idle IPv4 `$0.01`/hour, internet egress `$0.19`/GiB without Interconnect. Serverless export `$0.01`/GiB. |
+| **What it settles** | The price half of `OQ-105-008` for C1. Every `CT-102-006` and `CT-102-007` input for category D exists as a published list price. |
+| **What it does not settle** | The tier. `CR0` prices the cheapest tier clearing every gate, and the page states shared-core types *"are not covered by the Cloud SQL SLA"*, which `OQ-105-009` must weigh against `HG-102-042`'s point-in-time recovery requirement. |
+| Limitations | **Region-conditional**: `us-central1` only, and CBD-103 records the region as not fixed. Storage is billed on provisioned capacity, not the `DM-102-030` database size, and the page states no minimum — `OQ-108-077`. Retrieved by browser rendering; a plain fetch of the same URL returned the title and no tables. |
+| Re-verify by | March 4, 2027 |
+
+### 4.80 Category H prices, and the usage is free — added at v0.73
+
+**Tranche 69, September 4, 2026.** `OQ-108-076` asked whether the category H
+pricing pages are retrievable by browser rendering, as Cloud SQL's proved to be.
+**They are. All eight retrieved on the first attempt each**, one 404 aside where the
+Cloud KMS path had moved. `OQ-108-076` closes.
+
+#### The claim that has to be withdrawn
+
+`OQ-108-050` and `OI-108-022` both carried the position that the remaining Google
+route is a signed-in calculator or a quote *"which no amount of public reading
+substitutes for"*. **Every figure below is a public list price.** The blocker was
+never access; it was that a fetch reads delivered HTML and Google builds these
+tables client-side. Six failures were read as evidence about Google's disclosure and
+were evidence about the retrieval method.
+
+#### The result, which is not what the shape of the question suggested
+
+**At Base demand every usage-metered component in category H is free**, and the
+whole cost is always-on infrastructure:
+
+| Component | Base quantity | Free allowance | Cost at Base |
+| --- | --- | --- | ---: |
+| Cloud Run — requests | 15,600 / month | 2,000,000 / month | `$0.00` |
+| Cloud Run — CPU and memory | 15,600 requests | 180,000 vCPU-s, 360,000 GiB-s | `$0.00` |
+| Cloud Run jobs | 29,280 / month | 240,000 vCPU-s, 450,000 GiB-s | `$0.00` |
+| Cloud Logging ingest | 1.0 GB / month | 50 GiB / project / month | `$0.00` |
+| Pub/Sub throughput | 29,280 messages | first 10 GiB / month | `$0.00` |
+| Cloud Scheduler | job count not fixed | 3 jobs / account | `$0.00` at 3 or fewer |
+| Secret Manager | version count not fixed | 6 versions, 10,000 access ops | `$0.00` within it |
+| **Regional external ALB** | 1 forwarding rule | none | **`$18.25`** |
+| **Cloud Armor Standard** | 1 policy, `N` rules | none | **`$5.00` + `$1.00` × `N`** |
+| **Cloud KMS** | 1 software key version | Autokey only | **`$0.06`** |
+
+**Floor: `$24.31`/month** at one policy and one rule; **`$28.31`** at five rules. The
+demand-side quantities the model spent its effort on move none of it.
+
+#### Why that matters more than the number
+
+`DM-102-024`, `DM-102-021` and `DM-102-032` — the request, job and log-ingest rows —
+are the demand figures category H was built to price. **Every one of them lands
+inside a free tier at Base, and at High as well**: 104,000 requests against two
+million, 8 GB of logs against 50 GiB. The cost is a load balancer forwarding rule and
+a WAF policy that run whether anyone uses the product or not.
+
+This is the first category where the cost is insensitive to demand, and it changes
+what the cliffs section is watching. `CT-102-021`'s first overage threshold for
+category H is not near Base or High.
+
+#### What is still not settled
+
+* **The Cloud Armor rule count is not fixed.** Each rule is `$1.00`/month and the
+  approved topology names the service, not a rule set. `OQ-108-078`.
+* **Cloud Run instance sizing is still absent**, which is the half of `OI-108-022`
+  that survives: the free-tier headroom above is computed against plausible request
+  durations, not an approved sizing. It is large enough that the conclusion holds
+  across a wide range, and that is a range argument rather than a figure.
+* **`HG-102-024` may force HSM keys**, at `$1.00` per version per month against
+  `$0.06` for software — a 16× move on a small line. `EV-102-296` established the
+  mechanism; which protection level the gate requires is not decided here.
+* **Region-conditional.** Every figure is `us-central1`, and CBD-103 records the
+  region as not fixed.
+
+### EV-102-301 — Cloud Run publishes complete list pricing, and Base demand sits inside the free tier
+
+| Field | Content |
+| --- | --- |
+| Claim | `OQ-105-008`-equivalent price lines for category **H**, `CT-102-006` and `CT-102-008` |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"Cloud Run pricing"*, `https://cloud.google.com/run/pricing?hl=en` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | **`us-central1`.** Request-based billing: CPU `$0.000024`/vCPU-second active, memory `$0.0000025`/GiB-second active, requests `$0.40` per million. Free tier: 180,000 vCPU-seconds, 360,000 GiB-seconds, **2 million requests per month**. Instance-based billing: CPU `$0.000018`/vCPU-second, memory `$0.000002`/GiB-second, free 240,000 vCPU-s and 450,000 GiB-s. Jobs: same rates and free tier as instance-based. Free tier *"is aggregated across projects by billing account and resets every month"*. |
+| **What it settles** | Requests at Base (15,600) and High (104,000) are both inside the two-million free tier, so the request line is `$0.00` at every scenario in the demand model. |
+| Limitations | The CPU and memory conclusion depends on request duration and instance size, which no approved source fixes — the surviving half of `OI-108-022`. The headroom is wide enough that the conclusion holds across plausible values, which is a range argument, not a figure. |
+| Re-verify by | March 4, 2027 |
+
+### EV-102-302 — Cloud Logging bills $0.50/GiB above a 50 GiB free allotment
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-007` log ingest for category **H**, against `DM-102-032` |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"Google Cloud Observability pricing"*, `https://cloud.google.com/stackdriver/pricing?hl=en` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | Logging storage `$0.50`/GiB, **free allotment first 50 GiB per project per month**, including up to 30 days of storage with no additional query or analysis charge. Retention beyond 30 days `$0.01`/GiB/month. Log Router and Log Analytics carry no additional charge. |
+| **What it settles** | `DM-102-032`'s 1.0 GB at Base and 8.0 GB at High are both inside the 50 GiB allotment, so log ingest is `$0.00` at every scenario. |
+| Limitations | The allotment is per project; a multi-project layout would divide differently. Vended network logs are a separate `$0.25`/GiB SKU with no free allotment, and whether the composition generates them is not established. |
+| Re-verify by | March 4, 2027 |
+
+### EV-102-303 — Pub/Sub bills $40/TiB above 10 GiB free
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-007` messaging throughput for category **H** |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"Pub/Sub pricing"*, `https://cloud.google.com/pubsub/pricing?hl=en` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | *"Every calendar month, the first 10 GiB of throughput identified as the Message Delivery Basic SKU for a billing account is free. After that, the price is `$40` per TiB in all Google Cloud regions."* Storage and inter-region data transfer are separate components. |
+| **What it settles** | 29,280 background-job messages a month is far inside 10 GiB at any plausible message size, so Pub/Sub is `$0.00` at Base. |
+| Limitations | Message size is not fixed by any approved source. At 10 KiB per message the Base volume is roughly 0.3 GiB, so the conclusion survives a 30× error. |
+| Re-verify by | March 4, 2027 |
+
+### EV-102-304 — Cloud Scheduler bills per job, not per execution, with three jobs free
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-007` scheduling for category **H** |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"Cloud Scheduler pricing"*, `https://cloud.google.com/scheduler/pricing?hl=en` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | *"A job is billed `$0.10`/job/31 days."* Billing is *"based exclusively on the job"* and *"a job is not billed for individual executions"*. **Three jobs per month free per billing account**, expressed in the table as 93 free job-days. A paused job counts as a job. |
+| **What it settles** | The 29,280 executions at Base cost nothing; only the number of defined jobs is billable. At three or fewer defined jobs the line is `$0.00`. |
+| Limitations | The number of scheduler jobs the composition defines is not fixed by any approved source. |
+| Re-verify by | March 4, 2027 |
+
+### EV-102-305 — Secret Manager bills per active version above six free
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-007` secret storage for category **H** |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"Secret Manager pricing"*, `https://cloud.google.com/secret-manager/pricing?hl=en` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | Active secret versions `$0.000082192`/hour, **first 6 free per account per month**. Access operations `$0.03` per 10,000, **first 10,000 free**. Rotation notifications `$0.05` each, first 3 free. Destroyed versions and management operations are free. |
+| **What it settles** | At six or fewer active versions and under 10,000 accesses a month the line is `$0.00`. Beyond that a version costs `$0.06`/month. |
+| Limitations | The number of secret versions the composition holds is not fixed by any approved source. |
+| Re-verify by | March 4, 2027 |
+
+### EV-102-306 — Cloud KMS prices software key versions at $0.06/month and HSM at $1.00
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-007` key management for category **H**, and the cost consequence of `HG-102-024` — **extends `EV-102-296`** |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"Cloud Key Management Service pricing"*, `https://cloud.google.com/kms/pricing?hl=en` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | Active key versions: SOFTWARE `$0.000082192`/hour, **HSM `$0.001369863`/hour**, EXTERNAL `$0.004109589`/hour. Cryptographic operations `$0.03` per 10,000 for software and HSM, with 10,000 free; HSM asymmetric operations `$0.15` per 10,000. Admin operations and destroyed versions free. Autokey-created versions free to 100. |
+| **What it settles** | The monetary size of the `HG-102-024` protection-level question: `$0.06` per software key version per month against `$1.00` for HSM, a 16× move. `EV-102-296` established that hardware versions cost more without saying how much. |
+| Limitations | Which protection level `HG-102-024` requires is not decided here. The original page path `security-key-management/pricing` returned 404; the live path is `kms/pricing`. |
+| Re-verify by | March 4, 2027 |
+
+### EV-102-307 — Cloud Armor Standard bills per policy, per rule and per million requests
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-001` and `CT-102-007` for category **H** |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"Google Cloud Armor pricing"*, `https://cloud.google.com/armor/pricing?hl=en` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | Standard, pay as you go: security policies `$0.006849315`/hour, rules `$0.001369863`/hour, requests against regionally scoped policies `$0.60` per million and globally scoped `$0.75` per million. No data processing fee on Standard. Cloud Armor Enterprise Paygo is `$0.273972603`/hour with the first two protected resources free; Annual is `$4.109589041`/hour. |
+| **What it settles** | The always-on component of category H alongside the load balancer: `$5.00`/month per policy and `$1.00`/month per rule, with 15,600 Base requests costing `$0.01`. |
+| Limitations | **The rule count is not fixed** by the approved topology, and each rule is `$1.00`/month — `OQ-108-078`. Whether any gate forces Enterprise over Standard is not decided here; Standard is priced because it is the cheaper tier and no gate has been shown to exclude it. |
+| Re-verify by | March 4, 2027 |
+
+### EV-102-308 — A regional external Application Load Balancer costs $18.25/month before any traffic
+
+| Field | Content |
+| --- | --- |
+| Claim | `CT-102-001` for category **H**, the composition's largest fixed line |
+| Provider / category | Google Cloud (C1) / H |
+| Source | *"All networking pricing"*, `https://cloud.google.com/vpc/network-pricing?hl=en#lb` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | Regional forwarding rules: **first 5 at `$0.025`/hour**, each additional at `$0.01`/hour, with inbound and outbound data processed by the load balancer at `$0.008`/GiB each. Global forwarding rules carry the same `$0.025`/hour with no global data processing charge. IP addresses attached to forwarding rules carry no charge. |
+| **What it settles** | `$18.25`/month for the composition's single regional external Application Load Balancer, before any traffic — **the largest fixed line in category H** and larger than every usage-metered component combined at Base. |
+| Limitations | The `$0.025`/hour covers the first five forwarding rules together rather than each, so a second rule adds nothing until the sixth. Data processing at Base is negligible but not zero. |
+| Re-verify by | March 4, 2027 |
+
+### 4.81 The SMS rate retrieves from AWS's own CSV, and five of six categories price — added at v0.74
+
+**Tranche 70, September 4, 2026.** The last desk retrieval on the list. §4 recorded
+*"C2's per-segment rate was not obtainable"*; the pricing page does not carry a US
+SMS table inline, and points at a CSV instead. **The CSV carries every figure**
+(`EV-102-309`).
+
+#### Category N, SMS, at Base
+
+At `DM-102-047`'s 60 messages a month, 10DLC:
+
+| Line | Rate | Base | Monthly |
+| --- | --- | ---: | ---: |
+| Message part | `$0.00774` | 60 | `$0.46` |
+| Carrier fee, 10DLC | `$0.00421` | 60 | `$0.25` |
+| 10DLC campaign | `$10.00`/month | 1 | `$10.00` |
+| 10DLC phone number | `$1.00`/month | 1 | `$1.00` |
+| **Total** | | | **`$11.72`** |
+
+One-time: `$4.50` company registration, plus `$41.50` per vetting request where
+vetting is required.
+
+**The `$11.00` recurring floor §4.7 recorded is confirmed and now decomposed** —
+`$10.00` campaign plus `$1.00` number — and its *"roughly `$0.60` of traffic"*
+estimate lands within twenty per cent of the `$0.72` the retrieved rates produce.
+
+#### The first subtotal this package can state
+
+Five of six categories now carry a Base figure. **This is a subtotal with a named
+gap, not a total**: `CR4` forbids recording category F as zero, and it is not
+included below rather than being counted as nothing.
+
+| Category | Selected | Base monthly |
+| --- | --- | ---: |
+| H — Hosting | C1 Google Cloud | `$24.31` |
+| I — Identity | C2 Amazon Cognito | `$0.45` |
+| D — PostgreSQL | C1 Cloud SQL, `db-f1-micro` | `$7.74` |
+| E — Email | C2 Amazon SES | `$0.04` |
+| N — SMS | C2 AWS End User Messaging | `$11.72` |
+| N — Push | Web Push, no provider | `$0.00` |
+| **Subtotal, five categories** | | **`$44.26`** |
+| F — Financial connectivity | C6 Plaid | **`UNKNOWN`** |
+
+At the Enterprise database tier instead of `db-f1-micro` the subtotal is **`$85.90`**.
+Annually, `$531.12` and `$1,030.80`.
+
+#### What the ceiling now says
+
+Against the `$250.00`/month ceiling decided on September 4, 2026, and its `$175.00`
+warning threshold:
+
+| Database tier | Subtotal | Headroom to warning | Headroom to ceiling |
+| --- | ---: | ---: | ---: |
+| `db-f1-micro` | `$44.26` | `$130.74` | `$205.74` |
+| Enterprise, 1 vCPU | `$85.90` | `$89.10` | `$164.10` |
+
+**That is what category F has to fit inside**, and it is the first thing this package
+has been able to say about affordability at all. It is a headroom statement, not a
+verdict: Plaid's rate is unknown, and `EX-102-001` reserves acceptance of a residual
+to the Product Owner.
+
+#### What this does not close
+
+`OI-108-011` stays open. The ticket's third deliverable is a combined low, base and
+high model, and this is Base only for five of six categories. Low and High are not
+computed because the free-tier structure discovered at §4.80 makes them a different
+calculation rather than a scaling of Base — at High, category H's usage lines are
+still free and its floor is unchanged, which is worth stating but is not the model.
+`OQ-108-079` records it.
+
+### EV-102-309 — AWS publishes US SMS message and carrier rates in a downloadable CSV
+
+| Field | Content |
+| --- | --- |
+| Claim | `OQ-130-*` category **N** per-segment rate for C2 — the figure §4 recorded as *"not obtainable"* |
+| Provider / category | AWS End User Messaging (C2) / N |
+| Source | *"SMS pricing per country (CSV)"*, linked from `https://aws.amazon.com/end-user-messaging/pricing/`; CSV at `d1.awsstatic.com/.../End-User-Messaging-SMS-Prices.ebc340b4...csv` |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Documented / High |
+| Content | Columns are `ISO Country, Country Name, CarrierName, Number Type, Price ($USD)`. United States, All Networks: **10DLC `0.00774`, 10DLC carrier fee `0.00421`**; Long code `0.00774` with carrier fee `0.00767`; Short code `0.00774` with carrier fee `0.00417`; Toll free `0.00774` with carrier fee `0.00421`. From the pricing page itself: 10DLC company registration `$4.50` one-time, company vetting `$41.50` per request, campaign `$10.00`/month regular or `$2.00` low-volume, phone number `$1.00`/month. |
+| **What it settles** | The per-segment rate and the carrier fee, separately, which is what `§4` recorded as unobtainable and what left carrier fees *"unquantified"*. The message price is identical across US originator types; only the carrier fee differs, and 10DLC's is among the lowest. |
+| Limitations | **Per message part, not per message.** The figures assume one segment; a message exceeding the segment limit bills as multiple parts. `NT-92-001`'s content-free body is short enough that one segment is the reasonable assumption, but no approved source fixes the rendered length. Inbound SMS is not in this CSV. Prices *"change regularly"* by AWS's own statement. |
+| Re-verify by | December 4, 2026 |
+
+### 4.82 The rate arrives, the metering conflict resolves, and the model completes — added at v0.75
+
+**Tranche 71, September 4, 2026.** The Product Owner supplied Plaid's Pay as you go
+plan. **`OQ-107-020` closes**, and with it the last `UNKNOWN` price in the set.
+
+#### The unit, settled by the rate itself
+
+The rate is quoted **`$0.30` per item/month** for Transactions. That is not only a
+figure: **it settles the `EV-102-298` / `EV-102-299` conflict** by using the billing
+documentation's noun. §4.78 held the Item reading at Medium confidence against the
+pricing page's *"per connected account"* wording; the commercial plan quotes per item,
+so the Item reading is confirmed and `EV-102-299` moves to High.
+
+**That is the cheaper reading**, and the difference it was worth is now realised:
+61 Items at Base rather than 135 accounts, `$18.30`/month rather than `$40.50`.
+
+The plan also settles three template lines by stating their absence: **no monthly
+minimum** (`CT-102-004` is zero), month-to-month with **no upfront commitment**
+(`CT-102-004` again), and volume discounts available but unquantified at this tier.
+
+#### The complete model, at all three scenarios
+
+Every category now carries a rate. `CR7` is satisfied — every figure below is quoted
+at the same scenario — and `CR4` no longer excludes anything, because nothing is
+unknown.
+
+| Category | Selected | Low | Base | High |
+| --- | --- | ---: | ---: | ---: |
+| H — Hosting | C1 Google Cloud | `$24.31` | `$24.31` | `$24.31` |
+| I — Identity | C2 Amazon Cognito | `$0.11` | `$0.45` | `$1.80` |
+| D — PostgreSQL | C1 Cloud SQL, `db-f1-micro` | `$7.68` | `$7.74` | `$8.36` |
+| E — Email | C2 Amazon SES | `$0.01` | `$0.04` | `$0.26` |
+| F — Financial | C6 Plaid | `$2.40` | `$18.30` | `$112.50` |
+| N — SMS | C2 AWS End User Messaging | `$11.06` | `$11.72` | `$16.98` |
+| N — Push | Web Push, no provider | `$0.00` | `$0.00` | `$0.00` |
+| **Monthly total** | | **`$45.57`** | **`$62.56`** | **`$164.21`** |
+| **Annual** | | **`$546.84`** | **`$750.72`** | **`$1,970.52`** |
+
+At the Enterprise database tier instead of `db-f1-micro`, Base is **`$104.20`**/month
+and **`$1,250.40`** annually.
+
+**`CT-102-017`, the steady-state comparison figure, is `$62.56`/month.**
+
+#### Against the ceiling
+
+| Scenario | Total | Ceiling `$250` | Warning `$175` |
+| --- | ---: | --- | --- |
+| Low | `$45.57` | 18% | under |
+| Base | `$62.56` | 25% | under |
+| Base, Enterprise DB | `$104.20` | 42% | under |
+| High | `$164.21` | 66% | **under, by `$10.79`** |
+
+**Every scenario clears both thresholds**, which is the answer the ticket's fifth
+acceptance criterion was asking for and could not previously give. High clears the
+warning threshold by `$10.79`, which is thin enough to be worth stating plainly rather
+than reporting as a pass.
+
+#### What the shape of the model says
+
+**One line is 68% of the High bill.** Plaid moves from `$2.40` to `$112.50` across the
+scenarios while the other six move `$21.17` in total. Category H does not move at all —
+§4.80 established that its usage sits inside free tiers at every scenario, so its
+`$24.31` is a floor, not a function of demand.
+
+That makes `CT-102-021`, the first overage threshold, a category F question and almost
+nothing else. **At `$0.30` per item, the `$175` warning threshold is reached at roughly
+610 Items** with everything else at Base — an order of magnitude above the private
+beta's 61.
+
+#### Two things this does not do
+
+* **It does not price a fallback.** The disposition register declines to name one
+  because that would rank candidates the evaluation deliberately declined to rank.
+* **It does not clear a gate.** `CR3` — cost never overrides a gate. Every selection
+  remains at `ELIGIBLE-PENDING-EVIDENCE` and the ten route-A observations are still
+  owed. An affordable set is not an evidenced one.
+
+#### The guard had to be inverted, again
+
+`scripts/audit-cbd-108.py` required the cost model to contain *"cannot be produced"*,
+written when that was true. **§4.77 recorded exactly this failure once already** — a
+guard that requires a false statement is worse than no guard, and it is why the
+disposition register's stale sentence survived six tranches. The guard now requires
+the model to state a total and forbids the old claim.
+
+### EV-102-310 — Plaid prices Transactions at $0.30 per item per month, with no minimum
+
+| Field | Content |
+| --- | --- |
+| Claim | `OQ-107-020` category **F** rate — the half `EV-102-298` established was unpublished |
+| Provider / category | Plaid (C6) / F |
+| Source | Plaid Pay as you go plan, supplied by the Product Owner on September 4, 2026 |
+| Retrieval date | September 4, 2026 |
+| Class / confidence | Attested / High — supplied rather than retrieved, and consistent with `EV-102-299`'s published unit |
+| Content | Pay as you go: month-to-month, **no upfront commitment**, **no monthly minimum**, access to GA products, volume discounts, implementation package options. Rates per item per month: **Transactions `$0.30`**, Liabilities `$0.20`, Investments Holdings `$0.18`, Investments Transactions `$0.35`. |
+| **What it settles** | The rate, and with it `OQ-107-020` entire. It also **confirms `EV-102-299` over `EV-102-298`**: the commercial plan meters per item, so the Item reading is right and the pricing page's *"per connected account"* wording is loose. `CT-102-004` is zero — no minimum, no commitment. |
+| Limitations | **Attested, not Documented**: supplied rather than retrieved from a page this package read, so it carries the class the evidence register gives a figure whose source the reader cannot open. Transactions is the only product in scope (`/transactions/sync`); the other three rates are recorded for completeness. Volume discounts are stated but not quantified, so the figure is the undiscounted one. Webhook charging is still not addressed by any source. |
+| Re-verify by | March 4, 2027 |
+
+### 4.83 The observation pass is scoped, and it is thirty observations, not ten — added at v0.76
+
+**Tranche 72, September 4, 2026.** The route-A observation pass was authorised on
+August 20, 2026 and has never been scoped. Scoping it changes the number.
+
+#### Ten gates, thirty observations
+
+CBD-103 §3.1 names ten gates whose pass tests require a live account. **Four are
+cross-cutting `X` gates and apply to every selected candidate; six are `H` and apply
+only to hosting.** Against the six selections that is:
+
+| Account | Candidates on it | `X` | `H` | Observations |
+| --- | --- | ---: | ---: | ---: |
+| Google Cloud | C1 Hosting, C1 Cloud SQL | 4 × 2 | 6 | 14 |
+| AWS | C2 Cognito, C2 SES, C2 End User Messaging | 4 × 3 | — | 12 |
+| Plaid | C6 | 4 × 1 | — | 4 |
+| **Total** | | | | **30** |
+
+Three accounts rather than six: AWS carries three selections and Google Cloud two.
+Confirmed against each category evaluation — all four `X` gates are assessed in all six.
+
+#### Product Owner decision, September 4, 2026: one `HG-102-004` observation serves AWS
+
+`HG-102-004` concerns *"any product analytics, session replay… injected by the
+platform"*, and the platform is the provider's console — **one surface per account, not
+one per candidate**. The Product Owner decided that a single observation of the AWS
+console evidences Cognito, SES and End User Messaging. **AWS drops from 12 to 10 and the
+total to 28.**
+
+**This is not an amendment.** Provider-level record reuse is established practice in this
+package: CBD-107 §3.1 records that the CBD-103 cross-category documentary pass of
+August 21, 2026 *"registered eleven provider-level records and moved documentary gate
+outcomes in four sibling categories"*. The decision applies that pattern to an observed
+record rather than creating a new rule. CBD-107's own *"no provider-level records are
+reused"* is not a prohibition — it states that category F had nothing to reuse, because
+Plaid appears in no other CBD-15 category.
+
+Each of the three candidates still carries its own `EV-102-*` record; the three cite one
+observation. Evidence IDs are *"stable, never reused"*, so three records is the correct
+shape, not one record cited three times.
+
+#### Two extensions the same reasoning implies, not taken here
+
+* **Google Cloud.** The console argument does not distinguish AWS from Google. One
+  `HG-102-004` observation would serve both C1 Hosting and C1 Cloud SQL, taking the
+  total to **27**. `OQ-108-080`.
+* **`HG-102-015` on AWS.** If the immutability mechanism is CloudTrail log-file
+  validation, that is account-level and one observation may serve all three AWS
+  candidates, taking the total to **25**. Unlike the console argument this depends on
+  the mechanism, which the observation itself would establish. `OQ-108-081`.
+
+Neither is assumed. The Product Owner's decision was put for AWS `HG-102-004` and is
+recorded as given.
+
+#### What the remaining three `X` gates are not
+
+`HG-102-001`, `HG-102-012` and `HG-102-015` stay per-candidate for now, and the reason
+is that they are service-specific rather than platform-specific. Cognito's telemetry
+schema is not SES's; deleting a Cognito user is not deleting an SES suppression entry.
+Collapsing those would evidence one service and claim three.
+
+### 4.84 The console decision extends to Google Cloud — added at v0.77
+
+**Tranche 73, September 4, 2026.** `OQ-108-080` asked whether the `HG-102-004`
+provider-level decision extends to Google Cloud's two candidates, since the console
+argument does not distinguish the providers. **The Product Owner extended it.** One
+observation of the Google Cloud console evidences both C1 Hosting and C1 Cloud SQL.
+
+**Google Cloud drops from 14 observations to 13, and the pass from 28 to 27.**
+
+| Account | Candidates | `X` | `H` | Observations |
+| --- | --- | ---: | ---: | ---: |
+| Google Cloud | C1 Hosting, C1 Cloud SQL | 4 × 2, less 1 | 6 | 13 |
+| AWS | C2 Cognito, C2 SES, C2 End User Messaging | 4 × 3, less 2 | — | 10 |
+| Plaid | C6 | 4 × 1 | — | 4 |
+| **Total** | | | | **27** |
+
+`HG-102-004` is now the only gate treated as provider-level across the whole pass, and
+it is treated that way consistently on both multi-candidate accounts. Each candidate
+still carries its own `EV-102-*` record citing the single observation for its account.
+
+`OQ-108-081` remains open and cannot be answered in advance: whether `HG-102-015` is
+account-level on AWS depends on the mechanism, and the observation establishes it.
+
+### 4.85 AC6's dependency has an address, and it is `FU-95-028` — added at v0.78
+
+**Tranche 74, September 4, 2026.** §4.1 established that the CBD-14 reconciliation
+artifact the ticket names does not exist: CBD-95's matrix reconciles **CBD-12**. That
+finding stands. **It stopped one step short.**
+
+The dependency is real and it has a precise address the package never used.
+**`FU-95-028`** is the CBD-95 follow-up whose *target* is CBD-15 and CBD-102–108 and
+whose *source* is *"`RK-94-006`, `SR-94-039–043/146`, `PR-94-*`"*. Those are the CBD-14
+findings AC6 asks about, already routed to this ticket by an approved register.
+
+**Nothing in CBD-108 names `FU-95-028`, and only one of its sources is cited anywhere.**
+`SR-94-043` appears once; `RK-94-006`, `SR-94-039`, `040`, `041`, `042`, `146` and every
+`PR-94-*` appear nowhere. The CBD-102 hard-gate catalog cites none of them either, so the
+mapping is absent in both directions.
+
+#### The disposition
+
+| CBD-14 source | What it requires | Disposition in CBD-108 |
+| --- | --- | --- |
+| `RK-94-006` | The risk itself: a provider secret, callback credential, cursor, package key or signing material escaping into ordinary stores, jobs, logs, support, backups or clients, granting durable external access. Scored **15 High**, and named *"blocking production secrets/providers"* | **Carried, not closed.** `HG-102-014` and `HG-102-024` are the gate expression of it. `HG-102-024` is `UNPROVEN` for every selection and is one of the two the disposition register names as most likely to bite. The risk remains open by CBD-94's own scoring |
+| `SR-94-039` | Inventory every secret, key, token, cursor and signing value with owner, purpose, store, readers, writers, rotation, revocation, backup status and prohibited destinations | **Not a provider property.** A CoBudget architecture obligation. Provider selection constrains where such values may live, which is `HG-102-024`; it does not produce the inventory |
+| `SR-94-040` | Provider tokens and high-impact secrets use separated encryption/KMS custody and never appear in ordinary rows, queues, logs, audit, diagnostics, support, analytics, exports or clients | **Discharged as a gate, pending observation.** `HG-102-024` requires the dedicated secret manager, KMS or HSM with separation; `HG-102-014` requires that S4 material never enters the provider's ordinary surfaces. Both `UNPROVEN` until the pass runs |
+| `SR-94-041` | Workload and operator access least-privilege, strongly authenticated, purpose-bound, time-bounded where human, independently auditable | **Discharged as a gate, pending observation.** `HG-102-024` names workload identity and least privilege; `HG-102-005` covers the standing-credential half |
+| `SR-94-042` | Rotation and revocation invalidate every dependent session, callback, connection, package, queue, replica and backup recovery path without reactivating prior authority | **Not gated, and not a gap in this package.** No CBD-102 gate expresses it, because it is a CoBudget lifecycle obligation across providers rather than a property any one provider has. Recorded so it is not mistaken for provider-discharged — `OQ-108-082` |
+| `SR-94-043` | Build and runtime scanning and negative tests prove prohibited secret fields do not reach logs, errors, traces, queues, audit, support, analytics, exports or client bundles | **CoBudget implementation obligation.** Cited once already in this package. Provider selection neither discharges nor blocks it |
+| `SR-94-146` | Joint-account association pre-confirmation disclosure, versioned and Product Owner-approved | **Mis-routed to `FU-95-028`.** It is a CBD-12 and CBD-93 product-disclosure requirement about what a contributor sees before a joint-account association is released. It has no provider-selection content, and no reading of it constrains a provider choice. Recorded rather than forced into a disposition — `OQ-108-083` |
+| `PR-94-001`–`005` | Open quantitative and allowlist parameters governing response shape, enumeration oracles and safe classes | **Mis-routed, same reason.** These are CoBudget response-behaviour parameters. `PR-94-004` is cited by `SR-94-018` on report withholding, which is a CBD-72 product rule. None is a provider property |
+
+#### What this does to AC6
+
+The criterion is readable after all, and the package's *"cannot be read literally"* was
+one step too pessimistic. It asks for **explicit dispositions**, not closed findings.
+Every source `FU-95-028` routes here now has one: two are carried as gates pending the
+observation pass, three are CoBudget obligations that provider selection does not
+discharge, one is an open risk, and two are recorded as mis-routed.
+
+**AC6 moves to Met**, with two residuals stated rather than hidden: `RK-94-006` remains
+open at 15 High, and the gates that express `SR-94-040` and `SR-94-041` are `UNPROVEN`
+until the pass runs.
+
+The `D0` limb of the old verdict does not survive as a failure. `OI-108-015` records that
+24 of 227 carried items do not state, in their own text, what would resolve them — but
+`D0` **is** an explicit disposition, and an honest one. A criterion asking for explicit
+dispositions is satisfied by a class that says *"not derivable from the item's own
+recorded text"* and names the consequence.
+
+### 4.86 AC3's one contradiction is about a set that was not selected — added at v0.79
+
+**Tranche 75, September 4, 2026.** The coherence review found **one actual
+contradiction** across the seven dimensions, and `OI-108-007` records that the review
+*"clears nothing"* because the `X` gates are `UNPROVEN`. Those are two different
+statements, and the criterion turns on the first.
+
+**AC3 asks whether the topology has contradictory assumptions. It does not ask whether
+the gates pass.** Gate status is AC1 and AC7 territory. Testing §8's six incoherent
+combinations against the set actually selected — C1 Google Cloud, C1 Cloud SQL, C2
+Cognito, C2 SES, C6 Plaid, C2 AWS End User Messaging, Web Push — separates them.
+
+| § 8 finding | Applies to the selected set? |
+| --- | --- |
+| **1.** Any set assuming *"Azure has Customer Lockbox"* uniformly | **No.** This is the one actual contradiction the review found, and it concerns Entra External ID and PostgreSQL Flexible Server. **No Azure candidate is selected in any category.** The contradiction is real and describes a set that was not chosen |
+| **2.** C1 hosting chosen to reduce vendor count | **No.** C1 was **forced**, not chosen for consolidation: C2 and C3 are `INELIGIBLE` on `HG-102-013` and C1 was the only candidate standing. The caution survives as a description rule — the set is four vendors and must never be described as consolidating — but no selection rests on the reasoning the finding rejects |
+| **3.** Declining C10 believing it removes Twilio | **Not as a contradiction.** C10 Twilio was excluded on a `FAIL`, not declined on that belief, and §5 already records Twilio arriving by three routes including AWS A2P. The package asserts nowhere that Twilio is out of the set, so there is no assumption to contradict |
+| **4.** Application Insights JavaScript SDK alongside a C3 selection | **No.** No C3 candidate is selected |
+| **5.** A C2 set treated as settled before `OQ-103-028` is observed | **Yes, live.** Three of the six selections are C2. If `HG-102-009` resolves as a `FAIL`, C2 is `INELIGIBLE` in every category simultaneously |
+| **6.** Any set at all, if the remaining DPAs are silent on backup retention, region and expiry | **Yes, live.** `HG-102-013` would fail every candidate in every category at once |
+
+#### What that leaves
+
+**No contradictory assumption exists in the selected set.** Three findings do not apply,
+one survives only as a rule about how the set is described, and the two that remain live
+are not contradictions at all — they are the correlated-failure modes §8 already labels
+as such. A correlated-failure mode is a statement that the topology **might not survive**,
+not that its assumptions **disagree**.
+
+That distinction is what `OI-108-007` blurred. Both residuals resolve outside AC3:
+finding 5 in the observation pass at `OQ-103-028`, finding 6 in the `HG-102-013` DPA
+review that question C1 of the Plaid list and the equivalent asks of Google and AWS would
+close.
+
+#### Why Met, and the argument against it
+
+**AC3 moves to Met for the selected set**, with findings 5 and 6 named as residuals.
+
+The argument for holding it partial is that the topology is contingent: if `HG-102-009`
+fails, the set becomes something else and the analysis would have to run again. That is
+true — and it is equally true of AC1 and AC2, which are recorded as Met. Applying a
+stricter standard to AC3 alone would be inconsistent rather than careful. Every criterion
+in this package is met against a set that the observation pass could unmake, and AC7 is
+where that contingency is recorded.
+
+The seven dimensions each analysed, against the selected set: identity no contradiction;
+networking no contradiction possible, since no approved source imposes an assumption;
+secret no contradiction, with `OI-103-002`'s unfilled second principal a CoBudget
+obligation rather than a provider disagreement; regional a single US region with no
+category contradicting it; retention no contradiction, with `HG-102-013` unproven rather
+than contradictory; deletion three suppression blast radii recorded across email
+candidates, only one of which is selected; incident the Azure finding, which does not
+apply.
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -6595,6 +7281,14 @@ deferred observation tests, AC7's `Not met`, and the non-publication rule.
 | OQ-108-008 | The per-segment US SMS send rate and the quantified carrier fees for AWS End User Messaging. `EV-102-227` records that neither is on the pricing page. | `CT-102-006` for C2, category N — the one term missing from the §4.7 comparison |
 | OQ-108-009 | Can `HG-102-005` be satisfied for C3 **without** Privileged Identity Management? **Narrowed at §4.67.** `EV-102-297` records PIM supplying *"time-bound access... using start and end dates"* and requiring licences, and **stating nothing about whether expiring assignments exist without it** — an absence, not a negative. | **And the doubt now runs the other way.** The pass test asks for expiry *"bound to a named change or incident record"*; PIM supplies **free-text justification**. **Whether PIM satisfies the gate at all is `OQ-108-075`**, and C3's $61.41 floor turns on it |
 | OQ-108-075 | ~~Does Privileged Identity Management satisfy `HG-102-005` at all?~~ **Answered at §4.68: yes, and it was settled before the question was raised.** `HG-102-005` is `PASS` for C3 at **CBD-103 v1.1** on `EV-102-011`, reused at CBD-104 v1.1, CBD-105 v1.2 and CBD-130 v1.1; **CBD-103 §7.5 engages the *"bound to a named change or incident record"* clause directly**. | Closed. The corpus reads that clause as what a just-in-time elevation product delivers, not a schema-level link — and the pass test asks the model to *"support"* it. **The doubt was asymmetric**: it applies identically to C1's Privileged Access Manager and was not put to it. `OI-108-070` |
+| OQ-108-076 | ~~**Are the category H pricing pages retrievable by browser rendering, as Cloud SQL's proved to be?**~~ **Answered at §4.80: yes, all eight.** `EV-102-300` was obtained after seven fetch failures on Google pricing URLs, by rendering rather than fetching. | If yes, the largest gap in the cost model is ordinary desk work rather than a signed-in calculator. `OI-108-022` and `OQ-108-050` both state the stronger claim and would need correcting. Not attempted here; this tranche was scoped to the supplied URL. |
+| OQ-108-077 | **What minimum storage does Cloud SQL provision, and is `DM-102-030` the right quantity for `CT-102-006`?** The page bills *"provisioned capacity"* and states no minimum; `DM-102-030` is a database size, not a provisioned volume. | At Base the difference is between `$0.07` and whatever a minimum provision costs — small in absolute terms, but the demand model's unit and the provider's billing unit are not the same thing, which is the `CT-102-006` trap. |
+| OQ-108-078 | **How many Cloud Armor rules does the composition define?** Each is `$1.00`/month and the approved topology names the service, not a rule set. | It is the only part of the category H floor that scales with a decision nobody has recorded. One policy and one rule is `$24.31`/month; five rules is `$28.31`. |
+| OQ-108-079 | ~~**Are Low and High subtotals worth computing, given the free-tier structure?**~~ **Answered at §4.82: yes, and they are computed.** The free-tier structure makes category H flat across scenarios rather than uncomputable, which is a finding the model states. §4.80 found category H's usage lines free at Base *and* High, so its figure does not scale with demand. | The ticket asks for low/base/high. Mechanically scaling Base would be wrong for H and misleading for the set. Recorded so the deliverable's shape is a decision rather than an omission. |
+| OQ-108-080 | ~~**Does the `HG-102-004` provider-level decision extend to Google Cloud's two candidates?**~~ **Answered at §4.84: yes, extended September 4, 2026.** The console argument does not distinguish the providers. | Takes the observation pass from 28 to 27. Not assumed, because the decision was put for AWS. |
+| OQ-108-081 | **Is `HG-102-015` account-level on AWS?** If the immutability mechanism is CloudTrail log-file validation, one observation may serve all three AWS candidates. | Takes the pass to 25. Unlike `HG-102-004` this depends on the mechanism, which the observation itself establishes — so it resolves during the pass rather than before it. |
+| OQ-108-082 | **`SR-94-042` is expressed by no CBD-102 gate.** Rotation and revocation invalidating every dependent session, callback, connection, package, queue, replica and backup path is a CoBudget lifecycle obligation across providers, not a property one provider has. | Recorded so provider selection is not read as discharging it. Whether it needs a gate at all is a CBD-102 question, not a CBD-108 one. |
+| OQ-108-083 | **`SR-94-146` and `PR-94-001`–`005` appear mis-routed to `FU-95-028`.** `SR-94-146` is joint-account pre-confirmation disclosure; the `PR-94-*` set is response-shape and enumeration parameters. Neither has provider-selection content. | A CBD-95 register correction rather than CBD-108 work. Recorded with the disposition at §4.85 so the routing error is visible from both ends. |
 | OQ-108-010 | ~~Does CoBudget accept a database tier its vendor describes as *"Not recommended for production workloads"*?~~ **Ruled August 30, 2026: accepted for the Private MVP, to be revisited before public launch** §4.48. | Closed. C3's category D line is **Burstable B1ms at $12.41/month** rather than General Purpose at $163.52. Decided together with `OQ-108-047`. The revisit needs a named trigger — `OQ-108-058` |
 | OQ-108-011 | ~~Is CoBudget's C1 HTTPS load balancing the regional or the global Application Load Balancer?~~ **Answered by the Product Owner, August 29, 2026: the composition uses both.** The regional half is listed; the **global** external Application Load Balancer is on none of the four lists. | Closed. **Two C1 components remain uncovered, and unlike the scheduler this one has no like-for-like substitute** — §4.12. Raises `OQ-108-013` |
 | OQ-108-012 | ~~Must `TD-103-004`'s scheduling requirement be met by Cloud Scheduler? Workflows and Eventarc are listed.~~ **Answered for Workflows at §4.16, and the answer is that it cannot substitute** — Google's documented route to a recurring workflow *is* Cloud Scheduler (`EV-102-234`). | **Corrects tranche 6.** Substituting Workflows would add it on top of Cloud Scheduler, not replace it. Eventarc and Managed Service for Apache Airflow remain unexamined — `OQ-108-015` |
@@ -6725,8 +7419,9 @@ deferred observation tests, AC7's `Not met`, and the non-publication rule.
 | OI-108-075 | **C3's preview-without-an-SLA pattern appeared independently in two categories, and counted against it in both.** `OI-106-010`: the email suppression list, with `ED-106-003` depending on it. `OI-130-020`: the Opt-Out Management API, with `HG-102-073` depending on it. | Neither is a `FAIL` — the capability is documented in each case — and both re-verify on **November 21, 2026**. **Two instances is a pattern rather than a coincidence**: a release-blocking dependency on a preview service is a shape worth checking for directly if C3 is ever selected, rather than discovering it a third time. |
 | OI-108-076 | **`FC-107-005` is load-bearing after the F selection, and the corpus says so in advance.** C6 Plaid's account identifier is stable only through a correct repair path; C9 Akoya's is native and *"survives the path C6's does not"*. CBD-107 §7.2: under `FC-107-005` *"both work, but only one of them tolerates a mistake"*. | Recorded because the selection converts a design obligation into a **dependency of the chosen provider**. C9 also held `HG-102-058`, the refresh token inside CoBudget's boundary, which C6 does not. **F rested on two documentary `PASS`es of some twenty-seven** — materially thinner than the other five selections — so route B's accepted risk is largest here. |
 | OI-108-077 | **The acceptance-criteria traceability was four tranches stale, in the four places that describe the selection deliverable.** AC1's table read *"Blocked"* in every row, AC1's text and AC7's first residual risk said nothing was selected, and `OI-108-001` said the package *"selects nothing"* — while six categories were selected. | **Every one of those documents had its version bumped by the tranches that made the selections.** The header moved and the body did not, which is `OI-108-059` at the point where it would have escaped: **the next action was to copy it into Jira**, where it would have become the project's external record. Repaired before the update. |
-| OI-108-078 | **Three approved Confluence pages are behind their merged sources**, because this session amended them: CBD-102's evidence register (v1.3 published, **v1.5** merged), CBD-102's cost template (v1.0 / **v1.1**) and CBD-103's evaluation (v1.6 / **v1.7**). | **Distinct from CBD-108's non-publication, which is correct** — those documents say registration follows approval and AC7 is `Not met`. **These three are published and stale, and two carry live rules**: §3.3.1 permits selection at `ELIGIBLE-PENDING-EVIDENCE`, and `CT-102-022` closes a `CR4` breach. A reader of the pages finds neither. `scripts/sync-confluence.py` is the mechanism and its credentials are absent; **publishing by hand was available and deliberately not taken**, because it would bypass the script's title check and its deterministic conversion. |
+| OI-108-078 | **Three approved Confluence pages are behind their merged sources**, because this session amended them: CBD-102's evidence register (v1.3 published, **v1.5** merged), CBD-102's cost template (v1.0 / **v1.1**) and CBD-103's evaluation (v1.6 / **v1.7**). | **Distinct from CBD-108's non-publication, which is correct** — those documents say registration follows approval and AC7 is `Not met`. **These three are published and stale, and two carry live rules**: §3.3.1 permits selection at `ELIGIBLE-PENDING-EVIDENCE`, and `CT-102-022` closes a `CR4` breach. A reader of the pages finds neither. `scripts/sync-confluence.py` is the mechanism and its credentials are absent; **publishing by hand was available and deliberately not taken**, because it would bypass the script's title check and its deterministic conversion. **Closed September 4, 2026.** All three published from `main` with the script: CBD-102's evidence register and cost template in tranche 66, CBD-103's evaluation in tranche 67. Each page was read back and carries its merged version. |
 | OI-108-079 | **The disposition register said it selected no provider for six tranches after it selected six categories — in its status row, §1, §2, §2.1, the §4 summary and §8 — and `scripts/audit-cbd-108.py` required the words *"selects no provider"* to be present.** Found September 3, 2026 when the CBD-2 refinement read the register and copied the claim into Jira. | **Repaired at §4.77 and the guard inverted**: the register must state *"Six selected, one deferred"* and must not contain the old claim, and the inverted guard was shown to fail against the old text. **Also repaired, with the Product Owner's consent of September 3, 2026:** the acceptance-criteria traceability's AC2 text (*"No selection rests on anything, because none is made"*) and §6 first bullet (*"No provider is selected in any category"*), and this document's Companions row, which had read v0.20 since tranche 1. The pattern is `OI-108-077`'s: the tranches that made the selections bumped every version and changed no status row. |
+| OI-108-080 | **A published document answered half of a `D4` item, and the other nine have not been re-read.** `OQ-107-020` was classed `D4` — *"requires provider contact — no published document can answer it"* — and `EV-102-299` answered its metering half on the first read. | **This is `OI-108-016`'s stated risk, demonstrated**: the class was derived from CBD-107's wording rather than from reading the item. The nine other `D4` items — `OI-103-015`, `OI-107-018`, `OQ-103-011`, `OQ-104-005`, `OQ-104-006`, `OQ-104-021`, `OQ-107-008`, `OQ-107-010`, `OQ-130-014` — may hold the same partial answers. Re-reading them is a retrieval tranche of its own; this one was scoped to category F. No disposition changes until they are read. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | ~~**`EV-102-214` is the first cost record in the corpus whose own source disclaims it.**~~ **Resolved at §4.47.** The authoritative page carries the same two rates (`EV-102-278`), so the disclaimed figures were correct. | Closed. The decision to record it at Low rather than exclude it — *"a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces"* — is **vindicated rather than merely defensible**. Worth keeping as precedent for the next disclaimed source. |
