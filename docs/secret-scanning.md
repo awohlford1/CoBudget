@@ -100,8 +100,41 @@ Local baseline: `610b2314e372dd537403d1a0f9f2201803fe438e`, 519 reachable
 commits. Initial full-object scan took approximately seven seconds on Windows.
 The historical non-secrets above were classified before exceptions were added.
 
-GitHub clean/failing run IDs, PRs, exact implementation and fixture commits,
-runner timings, and final reachable-main scan are still pending. CBD-114 must
-not be marked Done until that immutable evidence is recorded and the merged
-reachable-main scan has zero unallowlisted findings. Synthetic negative-control
-branches must never be merged.
+Implementation: [PR #212](https://github.com/awohlford1/CoBudget/pull/212),
+commit `9946a3ddc497040280d919295cf5c47efbc2f374`, Gitleaks 8.30.1.
+The complete local `npm run check` passed. The actual root command was also
+run in an isolated worktree with a staged synthetic entropy fixture: exit 1,
+intended rule and location present, complete synthetic value absent from
+combined stdout/stderr. That staged fixture was not committed.
+
+GitHub-hosted Linux evidence, September 5, 2026:
+
+| Control | PR | Immutable run | Result | Range / history seconds |
+| --- | --- | --- | --- | --- |
+| Clean implementation | [212](https://github.com/awohlford1/CoBudget/pull/212) | [33970195133](https://github.com/awohlford1/CoBudget/actions/runs/33970195133) | Full required job passed | 0.381 / 5.087 |
+| provider-api-token | [213](https://github.com/awohlford1/CoBudget/pull/213) | [33970324739](https://github.com/awohlford1/CoBudget/actions/runs/33970324739) | Expected exit 1, github-pat | 0.501 / 6.400 |
+| postgresql-url | [214](https://github.com/awohlford1/CoBudget/pull/214) | [33970325844](https://github.com/awohlford1/CoBudget/actions/runs/33970325844) | Expected exit 1, cobudget-postgresql-credential | 0.489 / 6.337 |
+| pem-private-key | [215](https://github.com/awohlford1/CoBudget/pull/215) | [33970326763](https://github.com/awohlford1/CoBudget/actions/runs/33970326763) | Expected exit 1, private-key | 0.496 / 6.355 |
+| entropy-assignment | [216](https://github.com/awohlford1/CoBudget/pull/216) | [33970327878](https://github.com/awohlford1/CoBudget/actions/runs/33970327878) | Expected exit 1, cobudget-secret-assignment | 0.485 / 6.634 |
+
+The clean job's log spans 105.3 seconds, within the 15-minute job limit. All
+14 scanner tests passed on the runner. Its scanned merge head was
+`e57b303f18002a4a111b9a78a3b24eb7bc8d4550`; both scans had zero findings.
+
+Every negative branch adds a deliberately nonfunctional value, then removes it
+before its tip. Both modes still identify the intended rule at
+`cbd114-synthetic.txt:2`. Combined job logs were checked for the complete
+redaction sentinel; none contained it. These PRs are evidence only and must
+never be merged.
+
+| Fixture | Add commit | Deleted-at-tip commit |
+| --- | --- | --- |
+| provider-api-token | `bd5ef146a7a07b26f95e13994b66461ddbfe8d95` | `7116c966a9bdba922afc9a02382cedb8d7c8205c` |
+| postgresql-url | `7c3ce5ccf63fe5a885258ba608c752c6ecf0764a` | `ed06d8b6e3b3bcffa472949837bc3f75de6cab59` |
+| pem-private-key | `e323d9f53bd7c7afc6f5e85e15a4270443049f6b` | `a96358754e6795d00c450d949fb3d46ed43d64eb` |
+| entropy-assignment | `b1b868c575a03aa0546b774633fcf3a27ba9f704` | `25f984c26f8437a8a5d51f9724fe5f38350ffb4e` |
+
+CBD-113's template-catalog check passes in this suite. CBD-114 still requires
+review, merge authorization, and a zero-unallowlisted-finding scan of the final
+merged reachable main before it can be marked Done. Confluence publication is
+not part of this pre-merge change.
