@@ -121,6 +121,8 @@ To add a variable:
 The AST guards enforce a restricted source convention: environment access must
 use the shared loaders. Wrapped/aliased `process` references, dynamic process
 imports, reflective `os` access, and dynamic environment imports are rejected.
+Node diagnostic-report access and Python `nt`/`posix` environment reads are also
+rejected, including aliases; they must not bypass the configuration boundary.
 Python's existing optional-dependency import in the publisher's `require`
 helper (restricted to Markdown and HTTP dependencies), the inventory checker's
 compiler loader, and the two package barrel tests' file-URL imports are reviewed

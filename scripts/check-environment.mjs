@@ -94,6 +94,7 @@ export function scanJavaScript(source, path) {
       if ((ts.isPropertyAccessExpression(parent) || ts.isElementAccessExpression(parent)) && parent.expression === node) {
         const key = property(parent);
         if (!key) fail(parent, "dynamic process access is unsupported");
+        if (key === "report") fail(parent, "process.report can expose environment values; diagnostic reports require a reviewed boundary");
         if (["getBuiltinModule", "mainModule", "binding", "_linkedBinding"].includes(key)) fail(parent, "indirect module access through process is unsupported");
         if (key === "env") {
           const use = parent.parent;

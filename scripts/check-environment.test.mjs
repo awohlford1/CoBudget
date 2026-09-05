@@ -100,6 +100,27 @@ describe("environment contract", () => {
     assert.deepEqual(scanJavaScript('const policy = {process: "readonly"}; process.stdout.write("ok");', "scripts/fixture.mjs"), []);
     assert.deepEqual(scanJavaScript('const fs = await import("node:fs");', "scripts/fixture.mjs"), []);
   });
+  it("rejects diagnostic-report and platform-module environment access", () => {
+    const cases = [
+      ["mjs", "console.log(process.report.getReport().environmentVariables.CBD_113_UNDECLARED)"],
+      ["mjs", 'process["report"]["getReport"]().environmentVariables.CBD_113_UNDECLARED'],
+      ["mjs", "const report = process.report; report.getReport()"],
+      ["mjs", "const {getReport} = process.report; getReport()"],
+      ["mjs", "process.report.writeReport()"],
+    ];
+    for (const module of ["nt", "posix"]) {
+      cases.push(
+        ["py", `import ${module}\n${module}.environ.get("CBD_113_UNDECLARED")`],
+        ["py", `import ${module} as platform\nplatform.environ.get("CBD_113_UNDECLARED")`],
+        ["py", `from ${module} import environ as env\nenv.get("CBD_113_UNDECLARED")`],
+        ["py", `from ${module} import *\nenviron.get("CBD_113_UNDECLARED")`],
+      );
+    }
+    for (const [extension, source] of cases) {
+      const path = `scripts/platform-environment-fixture.${extension}`;
+      assert.ok(validateInventory(inventory, template, { ...files, [path]: source }).some(f => f.includes(path)), source);
+    }
+  });
   it("rejects malformed tooling rules and defaults at build time", () => {
     for (const validation of [null, {}, { kind: "unknown" }, { kind: "https-origin", extra: true },
       { kind: "https-origin", default: "http://bad.invalid/path" },

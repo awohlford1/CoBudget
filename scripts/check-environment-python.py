@@ -12,15 +12,16 @@ def scan(source, path, variables):
     except SyntaxError:
         return [f"{path}: invalid Python syntax"], []
     parents = {child: node for node in ast.walk(tree) for child in ast.iter_child_nodes(node)}
-    os_names = {"os"}
+    environment_modules = {"os", "nt", "posix"}
+    os_names = set(environment_modules)
     tool_names = {"tool_config"}
     import_names = {"importlib", "builtins"}
     import_functions = {"__import__"}
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
-                if alias.name == "os":
-                    os_names.add(alias.asname or "os")
+                if alias.name in environment_modules:
+                    os_names.add(alias.asname or alias.name)
                 if alias.name == "tool_config":
                     tool_names.add(alias.asname or "tool_config")
                 if alias.name in ("importlib", "builtins"):
@@ -30,7 +31,7 @@ def scan(source, path, variables):
                 import_functions.update(a.asname or a.name for a in node.names if a.name in ("import_module", "__import__"))
                 if any(a.name == "*" for a in node.names):
                     failures.append(f"{path}:{node.lineno}: wildcard importlib access is unsupported")
-            if node.module == "os" and any(a.name in ("environ", "environb", "getenv", "getenvb", "*") or a.name.startswith("__") for a in node.names):
+            if node.module in environment_modules and any(a.name in ("environ", "environb", "getenv", "getenvb", "*") or a.name.startswith("__") for a in node.names):
                 failures.append(f"{path}:{node.lineno}: imported environment access bypasses load_tool_config")
             if node.module == "tool_config" and any(a.asname or a.name == "*" for a in node.names):
                 failures.append(f"{path}:{node.lineno}: tool_config imports must use explicit original names")
@@ -65,7 +66,7 @@ def scan(source, path, variables):
             if node.attr in ("environ", "environb", "getenv", "getenvb"):
                 parent = parents.get(node)
                 # The sole dynamic reader is the inventory-driven loader.
-                allowed = (path == "scripts/tool_config.py" and node.attr == "environ"
+                allowed = (path == "scripts/tool_config.py" and node.value.id == "os" and node.attr == "environ"
                            and isinstance(parent, ast.Assign)
                            and len(parent.targets) == 1 and isinstance(parent.targets[0], ast.Name)
                            and parent.targets[0].id == "environment")
