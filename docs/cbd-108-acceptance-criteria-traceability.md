@@ -2,16 +2,17 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Six of seven acceptance criteria are met and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.80 |
+| Status | **Approved v1.0** — Product Owner approved the package and its five residual risks on September 5, 2026. Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **All seven acceptance criteria are met**, the seventh by Product Owner approval on September 5, 2026. §4 records two places where the ticket's own text does not match what exists. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
+| Reviewer | Alexander Wohlford — Product Owner. **Approved September 5, 2026**, with the five residual risks at traceability AC7 accepted rather than retired. |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
 | Last updated | September 5, 2026 |
+| Approval | Product Owner, September 5, 2026 — traceability AC7. **What was approved is a set at `ELIGIBLE-PENDING-EVIDENCE` with twenty-seven route-A observations owed**, not an evidenced set |
 
 ## 1. Package contents
 
@@ -191,10 +192,13 @@ what would resolve it, and names the consequence.
 
 ### AC7 — Product Owner approves the exact package and residual risks
 
-**Status: Not met.**
+**Status: Met — Product Owner, September 5, 2026.**
 
-This is the gate the package is submitted to, not a claim it can make about
-itself. The residual risks requiring explicit acceptance are:
+This was the gate the package was submitted to rather than a claim it could make
+about itself, and it is now answered. **The five residual risks below were
+accepted, not retired.** Each remains true of the package as approved, and each
+is stated here rather than in a covering note so that a later reader sees what
+the approval covered:
 
 1. **The selections were made at `ELIGIBLE-PENDING-EVIDENCE`** under route B, so
    **the ten observation-bound pass tests are deferred to build, not performed**
@@ -214,6 +218,21 @@ itself. The residual risks requiring explicit acceptance are:
 4. **Category F is not comparable with the other five** (`OI-108-003`).
 5. **No independent review** (`OI-108-004`) — this package and all six it
    consumes were written and reviewed by the same person.
+
+**What approval does and does not change.** It closes CBD-108 and releases the
+provider set for build. **It does not convert any verdict**: all six selections
+remain at `ELIGIBLE-PENDING-EVIDENCE`, the twenty-seven route-A observations
+remain owed, and evidence register §3.3.1 — which permits selection at that
+verdict for the Private MVP phase only — is what the set rests on. A gate that
+fails on first observation still invalidates its selection, and residual 1 is
+the acceptance of exactly that.
+
+**The approval is therefore phase-scoped.** §3.3.1 is a Private MVP amendment;
+the set has not been cleared for anything beyond it, and the observation pass is
+what would convert `ELIGIBLE-PENDING-EVIDENCE` into `ELIGIBLE`. Running it
+remains the highest-value work available on this ticket, and `scripts/audit-cbd-108.py`
+will fail deliberately the moment a source verdict moves, so the dispositions are
+revisited rather than left to drift.
 
 ## 3. Deliverables
 
@@ -301,7 +320,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-108-018 | **Six of seven acceptance criteria are met and the one that is not is the approval gate itself.** Was three partially met at tranche 65; AC4 closed at tranche 66 on the budget-ceiling decision and AC6 at tranche 74 once `FU-95-028` was identified as the dependency's address. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
+| OI-108-018 | ~~**Six of seven acceptance criteria are met and the one that is not is the approval gate itself.**~~ **Closed September 5, 2026 — all seven are met.** Was three partially met at tranche 65; AC4 closed at tranche 66 on the budget-ceiling decision and AC6 at tranche 74 once `FU-95-028` was identified as the dependency's address. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
 
 ## 8. Revision record
 

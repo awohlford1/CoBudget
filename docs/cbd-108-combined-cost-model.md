@@ -2,16 +2,17 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*, and **§2.1 states it**: `$45.57` / `$62.56` / `$164.21` monthly, `$546.84` / `$750.72` / `$1,970.52` annually, every scenario inside the `$175` warning and the `$250` ceiling. Every category carries a rate as of September 4, 2026. **No figure here is an estimate** — `CR4` forbade one for sixty-odd revisions and §2 keeps the reasoning that governed the refusal, because it still governs the result. §3 is the demand side, §4 the price side and how each category was closed, §5 what the figures do not settle, §7 the three confirmations still outstanding. |
-| Document version | 0.80 |
+| Status | **Approved v1.0** — Product Owner approved the package and its five residual risks on September 5, 2026. The ticket asks for a *"combined low/base/high monthly and annual cost model"*, and **§2.1 states it**: `$45.57` / `$62.56` / `$164.21` monthly, `$546.84` / `$750.72` / `$1,970.52` annually, every scenario inside the `$175` warning and the `$250` ceiling. Every category carries a rate as of September 4, 2026. **No figure here is an estimate** — `CR4` forbade one for sixty-odd revisions and §2 keeps the reasoning that governed the refusal, because it still governs the result. §3 is the demand side, §4 the price side and how each category was closed, §5 what the figures do not settle, §7 the three confirmations still outstanding. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
+| Reviewer | Alexander Wohlford — Product Owner. **Approved September 5, 2026**, with the five residual risks at traceability AC7 accepted rather than retired. |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** Registration follows approval. |
 | Repository baseline | `054bc56` |
 | Last updated | September 5, 2026 |
+| Approval | Product Owner, September 5, 2026 — traceability AC7. **What was approved is a set at `ELIGIBLE-PENDING-EVIDENCE` with twenty-seven route-A observations owed**, not an evidenced set |
 
 ## 1. What was asked for, and what is available
 

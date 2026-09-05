@@ -2,16 +2,17 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Issues the CBD-108 decision package and records the provider selections. **Six categories are selected and push is deferred** (§4), under CBD-103 §3.3 route B by Product Owner decision of September 2, 2026: every selection at `ELIGIBLE-PENDING-EVIDENCE` with its observation tests deferred to build rather than performed, no combined cost model, and the ticket's seventh acceptance criterion — Product Owner approval of the package — not met. §2 records the position the package inherited on August 29, 2026, when no candidate was selectable, and why that was a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. **Until v0.69 this row and the prose in §1, §2.1, §4 and §8 still said the package selected no provider**, six tranches after the first selection — `OI-108-079`. |
-| Document version | 0.80 |
+| Status | **Approved v1.0** — Product Owner approved the package and its five residual risks on September 5, 2026. Issues the CBD-108 decision package and records the provider selections. **Six categories are selected and push is deferred** (§4), under CBD-103 §3.3 route B by Product Owner decision of September 2, 2026: every selection at `ELIGIBLE-PENDING-EVIDENCE` with its observation tests deferred to build rather than performed. **The combined cost model was completed on September 4, 2026** and **the ticket's seventh acceptance criterion — Product Owner approval of the package — was met on September 5, 2026**, which is what promotes this register to v1.0. §2 records the position the package inherited on August 29, 2026, when no candidate was selectable, and why that was a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. **Until v0.69 this row and the prose in §1, §2.1, §4 and §8 still said the package selected no provider**, six tranches after the first selection — `OI-108-079`. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
+| Reviewer | Alexander Wohlford — Product Owner. **Approved September 5, 2026**, with the five residual risks at traceability AC7 accepted rather than retired. |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
 | Confluence page | **Not published.** No page is registered in `scripts/sync-confluence.py`; registration follows approval, per AGENTS.md. |
 | Repository baseline | `054bc56` |
 | Last updated | September 5, 2026 |
+| Approval | Product Owner, September 5, 2026 — traceability AC7. **What was approved is a set at `ELIGIBLE-PENDING-EVIDENCE` with twenty-seven route-A observations owed**, not an evidenced set |
 
 ## 1. Purpose and standing
 
