@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "variables": [
+    {
+      "name": "NODE_ENV",
+      "classification": "application",
+      "consumer": [
+        "apps/api/src/config.ts",
+        "apps/worker/src/config.ts"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "non-secret",
+      "source": "deployment environment",
+      "validation": {
+        "kind": "enum",
+        "values": [
+          "development",
+          "test",
+          "production"
+        ]
+      },
+      "template": "included",
+      "placeholder": "development",
+      "description": "Runtime environment; development, test, or production."
+    },
+    {
+      "name": "LOG_LEVEL",
+      "classification": "application",
+      "consumer": [
+        "apps/api/src/config.ts",
+        "apps/worker/src/config.ts"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "non-secret",
+      "source": "deployment environment",
+      "validation": {
+        "kind": "enum",
+        "values": [
+          "debug",
+          "info",
+          "warn",
+          "error"
+        ]
+      },
+      "template": "included",
+      "placeholder": "info",
+      "description": "Minimum emitted severity; log fields remain allowlisted at every level."
+    },
+    {
+      "name": "SERVICE_VERSION",
+      "classification": "application",
+      "consumer": [
+        "apps/api/src/config.ts",
+        "apps/worker/src/config.ts"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "non-secret",
+      "source": "deployment environment",
+      "validation": {
+        "kind": "string"
+      },
+      "template": "included",
+      "placeholder": "local",
+      "description": "Deployed version identifier, such as a commit SHA or release tag."
+    },
+    {
+      "name": "API_PORT",
+      "classification": "application",
+      "consumer": [
+        "apps/api/src/config.ts"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "non-secret",
+      "source": "deployment environment",
+      "validation": {
+        "kind": "integer",
+        "min": 1,
+        "max": 65535
+      },
+      "template": "included",
+      "placeholder": "3001",
+      "description": "API TCP port, an integer from 1 through 65535."
+    },
+    {
+      "name": "API_LISTEN_ADDRESS",
+      "classification": "application",
+      "consumer": [
+        "apps/api/src/config.ts"
+      ],
+      "owner": "Engineering",
+      "required": false,
+      "sensitivity": "non-secret",
+      "source": "deployment environment",
+      "validation": {
+        "kind": "ip"
+      },
+      "template": "included",
+      "placeholder": "127.0.0.1",
+      "description": "Optional IPv4 or IPv6 bind address; omission uses 127.0.0.1 in development/test and 0.0.0.0 in production."
+    },
+    {
+      "name": "CONFLUENCE_BASE_URL",
+      "classification": "tooling",
+      "consumer": [
+        "scripts/sync-confluence.py"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "non-secret",
+      "source": "environment, then untracked .env.local",
+      "validation": {
+        "kind": "https-origin"
+      },
+      "template": "included",
+      "placeholder": "https://example.atlassian.net",
+      "description": "HTTPS site origin only; no credentials, path, query, fragment, or explicit port.",
+      "group": "confluence"
+    },
+    {
+      "name": "CONFLUENCE_EMAIL",
+      "classification": "tooling",
+      "consumer": [
+        "scripts/sync-confluence.py"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "non-secret",
+      "source": "environment, then untracked .env.local",
+      "validation": {
+        "kind": "email"
+      },
+      "template": "included",
+      "placeholder": "operator@example.invalid",
+      "description": "Operator email for repository tooling; required only when this tool runs.",
+      "group": "confluence"
+    },
+    {
+      "name": "CONFLUENCE_API_TOKEN",
+      "classification": "tooling",
+      "consumer": [
+        "scripts/sync-confluence.py"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "secret",
+      "source": "environment, then untracked .env.local",
+      "validation": {
+        "kind": "token"
+      },
+      "template": "included",
+      "placeholder": "",
+      "description": "Secret API token; fill only in the untracked environment, never commit a value.",
+      "group": "confluence"
+    },
+    {
+      "name": "JIRA_BASE_URL",
+      "classification": "tooling",
+      "consumer": [
+        "scripts/audit-jira-links.py"
+      ],
+      "owner": "Engineering",
+      "required": false,
+      "sensitivity": "non-secret",
+      "source": "environment, then untracked .env.local",
+      "validation": {
+        "kind": "https-origin",
+        "default": "https://cobudget.atlassian.net"
+      },
+      "template": "included",
+      "placeholder": "https://example.atlassian.net",
+      "description": "HTTPS site origin only; no credentials, path, query, fragment, or explicit port.",
+      "group": "jira"
+    },
+    {
+      "name": "JIRA_EMAIL",
+      "classification": "tooling",
+      "consumer": [
+        "scripts/audit-jira-links.py"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "non-secret",
+      "source": "environment, then untracked .env.local",
+      "validation": {
+        "kind": "email"
+      },
+      "template": "included",
+      "placeholder": "operator@example.invalid",
+      "description": "Operator email for repository tooling; required only when this tool runs.",
+      "group": "jira"
+    },
+    {
+      "name": "JIRA_API_TOKEN",
+      "classification": "tooling",
+      "consumer": [
+        "scripts/audit-jira-links.py"
+      ],
+      "owner": "Engineering",
+      "required": true,
+      "sensitivity": "secret",
+      "source": "environment, then untracked .env.local",
+      "validation": {
+        "kind": "token"
+      },
+      "template": "included",
+      "placeholder": "",
+      "description": "Secret API token; fill only in the untracked environment, never commit a value.",
+      "group": "jira"
+    },
+    {
+      "name": "CI",
+      "classification": "platform",
+      "consumer": [
+        ".github/workflows/ci.yml"
+      ],
+      "owner": "Engineering",
+      "required": false,
+      "sensitivity": "non-secret",
+      "source": "platform or isolated test harness",
+      "validation": {
+        "kind": "enum",
+        "values": [
+          "true"
+        ]
+      },
+      "template": "excluded",
+      "placeholder": null,
+      "description": "CI runner signal. Platform-owned, not application configuration."
+    },
+    {
+      "name": "SCARF_ANALYTICS",
+      "classification": "platform",
+      "consumer": [
+        ".github/workflows/ci.yml"
+      ],
+      "owner": "Engineering",
+      "required": false,
+      "sensitivity": "non-secret",
+      "source": "platform or isolated test harness",
+      "validation": {
+        "kind": "enum",
+        "values": [
+          "false"
+        ]
+      },
+      "template": "excluded",
+      "placeholder": null,
+      "description": "Dependency-install analytics disabled by CI policy; not a deployable setting."
+    },
+    {
+      "name": "TZ",
+      "classification": "test",
+      "consumer": [
+        "packages/budget-domain/src/shared/iso-date.test.ts",
+        "packages/budget-domain/src/schedule/period.test.ts"
+      ],
+      "owner": "Engineering",
+      "required": false,
+      "sensitivity": "non-secret",
+      "source": "platform or isolated test harness",
+      "validation": {
+        "kind": "test-time-zone"
+      },
+      "template": "excluded",
+      "placeholder": null,
+      "description": "Subprocess-only time-zone override proving deterministic date arithmetic."
+    }
+  ]
+}

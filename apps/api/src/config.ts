@@ -8,7 +8,7 @@ import type { ConfigOf, ConfigSchema } from "@cobudget/contracts/config";
 export const apiConfigSchema = {
   ...baseConfigSchema,
   API_LISTEN_ADDRESS: {
-    kind: "string",
+    kind: "ip",
     required: false,
     description: "Interface to bind the API to. Omit for defaults: 127.0.0.1 in development/test, 0.0.0.0 in production.",
   },
@@ -22,6 +22,10 @@ export const apiConfigSchema = {
 } as const satisfies ConfigSchema;
 
 export type ApiConfig = ConfigOf<typeof apiConfigSchema>;
+
+export function resolveApiListenAddress(config: ApiConfig): string {
+  return config.API_LISTEN_ADDRESS ?? (config.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1");
+}
 
 export function loadApiConfig(): ApiConfig {
   return loadConfigFromEnvironment(apiConfigSchema);

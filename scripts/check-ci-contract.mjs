@@ -8,6 +8,7 @@ const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 
 const REQUIRED_CHECK_STAGES = [
   "npm run check:ci",
+  "npm run check:env",
   "npm run check:docs",
   "npm run check:tokens",
   "npm run check:copy",
@@ -19,6 +20,7 @@ const REQUIRED_CHECK_STAGES = [
 ];
 
 const REQUIRED_ROOT_SCRIPTS = {
+  "check:env": "node --test scripts/check-environment.test.mjs && node scripts/check-environment.mjs",
   "check:copy": "node scripts/check-copy-language.mjs",
   lint: "eslint scripts && npm run lint --workspaces --if-present",
   typecheck: "npm run typecheck --workspaces --if-present",

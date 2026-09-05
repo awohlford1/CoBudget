@@ -62,16 +62,15 @@ from __future__ import annotations
 import argparse
 import base64
 import json
-import os
 import sys
 import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from tool_config import ConfigurationError, load_tool_config
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 ENV_FILE = REPO_ROOT / ".env.local"
-DEFAULT_BASE_URL = "https://cobudget.atlassian.net"
 
 # Links whose direction looks inverted to the heuristic but which were read
 # against the issues' own text and confirmed correct by the Product Owner on
@@ -95,21 +94,11 @@ def load_credentials() -> tuple[str, str, str]:
             key, value = line.split("=", 1)
             values[key.strip()] = value.strip().strip('"').strip("'")
 
-    def pick(name: str) -> str | None:
-        return os.environ.get(name) or values.get(name)
-
-    email = pick("JIRA_EMAIL")
-    token = pick("JIRA_API_TOKEN")
-    base = (pick("JIRA_BASE_URL") or DEFAULT_BASE_URL).rstrip("/")
-
-    missing = [n for n, v in (("JIRA_EMAIL", email), ("JIRA_API_TOKEN", token)) if not v]
-    if missing:
-        sys.exit(
-            f"Missing credential(s): {', '.join(missing)}. Set them in the "
-            f"environment or in {ENV_FILE.name}; see this script's docstring."
-        )
-    assert email and token
-    return base, email, token
+    try:
+        config = load_tool_config("jira", values)
+    except ConfigurationError as error:
+        sys.exit(str(error))
+    return config["JIRA_BASE_URL"], config["JIRA_EMAIL"], config["JIRA_API_TOKEN"]
 
 
 def fetch_links(base: str, auth: str, project: str) -> dict[int, tuple[str, str, str]]:
