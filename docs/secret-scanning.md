@@ -28,6 +28,14 @@ digest is recorded in the configuration; its MIT notice is in
 `config/gitleaks-LICENSE`. Regenerate from the pinned upstream source on an
 update, remove every allowlist table, preserve every detection rule, and update
 both independent configuration digests after reviewing the resulting changes.
+Four upstream content rules also require filename predicates (Terraform/HCL,
+Kubernetes YAML, NuGet configuration, and Freemius PHP). Their predicates are
+relocated to `PATH_RULES` in the wrapper, with matching comments in the pinned
+configuration. These rules are excluded from the general stream and run only on
+eligible paths, one object/version/Unicode view at a time. This preserves their
+filename restrictions without writing credentials to temporary files, applying
+path exclusions, or combining unrelated files into a multiline match. Keep this
+mapping synchronized when updating upstream rules.
 
 ## History coverage
 
@@ -75,7 +83,9 @@ SHA-256 fingerprint. Child stdout/stderr and exception details are never relayed
 The wrapper captures the scanner's unredacted JSON in memory only so it can
 remove detected values from every diagnostic filename, including a value found
 in another file. Only the wrapper's projected metadata is emitted; detected
-values in paths become `[REDACTED]`. Raw reports are never saved or forwarded.
+values in paths become `[REDACTED]`. For filename-dependent rules whose upstream
+capture includes quotes or a YAML key, the contained credential scalar is also
+redacted. Raw reports are never saved or forwarded.
 A finding exits 1; a coverage or execution error exits 2. Both block the check.
 
 `config/secret-allowlist.json` accepts only exact rule/path/fingerprint entries
@@ -91,7 +101,9 @@ configuration-error test sentinel. No credential value is in exception metadata.
 After removal of upstream suppressions, 49 more exact historical exceptions
 were reviewed for prose, document/code identifiers, and synthetic placeholders;
 one additional exception covers an upstream regex matching its own fixed
-non-secret provider prefix. The current total is 93, with no broad exclusions.
+non-secret provider prefix. Three more exact document target identifiers arrived
+with the approved CBD-108 publication changes on main and were verified before
+exception approval. The current total is 96, with no broad exclusions.
 
 If a finding may be real, stop ordinary implementation and involve the owner.
 Revoke/rotate first, never paste the value into an issue, log, or review, and
@@ -122,6 +134,14 @@ all four credential fixtures in UTF-8/16/32 variants, malformed BOMs, stable
 decoded locations/fingerprints, and cross-file filename redaction. A real Git
 fixture exercises the new scenarios through the local and both CI entry points,
 including history-only secrets after the fixture files have been deleted.
+
+Filename-rule regression coverage includes all four upstream rules, neighboring
+non-secrets, ineligible filenames, uppercase/nested paths, shared blobs under
+eligible and ineligible names, Unicode line/fingerprint stability, exact
+exception mutation, own/cross-file scalar redaction, and prevention of matches
+assembled across separate files or historical versions. Real Git entry-point
+tests cover staged secrets hidden by clean working files and PR/push scans both
+before and after rename/delete commits.
 
 ## Completion evidence
 

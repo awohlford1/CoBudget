@@ -3,6 +3,7 @@
 import json
 import io
 import shutil
+import re
 import subprocess
 import tempfile
 import unittest
@@ -20,6 +21,22 @@ def fixtures():
         ("postgresql-url", "cobudget-postgresql-credential", b"postgresql://fixture:" + b"synthetic-password" + b"@example.invalid/db", b"postgresql://example.invalid/db"),
         ("pem-private-key", "private-key", b"-----BEGIN " + b"RSA PRIVATE KEY-----\n" + b"SYNTHETIC-NONFUNCTIONAL\n" * 4 + b"-----END " + b"RSA PRIVATE KEY-----", b"-----BEGIN PUBLIC KEY-----\nSYNTHETIC-NONFUNCTIONAL"),
         ("entropy-assignment", "cobudget-secret-assignment", b'token = "' + b"CBD114_COMPLETE_VALUE_" + b'MUST_NOT_APPEAR"', b'token = "local"'),
+    ]
+
+
+def path_fixtures():
+    password = b"Q7vX" + b"2mN9"
+    encoded = b"UTd2WD" + b"JtTjk="
+    provider = b"sk_" + b"Q7vX2mN9pL4rT8zK5wB3aH6cD1fG0"
+    return [
+        ("main.tf", "hashicorp-tf-password", b'administrator_login_password = "' + password + b'"\n',
+         b"administrator_login_password = var.password\n", password),
+        ("secret.yaml", "kubernetes-secret-yaml", b"apiVersion: v1\nkind: Secret\ndata:\n  password: " + encoded + b"\n",
+         b"apiVersion: v1\nkind: ConfigMap\ndata:\n  greeting: welcome\n", encoded),
+        ("nuget.config", "nuget-config-password", b'<add key="ClearTextPassword" value="' + password + b'" />\n',
+         b'<add key="Username" value="fixture" />\n', password),
+        ("config.php", "freemius-secret-key", b"'secret_key' => '" + provider + b"'\n",
+         b"'secret_key' => getenv('KEY')\n", provider),
     ]
 
 
@@ -289,6 +306,132 @@ class SecretScannerTests(unittest.TestCase):
             invoke(["ci", "pull_request", base, head, head])
             invoke(["ci", "push", "", "", head])
             self.assertNotEqual(added, head)
+
+    def test_filename_rule_catalog_and_path_restrictions(self):
+        rules = (scanner.ROOT / "config/gitleaks.toml").read_text()
+        relocated = {}
+        for block in rules.split("[[rules]]")[1:]:
+            rule = re.search(r'^id = "([a-z0-9-]+)"$', block, re.MULTILINE)[1]
+            marker = re.search(r'^# Wrapper path: (.+)$', block, re.MULTILINE)
+            if marker:
+                relocated[rule] = marker[1]
+                self.assertNotRegex(block, r"(?m)^path =")
+            elif re.search(r"(?m)^path =", block):
+                # A future upstream content+path rule must be routed explicitly,
+                # never silently left inactive in the filename-less stream.
+                self.assertNotRegex(block, r"(?m)^regex =")
+        self.assertEqual(relocated, scanner.PATH_RULES)
+        self.assertEqual(set(scanner.PATH_RULES), {fixture[1] for fixture in path_fixtures()})
+        for path, rule, positive, negative, _ in path_fixtures():
+            with self.subTest(rule=rule):
+                hits = self.scan(positive, path)
+                self.assertIn(rule, [hit[0] for hit in hits])
+                self.assertNotIn(rule, [hit[0] for hit in self.scan(positive, "example.txt")])
+                self.assertEqual(self.scan(negative, path), [])
+                aliases = [path, "nested/" + path.upper(), "example.txt"]
+                hits = scanner.scan_contents(self.binary, [(aliases, positive)], [])
+                self.assertEqual({hit[1] for hit in hits if hit[0] == rule}, set(aliases[:2]))
+        terraform = path_fixtures()[0]
+        self.assertIn(terraform[1], [hit[0] for hit in self.scan(terraform[2], "main.hcl")])
+        yaml = path_fixtures()[1]
+        self.assertIn(yaml[1], [hit[0] for hit in self.scan(yaml[2], "secret.yml")])
+
+    def test_filename_rules_preserve_unicode_lines_and_exact_exceptions(self):
+        for path, rule, positive, _, _ in path_fixtures():
+            body = b"# ordinary\r\n" + positive
+            baseline = self.scan(body, path)
+            for encoding in ("utf-16", "utf-32-be"):
+                with self.subTest(rule=rule, encoding=encoding):
+                    hits = self.scan(body.decode().encode(encoding), path)
+                    self.assertEqual(set(baseline), set(hits))
+        path, rule, positive, _, _ = path_fixtures()[0]
+        hits = self.scan(positive, path)
+        entries = [dict(rule=hit[0], path=hit[1], fingerprint=hit[3], rationale="Synthetic only", owner="Test owner",
+                        created=date.today().isoformat(), expires=(date.today() + timedelta(days=1)).isoformat())
+                   for hit in hits]
+        self.assertEqual(self.scan(positive, path, entries), [])
+        self.assertIn(rule, [hit[0] for hit in self.scan(positive, "moved/" + path, entries)])
+        self.assertIn(rule, [hit[0] for hit in self.scan(positive.replace(b"Q7vX", b"R8wY"), path, entries)])
+
+    def test_filename_rules_never_combine_files_or_historical_versions(self):
+        header = b"apiVersion: v1\nkind: Secret\n"
+        data = b"data:\n  password: " + path_fixtures()[1][4] + b"\n"
+        for paths in (("one.yaml", "two.yaml"), ("same.yaml", "same.yaml")):
+            with self.subTest(paths=paths):
+                self.assertEqual(scanner.scan_contents(self.binary,
+                                 [([paths[0]], header), ([paths[1]], data)], []), [])
+
+    def test_filename_rules_redact_scalar_values_from_all_diagnostic_paths(self):
+        for path, rule, positive, _, secret in path_fixtures():
+            with self.subTest(rule=rule):
+                # Keep the required basename/extension while exposing the scalar
+                # in a directory component; neither own nor cross-file paths leak.
+                named = secret.decode() + "/" + path
+                contents = [([named], positive), ([secret.decode() + "/other.txt"], fixtures()[3][2])]
+                hits = scanner.scan_contents(self.binary, contents, [])
+                self.assertIn(rule, [hit[0] for hit in hits])
+                self.assertNotIn(secret.decode(), json.dumps(hits))
+                self.assertIn("[REDACTED]", json.dumps(hits))
+        scalar = path_fixtures()[1][4].decode()
+        for rendered in (scalar, '"' + scalar + '"', "'" + scalar + "'",
+                         "|\n    " + scalar, ">-\n    " + scalar):
+            values = scanner.diagnostic_secrets(iter([{"RuleID": "kubernetes-secret-yaml",
+                                                       "Secret": "password: " + rendered}]))
+            self.assertNotIn(scalar, scanner.diagnostic_path(scalar + "/secret.yaml", values))
+        empty = scanner.diagnostic_secrets([{"RuleID": "kubernetes-secret-yaml", "Secret": 'password: ""'}])
+        self.assertNotIn("", empty)
+
+    def test_filename_rules_block_local_and_ci_including_renamed_deleted_history(self):
+        with tempfile.TemporaryDirectory(prefix="cbd114-filename-") as directory:
+            repo = Path(directory)
+            scanner.git(repo, "init", "--initial-branch=main")
+
+            def commit(message):
+                scanner.git(repo, "add", "--all")
+                scanner.git(repo, "-c", "user.name=Synthetic fixture", "-c", "user.email=fixture@example.invalid",
+                            "-c", "commit.gpgsign=false", "commit", "--no-verify", "-m", message)
+                return scanner.git(repo, "rev-parse", "HEAD").decode().strip()
+
+            (repo / "config").mkdir()
+            (repo / "config/secret-allowlist.json").write_text("[]")
+            base = commit("clean base")
+            catalog = path_fixtures()
+            for path, _, positive, _, _ in catalog:
+                (repo / path).write_bytes(positive)
+            scanner.git(repo, "add", "--all")
+            # A clean working copy must not hide the staged credential.
+            for path, _, _, negative, _ in catalog:
+                (repo / path).write_bytes(negative)
+
+            def invoke(args, expected_paths):
+                output = io.StringIO()
+                with patch.object(scanner, "ROOT", repo), patch.object(scanner, "scanner_binary", return_value=self.binary), \
+                        patch.object(scanner.sys, "argv", ["secret_scanner.py", *args]), \
+                        redirect_stdout(output), redirect_stderr(output):
+                    status = scanner.main()
+                self.assertEqual(status, 1)
+                rows = [json.loads(line) for line in output.getvalue().splitlines() if line.startswith("{")]
+                for path, rule, _, _, secret in catalog:
+                    self.assertEqual({row["path"] for row in rows if row["rule"] == rule}, expected_paths[path])
+                    self.assertNotIn(secret.decode(), output.getvalue())
+
+            expected = {path: {path} for path, *_ in catalog}
+            invoke(["local"], expected)
+            for path, _, positive, _, _ in catalog:
+                (repo / path).write_bytes(positive)
+            head = commit("synthetic filename rule fixtures")
+            invoke(["ci", "pull_request", base, head, head], expected)
+            invoke(["ci", "push", "", "", head], expected)
+            (repo / "renamed").mkdir()
+            for path, *_ in catalog:
+                (repo / path).rename(repo / "renamed" / path)
+            commit("rename fixtures without changing blobs")
+            for path, *_ in catalog:
+                (repo / "renamed" / path).unlink()
+            head = commit("delete fixtures before branch tip")
+            expected = {path: {path, "renamed/" + path} for path, *_ in catalog}
+            invoke(["ci", "pull_request", base, head, head], expected)
+            invoke(["ci", "push", "", "", head], expected)
 
 
 if __name__ == "__main__":

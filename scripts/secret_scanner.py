@@ -19,7 +19,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 MAX_BYTES = 256 * 1024 * 1024
 PIN_SHA256 = "bbfb84371e1fa8a33632632758e133b8d498e6d50844a98186e33a37ba7f1132"
-RULES_SHA256 = "f0334ff293b7b3207e8ada2d03c9c19942b44aefcb333971fa2d3f0c4e49cdd7"
+RULES_SHA256 = "dc6f27cd2be8a8d9960c92e2a81abb659be0409e5ea66918d321a3234f49c1be"
+PATH_RULES = {
+    "freemius-secret-key": r"(?i)\.php$",
+    "hashicorp-tf-password": r"(?i)\.(?:tf|hcl)$",
+    "kubernetes-secret-yaml": r"(?i)\.ya?ml$",
+    "nuget-config-password": r"(?i)nuget\.config$",
+}
+PREAMBLE = b"CoBudget secret scan input\n\n"
 
 
 class ScanError(Exception):
@@ -127,13 +134,19 @@ def validate_allowlist(entries):
     return identities
 
 
-def scan_input(binary, content, root=ROOT):
-    if digest((root / "config/gitleaks.toml").read_bytes().replace(b"\r\n", b"\n")) != RULES_SHA256:
+def scan_input(binary, content, root=ROOT, rule_ids=None):
+    rules = (root / "config/gitleaks.toml").read_bytes().replace(b"\r\n", b"\n")
+    if digest(rules) != RULES_SHA256:
         raise ScanError("unreviewed detection configuration")
+    known = set(re.findall(r'^id = "([a-z0-9-]+)"$', rules.decode("utf-8"), re.MULTILINE))
+    enabled = known - PATH_RULES.keys() if rule_ids is None else set(rule_ids)
+    if not enabled or not enabled <= known:
+        raise ScanError("invalid detection rule selection")
     # An empty private directory prevents .gitleaksignore / local config discovery.
     # Only explicit reviewed configuration is supplied. No repository data upload.
     with tempfile.TemporaryDirectory(prefix="cbd114-scanner-") as isolated:
         result = run([str(binary), "stdin", "--config", str(root / "config/gitleaks.toml"),
+                      "--enable-rule", ",".join(sorted(enabled)),
                       "--gitleaks-ignore-path", isolated, "--ignore-gitleaks-allow",
                       "--no-banner", "--no-color", "--log-level=error",
                       "--report-format=json", "--report-path=-", "--timeout=55"], isolated, content)
@@ -145,6 +158,7 @@ def scan_input(binary, content, root=ROOT):
             raise ValueError()
         for finding in findings:
             if (not re.fullmatch(r"[a-z0-9-]+", finding["RuleID"])
+                    or finding["RuleID"] not in enabled
                     or not isinstance(finding["Secret"], str) or not finding["Secret"]
                     or type(finding["StartLine"]) is not int or finding["StartLine"] < 1
                     or type(finding["EndLine"]) is not int or finding["EndLine"] < finding["StartLine"]):
@@ -311,13 +325,30 @@ def diagnostic_path(path, secrets):
     return path
 
 
+def diagnostic_secrets(findings):
+    values = set()
+    for finding in findings:
+        value = finding["Secret"]
+        values.add(value)
+        if finding["RuleID"] == "hashicorp-tf-password":
+            # Upstream captures the surrounding double quotes as well.
+            values.add(value.strip('"'))
+        elif finding["RuleID"] == "kubernetes-secret-yaml":
+            # Upstream captures the YAML key and scalar, not just its value.
+            scalar = value.split(":", 1)[-1].strip()
+            scalar = re.sub(r"^[|>][-+]?\s+", "", scalar).strip("\"'")
+            values.add(scalar)
+    return values - {""}
+
+
 def scan_contents(binary, contents, entries, root=ROOT):
     allowed = validate_allowlist(entries)
-    pieces = [b"CoBudget secret scan input\n\n"]
+    pieces = [PREAMBLE]
     starts, records = [], []
     line = 3
     # Concatenate raw objects in memory. ASCII preamble disables binary-file sniff
-    # skipping; scanner never sees repository paths, avoiding default path skips.
+    # skipping. Filename-dependent rules run separately on each eligible object;
+    # real paths are never supplied to the scanner or used for file discovery.
     # Blank separators prevent assignments continuing across object boundaries.
     seen = set()
     views = ((paths, view) for paths, body in contents for view in content_views(body))
@@ -335,20 +366,33 @@ def scan_contents(binary, contents, entries, root=ROOT):
     if len(payload) > MAX_BYTES:
         raise ScanError("scan input exceeds coverage limit; no partial scan performed")
     findings = scan_input(binary, payload, root)
-    # Raw scanner reports stay in memory and are never logged or persisted.
-    # Retain values only long enough to redact ALL diagnostic paths, including
-    # occurrences of a finding's value in another finding's filename.
-    secrets = {finding["Secret"] for finding in findings}
-    output = set()
+    located = []
     for finding in findings:
         index = bisect.bisect_right(starts, finding["StartLine"]) - 1
         if index < 0:
             raise ScanError("invalid scanner location")
         paths, body = records[index]
-        row = finding["StartLine"] - starts[index] + 1
-        end_row = finding["EndLine"] - starts[index] + 1
+        located.append((finding, paths, body, finding["StartLine"] - starts[index] + 1,
+                        finding["EndLine"] - starts[index] + 1))
+    for paths, body in records:
+        eligible = {rule: [path for path in paths if re.search(pattern, path)]
+                    for rule, pattern in PATH_RULES.items()}
+        enabled = [rule for rule, paths_for_rule in eligible.items() if paths_for_rule]
+        if not enabled:
+            continue
+        # One object per pass: multiline rules must not combine unrelated files,
+        # historical versions, or different Unicode views of the same object.
+        for finding in scan_input(binary, PREAMBLE + body + b"\n\n", root, enabled):
+            located.append((finding, eligible[finding["RuleID"]], body,
+                            finding["StartLine"] - 2, finding["EndLine"] - 2))
+    # Raw scanner reports stay in memory and are never logged or persisted.
+    # Retain values only long enough to redact ALL diagnostic paths, including
+    # occurrences of a finding's value in another finding's filename.
+    secrets = diagnostic_secrets(finding for finding, *_ in located)
+    output = set()
+    for finding, paths, body, row, end_row in located:
         lines = body.split(b"\n")
-        if end_row > len(lines):
+        if row < 1 or end_row > len(lines):
             raise ScanError("scanner match crosses object boundary")
         rule = finding["RuleID"]
         # The entire source line is hashed, never printed or saved in the allowlist.

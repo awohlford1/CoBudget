@@ -365,7 +365,7 @@ export function validateScannerPins(pin, rules) {
   if (hash(pin) !== "bbfb84371e1fa8a33632632758e133b8d498e6d50844a98186e33a37ba7f1132") {
     failures.push("secret scanner must retain its reviewed immutable release digests");
   }
-  if (hash(rules) !== "f0334ff293b7b3207e8ada2d03c9c19942b44aefcb333971fa2d3f0c4e49cdd7") {
+  if (hash(rules) !== "dc6f27cd2be8a8d9960c92e2a81abb659be0409e5ea66918d321a3234f49c1be") {
     failures.push("secret detection must retain its reviewed rules without broad suppression");
   }
   return failures;
