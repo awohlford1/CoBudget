@@ -224,7 +224,7 @@ GOVERNING_BLOBS = {
     # required work, closure evidence, or effect-while-open changed, so no
     # CBD-73 rule is affected.
     Path("docs/cbd-95-architecture-roadmap-follow-up-register.md"): (
-        "92948bc3cd976c6155c1c23c3b7c872826706d43"
+        "6d1f61f6aa49d920035acde5e97700c26c650181"
     ),
 }
 

@@ -25,6 +25,12 @@ What is specific to CBD-108, and why each guard exists:
   class and fails if the published table has drifted from what the rules
   produce.
 
+* The package was approved on September 5, 2026, so the status guard requires
+  the approval and forbids the draft string. It required the opposite until that
+  day, correctly. This is the third guard in this package inverted by a decision
+  rather than by a defect -- OI-108-085 -- and the inversion is the price of a
+  guard that asserts something true, not a sign the guard was wrong.
+
 * Tranche 71 completed the cost model and six places across three documents
   went on saying it could not be completed, through 117 green checks, because
   the guard of the day pinned one sentence and the survivors used six other
@@ -231,9 +237,23 @@ def main() -> int:
             "| Jira | [CBD-108]" in text,
             f"{path}: header does not name CBD-108",
         )
+        # Inverted at tranche 77, and this is the third inversion of the shape
+        # OI-108-085 records. The requirement for "Draft -- not approved" was
+        # true and worth asserting until the Product Owner approved on
+        # September 5, 2026, at which point it became a requirement for a false
+        # statement -- section 4.77's defect exactly. Shown to fail against the
+        # approved text before this replacement was written.
         audit.check(
-            "Draft — not approved" in text,
-            f"{path}: status must say the package is a draft until approved",
+            "**Approved v1.0**" in text,
+            f"{path}: status must record the September 5, 2026 approval",
+        )
+        audit.check(
+            "| Status | **Draft — not approved" not in text,
+            f"{path}: status row still says the package is an unapproved draft",
+        )
+        audit.check(
+            "Approved September 5, 2026" in text,
+            f"{path}: reviewer row must record who approved and when",
         )
 
     # --- the carried-item register is complete ----------------------------
@@ -537,6 +557,9 @@ def main() -> int:
         ("the total cannot be produced", re.compile(r"\bcannot be produced\b", re.I)),
         ("no combined total exists", re.compile(r"\bno (?:combined )?total (?:is|exists|can be)\b", re.I)),
         ("no cost totals", re.compile(r"\bno cost totals\b", re.I)),
+        # Eighth wording, found at tranche 77 in the disposition register's own
+        # status row while promoting it to v1.0 -- past all seven above.
+        ("no combined cost model", re.compile(r"\bno combined cost model\b", re.I)),
         ("thresholds cannot be set", re.compile(r"\bthresholds cannot be set\b", re.I)),
         ("no budget ceiling exists", re.compile(r"\bno budget ceiling exists\b", re.I)),
         (
