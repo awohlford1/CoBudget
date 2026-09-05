@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Four of seven acceptance criteria are met, two partially, and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.74 |
+| Document version | 0.75 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -182,7 +182,7 @@ itself. The residual risks requiring explicit acceptance are:
 | --- | --- | --- |
 | Selection and fallback disposition for every category | **Met for selection, not for fallback** — six categories selected September 2, 2026 and push deferred; **no fallback can be named**, because naming a second choice would rank candidates the evaluations deliberately declined to rank | Disposition §4 |
 | Decision records with alternatives, evidence, tradeoffs, hard-gate results, risks, cost guardrails, review triggers | **Partially met** — gate results, risks, guardrail structure and review triggers are here; alternatives and tradeoffs remain in the source evaluations and are not re-derived | Disposition §4, §5 |
-| Combined low/base/high monthly and annual cost model | **Not met** — no total can be produced at any scenario; the demand side is complete and the price side is empty | Cost model §2–§4, `OI-108-011` |
+| Combined low/base/high monthly and annual cost model | **Met** — September 4, 2026. `$45.57` / `$62.56` / `$164.21` monthly; `$546.84` / `$750.72` / `$1,970.52` annually. Every category carries a rate; `CT-102-017` is `$62.56`. Every scenario clears the `$175` warning and `$250` ceiling | Cost model §2.1; retrieval pass §4.82; `OI-108-011` closed |
 | Cross-provider data-flow, subprocessor, outage, support, and lock-in review | **Met** | Coherence §5, §6, §7 |
 | CBD-14 reconciliation and follow-up register | **Partially met** — the follow-up register is complete and mechanically checked; the reconciliation is discussed at §4.1 | Carried register; `OI-108-006` |
 

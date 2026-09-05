@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.74 |
+| Document version | 0.75 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -19,19 +19,27 @@ CBD-108's third deliverable is a *"combined low/base/high monthly and annual cos
 model"*, and its fifth acceptance criterion requires explicit cost warning and
 stop thresholds.
 
-**Neither is available as a number, and the reason is recorded upstream rather
-than discovered here.**
+**Both are now available, as of September 4, 2026.** This section records what
+changed, because for most of this package's life neither was.
 
 A cost model has two sides. The demand side — how much CoBudget will consume —
-is **complete, approved, and stated at all three scenarios** in the CBD-102
-demand model. The price side — what each candidate charges for that consumption
-— is **`UNKNOWN` in three of six categories**.
+was **complete, approved, and stated at all three scenarios** throughout. The
+price side was `UNKNOWN` in three of six categories until tranches 68 through 71
+closed every one: Cloud SQL and the eight category H component pages by browser
+rendering, the AWS SMS rate from its own CSV, and Plaid's rate supplied by the
+Product Owner.
 
-Multiplying a complete quantity by an unknown rate does not produce an estimate.
-It produces a number with no evidence record behind it, in a document whose only
-purpose is to make cost comparable.
+**`CT-102-017`, the steady-state comparison figure, is `$62.56` per month**, and
+the low/base/high model is in §2.1. Retrieval pass §4.82 carries the derivation.
 
-## 2. Why there are no totals
+The thresholds follow from the `OI-102-017` ceiling decided the same day:
+`$175.00` warning, `$250.00` stop. **Every scenario clears both.**
+
+## 2. Why there were no totals, and what changed
+
+The rules below are why this document refused to estimate for sixty-odd
+revisions. They are retained because they governed the refusal and still govern
+the result: nothing here is an estimate.
 
 Three approved rules converge, and none of them is discretionary.
 
@@ -179,6 +187,32 @@ Three Product Owner rulings close the open cost decisions for C3.
 
 The strict reading of ruling 1 would have cost **$222.11/month more**, and the acceptance is scoped to the Private MVP with a revisit that still needs a named trigger (`OQ-108-058`). Retrieval pass §4.48.
 
+## 2.1 The model
+
+| Category | Selected | Low | Base | High |
+| --- | --- | --- | ---: | ---: | ---: |
+| H — Hosting | C1 Google Cloud | `$24.31` | `$24.31` | `$24.31` |
+| I — Identity | C2 Amazon Cognito | `$0.11` | `$0.45` | `$1.80` |
+| D — PostgreSQL | C1 Cloud SQL, `db-f1-micro` | `$7.68` | `$7.74` | `$8.36` |
+| E — Email | C2 Amazon SES | `$0.01` | `$0.04` | `$0.26` |
+| F — Financial | C6 Plaid | `$2.40` | `$18.30` | `$112.50` |
+| N — SMS | C2 AWS End User Messaging | `$11.06` | `$11.72` | `$16.98` |
+| N — Push | Web Push, no provider | `$0.00` | `$0.00` | `$0.00` |
+| **Monthly** | | **`$45.57`** | **`$62.56`** | **`$164.21`** |
+| **Annual** | | **`$546.84`** | **`$750.72`** | **`$1,970.52`** |
+
+At the Enterprise database tier, Base is `$104.20`/month and `$1,250.40` annually.
+
+**One line is 68% of the High bill.** Plaid moves `$110.10` across the scenarios
+while every other category moves `$21.17` combined, and category H does not move
+at all. `CT-102-021`'s first overage threshold is therefore a category F
+question: at `$0.30` per item the `$175` warning is reached at roughly **610
+items**, an order of magnitude above the private beta's 61.
+
+**A total is not a clearance.** `CR3` holds: cost never overrides a gate. Every
+selection remains at `ELIGIBLE-PENDING-EVIDENCE` and the ten route-A
+observations are still owed.
+
 ## 5. What is known without prices
 
 Three structural facts are established, and they are more useful than a
@@ -257,7 +291,7 @@ claim rather than an assertion of it.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-108-011 | **No combined total is produced, at any scenario.** The ticket's third deliverable is not met. | Deliberate. `CR4` forbids the alternative, and an estimated total in a comparison document is worse than no total. §7 is the route to producing one. |
+| OI-108-011 | ~~**The combined total was absent at every scenario.**~~ **Closed September 4, 2026** at §2.1: `$45.57` low, `$62.56` base, `$164.21` high, monthly. The third deliverable is met. | Formerly deliberate. `CR4` forbade the alternative, and an estimated total in a comparison document is worse than no total. §7 is the route to producing one. |
 | OI-108-012 | **The one category with figures cannot be generalized from.** Identity is cheap, retrievable, and floor-dominated; category F is none of those. | `OI-104-013` already records that its figures are a starting position. Nothing about the identity result predicts the shape of the aggregator bill. |
 | OI-108-013 | ~~**Cost thresholds cannot be set**~~ — **closed September 4, 2026** by the `OI-102-017` ceiling decision; the thresholds are stated in disposition §5. What remains is that no total exists to compare against them. | Formerly: the blocker is `OI-102-017`, not retrieval. Even a complete price side would not produce a warning threshold without a ceiling to measure against. |
 | OI-108-014 | **Category F's billable unit is not established per candidate**, and the two candidate units differ by more than 2× at Base. | Recorded so that any later comparison in this category states which unit each figure uses. Comparing a per-account price against a per-connection price is not a comparison. |
