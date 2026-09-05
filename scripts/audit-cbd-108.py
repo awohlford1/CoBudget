@@ -462,9 +462,19 @@ def main() -> int:
         "clears nothing" in texts[COHERENCE],
         "coherence review: must state that it clears nothing while the X gates are UNPROVEN",
     )
+    # Tranche 71: inverted. This required the words "cannot be produced" from the
+    # tranche when that was true, and tranche 71 produced a total at cost model
+    # section 2.1. Section 4.77 recorded this exact failure once already -- a guard
+    # that requires a false statement is worse than no guard, and it is why the
+    # disposition register's stale sentence survived six tranches. The model must
+    # now carry its comparison figure and must not still claim it has none.
     audit.check(
-        "cannot be produced" in texts[COST],
-        "cost model: must state that no combined total can be produced",
+        "$62.56" in texts[COST],
+        "cost model: must state the CT-102-017 steady-state comparison figure",
+    )
+    audit.check(
+        "no combined total is produced" not in texts[COST].lower(),
+        "cost model: still claims no combined total is produced",
     )
     audit.check(
         "no gate outcome" in texts[RETRIEVAL],
