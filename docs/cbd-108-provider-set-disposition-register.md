@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** Issues the CBD-108 decision package and records the provider selections. **Six categories are selected and push is deferred** (§4), under CBD-103 §3.3 route B by Product Owner decision of September 2, 2026: every selection at `ELIGIBLE-PENDING-EVIDENCE` with its observation tests deferred to build rather than performed, no combined cost model, and the ticket's seventh acceptance criterion — Product Owner approval of the package — not met. §2 records the position the package inherited on August 29, 2026, when no candidate was selectable, and why that was a structural result rather than a finding about any vendor. Every category receives an explicit disposition with a named gap, per the ticket's first acceptance criterion. **Until v0.69 this row and the prose in §1, §2.1, §4 and §8 still said the package selected no provider**, six tranches after the first selection — `OI-108-079`. |
-| Document version | 0.73 |
+| Document version | 0.74 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
