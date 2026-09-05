@@ -2,16 +2,17 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Draft — not approved.** Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **Six of seven acceptance criteria are met and one — Product Owner approval — is the gate this document is submitted to.** §4 records two places where the ticket's own text does not match what exists. |
-| Document version | 0.79 |
+| Status | **Approved v1.0** — Product Owner approved the package and its five residual risks on September 5, 2026. Maps each CBD-108 acceptance criterion and deliverable to the exact document that answers it, and states plainly where the answer is *"met"*, *"partially met"*, or *"not met"*. **All seven acceptance criteria are met**, the seventh by Product Owner approval on September 5, 2026. §4 records two places where the ticket's own text does not match what exists. |
+| Document version | 1.0 |
 | Owner | Alexander Wohlford |
-| Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
+| Reviewer | Alexander Wohlford — Product Owner. **Approved September 5, 2026**, with the five residual risks at traceability AC7 accepted rather than retired. |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
-| Confluence page | **Not published.** Registration follows approval. |
+| Confluence page | [CBD-108 — Acceptance Criteria Traceability and Review Record](https://cobudget.atlassian.net/wiki/spaces/CoBudget/pages/20021249) — registered in `scripts/sync-confluence.py` and published September 5, 2026, after the package was approved at v1.0 and merged. Repository is the source; the page is the copy |
 | Repository baseline | `054bc56` |
-| Last updated | September 4, 2026 |
+| Last updated | September 5, 2026 |
+| Approval | Product Owner, September 5, 2026 — traceability AC7. **What was approved is a set at `ELIGIBLE-PENDING-EVIDENCE` with twenty-seven route-A observations owed**, not an evidenced set |
 
 ## 1. Package contents
 
@@ -50,7 +51,9 @@ partial would be generous to itself.
 **Amended September 2, 2026. The criterion is now met in its first branch.** Six
 categories are selected and push is deferred, under CBD-103 §3.3's route B and
 evidence register §3.3.1 — selection at `ELIGIBLE-PENDING-EVIDENCE`, with the ten
-observation tests deferred to build rather than cancelled.
+observation-bound pass tests deferred to build rather than cancelled. **Counted
+per candidate that is twenty-seven observations across three provider
+accounts**, scoped at retrieval pass §4.83.
 
 **This table previously read *"Blocked"* in every row and stated that zero
 categories were selected.** It was four tranches stale: the document's version was
@@ -119,7 +122,7 @@ a single-ecosystem set across five categories while the third does not.
 | --- | --- |
 | Owner | **Explicit** — Product Owner, per `EX-102-001` |
 | Cadence | **Explicit** — monthly, aligned to the provider billing period |
-| Actions | **Explicit** — disposition §5, including the rule that no automatic tier downgrade is permitted because `CR0` ties tier to gate clearance |
+| Actions | **Explicit** — disposition §6, including the rule that no automatic tier downgrade is permitted because `CR0` ties tier to gate clearance |
 | Cliffs | **Explicit** — six enumerated in cost model §5.1 |
 | Warning threshold | **Explicit** — `USD 175.00` per month, 70% of the ceiling |
 | Stop threshold | **Explicit** — `USD 250.00` per month; `USD 3,000.00` per year |
@@ -134,14 +137,18 @@ could never have closed on its own. The cost template's own row left the door
 open: *"a ceiling can be introduced later if one becomes obvious."*
 
 **The Product Owner reopened and re-decided `OI-102-017` on September 4, 2026**
-at `USD 250.00` per month. Both thresholds follow from it and are stated in
-disposition §5.
+at `USD 250.00` per month. Both thresholds follow from it and are stated at
+disposition §6.
 
-**What the ceiling does not do.** Prices remain `UNKNOWN` in three of six
-categories, so whether the selected set sits under the ceiling cannot yet be
-answered — the thresholds exist, the comparison does not. That is `OI-108-011`,
-which is a separate deliverable and remains open. Cost model §7 lists the
-retrievals that would close the price side.
+**And the comparison the thresholds exist for can now be made.** Tranches 68
+through 71 closed the price side in every category, so the selected set can be
+measured against the ceiling rather than only judged eligible for one: `$45.57`
+/ `$62.56` / `$164.21` monthly, **every scenario inside both thresholds**, with
+High clearing the `$175` warning by `$10.79`. `OI-108-011` is closed.
+
+**What the ceiling does not do** is exclude a provider. It sets review and
+escalation, not eligibility — `CR0` ties tier to gate clearance, so disposition
+§6 permits no automatic downgrade on a breach.
 
 ### AC5 — Legal/contract review needs and limitations are stated
 
@@ -179,28 +186,53 @@ the gates expressing `SR-94-040` and `SR-94-041` — `HG-102-014` and `HG-102-02
 `UNPROVEN` until the observation pass runs. An explicit disposition is not a closed
 finding, and this criterion asks for the former.
 
-`OI-108-015`'s 24 `D0` items are not a failure of this criterion. `D0` **is** an explicit
+`OI-108-015`'s 23 `D0` items are not a failure of this criterion. `D0` **is** an explicit
 disposition, and an honest one: it states that the item's own recorded text does not say
 what would resolve it, and names the consequence.
 
 ### AC7 — Product Owner approves the exact package and residual risks
 
-**Status: Not met.**
+**Status: Met — Product Owner, September 5, 2026.**
 
-This is the gate the package is submitted to, not a claim it can make about
-itself. The residual risks requiring explicit acceptance are:
+This was the gate the package was submitted to rather than a claim it could make
+about itself, and it is now answered. **The five residual risks below were
+accepted, not retired.** Each remains true of the package as approved, and each
+is stated here rather than in a covering note so that a later reader sees what
+the approval covered:
 
 1. **The selections were made at `ELIGIBLE-PENDING-EVIDENCE`** under route B, so
-   **the ten observation tests are deferred to build, not performed** (`OI-108-001`, amended September 2, 2026). CBD-103 §3.3 stated the risk when it offered
+   **the ten observation-bound pass tests are deferred to build, not performed**
+   (`OI-108-001`, amended September 2, 2026) — **twenty-seven observations across
+   three provider accounts** once counted per candidate (retrieval pass §4.83).
+   CBD-103 §3.3 stated the risk when it offered
    the route: *"a gate that fails on first observation invalidates the selection
    after integration work has started"*. **It is largest in category F**, which
    rests on two documentary `PASS`es of some twenty-seven.
 2. **No coherence clearance** (`OI-108-007`) — six named combinations are
    conditional risks, not cleared ones.
-3. **No cost totals or thresholds** (`OI-108-002`, `OI-108-011`).
+3. **The cost model's largest line is its weakest source** (`OI-108-081`).
+   ~~No cost totals or thresholds~~ — both were produced on September 4, 2026 and
+   `OI-108-002` and `OI-108-011` are closed. What replaces that risk is narrower
+   and real: category F is `Attested` rather than `Documented`, and it is 68% of
+   the High bill.
 4. **Category F is not comparable with the other five** (`OI-108-003`).
 5. **No independent review** (`OI-108-004`) — this package and all six it
    consumes were written and reviewed by the same person.
+
+**What approval does and does not change.** It closes CBD-108 and releases the
+provider set for build. **It does not convert any verdict**: all six selections
+remain at `ELIGIBLE-PENDING-EVIDENCE`, the twenty-seven route-A observations
+remain owed, and evidence register §3.3.1 — which permits selection at that
+verdict for the Private MVP phase only — is what the set rests on. A gate that
+fails on first observation still invalidates its selection, and residual 1 is
+the acceptance of exactly that.
+
+**The approval is therefore phase-scoped.** §3.3.1 is a Private MVP amendment;
+the set has not been cleared for anything beyond it, and the observation pass is
+what would convert `ELIGIBLE-PENDING-EVIDENCE` into `ELIGIBLE`. Running it
+remains the highest-value work available on this ticket, and `scripts/audit-cbd-108.py`
+will fail deliberately the moment a source verdict moves, so the dispositions are
+revisited rather than left to drift.
 
 ## 3. Deliverables
 
@@ -288,7 +320,7 @@ No approved decision is reopened, weakened, or reinterpreted by this package.
 
 | ID | Item | Effect |
 | --- | --- | --- |
-| OI-108-018 | **Six of seven acceptance criteria are met and the one that is not is the approval gate itself.** Was three partially met at tranche 65; AC4 closed at tranche 66 on the budget-ceiling decision and AC6 at tranche 74 once `FU-95-028` was identified as the dependency's address. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
+| OI-108-018 | ~~**Six of seven acceptance criteria are met and the one that is not is the approval gate itself.**~~ **Closed September 5, 2026 — all seven are met.** Was three partially met at tranche 65; AC4 closed at tranche 66 on the budget-ceiling decision and AC6 at tranche 74 once `FU-95-028` was identified as the dependency's address. A package that meets its criteria in their weakest permitted branch is a defensible answer to the question CBD-108 asks, and not the answer the ticket was written expecting. | Recorded so the approval decision is taken with the shortfall visible rather than inferred from the individual sections. The route to the stronger answer is the observation pass and the `D3` retrieval block, in that order. |
 
 ## 8. Revision record
 

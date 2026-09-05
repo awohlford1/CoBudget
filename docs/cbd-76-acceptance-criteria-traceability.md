@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Approved v1.0 — synchronized with the CBD-76 boundary record; the Product Owner approved the exact package on September 4, 2026** |
-| Document version | 1.0 |
+| Document version | 1.0.1 |
 | Owner | Alexander Wohlford |
 | Jira | [CBD-76](https://cobudget.atlassian.net/browse/CBD-76) |
 | Parent | [CBD-12](https://cobudget.atlassian.net/browse/CBD-12) |
@@ -36,7 +36,7 @@ Evidence labels are not interchangeable:
 | `CBD-1-AC01` workflows, states, edge cases | CBD-11 and CBD-67–71 | CBD-12 inherits the schedule/reconciliation permission and alert consequences; it is not the workflow owner. | Covered; no CBD-12 gap |
 | `CBD-1-AC02` roles, sharing, consent, alerts, audit, revocation, prohibitions | CBD-12; CBD-72–76 | Direct owner. | Covered |
 | `CBD-1-AC03` threat model and sensitive data | CBD-14; CBD-91–95 | CBD-12 consumes constraints and keeps implementation gates open. | Covered; no claim of implementation |
-| `CBD-1-AC04` managed providers | CBD-15; CBD-102–108/130 | CBD-12 defers provider selection as an execution decision without reopening product semantics. | Covered; CBD-108 remains in progress |
+| `CBD-1-AC04` managed providers | CBD-15; CBD-102–108/130 | CBD-12 defers provider selection as an execution decision without reopening product semantics. | Covered; **CBD-108 approved at v1.0 and closed September 5, 2026**, with selections at `ELIGIBLE-PENDING-EVIDENCE` and the observation pass owed |
 | `CBD-1-AC05` beta metrics | CBD-13; CBD-77–80 | CBD-76 blocks CBD-77, CBD-78, and CBD-79 in Jira by supplying stable scope; CBD-80 is not blocked by it. | Covered by accountable planned work |
 | `CBD-1-AC06` unresolved/deferred decisions | CBD-12/CBD-76 plus story-local registers | Directly delivered by the four-way boundary and follow-up register. | Covered; creation actions must settle before approval |
 | `CBD-1-AC07` plan/architecture/security/accessibility/brand/freshness consistency | CBD-11–15 collectively; CBD-12 via CBD-72–76 | CBD-75 controls role/copy language; CBD-76 records remaining execution gates. | Covered at specification level |

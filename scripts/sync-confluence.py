@@ -911,6 +911,69 @@ TARGETS: tuple[Target, ...] = (
         expected_title="CBD-76 — Acceptance Criteria Traceability and Completeness Report",
         path="docs/cbd-76-acceptance-criteria-traceability.md",
     ),
+    # CBD-108 consumes all six CBD-15 category evaluations and CBD-102's
+    # approved rules, so it publishes last of everything above.
+    #
+    # Registered on September 5, 2026, and the registration itself reverses a
+    # standing direction: on September 2 the Product Owner directed that
+    # CBD-108 stay unpublished while it was an unapproved draft, and CBD-108
+    # section 4.64 recorded that as correct and rule-following. The package was
+    # approved at v1.0 on September 5 and the direction was reversed the same
+    # day. The earlier direction is not overridden silently -- it is superseded
+    # on the record, at CBD-108 section 4.89.
+    #
+    # No target here is a baseline. Within the set the disposition register is
+    # the document the other five describe, but none cites another as a frozen
+    # source baseline in the CBD-71 sense, so a failure on one does not have to
+    # halt the rest. The six carry one shared version and move together, which
+    # is a release property rather than a citation dependency.
+    #
+    # The six pages were created as placeholders on September 5, 2026 to
+    # reserve the targets, after the approval merged as 445adde.
+    Target(
+        key="cbd-108-disposition",
+        doc_set="cbd-108",
+        page_id="19955713",
+        expected_title="CBD-108 — Provider Set Disposition Register",
+        path="docs/cbd-108-provider-set-disposition-register.md",
+    ),
+    Target(
+        key="cbd-108-coherence",
+        doc_set="cbd-108",
+        page_id="19660815",
+        expected_title="CBD-108 — Cross-Category Coherence Review",
+        path="docs/cbd-108-cross-category-coherence-review.md",
+    ),
+    Target(
+        key="cbd-108-cost",
+        doc_set="cbd-108",
+        page_id="19988481",
+        expected_title="CBD-108 — Combined Cost Model",
+        path="docs/cbd-108-combined-cost-model.md",
+    ),
+    Target(
+        key="cbd-108-carried",
+        doc_set="cbd-108",
+        page_id="19660835",
+        expected_title="CBD-108 — Carried Item Disposition Register",
+        path="docs/cbd-108-carried-item-disposition-register.md",
+    ),
+    Target(
+        key="cbd-108-retrieval",
+        doc_set="cbd-108",
+        page_id="19660855",
+        expected_title="CBD-108 — Evidence Retrieval Pass",
+        path="docs/cbd-108-evidence-retrieval-pass.md",
+    ),
+    Target(
+        key="cbd-108-traceability",
+        doc_set="cbd-108",
+        page_id="20021249",
+        expected_title=(
+            "CBD-108 — Acceptance Criteria Traceability and Review Record"
+        ),
+        path="docs/cbd-108-acceptance-criteria-traceability.md",
+    ),
 )
 
 

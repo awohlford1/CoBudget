@@ -29,7 +29,16 @@ RECORD = Path("docs/cbd-76-mvp-boundary-and-readiness-record.md")
 TRACE = Path("docs/cbd-76-acceptance-criteria-traceability.md")
 REGISTER = Path("docs/cbd-76-mvp-boundary-register.json")
 
-EXPECTED_VERSION = "1.0"
+# 1.0.1 at the September 5, 2026 refresh recording the CBD-108 approval.
+# The approval itself is still of v1.0 and the status row still says so:
+# a patch level records an upstream status without reopening the package,
+# which is the CBD-95 1.0.10 precedent.
+EXPECTED_VERSION = "1.0.1"
+# The version the Product Owner approved and the package closed at. It is
+# history and does not move with a patch refresh -- pinning the closure
+# instruction to EXPECTED_VERSION made a later refresh demand that the
+# record misstate when CBD-76 closed.
+APPROVED_VERSION = "1.0"
 EXPECTED_IDS = {
     "Included": {f"INC-76-{n:03d}" for n in range(1, 14)},
     "Prohibited": {f"PRO-76-{n:03d}" for n in range(1, 9)},
@@ -174,7 +183,7 @@ for heading in (
 for role in ("Primary Owner", "Co-owner", "Collaborator", "Viewer", "Accountability Partner"):
     check(role in record, f"canonical role missing from record: {role}")
 
-check(f"close CBD-76 at v{EXPECTED_VERSION} once the merge commit" in trace, "approved package must carry the closure instruction")
+check(f"close CBD-76 at v{APPROVED_VERSION} once the merge commit" in trace, "approved package must carry the closure instruction")
 check("| Met in draft" not in trace and "partially met until" not in trace, "approved traceability must not describe itself as a draft")
 check("Confluence remains read-only" in record, "approval checklist must preserve merge-first publication")
 check("edits the audit in the same change" in record, "approval checklist must say promotion edits this audit")
