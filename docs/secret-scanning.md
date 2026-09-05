@@ -103,7 +103,9 @@ were reviewed for prose, document/code identifiers, and synthetic placeholders;
 one additional exception covers an upstream regex matching its own fixed
 non-secret provider prefix. Three more exact document target identifiers arrived
 with the approved CBD-108 publication changes on main and were verified before
-exception approval. The current total is 96, with no broad exclusions.
+exception approval. Two exact test-source construction lines are also verified
+non-secrets; their synthetic credential values are assembled only at runtime.
+The current total is 98, with no broad exclusions.
 
 If a finding may be real, stop ordinary implementation and involve the owner.
 Revoke/rotate first, never paste the value into an issue, log, or review, and
