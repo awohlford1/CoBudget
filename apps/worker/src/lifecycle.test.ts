@@ -106,6 +106,26 @@ async function runUntilReady(signal?: ShutdownSignal): Promise<ProcessResult> {
 }
 
 describe("worker process lifecycle", () => {
+  for (const name of ["NODE_ENV", "LOG_LEVEL", "SERVICE_VERSION"]) {
+    it(`rejects missing ${name} before readiness`, async () => {
+      const environment: Record<string, string> = { ...validEnvironment, SERVICE_VERSION: "CBD113_VALUE_MUST_NOT_APPEAR" };
+      delete environment[name];
+      const result = await runToExit(environment);
+      assert.equal(result.code, 1);
+      assert.equal(result.stdout, "");
+      assert.ok(result.stderr.includes(name));
+      assert.ok(!result.stderr.includes("CBD113_VALUE_MUST_NOT_APPEAR"));
+    });
+  }
+  for (const name of ["NODE_ENV", "LOG_LEVEL"]) {
+    it(`rejects malformed ${name} without disclosing its value`, async () => {
+      const result = await runToExit({ ...validEnvironment, [name]: "CBD113_VALUE_MUST_NOT_APPEAR" });
+      assert.equal(result.code, 1);
+      assert.equal(result.stdout, "");
+      assert.ok(result.stderr.includes(name));
+      assert.ok(!result.stderr.includes("CBD113_VALUE_MUST_NOT_APPEAR"));
+    });
+  }
   it("fails closed with a sanitized configuration diagnostic", async () => {
     const result = await runToExit({ LOG_LEVEL: "info", NODE_ENV: "test" });
 

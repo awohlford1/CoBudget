@@ -34,7 +34,13 @@ export interface EnumSpec {
   readonly values: readonly string[];
 }
 
-export type VariableSpec = StringSpec | IntegerSpec | EnumSpec;
+export interface IpSpec {
+  readonly kind: "ip";
+  readonly required: boolean;
+  readonly description: string;
+}
+
+export type VariableSpec = StringSpec | IntegerSpec | EnumSpec | IpSpec;
 
 export type ConfigSchema = Readonly<Record<string, VariableSpec>>;
 
