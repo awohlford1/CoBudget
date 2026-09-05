@@ -1,2 +1,0 @@
-SYNTHETIC NONFUNCTIONAL NEGATIVE CONTROL. NEVER MERGE.
-postgresql://fixture:synthetic-password@example.invalid/db
