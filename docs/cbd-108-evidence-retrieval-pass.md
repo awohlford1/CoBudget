@@ -9,7 +9,7 @@
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
 | Parent | [CBD-15](https://cobudget.atlassian.net/browse/CBD-15) — Select initial managed providers |
 | Companions | The other five CBD-108 documents, which carry one shared version and move together. Stated without a number on purpose: a pinned list went six tranches stale as `OI-108-079` records, and a version repeated in six places decays in six places |
-| Confluence page | **Not published.** Registration follows approval. |
+| Confluence page | [CBD-108 — Evidence Retrieval Pass](https://cobudget.atlassian.net/wiki/spaces/CoBudget/pages/19660855) — registered in `scripts/sync-confluence.py` and published September 5, 2026, after the package was approved at v1.0 and merged. Repository is the source; the page is the copy |
 | Repository baseline | `054bc56` |
 | Last updated | September 5, 2026 |
 | Approval | Product Owner, September 5, 2026 — traceability AC7. **What was approved is a set at `ELIGIBLE-PENDING-EVIDENCE` with twenty-seven route-A observations owed**, not an evidenced set |
@@ -7438,6 +7438,45 @@ The disposition register's status row said the package had *"no combined cost
 model"* — phrased differently again, and so past tranche 76's seven patterns.
 **Eight now**, and it is the last: the guard gains the wording, and the row says
 what is true.
+
+### 4.89 The non-publication direction is reversed, on the record — added at v1.0
+
+**Tranche 78, September 5, 2026.** The Product Owner directed that CBD-108 be
+published to Confluence. **That reverses a standing direction of September 2,
+2026**, and the reversal is recorded here rather than applied silently.
+
+#### What the earlier direction was, and why it was right
+
+§4.64 records the September 2 direction that CBD-108 stays unpublished, and
+found it *"correct and rule-following"*. It was. AGENTS.md fixes the order —
+repo, then merge, then Confluence — and every document in this package carried
+*"Registration follows approval"* in its own header. **The package was an
+unapproved draft on September 2**, so there was nothing to register.
+
+**The condition the direction rested on has been satisfied**, and that is what
+changed. Approval came on September 5, and the six documents are Approved v1.0.
+The direction is not overruled; **its premise expired.**
+
+#### What was published, and what the pages are not
+
+Six pages under *CoBudget Development Home*, reserved as placeholders on
+September 5 and filled from the merged sources. The repository remains the
+source and the page is the copy — the rule §4.64 was enforcing when it kept the
+package off Confluence is the same rule that governs it now that it is on.
+
+**Publication changes nothing about the evidence.** The pages carry the same
+`ELIGIBLE-PENDING-EVIDENCE` verdicts, the same twenty-seven owed observations,
+and the same five accepted residuals. A wider audience does not convert a
+deferred observation into a performed one, and the approval remains scoped to
+the Private MVP phase.
+
+**One consequence worth naming.** §4.64 also found **three approved Confluence
+pages behind their merged sources** because this session amended them. Adding
+six more pages adds six more that can drift. The `sync-confluence.py`
+registration is what makes drift detectable rather than invisible, and the
+six-document shared version is what makes it detectable in one place — but
+detection is not prevention, and the CBD-108 set is now the largest single
+group of pages this repository has to keep in step.
 ## 5. Open questions raised by this pass
 
 | ID | Question | Bears on |
@@ -7593,6 +7632,7 @@ what is true.
 | OI-108-083 | **A superseded projection was quoted as a current fact.** §4.86 said the selected set is four vendors, from the coherence review's pre-selection projection that *"a C1 set spans four vendors plus an aggregator"*. The selections consolidated identity, email and SMS onto AWS, making it **three**. | **Seventeenth ledger entry, and a shape the previous sixteen do not have.** The source was accurate when written and was outrun by decisions taken after it — neither a misreading nor a missed record. `OI-108-024`'s rule sends the reader to the primary document, which here would have **confirmed** the error. The remedy is to check a projection against the decisions made since, which is a different action from checking a source. |
 | OI-108-084 | **Two counts written beside correct tables did not match those tables**, both introduced by this pass one tranche apart. §4.86 took the vendor count from the coherence review's superseded projection; §4.85 took the `D0` count from the `D2` row four lines below it in the same table. | **The artifact was right both times and the prose beside it was not**, which is the inverse of the defect the audits were built for. The carried register's class table is mechanically derived and was never wrong. `scripts/audit-cbd-108.py` now derives the `D0` figure and fails on any number stated in a sentence with `OI-108-015` that is neither it nor the 227 total — a derived check rather than a pinned one, proven by restating the count as the neighbouring class's and watching the build fail. |
 | OI-108-085 | **Three guards in this package have required a sentence that a later decision made false.** Tranche 65's *"selects no provider"*, tranche 71's *"cannot be produced"*, and tranche 77's *"Draft — not approved"*. Each was true and worth asserting when written. | **Distinct from `OI-108-082`.** That is prose drifting from an artifact, and the remedy is to derive rather than restate. **This is a guard drifting from a decision**, and no derivation helps: the audit cannot read a Product Owner's mind. What it can do is fail loudly at the moment of the decision, which all three did — the cost is one inversion per decision, paid in the tranche that records it, and that is the correct price rather than a defect. |
+| OI-108-086 | **The CBD-108 set is now the largest group of Confluence pages this repository must keep in step**, at six pages moving on one shared version. §4.64 already found three approved pages behind their merged sources after this session amended them. | Recorded because registration makes drift **detectable**, not impossible. The shared version helps — six pages that move together are one check rather than six — but the check is `scripts/sync-confluence.py` being run, and nothing in the repository forces it to run after a merge. The exposure grows with every package published, and it is a process gap rather than a defect in any document. |
 | OI-108-019 | **This is tranche 1 of an incomplete pass.** Six records against 91 `D3` items; two questions touched, one closed. | The pass is worth continuing on these terms — every record here came from a public page in a single sitting. `OI-108-017`'s point stands: the constraint is that nothing is driving the work, not that the work is hard. |
 | OI-108-020 | **The source packages are not amended.** CBD-106 §5.1 still records its hypothesis as untested and `OQ-106-010` as open; CBD-104 §6.6 still rests C3's `$0.00` on `OQ-104-016`. | Deliberate. Propagating into two approved, Confluence-published packages mid-pass would mean amending them again at the end. The record of what is now known lives here until the pass closes, and this document is cited by the disposition register so the position is not lost. |
 | OI-108-021 | ~~**`EV-102-214` is the first cost record in the corpus whose own source disclaims it.**~~ **Resolved at §4.47.** The authoritative page carries the same two rates (`EV-102-278`), so the disclaimed figures were correct. | Closed. The decision to record it at Low rather than exclude it — *"a disclaimed figure from the vendor is still better than the `UNKNOWN` it replaces"* — is **vindicated rather than merely defensible**. Worth keeping as precedent for the next disclaimed source. |
