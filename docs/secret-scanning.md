@@ -21,6 +21,14 @@ and review cadence are in `config/secret-scanner.json`. Alexander Wohlford owns
 monthly security-update review. A tool or detection-rule update must update the
 independent CI contract pins and rerun every synthetic fixture before merging.
 
+The checked-in `config/gitleaks.toml` contains all 222 upstream detection rules
+plus the two CoBudget rules. Global and per-rule upstream allowlists are removed:
+only `config/secret-allowlist.json` can suppress findings. The upstream source
+digest is recorded in the configuration; its MIT notice is in
+`config/gitleaks-LICENSE`. Regenerate from the pinned upstream source on an
+update, remove every allowlist table, preserve every detection rule, and update
+both independent configuration digests after reviewing the resulting changes.
+
 ## History coverage
 
 `python scripts/secret_scanner.py history` scans all commits and blobs reachable
@@ -38,6 +46,13 @@ mapping, not stored as plaintext reports or temporary checkout files. An ASCII
 preamble avoids binary-type skipping; no scanner path exclusions are applied.
 CRLF is normalized to LF for stable Windows/Git fingerprints. The input cap is
 256 MiB; exceeding it fails coverage and requires a reviewed scaling change.
+
+BOM-marked UTF-8, UTF-16, and UTF-32 text is decoded strictly; malformed marked
+text fails coverage without printing its contents. Objects containing NUL bytes
+also receive BOM-less UTF-16/UTF-32 scans in both byte orders, alongside their
+unchanged raw-byte scan. Findings use decoded text line numbers and normalized
+fingerprints, consistent with the same content saved as UTF-8. Unsupported
+encodings and mixed/unaligned embedded character streams remain limitations.
 
 CI checks out full history with no persisted Git credential. On pull requests,
 the trusted base/head come from the GitHub event, never branch-supplied shell
@@ -57,8 +72,11 @@ this control instead of credential hygiene and review.
 
 Output contains only the named rule, repository path, one-based line, and a
 SHA-256 fingerprint. Child stdout/stderr and exception details are never relayed.
-The scanner also receives its full-redaction flag. A finding exits 1; a coverage
-or execution error exits 2. Both block the required check.
+The wrapper captures the scanner's unredacted JSON in memory only so it can
+remove detected values from every diagnostic filename, including a value found
+in another file. Only the wrapper's projected metadata is emitted; detected
+values in paths become `[REDACTED]`. Raw reports are never saved or forwarded.
+A finding exits 1; a coverage or execution error exits 2. Both block the check.
 
 `config/secret-allowlist.json` accepts only exact rule/path/fingerprint entries
 with rationale, owner, creation date, and expiry (at most 366 days). The
@@ -70,6 +88,10 @@ is supported. Expired exceptions fail the guard.
 The initial 43 exceptions are verified non-secrets: 42 document target
 identifiers in the Confluence publication script and one pre-existing synthetic
 configuration-error test sentinel. No credential value is in exception metadata.
+After removal of upstream suppressions, 49 more exact historical exceptions
+were reviewed for prose, document/code identifiers, and synthetic placeholders;
+one additional exception covers an upstream regex matching its own fixed
+non-secret provider prefix. The current total is 93, with no broad exclusions.
 
 If a finding may be real, stop ordinary implementation and involve the owner.
 Revoke/rotate first, never paste the value into an issue, log, or review, and
@@ -93,6 +115,13 @@ exact exceptions and mutations, output redaction, binary-prefix/path skipping,
 line mapping past scanner chunk boundaries, CRLF fingerprints, missing binary,
 malformed/error reports, staged-versus-working content, and a real multi-commit
 add/rename/delete history in both range and history modes.
+
+Review-regression coverage additionally verifies formerly suppressed URL
+passwords (including `false`, `true`, `null`, `example`, and `placeholder`),
+all four credential fixtures in UTF-8/16/32 variants, malformed BOMs, stable
+decoded locations/fingerprints, and cross-file filename redaction. A real Git
+fixture exercises the new scenarios through the local and both CI entry points,
+including history-only secrets after the fixture files have been deleted.
 
 ## Completion evidence
 

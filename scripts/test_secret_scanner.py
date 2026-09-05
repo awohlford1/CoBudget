@@ -16,7 +16,7 @@ import secret_scanner as scanner
 
 def fixtures():
     return [
-        ("provider-api-token", "github-pat", b'api_key = "' + b"ghp_" + b"Q7vX2mN9pL4rT8zK5wB3aH6cD1fG0jS2uV9x" + b'"', b'api_key = "not-a-provider-token"'),
+        ("provider-api-token", "github-pat", b'api_key = "' + b"ghp_" + b"Q7vX2mN9pL4rT8zK5wB3aH6cD1fG0jS2uV9x" + b'"', b'api_key = "local"'),
         ("postgresql-url", "cobudget-postgresql-credential", b"postgresql://fixture:" + b"synthetic-password" + b"@example.invalid/db", b"postgresql://example.invalid/db"),
         ("pem-private-key", "private-key", b"-----BEGIN " + b"RSA PRIVATE KEY-----\n" + b"SYNTHETIC-NONFUNCTIONAL\n" * 4 + b"-----END " + b"RSA PRIVATE KEY-----", b"-----BEGIN PUBLIC KEY-----\nSYNTHETIC-NONFUNCTIONAL"),
         ("entropy-assignment", "cobudget-secret-assignment", b'token = "' + b"CBD114_COMPLETE_VALUE_" + b'MUST_NOT_APPEAR"', b'token = "local"'),
@@ -40,6 +40,53 @@ class SecretScannerTests(unittest.TestCase):
 
     def test_environment_template_matches_no_fixture_rule(self):
         self.assertEqual(self.scan((scanner.ROOT / ".env.example").read_bytes(), ".env.example"), [])
+
+    def test_upstream_suppressions_never_override_exact_exceptions(self):
+        rules = (scanner.ROOT / "config/gitleaks.toml").read_text()
+        self.assertNotIn("[extend]", rules)
+        self.assertNotRegex(rules, r"(?m)^\[.*allowlist")
+        self.assertEqual(rules.count("[[rules]]"), 224)
+        for fragment in (b"false", b"true", b"null", b"example", b"placeholder"):
+            with self.subTest(fragment=fragment.decode()):
+                value = fragment + b"-Q7vX2mN9pL4rT8zK"
+                body = b"postgresql://fixture:" + value + b"@example.invalid/db"
+                self.assertIn("cobudget-postgresql-credential", [hit[0] for hit in self.scan(body)])
+                body = b"postgresql://fixture:Q7vX2mN9-" + value + b"@example.invalid/db"
+                self.assertIn("cobudget-postgresql-credential", [hit[0] for hit in self.scan(body)])
+
+    def test_unicode_encodings_keep_detection_lines_and_fingerprints(self):
+        for fixture_id, rule, positive, negative in fixtures():
+            # Include CRLF and a non-ASCII character before the finding.
+            text = "ordinary \u00e9\r\n" + positive.decode()
+            baseline = self.scan(text.encode("utf-8"))
+            self.assertIn(rule, [hit[0] for hit in baseline])
+            for encoding in ("utf-8-sig", "utf-16", "utf-16-le", "utf-16-be", "utf-32", "utf-32-le", "utf-32-be"):
+                with self.subTest(fixture=fixture_id, encoding=encoding):
+                    hits = self.scan(text.encode(encoding))
+                    self.assertTrue(set(baseline).issubset(set(hits)))
+                    self.assertEqual(self.scan(negative.decode().encode(encoding)), [])
+
+    def test_malformed_bom_text_fails_closed_without_value_disclosure(self):
+        for body in (b"\xff\xfeX", b"\xfe\xffX", b"\xff\xfe\0\0X", b"\0\0\xfe\xffX", b"\xef\xbb\xbf\xff"):
+            with self.subTest(length=len(body)), self.assertRaisesRegex(scanner.ScanError, "malformed BOM-marked text"):
+                self.scan(body)
+
+    def test_paths_redact_values_across_findings_and_preserve_exact_allowlists(self):
+        marker = (b"CBD114_COMPLETE_VALUE_" + b"MUST_NOT_APPEAR").decode()
+        path = "nested/" + marker + ".txt"
+        value = fixtures()[3][2]
+        hits = self.scan(value, path=path)
+        self.assertTrue(hits)
+        self.assertNotIn(marker, json.dumps(hits))
+        self.assertIn("[REDACTED]", json.dumps(hits))
+        # A value found in file A must also be removed from file B's metadata.
+        hits = scanner.scan_contents(self.binary, [(["ordinary.txt"], value), ([path], fixtures()[1][2])], [])
+        self.assertNotIn(marker, json.dumps(hits))
+        entries = [dict(rule=rule, path=path, fingerprint=fp, rationale="Synthetic only", owner="Test owner",
+                        created=date.today().isoformat(), expires=(date.today() + timedelta(days=1)).isoformat())
+                   for rule, _, _, fp in self.scan(value, path=path)]
+        self.assertEqual(self.scan(value, path=path, entries=entries), [])
+        self.assertTrue(self.scan(value, path="moved/" + path, entries=entries))
 
     def test_allowlist_is_exact_and_expiring(self):
         positive = fixtures()[1][2]
@@ -194,6 +241,54 @@ class SecretScannerTests(unittest.TestCase):
             (repo / ".git/shallow").write_text(added + "\n")
             with self.assertRaises(scanner.ScanError):
                 scanner.history_content(repo, head, base)
+
+    def test_review_regressions_through_local_and_ci_entry_points(self):
+        with tempfile.TemporaryDirectory(prefix="cbd114-review-") as directory:
+            repo = Path(directory)
+            scanner.git(repo, "init", "--initial-branch=main")
+
+            def commit(message):
+                scanner.git(repo, "add", "--all")
+                scanner.git(repo, "-c", "user.name=Synthetic fixture", "-c", "user.email=fixture@example.invalid",
+                            "-c", "commit.gpgsign=false", "commit", "--no-verify", "-m", message)
+                return scanner.git(repo, "rev-parse", "HEAD").decode().strip()
+
+            (repo / "clean.txt").write_text("ordinary\n")
+            base = commit("clean base")
+            marker = (b"CBD114_COMPLETE_VALUE_" + b"MUST_NOT_APPEAR").decode()
+            names = ["false.txt", "true.txt", "utf16-le.txt", "utf16-be.txt", "utf32.txt", marker + ".txt"]
+            for name, body in zip(names, [
+                b"postgresql://fixture:" + b"Synthetic-false-Q7vX2mN9pL4rT8zK" + b"@example.invalid/db",
+                b"postgresql://fixture:" + b"true-Q7vX2mN9pL4rT8zK" + b"@example.invalid/db",
+                fixtures()[3][2].decode().encode("utf-16"),
+                fixtures()[3][2].decode().encode("utf-16-be"),
+                fixtures()[3][2].decode().encode("utf-32"),
+                fixtures()[3][2],
+            ]):
+                (repo / name).write_bytes(body)
+            added = commit("synthetic review regression fixtures")
+            (repo / "config").mkdir()
+            (repo / "config/secret-allowlist.json").write_text("[]")
+
+            def invoke(args):
+                output = io.StringIO()
+                with patch.object(scanner, "ROOT", repo), patch.object(scanner, "scanner_binary", return_value=self.binary), \
+                        patch.object(scanner.sys, "argv", ["secret_scanner.py", *args]), \
+                        redirect_stdout(output), redirect_stderr(output):
+                    status = scanner.main()
+                self.assertEqual(status, 1)
+                self.assertNotIn(marker, output.getvalue())
+                rows = [json.loads(line) for line in output.getvalue().splitlines() if line.startswith("{")]
+                self.assertEqual({row["path"] for row in rows}, set(names[:-1] + ["[REDACTED].txt"]))
+                self.assertTrue(all(row["line"] == 1 for row in rows))
+
+            invoke(["local"])
+            for name in names:
+                (repo / name).unlink()
+            head = commit("remove fixtures before branch tip")
+            invoke(["ci", "pull_request", base, head, head])
+            invoke(["ci", "push", "", "", head])
+            self.assertNotEqual(added, head)
 
 
 if __name__ == "__main__":

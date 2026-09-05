@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 MAX_BYTES = 256 * 1024 * 1024
 PIN_SHA256 = "bbfb84371e1fa8a33632632758e133b8d498e6d50844a98186e33a37ba7f1132"
-RULES_SHA256 = "8dba093f58db6175981a7aa60a60bf98be0d54ee17769dd796792e5de0c6d913"
+RULES_SHA256 = "f0334ff293b7b3207e8ada2d03c9c19942b44aefcb333971fa2d3f0c4e49cdd7"
 
 
 class ScanError(Exception):
@@ -135,7 +135,7 @@ def scan_input(binary, content, root=ROOT):
     with tempfile.TemporaryDirectory(prefix="cbd114-scanner-") as isolated:
         result = run([str(binary), "stdin", "--config", str(root / "config/gitleaks.toml"),
                       "--gitleaks-ignore-path", isolated, "--ignore-gitleaks-allow",
-                      "--no-banner", "--no-color", "--redact=100", "--log-level=error",
+                      "--no-banner", "--no-color", "--log-level=error",
                       "--report-format=json", "--report-path=-", "--timeout=55"], isolated, content)
     if result.returncode not in (0, 1):
         raise ScanError("scanner execution failed")
@@ -145,6 +145,7 @@ def scan_input(binary, content, root=ROOT):
             raise ValueError()
         for finding in findings:
             if (not re.fullmatch(r"[a-z0-9-]+", finding["RuleID"])
+                    or not isinstance(finding["Secret"], str) or not finding["Secret"]
                     or type(finding["StartLine"]) is not int or finding["StartLine"] < 1
                     or type(finding["EndLine"]) is not int or finding["EndLine"] < finding["StartLine"]):
                 raise ValueError()
@@ -282,6 +283,34 @@ def local_content(repo):
     return working + [(sorted(paths[oid]), body) for oid, (kind, body) in objects.items() if kind == "blob"]
 
 
+def content_views(body):
+    """Normalize Unicode text without discarding the raw view of binary objects."""
+    # Check UTF-32 first: its little-endian BOM begins with the UTF-16 BOM.
+    for marker, encoding in ((b"\xff\xfe\0\0", "utf-32"), (b"\0\0\xfe\xff", "utf-32"),
+                             (b"\xff\xfe", "utf-16"), (b"\xfe\xff", "utf-16"),
+                             (b"\xef\xbb\xbf", "utf-8-sig")):
+        if body.startswith(marker):
+            try:
+                return [body.decode(encoding, errors="strict").encode("utf-8")]
+            except UnicodeError:
+                raise ScanError("coverage error: malformed BOM-marked text") from None
+    views = [body]
+    if b"\0" in body:
+        # BOM-less UTF-16/32 and binary-embedded text have no reliable charset
+        # declaration. Scan both byte orders in addition to the unchanged raw
+        # bytes. Replacement affects malformed units only, not adjacent text.
+        for encoding in ("utf-16-le", "utf-16-be", "utf-32-le", "utf-32-be"):
+            views.append(body.decode(encoding, errors="replace").encode("utf-8"))
+    return views
+
+
+def diagnostic_path(path, secrets):
+    """Never repeat a detected value through the diagnostic metadata channel."""
+    for secret in sorted(secrets, key=lambda value: (-len(value), value)):
+        path = path.replace(secret, "[REDACTED]")
+    return path
+
+
 def scan_contents(binary, contents, entries, root=ROOT):
     allowed = validate_allowlist(entries)
     pieces = [b"CoBudget secret scan input\n\n"]
@@ -291,7 +320,8 @@ def scan_contents(binary, contents, entries, root=ROOT):
     # skipping; scanner never sees repository paths, avoiding default path skips.
     # Blank separators prevent assignments continuing across object boundaries.
     seen = set()
-    for paths, body in contents:
+    views = ((paths, view) for paths, body in contents for view in content_views(body))
+    for paths, body in views:
         body = body.replace(b"\r\n", b"\n")
         identity = (tuple(paths), digest(body))
         if identity in seen:
@@ -305,6 +335,10 @@ def scan_contents(binary, contents, entries, root=ROOT):
     if len(payload) > MAX_BYTES:
         raise ScanError("scan input exceeds coverage limit; no partial scan performed")
     findings = scan_input(binary, payload, root)
+    # Raw scanner reports stay in memory and are never logged or persisted.
+    # Retain values only long enough to redact ALL diagnostic paths, including
+    # occurrences of a finding's value in another finding's filename.
+    secrets = {finding["Secret"] for finding in findings}
     output = set()
     for finding in findings:
         index = bisect.bisect_right(starts, finding["StartLine"]) - 1
@@ -321,7 +355,7 @@ def scan_contents(binary, contents, entries, root=ROOT):
         fingerprint = digest(rule.encode() + b"\0" + b"\n".join(lines[row - 1:end_row]))
         for path in paths:
             if (rule, path, fingerprint) not in allowed:
-                output.add((rule, path, row, fingerprint))
+                output.add((rule, diagnostic_path(path, secrets), row, fingerprint))
     return sorted(output)
 
 
