@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Status | **Draft — not approved.** The ticket asks for a *"combined low/base/high monthly and annual cost model"*. **It cannot be produced as a figure**, because no price was retrieved in three of the six categories and cost rule `CR4` forbids recording an unknown price as zero. **Category E is priced and category N is partly priced**, by the CBD-108 retrieval pass. §2 gives the reason, §3–§4 give what can be produced — a complete demand side, an empty price side, and the exact retrieval list that would close it. Producing an estimated total would be the specific failure this model exists to prevent. |
-| Document version | 0.70 |
+| Document version | 0.71 |
 | Owner | Alexander Wohlford |
 | Reviewer | Alexander Wohlford — Product Owner. **Not yet reviewed.** |
 | Jira | [CBD-108](https://cobudget.atlassian.net/browse/CBD-108) |
@@ -101,7 +101,7 @@ category where the metering question is as consequential as the rate.
 | **I** — Identity | **Partially** | The only category with figures. Two of three totals carry unresolved tier risk — CBD-104 §6.6 |
 | **D** — PostgreSQL | **Compute priced** — August 30, 2026 | `CT-102-006` still `UNKNOWN × 0.4 GB Base`. **The tier to price is now identified for C3**: `EV-102-231` records that Azure's cheapest tier is excluded from production support, so `CR0` is plausibly General Purpose at 2 vCores / 8 GiB rather than Burstable — pending `OQ-108-010` |
 | **E** — Email | **Yes** — August 29, 2026 | Retrieved by this package: `EV-102-212`–`215`. C2 `$0.04`, C3 `$0.06 + data`, C5 `$15.00` at Base. C3's rate carries the vendor's own *"illustrative purposes"* disclaimer and is held at Low confidence |
-| **F** — Financial connectivity | **No** | `OQ-107-020` records that this category **requires provider contact** — reading will not close it |
+| **F** — Financial connectivity | **Unit only** — September 4, 2026 | No rate is published (`EV-102-298`), so `OQ-107-020` still needs provider contact. **The metering unit is answered**: Plaid bills per `Item` (`EV-102-299`), pointing at `DM-102-010`'s 61 connections at Base rather than 135 accounts — held at Medium against a wording conflict in Plaid's own material |
 | **N** — Push and SMS | **Partly** — August 29, 2026 | Floors and registration fees retrieved for both candidates (`EV-102-227`–`228`); **C2's per-segment rate was not obtainable** and carrier fees are unquantified for it (`OQ-108-008`) |
 
 **A combined total therefore has three known-ish terms out of six**, and three
@@ -237,9 +237,11 @@ In the order that produces the most per unit of effort:
    candidate.~~ **Done, August 29, 2026.** One page per candidate, exactly as
    CBD-106 §5.1 predicted the effort would be. The hypothesis it tested turned
    out to be false for all three candidates — retrieval pass §4.1.
-4. **`OQ-107-020`** — category F pricing, which **requires provider contact**,
-   and which must also settle the per-account versus per-connection metering
-   question from §3.
+4. **`OQ-107-020`** — category F pricing, which **requires provider contact**.
+   The metering question §3 raises is **partly answered**: `EV-102-299` records
+   Plaid billing per `Item`, so the connection row rather than the account row.
+   The conflict with Plaid's own pricing-page wording goes to the same
+   conversation as the rate.
 5. ~~**A budget ceiling**~~ — **closed September 4, 2026.** `OI-102-017` was
    reopened and re-decided: `USD 250.00` per month, `USD 3,000.00` per year. The
    warning and stop thresholds are stated in disposition §5. What the price side
