@@ -26,6 +26,10 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0
+
+      - name: Scan introduced commits and reachable history
+        run: python3 scripts/secret_scanner.py ci '${{ github.event_name }}' '${{ github.event.pull_request.base.sha }}' '${{ github.event.pull_request.head.sha }}' '${{ github.sha }}'
 
       # Runs before the Node setup so a documentation-only change fails fast
       # without installing dependencies. Uses the standard library only, so it

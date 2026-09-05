@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { readFile, readdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -8,6 +9,7 @@ const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 
 const REQUIRED_CHECK_STAGES = [
   "npm run check:ci",
+  "npm run check:secrets",
   "npm run check:env",
   "npm run check:docs",
   "npm run check:tokens",
@@ -20,6 +22,7 @@ const REQUIRED_CHECK_STAGES = [
 ];
 
 const REQUIRED_ROOT_SCRIPTS = {
+  "check:secrets": "node scripts/check-secrets.mjs",
   "check:env": "node --test scripts/check-environment.test.mjs && node scripts/check-environment.mjs",
   "check:copy": "node scripts/check-copy-language.mjs",
   lint: "eslint scripts && npm run lint --workspaces --if-present",
@@ -36,6 +39,7 @@ const REQUIRED_EXTERNAL_ACTIONS = new Map([
 ]);
 
 const REQUIRED_WORKFLOW_COMMANDS = [
+  "python3 scripts/secret_scanner.py ci '${{ github.event_name }}' '${{ github.event.pull_request.base.sha }}' '${{ github.event.pull_request.head.sha }}' '${{ github.sha }}'",
   "python3 scripts/check-doc-vocabulary.py",
   // --offline only: the freshness check's Jira half needs credentials the
   // runner does not have. The offline half compares pinned source versions
@@ -199,8 +203,12 @@ function checkWorkflow(workflow, failures) {
   if (checkoutStep && !/^\s{10}persist-credentials:\s*false\s*$/m.test(checkoutStep)) {
     failures.push("persist-credentials: false must belong to the checkout step");
   }
-  if (checkoutStep && !sameItems(nestedInputKeys(checkoutStep), ["persist-credentials"])) {
-    failures.push("the checkout step may set only persist-credentials; repository, ref, path, and token overrides are forbidden");
+  requireSingleYamlKey(failures, workflow, "fetch-depth", "full-history checkout");
+  if (checkoutStep && !/^\s{10}fetch-depth:\s*0\s*$/m.test(checkoutStep)) {
+    failures.push("checkout must fetch complete history with fetch-depth: 0");
+  }
+  if (checkoutStep && !sameItems(nestedInputKeys(checkoutStep), ["persist-credentials", "fetch-depth"])) {
+    failures.push("the checkout step may set only credential removal and full history; repository, ref, path, and token overrides are forbidden");
   }
 
   requireSingleYamlKey(failures, workflow, "node-version-file", "the Node version file setting");
@@ -351,6 +359,18 @@ export function validateCiContract({ workflow, dependabot, nodeVersion, rootPack
   return failures;
 }
 
+export function validateScannerPins(pin, rules) {
+  const hash = (source) => createHash("sha256").update(source.replaceAll("\r\n", "\n")).digest("hex");
+  const failures = [];
+  if (hash(pin) !== "bbfb84371e1fa8a33632632758e133b8d498e6d50844a98186e33a37ba7f1132") {
+    failures.push("secret scanner must retain its reviewed immutable release digests");
+  }
+  if (hash(rules) !== "dc6f27cd2be8a8d9960c92e2a81abb659be0409e5ea66918d321a3234f49c1be") {
+    failures.push("secret detection must retain its reviewed rules without broad suppression");
+  }
+  return failures;
+}
+
 async function loadWorkspaces(rootPackage) {
   const workspaces = [];
   for (const pattern of rootPackage.workspaces ?? []) {
@@ -379,6 +399,10 @@ async function main() {
     runtimeNodeVersion: process.versions.node,
     workspaces: await loadWorkspaces(rootPackage),
   });
+  failures.push(...validateScannerPins(
+    await readFile(join(repositoryRoot, "config/secret-scanner.json"), "utf8"),
+    await readFile(join(repositoryRoot, "config/gitleaks.toml"), "utf8"),
+  ));
 
   if (failures.length > 0) {
     for (const failure of failures) console.error(`CI contract check failed: ${failure}`);
