@@ -17,7 +17,7 @@
     "@cobudget/data-access": "*",
     "@cobudget/sessions": "*",
     "@fastify/helmet": "13.1.1",
-    "@fastify/static": "10.1.3",
+    "@fastify/static": "10.1.4",
     "@nestjs/common": "12.0.1",
     "@nestjs/core": "12.0.1",
     "@nestjs/platform-fastify": "12.0.1",
